@@ -1,5 +1,5 @@
 Analysis & Synthesis report for SoC_Brain
-Mon Jun 18 18:29:31 2018
+Tue Jun 19 00:47:25 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -70,15 +70,15 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Jun 18 18:29:31 2018       ;
+; Analysis & Synthesis Status        ; Successful - Tue Jun 19 00:47:25 2018       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; SoC_Brain                                   ;
 ; Top-level Entity Name              ; FPGA_Processing                             ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 1,877                                       ;
-;     Total combinational functions  ; 1,570                                       ;
-;     Dedicated logic registers      ; 779                                         ;
-; Total registers                    ; 779                                         ;
+; Total logic elements               ; 1,880                                       ;
+;     Total combinational functions  ; 1,573                                       ;
+;     Dedicated logic registers      ; 782                                         ;
+; Total registers                    ; 782                                         ;
 ; Total pins                         ; 60                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 1,073,152                                   ;
@@ -195,15 +195,15 @@ refer to the applicable agreement for further details.
 +--------------------------------------------------------------------+-----------------+----------------------------------------------+----------------------------------------------------------------------------------------------------------+-------------+
 ; File Name with User-Entered Path                                   ; Used in Netlist ; File Type                                    ; File Name with Absolute Path                                                                             ; Library     ;
 +--------------------------------------------------------------------+-----------------+----------------------------------------------+----------------------------------------------------------------------------------------------------------+-------------+
-; RAM.v                                                              ; yes             ; User Wizard-Generated File                   ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/RAM.v                                                              ;             ;
-; FPGA_Processing.v                                                  ; yes             ; User Verilog HDL File                        ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v                                                  ;             ;
-; pll.v                                                              ; yes             ; User Wizard-Generated File                   ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/pll.v                                                              ;             ;
+; RAM.v                                                              ; yes             ; User Wizard-Generated File                   ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/RAM.v                                                              ;             ;
+; FPGA_Processing.v                                                  ; yes             ; User Verilog HDL File                        ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v                                                  ;             ;
+; pll.v                                                              ; yes             ; User Wizard-Generated File                   ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/pll.v                                                              ;             ;
 ; altpll.tdf                                                         ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altpll.tdf                                        ;             ;
 ; aglobal180.inc                                                     ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/aglobal180.inc                                    ;             ;
 ; stratix_pll.inc                                                    ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/stratix_pll.inc                                   ;             ;
 ; stratixii_pll.inc                                                  ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/stratixii_pll.inc                                 ;             ;
 ; cycloneii_pll.inc                                                  ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/cycloneii_pll.inc                                 ;             ;
-; db/pll_altpll.v                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/pll_altpll.v                                                    ;             ;
+; db/pll_altpll.v                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/pll_altpll.v                                                    ;             ;
 ; altsyncram.tdf                                                     ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsyncram.tdf                                    ;             ;
 ; stratix_ram_block.inc                                              ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/stratix_ram_block.inc                             ;             ;
 ; lpm_mux.inc                                                        ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/lpm_mux.inc                                       ;             ;
@@ -212,9 +212,9 @@ refer to the applicable agreement for further details.
 ; altrom.inc                                                         ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altrom.inc                                        ;             ;
 ; altram.inc                                                         ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altram.inc                                        ;             ;
 ; altdpram.inc                                                       ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altdpram.inc                                      ;             ;
-; db/altsyncram_59g1.tdf                                             ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/altsyncram_59g1.tdf                                             ;             ;
-; db/decode_rsa.tdf                                                  ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/decode_rsa.tdf                                                  ;             ;
-; db/mux_qob.tdf                                                     ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/mux_qob.tdf                                                     ;             ;
+; db/altsyncram_59g1.tdf                                             ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/altsyncram_59g1.tdf                                             ;             ;
+; db/decode_rsa.tdf                                                  ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/decode_rsa.tdf                                                  ;             ;
+; db/mux_qob.tdf                                                     ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/mux_qob.tdf                                                     ;             ;
 ; sld_signaltap.vhd                                                  ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/sld_signaltap.vhd                                 ;             ;
 ; sld_signaltap_impl.vhd                                             ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/sld_signaltap_impl.vhd                            ;             ;
 ; sld_ela_control.vhd                                                ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/sld_ela_control.vhd                               ;             ;
@@ -224,7 +224,7 @@ refer to the applicable agreement for further details.
 ; sld_mbpmg.vhd                                                      ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/sld_mbpmg.vhd                                     ;             ;
 ; sld_ela_trigger_flow_mgr.vhd                                       ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/sld_ela_trigger_flow_mgr.vhd                      ;             ;
 ; sld_buffer_manager.vhd                                             ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/sld_buffer_manager.vhd                            ;             ;
-; db/altsyncram_8824.tdf                                             ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/altsyncram_8824.tdf                                             ;             ;
+; db/altsyncram_8824.tdf                                             ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/altsyncram_8824.tdf                                             ;             ;
 ; altdpram.tdf                                                       ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altdpram.tdf                                      ;             ;
 ; memmodes.inc                                                       ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/others/maxplus2/memmodes.inc                                    ;             ;
 ; a_hdffe.inc                                                        ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/a_hdffe.inc                                       ;             ;
@@ -234,51 +234,51 @@ refer to the applicable agreement for further details.
 ; muxlut.inc                                                         ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/muxlut.inc                                        ;             ;
 ; bypassff.inc                                                       ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/bypassff.inc                                      ;             ;
 ; altshift.inc                                                       ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altshift.inc                                      ;             ;
-; db/mux_vsc.tdf                                                     ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/mux_vsc.tdf                                                     ;             ;
+; db/mux_vsc.tdf                                                     ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/mux_vsc.tdf                                                     ;             ;
 ; lpm_decode.tdf                                                     ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/lpm_decode.tdf                                    ;             ;
 ; declut.inc                                                         ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/declut.inc                                        ;             ;
 ; lpm_compare.inc                                                    ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/lpm_compare.inc                                   ;             ;
-; db/decode_dvf.tdf                                                  ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/decode_dvf.tdf                                                  ;             ;
+; db/decode_dvf.tdf                                                  ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/decode_dvf.tdf                                                  ;             ;
 ; lpm_counter.tdf                                                    ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/lpm_counter.tdf                                   ;             ;
 ; lpm_add_sub.inc                                                    ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/lpm_add_sub.inc                                   ;             ;
 ; cmpconst.inc                                                       ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/cmpconst.inc                                      ;             ;
 ; lpm_counter.inc                                                    ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/lpm_counter.inc                                   ;             ;
 ; alt_counter_stratix.inc                                            ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/alt_counter_stratix.inc                           ;             ;
-; db/cntr_pei.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/cntr_pei.tdf                                                    ;             ;
-; db/cmpr_ogc.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/cmpr_ogc.tdf                                                    ;             ;
-; db/cntr_o9j.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/cntr_o9j.tdf                                                    ;             ;
-; db/cntr_igi.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/cntr_igi.tdf                                                    ;             ;
-; db/cmpr_rgc.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/cmpr_rgc.tdf                                                    ;             ;
-; db/cntr_23j.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/cntr_23j.tdf                                                    ;             ;
-; db/cmpr_ngc.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/cmpr_ngc.tdf                                                    ;             ;
+; db/cntr_pei.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/cntr_pei.tdf                                                    ;             ;
+; db/cmpr_ogc.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/cmpr_ogc.tdf                                                    ;             ;
+; db/cntr_o9j.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/cntr_o9j.tdf                                                    ;             ;
+; db/cntr_igi.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/cntr_igi.tdf                                                    ;             ;
+; db/cmpr_rgc.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/cmpr_rgc.tdf                                                    ;             ;
+; db/cntr_23j.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/cntr_23j.tdf                                                    ;             ;
+; db/cmpr_ngc.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/cmpr_ngc.tdf                                                    ;             ;
 ; sld_rom_sr.vhd                                                     ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/sld_rom_sr.vhd                                    ;             ;
 ; sld_jtag_endpoint_adapter.vhd                                      ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/sld_jtag_endpoint_adapter.vhd                     ;             ;
 ; sld_jtag_endpoint_adapter_impl.sv                                  ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/sld_jtag_endpoint_adapter_impl.sv                 ;             ;
 ; sld_hub.vhd                                                        ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/sld_hub.vhd                                       ; altera_sld  ;
-; db/ip/sld91d496a5/alt_sld_fab.v                                    ; yes             ; Encrypted Auto-Found Verilog HDL File        ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/ip/sld91d496a5/alt_sld_fab.v                                    ; alt_sld_fab ;
-; db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab.v             ; yes             ; Encrypted Auto-Found Verilog HDL File        ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab.v             ; alt_sld_fab ;
-; db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_ident.sv      ; yes             ; Auto-Found SystemVerilog HDL File            ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_ident.sv      ; alt_sld_fab ;
-; db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_presplit.sv   ; yes             ; Encrypted Auto-Found SystemVerilog HDL File  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_presplit.sv   ; alt_sld_fab ;
-; db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd ; yes             ; Encrypted Auto-Found VHDL File               ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd ; alt_sld_fab ;
-; db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_splitter.sv   ; yes             ; Encrypted Auto-Found SystemVerilog HDL File  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_splitter.sv   ; alt_sld_fab ;
+; db/ip/sld91d496a5/alt_sld_fab.v                                    ; yes             ; Encrypted Auto-Found Verilog HDL File        ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/ip/sld91d496a5/alt_sld_fab.v                                    ; alt_sld_fab ;
+; db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab.v             ; yes             ; Encrypted Auto-Found Verilog HDL File        ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab.v             ; alt_sld_fab ;
+; db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_ident.sv      ; yes             ; Auto-Found SystemVerilog HDL File            ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_ident.sv      ; alt_sld_fab ;
+; db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_presplit.sv   ; yes             ; Encrypted Auto-Found SystemVerilog HDL File  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_presplit.sv   ; alt_sld_fab ;
+; db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd ; yes             ; Encrypted Auto-Found VHDL File               ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd ; alt_sld_fab ;
+; db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_splitter.sv   ; yes             ; Encrypted Auto-Found SystemVerilog HDL File  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_splitter.sv   ; alt_sld_fab ;
 ; sld_jtag_hub.vhd                                                   ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/sld_jtag_hub.vhd                                  ;             ;
 ; lpm_divide.tdf                                                     ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/lpm_divide.tdf                                    ;             ;
 ; abs_divider.inc                                                    ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/abs_divider.inc                                   ;             ;
 ; sign_div_unsign.inc                                                ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/sign_div_unsign.inc                               ;             ;
-; db/lpm_divide_6jm.tdf                                              ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/lpm_divide_6jm.tdf                                              ;             ;
-; db/sign_div_unsign_ulh.tdf                                         ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/sign_div_unsign_ulh.tdf                                         ;             ;
-; db/alt_u_div_g7f.tdf                                               ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/alt_u_div_g7f.tdf                                               ;             ;
-; db/add_sub_7pc.tdf                                                 ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/add_sub_7pc.tdf                                                 ;             ;
-; db/add_sub_8pc.tdf                                                 ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/add_sub_8pc.tdf                                                 ;             ;
-; db/lpm_divide_4bm.tdf                                              ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/lpm_divide_4bm.tdf                                              ;             ;
-; db/sign_div_unsign_plh.tdf                                         ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/sign_div_unsign_plh.tdf                                         ;             ;
-; db/alt_u_div_67f.tdf                                               ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/alt_u_div_67f.tdf                                               ;             ;
+; db/lpm_divide_6jm.tdf                                              ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/lpm_divide_6jm.tdf                                              ;             ;
+; db/sign_div_unsign_ulh.tdf                                         ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/sign_div_unsign_ulh.tdf                                         ;             ;
+; db/alt_u_div_g7f.tdf                                               ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/alt_u_div_g7f.tdf                                               ;             ;
+; db/add_sub_7pc.tdf                                                 ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/add_sub_7pc.tdf                                                 ;             ;
+; db/add_sub_8pc.tdf                                                 ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/add_sub_8pc.tdf                                                 ;             ;
+; db/lpm_divide_4bm.tdf                                              ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/lpm_divide_4bm.tdf                                              ;             ;
+; db/sign_div_unsign_plh.tdf                                         ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/sign_div_unsign_plh.tdf                                         ;             ;
+; db/alt_u_div_67f.tdf                                               ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/alt_u_div_67f.tdf                                               ;             ;
 ; lpm_mult.tdf                                                       ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/lpm_mult.tdf                                      ;             ;
 ; multcore.inc                                                       ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/multcore.inc                                      ;             ;
-; db/mult_6ft.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/mult_6ft.tdf                                                    ;             ;
-; db/mult_bft.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/mult_bft.tdf                                                    ;             ;
-; db/mult_fgt.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/mult_fgt.tdf                                                    ;             ;
-; db/mult_dft.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/mult_dft.tdf                                                    ;             ;
+; db/mult_6ft.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/mult_6ft.tdf                                                    ;             ;
+; db/mult_bft.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/mult_bft.tdf                                                    ;             ;
+; db/mult_fgt.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/mult_fgt.tdf                                                    ;             ;
+; db/mult_dft.tdf                                                    ; yes             ; Auto-Generated Megafunction                  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/mult_dft.tdf                                                    ;             ;
 +--------------------------------------------------------------------+-----------------+----------------------------------------------+----------------------------------------------------------------------------------------------------------+-------------+
 
 
@@ -287,20 +287,20 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+---------------+
 ; Resource                                    ; Usage         ;
 +---------------------------------------------+---------------+
-; Estimated Total logic elements              ; 1,877         ;
+; Estimated Total logic elements              ; 1,880         ;
 ;                                             ;               ;
-; Total combinational functions               ; 1570          ;
+; Total combinational functions               ; 1573          ;
 ; Logic element usage by number of LUT inputs ;               ;
-;     -- 4 input functions                    ; 502           ;
+;     -- 4 input functions                    ; 504           ;
 ;     -- 3 input functions                    ; 701           ;
-;     -- <=2 input functions                  ; 367           ;
+;     -- <=2 input functions                  ; 368           ;
 ;                                             ;               ;
 ; Logic elements by mode                      ;               ;
-;     -- normal mode                          ; 1066          ;
+;     -- normal mode                          ; 1069          ;
 ;     -- arithmetic mode                      ; 504           ;
 ;                                             ;               ;
-; Total registers                             ; 779           ;
-;     -- Dedicated logic registers            ; 779           ;
+; Total registers                             ; 782           ;
+;     -- Dedicated logic registers            ; 782           ;
 ;     -- I/O registers                        ; 0             ;
 ;                                             ;               ;
 ; I/O pins                                    ; 60            ;
@@ -313,7 +313,7 @@ refer to the applicable agreement for further details.
 ;                                             ;               ;
 ; Maximum fan-out node                        ; clk_llc~input ;
 ; Maximum fan-out                             ; 399           ;
-; Total fan-out                               ; 10041         ;
+; Total fan-out                               ; 10063         ;
 ; Average fan-out                             ; 3.79          ;
 +---------------------------------------------+---------------+
 
@@ -323,7 +323,7 @@ refer to the applicable agreement for further details.
 +-----------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+--------------+
 ; Compilation Hierarchy Node                                                                                                              ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                                                                                                                                                                                                         ; Entity Name                       ; Library Name ;
 +-----------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+--------------+
-; |FPGA_Processing                                                                                                                        ; 1570 (372)          ; 779 (260)                 ; 1073152     ; 19           ; 5       ; 7         ; 60   ; 0            ; |FPGA_Processing                                                                                                                                                                                                                                                                                                                                            ; FPGA_Processing                   ; work         ;
+; |FPGA_Processing                                                                                                                        ; 1573 (375)          ; 782 (263)                 ; 1073152     ; 19           ; 5       ; 7         ; 60   ; 0            ; |FPGA_Processing                                                                                                                                                                                                                                                                                                                                            ; FPGA_Processing                   ; work         ;
 ;    |RAM:RAM_inst|                                                                                                                       ; 97 (0)              ; 8 (0)                     ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM:RAM_inst                                                                                                                                                                                                                                                                                                                               ; RAM                               ; work         ;
 ;       |altsyncram:altsyncram_component|                                                                                                 ; 97 (0)              ; 8 (0)                     ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM:RAM_inst|altsyncram:altsyncram_component                                                                                                                                                                                                                                                                                               ; altsyncram                        ; work         ;
 ;          |altsyncram_59g1:auto_generated|                                                                                               ; 97 (1)              ; 8 (8)                     ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM:RAM_inst|altsyncram:altsyncram_component|altsyncram_59g1:auto_generated                                                                                                                                                                                                                                                                ; altsyncram_59g1                   ; work         ;
@@ -533,10 +533,8 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; const1[8]                               ; Stuck at VCC due to stuck port data_in ;
 ; const1[9]                               ; Stuck at GND due to stuck port data_in ;
 ; H_DATA[5..7]                            ; Lost fanout                            ;
-; vdata[2..4]                             ; Merged with vdata[1]                   ;
+; vdata[2,4]                              ; Merged with vdata[1]                   ;
 ; vdata[6,7]                              ; Merged with vdata[5]                   ;
-; vdata[9]                                ; Merged with vdata[8]                   ;
-; vdata[15]                               ; Merged with vdata[14]                  ;
 ; Cb_Data2[7]                             ; Merged with Cb_Data1[7]                ;
 ; Cb_Data2[6]                             ; Merged with Cb_Data1[6]                ;
 ; Cb_Data2[5]                             ; Merged with Cb_Data1[5]                ;
@@ -563,7 +561,7 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; C_int[5]                                ; Merged with B2_int[5]                  ;
 ; C_int[4]                                ; Merged with B2_int[4]                  ;
 ; X_int[3]                                ; Lost fanout                            ;
-; Total Number of Removed Registers = 202 ;                                        ;
+; Total Number of Removed Registers = 199 ;                                        ;
 +-----------------------------------------+----------------------------------------+
 
 
@@ -582,12 +580,12 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 779   ;
+; Total registers                              ; 782   ;
 ; Number of registers using Synchronous Clear  ; 63    ;
 ; Number of registers using Synchronous Load   ; 83    ;
-; Number of registers using Asynchronous Clear ; 455   ;
+; Number of registers using Asynchronous Clear ; 458   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 525   ;
+; Number of registers using Clock Enable       ; 528   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -1581,32 +1579,32 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 61                          ;
-; cycloneiii_ff         ; 268                         ;
+; cycloneiii_ff         ; 271                         ;
 ;     CLR               ; 77                          ;
 ;     CLR SLD           ; 16                          ;
 ;     ENA               ; 3                           ;
-;     ENA CLR           ; 152                         ;
+;     ENA CLR           ; 155                         ;
 ;     ENA CLR SCLR      ; 15                          ;
 ;     plain             ; 5                           ;
 ; cycloneiii_io_obuf    ; 16                          ;
-; cycloneiii_lcell_comb ; 1067                        ;
+; cycloneiii_lcell_comb ; 1070                        ;
 ;     arith             ; 408                         ;
 ;         1 data inputs ; 1                           ;
 ;         2 data inputs ; 31                          ;
 ;         3 data inputs ; 376                         ;
-;     normal            ; 659                         ;
+;     normal            ; 662                         ;
 ;         0 data inputs ; 43                          ;
 ;         1 data inputs ; 15                          ;
-;         2 data inputs ; 122                         ;
+;         2 data inputs ; 123                         ;
 ;         3 data inputs ; 168                         ;
-;         4 data inputs ; 311                         ;
+;         4 data inputs ; 313                         ;
 ; cycloneiii_mac_mult   ; 12                          ;
 ; cycloneiii_mac_out    ; 12                          ;
 ; cycloneiii_pll        ; 1                           ;
 ; cycloneiii_ram_block  ; 128                         ;
 ;                       ;                             ;
 ; Max LUT depth         ; 43.60                       ;
-; Average LUT depth     ; 17.61                       ;
+; Average LUT depth     ; 17.56                       ;
 +-----------------------+-----------------------------+
 
 
@@ -1615,7 +1613,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:04     ;
+; Top            ; 00:00:08     ;
 +----------------+--------------+
 
 
@@ -1672,38 +1670,38 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Mon Jun 18 18:28:45 2018
+    Info: Processing started: Tue Jun 19 00:45:39 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off SoC_Brain -c SoC_Brain
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file ram.v
-    Info (12023): Found entity 1: RAM File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/RAM.v Line: 39
+    Info (12023): Found entity 1: RAM File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/RAM.v Line: 39
 Info (12021): Found 1 design units, including 1 entities, in source file fpga_processing.v
-    Info (12023): Found entity 1: FPGA_Processing File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 25
+    Info (12023): Found entity 1: FPGA_Processing File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 25
 Info (12021): Found 1 design units, including 1 entities, in source file pll.v
-    Info (12023): Found entity 1: pll File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/pll.v Line: 39
+    Info (12023): Found entity 1: pll File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/pll.v Line: 39
 Info (12127): Elaborating entity "FPGA_Processing" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(147): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 147
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(148): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 148
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(149): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 149
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(150): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 150
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(151): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 151
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(155): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 155
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(156): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 156
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(157): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 157
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(158): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 158
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(159): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 159
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(186): truncated value with size 10 to match size of target (8) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 186
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(187): truncated value with size 10 to match size of target (8) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 187
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(188): truncated value with size 10 to match size of target (8) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 188
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(223): truncated value with size 32 to match size of target (16) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 223
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(230): truncated value with size 32 to match size of target (8) File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 230
-Warning (10235): Verilog HDL Always Construct warning at FPGA_Processing.v(544): variable "vdd" is read inside the Always Construct but isn't in the Always Construct's Event Control File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 544
-Warning (10766): Verilog HDL Synthesis Attribute warning at FPGA_Processing.v(544): ignoring full_case attribute on case statement with explicit default case item File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 544
-Info (12128): Elaborating entity "pll" for hierarchy "pll:pll_inst" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 503
-Info (12128): Elaborating entity "altpll" for hierarchy "pll:pll_inst|altpll:altpll_component" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/pll.v Line: 90
-Info (12130): Elaborated megafunction instantiation "pll:pll_inst|altpll:altpll_component" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/pll.v Line: 90
-Info (12133): Instantiated megafunction "pll:pll_inst|altpll:altpll_component" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/pll.v Line: 90
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(147): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 147
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(148): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 148
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(149): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 149
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(150): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 150
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(151): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 151
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(155): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 155
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(156): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 156
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(157): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 157
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(158): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 158
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(159): truncated value with size 32 to match size of target (21) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 159
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(186): truncated value with size 10 to match size of target (8) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 186
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(187): truncated value with size 10 to match size of target (8) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 187
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(188): truncated value with size 10 to match size of target (8) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 188
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(223): truncated value with size 32 to match size of target (16) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 223
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(230): truncated value with size 32 to match size of target (8) File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 230
+Warning (10235): Verilog HDL Always Construct warning at FPGA_Processing.v(547): variable "vdd" is read inside the Always Construct but isn't in the Always Construct's Event Control File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 547
+Warning (10766): Verilog HDL Synthesis Attribute warning at FPGA_Processing.v(547): ignoring full_case attribute on case statement with explicit default case item File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 547
+Info (12128): Elaborating entity "pll" for hierarchy "pll:pll_inst" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 506
+Info (12128): Elaborating entity "altpll" for hierarchy "pll:pll_inst|altpll:altpll_component" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/pll.v Line: 90
+Info (12130): Elaborated megafunction instantiation "pll:pll_inst|altpll:altpll_component" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/pll.v Line: 90
+Info (12133): Instantiated megafunction "pll:pll_inst|altpll:altpll_component" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/pll.v Line: 90
     Info (12134): Parameter "bandwidth_type" = "AUTO"
     Info (12134): Parameter "clk0_divide_by" = "27"
     Info (12134): Parameter "clk0_duty_cycle" = "50"
@@ -1759,12 +1757,12 @@ Info (12133): Instantiated megafunction "pll:pll_inst|altpll:altpll_component" w
     Info (12134): Parameter "port_extclk3" = "PORT_UNUSED"
     Info (12134): Parameter "width_clock" = "5"
 Info (12021): Found 1 design units, including 1 entities, in source file db/pll_altpll.v
-    Info (12023): Found entity 1: pll_altpll File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/pll_altpll.v Line: 29
+    Info (12023): Found entity 1: pll_altpll File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/pll_altpll.v Line: 29
 Info (12128): Elaborating entity "pll_altpll" for hierarchy "pll:pll_inst|altpll:altpll_component|pll_altpll:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altpll.tdf Line: 897
-Info (12128): Elaborating entity "RAM" for hierarchy "RAM:RAM_inst" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 512
-Info (12128): Elaborating entity "altsyncram" for hierarchy "RAM:RAM_inst|altsyncram:altsyncram_component" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/RAM.v Line: 88
-Info (12130): Elaborated megafunction instantiation "RAM:RAM_inst|altsyncram:altsyncram_component" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/RAM.v Line: 88
-Info (12133): Instantiated megafunction "RAM:RAM_inst|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/RAM.v Line: 88
+Info (12128): Elaborating entity "RAM" for hierarchy "RAM:RAM_inst" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 515
+Info (12128): Elaborating entity "altsyncram" for hierarchy "RAM:RAM_inst|altsyncram:altsyncram_component" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/RAM.v Line: 88
+Info (12130): Elaborated megafunction instantiation "RAM:RAM_inst|altsyncram:altsyncram_component" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/RAM.v Line: 88
+Info (12133): Instantiated megafunction "RAM:RAM_inst|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/RAM.v Line: 88
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
     Info (12134): Parameter "intended_device_family" = "Cyclone IV E"
@@ -1780,37 +1778,37 @@ Info (12133): Instantiated megafunction "RAM:RAM_inst|altsyncram:altsyncram_comp
     Info (12134): Parameter "width_a" = "16"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_59g1.tdf
-    Info (12023): Found entity 1: altsyncram_59g1 File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/altsyncram_59g1.tdf Line: 31
+    Info (12023): Found entity 1: altsyncram_59g1 File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/altsyncram_59g1.tdf Line: 31
 Info (12128): Elaborating entity "altsyncram_59g1" for hierarchy "RAM:RAM_inst|altsyncram:altsyncram_component|altsyncram_59g1:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
 Info (12021): Found 1 design units, including 1 entities, in source file db/decode_rsa.tdf
-    Info (12023): Found entity 1: decode_rsa File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/decode_rsa.tdf Line: 22
-Info (12128): Elaborating entity "decode_rsa" for hierarchy "RAM:RAM_inst|altsyncram:altsyncram_component|altsyncram_59g1:auto_generated|decode_rsa:decode3" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/altsyncram_59g1.tdf Line: 45
+    Info (12023): Found entity 1: decode_rsa File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/decode_rsa.tdf Line: 22
+Info (12128): Elaborating entity "decode_rsa" for hierarchy "RAM:RAM_inst|altsyncram:altsyncram_component|altsyncram_59g1:auto_generated|decode_rsa:decode3" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/altsyncram_59g1.tdf Line: 45
 Info (12021): Found 1 design units, including 1 entities, in source file db/mux_qob.tdf
-    Info (12023): Found entity 1: mux_qob File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/mux_qob.tdf Line: 22
-Info (12128): Elaborating entity "mux_qob" for hierarchy "RAM:RAM_inst|altsyncram:altsyncram_component|altsyncram_59g1:auto_generated|mux_qob:mux2" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/altsyncram_59g1.tdf Line: 47
+    Info (12023): Found entity 1: mux_qob File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/mux_qob.tdf Line: 22
+Info (12128): Elaborating entity "mux_qob" for hierarchy "RAM:RAM_inst|altsyncram:altsyncram_component|altsyncram_59g1:auto_generated|mux_qob:mux2" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/altsyncram_59g1.tdf Line: 47
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_8824.tdf
-    Info (12023): Found entity 1: altsyncram_8824 File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/altsyncram_8824.tdf Line: 27
+    Info (12023): Found entity 1: altsyncram_8824 File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/altsyncram_8824.tdf Line: 27
 Info (12021): Found 1 design units, including 1 entities, in source file db/mux_vsc.tdf
-    Info (12023): Found entity 1: mux_vsc File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/mux_vsc.tdf Line: 22
+    Info (12023): Found entity 1: mux_vsc File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/mux_vsc.tdf Line: 22
 Info (12021): Found 1 design units, including 1 entities, in source file db/decode_dvf.tdf
-    Info (12023): Found entity 1: decode_dvf File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/decode_dvf.tdf Line: 22
+    Info (12023): Found entity 1: decode_dvf File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/decode_dvf.tdf Line: 22
 Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_pei.tdf
-    Info (12023): Found entity 1: cntr_pei File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/cntr_pei.tdf Line: 27
+    Info (12023): Found entity 1: cntr_pei File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/cntr_pei.tdf Line: 27
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_ogc.tdf
-    Info (12023): Found entity 1: cmpr_ogc File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/cmpr_ogc.tdf Line: 22
+    Info (12023): Found entity 1: cmpr_ogc File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/cmpr_ogc.tdf Line: 22
 Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_o9j.tdf
-    Info (12023): Found entity 1: cntr_o9j File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/cntr_o9j.tdf Line: 25
+    Info (12023): Found entity 1: cntr_o9j File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/cntr_o9j.tdf Line: 25
 Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_igi.tdf
-    Info (12023): Found entity 1: cntr_igi File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/cntr_igi.tdf Line: 27
+    Info (12023): Found entity 1: cntr_igi File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/cntr_igi.tdf Line: 27
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_rgc.tdf
-    Info (12023): Found entity 1: cmpr_rgc File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/cmpr_rgc.tdf Line: 22
+    Info (12023): Found entity 1: cmpr_rgc File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/cmpr_rgc.tdf Line: 22
 Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_23j.tdf
-    Info (12023): Found entity 1: cntr_23j File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/cntr_23j.tdf Line: 27
+    Info (12023): Found entity 1: cntr_23j File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/cntr_23j.tdf Line: 27
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_ngc.tdf
-    Info (12023): Found entity 1: cmpr_ngc File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/cmpr_ngc.tdf Line: 22
+    Info (12023): Found entity 1: cmpr_ngc File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/cmpr_ngc.tdf Line: 22
 Info (12033): Analysis and Synthesis generated Signal Tap or debug node instance "auto_signaltap_0"
 Info (11170): Starting IP generation for the debug fabric: alt_sld_fab.
-Info (11172): 2018.06.18.18:29:11 Progress: Loading sld91d496a5/alt_sld_fab_wrapper_hw.tcl
+Info (11172): 2018.06.19.00:46:40 Progress: Loading sld91d496a5/alt_sld_fab_wrapper_hw.tcl
 Info (11172): Alt_sld_fab.alt_sld_fab: SLD fabric agents which did not specify prefer_host were connected to JTAG
 Info (11172): Alt_sld_fab: Generating alt_sld_fab "alt_sld_fab" for QUARTUS_SYNTH
 Info (11172): Alt_sld_fab: "alt_sld_fab" instantiated alt_sld_fab "alt_sld_fab"
@@ -1821,81 +1819,81 @@ Info (11172): Ident: "alt_sld_fab" instantiated altera_connection_identification
 Info (11172): Alt_sld_fab: Done "alt_sld_fab" with 6 modules, 6 files
 Info (11171): Finished IP generation for the debug fabric: alt_sld_fab.
 Info (12021): Found 1 design units, including 1 entities, in source file db/ip/sld91d496a5/alt_sld_fab.v
-    Info (12023): Found entity 1: alt_sld_fab File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/ip/sld91d496a5/alt_sld_fab.v Line: 9
+    Info (12023): Found entity 1: alt_sld_fab File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/ip/sld91d496a5/alt_sld_fab.v Line: 9
 Info (12021): Found 1 design units, including 1 entities, in source file db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab.v
-    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab.v Line: 9
+    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab.v Line: 9
 Info (12021): Found 1 design units, including 1 entities, in source file db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_ident.sv
-    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_ident File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_ident.sv Line: 33
+    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_ident File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_ident.sv Line: 33
 Info (12021): Found 1 design units, including 1 entities, in source file db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_presplit.sv
-    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_presplit File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_presplit.sv Line: 3
+    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_presplit File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_presplit.sv Line: 3
 Info (12021): Found 2 design units, including 1 entities, in source file db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd
-    Info (12022): Found design unit 1: alt_sld_fab_alt_sld_fab_sldfabric-rtl File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd Line: 102
-    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_sldfabric File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd Line: 11
+    Info (12022): Found design unit 1: alt_sld_fab_alt_sld_fab_sldfabric-rtl File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd Line: 102
+    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_sldfabric File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd Line: 11
 Info (12021): Found 1 design units, including 1 entities, in source file db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_splitter.sv
-    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_splitter File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_splitter.sv Line: 3
+    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_splitter File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/ip/sld91d496a5/submodules/alt_sld_fab_alt_sld_fab_splitter.sv Line: 3
 Warning (13046): Tri-state node(s) do not directly drive top-level pin(s)
-    Warning (13049): Converted tri-state buffer "vmem_data[8]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[7]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[6]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[15]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[14]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[13]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[12]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[11]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[0]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[10]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[1]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[9]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[2]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[3]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[4]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
-    Warning (13049): Converted tri-state buffer "vmem_data[5]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 491
+    Warning (13049): Converted tri-state buffer "vmem_data[8]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[7]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[6]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[15]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[14]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[13]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[12]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[11]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[0]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[10]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[1]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[9]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[2]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[3]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[4]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
+    Warning (13049): Converted tri-state buffer "vmem_data[5]" feeding internal logic into a wire File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 494
 Info (278001): Inferred 9 megafunctions from design logic
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div0" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 218
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div1" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 226
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod0" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 224
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult5" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 155
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult0" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 147
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult6" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 156
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult8" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 158
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult9" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 159
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult7" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 157
-Info (12130): Elaborated megafunction instantiation "lpm_divide:Div0" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 218
-Info (12133): Instantiated megafunction "lpm_divide:Div0" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 218
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div0" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 218
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div1" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 226
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod0" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 224
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult5" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 155
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult0" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 147
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult6" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 156
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult8" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 158
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult9" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 159
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult7" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 157
+Info (12130): Elaborated megafunction instantiation "lpm_divide:Div0" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 218
+Info (12133): Instantiated megafunction "lpm_divide:Div0" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 218
     Info (12134): Parameter "LPM_WIDTHN" = "16"
     Info (12134): Parameter "LPM_WIDTHD" = "8"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
 Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_6jm.tdf
-    Info (12023): Found entity 1: lpm_divide_6jm File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/lpm_divide_6jm.tdf Line: 24
+    Info (12023): Found entity 1: lpm_divide_6jm File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/lpm_divide_6jm.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_ulh.tdf
-    Info (12023): Found entity 1: sign_div_unsign_ulh File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/sign_div_unsign_ulh.tdf Line: 24
+    Info (12023): Found entity 1: sign_div_unsign_ulh File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/sign_div_unsign_ulh.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_g7f.tdf
-    Info (12023): Found entity 1: alt_u_div_g7f File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/alt_u_div_g7f.tdf Line: 26
+    Info (12023): Found entity 1: alt_u_div_g7f File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/alt_u_div_g7f.tdf Line: 26
 Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_7pc.tdf
-    Info (12023): Found entity 1: add_sub_7pc File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/add_sub_7pc.tdf Line: 22
+    Info (12023): Found entity 1: add_sub_7pc File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/add_sub_7pc.tdf Line: 22
 Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_8pc.tdf
-    Info (12023): Found entity 1: add_sub_8pc File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/add_sub_8pc.tdf Line: 22
-Info (12130): Elaborated megafunction instantiation "lpm_divide:Div1" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 226
-Info (12133): Instantiated megafunction "lpm_divide:Div1" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 226
+    Info (12023): Found entity 1: add_sub_8pc File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/add_sub_8pc.tdf Line: 22
+Info (12130): Elaborated megafunction instantiation "lpm_divide:Div1" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 226
+Info (12133): Instantiated megafunction "lpm_divide:Div1" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 226
     Info (12134): Parameter "LPM_WIDTHN" = "16"
     Info (12134): Parameter "LPM_WIDTHD" = "8"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
-Info (12130): Elaborated megafunction instantiation "lpm_divide:Mod0" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 224
-Info (12133): Instantiated megafunction "lpm_divide:Mod0" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 224
+Info (12130): Elaborated megafunction instantiation "lpm_divide:Mod0" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 224
+Info (12133): Instantiated megafunction "lpm_divide:Mod0" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 224
     Info (12134): Parameter "LPM_WIDTHN" = "16"
     Info (12134): Parameter "LPM_WIDTHD" = "3"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
 Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_4bm.tdf
-    Info (12023): Found entity 1: lpm_divide_4bm File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/lpm_divide_4bm.tdf Line: 24
+    Info (12023): Found entity 1: lpm_divide_4bm File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/lpm_divide_4bm.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_plh.tdf
-    Info (12023): Found entity 1: sign_div_unsign_plh File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/sign_div_unsign_plh.tdf Line: 24
+    Info (12023): Found entity 1: sign_div_unsign_plh File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/sign_div_unsign_plh.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_67f.tdf
-    Info (12023): Found entity 1: alt_u_div_67f File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/alt_u_div_67f.tdf Line: 26
-Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult5" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 155
-Info (12133): Instantiated megafunction "lpm_mult:Mult5" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 155
+    Info (12023): Found entity 1: alt_u_div_67f File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/alt_u_div_67f.tdf Line: 26
+Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult5" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 155
+Info (12133): Instantiated megafunction "lpm_mult:Mult5" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 155
     Info (12134): Parameter "LPM_WIDTHA" = "9"
     Info (12134): Parameter "LPM_WIDTHB" = "21"
     Info (12134): Parameter "LPM_WIDTHP" = "30"
@@ -1906,9 +1904,9 @@ Info (12133): Instantiated megafunction "lpm_mult:Mult5" with the following para
     Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
     Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
 Info (12021): Found 1 design units, including 1 entities, in source file db/mult_6ft.tdf
-    Info (12023): Found entity 1: mult_6ft File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/mult_6ft.tdf Line: 30
-Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult6" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 156
-Info (12133): Instantiated megafunction "lpm_mult:Mult6" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 156
+    Info (12023): Found entity 1: mult_6ft File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/mult_6ft.tdf Line: 30
+Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult6" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 156
+Info (12133): Instantiated megafunction "lpm_mult:Mult6" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 156
     Info (12134): Parameter "LPM_WIDTHA" = "9"
     Info (12134): Parameter "LPM_WIDTHB" = "21"
     Info (12134): Parameter "LPM_WIDTHP" = "30"
@@ -1918,8 +1916,8 @@ Info (12133): Instantiated megafunction "lpm_mult:Mult6" with the following para
     Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "YES"
     Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
     Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
-Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult8" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 158
-Info (12133): Instantiated megafunction "lpm_mult:Mult8" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 158
+Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult8" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 158
+Info (12133): Instantiated megafunction "lpm_mult:Mult8" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 158
     Info (12134): Parameter "LPM_WIDTHA" = "7"
     Info (12134): Parameter "LPM_WIDTHB" = "21"
     Info (12134): Parameter "LPM_WIDTHP" = "28"
@@ -1930,9 +1928,9 @@ Info (12133): Instantiated megafunction "lpm_mult:Mult8" with the following para
     Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
     Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
 Info (12021): Found 1 design units, including 1 entities, in source file db/mult_bft.tdf
-    Info (12023): Found entity 1: mult_bft File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/mult_bft.tdf Line: 30
-Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult9" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 159
-Info (12133): Instantiated megafunction "lpm_mult:Mult9" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 159
+    Info (12023): Found entity 1: mult_bft File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/mult_bft.tdf Line: 30
+Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult9" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 159
+Info (12133): Instantiated megafunction "lpm_mult:Mult9" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 159
     Info (12134): Parameter "LPM_WIDTHA" = "10"
     Info (12134): Parameter "LPM_WIDTHB" = "21"
     Info (12134): Parameter "LPM_WIDTHP" = "31"
@@ -1943,9 +1941,9 @@ Info (12133): Instantiated megafunction "lpm_mult:Mult9" with the following para
     Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
     Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
 Info (12021): Found 1 design units, including 1 entities, in source file db/mult_fgt.tdf
-    Info (12023): Found entity 1: mult_fgt File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/mult_fgt.tdf Line: 30
-Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult7" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 157
-Info (12133): Instantiated megafunction "lpm_mult:Mult7" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 157
+    Info (12023): Found entity 1: mult_fgt File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/mult_fgt.tdf Line: 30
+Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult7" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 157
+Info (12133): Instantiated megafunction "lpm_mult:Mult7" with the following parameter: File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 157
     Info (12134): Parameter "LPM_WIDTHA" = "8"
     Info (12134): Parameter "LPM_WIDTHB" = "21"
     Info (12134): Parameter "LPM_WIDTHP" = "29"
@@ -1956,54 +1954,54 @@ Info (12133): Instantiated megafunction "lpm_mult:Mult7" with the following para
     Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
     Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
 Info (12021): Found 1 design units, including 1 entities, in source file db/mult_dft.tdf
-    Info (12023): Found entity 1: mult_dft File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/mult_dft.tdf Line: 30
+    Info (12023): Found entity 1: mult_dft File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/mult_dft.tdf Line: 30
 Info (13014): Ignored 42 buffer(s)
     Info (13019): Ignored 42 SOFT buffer(s)
-Info (13000): Registers with preset signals will power-up high File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 339
+Info (13000): Registers with preset signals will power-up high File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 342
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Info (286031): Timing-Driven Synthesis is running on partition "Top"
 Info (17049): 4 registers lost all their fanouts during netlist optimizations.
 Info (17016): Found the following redundant logic cells in design
-    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_7_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/alt_u_div_67f.tdf Line: 91
-    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_8_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/alt_u_div_67f.tdf Line: 96
-    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_9_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/alt_u_div_67f.tdf Line: 101
-    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_10_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/alt_u_div_67f.tdf Line: 36
-    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_11_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/alt_u_div_67f.tdf Line: 41
-    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_12_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/alt_u_div_67f.tdf Line: 46
-    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_13_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/alt_u_div_67f.tdf Line: 51
-    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_14_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/alt_u_div_67f.tdf Line: 56
-    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_15_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/db/alt_u_div_67f.tdf Line: 61
-Info (144001): Generated suppressed messages file C:/Users/thdtj/OneDrive/SoC/SoC Brain/output_files/SoC_Brain.map.smsg
+    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_7_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/alt_u_div_67f.tdf Line: 91
+    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_8_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/alt_u_div_67f.tdf Line: 96
+    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_9_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/alt_u_div_67f.tdf Line: 101
+    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_10_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/alt_u_div_67f.tdf Line: 36
+    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_11_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/alt_u_div_67f.tdf Line: 41
+    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_12_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/alt_u_div_67f.tdf Line: 46
+    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_13_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/alt_u_div_67f.tdf Line: 51
+    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_14_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/alt_u_div_67f.tdf Line: 56
+    Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_4bm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_67f:divider|add_sub_15_result_int[0]~8" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/db/alt_u_div_67f.tdf Line: 61
+Info (144001): Generated suppressed messages file C:/Users/thdtj/OneDrive/SoC/SoC_Brain/output_files/SoC_Brain.map.smsg
 Info (35024): Successfully connected in-system debug instance "auto_signaltap_0" to all 39 required data inputs, trigger inputs, acquisition clocks, and dynamic pins
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 8 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "vpo[0]" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 40
-    Warning (15610): No output dependent on input pin "vpo[1]" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 40
-    Warning (15610): No output dependent on input pin "vpo[2]" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 40
-    Warning (15610): No output dependent on input pin "vpo[3]" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 40
-    Warning (15610): No output dependent on input pin "vpo[4]" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 40
-    Warning (15610): No output dependent on input pin "vpo[5]" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 40
-    Warning (15610): No output dependent on input pin "vpo[6]" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 40
-    Warning (15610): No output dependent on input pin "vpo[7]" File: C:/Users/thdtj/OneDrive/SoC/SoC Brain/FPGA_Processing.v Line: 40
-Info (21057): Implemented 2119 device resources after synthesis - the final resource count might be different
+    Warning (15610): No output dependent on input pin "vpo[0]" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 40
+    Warning (15610): No output dependent on input pin "vpo[1]" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 40
+    Warning (15610): No output dependent on input pin "vpo[2]" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 40
+    Warning (15610): No output dependent on input pin "vpo[3]" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 40
+    Warning (15610): No output dependent on input pin "vpo[4]" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 40
+    Warning (15610): No output dependent on input pin "vpo[5]" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 40
+    Warning (15610): No output dependent on input pin "vpo[6]" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 40
+    Warning (15610): No output dependent on input pin "vpo[7]" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/FPGA_Processing.v Line: 40
+Info (21057): Implemented 2122 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 43 input pins
     Info (21059): Implemented 5 output pins
     Info (21060): Implemented 16 bidirectional pins
-    Info (21061): Implemented 1903 logic cells
+    Info (21061): Implemented 1906 logic cells
     Info (21064): Implemented 131 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 19 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 44 warnings
-    Info: Peak virtual memory: 4884 megabytes
-    Info: Processing ended: Mon Jun 18 18:29:31 2018
-    Info: Elapsed time: 00:00:46
-    Info: Total CPU time (on all processors): 00:01:21
+    Info: Peak virtual memory: 4878 megabytes
+    Info: Processing ended: Tue Jun 19 00:47:25 2018
+    Info: Elapsed time: 00:01:46
+    Info: Total CPU time (on all processors): 00:02:01
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in C:/Users/thdtj/OneDrive/SoC/SoC Brain/output_files/SoC_Brain.map.smsg.
+The suppressed messages can be found in C:/Users/thdtj/OneDrive/SoC/SoC_Brain/output_files/SoC_Brain.map.smsg.
 
 

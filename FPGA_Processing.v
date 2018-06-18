@@ -325,11 +325,14 @@ always @ (negedge resetx or posedge clk_llc)
 	end
 
 wire ROY = R_B | O_B | Y_B;
+wire ROYBK = R_B | O_B | Y_B | BK_B;
 wire GY	= G_B | Y_B;
 wire GYO = G_B | Y_B | O_B;
-wire [15:0] DecVData = {ROY, ROY, R_B, O_B, Y_B,
-								GY, GYO, GYO, G_B, G_B, G_B,
-								B_B, B_B, B_B, B_B, BK_B};
+wire GYOBK = G_B | Y_B | O_B | BK_B;
+wire BBK = B_B | BK_B;
+wire [15:0] DecVData = {ROY, ROYBK, R_B, O_B, Y_B,
+								GY, GYOBK, GYO, G_B, G_B, G_B,
+								B_B, BBK, B_B, B_B, BK_B};
 	
 /////////////////////////////////////////////////////////////////////////////
 
