@@ -1,0 +1,16 @@
+Fitter Status : Successful - Mon Jun 18 18:29:52 2018
+Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+Revision Name : SoC_Brain
+Top-level Entity Name : FPGA_Processing
+Family : Cyclone IV E
+Device : EP4CE75U19I7
+Timing Models : Final
+Total logic elements : 1,823 / 75,408 ( 2 % )
+    Total combinational functions : 1,572 / 75,408 ( 2 % )
+    Dedicated logic registers : 779 / 75,408 ( 1 % )
+Total registers : 779
+Total pins : 60 / 293 ( 20 % )
+Total virtual pins : 0
+Total memory bits : 1,073,152 / 2,810,880 ( 38 % )
+Embedded Multiplier 9-bit elements : 19 / 400 ( 5 % )
+Total PLLs : 1 / 4 ( 25 % )
