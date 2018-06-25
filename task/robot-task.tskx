@@ -5,12 +5,54 @@ o // param_text:Created : 6 / 25 / 2018
 - 
 o main
 o begin
+o load param_dest:var:index param_src:dec_num:0
+o load param_dest:var:sendData param_src:dec_num:0
 - 
+o load param_dest:var:SUCCESS param_src:dec_num:200
+o load param_dest:var:FAIL param_src:dec_num:400
 - 
+o load param_dest:motion:-:50 param_src:dec_num:1
+o call faddr_dest:모션완료대기
 - 
+o while(1)
+o begin
+o wait param_src:cm:2 lop:== param_src:bool_num:0 rop:then
+o load param_dest:var:data param_src:cm:1
+o load param_dest:var:index param_src:dec_num:0
+o if param_src:var:data lop:!= param_src:bin_num:256 rop:then
+o begin
+o load param_dest:motion:-:50 param_src:var:data
+- 
+o for param_var:index param_src:dec_num:0 param_src:dec_num:1
+o begin
+o load param_dest:cm:9 param_src:var:index
+o load param_dest:cm:11 param_src:var:data
+o end
+o load param_dest:var:sendData param_src:var:SUCCESS
+o end
+o else
+o begin
+o load param_dest:var:sendData param_src:var:FAIL
+o end
+o call faddr_dest:모션완료대기
+o load param_dest:cm:0 param_src:var:sendData
+o end
 o end
 - 
-- 
+o function faddr_src:Exit실행후정지
+o begin
+o load param_dest:motion:1:50 param_src:dec_num:0
+o call faddr_dest:모션완료대기
+o end
+o function faddr_src:Exit실행없이정지
+o begin
+o load param_dest:motion:1:50 param_src:dec_num:-1
+o call faddr_dest:모션완료대기
+o end
+o function faddr_src:모션완료대기
+o begin
+o wait param_src:motion:1:51 lop:== param_src:bool_num:1 rop:then
+o end
 - 
 - 
 - 
