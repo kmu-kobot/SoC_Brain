@@ -8,13 +8,12 @@
 #include "uart_api.h"
 #include "robot_protocol.h"
 
-
 void Logo(void)
 {
-  	printf("\n\n");
-  	printf("            *****************************************\n");
-  	printf("              Welcome to Eagle Robot Platform Board \n");
-  	printf("            *****************************************\n"); 
+	printf("\n\n");
+	printf("            *****************************************\n");
+	printf("              Welcome to Eagle Robot Platform Board \n");
+	printf("            *****************************************\n");
 }
 
 void PrintBannerRobot(void)
@@ -28,25 +27,35 @@ void PrintBannerRobot(void)
 	printf("----------------------------------------------------------------\n");
 	printf("   19. Quit            -[z]         \n");
 	printf("================================================================\n");
-	
 }
-
 
 int TestItemSelectRobot(void)
 {
-   char Item;
- 	
-	while(1) {
- 		PrintBannerRobot();
+	char Item;
+
+	while (1)
+	{
+		PrintBannerRobot();
 		printf("\nSelected Test Item :  ");
- 		Item = getchar();
+		Item = getchar();
 		putchar(Item);
 
-		switch(Item) {
-			case 'a' : case 'A' : init();				break;
-			case 'b' : case 'B' : InitSlow();				break;
-			case 'z' : case 'Z' : return 0;
-			default : printf("\nNo Test Item Selected");	break;
+		switch (Item)
+		{
+		case 'a':
+		case 'A':
+			init();
+			break;
+		case 'b':
+		case 'B':
+			InitSlow();
+			break;
+		case 'z':
+		case 'Z':
+			return 0;
+		default:
+			printf("\nNo Test Item Selected");
+			break;
 		}
 	}
 	return 0;
@@ -57,17 +66,17 @@ static struct termios inittio, newtio;
 
 void init_console(void)
 {
-    tcgetattr(0, &inittio);
-    newtio = inittio;
-    newtio.c_lflag &= ~ICANON;
-    newtio.c_lflag &= ~ECHO;
-    newtio.c_lflag &= ~ISIG;
-    newtio.c_cc[VMIN] = 1;
-    newtio.c_cc[VTIME] = 0;
+	tcgetattr(0, &inittio);
+	newtio = inittio;
+	newtio.c_lflag &= ~ICANON;
+	newtio.c_lflag &= ~ECHO;
+	newtio.c_lflag &= ~ISIG;
+	newtio.c_cc[VMIN] = 1;
+	newtio.c_cc[VTIME] = 0;
 
-    cfsetispeed(&newtio, B115200);
+	cfsetispeed(&newtio, B115200);
 
-    tcsetattr(0, TCSANOW, &newtio);
+	tcsetattr(0, TCSANOW, &newtio);
 }
 
 int main(void)
@@ -77,7 +86,8 @@ int main(void)
 	init_console();
 
 	ret = uart_open();
-	if (ret < 0) return EXIT_FAILURE;
+	if (ret < 0)
+		return EXIT_FAILURE;
 
 	uart_config(UART1, 57600, 8, UART_PARNONE, 1);
 
@@ -88,5 +98,3 @@ int main(void)
 
 	return 0;
 }
-
-
