@@ -230,7 +230,7 @@ always @(negedge resetx or posedge clk_llc)
 	else					H_VAL <= H_DATA[7:0] * 40;
 											 
 wire [ 7:0] H = H_VAL;
-wire [ 7:0] S = S_DATA[7:0];
+wire [ 7:0] S = S_DATA[14:8] > 0 ? 8'b11111111 : S_DATA[7:0];
 wire [ 7:0] V = C_MAX;
 
 /////////////////////////////////////////////////////////////////////////////
@@ -246,9 +246,9 @@ reg R_B, G_B, B_B, Y_B, O_B, BK_B, C;
 
 always @ (posedge clk_llc)
 begin
-	H_THRES = 8'd15;
-	S_THRES = 8'd64;
-	V_THRES = 8'd32;
+	H_THRES = 8'd5;
+	S_THRES = 8'd128;
+	V_THRES = 8'd64;
 
 	R_H	= 8'd230;
 	G_H	= 8'd90;

@@ -1,5 +1,5 @@
 Flow report for SoC_Brain
-Tue Jun 19 00:48:38 2018
+Wed Jun 27 16:50:04 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -40,17 +40,17 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Tue Jun 19 00:48:25 2018       ;
+; Flow Status                        ; Successful - Wed Jun 27 16:49:57 2018       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; SoC_Brain                                   ;
 ; Top-level Entity Name              ; FPGA_Processing                             ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE75U19I7                                ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 1,820 / 75,408 ( 2 % )                      ;
-;     Total combinational functions  ; 1,575 / 75,408 ( 2 % )                      ;
-;     Dedicated logic registers      ; 782 / 75,408 ( 1 % )                        ;
-; Total registers                    ; 782                                         ;
+; Total logic elements               ; 1,834 / 75,408 ( 2 % )                      ;
+;     Total combinational functions  ; 1,584 / 75,408 ( 2 % )                      ;
+;     Dedicated logic registers      ; 789 / 75,408 ( 1 % )                        ;
+; Total registers                    ; 789                                         ;
 ; Total pins                         ; 60 / 293 ( 20 % )                           ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 1,073,152 / 2,810,880 ( 38 % )              ;
@@ -64,7 +64,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 06/19/2018 00:45:40 ;
+; Start date & time ; 06/27/2018 16:48:22 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; SoC_Brain           ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------+---------------------------------------------------------+---------------+-----------------+------------------+
 ; Assignment Name                     ; Value                                                   ; Default Value ; Entity Name     ; Section Id       ;
 +-------------------------------------+---------------------------------------------------------+---------------+-----------------+------------------+
-; COMPILER_SIGNATURE_ID               ; 176770276696550.152933674004704                         ; --            ; --              ; --               ;
+; COMPILER_SIGNATURE_ID               ; 176770276696550.153008570116640                         ; --            ; --              ; --               ;
 ; ENABLE_SIGNALTAP                    ; On                                                      ; --            ; --              ; --               ;
 ; MAX_CORE_JUNCTION_TEMP              ; 100                                                     ; --            ; --              ; --               ;
 ; MIN_CORE_JUNCTION_TEMP              ; -40                                                     ; --            ; --              ; --               ;
@@ -126,11 +126,11 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:01:41     ; 1.0                     ; 4878 MB             ; 00:01:58                           ;
-; Fitter               ; 00:00:44     ; 1.0                     ; 5485 MB             ; 00:00:32                           ;
-; Assembler            ; 00:00:09     ; 1.0                     ; 4706 MB             ; 00:00:06                           ;
-; Timing Analyzer      ; 00:00:11     ; 1.1                     ; 4830 MB             ; 00:00:07                           ;
-; Total                ; 00:02:45     ; --                      ; --                  ; 00:02:43                           ;
+; Analysis & Synthesis ; 00:00:56     ; 1.0                     ; 4884 MB             ; 00:01:37                           ;
+; Fitter               ; 00:00:26     ; 1.0                     ; 5427 MB             ; 00:00:33                           ;
+; Assembler            ; 00:00:06     ; 1.0                     ; 4709 MB             ; 00:00:05                           ;
+; Timing Analyzer      ; 00:00:06     ; 1.1                     ; 4833 MB             ; 00:00:06                           ;
+; Total                ; 00:01:34     ; --                      ; --                  ; 00:02:21                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
