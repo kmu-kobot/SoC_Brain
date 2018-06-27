@@ -26,23 +26,20 @@ o begin
 - 
 o if param_src:var:data lop:== param_src:bin_num:1 rop:then
 o begin
-o load param_dest:motion:-:50 param_src:dec_num:177
+o load param_dest:var:data param_src:dec_num:120
 o end
 o else
 o begin
-o load param_dest:motion:-:50 param_src:dec_num:178
+o load param_dest:var:data param_src:dec_num:121
 o end
 - 
-o for param_var:index param_src:dec_num:0 param_src:dec_num:1
-o begin
-o load param_dest:cm:9 param_src:var:index
-o load param_dest:cm:11 param_src:var:data
-o end
-- 
+o load param_dest:motion:-:50 param_src:var:data
 o load param_dest:var:status param_src:var:SUCCESS
 o end
 o call faddr_dest:모션완료대기
+- 
 o load param_dest:cm:0 param_src:var:sendData
+- 
 o end
 o end
 - 
