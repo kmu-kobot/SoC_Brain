@@ -1,2 +1,2 @@
-Warning (10273): Verilog HDL warning at FPGA_Processing.v(585): extended using "x" or "z" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/FPGA_Processing.v Line: 585
-Warning (10273): Verilog HDL warning at FPGA_Processing.v(587): extended using "x" or "z" File: C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/FPGA_Processing.v Line: 587
+Warning (10273): Verilog HDL warning at FPGA_Processing.v(612): extended using "x" or "z"
+Warning (10273): Verilog HDL warning at FPGA_Processing.v(614): extended using "x" or "z"

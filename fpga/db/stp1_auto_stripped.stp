@@ -2,7 +2,7 @@
   <display_tree gui_logging_enabled="0">
     <display_branch instance="auto_signaltap_0" log="USE_GLOBAL_TEMP" signal_set="USE_GLOBAL_TEMP" trigger="USE_GLOBAL_TEMP"/>
   </display_tree>
-  <instance enabled="true" entity_name="sld_signaltap" is_auto_node="yes" is_expanded="true" name="auto_signaltap_0" source_file="sld_signaltap.vhd">
+  <instance entity_name="sld_signaltap" is_auto_node="yes" is_expanded="true" name="auto_signaltap_0" source_file="sld_signaltap.vhd">
     <node_ip_info instance_id="0" mfg_id="110" node_id="0" version="6"/>
     <signal_set global_temp="1" is_expanded="true" name="signal_set: 2014/05/20 10:56:14  #0">
       <clock name="clk_llc" polarity="posedge" tap_mode="classic"/>

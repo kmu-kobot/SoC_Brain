@@ -183,56 +183,84 @@ always @ (posedge clk_llc or negedge resetx)
 /////////////////////////////////////////////////////////////////////////////
 //	RGB888 to HSV
 
-wire [ 7:0] R8 = (R_int[20]) ? 8'b0 : (R_int[19:18] == 2'b0) ? R_int[17:8] : 8'b11111111;
-wire [ 7:0] G8 = (G_int[20]) ? 8'b0 : (G_int[19:18] == 2'b0) ? G_int[17:8] : 8'b11111111;
-wire [ 7:0] B8 = (B_int[20]) ? 8'b0 : (B_int[19:18] == 2'b0) ? B_int[17:8] : 8'b11111111;	
+wire [ 7:0] R8 = (R_int[20]) ? 8'b0 : (R_int[19:18] == 2'b0) ? R_int[17:10] : 8'b11111111;
+wire [ 7:0] G8 = (G_int[20]) ? 8'b0 : (G_int[19:18] == 2'b0) ? G_int[17:10] : 8'b11111111;
+wire [ 7:0] B8 = (B_int[20]) ? 8'b0 : (B_int[19:18] == 2'b0) ? B_int[17:10] : 8'b11111111;	
 
-reg  [ 7:0] C_MAX, C_MIN, DELTA, H_DIFF, H_VAL;
-reg  [15:0] S_X255, S_DATA, H_DATA;
+integer C_MAX, C_MIN, DELTA, H_DIFF, S_DATA, H_DATA;
+reg  [ 1:0] MAX;
 
 always @(negedge resetx or posedge clk_llc)
 	if (~resetx)
 		begin
-		C_MAX <= 8'b0;
-		C_MIN <= 8'b0;
+		C_MAX <= 0;
+		C_MIN <= 0;
+		MAX <= 2'b00;
 		end
 	else
 		begin
-		C_MAX <= (R8 < G8) ? ((G8 < B8) ? B8 : G8) : (R8 < B8) ? B8 : R8;
-		C_MIN <= (R8 < G8) ? ((R8 < B8) ? R8 : B8) : (G8 < B8) ? G8 : B8;
+		if (R8 > G8 & R8 > B8) 
+			begin
+			C_MAX <= R8;
+			MAX <= 2'b00;
+			end
+		if (R8 < G8 & R8 < B8) C_MIN <= R8;
+		if (G8 > R8 & G8 > B8) 
+			begin
+			C_MAX <= G8;
+			MAX <= 2'b01;
+			end
+		if (G8 < R8 & G8 < B8) C_MIN <= G8;
+		if (B8 > R8 & B8 > G8) 
+			begin
+			C_MAX <= B8;
+			MAX <= 2'b10;
+			end
+		if (B8 < R8 & B8 < G8) C_MIN <= B8;
 		end
+		
+wire MAX_R = ~MAX[1] & ~MAX[0];
+wire MAX_G = ~MAX[1] & MAX[0];
+wire MAX_B = MAX[1] & ~MAX[0];
 
 always @(negedge resetx or posedge clk_llc)
-	if (~resetx)		DELTA <= 8'b0;
+	if (~resetx)		DELTA <= 0;
 	else					DELTA <= C_MAX - C_MIN;
 
 always @(negedge resetx or posedge clk_llc)
 	if (~resetx)
 		begin
-		H_DIFF <= 8'b0;
-		S_DATA <= 16'b0;
+		H_DIFF <= 0;
+		S_DATA <= 0;
 		end
 	else
 		begin
-		H_DIFF <= C_MAX == R8 ? G8 - B8 : C_MAX == G8 ? B8 - R8 : C_MAX == B8 ? R8 - G8 : 8'b0;
-		S_DATA <= C_MAX ? DELTA * 8'b11111111 / C_MAX : 16'b0;
+		if (MAX_R) H_DIFF <= G8 - B8;
+		if (MAX_G) H_DIFF <= B8 - R8;
+		if (MAX_B) H_DIFF <= R8 - G8;
+		
+		S_DATA <= C_MAX > 0 ? DELTA * 255 / C_MAX : 0;
 		end
 
 always @(negedge resetx or posedge clk_llc)
-	if (~resetx)		H_DATA <= 16'b0;
-	else					H_DATA <= DELTA == 8'b0 ? 16'b0 : 
-							C_MAX == R8 ? ({H_DIFF, 8'b0} / DELTA) % 6 : 
-							C_MAX == G8 ? ({H_DIFF, 8'b0} / DELTA) + 2 : 
-											  ({H_DIFF, 8'b0} / DELTA) + 4;
+	if (~resetx)		H_DATA <= 0;
+	else
+		if (DELTA == 0) H_DATA <= 0;
+		else
+			begin
+			if (MAX_R) H_DATA <= (H_DIFF * 40 / DELTA + 240) % 240;
+			if (MAX_G) H_DATA <= H_DIFF * 40 / DELTA + 80;
+			if (MAX_B) H_DATA <= H_DIFF * 40 / DELTA + 160;
+			end
+	
+wire [ 7:0] H = H_DATA[7 :0];
+wire [ 7:0] S = S_DATA[7 :0];
+wire [ 7:0] V = C_MAX[ 7 :0];
 
-always @(negedge resetx or posedge clk_llc)
-	if (~resetx)		H_VAL <= 8'b0;
-	else					H_VAL <= H_DATA[7:0] * 40;
-											 
-wire [ 7:0] H = H_VAL;
-wire [ 7:0] S = S_DATA[14:8] > 0 ? 8'b11111111 : S_DATA[7:0];
-wire [ 7:0] V = C_MAX;
-
+//wire [15:0] DecVData = {5'b0, DELTA[7:2], 5'b0};
+//wire [15:0] DecVData = {H[7:3], S[7:2], V[7:3]};
+//wire [15:0] DecVData = {MAX_R, 4'b0, MAX_G, 5'b0, MAX_B, 4'b0};
+//wire [15:0] DecVData = {H < 41 | 200 < H, 4'b0, 40 < H & H < 121, 5'b0, 120 < H & H < 201, 4'b0};
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -246,18 +274,18 @@ reg R_B, G_B, B_B, Y_B, O_B, BK_B, C;
 
 always @ (posedge clk_llc)
 begin
-	H_THRES = 8'd5;
-	S_THRES = 8'd128;
-	V_THRES = 8'd64;
+	H_THRES = 8'd10;
+	S_THRES = 8'd96;
+	V_THRES = 8'd96;
 
 	R_H	= 8'd230;
 	G_H	= 8'd90;
 	B_H	= 8'd144;
-	Y_H	= 8'd36;
+	Y_H	= 8'd40;
 	O_H	= 8'd15;
 	
 	R_MIN = R_H - H_THRES;
-	R_MAX = (R_H + H_THRES) - 8'd240;
+	R_MAX = R_H + H_THRES;
 	
 	G_MIN = G_H - H_THRES;
 	G_MAX = G_H + H_THRES;
@@ -293,7 +321,7 @@ always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	R_B <= 1'b0;
 	else
 	begin
-		R_B <= C & ((R_MIN < H) | (H < R_MAX));
+		R_B <= C & ((R_MIN < H) & (H < R_MAX));
 	end
 	
 always @ (negedge resetx or posedge clk_llc)
@@ -330,9 +358,8 @@ wire GY	= G_B | Y_B;
 wire GYO = G_B | Y_B | O_B;
 wire GYOBK = G_B | Y_B | O_B | BK_B;
 wire BBK = B_B | BK_B;
-wire [15:0] DecVData = {ROY, ROYBK, R_B, O_B, Y_B,
-								GY, GYOBK, GYO, G_B, G_B, G_B,
-								B_B, BBK, B_B, B_B, BK_B};
+//wire [15:0] DecVData = {R_B, R_B, R_B, R_B, R_B, G_B, G_B, G_B, G_B, G_B, G_B, B_B, B_B, B_B, B_B, B_B};
+wire [15:0] DecVData = {ROY, ROYBK, R_B, O_B, Y_B,		GY, GYOBK, GYO, G_B, G_B, G_B,	B_B, BBK, B_B, B_B, BK_B};
 	
 /////////////////////////////////////////////////////////////////////////////
 
