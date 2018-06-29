@@ -1,2 +1,2 @@
-fpga/db/*
-fpga/incremental_db/*
+fpga/db/
+fpga/incremental_db/
