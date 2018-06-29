@@ -80,6 +80,30 @@ wire oddframe   = odd & vref;
 wire href2_wr   = href2 & href & oddframe;// & oddframe2; 
 
 
+reg [23:0] IMAGE[2][120][180];
+reg [23:0] IMAGE_BLUR[2][120][180];
+reg I_addr;
+reg [7:0] Y_addr;
+reg [7:0] X_addr;
+
+always @(negedge resetx or posedge odd)
+   if       (~resetx)      I_addr <= 1'b0;
+   else							I_addr <= ~I_addr;
+	
+always @(negedge resetx or posedge href2)
+	if			(~resetx)		Y_addr <= 8'b0;
+	else if	(~oddframe)		Y_addr <= 8'b0;
+	else							Y_addr <= Y_addr + 1'b1;
+	
+always @(negedge resetx or posedge clk_llc8)
+	if			(~resetx)		X_addr <= 8'b0;
+	else if 	(href2)			X_addr <= X_addr + 1'b1;
+	else							X_addr <= 8'b0;
+
+wire W_addr = I_addr;
+wire R_addr = ~I_addr;
+
+
 /////////////////////////////////////////////////////////////////////////////
 // YCbCr422 to RGB565
 reg [ 1:0] CodeCnt;
@@ -175,20 +199,47 @@ always @ (posedge clk_llc or negedge resetx)
 //wire [ 4:0] R = (R_int[20]) ? 5'b0 : (R_int[19:18] == 2'b0) ? R_int[17:13] : 5'b11111;
 //wire [ 5:0] G = (G_int[20]) ? 6'b0 : (G_int[19:18] == 2'b0) ? G_int[17:12] : 6'b111111;
 //wire [ 4:0] B = (B_int[20]) ? 5'b0 : (B_int[19:18] == 2'b0) ? B_int[17:13] : 5'b11111;	  
-//
-//wire [15:0] DecVData = {R,G,B};
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
-//	RGB888 to HSV
 
 wire [ 7:0] R8 = (R_int[20]) ? 8'b0 : (R_int[19:18] == 2'b0) ? R_int[17:10] : 8'b11111111;
 wire [ 7:0] G8 = (G_int[20]) ? 8'b0 : (G_int[19:18] == 2'b0) ? G_int[17:10] : 8'b11111111;
 wire [ 7:0] B8 = (B_int[20]) ? 8'b0 : (B_int[19:18] == 2'b0) ? B_int[17:10] : 8'b11111111;	
 
+//wire [15:0] DecVData = {R,G,B};
+
+always @(negedge resetx or posedge clk_llc)
+	if (~resetx)
+		IMAGE[W_addr][Y_addr][X_addr] <= 24'b0;
+	else
+		IMAGE[W_addr][Y_addr][X_addr] <= {R8, G8, B8};
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// BLUR
+
+//always @(negedge resetx or posedge clk_llc)
+//	if (~resetx)
+//		IMAGE_BLUR[W_addr][Y_addr][X_addr] <= 24'b0;
+//	else
+//		IMAGE_BLUR[W_addr][Y_addr][X_addr] <= IMAGE[R_addr][Y_addr][X_addr];
+
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+//	RGB888 to HSV
+reg  [23:0] Blurred;
 integer C_MAX, C_MIN, DELTA, H_DIFF, S_DATA, H_DATA;
 reg  [ 1:0] MAX;
+
+always @(negedge resetx or posedge clk_llc)
+	if (~resetx)		Blurred <= 24'b0;
+	else					Blurred <= {R8, G8, B8};
+//	else					Blurred <= IMAGE_BLUR[R_addr][Y_addr][X_addr];
+
+wire [ 7:0] R_blurred = Blurred[23:16];
+wire [ 7:0] G_blurred = Blurred[15: 8];
+wire [ 7:0] B_blurred = Blurred[ 7: 0];
 
 always @(negedge resetx or posedge clk_llc)
 	if (~resetx)
@@ -199,24 +250,24 @@ always @(negedge resetx or posedge clk_llc)
 		end
 	else
 		begin
-		if (R8 > G8 & R8 > B8) 
+		if (R_blurred > G_blurred & R_blurred > B_blurred) 
 			begin
-			C_MAX <= R8;
+			C_MAX <= R_blurred;
 			MAX <= 2'b00;
 			end
-		if (R8 < G8 & R8 < B8) C_MIN <= R8;
-		if (G8 > R8 & G8 > B8) 
+		if (R_blurred < G_blurred & R_blurred < B_blurred) C_MIN <= R_blurred;
+		if (G_blurred > R_blurred & G_blurred > B_blurred) 
 			begin
-			C_MAX <= G8;
+			C_MAX <= G_blurred;
 			MAX <= 2'b01;
 			end
-		if (G8 < R8 & G8 < B8) C_MIN <= G8;
-		if (B8 > R8 & B8 > G8) 
+		if (G_blurred < R_blurred & G_blurred < B_blurred) C_MIN <= G_blurred;
+		if (B_blurred > R_blurred & B_blurred > G_blurred) 
 			begin
-			C_MAX <= B8;
+			C_MAX <= B_blurred;
 			MAX <= 2'b10;
 			end
-		if (B8 < R8 & B8 < G8) C_MIN <= B8;
+		if (B_blurred < R_blurred & B_blurred < G_blurred) C_MIN <= B_blurred;
 		end
 		
 wire MAX_R = ~MAX[1] & ~MAX[0];
@@ -235,9 +286,9 @@ always @(negedge resetx or posedge clk_llc)
 		end
 	else
 		begin
-		if (MAX_R) H_DIFF <= G8 - B8;
-		if (MAX_G) H_DIFF <= B8 - R8;
-		if (MAX_B) H_DIFF <= R8 - G8;
+		if (MAX_R) H_DIFF <= G_blurred - B_blurred;
+		if (MAX_G) H_DIFF <= B_blurred - R_blurred;
+		if (MAX_B) H_DIFF <= R_blurred - G_blurred;
 		
 		S_DATA <= C_MAX > 0 ? DELTA * 255 / C_MAX : 0;
 		end
@@ -388,7 +439,7 @@ always @(negedge resetx or posedge clk_llc)
 wire   vd_wrx    = ~(~vpo_wrxd1 & vpo_wrxd3);
 
 //------------------------------------------------------
-// 16bit SRAM address generation (64KB) -> (256KB)
+// 16bit SRAM address generation (64KB)
 // 180 x 120
 //   __________ 
 //  |          |  0x00000  
@@ -405,66 +456,6 @@ wire   vd_wrx    = ~(~vpo_wrxd1 & vpo_wrxd3);
 //  |----------|  0x0D460(word)  
 //  | reserved |  
 //  |__________|  0x0FFFF
-//  |          |	0x10000	// if we can use more memory
-//  | 180x120/2|  R
-//  |----------|  0x12A30
-//	 | reserved |
-//	 |----------|	0x14000
-//  | 			|
-//	 | 180x120/2|	R
-//	 |----------|	0x16A30
-//	 | reserved |
-//	 |----------|	0x18000
-//	 |				|
-//	 | 180x120/2|	G
-//	 |----------|	0x1AA30
-//	 | reserved |
-//	 |----------|	0x1C000
-//	 |				|
-//	 | 180x120/2|	G
-//	 |----------|	0x1EA30
-//	 | reserved |
-//	 |----------|	0x20000
-//  |          |
-//  | 180x120/2|  B
-//  |----------|  0x22A30
-//	 | reserved |
-//	 |----------|	0x24000
-//  | 			|
-//	 | 180x120/2|	B
-//	 |----------|	0x26A30
-//	 | reserved |
-//	 |----------|	0x28000
-//	 |				|
-//	 | 180x120/2|	Y
-//	 |----------|	0x2AA30
-//	 | reserved |
-//	 |----------|	0x2C000
-//	 |				|
-//	 | 180x120/2|	Y
-//	 |----------|	0x2EA30
-//	 | reserved |
-//	 |----------|	0x30000
-//  |          |
-//  | 180x120/2|  O
-//  |----------|  0x32A30
-//	 | reserved |
-//	 |----------|	0x34000
-//  | 			|
-//	 | 180x120/2|	O
-//	 |----------|	0x36A30
-//	 | reserved |
-//	 |----------|	0x38000
-//	 |				|
-//	 | 180x120/2|	BK
-//	 |----------|	0x3AA30
-//	 | reserved |
-//	 |----------|	0x3C000
-//	 |				|
-//	 | 180x120/2|	BK
-//	 |----------|	0x3EA30
-//	 | reserved |
-//	 |__________|	0x3FFFF
 //------------------------------------------------------
 
 reg [15:0] vdata;
