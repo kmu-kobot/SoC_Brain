@@ -65,6 +65,7 @@ always @(negedge resetx or posedge clk_llc2)
    else                      clk_div <= clk_div + 1'b1;
 
 // clk_llc8 : 180(720/4) clock generation
+wire clk_llc4  = clk_div[0];
 wire clk_llc8  = clk_div[1];
 
 // href2 : (480/2) clock generation
@@ -206,7 +207,7 @@ wire [ 7:0] B8 = (B_int[20]) ? 8'b0 : (B_int[19:18] == 2'b0) ? B_int[17:10] : 8'
 
 //wire [15:0] DecVData = {R,G,B};
 
-always @(negedge resetx or posedge clk_llc)
+always @(negedge resetx or posedge clk_llc4)
 	if (~resetx)
 		IMAGE[W_addr][Y_addr][X_addr] <= 24'b0;
 	else
@@ -217,11 +218,58 @@ always @(negedge resetx or posedge clk_llc)
 /////////////////////////////////////////////////////////////////////////////
 // BLUR
 
-//always @(negedge resetx or posedge clk_llc)
-//	if (~resetx)
-//		IMAGE_BLUR[W_addr][Y_addr][X_addr] <= 24'b0;
-//	else
-//		IMAGE_BLUR[W_addr][Y_addr][X_addr] <= IMAGE[R_addr][Y_addr][X_addr];
+reg [23:0] LeftTop, CenterTop, RightTop;
+reg [23:0] LeftMid, CenterMid, RightMid;
+reg [23:0] LeftBot, CenterBot, RightBot;
+reg [11:0] Sum_R, Sum_G, Sum_B;
+reg [ 7:0] Val_R, Val_G, Val_B;
+
+always @(negedge resetx or posedge clk_llc8)
+	if (~resetx)
+		begin
+		Sum_R <= 12'b0;
+		Sum_R <= 12'b0;
+		Sum_R <= 12'b0;
+		end
+	else if (~href2_wr)
+		begin
+		Sum_R <= 12'b0;
+		Sum_R <= 12'b0;
+		Sum_R <= 12'b0;
+		end
+	else if (X_addr == 0)
+		begin
+			Sum_R <= 12'b0;
+			Sum_G <= 12'b0;
+			Sum_B <= 12'b0;
+			
+			
+		end
+	else
+		begin
+		end
+
+always @(negedge resetx or posedge clk_llc4)
+	if (~resetx)
+		begin
+		Val_R <= 7'b0;
+		Val_G <= 7'b0;
+		Val_B <= 7'b0;
+		end
+	else
+		begin
+		Val_R <= Sum_R / 9;
+		Val_G <= Sum_G / 9;
+		Val_B <= Sum_B / 9;
+		end
+		
+wire [23:0] Val = {Val_R[7:0], Val_G[7:0], Val_B[7:0]};
+
+always @(negedge resetx or posedge clk_llc4)
+	if (~resetx)
+		IMAGE_BLUR[W_addr][Y_addr][X_addr] <= 24'b0;
+	else
+		IMAGE_BLUR[W_addr][Y_addr][X_addr] <= Val;
 
 /////////////////////////////////////////////////////////////////////////////
 
@@ -232,10 +280,10 @@ reg  [23:0] Blurred;
 integer C_MAX, C_MIN, DELTA, H_DIFF, S_DATA, H_DATA;
 reg  [ 1:0] MAX;
 
-always @(negedge resetx or posedge clk_llc)
+always @(negedge resetx or posedge clk_llc4)
 	if (~resetx)		Blurred <= 24'b0;
-	else					Blurred <= {R8, G8, B8};
-//	else					Blurred <= IMAGE_BLUR[R_addr][Y_addr][X_addr];
+//	else					Blurred <= {R8, G8, B8};
+	else					Blurred <= IMAGE_BLUR[R_addr][Y_addr][X_addr];
 
 wire [ 7:0] R_blurred = Blurred[23:16];
 wire [ 7:0] G_blurred = Blurred[15: 8];
