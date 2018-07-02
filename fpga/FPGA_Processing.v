@@ -76,33 +76,26 @@ always @(negedge resetx or posedge href)
 
 // select only odd frame
 wire oddframe   = odd & vref;
+wire evenframe  = ~odd & vref;
 
 // 120(480/4) clock generation
 wire href2_wr   = href2 & href & oddframe;// & oddframe2; 
 
 
-reg [23:0] IMAGE[2][120][180];
-reg [23:0] IMAGE_BLUR[2][120][180];
-reg I_addr;
+reg [23:0] IMAGE[120][180];
+reg [23:0] IMAGE_BLUR[120][180];
 reg [7:0] Y_addr;
 reg [7:0] X_addr;
 
-always @(negedge resetx or posedge odd)
-   if       (~resetx)      I_addr <= 1'b0;
-   else							I_addr <= ~I_addr;
-	
 always @(negedge resetx or posedge href2)
 	if			(~resetx)		Y_addr <= 8'b0;
-	else if	(~oddframe)		Y_addr <= 8'b0;
+	else if	(~vref)			Y_addr <= 8'b0;
 	else							Y_addr <= Y_addr + 1'b1;
 	
 always @(negedge resetx or posedge clk_llc8)
 	if			(~resetx)		X_addr <= 8'b0;
-	else if 	(href2)			X_addr <= X_addr + 1'b1;
-	else							X_addr <= 8'b0;
-
-wire W_addr = I_addr;
-wire R_addr = ~I_addr;
+	else if 	(~href2)			X_addr <= 8'b0;
+	else							X_addr <= X_addr + 1'b1;
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -209,67 +202,125 @@ wire [ 7:0] B8 = (B_int[20]) ? 8'b0 : (B_int[19:18] == 2'b0) ? B_int[17:10] : 8'
 
 always @(negedge resetx or posedge clk_llc4)
 	if (~resetx)
-		IMAGE[W_addr][Y_addr][X_addr] <= 24'b0;
+		IMAGE[Y_addr][X_addr] <= 24'b0;
 	else
-		IMAGE[W_addr][Y_addr][X_addr] <= {R8, G8, B8};
+		IMAGE[Y_addr][X_addr] <= {R8, G8, B8};
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
 // BLUR
 
-reg [23:0] LeftTop, CenterTop, RightTop;
-reg [23:0] LeftMid, CenterMid, RightMid;
-reg [23:0] LeftBot, CenterBot, RightBot;
-reg [11:0] Sum_R, Sum_G, Sum_B;
-reg [ 7:0] Val_R, Val_G, Val_B;
+reg  [ 7:0] XL_addr, XR_addr,
+				YT_addr, YB_addr;
 
-always @(negedge resetx or posedge clk_llc8)
-	if (~resetx)
-		begin
-		Sum_R <= 12'b0;
-		Sum_R <= 12'b0;
-		Sum_R <= 12'b0;
-		end
-	else if (~href2_wr)
-		begin
-		Sum_R <= 12'b0;
-		Sum_R <= 12'b0;
-		Sum_R <= 12'b0;
-		end
-	else if (X_addr == 0)
-		begin
-			Sum_R <= 12'b0;
-			Sum_G <= 12'b0;
-			Sum_B <= 12'b0;
-			
-			
-		end
-	else
-		begin
-		end
+reg  [23:0] LT, CT, RT,
+				LM, CM, RM,
+				LB, CB, RB;
+				
+reg  [11:0]	Sum_R, Sum_G, Sum_B;
+reg  [ 7:0] Val_R, Val_G, Val_B;
+
+wire [23:0] Val = {Val_R, Val_G, Val_B};
 
 always @(negedge resetx or posedge clk_llc4)
 	if (~resetx)
 		begin
-		Val_R <= 7'b0;
-		Val_G <= 7'b0;
-		Val_B <= 7'b0;
+		XL_addr <= 8'b0;
+		XR_addr <= 8'b0;
+		YT_addr <= 8'b0;
+		YB_addr <= 8'b0;
 		end
 	else
 		begin
-		Val_R <= Sum_R / 9;
-		Val_G <= Sum_G / 9;
-		Val_B <= Sum_B / 9;
+		XL_addr <= X_addr == 8'b0 ? 8'b0 : X_addr - 8'b1;
+		XR_addr <= X_addr == 8'd179 ? 8'd179 : X_addr + 8'b1;
+		YT_addr <= Y_addr == 8'b0 ? 8'b0 : Y_addr - 8'b1;
+		YB_addr <= Y_addr == 8'd119 ? 8'd119 : Y_addr + 8'b0;
 		end
 		
-wire [23:0] Val = {Val_R[7:0], Val_G[7:0], Val_B[7:0]};
-
 always @(negedge resetx or posedge clk_llc4)
 	if (~resetx)
-		IMAGE_BLUR[W_addr][Y_addr][X_addr] <= 24'b0;
+		begin
+		LT <= 24'b0;
+		CT <= 24'b0;
+		RT <= 24'b0;
+		LM <= 24'b0;
+		CM <= 24'b0;
+		RM <= 24'b0;
+		LB <= 24'b0;
+		CB <= 24'b0;
+		RB <= 24'b0;
+		end
 	else
-		IMAGE_BLUR[W_addr][Y_addr][X_addr] <= Val;
+		begin
+//		LT <= IMAGE[YT_addr][XL_addr];
+//		CT <= IMAGE[YT_addr][ X_addr];
+//		RT <= IMAGE[YT_addr][XR_addr];
+//		LM <= IMAGE[ Y_addr][XL_addr];
+//		CM <= IMAGE[ Y_addr][ X_addr];
+//		RM <= IMAGE[ Y_addr][XR_addr];
+//		LB <= IMAGE[YB_addr][XL_addr];
+//		CB <= IMAGE[YB_addr][ X_addr];
+//		RB <= IMAGE[YB_addr][XR_addr];
+		end
+	
+always @(negedge resetx or posedge clk_llc4)
+	if (~resetx)
+		begin
+		Sum_R <= 12'b0;
+		Sum_G <= 12'b0;
+		Sum_B <= 12'b0;
+		end
+	else
+		begin
+//		Sum_R <= LT[23:16] + CT[23:16] + RT[23:16]
+//				 + LM[23:16] + CM[23:16] + RM[23:16]
+//				 + LB[23:16] + CB[23:16] + RB[23:16];
+//		Sum_G <= LT[15: 8] + CT[15: 8] + RT[15: 8]
+//				 + LM[15: 8] + CM[15: 8] + RM[15: 8]
+//				 + LB[15: 8] + CB[15: 8] + RB[15: 8];
+//		Sum_B <= LT[ 7: 0] + CT[ 7: 0] + RT[ 7: 0]
+//				 + LM[ 7: 0] + CM[ 7: 0] + RM[ 7: 0]
+//				 + LB[ 7: 0] + CB[ 7: 0] + RB[ 7: 0];
+
+//		Sum_R <= LM[23:16] + CM[23:16] + RM[23:16];
+//		Sum_G <= LM[15: 8] + CM[15: 8] + RM[15: 8];
+//		Sum_B <= LM[ 7: 0] + CM[ 7: 0] + RM[ 7: 0];
+
+		Sum_R <= CM[23:16];
+		Sum_G <= CM[15: 8];
+		Sum_B <= CM[ 7: 0];
+		end
+		
+always @(negedge resetx or posedge clk_llc4)
+	if (~resetx)
+		begin
+		Val_R <= 8'b0;
+		Val_G <= 8'b0;
+		Val_B <= 8'b0;
+		end
+	else
+		begin
+//		Val_R <= Sum_R / 9;
+//		Val_G <= Sum_G / 9;
+//		Val_B <= Sum_B / 9;
+		
+//		Val_R <= Sum_R / 3;
+//		Val_G <= Sum_G / 3;
+//		Val_B <= Sum_B / 3;
+
+		Val_R <= Sum_R;
+		Val_G <= Sum_G;
+		Val_B <= Sum_B;
+		end
+	
+always @(negedge resetx or posedge clk_llc4)
+	if (~resetx)
+		IMAGE_BLUR[Y_addr][X_addr] <= 24'b0;
+	else
+		IMAGE_BLUR[Y_addr][X_addr] <= Val;
+//		IMAGE_BLUR[Y_addr][X_addr] <= IMAGE[Y_addr][X_addr];
 
 /////////////////////////////////////////////////////////////////////////////
 
@@ -283,7 +334,7 @@ reg  [ 1:0] MAX;
 always @(negedge resetx or posedge clk_llc4)
 	if (~resetx)		Blurred <= 24'b0;
 //	else					Blurred <= {R8, G8, B8};
-	else					Blurred <= IMAGE_BLUR[R_addr][Y_addr][X_addr];
+	else					Blurred <= IMAGE_BLUR[Y_addr][X_addr];
 
 wire [ 7:0] R_blurred = Blurred[23:16];
 wire [ 7:0] G_blurred = Blurred[15: 8];
@@ -579,6 +630,7 @@ RAM	RAM_inst (
 	.wren ( vmem_wren ),
 	.q ( vmem_q )
 	);
+	
 ////////////////////////////////////////////////////////////////////////////
 
 //-----------------------------------------------------------------
