@@ -1,0 +1,55 @@
+﻿version 4.00
+cm_version 1.0
+platform CM-530
+o // param_text:Created : 6 / 25 / 2018
+- 
+o main
+o begin
+o load param_dest:cm:22 param_src:dec_num:255
+- 
+o load param_dest:var:i param_src:dec_num:0
+- 
+o while(1)
+o begin
+o compute param_dest:var:i param_src:var:i aop:+ param_src:dec_num:1
+- 
+o load param_dest:cm:0 param_src:var:i
+o end
+o end
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
