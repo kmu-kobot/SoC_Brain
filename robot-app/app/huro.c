@@ -16,13 +16,36 @@ int huro(void) {
 
     int rResult = 1;
 
+    U32 col, row, cntBlue = 0, cntGreen = 0;
+    U16 p;
+
     while (!missionFinished) {
 
         setFPGAVideoData(fpga_videodata);
 
-        int i = 1;
+        cntBlue = 0;
+        cntGreen = 0;
 
-        RobotAction((unsigned char) i);
+        for(row = 0; row < HEIGHT; row++) {
+            for(col = 0; col < WIDTH; col++) {
+                p = GetPtr(fpga_videodata, row, col, WIDTH);
+                cntGreen += GetValueRGBYOBK(p, GREEN);
+                cntBlue += GetValueRGBYOBK(p, BLUE);
+            }
+        }
+        
+        printf("BLUE : %d\n", cntBlue);
+        printf("GREEN : %d\n", cntGreen);
+
+        if (cntBlue / WIDTH * HEIGHT > 0.4) {
+            rResult = 200;
+        } else if (cntGreen / WIDTH * HEIGHT > 0.4) {
+            rResult = 201;
+        } else {
+            rResult = 1;
+        }
+
+        RobotAction(rResult);
 
 //        switch (mission) {
 //            case 1:
@@ -72,7 +95,7 @@ int init_huro(void) {
     uart_config(UART1, 57600, 8, UART_PARNONE, 1);
     //
 
-    while (Receive_Ack(0) != 4);
+    RobotAction(1);
 
     // graphic port check
     if (open_graphic() < 0) {
