@@ -249,14 +249,14 @@ typedef struct _tag_DrawRaw_value {
 #define GetBlueValue(C) (C & 0xff)
 
 /*#######################################################*/
-#define RED 13;
-#define GREEN 7;
-#define BLUE 4;
-#define YELLOW 11;
-#define ORANGE 12;
-#define BLACK 0;
+#define RED 13
+#define GREEN 7
+#define BLUE 4
+#define YELLOW 11
+#define ORANGE 12
+#define BLACK 0
 
-#define GetValueRGEYOBK(u16, color) ((U16)(u16 >> color) & 0x0001)
+#define GetValueRGBYOBK(u16, color) ((U16)(u16 >> color) & 0x0001)
 #define GetPtr(arr, row, col, width) (arr[row * width + col])
 
 /*#######################################################*/
