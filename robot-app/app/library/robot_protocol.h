@@ -150,9 +150,9 @@ Communication Protocol :
 ////////////////////////////////////////////////////////////////////////////////
 void DelayLoop(int delay_time);
 
-void Send_Command(unsigned char Ldata);
+void Send_Command(unsigned char Ldata, unsigned char Ldata1);
 
-unsigned char Receive_Ack(int status);
+int Receive_Ack(int status);
 
 void RobotAction(unsigned char Ldata);
 ////////////////////////////////////////////////////////////////////////////////
