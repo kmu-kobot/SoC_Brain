@@ -1,5 +1,5 @@
 Analysis & Synthesis report for SoC_Brain
-Thu Jun 28 22:35:25 2018
+Tue Jul 03 21:56:40 2018
 Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -68,13 +68,13 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Jun 28 22:35:25 2018      ;
+; Analysis & Synthesis Status        ; Successful - Tue Jul 03 21:56:40 2018      ;
 ; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
 ; Revision Name                      ; SoC_Brain                                  ;
 ; Top-level Entity Name              ; FPGA_Processing                            ;
 ; Family                             ; Cyclone IV E                               ;
-; Total logic elements               ; 4,853                                      ;
-;     Total combinational functions  ; 4,549                                      ;
+; Total logic elements               ; 4,851                                      ;
+;     Total combinational functions  ; 4,547                                      ;
 ;     Dedicated logic registers      ; 783                                        ;
 ; Total registers                    ; 783                                        ;
 ; Total pins                         ; 60                                         ;
@@ -190,96 +190,96 @@ applicable agreement for further details.
 +----------------------------+-------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                                      ;
-+--------------------------------------------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path                                   ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                ; Library ;
-+--------------------------------------------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------+---------+
-; RAM.v                                                              ; yes             ; User Wizard-Generated File   ; C:/Users/kobot/Documents/SoC_Brain/fpga/RAM.v                               ;         ;
-; FPGA_Processing.v                                                  ; yes             ; User Verilog HDL File        ; C:/Users/kobot/Documents/SoC_Brain/fpga/FPGA_Processing.v                   ;         ;
-; pll.v                                                              ; yes             ; User Wizard-Generated File   ; C:/Users/kobot/Documents/SoC_Brain/fpga/pll.v                               ;         ;
-; altpll.tdf                                                         ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altpll.tdf                   ;         ;
-; aglobal131.inc                                                     ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/aglobal131.inc               ;         ;
-; stratix_pll.inc                                                    ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/stratix_pll.inc              ;         ;
-; stratixii_pll.inc                                                  ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/stratixii_pll.inc            ;         ;
-; cycloneii_pll.inc                                                  ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/cycloneii_pll.inc            ;         ;
-; db/pll_altpll.v                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/pll_altpll.v                     ;         ;
-; altsyncram.tdf                                                     ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altsyncram.tdf               ;         ;
-; stratix_ram_block.inc                                              ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/stratix_ram_block.inc        ;         ;
-; lpm_mux.inc                                                        ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_mux.inc                  ;         ;
-; lpm_decode.inc                                                     ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_decode.inc               ;         ;
-; a_rdenreg.inc                                                      ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/a_rdenreg.inc                ;         ;
-; altrom.inc                                                         ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altrom.inc                   ;         ;
-; altram.inc                                                         ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altram.inc                   ;         ;
-; altdpram.inc                                                       ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altdpram.inc                 ;         ;
-; db/altsyncram_59g1.tdf                                             ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/altsyncram_59g1.tdf              ;         ;
-; db/decode_rsa.tdf                                                  ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/decode_rsa.tdf                   ;         ;
-; db/mux_qob.tdf                                                     ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/mux_qob.tdf                      ;         ;
-; sld_signaltap.vhd                                                  ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/sld_signaltap.vhd            ;         ;
-; sld_signaltap_impl.vhd                                             ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_signaltap_impl.vhd       ;         ;
-; sld_ela_control.vhd                                                ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_ela_control.vhd          ;         ;
-; lpm_shiftreg.tdf                                                   ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_shiftreg.tdf             ;         ;
-; lpm_constant.inc                                                   ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_constant.inc             ;         ;
-; dffeea.inc                                                         ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/dffeea.inc                   ;         ;
-; sld_mbpmg.vhd                                                      ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_mbpmg.vhd                ;         ;
-; sld_ela_trigger_flow_mgr.vhd                                       ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_ela_trigger_flow_mgr.vhd ;         ;
-; sld_buffer_manager.vhd                                             ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_buffer_manager.vhd       ;         ;
-; db/altsyncram_0u14.tdf                                             ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/altsyncram_0u14.tdf              ;         ;
-; altdpram.tdf                                                       ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altdpram.tdf                 ;         ;
-; memmodes.inc                                                       ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/others/maxplus2/memmodes.inc               ;         ;
-; a_hdffe.inc                                                        ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/a_hdffe.inc                  ;         ;
-; alt_le_rden_reg.inc                                                ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/alt_le_rden_reg.inc          ;         ;
-; altsyncram.inc                                                     ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altsyncram.inc               ;         ;
-; lpm_mux.tdf                                                        ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_mux.tdf                  ;         ;
-; muxlut.inc                                                         ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/muxlut.inc                   ;         ;
-; bypassff.inc                                                       ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/bypassff.inc                 ;         ;
-; altshift.inc                                                       ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altshift.inc                 ;         ;
-; db/mux_vsc.tdf                                                     ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/mux_vsc.tdf                      ;         ;
-; lpm_decode.tdf                                                     ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_decode.tdf               ;         ;
-; declut.inc                                                         ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/declut.inc                   ;         ;
-; lpm_compare.inc                                                    ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_compare.inc              ;         ;
-; db/decode_dvf.tdf                                                  ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/decode_dvf.tdf                   ;         ;
-; lpm_counter.tdf                                                    ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_counter.tdf              ;         ;
-; lpm_add_sub.inc                                                    ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_add_sub.inc              ;         ;
-; cmpconst.inc                                                       ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/cmpconst.inc                 ;         ;
-; lpm_counter.inc                                                    ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_counter.inc              ;         ;
-; alt_counter_stratix.inc                                            ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/alt_counter_stratix.inc      ;         ;
-; db/cntr_pei.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/cntr_pei.tdf                     ;         ;
-; db/cmpr_ogc.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/cmpr_ogc.tdf                     ;         ;
-; db/cntr_o9j.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/cntr_o9j.tdf                     ;         ;
-; db/cntr_igi.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/cntr_igi.tdf                     ;         ;
-; db/cmpr_rgc.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/cmpr_rgc.tdf                     ;         ;
-; db/cntr_23j.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/cntr_23j.tdf                     ;         ;
-; db/cmpr_ngc.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/cmpr_ngc.tdf                     ;         ;
-; sld_rom_sr.vhd                                                     ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_rom_sr.vhd               ;         ;
-; sld_hub.vhd                                                        ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_hub.vhd                  ;         ;
-; sld_jtag_hub.vhd                                                   ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_jtag_hub.vhd             ;         ;
-; lpm_divide.tdf                                                     ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_divide.tdf               ;         ;
-; abs_divider.inc                                                    ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/abs_divider.inc              ;         ;
-; sign_div_unsign.inc                                                ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/sign_div_unsign.inc          ;         ;
-; db/lpm_divide_92p.tdf                                              ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/lpm_divide_92p.tdf               ;         ;
-; db/abs_divider_4dg.tdf                                             ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/abs_divider_4dg.tdf              ;         ;
-; db/alt_u_div_6af.tdf                                               ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/alt_u_div_6af.tdf                ;         ;
-; db/add_sub_7pc.tdf                                                 ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/add_sub_7pc.tdf                  ;         ;
-; db/add_sub_8pc.tdf                                                 ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/add_sub_8pc.tdf                  ;         ;
-; db/lpm_abs_i0a.tdf                                                 ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/lpm_abs_i0a.tdf                  ;         ;
-; db/lpm_divide_0po.tdf                                              ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/lpm_divide_0po.tdf               ;         ;
-; db/abs_divider_obg.tdf                                             ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/abs_divider_obg.tdf              ;         ;
-; db/alt_u_div_f7f.tdf                                               ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/alt_u_div_f7f.tdf                ;         ;
-; db/lpm_abs_6v9.tdf                                                 ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/lpm_abs_6v9.tdf                  ;         ;
-; lpm_mult.tdf                                                       ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_mult.tdf                 ;         ;
-; multcore.inc                                                       ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/multcore.inc                 ;         ;
-; db/mult_6ft.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/mult_6ft.tdf                     ;         ;
-; db/mult_bft.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/mult_bft.tdf                     ;         ;
-; db/mult_fgt.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/mult_fgt.tdf                     ;         ;
-; db/mult_dft.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/mult_dft.tdf                     ;         ;
-; C:/Users/kobot/Documents/SoC_Brain/fpga/db/lpm_divide_6jm.tdf      ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/lpm_divide_6jm.tdf               ;         ;
-; C:/Users/kobot/Documents/SoC_Brain/fpga/db/sign_div_unsign_ulh.tdf ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/sign_div_unsign_ulh.tdf          ;         ;
-; C:/Users/kobot/Documents/SoC_Brain/fpga/db/alt_u_div_g7f.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/alt_u_div_g7f.tdf                ;         ;
-; C:/Users/kobot/Documents/SoC_Brain/fpga/db/lpm_divide_4bm.tdf      ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/lpm_divide_4bm.tdf               ;         ;
-; C:/Users/kobot/Documents/SoC_Brain/fpga/db/sign_div_unsign_plh.tdf ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/sign_div_unsign_plh.tdf          ;         ;
-; C:/Users/kobot/Documents/SoC_Brain/fpga/db/alt_u_div_67f.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/SoC_Brain/fpga/db/alt_u_div_67f.tdf                ;         ;
-+--------------------------------------------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------+---------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                         ;
++-----------------------------------------------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path                                      ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                ; Library ;
++-----------------------------------------------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------+---------+
+; RAM.v                                                                 ; yes             ; User Wizard-Generated File   ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/RAM.v                            ;         ;
+; FPGA_Processing.v                                                     ; yes             ; User Verilog HDL File        ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/FPGA_Processing.v                ;         ;
+; pll.v                                                                 ; yes             ; User Wizard-Generated File   ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/pll.v                            ;         ;
+; altpll.tdf                                                            ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altpll.tdf                   ;         ;
+; aglobal131.inc                                                        ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/aglobal131.inc               ;         ;
+; stratix_pll.inc                                                       ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/stratix_pll.inc              ;         ;
+; stratixii_pll.inc                                                     ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/stratixii_pll.inc            ;         ;
+; cycloneii_pll.inc                                                     ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/cycloneii_pll.inc            ;         ;
+; db/pll_altpll.v                                                       ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/pll_altpll.v                  ;         ;
+; altsyncram.tdf                                                        ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altsyncram.tdf               ;         ;
+; stratix_ram_block.inc                                                 ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/stratix_ram_block.inc        ;         ;
+; lpm_mux.inc                                                           ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_mux.inc                  ;         ;
+; lpm_decode.inc                                                        ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_decode.inc               ;         ;
+; a_rdenreg.inc                                                         ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/a_rdenreg.inc                ;         ;
+; altrom.inc                                                            ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altrom.inc                   ;         ;
+; altram.inc                                                            ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altram.inc                   ;         ;
+; altdpram.inc                                                          ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altdpram.inc                 ;         ;
+; db/altsyncram_59g1.tdf                                                ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/altsyncram_59g1.tdf           ;         ;
+; db/decode_rsa.tdf                                                     ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/decode_rsa.tdf                ;         ;
+; db/mux_qob.tdf                                                        ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/mux_qob.tdf                   ;         ;
+; sld_signaltap.vhd                                                     ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/sld_signaltap.vhd            ;         ;
+; sld_signaltap_impl.vhd                                                ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_signaltap_impl.vhd       ;         ;
+; sld_ela_control.vhd                                                   ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_ela_control.vhd          ;         ;
+; lpm_shiftreg.tdf                                                      ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_shiftreg.tdf             ;         ;
+; lpm_constant.inc                                                      ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_constant.inc             ;         ;
+; dffeea.inc                                                            ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/dffeea.inc                   ;         ;
+; sld_mbpmg.vhd                                                         ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_mbpmg.vhd                ;         ;
+; sld_ela_trigger_flow_mgr.vhd                                          ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_ela_trigger_flow_mgr.vhd ;         ;
+; sld_buffer_manager.vhd                                                ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_buffer_manager.vhd       ;         ;
+; db/altsyncram_0u14.tdf                                                ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/altsyncram_0u14.tdf           ;         ;
+; altdpram.tdf                                                          ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altdpram.tdf                 ;         ;
+; memmodes.inc                                                          ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/others/maxplus2/memmodes.inc               ;         ;
+; a_hdffe.inc                                                           ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/a_hdffe.inc                  ;         ;
+; alt_le_rden_reg.inc                                                   ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/alt_le_rden_reg.inc          ;         ;
+; altsyncram.inc                                                        ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altsyncram.inc               ;         ;
+; lpm_mux.tdf                                                           ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_mux.tdf                  ;         ;
+; muxlut.inc                                                            ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/muxlut.inc                   ;         ;
+; bypassff.inc                                                          ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/bypassff.inc                 ;         ;
+; altshift.inc                                                          ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/altshift.inc                 ;         ;
+; db/mux_vsc.tdf                                                        ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/mux_vsc.tdf                   ;         ;
+; lpm_decode.tdf                                                        ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_decode.tdf               ;         ;
+; declut.inc                                                            ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/declut.inc                   ;         ;
+; lpm_compare.inc                                                       ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_compare.inc              ;         ;
+; db/decode_dvf.tdf                                                     ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/decode_dvf.tdf                ;         ;
+; lpm_counter.tdf                                                       ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_counter.tdf              ;         ;
+; lpm_add_sub.inc                                                       ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_add_sub.inc              ;         ;
+; cmpconst.inc                                                          ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/cmpconst.inc                 ;         ;
+; lpm_counter.inc                                                       ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_counter.inc              ;         ;
+; alt_counter_stratix.inc                                               ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/alt_counter_stratix.inc      ;         ;
+; db/cntr_pei.tdf                                                       ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/cntr_pei.tdf                  ;         ;
+; db/cmpr_ogc.tdf                                                       ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/cmpr_ogc.tdf                  ;         ;
+; db/cntr_o9j.tdf                                                       ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/cntr_o9j.tdf                  ;         ;
+; db/cntr_igi.tdf                                                       ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/cntr_igi.tdf                  ;         ;
+; db/cmpr_rgc.tdf                                                       ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/cmpr_rgc.tdf                  ;         ;
+; db/cntr_23j.tdf                                                       ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/cntr_23j.tdf                  ;         ;
+; db/cmpr_ngc.tdf                                                       ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/cmpr_ngc.tdf                  ;         ;
+; sld_rom_sr.vhd                                                        ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_rom_sr.vhd               ;         ;
+; sld_hub.vhd                                                           ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_hub.vhd                  ;         ;
+; sld_jtag_hub.vhd                                                      ; yes             ; Encrypted Megafunction       ; c:/altera/13.1/quartus/libraries/megafunctions/sld_jtag_hub.vhd             ;         ;
+; lpm_divide.tdf                                                        ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_divide.tdf               ;         ;
+; abs_divider.inc                                                       ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/abs_divider.inc              ;         ;
+; sign_div_unsign.inc                                                   ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/sign_div_unsign.inc          ;         ;
+; db/lpm_divide_92p.tdf                                                 ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/lpm_divide_92p.tdf            ;         ;
+; db/abs_divider_4dg.tdf                                                ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/abs_divider_4dg.tdf           ;         ;
+; db/alt_u_div_6af.tdf                                                  ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/alt_u_div_6af.tdf             ;         ;
+; db/add_sub_7pc.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/add_sub_7pc.tdf               ;         ;
+; db/add_sub_8pc.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/add_sub_8pc.tdf               ;         ;
+; db/lpm_abs_i0a.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/lpm_abs_i0a.tdf               ;         ;
+; db/lpm_divide_0po.tdf                                                 ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/lpm_divide_0po.tdf            ;         ;
+; db/abs_divider_obg.tdf                                                ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/abs_divider_obg.tdf           ;         ;
+; db/alt_u_div_f7f.tdf                                                  ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/alt_u_div_f7f.tdf             ;         ;
+; db/lpm_abs_6v9.tdf                                                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/lpm_abs_6v9.tdf               ;         ;
+; lpm_mult.tdf                                                          ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_mult.tdf                 ;         ;
+; multcore.inc                                                          ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/multcore.inc                 ;         ;
+; db/mult_6ft.tdf                                                       ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/mult_6ft.tdf                  ;         ;
+; db/mult_bft.tdf                                                       ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/mult_bft.tdf                  ;         ;
+; db/mult_fgt.tdf                                                       ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/mult_fgt.tdf                  ;         ;
+; db/mult_dft.tdf                                                       ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/mult_dft.tdf                  ;         ;
+; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/lpm_divide_6jm.tdf      ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/lpm_divide_6jm.tdf            ;         ;
+; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/sign_div_unsign_ulh.tdf ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/sign_div_unsign_ulh.tdf       ;         ;
+; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/alt_u_div_g7f.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/alt_u_div_g7f.tdf             ;         ;
+; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/lpm_divide_4bm.tdf      ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/lpm_divide_4bm.tdf            ;         ;
+; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/sign_div_unsign_plh.tdf ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/sign_div_unsign_plh.tdf       ;         ;
+; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/alt_u_div_67f.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/db/alt_u_div_67f.tdf             ;         ;
++-----------------------------------------------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------+---------+
 
 
 +-------------------------------------------------------------+
@@ -287,16 +287,16 @@ applicable agreement for further details.
 +---------------------------------------------+---------------+
 ; Resource                                    ; Usage         ;
 +---------------------------------------------+---------------+
-; Estimated Total logic elements              ; 4,853         ;
+; Estimated Total logic elements              ; 4,851         ;
 ;                                             ;               ;
-; Total combinational functions               ; 4549          ;
+; Total combinational functions               ; 4547          ;
 ; Logic element usage by number of LUT inputs ;               ;
-;     -- 4 input functions                    ; 1330          ;
-;     -- 3 input functions                    ; 1946          ;
-;     -- <=2 input functions                  ; 1273          ;
+;     -- 4 input functions                    ; 1332          ;
+;     -- 3 input functions                    ; 1945          ;
+;     -- <=2 input functions                  ; 1270          ;
 ;                                             ;               ;
 ; Logic elements by mode                      ;               ;
-;     -- normal mode                          ; 2993          ;
+;     -- normal mode                          ; 2991          ;
 ;     -- arithmetic mode                      ; 1556          ;
 ;                                             ;               ;
 ; Total registers                             ; 783           ;
@@ -311,7 +311,7 @@ applicable agreement for further details.
 ;                                             ;               ;
 ; Maximum fan-out node                        ; clk_llc~input ;
 ; Maximum fan-out                             ; 401           ;
-; Total fan-out                               ; 18904         ;
+; Total fan-out                               ; 18903         ;
 ; Average fan-out                             ; 3.36          ;
 +---------------------------------------------+---------------+
 
@@ -321,7 +321,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                                                              ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                                                                                                                                                                                                  ; Library Name ;
 +---------------------------------------------------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |FPGA_Processing                                                                                        ; 4549 (441)        ; 783 (265)    ; 1073152     ; 19           ; 5       ; 7         ; 60   ; 0            ; |FPGA_Processing                                                                                                                                                                                                                                                                                                                                     ; work         ;
+; |FPGA_Processing                                                                                        ; 4547 (441)        ; 783 (265)    ; 1073152     ; 19           ; 5       ; 7         ; 60   ; 0            ; |FPGA_Processing                                                                                                                                                                                                                                                                                                                                     ; work         ;
 ;    |RAM:RAM_inst|                                                                                       ; 97 (0)            ; 8 (0)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM:RAM_inst                                                                                                                                                                                                                                                                                                                        ; work         ;
 ;       |altsyncram:altsyncram_component|                                                                 ; 97 (0)            ; 8 (0)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM:RAM_inst|altsyncram:altsyncram_component                                                                                                                                                                                                                                                                                        ; work         ;
 ;          |altsyncram_59g1:auto_generated|                                                               ; 97 (1)            ; 8 (8)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM:RAM_inst|altsyncram:altsyncram_component|altsyncram_59g1:auto_generated                                                                                                                                                                                                                                                         ; work         ;
@@ -359,8 +359,8 @@ applicable agreement for further details.
 ;    |pll:pll_inst|                                                                                       ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|pll:pll_inst                                                                                                                                                                                                                                                                                                                        ; work         ;
 ;       |altpll:altpll_component|                                                                         ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|pll:pll_inst|altpll:altpll_component                                                                                                                                                                                                                                                                                                ; work         ;
 ;          |pll_altpll:auto_generated|                                                                    ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|pll:pll_inst|altpll:altpll_component|pll_altpll:auto_generated                                                                                                                                                                                                                                                                      ; work         ;
-;    |sld_hub:auto_hub|                                                                                   ; 124 (1)           ; 90 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|sld_hub:auto_hub                                                                                                                                                                                                                                                                                                                    ; work         ;
-;       |sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|                                                    ; 123 (85)          ; 90 (62)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst                                                                                                                                                                                                                                                                       ; work         ;
+;    |sld_hub:auto_hub|                                                                                   ; 122 (1)           ; 90 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|sld_hub:auto_hub                                                                                                                                                                                                                                                                                                                    ; work         ;
+;       |sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|                                                    ; 121 (83)          ; 90 (62)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst                                                                                                                                                                                                                                                                       ; work         ;
 ;          |sld_rom_sr:hub_info_reg|                                                                      ; 21 (21)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|sld_rom_sr:hub_info_reg                                                                                                                                                                                                                                               ; work         ;
 ;          |sld_shadow_jsm:shadow_jsm|                                                                    ; 17 (17)           ; 19 (19)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|sld_shadow_jsm:shadow_jsm                                                                                                                                                                                                                                             ; work         ;
 ;    |sld_signaltap:auto_signaltap_0|                                                                     ; 365 (1)           ; 420 (6)      ; 24576       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|sld_signaltap:auto_signaltap_0                                                                                                                                                                                                                                                                                                      ; work         ;
@@ -432,14 +432,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Note: number of Embedded Multiplier Blocks used is only available after a successful fit.
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis IP Cores Summary                                                                                                         ;
-+--------+--------------+---------+--------------+--------------+-------------------------------+-----------------------------------------------+
-; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance               ; IP Include File                               ;
-+--------+--------------+---------+--------------+--------------+-------------------------------+-----------------------------------------------+
-; Altera ; RAM: 1-PORT  ; N/A     ; N/A          ; N/A          ; |FPGA_Processing|RAM:RAM_inst ; C:/Users/kobot/Documents/SoC_Brain/fpga/RAM.v ;
-; Altera ; ALTPLL       ; 13.1    ; N/A          ; N/A          ; |FPGA_Processing|pll:pll_inst ; C:/Users/kobot/Documents/SoC_Brain/fpga/pll.v ;
-+--------+--------------+---------+--------------+--------------+-------------------------------+-----------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis IP Cores Summary                                                                                                            ;
++--------+--------------+---------+--------------+--------------+-------------------------------+--------------------------------------------------+
+; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance               ; IP Include File                                  ;
++--------+--------------+---------+--------------+--------------+-------------------------------+--------------------------------------------------+
+; Altera ; RAM: 1-PORT  ; N/A     ; N/A          ; N/A          ; |FPGA_Processing|RAM:RAM_inst ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/RAM.v ;
+; Altera ; ALTPLL       ; 13.1    ; N/A          ; N/A          ; |FPGA_Processing|pll:pll_inst ; C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/pll.v ;
++--------+--------------+---------+--------------+--------------+-------------------------------+--------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------+
@@ -639,7 +639,7 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|mixer_addr_reg[4]                       ;
 ; 5:1                ; 5 bits    ; 15 LEs        ; 5 LEs                ; 10 LEs                 ; Yes        ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|sld_rom_sr:hub_info_reg|word_counter[0] ;
 ; 6:1                ; 9 bits    ; 36 LEs        ; 9 LEs                ; 27 LEs                 ; Yes        ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|irsr_reg[2]                             ;
-; 34:1               ; 4 bits    ; 88 LEs        ; 60 LEs               ; 28 LEs                 ; Yes        ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|design_hash_reg[0]                      ;
+; 34:1               ; 4 bits    ; 88 LEs        ; 64 LEs               ; 24 LEs                 ; Yes        ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|design_hash_reg[0]                      ;
 ; 20:1               ; 4 bits    ; 52 LEs        ; 32 LEs               ; 20 LEs                 ; Yes        ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|sld_rom_sr:hub_info_reg|WORD_SR[0]      ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------------------------------+
 
@@ -1569,7 +1569,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------------------+--------------+
 ; Partition Name   ; Elapsed Time ;
 +------------------+--------------+
-; Top              ; 00:00:17     ;
+; Top              ; 00:00:16     ;
 ; sld_hub:auto_hub ; 00:00:00     ;
 +------------------+--------------+
 
@@ -1595,7 +1595,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Thu Jun 28 22:34:52 2018
+    Info: Processing started: Tue Jul 03 21:56:15 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off SoC_Brain -c SoC_Brain
 Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
 Info (12021): Found 1 design units, including 1 entities, in source file ram.v
@@ -1615,8 +1615,8 @@ Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(156): trunc
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(157): truncated value with size 32 to match size of target (21)
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(158): truncated value with size 32 to match size of target (21)
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(159): truncated value with size 32 to match size of target (21)
-Warning (10235): Verilog HDL Always Construct warning at FPGA_Processing.v(574): variable "vdd" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10766): Verilog HDL Synthesis Attribute warning at FPGA_Processing.v(574): ignoring full_case attribute on case statement with explicit default case item
+Warning (10235): Verilog HDL Always Construct warning at FPGA_Processing.v(514): variable "vdd" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10766): Verilog HDL Synthesis Attribute warning at FPGA_Processing.v(514): ignoring full_case attribute on case statement with explicit default case item
 Info (12128): Elaborating entity "pll" for hierarchy "pll:pll_inst"
 Info (12128): Elaborating entity "altpll" for hierarchy "pll:pll_inst|altpll:altpll_component"
 Info (12130): Elaborated megafunction instantiation "pll:pll_inst|altpll:altpll_component"
@@ -1869,7 +1869,7 @@ Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal 
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "sld_hub:auto_hub|receive[0][0]" is stuck at GND
 Info (286031): Timing-Driven Synthesis is running on partition "sld_hub:auto_hub"
-Info (144001): Generated suppressed messages file C:/Users/kobot/Documents/SoC_Brain/fpga/output_files/SoC_Brain.map.smsg
+Info (144001): Generated suppressed messages file C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/output_files/SoC_Brain.map.smsg
 Info (35024): Succesfully connected in-system debug instance "auto_signaltap_0" to all 7 required data inputs, trigger inputs, acquisition clocks, and dynamic pins
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
@@ -1882,24 +1882,24 @@ Warning (21074): Design contains 8 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "vpo[5]"
     Warning (15610): No output dependent on input pin "vpo[6]"
     Warning (15610): No output dependent on input pin "vpo[7]"
-Info (21057): Implemented 5094 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 5092 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 43 input pins
     Info (21059): Implemented 5 output pins
     Info (21060): Implemented 16 bidirectional pins
-    Info (21061): Implemented 4878 logic cells
+    Info (21061): Implemented 4876 logic cells
     Info (21064): Implemented 131 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 19 DSP elements
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 40 warnings
-    Info: Peak virtual memory: 4799 megabytes
-    Info: Processing ended: Thu Jun 28 22:35:25 2018
-    Info: Elapsed time: 00:00:33
-    Info: Total CPU time (on all processors): 00:00:34
+    Info: Peak virtual memory: 4791 megabytes
+    Info: Processing ended: Tue Jul 03 21:56:40 2018
+    Info: Elapsed time: 00:00:25
+    Info: Total CPU time (on all processors): 00:00:26
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in C:/Users/kobot/Documents/SoC_Brain/fpga/output_files/SoC_Brain.map.smsg.
+The suppressed messages can be found in C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/output_files/SoC_Brain.map.smsg.
 
 
