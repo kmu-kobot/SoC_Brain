@@ -267,16 +267,18 @@ wire [ 7:0] V = C_MAX[ 7 :0];
 /////////////////////////////////////////////////////////////////////////////
 //	Binarization
 
-reg [ 7:0] H_THRES, S_THRES, V_THRES, 
+reg [ 7:0] H_THRES, S_THRES_C, S_THRES_W, V_THRES_BK, V_THRES_W,
 				R_H, G_H, B_H, Y_H, O_H, 
 				R_MIN, R_MAX, G_MIN, G_MAX, B_MIN, B_MAX, Y_MIN, Y_MAX, O_MIN, O_MAX;
-reg R_B, G_B, B_B, Y_B, O_B, BK_B, C;
+reg R_B, G_B, B_B, Y_B, O_B, BK_B, W_B, C;
 
 always @ (posedge clk_llc)
 begin
 	H_THRES = 8'd10;
-	S_THRES = 8'd96;
-	V_THRES = 8'd96;
+	S_THRES_C = 8'd96;
+	S_THRES_W = 8'd64;
+	V_THRES_BK = 8'd96;
+	V_THRES_W = 8'd192;
 
 	R_H	= 8'd230;
 	G_H	= 8'd90;
@@ -303,63 +305,55 @@ end
 
 always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	BK_B <= 1'b0;
-	else
-	begin
-		BK_B <= V < V_THRES;
-	end
+	else					BK_B <= V < V_THRES_BK;
 
 
 always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	C <= 1'b0;
-	else
-	begin
-		C <= ~BK_B & (S > S_THRES);
-	end
+	else					C <= ~BK_B & (S > S_THRES_C);
 
+always @ (negedge resetx or posedge clk_llc)
+	if		(~resetx)	W_B <= 1'b0;
+	else					W_B <= (S < S_THRES_W) & (V > V_THRES_W);
 
 always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	R_B <= 1'b0;
-	else
-	begin
-		R_B <= C & ((R_MIN < H) & (H < R_MAX));
-	end
+	else					R_B <= C & ((R_MIN < H) & (H < R_MAX));
 	
 always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	G_B <= 1'b0;
-	else
-	begin
-		G_B <= C & ((G_MIN < H) & (H < G_MAX));
-	end
+	else					G_B <= C & ((G_MIN < H) & (H < G_MAX));
 	
 always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	B_B <= 1'b0;
-	else
-	begin
-		B_B <= C & ((B_MIN < H) & (H < B_MAX));
-	end
+	else					B_B <= C & ((B_MIN < H) & (H < B_MAX));
 	
 always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	Y_B <= 1'b0;
-	else
-	begin
-		Y_B <= C & ((Y_MIN < H) & (H < Y_MAX));
-	end
+	else					Y_B <= C & ((Y_MIN < H) & (H < Y_MAX));
 	
 always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	O_B <= 1'b0;
-	else
-	begin
-		O_B <= C & ((O_MIN < H) & (H < O_MAX));
-	end
-
+	else					O_B <= C & ((O_MIN < H) & (H < O_MAX));
+	
 wire ROY = R_B | O_B | Y_B;
 wire ROYBK = R_B | O_B | Y_B | BK_B;
 wire GY	= G_B | Y_B;
 wire GYO = G_B | Y_B | O_B;
 wire GYOBK = G_B | Y_B | O_B | BK_B;
 wire BBK = B_B | BK_B;
-//wire [15:0] DecVData = {R_B, R_B, R_B, R_B, R_B, G_B, G_B, G_B, G_B, G_B, G_B, B_B, B_B, B_B, B_B, B_B};
-wire [15:0] DecVData = {ROY, ROYBK, R_B, O_B, Y_B,		GY, GYOBK, GYO, G_B, G_B, G_B,	B_B, BBK, B_B, B_B, BK_B};
+//wire [15:0] DecVData = {ROY, ROYBK, R_B, O_B, Y_B,		GY, GYOBK, GYO, G_B, G_B, G_B,	B_B, BBK, B_B, B_B, BK_B};
+
+wire WROY = ROY | W_B;
+wire WROYBK = ROYBK | W_B;
+wire WR = R_B | W_B;
+wire WGY = GY | W_B;
+wire WGYOBK = GYOBK | W_B;
+wire WGYO = GYO | W_B;
+wire WB = B_B | W_B;
+wire WBBK = BBK | W_B;
+
+wire [15:0] DecVData = {WROY, WROYBK, WR, R_B, O_B,		WGY, WGYOBK, WGYO, W_B, G_B, Y_B,	WB, WBBK, WB, B_B, BK_B};
 	
 /////////////////////////////////////////////////////////////////////////////
 
