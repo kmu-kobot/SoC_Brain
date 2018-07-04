@@ -13,16 +13,14 @@
 #include "uart_api.h"
 //////////////////////////////////////////////////// Protocol Test
 
-void DelayLoop(int delay_time)
-{
+void DelayLoop(int delay_time) {
     while (delay_time)
         delay_time--;
 }
 
-void Send_Command(unsigned char Ldata)
-{
+void Send_Command(unsigned char Ldata) {
     unsigned char Command_Buffer[6] = {
-        0,
+            0,
     };
 
     Command_Buffer[0] = START_CODE;  // Start Byte -> 0xff
@@ -35,32 +33,29 @@ void Send_Command(unsigned char Ldata)
     uart1_buffer_write(Command_Buffer, 6);
 }
 
-int Receive_Ack(int status)
-{
+int Receive_Ack(int status) {
     unsigned char command[6] = {
-        0,
+            0,
     };
 
     uart1_buffer_read(command, 6);
-
+    
     int i = 0;
     int rResult = 0;
-    for (i = 0; i < 6; ++i)
-    {
+    for (i = 0; i < 6; ++i) {
         rResult += (command[i] == 4);
     }
 
     return rResult != 0;
 }
 
+
 #define ERROR 0
 #define OK 1
 
-void RobotAction(unsigned char Ldata)
-{
+void RobotAction(unsigned char Ldata) {
     Send_Command(Ldata);
     printf("Started %d Motion\n", Ldata);
-    while (!Receive_Ack(1))
-        ;
+    while (!Receive_Ack(1));
     printf("Finished %d Motion\n", Ldata);
 }
