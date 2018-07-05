@@ -16,7 +16,7 @@ int mission_1_1_wait_yellow_barricade(U16 *image) {
         }
     }
 
-    return cntYellow * 2 / (WIDTH * MISSION_1_RANGE) > MISSION_1_THRESHOLDS;
+    return cntYellow * 2 * 100 / (WIDTH * MISSION_1_RANGE) > MISSION_1_THRESHOLDS;
 }
 
 int mission_1_2_end_yellow_barricade(U16 *image) {
@@ -31,7 +31,7 @@ int mission_1_2_end_yellow_barricade(U16 *image) {
         }
     }
 
-    return cntYellow * 2 / (WIDTH * HEIGHT) <= 0.1;
+    return cntYellow * 2 * 100 / (WIDTH * HEIGHT) <= 10;
 }
 
 void mission_1_3_escape_yellow_barricade(int repeat) {
