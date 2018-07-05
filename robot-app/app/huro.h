@@ -16,14 +16,17 @@
 #include "./library/robot_protocol.h"
 #include "./library/uart_api.h"
 
-#include <termios.h>
+#include "./mission/MISSION_0_READY_PLAY.h"
+#include "./mission/MISSION_1_YELLOW_BARRICADE.h"
+#include "./mission/MISSION_2_RED_BRIDGE.h"
 
-static struct termios inittio, newtio;
+#include "./library/robot_action.h"
+
+#include <termios.h>
 
 #define SOC_APP_HURO_H
 
-#define WIDTH 180
-#define HEIGHT 120
+static struct termios inittio, newtio;
 
 int huro(void);
 

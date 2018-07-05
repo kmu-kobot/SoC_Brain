@@ -1,4 +1,4 @@
-# Install script for directory: /Users/dexterastin/CLionProjects/SoC_App
+# Install script for directory: /Users/dexterastin/SoC_Brain/robot-app/app
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -35,5 +35,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
