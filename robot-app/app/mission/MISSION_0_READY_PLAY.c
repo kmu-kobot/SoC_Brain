@@ -16,5 +16,5 @@ int mission_0_1_wait_play(U16 *image) {
         }
     }
 
-    return cntYellow / (WIDTH * MISSION_0_RANGE) > MISSION_0_THRESHOLDS;
+    return cntYellow * 2 * 100 / (WIDTH * MISSION_0_RANGE) > MISSION_0_THRESHOLDS;
 }

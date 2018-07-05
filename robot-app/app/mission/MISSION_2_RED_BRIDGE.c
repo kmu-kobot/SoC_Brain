@@ -23,7 +23,7 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat, int repeat1) {
 
     RobotAction(INIT_ROBOT); // TODO: 걷기 위한 준비 동작
 
-    int rReturn = (cntRed * 2 / (WIDTH * (HEIGHT - MISSION_2_LOWER))) > MISSION_2_THRESHOLDS;
+    int rReturn = (cntRed * 2 * 100 / (WIDTH * (HEIGHT - MISSION_2_LOWER))) > MISSION_2_THRESHOLDS;
 
     if (rReturn) {
         mission_2_2_short_walk(repeat1);

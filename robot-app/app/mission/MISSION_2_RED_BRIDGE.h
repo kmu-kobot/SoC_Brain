@@ -11,7 +11,7 @@
 #define SOC_APP_MISSION_2_RED_BRIDGE_H
 
 #define MISSION_2_LOWER 30
-#define MISSION_2_THRESHOLDS 0.6
+#define MISSION_2_THRESHOLDS 60
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat, int repeat1);
 
