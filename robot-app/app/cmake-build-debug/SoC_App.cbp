@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug"/>
+				<Option working_dir="/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug"/>
+				<Option working_dir="/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug"/>
+				<Option working_dir="/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="SoC_App">
-				<Option output="/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/SoC_App" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug"/>
+				<Option output="/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/SoC_App" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -52,15 +52,15 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 SoC_App"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 SoC_App"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="SoC_App/fast">
-				<Option output="/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/SoC_App" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug"/>
+				<Option output="/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/SoC_App" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -73,44 +73,65 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 SoC_App/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 SoC_App/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/dexterastin/CLionProjects/SoC_App/huro.c">
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/huro.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/CLionProjects/SoC_App/huro.h">
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/huro.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/CLionProjects/SoC_App/library/amazon2_sdk.h">
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/library/amazon2_sdk.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/CLionProjects/SoC_App/library/graphic_api.c">
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/library/graphic_api.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/CLionProjects/SoC_App/library/graphic_api.h">
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/library/graphic_api.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/CLionProjects/SoC_App/library/robot_protocol.c">
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/library/robot_action.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/CLionProjects/SoC_App/library/robot_protocol.h">
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/library/robot_protocol.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/CLionProjects/SoC_App/library/uart_api.c">
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/library/robot_protocol.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/CLionProjects/SoC_App/library/uart_api.h">
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/library/uart_api.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/CLionProjects/SoC_App/main.c">
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/library/uart_api.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/CLionProjects/SoC_App/CMakeLists.txt">
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/main.c">
+			<Option target="SoC_App"/>
+		</Unit>
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_0_READY_PLAY.c">
+			<Option target="SoC_App"/>
+		</Unit>
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_0_READY_PLAY.h">
+			<Option target="SoC_App"/>
+		</Unit>
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.c">
+			<Option target="SoC_App"/>
+		</Unit>
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.h">
+			<Option target="SoC_App"/>
+		</Unit>
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_2_RED_BRIDGE.c">
+			<Option target="SoC_App"/>
+		</Unit>
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_2_RED_BRIDGE.h">
+			<Option target="SoC_App"/>
+		</Unit>
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

@@ -1,3 +1,3 @@
-/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/CMakeFiles/SoC_App.dir
+/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles/SoC_App.dir

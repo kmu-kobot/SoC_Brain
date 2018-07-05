@@ -48,10 +48,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/dexterastin/CLionProjects/SoC_App
+CMAKE_SOURCE_DIR = /Users/dexterastin/SoC_Brain/robot-app/app
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/CMakeFiles /Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles /Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dexterastin/CLionProjects/SoC_App/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -258,6 +258,87 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/main.c.s
 .PHONY : main.c.s
 
+mission/MISSION_0_READY_PLAY.o: mission/MISSION_0_READY_PLAY.c.o
+
+.PHONY : mission/MISSION_0_READY_PLAY.o
+
+# target to build an object file
+mission/MISSION_0_READY_PLAY.c.o:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o
+.PHONY : mission/MISSION_0_READY_PLAY.c.o
+
+mission/MISSION_0_READY_PLAY.i: mission/MISSION_0_READY_PLAY.c.i
+
+.PHONY : mission/MISSION_0_READY_PLAY.i
+
+# target to preprocess a source file
+mission/MISSION_0_READY_PLAY.c.i:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.i
+.PHONY : mission/MISSION_0_READY_PLAY.c.i
+
+mission/MISSION_0_READY_PLAY.s: mission/MISSION_0_READY_PLAY.c.s
+
+.PHONY : mission/MISSION_0_READY_PLAY.s
+
+# target to generate assembly for a file
+mission/MISSION_0_READY_PLAY.c.s:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.s
+.PHONY : mission/MISSION_0_READY_PLAY.c.s
+
+mission/MISSION_1_YELLOW_BARRICADE.o: mission/MISSION_1_YELLOW_BARRICADE.c.o
+
+.PHONY : mission/MISSION_1_YELLOW_BARRICADE.o
+
+# target to build an object file
+mission/MISSION_1_YELLOW_BARRICADE.c.o:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o
+.PHONY : mission/MISSION_1_YELLOW_BARRICADE.c.o
+
+mission/MISSION_1_YELLOW_BARRICADE.i: mission/MISSION_1_YELLOW_BARRICADE.c.i
+
+.PHONY : mission/MISSION_1_YELLOW_BARRICADE.i
+
+# target to preprocess a source file
+mission/MISSION_1_YELLOW_BARRICADE.c.i:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.i
+.PHONY : mission/MISSION_1_YELLOW_BARRICADE.c.i
+
+mission/MISSION_1_YELLOW_BARRICADE.s: mission/MISSION_1_YELLOW_BARRICADE.c.s
+
+.PHONY : mission/MISSION_1_YELLOW_BARRICADE.s
+
+# target to generate assembly for a file
+mission/MISSION_1_YELLOW_BARRICADE.c.s:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.s
+.PHONY : mission/MISSION_1_YELLOW_BARRICADE.c.s
+
+mission/MISSION_2_RED_BRIDGE.o: mission/MISSION_2_RED_BRIDGE.c.o
+
+.PHONY : mission/MISSION_2_RED_BRIDGE.o
+
+# target to build an object file
+mission/MISSION_2_RED_BRIDGE.c.o:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o
+.PHONY : mission/MISSION_2_RED_BRIDGE.c.o
+
+mission/MISSION_2_RED_BRIDGE.i: mission/MISSION_2_RED_BRIDGE.c.i
+
+.PHONY : mission/MISSION_2_RED_BRIDGE.i
+
+# target to preprocess a source file
+mission/MISSION_2_RED_BRIDGE.c.i:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.i
+.PHONY : mission/MISSION_2_RED_BRIDGE.c.i
+
+mission/MISSION_2_RED_BRIDGE.s: mission/MISSION_2_RED_BRIDGE.c.s
+
+.PHONY : mission/MISSION_2_RED_BRIDGE.s
+
+# target to generate assembly for a file
+mission/MISSION_2_RED_BRIDGE.c.s:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.s
+.PHONY : mission/MISSION_2_RED_BRIDGE.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -282,6 +363,15 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... mission/MISSION_0_READY_PLAY.o"
+	@echo "... mission/MISSION_0_READY_PLAY.i"
+	@echo "... mission/MISSION_0_READY_PLAY.s"
+	@echo "... mission/MISSION_1_YELLOW_BARRICADE.o"
+	@echo "... mission/MISSION_1_YELLOW_BARRICADE.i"
+	@echo "... mission/MISSION_1_YELLOW_BARRICADE.s"
+	@echo "... mission/MISSION_2_RED_BRIDGE.o"
+	@echo "... mission/MISSION_2_RED_BRIDGE.i"
+	@echo "... mission/MISSION_2_RED_BRIDGE.s"
 .PHONY : help
 
 
