@@ -20,7 +20,7 @@ int huro(void) {
 
         setFPGAVideoData(fpga_videodata);
 
-        printf("[START]\tMISSION[%d]: STEP [%d]", mission, step);
+        printf("[START]\tMISSION[%d]: STEP [%d]\n", mission, step);
 
         switch (mission) {
             case 0: // MISSION 0: READY PLAY
@@ -71,7 +71,7 @@ int huro(void) {
                 break;
         }
 
-        printf("[END]\tMISSION[%d]: STEP [%d]", mission, step);
+        printf("[END]\tMISSION[%d]: STEP [%d]\n", mission, step);
 
     }
 
