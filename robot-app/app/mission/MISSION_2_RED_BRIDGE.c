@@ -109,7 +109,7 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
 
 int mission_2_5_after_bridge_set_center(U16 *image) {
 
-    Action_LONG_TURN_LEFT_HEAD();
+    Action_LEFT_TURN_HEAD_LONG();
 
     U32 col, i;
 
@@ -130,9 +130,9 @@ int mission_2_5_after_bridge_set_center(U16 *image) {
 
     // TODO : 길이 바꾸끼!!!!!!!!
     if (black_len[0] < 55 && black_len[1] < 75) {
-        Action_RIGHT_SHORT_MOVE(1);
+        Action_RIGHT_MOVE_SHORT(1);
     } else if (black_len[0] < 65 && black_len[1] < 85) {
-        Action_LEFT_SHORT_MOVE(1);
+        Action_LEFT_MOVE_SHORT(1);
     } else {
         rResult = 1;
     }
