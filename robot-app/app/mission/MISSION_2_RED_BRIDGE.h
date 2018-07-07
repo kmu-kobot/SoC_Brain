@@ -9,10 +9,13 @@
 
 #define SOC_APP_MISSION_2_RED_BRIDGE_H
 
-#define MISSION_2_LOWER 30
-#define MISSION_2_THRESHOLDS 60
+#define MISSION_2_THRESHOLDS 4
 
-int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat, int repeat1);
+void mission_2_1_watch_below(int repeat);
+
+int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat);
+
+void mission_2_2_watch_side(void);
 
 int mission_2_2_before_bridge_set_center(U16 *image);
 

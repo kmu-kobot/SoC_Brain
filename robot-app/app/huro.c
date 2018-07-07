@@ -32,7 +32,7 @@ int huro(void) {
                 } else if (step == 1) {
                     step += mission_1_2_end_yellow_barricade(fpga_videodata);
                 } else if (step == 2) {
-                    mission_1_3_escape_yellow_barricade(5);
+                    mission_1_3_escape_yellow_barricade(8);
 
                     step = 0;
                     mission += 1;
@@ -40,14 +40,22 @@ int huro(void) {
                 break;
             case 2: // MISSION 2: RED BRIDGE
                 if (step == 0) {
-                    step += mission_2_1_wait_front_of_red_bridge(fpga_videodata, 8, 3);
+                    mission_2_1_watch_below(8);
+                    setFPGAVideoData(fpga_videodata);
+                    step += mission_2_1_wait_front_of_red_bridge(fpga_videodata, 3);
                 } else if (step == 1) {
+                    mission_2_2_watch_side();
+                    setFPGAVideoData(fpga_videodata);
                     step += mission_2_2_before_bridge_set_center(fpga_videodata);
                 } else if (step == 2) {
                     step += mission_2_3_escape_red_bridge();
                 } else if (step == 3) {
+                    mission_2_2_watch_side();
+                    setFPGAVideoData(fpga_videodata);
                     step += mission_2_4_after_bridge_set_straight(fpga_videodata); // 직선 맞추기
                 } else if (step == 4) {
+                    mission_2_2_watch_side();
+                    setFPGAVideoData(fpga_videodata);
                     step += mission_2_5_after_bridge_set_center(fpga_videodata);// 길이 맞추기
                 } else if (step == 5) {
                     mission += 1;

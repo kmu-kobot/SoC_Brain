@@ -4,15 +4,17 @@
 
 #include "MISSION_2_RED_BRIDGE.h"
 
-int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat, int repeat1) {
-
+void mission_2_1_watch_below(int repeat) {
     Action_WALK_FRONT_LONG(repeat);
 
     Action_WATCH_BELOW_SHORT();
+}
+
+int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat) {
 
     U32 col, row, cntRed = 0;
-    for (row = MISSION_2_LOWER; row < HEIGHT; ++row) {
-        for (col = 0; col < WIDTH; col += 2) {
+    for (row = 0; row < HEIGHT; ++row) {
+        for (col = 0; col < WIDTH; ++col) {
             cntRed += GetValueRGBYOBK(
                     GetPtr(image, row, col, WIDTH),
                     RED
@@ -22,18 +24,20 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat, int repeat1) {
 
     Action_INIT_ROBOT();
 
-    int rReturn = (cntRed * 2 * 100 / (WIDTH * (HEIGHT - MISSION_2_LOWER))) > MISSION_2_THRESHOLDS;
+    int rReturn = (cntRed * 100 / (WIDTH * HEIGHT)) > MISSION_2_THRESHOLDS;
 
     if (rReturn) {
-        Action_WALK_FRONT_SHORT(repeat1);
+        Action_WALK_FRONT_SHORT(repeat);
     }
 
     return rReturn;
 }
 
-int mission_2_2_before_bridge_set_center(U16 *image) {
-
+void mission_2_2_watch_side(void) {
     Action_LEFT_TURN_HEAD_LONG();
+}
+
+int mission_2_2_before_bridge_set_center(U16 *image) {
 
     U32 col, i;
     U16 red_len[2] = {0,}, row[2] = {0, 30};
