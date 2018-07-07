@@ -4,7 +4,6 @@
 
 #ifndef SOC_APP_MISSION_0_READY_PLAY_H
 
-#include "./../library/robot_action.h"
 #include "./../library/amazon2_sdk.h"
 
 #define SOC_APP_MISSION_0_READY_PLAY_H

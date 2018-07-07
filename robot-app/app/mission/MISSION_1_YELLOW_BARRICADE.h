@@ -4,9 +4,7 @@
 
 #ifndef SOC_APP_MISSION_1_YELLOW_BARRICADE_H
 
-#include "./../library/robot_protocol.h"
 #include "./../library/amazon2_sdk.h"
-
 #include "./../library/robot_action.h"
 
 #define SOC_APP_MISSION_1_YELLOW_BARRICADE_H

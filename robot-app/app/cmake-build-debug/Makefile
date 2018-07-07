@@ -177,6 +177,33 @@ library/graphic_api.c.s:
 	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/library/graphic_api.c.s
 .PHONY : library/graphic_api.c.s
 
+library/robot_action.o: library/robot_action.c.o
+
+.PHONY : library/robot_action.o
+
+# target to build an object file
+library/robot_action.c.o:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/library/robot_action.c.o
+.PHONY : library/robot_action.c.o
+
+library/robot_action.i: library/robot_action.c.i
+
+.PHONY : library/robot_action.i
+
+# target to preprocess a source file
+library/robot_action.c.i:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/library/robot_action.c.i
+.PHONY : library/robot_action.c.i
+
+library/robot_action.s: library/robot_action.c.s
+
+.PHONY : library/robot_action.s
+
+# target to generate assembly for a file
+library/robot_action.c.s:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/library/robot_action.c.s
+.PHONY : library/robot_action.c.s
+
 library/robot_protocol.o: library/robot_protocol.c.o
 
 .PHONY : library/robot_protocol.o
@@ -354,6 +381,9 @@ help:
 	@echo "... library/graphic_api.o"
 	@echo "... library/graphic_api.i"
 	@echo "... library/graphic_api.s"
+	@echo "... library/robot_action.o"
+	@echo "... library/robot_action.i"
+	@echo "... library/robot_action.s"
 	@echo "... library/robot_protocol.o"
 	@echo "... library/robot_protocol.i"
 	@echo "... library/robot_protocol.s"
