@@ -139,3 +139,4 @@ int mission_2_5_after_bridge_set_center(U16 *image) {
 
     return rResult;
 }
+
