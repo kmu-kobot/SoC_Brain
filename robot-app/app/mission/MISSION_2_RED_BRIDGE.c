@@ -5,13 +5,12 @@
 #include "MISSION_2_RED_BRIDGE.h"
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat, int repeat1) {
+
+    Action_WALK_FRONT_LONG(repeat);
+
+    Action_WATCH_BELOW_SHORT();
+
     U32 col, row, cntRed = 0;
-    for (col = 0; col < repeat; ++col) {
-        RobotAction(WALK_FRONT); // TODO: 걷기 동작 넣기
-    }
-
-    RobotAction(READY_SHOW_FLOOR); // TODO: 바닥 보기 위한 준비 동작
-
     for (row = MISSION_2_LOWER; row < HEIGHT; ++row) {
         for (col = 0; col < WIDTH; col += 2) {
             cntRed += GetValueRGBYOBK(
@@ -21,32 +20,22 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat, int repeat1) {
         }
     }
 
-    RobotAction(INIT_ROBOT); // TODO: 걷기 위한 준비 동작
+    Action_INIT_ROBOT();
 
     int rReturn = (cntRed * 2 * 100 / (WIDTH * (HEIGHT - MISSION_2_LOWER))) > MISSION_2_THRESHOLDS;
 
     if (rReturn) {
-        mission_2_2_short_walk(repeat1);
+        Action_WALK_FRONT_SHORT(repeat1);
     }
 
     return rReturn;
 }
 
-int mission_2_2_short_walk(int repeat) {
-    U32 i;
-    for (i = 0; i < repeat; ++i) {
-        RobotAction(SHORT_WALK_FRONT);
-    }
-    RobotAction(INIT_ROBOT);
-    return 1;
-}
-
 int mission_2_2_before_bridge_set_center(U16 *image) {
 
-    RobotAction(LONG_TURN_LEFT_HEAD);
+    Action_LEFT_TURN_HEAD_LONG();
 
     U32 col, i;
-
     U16 red_len[2] = {0,}, row[2] = {0, 30};
 
     for (col = 0; col < WIDTH; ++col) {
@@ -58,14 +47,13 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
         }
     }
 
-    RobotAction(INIT_ROBOT);
+    Action_INIT_ROBOT();
 
     int rResult = 0;
-
     if (red_len[0] < 55 && red_len[1] < 75) {
-        RobotAction(RIGHT_SHORT_MOVE);
+        Action_RIGHT_MOVE_SHORT(1);
     } else if (red_len[0] < 65 && red_len[1] < 85) {
-        RobotAction(LEFT_SHORT_MOVE);
+        Action_LEFT_MOVE_SHORT(1);
     } else {
         rResult = 1;
     }
@@ -73,22 +61,14 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
     return rResult;
 }
 
-int mission_2_3_escape_red_bridge() {
-    RobotAction(MISSION_2_READY_CREEP_MOTION);
-
-    U32 i;
-    for (i = 0; i < 4; ++i) {
-        RobotAction(MISSION_2_CREEP);
-    }
-
-    RobotAction(INIT_ROBOT); // 일어나는 동작
-
+int mission_2_3_escape_red_bridge(void) {
+    Action_ESCAPE_RED_BRIDGE();
     return 1;
 }
 
 int mission_2_4_after_bridge_set_straight(U16 *image) {
 
-    RobotAction(LONG_TURN_LEFT_HEAD);
+    Action_LEFT_TURN_HEAD_LONG();
 
     U32 row, i, pos_bk[3] = {0,};
     U16 col[3] = {45, 90, 135};
@@ -107,19 +87,19 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
         }
     }
 
-    RobotAction(INIT_ROBOT); // 원래 로봇 모습으로 바꾸기!
+    Action_INIT_ROBOT();
 
     int rResult = 0;
     if (
             (pos_bk[2] - pos_bk[1]) < -10 &&
             (pos_bk[1] - pos_bk[0] < -10)
             ) {
-        RobotAction(TURN_RIGHT_BODY);
+        Action_RIGHT_TURN_BODY_LONG(1);
     } else if (
             (pos_bk[2] - pos_bk[1]) > 10 &&
             (pos_bk[1] - pos_bk[0] > 10)
             ) {
-        RobotAction(TURN_LEFT_BODY);
+        Action_LEFT_TURN_BODY_LONG(1);
     } else {
         rResult = 1;
     }
@@ -129,7 +109,7 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
 
 int mission_2_5_after_bridge_set_center(U16 *image) {
 
-    RobotAction(LONG_TURN_LEFT_HEAD);
+    Action_LONG_TURN_LEFT_HEAD();
 
     U32 col, i;
 
@@ -144,15 +124,15 @@ int mission_2_5_after_bridge_set_center(U16 *image) {
         }
     }
 
-    RobotAction(INIT_ROBOT);
+    Action_INIT_ROBOT();
 
     int rResult = 0;
 
     // TODO : 길이 바꾸끼!!!!!!!!
     if (black_len[0] < 55 && black_len[1] < 75) {
-        RobotAction(RIGHT_SHORT_MOVE);
+        Action_RIGHT_SHORT_MOVE(1);
     } else if (black_len[0] < 65 && black_len[1] < 85) {
-        RobotAction(LEFT_SHORT_MOVE);
+        Action_LEFT_SHORT_MOVE(1);
     } else {
         rResult = 1;
     }

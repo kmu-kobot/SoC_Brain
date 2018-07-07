@@ -4,7 +4,6 @@
 
 #ifndef SOC_APP_MISSION_2_RED_BRIDGE_H
 
-#include "./../library/robot_protocol.h"
 #include "./../library/amazon2_sdk.h"
 #include "./../library/robot_action.h"
 
@@ -15,11 +14,9 @@
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat, int repeat1);
 
-int mission_2_2_short_walk(int repeat);
-
 int mission_2_2_before_bridge_set_center(U16 *image);
 
-int mission_2_3_escape_red_bridge();
+int mission_2_3_escape_red_bridge(void);
 
 int mission_2_4_after_bridge_set_straight(U16 *image);
 

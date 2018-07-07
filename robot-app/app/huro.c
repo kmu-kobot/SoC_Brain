@@ -112,7 +112,7 @@ int init_huro(void) {
 
     direct_camera_display_off();
 
-    RobotAction(INIT_ROBOT);
+    Action_INIT_ROBOT();
 
     return 0;
 }

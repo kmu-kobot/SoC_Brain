@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "/Users/dexterastin/SoC_Brain/robot-app/app/huro.c" "/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles/SoC_App.dir/huro.c.o"
   "/Users/dexterastin/SoC_Brain/robot-app/app/library/graphic_api.c" "/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles/SoC_App.dir/library/graphic_api.c.o"
+  "/Users/dexterastin/SoC_Brain/robot-app/app/library/robot_action.c" "/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles/SoC_App.dir/library/robot_action.c.o"
   "/Users/dexterastin/SoC_Brain/robot-app/app/library/robot_protocol.c" "/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles/SoC_App.dir/library/robot_protocol.c.o"
   "/Users/dexterastin/SoC_Brain/robot-app/app/library/uart_api.c" "/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles/SoC_App.dir/library/uart_api.c.o"
   "/Users/dexterastin/SoC_Brain/robot-app/app/main.c" "/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles/SoC_App.dir/main.c.o"

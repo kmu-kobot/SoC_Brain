@@ -95,6 +95,9 @@
 		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/library/graphic_api.h">
 			<Option target="SoC_App"/>
 		</Unit>
+		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/library/robot_action.c">
+			<Option target="SoC_App"/>
+		</Unit>
 		<Unit filename="/Users/dexterastin/SoC_Brain/robot-app/app/library/robot_action.h">
 			<Option target="SoC_App"/>
 		</Unit>
