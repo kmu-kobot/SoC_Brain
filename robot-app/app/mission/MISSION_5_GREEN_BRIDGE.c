@@ -35,7 +35,37 @@ int mission_5_4_check_finish_black_line(U16 *image) {
 }
 
 int mission_5_4_check_green_bridge_straight(U16 *image) {
-    return 1;
+    U32 col, i;
+
+    U16 green_len[2] = {0,}, row[2] = {100,30};
+    
+    for (col = 90; col > 0; --col)
+    {
+        green_len[0] += GetValueRGBYOBK(GetPtr(image, row[0], col, WIDTH),GREEN);
+        green_len[1] += GetValueRGBYOBK(GetPtr(image, row[1], col, WIDTH),GREEN);
+    }
+
+    Action_INIT_ROBOT();
+
+    int rResult = 0;
+    int slope;
+
+    if((green_len[1] - green_len[0]) == 0)
+    {
+        Action_LEFT_TURN_BODY_SHORT(2);
+    }
+    else
+    {
+        slope = -70 / (green_len[1] - green_len[0]);
+        if(slope < MISSION_5_SLOPE - MISSION_5_SLOPE_RANGE)
+            Action_RIGHT_TURN_BODY_SHORT(2);
+        else if(slope > MISSION_5_SLOPE + MISSION_5_SLOPE_RANGE)
+            Action_LEFT_TURN_BODY_SHORT(2);
+        else
+            rResult = 1;
+
+    }
+    return rResult;
 }
 
 int mission_5_4_check_green_bridge_center(U16 *image) {
