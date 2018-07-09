@@ -40,16 +40,23 @@ void mission_2_2_watch_side(void) {
 int mission_2_2_before_bridge_set_center(U16 *image) {
 
     U32 col, i;
-    U16 red_len[2] = {0,}, row[2] = {0, 30};
+    U16 red_len[2] = {0,}, row[4] = {0, 2, 28, 30};
 
     for (col = 0; col < WIDTH; ++col) {
-        for (i = 0; i < 2; ++i) {
+        for (i = 0; i < 4; ++i) {
             red_len[i] += GetValueRGBYOBK(
                     GetPtr(image, row[i], col, WIDTH),
                     RED
             );
         }
     }
+
+    row[0] += row[1];
+    row[2] += row[3];
+    row[1] = row[2];
+
+    row[0] /= 2;
+    row[1] /= 2;
 
     Action_INIT_ROBOT();
 

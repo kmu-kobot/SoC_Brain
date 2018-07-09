@@ -20,6 +20,9 @@
 #include "./mission/MISSION_1_YELLOW_BARRICADE.h"
 #include "./mission/MISSION_2_RED_BRIDGE.h"
 
+#include "./mission/MISSION_4_JUMP_HURDLE.h"
+#include "./mission/MISSION_5_GREEN_BRIDGE.h"
+
 #include <termios.h>
 
 #define SOC_APP_HURO_H

@@ -27,50 +27,169 @@ int huro(void) {
                 mission += mission_0_1_wait_play(fpga_videodata);
                 break;
             case 1: // MISSION 1: YELLOW BARRICADE
-                if (step == 0) {
-                    step += mission_1_1_wait_yellow_barricade(fpga_videodata);
-                } else if (step == 1) {
-                    step += mission_1_2_end_yellow_barricade(fpga_videodata);
-                } else if (step == 2) {
-                    mission_1_3_escape_yellow_barricade(8);
-
-                    step = 0;
-                    mission += 1;
+                switch (step) {
+                    case 0:
+                        step += mission_1_1_wait_yellow_barricade(fpga_videodata);
+                        break;
+                    case 1:
+                        step += mission_1_2_end_yellow_barricade(fpga_videodata);
+                        break;
+                    case 2:
+                        mission_1_3_escape_yellow_barricade(8);
+                        step = 0;
+                        mission += 1;
+                        break;
+                    default:
+                        break;
                 }
                 break;
             case 2: // MISSION 2: RED BRIDGE
-                if (step == 0) {
-                    mission_2_1_watch_below(8);
-                    setFPGAVideoData(fpga_videodata);
-                    step += mission_2_1_wait_front_of_red_bridge(fpga_videodata, 3);
-                } else if (step == 1) {
-                    mission_2_2_watch_side();
-                    setFPGAVideoData(fpga_videodata);
-                    step += mission_2_2_before_bridge_set_center(fpga_videodata);
-                } else if (step == 2) {
-                    step += mission_2_3_escape_red_bridge();
-                } else if (step == 3) {
-                    mission_2_2_watch_side();
-                    setFPGAVideoData(fpga_videodata);
-                    step += mission_2_4_after_bridge_set_straight(fpga_videodata); // 직선 맞추기
-                } else if (step == 4) {
-                    mission_2_2_watch_side();
-                    setFPGAVideoData(fpga_videodata);
-                    step += mission_2_5_after_bridge_set_center(fpga_videodata);// 길이 맞추기
-                } else if (step == 5) {
-                    mission += 1;
-                    step = 0;
+                switch (step) {
+                    case 0:
+                        mission_2_1_watch_below(8);
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_2_1_wait_front_of_red_bridge(fpga_videodata, 3);
+                        break;
+                    case 1:
+                        mission_2_2_watch_side();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_2_2_before_bridge_set_center(fpga_videodata);
+                        break;
+                    case 2:
+                        step += mission_2_3_escape_red_bridge();
+                        break;
+                    case 3:
+                        mission_2_2_watch_side();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_2_4_after_bridge_set_straight(fpga_videodata); // 직선 맞추기
+
+                        mission_2_2_watch_side();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_2_5_after_bridge_set_center(fpga_videodata);// 길이 맞추기
+
+                        step = (step == 5) ? 4 : 3;
+                        break;
+                    case 4:
+                        mission += 1;
+                        step = 0;
+                        break;
+                    default:
+                        break;
                 }
                 break;
             case 3: // MISSION 3: AVOID BOMB
                 break;
-            case 4: // MISSION 4: JUMP HUDDLE
+            case 4: // MISSION 4: JUMP HURDLE
+                switch (step) {
+                    case 3:
+                        step += mission_4_3_jump_hurdle();
+                        break;
+                    case 4:
+                        mission_4_6_watch_side();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_4_4_set_straight(fpga_videodata);
+                        break;
+                    case 5:
+                        step += mission_4_5_check_bk_line(fpga_videodata);
+                        break;
+                    case 6:
+                        mission_4_6_watch_side();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_4_6_set_center(fpga_videodata);
+                        break;
+                    case 7:
+                        mission += 1;
+                        step = 0;
+                        break;
+                    default:
+                        mission_4_1_watch_front(4);
+                        step += mission_4_2_ready_hurdle(fpga_videodata);
+                        break;
+                }
                 break;
             case 5: // MISSION 5: GREEN BRIDGE
+                switch (step) {
+                    case 0:
+                        mission_5_1_watch_below(5);
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_5_1_check_black_line(fpga_videodata);
+                        break;
+                    case 1:
+                        // 맨처음 다리 중심 맞추기
+                        break;
+                    case 2:
+                        // 계단 오르기
+                        break;
+                    case 3:
+                        // 초록색 중심 맞추기
+                        break;
+                    case 4:
+                        mission_5_4_watch_below();
+                        setFPGAVideoData(fpga_videodata);
+                        if (mission_5_4_check_finish_black_line(fpga_videodata)) {
+                            step += 1;
+                            break;
+                        }
+
+                        step += mission_5_4_check_green_bridge_straight(fpga_videodata);
+
+                        mission_5_4_watch_below();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_5_4_check_green_bridge_center(fpga_videodata);
+
+                        if (step == 6) {
+                            mission_5_4_short_walk_on_green_bridge(4);
+                        }
+                        step = 4;
+                        break;
+                    case 5:
+                        // 내려가기 위해 선 맞추기
+                        break;
+                    case 6:
+                        // 계단 내려가기
+                        break;
+                    case 7:
+                        mission += 1;
+                        step = 0;
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 6: // MISSION 6: KICK BALL
                 break;
             case 7: // MISSION 7: YELLOW HOLE
+                switch (step) {
+                    case 0:
+                        // 앞으로 걸어가면서 밑에 노란색이 있는지 확인
+                        break;
+                    case 1:
+                        // 중심 맞추기
+                        break;
+                    case 2:
+                        // 계단 오르기
+                        break;
+                    case 3:
+                        // 각도랑 중심 체크
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        // 노란색 선으로 중심 체크
+                        break;
+                    case 6:
+                        // 구르기랑 내려가기
+                        break;
+                    case 7:
+                        // 각도랑 중심 체크
+                        break;
+                    case 8:
+                        mission += 1;
+                        step = 0;
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 8: // MISSION 8: LAST BARRICADE
                 break;
