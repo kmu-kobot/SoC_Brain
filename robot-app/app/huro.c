@@ -53,11 +53,13 @@ int huro(void) {
                     mission_2_2_watch_side();
                     setFPGAVideoData(fpga_videodata);
                     step += mission_2_4_after_bridge_set_straight(fpga_videodata); // 직선 맞추기
-                } else if (step == 4) {
+
                     mission_2_2_watch_side();
                     setFPGAVideoData(fpga_videodata);
                     step += mission_2_5_after_bridge_set_center(fpga_videodata);// 길이 맞추기
-                } else if (step == 5) {
+
+                    step = (step == 5) ? 4 : 3;
+                } else if (step == 4) {
                     mission += 1;
                     step = 0;
                 }
@@ -65,9 +67,20 @@ int huro(void) {
             case 3: // MISSION 3: AVOID BOMB
                 break;
             case 4: // MISSION 4: JUMP HURDLE
-                if (step == 0) {
+                if (step == 3) {
+                    step += mission_4_3_jump_hurdle();
+                } else if (step == 4) {
+                    // 직각 맞추고 해야댐~~ mission_2_4_after_bridge_set_straight 활용
+                } else if (step == 5) {
+                    // 앞에 흰선인지 검은선인지 확인. 검은선이면 한번더 90도 돌기 mission_2_4_after_bridge_set_straight 활용
+                } else if (step == 6) {
+                    // 중심 맞추기 mission_2_5_after_bridge_set_center 활용
+                } else if (step == 7) {
+                    mission += 1;
+                    step = 0;
+                } else {
                     mission_4_1_watch_front(4);
-                    step += mission_4_2_ready_hurdle();
+                    step += mission_4_2_ready_hurdle(fpga_videodata);
                 }
                 break;
             case 5: // MISSION 5: GREEN BRIDGE
