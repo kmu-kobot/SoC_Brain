@@ -85,13 +85,17 @@ int huro(void) {
                         step += mission_4_3_jump_hurdle();
                         break;
                     case 4:
-                        // 직각 맞추고 해야댐~~ mission_2_4_after_bridge_set_straight 활용
+                        mission_4_6_watch_side();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_4_4_set_straight(fpga_videodata);
                         break;
                     case 5:
                         step += mission_4_5_check_bk_line(fpga_videodata);
                         break;
                     case 6:
-                        // 중심 맞추기 mission_2_5_after_bridge_set_center 활용
+                        mission_4_6_watch_side();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_4_6_set_center(fpga_videodata);
                         break;
                     case 7:
                         mission += 1;
@@ -106,7 +110,9 @@ int huro(void) {
             case 5: // MISSION 5: GREEN BRIDGE
                 switch (step) {
                     case 0:
-                        // 앞으로 걸어가면서 밑에 검은색 바가 있는지 확인
+                        mission_5_1_watch_below(5);
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_5_1_check_black_line(fpga_videodata);
                         break;
                     case 1:
                         // 맨처음 다리 중심 맞추기
@@ -118,11 +124,23 @@ int huro(void) {
                         // 초록색 중심 맞추기
                         break;
                     case 4:
-                        // 먼저 각도랑 줌식체크, 맞으면 가기, 그리고 앞에 검은선확인하면서 끝났는지 확인
-                        // 1. 검은선확인
-                        // if (2. 각도체크) {
-                        //    3. 가기
-                        // }
+                        mission_5_4_watch_below();
+                        setFPGAVideoData(fpga_videodata);
+                        if (mission_5_4_check_finish_black_line(fpga_videodata)) {
+                            step += 1;
+                            break;
+                        }
+
+                        step += mission_5_4_check_green_bridge_straight(fpga_videodata);
+
+                        mission_5_4_watch_below();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_5_4_check_green_bridge_center(fpga_videodata);
+
+                        if (step == 6) {
+                            mission_5_4_short_walk_on_green_bridge(4);
+                        }
+                        step = 4;
                         break;
                     case 5:
                         // 내려가기 위해 선 맞추기

@@ -44,9 +44,47 @@ int mission_4_3_jump_hurdle() {
     return 1;
 }
 
+int mission_4_4_set_straight(U16 *image) {
+    U32 row, i, pos_bk[3] = {0,};
+    U16 col[3] = {45, 90, 135};
+
+    for (i = 0; i < 3; ++i) {
+        for (row = HEIGHT; row > 0; row--) {
+            if (
+                    GetValueRGBYOBK(
+                            GetPtr(image, row, col[i], WIDTH),
+                            BLACK
+                    ) == 1
+                    ) {
+                pos_bk[i] = row;
+                break;
+            }
+        }
+    }
+
+    Action_INIT_ROBOT();
+
+    int rResult = 0;
+    if (
+            (pos_bk[2] - pos_bk[1]) < -10 &&
+            (pos_bk[1] - pos_bk[0] < -10)
+            ) {
+        Action_LEFT_TURN_BODY_LONG(1);
+    } else if (
+            (pos_bk[2] - pos_bk[1]) > 10 &&
+            (pos_bk[1] - pos_bk[0] > 10)
+            ) {
+        Action_RIGHT_TURN_BODY_LONG(1);
+    } else {
+        rResult = 1;
+    }
+
+    return rResult;
+}
+
 int mission_4_5_check_bk_line(U16 *image) {
     U32 col, row, i;
-    U16 checkHurdleLine[3] = {0,};
+    U16 checkHurdleLine[MISSION_4_HURDLE_CRITERI] = {0,};
 
     for (row = HEIGHT; row > 0; --row) {
         for (col = 0; col < MISSION_4_HURDLE_CRITERI; ++col) {
@@ -76,4 +114,46 @@ int mission_4_5_check_bk_line(U16 *image) {
 
     return rResult;
 
+}
+
+int mission_4_6_set_center(U16 *image) {
+    U32 row, i, pos_bk[3] = {0,};
+    U16 col[3] = {45, 90, 135};
+
+    for (i = 0; i < 3; ++i) {
+        for (row = HEIGHT; row > 0; row--) {
+            if (
+                    GetValueRGBYOBK(
+                            GetPtr(image, row, col[i], WIDTH),
+                            BLACK
+                    ) == 1
+                    ) {
+                pos_bk[i] = row;
+                break;
+            }
+        }
+    }
+
+    Action_INIT_ROBOT();
+
+    int rResult = 0;
+
+    if ((pos_bk[0] > MISSION_4_BK_LINE_LOWER) &&
+        (pos_bk[1] > MISSION_4_BK_LINE_LOWER) &&
+        (pos_bk[2] > MISSION_4_BK_LINE_LOWER)) {
+        //move body left
+    } else if ((pos_bk[0] > MISSION_4_BK_LINE_LOWER - MISSION_4_BK_LINE_RANGE) &&
+               (pos_bk[1] > MISSION_4_BK_LINE_LOWER - MISSION_4_BK_LINE_RANGE) &&
+               (pos_bk[2] > MISSION_4_BK_LINE_LOWER - MISSION_4_BK_LINE_RANGE)) {
+        //MOVE BODY RIGHT
+    } else
+        rResult = 1;
+
+
+    return rResult;
+
+}
+
+void mission_4_6_watch_side() {
+    Action_RIGHT_TURN_HEAD_LONG();
 }
