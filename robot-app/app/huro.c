@@ -88,7 +88,7 @@ int huro(void) {
                         // 직각 맞추고 해야댐~~ mission_2_4_after_bridge_set_straight 활용
                         break;
                     case 5:
-                        // 앞에 흰선인지 검은선인지 확인. 검은선이면 한번더 90도 돌기 mission_2_4_after_bridge_set_straight 활용
+                        step += mission_4_5_check_bk_line(fpga_videodata);
                         break;
                     case 6:
                         // 중심 맞추기 mission_2_5_after_bridge_set_center 활용

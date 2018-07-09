@@ -366,32 +366,32 @@ mission/MISSION_2_RED_BRIDGE.c.s:
 	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.s
 .PHONY : mission/MISSION_2_RED_BRIDGE.c.s
 
-mission/MISSION_4_JUMP_HUDDLE.o: mission/MISSION_4_JUMP_HUDDLE.c.o
+mission/MISSION_4_JUMP_HURDLE.o: mission/MISSION_4_JUMP_HURDLE.c.o
 
-.PHONY : mission/MISSION_4_JUMP_HUDDLE.o
+.PHONY : mission/MISSION_4_JUMP_HURDLE.o
 
 # target to build an object file
-mission/MISSION_4_JUMP_HUDDLE.c.o:
-	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HUDDLE.c.o
-.PHONY : mission/MISSION_4_JUMP_HUDDLE.c.o
+mission/MISSION_4_JUMP_HURDLE.c.o:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o
+.PHONY : mission/MISSION_4_JUMP_HURDLE.c.o
 
-mission/MISSION_4_JUMP_HUDDLE.i: mission/MISSION_4_JUMP_HUDDLE.c.i
+mission/MISSION_4_JUMP_HURDLE.i: mission/MISSION_4_JUMP_HURDLE.c.i
 
-.PHONY : mission/MISSION_4_JUMP_HUDDLE.i
+.PHONY : mission/MISSION_4_JUMP_HURDLE.i
 
 # target to preprocess a source file
-mission/MISSION_4_JUMP_HUDDLE.c.i:
-	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HUDDLE.c.i
-.PHONY : mission/MISSION_4_JUMP_HUDDLE.c.i
+mission/MISSION_4_JUMP_HURDLE.c.i:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.i
+.PHONY : mission/MISSION_4_JUMP_HURDLE.c.i
 
-mission/MISSION_4_JUMP_HUDDLE.s: mission/MISSION_4_JUMP_HUDDLE.c.s
+mission/MISSION_4_JUMP_HURDLE.s: mission/MISSION_4_JUMP_HURDLE.c.s
 
-.PHONY : mission/MISSION_4_JUMP_HUDDLE.s
+.PHONY : mission/MISSION_4_JUMP_HURDLE.s
 
 # target to generate assembly for a file
-mission/MISSION_4_JUMP_HUDDLE.c.s:
-	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HUDDLE.c.s
-.PHONY : mission/MISSION_4_JUMP_HUDDLE.c.s
+mission/MISSION_4_JUMP_HURDLE.c.s:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.s
+.PHONY : mission/MISSION_4_JUMP_HURDLE.c.s
 
 # Help Target
 help:
@@ -429,9 +429,9 @@ help:
 	@echo "... mission/MISSION_2_RED_BRIDGE.o"
 	@echo "... mission/MISSION_2_RED_BRIDGE.i"
 	@echo "... mission/MISSION_2_RED_BRIDGE.s"
-	@echo "... mission/MISSION_4_JUMP_HUDDLE.o"
-	@echo "... mission/MISSION_4_JUMP_HUDDLE.i"
-	@echo "... mission/MISSION_4_JUMP_HUDDLE.s"
+	@echo "... mission/MISSION_4_JUMP_HURDLE.o"
+	@echo "... mission/MISSION_4_JUMP_HURDLE.i"
+	@echo "... mission/MISSION_4_JUMP_HURDLE.s"
 .PHONY : help
 
 
