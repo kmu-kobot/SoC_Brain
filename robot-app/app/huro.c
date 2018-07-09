@@ -64,7 +64,11 @@ int huro(void) {
                 break;
             case 3: // MISSION 3: AVOID BOMB
                 break;
-            case 4: // MISSION 4: JUMP HUDDLE
+            case 4: // MISSION 4: JUMP HURDLE
+                if (step == 0) {
+                    mission_4_1_watch_front(4);
+                    step += mission_4_2_ready_hurdle();
+                }
                 break;
             case 5: // MISSION 5: GREEN BRIDGE
                 break;

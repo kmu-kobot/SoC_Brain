@@ -366,6 +366,33 @@ mission/MISSION_2_RED_BRIDGE.c.s:
 	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.s
 .PHONY : mission/MISSION_2_RED_BRIDGE.c.s
 
+mission/MISSION_4_JUMP_HUDDLE.o: mission/MISSION_4_JUMP_HUDDLE.c.o
+
+.PHONY : mission/MISSION_4_JUMP_HUDDLE.o
+
+# target to build an object file
+mission/MISSION_4_JUMP_HUDDLE.c.o:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HUDDLE.c.o
+.PHONY : mission/MISSION_4_JUMP_HUDDLE.c.o
+
+mission/MISSION_4_JUMP_HUDDLE.i: mission/MISSION_4_JUMP_HUDDLE.c.i
+
+.PHONY : mission/MISSION_4_JUMP_HUDDLE.i
+
+# target to preprocess a source file
+mission/MISSION_4_JUMP_HUDDLE.c.i:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HUDDLE.c.i
+.PHONY : mission/MISSION_4_JUMP_HUDDLE.c.i
+
+mission/MISSION_4_JUMP_HUDDLE.s: mission/MISSION_4_JUMP_HUDDLE.c.s
+
+.PHONY : mission/MISSION_4_JUMP_HUDDLE.s
+
+# target to generate assembly for a file
+mission/MISSION_4_JUMP_HUDDLE.c.s:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HUDDLE.c.s
+.PHONY : mission/MISSION_4_JUMP_HUDDLE.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -402,6 +429,9 @@ help:
 	@echo "... mission/MISSION_2_RED_BRIDGE.o"
 	@echo "... mission/MISSION_2_RED_BRIDGE.i"
 	@echo "... mission/MISSION_2_RED_BRIDGE.s"
+	@echo "... mission/MISSION_4_JUMP_HUDDLE.o"
+	@echo "... mission/MISSION_4_JUMP_HUDDLE.i"
+	@echo "... mission/MISSION_4_JUMP_HUDDLE.s"
 .PHONY : help
 
 
