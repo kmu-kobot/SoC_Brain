@@ -8,6 +8,8 @@
 #include "./../library/robot_action.h"
 
 #define SOC_APP_MISSION_5_GREEN_BRIDGE_H
+#define MISSION_5_SLOPE 1
+#define MISSION_5_SLOPE_RANGE 0.3
 
 #define MISSION_5_1_BLACK_LINE_UPPER 60
 
