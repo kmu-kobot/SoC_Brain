@@ -6,8 +6,7 @@
 
 void mission_2_1_watch_below(int repeat) {
     Action_WALK_FRONT_LONG(repeat);
-
-    Action_WATCH_BELOW_SHORT();
+    Action_WATCH_BELOW_MIDDLE();
 }
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat) {
@@ -105,12 +104,12 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
             (pos_bk[2] - pos_bk[1]) < -10 &&
             (pos_bk[1] - pos_bk[0] < -10)
             ) {
-        Action_RIGHT_TURN_BODY_LONG(1);
+        Action_RIGHT_TURN_BODY(1);
     } else if (
             (pos_bk[2] - pos_bk[1]) > 10 &&
             (pos_bk[1] - pos_bk[0] > 10)
             ) {
-        Action_LEFT_TURN_BODY_LONG(1);
+        Action_LEFT_TURN_BODY(1);
     } else {
         rResult = 1;
     }
