@@ -161,29 +161,39 @@ int huro(void) {
             case 7: // MISSION 7: YELLOW HOLE
                 switch (step) {
                     case 0:
-                        // 앞으로 걸어가면서 밑에 노란색이 있는지 확인
+                        mission_7_1_watch_below(8);
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_7_1_wait_front_of_yellow_hole_bridge(fpga_videodata, 3);
                         break;
                     case 1:
-                        // 중심 맞추기
+                        mission_7_2_watch_side();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_7_2_before_bridge_set_center(fpga_videodata);
                         break;
                     case 2:
-                        // 계단 오르기
+                        step += mission_7_3_climb_yellow_hole_bridge();
                         break;
                     case 3:
-                        // 각도랑 중심 체크
+                        mission_7_4_watch_below();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_7_4_set_straight_on_yellow_bridge(fpga_videodata);
+
+                        mission_7_4_watch_below();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_7_4_set_straight_on_yellow_bridge(fpga_videodata);
+
+                        // TODO: step 확인
                         break;
                     case 4:
+                        // TODO: 앞으로 걸어가면서 바로앞에 검은선인지 확인
                         break;
                     case 5:
-                        // 노란색 선으로 중심 체크
-                        break;
-                    case 6:
                         // 구르기랑 내려가기
                         break;
-                    case 7:
+                    case 6:
                         // 각도랑 중심 체크
                         break;
-                    case 8:
+                    case 7:
                         mission += 1;
                         step = 0;
                         break;

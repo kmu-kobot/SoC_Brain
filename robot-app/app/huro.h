@@ -23,6 +23,8 @@
 #include "./mission/MISSION_4_JUMP_HURDLE.h"
 #include "./mission/MISSION_5_GREEN_BRIDGE.h"
 
+#include "./mission/MISSION_7_YELLOW_HOLE_BRIDGE.h"
+
 #include <termios.h>
 
 #define SOC_APP_HURO_H
