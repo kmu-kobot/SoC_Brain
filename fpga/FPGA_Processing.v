@@ -2,9 +2,7 @@
   Project   : SoC Robot WAR Support
   Title     : FPGA HDL Source for Image Processing(SRAM Interface)
   File name : FPGA_Processing.v
-
   Author(s) : Advanced Digital Chips Inc. 
-
   History
         + v0.0   2002/ 9/18 : First version released
         + v0.1   2003/ 7/08 : Update
@@ -21,6 +19,58 @@
 	     + v0.7  2014/6/19: Update(Conversion for AMAZON2 Chip)								
 									
 *************************************************************************/
+module RAM_MORPH ( clock, wren, addr_wr, data_wr, addr_rd,
+							q_w, q_m);
+
+input clock;
+input wren;
+input [14:0] addr_wr;
+input [ 5:0] data_wr;
+input [14:0] addr_rd;
+
+output [ 5:0] q_w;
+output [ 5:0] q_m;
+
+reg [ 5:0] ram [0:21599];
+
+reg [14:0] top, bot, left, right;
+reg [ 5:0] result;
+
+always @(posedge clock)
+begin
+	if (wren) ram[addr_wr] <= data_wr;
+
+	top <= addr_rd / 180 < 1 ? addr_rd : addr_rd - 180;
+	bot <= addr_rd / 180 < 119 ? addr_rd + 180 : addr_rd;
+	left <= addr_rd % 180 < 1 ? addr_rd : addr_rd - 1;
+	right <= addr_rd % 180 < 179 ? addr_rd + 1 : addr_rd;
+	
+	result <= (ram[top] | ram[bot] | ram[left] | ram[right]) & ram[addr_rd];
+end
+
+assign q_w = ram[addr_wr];
+assign q_m = result;
+
+endmodule
+
+module RAM_BUFF ( clock, wren, addr, data, q );
+
+input clock,
+		wren;
+input [14:0] addr;
+input [ 5:0] data;
+output [ 5:0] q;
+
+reg [ 5:0] ram [0:21599];
+
+always @(posedge clock)
+begin
+	if (wren) ram[addr] <= data;
+end
+
+assign q = ram[addr];
+
+endmodule
 
 module FPGA_Processing ( resetx,
 					clk_llc2, clk_llc, vref, href, odd, vpo,                  	   // mem_ctrl <- SAA7111A
@@ -65,6 +115,7 @@ always @(negedge resetx or posedge clk_llc2)
    else                      clk_div <= clk_div + 1'b1;
 
 // clk_llc8 : 180(720/4) clock generation
+wire clk_llc4  = clk_div[0];
 wire clk_llc8  = clk_div[1];
 
 // href2 : (480/2) clock generation
@@ -76,9 +127,14 @@ always @(negedge resetx or posedge href)
 // select only odd frame
 wire oddframe   = odd & vref;
 
+wire evenframe  = ~odd & vref;
+
 // 120(480/4) clock generation
 wire href2_wr   = href2 & href & oddframe;// & oddframe2; 
 
+wire href2_wr_E = href2 & href & evenframe;
+
+wire href2_wr_A = href2 & href & vref;
 
 /////////////////////////////////////////////////////////////////////////////
 // YCbCr422 to RGB565
@@ -175,22 +231,21 @@ always @ (posedge clk_llc or negedge resetx)
 //wire [ 4:0] R = (R_int[20]) ? 5'b0 : (R_int[19:18] == 2'b0) ? R_int[17:13] : 5'b11111;
 //wire [ 5:0] G = (G_int[20]) ? 6'b0 : (G_int[19:18] == 2'b0) ? G_int[17:12] : 6'b111111;
 //wire [ 4:0] B = (B_int[20]) ? 5'b0 : (B_int[19:18] == 2'b0) ? B_int[17:13] : 5'b11111;	  
-//
+
+wire [ 7:0] R8 = (R_int[20]) ? 8'b0 : (R_int[19:18] == 2'b0) ? R_int[17:10] : 8'b11111111;
+wire [ 7:0] G8 = (G_int[20]) ? 8'b0 : (G_int[19:18] == 2'b0) ? G_int[17:10] : 8'b11111111;
+wire [ 7:0] B8 = (B_int[20]) ? 8'b0 : (B_int[19:18] == 2'b0) ? B_int[17:10] : 8'b11111111;	
+
 //wire [15:0] DecVData = {R,G,B};
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
 //	RGB888 to HSV
-
-wire [ 7:0] R8 = (R_int[20]) ? 8'b0 : (R_int[19:18] == 2'b0) ? R_int[17:10] : 8'b11111111;
-wire [ 7:0] G8 = (G_int[20]) ? 8'b0 : (G_int[19:18] == 2'b0) ? G_int[17:10] : 8'b11111111;
-wire [ 7:0] B8 = (B_int[20]) ? 8'b0 : (B_int[19:18] == 2'b0) ? B_int[17:10] : 8'b11111111;	
-
 integer C_MAX, C_MIN, DELTA, H_DIFF, S_DATA, H_DATA;
 reg  [ 1:0] MAX;
 
-always @(negedge resetx or posedge clk_llc)
+always @(negedge resetx or posedge clk_llc4)
 	if (~resetx)
 		begin
 		C_MAX <= 0;
@@ -223,11 +278,11 @@ wire MAX_R = ~MAX[1] & ~MAX[0];
 wire MAX_G = ~MAX[1] & MAX[0];
 wire MAX_B = MAX[1] & ~MAX[0];
 
-always @(negedge resetx or posedge clk_llc)
+always @(negedge resetx or posedge clk_llc4)
 	if (~resetx)		DELTA <= 0;
 	else					DELTA <= C_MAX - C_MIN;
 
-always @(negedge resetx or posedge clk_llc)
+always @(negedge resetx or posedge clk_llc4)
 	if (~resetx)
 		begin
 		H_DIFF <= 0;
@@ -242,7 +297,7 @@ always @(negedge resetx or posedge clk_llc)
 		S_DATA <= C_MAX > 0 ? DELTA * 255 / C_MAX : 0;
 		end
 
-always @(negedge resetx or posedge clk_llc)
+always @(negedge resetx or posedge clk_llc4)
 	if (~resetx)		H_DATA <= 0;
 	else
 		if (DELTA == 0) H_DATA <= 0;
@@ -256,11 +311,6 @@ always @(negedge resetx or posedge clk_llc)
 wire [ 7:0] H = H_DATA[7 :0];
 wire [ 7:0] S = S_DATA[7 :0];
 wire [ 7:0] V = C_MAX[ 7 :0];
-
-//wire [15:0] DecVData = {5'b0, DELTA[7:2], 5'b0};
-//wire [15:0] DecVData = {H[7:3], S[7:2], V[7:3]};
-//wire [15:0] DecVData = {MAX_R, 4'b0, MAX_G, 5'b0, MAX_B, 4'b0};
-//wire [15:0] DecVData = {H < 41 | 200 < H, 4'b0, 40 < H & H < 121, 5'b0, 120 < H & H < 201, 4'b0};
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -272,7 +322,7 @@ reg [ 7:0] H_THRES, S_THRES, V_THRES,
 				R_MIN, R_MAX, G_MIN, G_MAX, B_MIN, B_MAX, Y_MIN, Y_MAX, O_MIN, O_MAX;
 reg R_B, G_B, B_B, Y_B, O_B, BK_B, C;
 
-always @ (posedge clk_llc)
+always @ (posedge clk_llc4)
 begin
 	H_THRES = 8'd10;
 	S_THRES = 8'd96;
@@ -301,7 +351,7 @@ begin
 end
 
 
-always @ (negedge resetx or posedge clk_llc)
+always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	BK_B <= 1'b0;
 	else
 	begin
@@ -309,7 +359,7 @@ always @ (negedge resetx or posedge clk_llc)
 	end
 
 
-always @ (negedge resetx or posedge clk_llc)
+always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	C <= 1'b0;
 	else
 	begin
@@ -317,50 +367,65 @@ always @ (negedge resetx or posedge clk_llc)
 	end
 
 
-always @ (negedge resetx or posedge clk_llc)
+always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	R_B <= 1'b0;
 	else
 	begin
 		R_B <= C & ((R_MIN < H) & (H < R_MAX));
 	end
 	
-always @ (negedge resetx or posedge clk_llc)
+always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	G_B <= 1'b0;
 	else
 	begin
 		G_B <= C & ((G_MIN < H) & (H < G_MAX));
 	end
 	
-always @ (negedge resetx or posedge clk_llc)
+always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	B_B <= 1'b0;
 	else
 	begin
 		B_B <= C & ((B_MIN < H) & (H < B_MAX));
 	end
 	
-always @ (negedge resetx or posedge clk_llc)
+always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	Y_B <= 1'b0;
 	else
 	begin
 		Y_B <= C & ((Y_MIN < H) & (H < Y_MAX));
 	end
 	
-always @ (negedge resetx or posedge clk_llc)
+always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	O_B <= 1'b0;
 	else
 	begin
 		O_B <= C & ((O_MIN < H) & (H < O_MAX));
 	end
 
-wire ROY = R_B | O_B | Y_B;
-wire ROYBK = R_B | O_B | Y_B | BK_B;
-wire GY	= G_B | Y_B;
-wire GYO = G_B | Y_B | O_B;
-wire GYOBK = G_B | Y_B | O_B | BK_B;
-wire BBK = B_B | BK_B;
-//wire [15:0] DecVData = {R_B, R_B, R_B, R_B, R_B, G_B, G_B, G_B, G_B, G_B, G_B, B_B, B_B, B_B, B_B, B_B};
-wire [15:0] DecVData = {ROY, ROYBK, R_B, O_B, Y_B,		GY, GYOBK, GYO, G_B, G_B, G_B,	B_B, BBK, B_B, B_B, BK_B};
-	
+//wire ROY = R_B | O_B | Y_B;
+//wire ROYBK = R_B | O_B | Y_B | BK_B;
+//wire GY	= G_B | Y_B;
+//wire GYO = G_B | Y_B | O_B;
+//wire GYOBK = G_B | Y_B | O_B | BK_B;
+//wire BBK = B_B | BK_B;
+//wire [15:0] DecVData = {ROY, ROYBK, R_B, O_B, Y_B,		GY, GYOBK, GYO, G_B, G_B, G_B,	B_B, BBK, B_B, B_B, BK_B};
+wire [ 5:0] DecVData_M = {R_B, O_B, Y_B, G_B, B_B, BK_B};
+
+wire R_M = vmem_B_q[5];
+wire O_M = vmem_B_q[4];
+wire Y_M = vmem_B_q[3];
+wire G_M = vmem_B_q[2];
+wire B_M = vmem_B_q[1];
+wire BK_M = vmem_B_q[0];
+
+wire ROY_M = R_M | O_M | Y_M;
+wire ROYBK_M = R_M | O_M | Y_M | BK_M;
+wire GY_M = G_M | Y_M;
+wire GYO_M = G_M | Y_M | O_M;
+wire GYOBK_M = G_M | Y_M | O_M | BK_M;
+wire BBK_M = B_M | BK_M;
+
+wire [15:0] DecVData = {ROY_M, ROYBK_M, R_M, O_M, Y_M,	GY_M, GYOBK_M, GYO_M, G_M, G_M, G_M,	B_M, BBK_M, B_M, B_M, BK_M};
 /////////////////////////////////////////////////////////////////////////////
 
 // 180x120 write clock generation 
@@ -427,6 +492,29 @@ always @(negedge resetx or posedge Sys_clk)
    if      (~resetx)       A_addr <= 1'b0;
    else                    A_addr <= AMAmem_irq1;
 
+reg [ 5:0] vdata_M_wr;
+reg [14:0] vadr_M_wr;
+always @(negedge resetx or posedge clk_llc8)
+	if		  (~resetx)			vdata_M_wr <= 6'b0;
+	else if (~vref)			vdata_M_wr <= 6'b0;
+	else if (href2_wr_A)		vdata_M_wr <= DecVData_M;
+	
+always @(negedge resetx or posedge clk_llc8)
+	if		  (~resetx)			vadr_M_wr <= 15'b0;
+	else if (~vref)			vadr_M_wr <= 15'b0;
+	else if (href2_wr_A)		vadr_M_wr <= vadr_M_wr + 1'b1;
+
+reg [ 5:0] vdata_B;
+reg [14:0] vadr_B;
+always @(negedge resetx or posedge clk_llc8)
+	if		  (~resetx)			vdata_B <= 6'b0;
+	else if (~vref)			vdata_B <= 6'b0;
+	else if (href2_wr_A)		vdata_B <= vmem_M_q;
+	
+always @(negedge resetx or posedge clk_llc8)
+	if		  (~resetx)			vadr_B <= 15'b0;
+	else if (~vref)			vadr_B <= 15'b0;
+	else if (href2_wr_A)		vadr_B <= vadr_B + 1'b1;
 
 
 //----------------------------------------------------------------------------------
@@ -457,11 +545,24 @@ assign AMAmem_irq1 = ~oddframe_d1 & oddframe_d3 & (vadr[15] == 0);
 
 
 
-wire	[15:0]  vmem_addr;
-wire	[15:0]  vmem_data;
-wire	        vmem_rden;
-wire	        vmem_wren;
-wire  [15:0]  vmem_q;
+wire	[15:0]  	vmem_addr;
+wire	[15:0]  	vmem_data;
+wire	        	vmem_rden;
+wire	        	vmem_wren;
+wire  [15:0]  	vmem_q;
+
+wire  [14:0]  	vmem_M_addr_wr;
+wire  [14:0]	vmem_M_addr_rd;
+wire	[ 5:0]  	vmem_M_data_wr;
+wire				vmem_M_wren;
+wire	[ 5:0]	vmem_M_q_w;
+wire	[ 5:0]	vmem_M_q;
+
+wire	[14:0]  	vmem_B_addr;
+wire	[ 5:0]  	vmem_B_data;
+wire	        	vmem_B_rden;
+wire	        	vmem_B_wren;
+wire  [ 5:0]  	vmem_B_q;
 
 //////////////////////////// MEGA Wizard //////////////////////////////////
 // FPGA PLL
@@ -471,7 +572,7 @@ pll	pll_inst (
 		.inclk0 ( clk_llc ),
 		.c0 ( Sys_clk )
 		);
-// Original Image Block RAM Instance
+// Binarized Image Block RAM Instance
 RAM	RAM_inst (
 	.address ( vmem_addr ),
 	.clock ( Sys_clk ),
@@ -480,6 +581,28 @@ RAM	RAM_inst (
 	.wren ( vmem_wren ),
 	.q ( vmem_q )
 	);
+	
+// Original Image Block RAM Instance
+RAM_MORPH RAM_inst_M (
+	.clock( Sys_clk ),
+	.wren( vmem_M_wren ), 
+	.addr_wr( vmem_M_addr_wr ), 
+	.data_wr( vmem_M_data_wr),
+	.addr_rd( vmem_M_addr_rd ), 
+	.q_w( vmem_M_q_w ),
+	.q_m( vmem_M_q )
+);
+
+
+// Blurred Image Block RAM Instance
+RAM_BUFF	RAM_inst_B	(
+	.addr ( vmem_B_addr ),
+	.clock ( Sys_clk ),
+	.data ( vmem_B_data ),
+	.wren ( vmem_B_wren ),
+	.q ( vmem_B_q )
+);
+
 ////////////////////////////////////////////////////////////////////////////
 
 //-----------------------------------------------------------------
@@ -557,6 +680,20 @@ assign vmem_data    = ( mcs1 | mcs2 ) ? vdata : 16'bZ ;
 assign vmem_addr     = ( mcs1 | mcs2 ) ? vadr : {A_addr, AMAmem_adr};	// 16bit SRAM address
 //assign vmem_addr     = ( (~mcs0 & mcs1) | (~mcs0 & mcs2) ) ? vadr : AMAmem_adr;
 
+
+assign vmem_M_wren   = href2_wr & clk_llc8;
+
+assign vmem_M_data_wr   = vdata_M_wr;
+
+assign vmem_M_addr_wr   = vadr_M_wr;
+assign vmem_M_addr_rd	= vadr_B;
+
+
+assign vmem_B_wren   = href2_wr_E & clk_llc8;
+
+assign vmem_B_data   = vdata_B;
+
+assign vmem_B_addr   = vadr_B;
 
 //-----------------------------------------------------------------
 // FPGA waitx signal generation
