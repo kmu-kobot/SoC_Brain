@@ -41,7 +41,7 @@ int mission_4_2_ready_hurdle(U16 *image) {
 }
 
 int mission_4_3_jump_hurdle() {
-    return 1;
+    Action_MISSION_4_HURDLING();
 }
 
 int mission_4_4_set_straight(U16 *image) {
@@ -69,12 +69,12 @@ int mission_4_4_set_straight(U16 *image) {
             (pos_bk[2] - pos_bk[1]) < -10 &&
             (pos_bk[1] - pos_bk[0] < -10)
             ) {
-        Action_LEFT_TURN_BODY_LONG(1);
+        Action_LEFT_TURN_BODY(1);
     } else if (
             (pos_bk[2] - pos_bk[1]) > 10 &&
             (pos_bk[1] - pos_bk[0] > 10)
             ) {
-        Action_RIGHT_TURN_BODY_LONG(1);
+        Action_RIGHT_TURN_BODY(1);
     } else {
         rResult = 1;
     }
@@ -109,11 +109,10 @@ int mission_4_5_check_bk_line(U16 *image) {
     }
 
     if (!rResult) {
-        Action_LEFT_TURN_BODY_LONG(2);
+        Action_LEFT_TURN_BODY(2);
     }
 
     return rResult;
-
 }
 
 int mission_4_6_set_center(U16 *image) {
@@ -141,11 +140,11 @@ int mission_4_6_set_center(U16 *image) {
     if ((pos_bk[0] > MISSION_4_BK_LINE_LOWER) &&
         (pos_bk[1] > MISSION_4_BK_LINE_LOWER) &&
         (pos_bk[2] > MISSION_4_BK_LINE_LOWER)) {
-        //move body left
+        Action_LEFT_TURN_BODY(1);
     } else if ((pos_bk[0] > MISSION_4_BK_LINE_LOWER - MISSION_4_BK_LINE_RANGE) &&
                (pos_bk[1] > MISSION_4_BK_LINE_LOWER - MISSION_4_BK_LINE_RANGE) &&
                (pos_bk[2] > MISSION_4_BK_LINE_LOWER - MISSION_4_BK_LINE_RANGE)) {
-        //MOVE BODY RIGHT
+        Action_RIGHT_TURN_BODY(1);
     } else
         rResult = 1;
 
