@@ -40,8 +40,9 @@ int mission_4_2_ready_hurdle(U16 *image) {
     return 1;
 }
 
-int mission_4_3_jump_hurdle() {
+int mission_4_3_jump_hurdle(void) {
     Action_MISSION_4_HURDLING();
+    return 1;
 }
 
 int mission_4_4_set_straight(U16 *image) {
@@ -148,11 +149,9 @@ int mission_4_6_set_center(U16 *image) {
     } else
         rResult = 1;
 
-
     return rResult;
-
 }
 
-void mission_4_6_watch_side() {
+void mission_4_6_watch_side(void) {
     Action_RIGHT_TURN_HEAD_LONG();
 }

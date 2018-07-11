@@ -6,7 +6,7 @@
 
 void mission_2_1_watch_below(int repeat) {
     Action_WALK_FRONT_LONG(repeat);
-    Action_WATCH_BELOW_MIDDLE();
+    Action_WATCH_BELOW_LONG();
 }
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat) {
@@ -37,37 +37,41 @@ void mission_2_2_watch_side(void) {
 }
 
 int mission_2_2_before_bridge_set_center(U16 *image) {
+    U32 row, i;
+    U16 black_len[2] = {0,}, col[2] = {
+            MISSION_2_2_BLACK_LINE_COL_POINT_1,
+            MISSION_2_2_BLACK_LINE_COL_POINT_2
+    };
 
-    U32 col, i;
-    U16 red_len[2] = {0,}, row[4] = {0, 2, 28, 30};
-
-    for (col = 0; col < WIDTH; ++col) {
-        for (i = 0; i < 4; ++i) {
-            red_len[i] += GetValueRGBYOBK(
-                    GetPtr(image, row[i], col, WIDTH),
-                    RED
-            );
+    for (i = 0; i < 2; ++i) {
+        for (row = HEIGHT; row > 0; --row) {
+            if (GetValueRGBYOBK(
+                        GetPtr(image, row, col[i], WIDTH),
+                        BLACK
+                ) &&
+                GetValueRGBYOBK(
+                        GetPtr(image, row, col[i + 1], WIDTH),
+                        BLACK
+                ))
+                break;
+            black_len[i] += 1;
         }
     }
 
-    row[0] += row[1];
-    row[2] += row[3];
-    row[1] = row[2];
-
-    row[0] /= 2;
-    row[1] /= 2;
-
     Action_INIT_ROBOT();
 
+    black_len[0] = (U16) ((black_len[0] + black_len[1]) / 2);
+
     int rResult = 0;
-    if (red_len[0] < 55 && red_len[1] < 75) {
-        Action_RIGHT_MOVE_SHORT(1);
-    } else if (red_len[0] < 65 && red_len[1] < 85) {
-        Action_LEFT_MOVE_SHORT(1);
+    if (black_len[0] < MISSION_2_2_BLACK_LINE_RANGE - MISSION_2_2_BLACK_LINE_ERROR) {
+        Action_RIGHT_MOVE_SHORT(3);
+    } else if (black_len[0] > MISSION_2_2_BLACK_LINE_RANGE + MISSION_2_2_BLACK_LINE_ERROR) {
+        Action_LEFT_MOVE_SHORT(3);
     } else {
         rResult = 1;
     }
 
+    Action_INIT_ROBOT();
     return rResult;
 }
 
@@ -77,76 +81,50 @@ int mission_2_3_escape_red_bridge(void) {
 }
 
 int mission_2_4_after_bridge_set_straight(U16 *image) {
+    U32 row, i;
+    U16 black_len[2] = {0,}, col[2] = {
+            MISSION_2_4_BLACK_LINE_COL_POINT_1,
+            MISSION_2_4_BLACK_LINE_COL_POINT_2
+    };
 
-    Action_LEFT_TURN_HEAD_LONG();
-
-    U32 row, i, pos_bk[3] = {0,};
-    U16 col[3] = {45, 90, 135};
-
-    for (i = 0; i < 3; ++i) {
-        for (row = HEIGHT; row > 0; row--) {
-            if (
-                    GetValueRGBYOBK(
-                            GetPtr(image, row, col[i], WIDTH),
-                            BLACK
-                    ) == 1
-                    ) {
-                pos_bk[i] = row;
+    for (i = 0; i < 2; ++i) {
+        for (row = HEIGHT; row > 0; --row) {
+            if (GetValueRGBYOBK(
+                        GetPtr(image, row, col[i], WIDTH),
+                        BLACK
+                ) &&
+                GetValueRGBYOBK(
+                        GetPtr(image, row, col[i + 1], WIDTH),
+                        BLACK
+                )) {
                 break;
             }
+            black_len[i] += 1;
         }
     }
 
     Action_INIT_ROBOT();
 
+    row = (U32) (
+            (black_len[0] - black_len[1]) /
+            MISSION_2_4_BLACK_LINE_COL_POINT_1 - MISSION_2_4_BLACK_LINE_COL_POINT_2
+    );
+
     int rResult = 0;
-    if (
-            (pos_bk[2] - pos_bk[1]) < -10 &&
-            (pos_bk[1] - pos_bk[0] < -10)
-            ) {
+    if (row < MISSION_2_4_BLACK_LINE_SLOPE + MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
         Action_RIGHT_TURN_BODY(1);
-    } else if (
-            (pos_bk[2] - pos_bk[1]) > 10 &&
-            (pos_bk[1] - pos_bk[0] > 10)
-            ) {
+    } else if (row > MISSION_2_4_BLACK_LINE_SLOPE - MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
         Action_LEFT_TURN_BODY(1);
     } else {
         rResult = 1;
     }
 
+    Action_INIT_ROBOT();
+
     return rResult;
 }
 
 int mission_2_5_after_bridge_set_center(U16 *image) {
-
-    Action_LEFT_TURN_HEAD_LONG();
-
-    U32 col, i;
-
-    U16 black_len[2] = {0,}, row[2] = {0, 50};
-
-    for (col = 0; col < WIDTH; ++col) {
-        for (i = 0; i < 2; ++i) {
-            black_len[i] += GetValueRGBYOBK(
-                    GetPtr(image, row[i], col, WIDTH),
-                    BLACK
-            );
-        }
-    }
-
-    Action_INIT_ROBOT();
-
-    int rResult = 0;
-
-    // TODO : 길이 바꾸끼!!!!!!!!
-    if (black_len[0] < 55 && black_len[1] < 75) {
-        Action_RIGHT_MOVE_SHORT(1);
-    } else if (black_len[0] < 65 && black_len[1] < 85) {
-        Action_LEFT_MOVE_SHORT(1);
-    } else {
-        rResult = 1;
-    }
-
-    return rResult;
+    return mission_2_2_before_bridge_set_center(image);
 }
 

@@ -48,7 +48,7 @@ int huro(void) {
                     case 0:
                         mission_2_1_watch_below(8);
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_2_1_wait_front_of_red_bridge(fpga_videodata, 3);
+                        step += mission_2_1_wait_front_of_red_bridge(fpga_videodata, 5);
                         break;
                     case 1:
                         mission_2_2_watch_side();
