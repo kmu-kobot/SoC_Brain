@@ -26,7 +26,7 @@ int mission_5_1_check_black_line(U16 *image) {
     return (cntBlack / (MISSION_5_1_BLACK_LINE_UPPER) * WIDTH) > MISSION_5_1_THRESHOLDS;
 }
 
-void mission_5_4_watch_below() {
+void mission_5_4_watch_below(void) {
     Action_WATCH_BELOW_LONG();
 }
 
@@ -102,4 +102,5 @@ int mission_5_4_check_green_bridge_center(U16 *image) {
 
 int mission_5_4_short_walk_on_green_bridge(int repeat) {
     Action_WALK_FRONT_SHORT(repeat);
+    return 1;
 }

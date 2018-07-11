@@ -23,7 +23,7 @@ void mission_5_1_watch_below(int repeat);
 
 int mission_5_1_check_black_line(U16 *image);
 
-void mission_5_4_watch_below();
+void mission_5_4_watch_below(void);
 
 int mission_5_4_check_finish_black_line(U16 *image);
 
