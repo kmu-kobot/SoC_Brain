@@ -19,10 +19,14 @@ void mission_7_2_watch_side(void);
 
 int mission_7_2_before_bridge_set_center(U16 *image);
 
-int mission_7_3_climb_yellow_hole_bridge();
-
-void mission_7_4_watch_below();
+int mission_7_3_climb_yellow_hole_bridge(void);
 
 int mission_7_4_set_straight_on_yellow_bridge(U16 *image);
+
+int mission_7_4_set_center_on_yellow_bridge(U16 *image);
+
+void mission_7_5_watch_below(void);
+
+int mission_7_6_jump_hole(void);
 
 #endif //SOC_APP_MISSION_7_YELLOW_HOLE_BRIDGE_H

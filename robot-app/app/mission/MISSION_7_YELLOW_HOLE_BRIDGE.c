@@ -47,3 +47,21 @@ int mission_7_3_climb_yellow_hole_bridge() {
     Action_INIT_ROBOT();
     return 0;
 }
+
+int mission_7_4_set_straight_on_yellow_bridge(U16 *image) {
+    return 1;
+}
+
+int mission_7_4_set_center_on_yellow_bridge(U16 *image) {
+    return 1;
+}
+
+void mission_7_5_watch_below(void) {
+    Action_WATCH_BELOW_LONG();
+}
+
+int mission_7_6_jump_hole(void) {
+    // TODO: 노란색 구멍 덤블링하는 동작
+    return 1;
+}
+

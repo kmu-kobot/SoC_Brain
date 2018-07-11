@@ -115,13 +115,13 @@ int huro(void) {
                         step += mission_5_1_check_black_line(fpga_videodata);
                         break;
                     case 1:
-                        // 맨처음 다리 중심 맞추기
+                        // TODO: 맨처음 다리 중심 맞추기
                         break;
                     case 2:
-                        // 계단 오르기
+                        // TODO: 계단 오르기
                         break;
                     case 3:
-                        // 초록색 중심 맞추기
+                        // TODO: 초록색 중심 맞추기
                         break;
                     case 4:
                         mission_5_4_watch_below();
@@ -143,10 +143,10 @@ int huro(void) {
                         step = 4;
                         break;
                     case 5:
-                        // 내려가기 위해 선 맞추기
+                        // TODO: 내려가기 위해 선 맞추기
                         break;
                     case 6:
-                        // 계단 내려가기
+                        // TODO: 계단 내려가기
                         break;
                     case 7:
                         mission += 1;
@@ -174,24 +174,28 @@ int huro(void) {
                         step += mission_7_3_climb_yellow_hole_bridge();
                         break;
                     case 3:
-                        mission_7_4_watch_below();
+                        mission_7_2_watch_side();
                         setFPGAVideoData(fpga_videodata);
                         step += mission_7_4_set_straight_on_yellow_bridge(fpga_videodata);
 
-                        mission_7_4_watch_below();
+                        mission_7_2_watch_side();
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_7_4_set_straight_on_yellow_bridge(fpga_videodata);
+                        step += mission_7_4_set_center_on_yellow_bridge(fpga_videodata);
 
-                        // TODO: step 확인
+                        step = (step == 5) ? 4 : 3;
                         break;
                     case 4:
+                        mission_7_5_watch_below();
+                        setFPGAVideoData(fpga_videodata);
                         // TODO: 앞으로 걸어가면서 바로앞에 검은선인지 확인
+                        step += 1;
                         break;
                     case 5:
-                        // 구르기랑 내려가기
+                        step += mission_7_6_jump_hole();
                         break;
                     case 6:
-                        // 각도랑 중심 체크
+                        // TODO: 각도랑 중심 체크
+                        step += 1;
                         break;
                     case 7:
                         mission += 1;
