@@ -10,18 +10,17 @@ void mission_4_1_watch_front(int repeat) {
 
 int mission_4_2_ready_hurdle(U16 *image) {
 
-    U32 col, row, i;
+    U32 col[3] = {70, 60, 90}, row, i;
     U16 checkHurdleLine[MISSION_4_HURDLE_CRITERI] = {0,};
 
     for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
         for (row = HEIGHT; row > 0; --row) {
-            col = (i + 1) * WIDTH / (MISSION_4_HURDLE_CRITERI + 1);
             if (GetValueRGBYOBK(
-                        GetPtr(image, row, col, WIDTH),
+                        GetPtr(image, row, col[i], WIDTH),
                         BLACK
                 ) &&
                 GetValueRGBYOBK(
-                        GetPtr(image, row, col + 1, WIDTH),
+                        GetPtr(image, row, col[i] + 1, WIDTH),
                         BLACK
                 )) {
                 checkHurdleLine[i] = (U16) row;
@@ -30,21 +29,19 @@ int mission_4_2_ready_hurdle(U16 *image) {
         }
     }
 
-    col = 0;
+    double s = 0;
+    printf("BLACK LINE\n");
     for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
-        col += checkHurdleLine[i];
+        s += checkHurdleLine[i];
+        printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);
     }
+    printf("\n");
 
-    col /= MISSION_4_HURDLE_CRITERI;
+    s /= MISSION_4_HURDLE_CRITERI;
+    printf("AVG: %f\n", s);
 
-    for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
-        row = checkHurdleLine[i] - col;
-        if (MISSION_4_2_HURDLE_THRESHOLDS - MISSION_4_HURDLE_ERROR > row ||
-            row > MISSION_4_2_HURDLE_THRESHOLDS + MISSION_4_HURDLE_ERROR)
-            return 0;
-    }
-
-    return 1;
+    return (MISSION_4_2_HURDLE_THRESHOLDS - MISSION_4_HURDLE_ERROR > s ||
+            s > MISSION_4_2_HURDLE_THRESHOLDS + MISSION_4_HURDLE_ERROR);
 }
 
 int mission_4_4_jump_hurdle(void) {

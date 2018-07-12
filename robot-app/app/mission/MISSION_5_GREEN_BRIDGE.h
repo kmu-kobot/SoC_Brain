@@ -29,7 +29,7 @@ int mission_5_1_check_black_line(U16 *image, int repeat);
 
 void mission_5_2_watch_side(void);
 
-int mission_5_3_climb_stairs(void);
+int mission_5_3_climb_up_stairs(void);
 
 int mission_5_4_set_center_before_green_bridge(U16 *image);
 
@@ -42,5 +42,7 @@ int mission_5_5_check_green_bridge_straight(U16 *image);
 int mission_5_5_check_green_bridge_center(U16 *image);
 
 int mission_5_5_short_walk_on_green_bridge(int repeat);
+
+int mission_5_7_climb_down_stairs(void);
 
 #endif //SOC_APP_MISSION_5_GREEN_BRIDGE_H

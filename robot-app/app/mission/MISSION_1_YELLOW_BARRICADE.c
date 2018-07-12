@@ -16,7 +16,7 @@ int mission_1_1_wait_yellow_barricade(U16 *image) {
         }
     }
 
-    printf("M1-1: WAIT: %f\n", cntYellow * 2 * 100 / (WIDTH * MISSION_1_RANGE));
+    printf("M1-1: WAIT: %d\n", cntYellow * 2 * 100 / (WIDTH * MISSION_1_RANGE));
     return cntYellow * 2 * 100 / (WIDTH * MISSION_1_RANGE) > MISSION_1_THRESHOLDS;
 }
 
@@ -32,7 +32,7 @@ int mission_1_2_end_yellow_barricade(U16 *image) {
         }
     }
 
-    printf("M1-2: END: %f\n", cntYellow * 2 * 100 / (WIDTH * HEIGHT));
+    printf("M1-2: END: %d\n", cntYellow * 2 * 100 / (WIDTH * HEIGHT));
     return cntYellow * 2 * 100 / (WIDTH * HEIGHT) <= (MISSION_1_THRESHOLDS - 20);
 }
 

@@ -36,8 +36,8 @@ void mission_5_2_watch_side(void) {
     Action_LEFT_TURN_HEAD_LONG();
 }
 
-int mission_5_3_climb_stairs(void) {
-    // 계단 오르기 동작
+int mission_5_3_climb_up_stairs(void) {
+    Action_CLIMB_UP_STAIRS();
     return 1;
 }
 
@@ -123,5 +123,11 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
 
 int mission_5_5_short_walk_on_green_bridge(int repeat) {
     Action_WALK_FRONT_SHORT(repeat);
+    return 1;
+}
+
+
+int mission_5_7_climb_down_stairs(void) {
+    Action_CLIMB_DOWN_STAIRS();
     return 1;
 }

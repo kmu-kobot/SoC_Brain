@@ -43,8 +43,7 @@ int mission_7_2_before_bridge_set_center(U16 *image) {
 
 
 int mission_7_3_climb_yellow_hole_bridge() {
-    // TODO: 계단 오르는 동작
-    Action_INIT_ROBOT();
+    Action_CLIMB_UP_STAIRS();
     return 0;
 }
 
@@ -61,7 +60,7 @@ void mission_7_5_watch_below(void) {
 }
 
 int mission_7_6_jump_hole(void) {
-    // TODO: 노란색 구멍 덤블링하는 동작
+    Action_MISSION_7_YELLOW_HOLE_BRIDG_DUMBLING();
     return 1;
 }
 

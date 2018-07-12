@@ -124,7 +124,7 @@ int huro(void) {
                     case 2:
                         // 계단 오르기
                         Action_WALK_FRONT_SHORT(2);
-                        step += mission_5_3_climb_stairs();
+                        step += mission_5_3_climb_up_stairs();
                         break;
                     case 3:
                         mission_5_2_watch_side();
@@ -156,7 +156,7 @@ int huro(void) {
                         // TODO: 내려가기 위해 선 맞추기
                         break;
                     case 6:
-                        // TODO: 계단 내려가기
+                        step += mission_5_7_climb_down_stairs();
                         break;
                     case 7:
                         mission += 1;
