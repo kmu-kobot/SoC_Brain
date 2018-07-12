@@ -57,10 +57,16 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
             black_len[i] += 1;
         }
     }
+    
+    
+    printf("M2-2: SET CENTER"\n);
+    printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
 
     Action_INIT_ROBOT();
 
     black_len[0] = (U16) ((black_len[0] + black_len[1]) / 2);
+    
+    printf("length : %d\n", black_len[0]);
 
     int rResult = 0;
     if (black_len[0] < MISSION_2_2_BLACK_LINE_RANGE - MISSION_2_2_BLACK_LINE_ERROR) {
@@ -102,6 +108,9 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
             black_len[i] += 1;
         }
     }
+    
+    printf("M2-4: SLOPE"\n);
+    printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
 
     Action_INIT_ROBOT();
 
@@ -109,6 +118,8 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
             (black_len[0] - black_len[1]) /
             MISSION_2_4_BLACK_LINE_COL_POINT_1 - MISSION_2_4_BLACK_LINE_COL_POINT_2
     );
+    
+    printf("Slope : %f\n",s);
 
     s *= 100;
 
