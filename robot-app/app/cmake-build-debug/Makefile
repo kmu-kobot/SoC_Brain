@@ -420,6 +420,33 @@ mission/MISSION_5_GREEN_BRIDGE.c.s:
 	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.s
 .PHONY : mission/MISSION_5_GREEN_BRIDGE.c.s
 
+mission/MISSION_7_YELLOW_HOLE_BRIDGE.o: mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o
+
+.PHONY : mission/MISSION_7_YELLOW_HOLE_BRIDGE.o
+
+# target to build an object file
+mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o
+.PHONY : mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o
+
+mission/MISSION_7_YELLOW_HOLE_BRIDGE.i: mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.i
+
+.PHONY : mission/MISSION_7_YELLOW_HOLE_BRIDGE.i
+
+# target to preprocess a source file
+mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.i:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.i
+.PHONY : mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.i
+
+mission/MISSION_7_YELLOW_HOLE_BRIDGE.s: mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s
+
+.PHONY : mission/MISSION_7_YELLOW_HOLE_BRIDGE.s
+
+# target to generate assembly for a file
+mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s
+.PHONY : mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -462,6 +489,9 @@ help:
 	@echo "... mission/MISSION_5_GREEN_BRIDGE.o"
 	@echo "... mission/MISSION_5_GREEN_BRIDGE.i"
 	@echo "... mission/MISSION_5_GREEN_BRIDGE.s"
+	@echo "... mission/MISSION_7_YELLOW_HOLE_BRIDGE.o"
+	@echo "... mission/MISSION_7_YELLOW_HOLE_BRIDGE.i"
+	@echo "... mission/MISSION_7_YELLOW_HOLE_BRIDGE.s"
 .PHONY : help
 
 

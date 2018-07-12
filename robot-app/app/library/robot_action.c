@@ -97,20 +97,27 @@ void Action_RIGHT_TURN_BODY(int repeat) {
     RobotAction(TURN_BODY_END);
 }
 
+////////// Motion: Climb Stairs /////////
+void Action_CLIMB_UP_STAIRS(void) { RobotAction(CLIMB_UP_STAIRS); }
+
+void Action_CLIMB_DOWN_STAIRS(void) { RobotAction(CLIMB_DOWN_STAIRS); }
 
 /////////////////////////////////
 //////// Motion: Mission 2 //////
 /////////////////////////////////
 
-void Action_ESCAPE_RED_BRIDGE(void) {
-    RobotAction(MISSION_2_RED_BRIDGE_DUMBLING);
-}
+void Action_ESCAPE_RED_BRIDGE(void) { RobotAction(MISSION_2_RED_BRIDGE_DUMBLING); }
 
 
 /////////////////////////////////
 //////// Motion: Mission 4 //////
 /////////////////////////////////
 
-void Action_MISSION_4_HURDLING(void) {
-    RobotAction(MISSION_4_HURDLING);
-}
+void Action_MISSION_4_HURDLING(void) { RobotAction(MISSION_4_HURDLING); }
+
+
+/////////////////////////////////
+//////// Motion: Mission 7 //////
+/////////////////////////////////
+
+void Action_MISSION_7_YELLOW_HOLE_BRIDG_DUMBLING(void) { RobotAction(MISSION_7_YELLOW_HOLE_BRIDG_DUMBLING); }
