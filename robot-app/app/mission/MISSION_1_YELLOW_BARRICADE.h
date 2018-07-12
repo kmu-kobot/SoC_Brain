@@ -6,6 +6,7 @@
 
 #include "./../library/amazon2_sdk.h"
 #include "./../library/robot_action.h"
+#include "stdio.h"
 
 #define SOC_APP_MISSION_1_YELLOW_BARRICADE_H
 
