@@ -6,6 +6,7 @@
 
 #include "./../library/amazon2_sdk.h"
 #include "./../library/robot_action.h"
+#include "stdio.h"
 
 #define SOC_APP_MISSION_5_GREEN_BRIDGE_H
 #define MISSION_5_SLOPE 1
