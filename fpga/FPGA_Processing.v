@@ -19,14 +19,17 @@
 	     + v0.7  2014/6/19: Update(Conversion for AMAZON2 Chip)								
 									
 *************************************************************************/
-module RAM_CLEAN_2 ( clock, wren, addr, data, q );
+module RAM_MORPH ( clock, wren, addr_wr, data_wr, addr_rd,
+							q_w, q_m);
 
 input clock;
 input wren;
-input [14:0] addr;
-input [ 5:0] data;
+input [14:0] addr_wr;
+input [ 5:0] data_wr;
+input [14:0] addr_rd;
 
-output [ 5:0] q;
+output [ 5:0] q_w;
+output [ 5:0] q_m;
 
 reg [ 5:0] ram [0:21599];
 
@@ -35,49 +38,18 @@ reg [ 5:0] result;
 
 always @(posedge clock)
 begin
-	if (wren) ram[addr] <= data;
+	if (wren) ram[addr_wr] <= data_wr;
 
-	top <= addr / 180 < 1 ? addr : addr - 180;
-	bot <= addr / 180 < 119 ? addr + 180 : addr;
-	left <= addr % 180 < 1 ? addr : addr - 1;
-	right <= addr % 180 < 179 ? addr + 1 : addr;
+	top <= addr_rd / 180 < 1 ? addr_rd : addr_rd - 180;
+	bot <= addr_rd / 180 < 119 ? addr_rd + 180 : addr_rd;
+	left <= addr_rd % 180 < 1 ? addr_rd : addr_rd - 1;
+	right <= addr_rd % 180 < 179 ? addr_rd + 1 : addr_rd;
 	
-//	result <= (ram[top] | ram[bot] | ram[left] | ram[right]) & ram[addr_rd];  //  clean
-//	result <= ram[top] & ram[bot] & ram[left] & ram[right] & ram[addr_rd];  //  erode
-	result <= ((ram[top] & ram[bot]) | (ram[top] & ram[left]) | (ram[top] & ram[right]) | (ram[bot] & ram[left]) | (ram[bot] & ram[right]) | (ram[left] & ram[right])) & ram[addr];
+	result <= (ram[top] | ram[bot] | ram[left] | ram[right]) & ram[addr_rd];
 end
 
-assign q = result;
-
-endmodule
-
-module RAM_BRIDGE ( clock, wren, addr, data, q );
-
-input clock;
-input wren;
-input [14:0] addr;
-input [ 5:0] data;
-
-output [ 5:0] q;
-
-reg [ 5:0] ram [0:21599];
-
-reg [14:0] top, bot, left, right;
-reg [ 5:0] result;
-
-always @(posedge clock)
-begin
-	if (wren) ram[addr] <= data;
-
-	top <= addr / 180 < 1 ? addr : addr - 180;
-	bot <= addr / 180 < 119 ? addr + 180 : addr;
-	left <= addr % 180 < 1 ? addr : addr - 1;
-	right <= addr % 180 < 179 ? addr + 1 : addr;
-	
-	result <= (ram[top] & ram[bot]) | (ram[left] & ram[right]) | ram[addr];	
-end
-
-assign q = result;
+assign q_w = ram[addr_wr];
+assign q_m = result;
 
 endmodule
 
@@ -437,7 +409,7 @@ always @ (negedge resetx or posedge clk_llc4)
 //wire GYOBK = G_B | Y_B | O_B | BK_B;
 //wire BBK = B_B | BK_B;
 //wire [15:0] DecVData = {ROY, ROYBK, R_B, O_B, Y_B,		GY, GYOBK, GYO, G_B, G_B, G_B,	B_B, BBK, B_B, B_B, BK_B};
-wire [ 5:0] DecVData_C = {R_B, O_B, Y_B, G_B, B_B, BK_B};
+wire [ 5:0] DecVData_M = {R_B, O_B, Y_B, G_B, B_B, BK_B};
 
 wire R_M = vmem_B_q[5];
 wire O_M = vmem_B_q[4];
@@ -520,25 +492,24 @@ always @(negedge resetx or posedge Sys_clk)
    if      (~resetx)       A_addr <= 1'b0;
    else                    A_addr <= AMAmem_irq1;
 
-reg [ 5:0] vdata_C;
-reg [14:0] vadr_M;
+reg [ 5:0] vdata_M_wr;
+reg [14:0] vadr_M_wr;
 always @(negedge resetx or posedge clk_llc8)
-	if		  (~resetx)			vdata_C <= 6'b0;
-	else if (~vref)			vdata_C <= 6'b0;
-	else if (href2_wr_A)		vdata_C <= DecVData_C;
+	if		  (~resetx)			vdata_M_wr <= 6'b0;
+	else if (~vref)			vdata_M_wr <= 6'b0;
+	else if (href2_wr_A)		vdata_M_wr <= DecVData_M;
 	
 always @(negedge resetx or posedge clk_llc8)
-	if		  (~resetx)			vadr_M <= 15'b0;
-	else if (~vref)			vadr_M <= 15'b0;
-	else if (href2_wr_A)		vadr_M <= vadr_M + 1'b1;
-	
+	if		  (~resetx)			vadr_M_wr <= 15'b0;
+	else if (~vref)			vadr_M_wr <= 15'b0;
+	else if (href2_wr_A)		vadr_M_wr <= vadr_M_wr + 1'b1;
 
 reg [ 5:0] vdata_B;
 reg [14:0] vadr_B;
 always @(negedge resetx or posedge clk_llc8)
 	if		  (~resetx)			vdata_B <= 6'b0;
 	else if (~vref)			vdata_B <= 6'b0;
-	else if (href2_wr_A)		vdata_B <= vmem_C_q;
+	else if (href2_wr_A)		vdata_B <= vmem_M_q;
 	
 always @(negedge resetx or posedge clk_llc8)
 	if		  (~resetx)			vadr_B <= 15'b0;
@@ -580,10 +551,12 @@ wire	        	vmem_rden;
 wire	        	vmem_wren;
 wire  [15:0]  	vmem_q;
 
-wire  [14:0]  	vmem_C_addr;
-wire	[ 5:0]  	vmem_C_data;
-wire				vmem_C_wren;
-wire	[ 5:0]	vmem_C_q;
+wire  [14:0]  	vmem_M_addr_wr;
+wire  [14:0]	vmem_M_addr_rd;
+wire	[ 5:0]  	vmem_M_data_wr;
+wire				vmem_M_wren;
+wire	[ 5:0]	vmem_M_q_w;
+wire	[ 5:0]	vmem_M_q;
 
 wire	[14:0]  	vmem_B_addr;
 wire	[ 5:0]  	vmem_B_data;
@@ -610,12 +583,14 @@ RAM	RAM_inst (
 	);
 	
 // Original Image Block RAM Instance
-RAM_CLEAN_2 RAM_inst_M (
+RAM_MORPH RAM_inst_M (
 	.clock( Sys_clk ),
-	.wren( vmem_C_wren ), 
-	.addr( vmem_C_addr ), 
-	.data( vmem_C_data ),
-	.q( vmem_C_q )
+	.wren( vmem_M_wren ), 
+	.addr_wr( vmem_M_addr_wr ), 
+	.data_wr( vmem_M_data_wr),
+	.addr_rd( vmem_M_addr_rd ), 
+	.q_w( vmem_M_q_w ),
+	.q_m( vmem_M_q )
 );
 
 
@@ -706,11 +681,12 @@ assign vmem_addr     = ( mcs1 | mcs2 ) ? vadr : {A_addr, AMAmem_adr};	// 16bit S
 //assign vmem_addr     = ( (~mcs0 & mcs1) | (~mcs0 & mcs2) ) ? vadr : AMAmem_adr;
 
 
-assign vmem_C_wren   = href2_wr & clk_llc8;
+assign vmem_M_wren   = href2_wr & clk_llc8;
 
-assign vmem_C_data   = vdata_C;
+assign vmem_M_data_wr   = vdata_M_wr;
 
-assign vmem_C_addr   = vadr_M;
+assign vmem_M_addr_wr   = vadr_M_wr;
+assign vmem_M_addr_rd	= vadr_B;
 
 
 assign vmem_B_wren   = href2_wr_E & clk_llc8;
