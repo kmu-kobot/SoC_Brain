@@ -76,7 +76,7 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
 }
 
 int mission_2_3_escape_red_bridge(void) {
-    Action_ESCAPE_RED_BRIDGE();
+//    Action_ESCAPE_RED_BRIDGE();
     return 1;
 }
 
