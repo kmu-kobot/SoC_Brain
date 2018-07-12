@@ -50,7 +50,7 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
                         BLACK
                 ) &&
                 GetValueRGBYOBK(
-                        GetPtr(image, row, col[i + 1], WIDTH),
+                        GetPtr(image, row, col[i] + 1, WIDTH),
                         BLACK
                 ))
                 break;
@@ -94,7 +94,7 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
                         BLACK
                 ) &&
                 GetValueRGBYOBK(
-                        GetPtr(image, row, col[i + 1], WIDTH),
+                        GetPtr(image, row, col[i] + 1, WIDTH),
                         BLACK
                 )) {
                 break;
@@ -105,15 +105,17 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
 
     Action_INIT_ROBOT();
 
-    row = (U32) (
+    double s = (
             (black_len[0] - black_len[1]) /
             MISSION_2_4_BLACK_LINE_COL_POINT_1 - MISSION_2_4_BLACK_LINE_COL_POINT_2
     );
 
+    s *= 100;
+
     int rResult = 0;
-    if (row < MISSION_2_4_BLACK_LINE_SLOPE + MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
+    if (s < MISSION_2_4_BLACK_LINE_SLOPE + MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
         Action_RIGHT_TURN_BODY(1);
-    } else if (row > MISSION_2_4_BLACK_LINE_SLOPE - MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
+    } else if (s > MISSION_2_4_BLACK_LINE_SLOPE - MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
         Action_LEFT_TURN_BODY(1);
     } else {
         rResult = 1;
