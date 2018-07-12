@@ -6,6 +6,7 @@
 
 #include "./../library/amazon2_sdk.h"
 #include "./../library/robot_action.h"
+#include "stdio.h"
 
 #define SOC_APP_MISSION_4_JUMP_HUDDLE_H
 

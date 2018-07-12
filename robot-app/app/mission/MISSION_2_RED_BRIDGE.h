@@ -6,6 +6,7 @@
 
 #include "./../library/amazon2_sdk.h"
 #include "./../library/robot_action.h"
+#include "stdio.h"
 
 #define SOC_APP_MISSION_2_RED_BRIDGE_H
 
@@ -18,7 +19,7 @@
 #define MISSION_2_4_BLACK_LINE_COL_POINT_1 70
 #define MISSION_2_4_BLACK_LINE_COL_POINT_2 130
 
-#define MISSION_2_4_BLACK_LINE_SLOPE 50
+#define MISSION_2_4_BLACK_LINE_SLOPE 7.5
 #define MISSION_2_4_BLACK_LINE_SLOPE_ERROR 3
 
 #define MISSION_2_THRESHOLDS 20

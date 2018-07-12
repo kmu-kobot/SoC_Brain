@@ -50,17 +50,23 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
                         BLACK
                 ) &&
                 GetValueRGBYOBK(
-                        GetPtr(image, row, col[i + 1], WIDTH),
+                        GetPtr(image, row, col[i] + 1, WIDTH),
                         BLACK
                 ))
                 break;
             black_len[i] += 1;
         }
     }
+    
+    
+    printf("M2-2: SET CENTER"\n);
+    printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
 
     Action_INIT_ROBOT();
 
     black_len[0] = (U16) ((black_len[0] + black_len[1]) / 2);
+    
+    printf("length : %d\n", black_len[0]);
 
     int rResult = 0;
     if (black_len[0] < MISSION_2_2_BLACK_LINE_RANGE - MISSION_2_2_BLACK_LINE_ERROR) {
@@ -76,7 +82,7 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
 }
 
 int mission_2_3_escape_red_bridge(void) {
-    Action_ESCAPE_RED_BRIDGE();
+//    Action_ESCAPE_RED_BRIDGE();
     return 1;
 }
 
@@ -94,7 +100,7 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
                         BLACK
                 ) &&
                 GetValueRGBYOBK(
-                        GetPtr(image, row, col[i + 1], WIDTH),
+                        GetPtr(image, row, col[i] + 1, WIDTH),
                         BLACK
                 )) {
                 break;
@@ -102,18 +108,25 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
             black_len[i] += 1;
         }
     }
+    
+    printf("M2-4: SLOPE"\n);
+    printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
 
     Action_INIT_ROBOT();
 
-    row = (U32) (
+    double s = (
             (black_len[0] - black_len[1]) /
             MISSION_2_4_BLACK_LINE_COL_POINT_1 - MISSION_2_4_BLACK_LINE_COL_POINT_2
     );
+    
+    printf("Slope : %f\n",s);
+
+    s *= 100;
 
     int rResult = 0;
-    if (row < MISSION_2_4_BLACK_LINE_SLOPE + MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
+    if (s < MISSION_2_4_BLACK_LINE_SLOPE + MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
         Action_RIGHT_TURN_BODY(1);
-    } else if (row > MISSION_2_4_BLACK_LINE_SLOPE - MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
+    } else if (s > MISSION_2_4_BLACK_LINE_SLOPE - MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
         Action_LEFT_TURN_BODY(1);
     } else {
         rResult = 1;
