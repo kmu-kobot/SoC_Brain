@@ -77,6 +77,13 @@ void Action_LEFT_TURN_BODY(int repeat);
 
 void Action_RIGHT_TURN_BODY(int repeat);
 
+////////// Motion: Climb Stairs /////////
+#define CLIMB_UP_STAIRS 43
+#define CLIMB_DOWN_STAIRS 46
+
+void Action_CLIMB_UP_STAIRS(void);
+
+void Action_CLIMB_DOWN_STAIRS(void);
 
 /////////////////////////////////
 //////// Motion: Mission 2 //////
@@ -93,6 +100,15 @@ void Action_ESCAPE_RED_BRIDGE(void);
 #define MISSION_4_HURDLING 36
 
 void Action_MISSION_4_HURDLING(void);
+
+
+/////////////////////////////////
+//////// Motion: Mission 7 //////
+/////////////////////////////////
+
+#define MISSION_7_YELLOW_HOLE_BRIDG_DUMBLING 39
+
+void Action_MISSION_7_YELLOW_HOLE_BRIDG_DUMBLING(void);
 
 /////////////////////////////////
 
