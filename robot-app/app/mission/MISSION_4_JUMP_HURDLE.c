@@ -13,13 +13,19 @@ int mission_4_2_ready_hurdle(U16 *image) {
     U32 col, row, i;
     U16 checkHurdleLine[MISSION_4_HURDLE_CRITERI] = {0,};
 
-    for (row = 0; row < HEIGHT; ++row) {
-        for (col = 0; col < MISSION_4_HURDLE_CRITERI; ++col) {
-            for (i = 0; i < 3; ++i) {
-                checkHurdleLine[col] += GetValueRGBYOBK(
-                        GetPtr(image, row, ((col + 1) * WIDTH / (MISSION_4_HURDLE_CRITERI + 1)) + i, WIDTH),
+    for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
+        for (row = HEIGHT; row > 0; --row) {
+            col = (i + 1) * WIDTH / (MISSION_4_HURDLE_CRITERI + 1);
+            if (GetValueRGBYOBK(
+                        GetPtr(image, row, col, WIDTH),
                         BLACK
-                );
+                ) &&
+                GetValueRGBYOBK(
+                        GetPtr(image, row, col + 1, WIDTH),
+                        BLACK
+                )) {
+                checkHurdleLine[i] = (U16) row;
+                break;
             }
         }
     }
@@ -28,35 +34,38 @@ int mission_4_2_ready_hurdle(U16 *image) {
     for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
         col += checkHurdleLine[i];
     }
-    col /= 3;
+
+    col /= MISSION_4_HURDLE_CRITERI;
 
     for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
         row = checkHurdleLine[i] - col;
-        if ((-MISSION_4_HURDLE_ERROR) > row && row > MISSION_4_HURDLE_ERROR) {
+        if (MISSION_4_2_HURDLE_THRESHOLDS - MISSION_4_HURDLE_ERROR > row ||
+            row > MISSION_4_2_HURDLE_THRESHOLDS + MISSION_4_HURDLE_ERROR)
             return 0;
-        }
     }
 
     return 1;
 }
 
-int mission_4_3_jump_hurdle(void) {
+int mission_4_4_jump_hurdle(void) {
     Action_MISSION_4_HURDLING();
     return 1;
 }
 
-int mission_4_4_set_straight(U16 *image) {
+int mission_4_5_set_straight(U16 *image) {
     U32 row, i, pos_bk[3] = {0,};
     U16 col[3] = {45, 90, 135};
 
     for (i = 0; i < 3; ++i) {
         for (row = HEIGHT; row > 0; row--) {
-            if (
-                    GetValueRGBYOBK(
-                            GetPtr(image, row, col[i], WIDTH),
-                            BLACK
-                    ) == 1
-                    ) {
+            if (GetValueRGBYOBK(
+                        GetPtr(image, row, col[i], WIDTH),
+                        BLACK
+                ) &&
+                GetValueRGBYOBK(
+                        GetPtr(image, row, col[i] + 1, WIDTH),
+                        BLACK
+                )) {
                 pos_bk[i] = row;
                 break;
             }
@@ -83,26 +92,29 @@ int mission_4_4_set_straight(U16 *image) {
     return rResult;
 }
 
-int mission_4_5_check_bk_line(U16 *image) {
+int mission_4_6_check_bk_line(U16 *image) {
     U32 col, row, i;
     U16 checkHurdleLine[MISSION_4_HURDLE_CRITERI] = {0,};
 
     for (row = HEIGHT; row > 0; --row) {
-        for (col = 0; col < MISSION_4_HURDLE_CRITERI; ++col) {
-            for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
-                checkHurdleLine[col] += (GetValueRGBYOBK(
-                                                 GetPtr(image, row,
-                                                        ((col + 1) * WIDTH / (MISSION_4_HURDLE_CRITERI + 1)) + i,
-                                                        WIDTH),
-                                                 BLACK
-                                         ) == 1) ? 0 : 1;
+        for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
+            col = (i + 1) * WIDTH / (MISSION_4_HURDLE_CRITERI + 1);
+            if (GetValueRGBYOBK(
+                        GetPtr(image, row, col, WIDTH),
+                        BLACK
+                ) &&
+                GetValueRGBYOBK(
+                        GetPtr(image, row, col + 1, WIDTH),
+                        BLACK
+                )) {
+                checkHurdleLine[i] = (U16) (HEIGHT - row);
+                break;
             }
         }
     }
 
     int rResult = 1;
     for (col = 0; col < 3; ++col) {
-        checkHurdleLine[col] /= MISSION_4_HURDLE_CRITERI;
         if (checkHurdleLine[col] <= MISSION_4_BK_LINE_RANGE) {
             rResult = 0;
             break;
@@ -116,18 +128,20 @@ int mission_4_5_check_bk_line(U16 *image) {
     return rResult;
 }
 
-int mission_4_6_set_center(U16 *image) {
-    U32 row, i, pos_bk[3] = {0,};
-    U16 col[3] = {45, 90, 135};
+int mission_4_7_set_center(U16 *image) {
+    U32 row, col, i, pos_bk[MISSION_4_HURDLE_CRITERI] = {0,};
 
-    for (i = 0; i < 3; ++i) {
+    for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
         for (row = HEIGHT; row > 0; row--) {
-            if (
-                    GetValueRGBYOBK(
-                            GetPtr(image, row, col[i], WIDTH),
-                            BLACK
-                    ) == 1
-                    ) {
+            col = (i + 1) * (WIDTH / (MISSION_4_HURDLE_CRITERI + 1));
+            if (GetValueRGBYOBK(
+                        GetPtr(image, row, col, WIDTH),
+                        BLACK
+                ) &&
+                GetValueRGBYOBK(
+                        GetPtr(image, row, col + 1, WIDTH),
+                        BLACK
+                )) {
                 pos_bk[i] = row;
                 break;
             }
@@ -152,6 +166,6 @@ int mission_4_6_set_center(U16 *image) {
     return rResult;
 }
 
-void mission_4_6_watch_side(void) {
+void mission_4_7_watch_side(void) {
     Action_RIGHT_TURN_HEAD_LONG();
 }

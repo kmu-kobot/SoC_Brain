@@ -78,24 +78,25 @@ int huro(void) {
                 }
                 break;
             case 3: // MISSION 3: AVOID BOMB
+                mission += 1;
                 break;
             case 4: // MISSION 4: JUMP HURDLE
                 switch (step) {
                     case 3:
-                        step += mission_4_3_jump_hurdle();
+                        step += mission_4_4_jump_hurdle();
                         break;
                     case 4:
-                        mission_4_6_watch_side();
+                        mission_4_7_watch_side();
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_4_4_set_straight(fpga_videodata);
+                        step += mission_4_5_set_straight(fpga_videodata);
                         break;
                     case 5:
-                        step += mission_4_5_check_bk_line(fpga_videodata);
+                        step += mission_4_6_check_bk_line(fpga_videodata);
                         break;
                     case 6:
-                        mission_4_6_watch_side();
+                        mission_4_7_watch_side();
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_4_6_set_center(fpga_videodata);
+                        step += mission_4_7_set_center(fpga_videodata);
                         break;
                     case 7:
                         mission += 1;
