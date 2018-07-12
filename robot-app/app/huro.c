@@ -78,24 +78,25 @@ int huro(void) {
                 }
                 break;
             case 3: // MISSION 3: AVOID BOMB
+                mission += 1;
                 break;
             case 4: // MISSION 4: JUMP HURDLE
                 switch (step) {
                     case 3:
-                        step += mission_4_3_jump_hurdle();
+                        step += mission_4_4_jump_hurdle();
                         break;
                     case 4:
-                        mission_4_6_watch_side();
+                        mission_4_7_watch_side();
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_4_4_set_straight(fpga_videodata);
+                        step += mission_4_5_set_straight(fpga_videodata);
                         break;
                     case 5:
-                        step += mission_4_5_check_bk_line(fpga_videodata);
+                        step += mission_4_6_check_bk_line(fpga_videodata);
                         break;
                     case 6:
-                        mission_4_6_watch_side();
+                        mission_4_7_watch_side();
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_4_6_set_center(fpga_videodata);
+                        step += mission_4_7_set_center(fpga_videodata);
                         break;
                     case 7:
                         mission += 1;
@@ -112,34 +113,43 @@ int huro(void) {
                     case 0:
                         mission_5_1_watch_below(5);
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_5_1_check_black_line(fpga_videodata);
+                        step += mission_5_1_check_black_line(fpga_videodata, 3);
                         break;
                     case 1:
-                        // TODO: 맨처음 다리 중심 맞추기
+                        // 맨 처음 다리 중심 맞추기
+                        mission_5_2_watch_side();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_2_2_before_bridge_set_center(fpga_videodata);
                         break;
                     case 2:
-                        // TODO: 계단 오르기
+                        // 계단 오르기
+                        Action_WALK_FRONT_SHORT(2);
+                        step += mission_5_3_climb_stairs();
                         break;
                     case 3:
-                        // TODO: 초록색 중심 맞추기
+                        mission_5_2_watch_side();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_5_4_set_center_before_green_bridge(fpga_videodata);
                         break;
                     case 4:
-                        mission_5_4_watch_below();
+                        mission_5_5_watch_below();
                         setFPGAVideoData(fpga_videodata);
-                        if (mission_5_4_check_finish_black_line(fpga_videodata)) {
+
+                        if (mission_5_5_check_finish_black_line(fpga_videodata)) {
                             step += 1;
                             break;
                         }
 
-                        step += mission_5_4_check_green_bridge_straight(fpga_videodata);
+                        step += mission_5_5_check_green_bridge_straight(fpga_videodata);
 
-                        mission_5_4_watch_below();
+                        mission_5_5_watch_below();
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_5_4_check_green_bridge_center(fpga_videodata);
+                        step += mission_5_5_check_green_bridge_center(fpga_videodata);
 
                         if (step == 6) {
-                            mission_5_4_short_walk_on_green_bridge(4);
+                            mission_5_5_short_walk_on_green_bridge(4);
                         }
+
                         step = 4;
                         break;
                     case 5:
