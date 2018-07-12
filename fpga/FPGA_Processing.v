@@ -339,6 +339,8 @@ always @(negedge resetx or posedge clk_llc4)
 wire [ 7:0] H = H_DATA[7 :0];
 wire [ 7:0] S = S_DATA[7 :0];
 wire [ 7:0] V = C_MAX[ 7 :0];
+
+wire [15:0] DecVData = {H[7:2], S[7:3], V[7:3]};
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -453,7 +455,7 @@ wire GYO_M = G_M | Y_M | O_M;
 wire GYOBK_M = G_M | Y_M | O_M | BK_M;
 wire BBK_M = B_M | BK_M;
 
-wire [15:0] DecVData = {ROY_M, ROYBK_M, R_M, O_M, Y_M,	GY_M, GYOBK_M, GYO_M, G_M, G_M, G_M,	B_M, BBK_M, B_M, B_M, BK_M};
+//wire [15:0] DecVData = {ROY_M, ROYBK_M, R_M, O_M, Y_M,	GY_M, GYOBK_M, GYO_M, G_M, G_M, G_M,	B_M, BBK_M, B_M, B_M, BK_M};
 /////////////////////////////////////////////////////////////////////////////
 
 // 180x120 write clock generation 
