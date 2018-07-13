@@ -150,7 +150,7 @@ Communication Protocol :
 ////////////////////////////////////////////////////////////////////////////////
 void DelayLoop(int delay_time);
 
-void Send_Command(unsigned char Ldat);
+void Send_Command(unsigned char Ldata, unsigned char Hdata2);
 
 int Receive_Ack(int status);
 
