@@ -22,7 +22,7 @@
 // AVOID BOMB
 #include "./mission/MISSION_4_JUMP_HURDLE.h"
 #include "./mission/MISSION_5_GREEN_BRIDGE.h"
-// KICK BALL
+#include "./mission/MISSION_6_KICK_BALL.h"
 #include "./mission/MISSION_7_YELLOW_HOLE_BRIDGE.h"
 // AVOID BOMB
 #include "mission/MISSION_9_LAST_BARRICADE.h"

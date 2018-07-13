@@ -420,6 +420,33 @@ mission/MISSION_5_GREEN_BRIDGE.c.s:
 	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.s
 .PHONY : mission/MISSION_5_GREEN_BRIDGE.c.s
 
+mission/MISSION_6_KICK_BALL.o: mission/MISSION_6_KICK_BALL.c.o
+
+.PHONY : mission/MISSION_6_KICK_BALL.o
+
+# target to build an object file
+mission/MISSION_6_KICK_BALL.c.o:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o
+.PHONY : mission/MISSION_6_KICK_BALL.c.o
+
+mission/MISSION_6_KICK_BALL.i: mission/MISSION_6_KICK_BALL.c.i
+
+.PHONY : mission/MISSION_6_KICK_BALL.i
+
+# target to preprocess a source file
+mission/MISSION_6_KICK_BALL.c.i:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.i
+.PHONY : mission/MISSION_6_KICK_BALL.c.i
+
+mission/MISSION_6_KICK_BALL.s: mission/MISSION_6_KICK_BALL.c.s
+
+.PHONY : mission/MISSION_6_KICK_BALL.s
+
+# target to generate assembly for a file
+mission/MISSION_6_KICK_BALL.c.s:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.s
+.PHONY : mission/MISSION_6_KICK_BALL.c.s
+
 mission/MISSION_7_YELLOW_HOLE_BRIDGE.o: mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o
 
 .PHONY : mission/MISSION_7_YELLOW_HOLE_BRIDGE.o
@@ -446,6 +473,33 @@ mission/MISSION_7_YELLOW_HOLE_BRIDGE.s: mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s
 mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s:
 	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s
 .PHONY : mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s
+
+mission/MISSION_9_LAST_BARRICADE.o: mission/MISSION_9_LAST_BARRICADE.c.o
+
+.PHONY : mission/MISSION_9_LAST_BARRICADE.o
+
+# target to build an object file
+mission/MISSION_9_LAST_BARRICADE.c.o:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o
+.PHONY : mission/MISSION_9_LAST_BARRICADE.c.o
+
+mission/MISSION_9_LAST_BARRICADE.i: mission/MISSION_9_LAST_BARRICADE.c.i
+
+.PHONY : mission/MISSION_9_LAST_BARRICADE.i
+
+# target to preprocess a source file
+mission/MISSION_9_LAST_BARRICADE.c.i:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.i
+.PHONY : mission/MISSION_9_LAST_BARRICADE.c.i
+
+mission/MISSION_9_LAST_BARRICADE.s: mission/MISSION_9_LAST_BARRICADE.c.s
+
+.PHONY : mission/MISSION_9_LAST_BARRICADE.s
+
+# target to generate assembly for a file
+mission/MISSION_9_LAST_BARRICADE.c.s:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.s
+.PHONY : mission/MISSION_9_LAST_BARRICADE.c.s
 
 # Help Target
 help:
@@ -489,9 +543,15 @@ help:
 	@echo "... mission/MISSION_5_GREEN_BRIDGE.o"
 	@echo "... mission/MISSION_5_GREEN_BRIDGE.i"
 	@echo "... mission/MISSION_5_GREEN_BRIDGE.s"
+	@echo "... mission/MISSION_6_KICK_BALL.o"
+	@echo "... mission/MISSION_6_KICK_BALL.i"
+	@echo "... mission/MISSION_6_KICK_BALL.s"
 	@echo "... mission/MISSION_7_YELLOW_HOLE_BRIDGE.o"
 	@echo "... mission/MISSION_7_YELLOW_HOLE_BRIDGE.i"
 	@echo "... mission/MISSION_7_YELLOW_HOLE_BRIDGE.s"
+	@echo "... mission/MISSION_9_LAST_BARRICADE.o"
+	@echo "... mission/MISSION_9_LAST_BARRICADE.i"
+	@echo "... mission/MISSION_9_LAST_BARRICADE.s"
 .PHONY : help
 
 
