@@ -52,7 +52,54 @@ int mission_4_4_jump_hurdle(void) {
     return 1;
 }
 
-int mission_4_5_set_straight(U16 *image) {
+
+void mission_4_5_watch_diagonal_line(void) {
+    Action_WATCH_BELOW_MIDDLE();
+    RobotSleep();
+}
+
+int mission_4_5_set_front_of_not_bk(U16 *image) {
+    U32 col[3] = {70, 60, 90}, row, i;
+    U16 checkHurdleLine[MISSION_4_HURDLE_CRITERI] = {0,};
+
+    for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
+        for (row = HEIGHT; row > 0; --row) {
+            if (GetValueRGBYOBK(
+                        GetPtr(image, row, col[i], WIDTH),
+                        BLACK
+                ) &&
+                GetValueRGBYOBK(
+                        GetPtr(image, row, col[i] + 1, WIDTH),
+                        BLACK
+                )) {
+                break;
+            }
+            checkHurdleLine[i] += 1;
+        }
+    }
+
+    double s = 0;
+    printf("BLACK LINE\n");
+    for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
+        s += checkHurdleLine[i];
+        printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);
+    }
+    printf("\n");
+
+    s /= MISSION_4_HURDLE_CRITERI;
+    printf("AVG: %f\n", s);
+
+    int rResult = 1;
+    if (s > 90) {
+        Action_LEFT_TURN_BODY(3);
+        rResult = 0;
+    }
+    RobotSleep();
+
+    return rResult;
+}
+
+int mission_4_6_set_straight(U16 *image) {
     U32 row, i, pos_bk[3] = {0,};
     U16 col[3] = {45, 90, 135};
 
@@ -91,7 +138,7 @@ int mission_4_5_set_straight(U16 *image) {
     return rResult;
 }
 
-int mission_4_5_set_center(U16 *image) {
+int mission_4_6_set_center(U16 *image) {
 
     U32 col[3] = {70, 60, 90}, row, i;
     U16 checkHurdleLine[MISSION_4_HURDLE_CRITERI] = {0,};
@@ -136,7 +183,7 @@ int mission_4_5_set_center(U16 *image) {
     return rResult;
 }
 
-void mission_4_5_watch_side(void) {
+void mission_4_6_watch_side(void) {
     Action_RIGHT_TURN_HEAD_LONG();
     RobotSleep();
 }
