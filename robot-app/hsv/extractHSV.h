@@ -11,6 +11,9 @@
 #include <stdlib.h>
 #include <termios.h>
 
+#define WIDTH 180
+#define HEIGHT 120
+
 #define BIT_H 0x07e0//0000011111100000
 #define BIT_S 0xf800//1111100000000000
 #define BIT_V 0x001f//0000000000011111
