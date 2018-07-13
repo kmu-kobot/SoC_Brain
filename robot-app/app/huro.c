@@ -175,6 +175,9 @@ int huro(void) {
                 }
                 break;
             case 6: // MISSION 6: KICK BALL
+                mission = 9;
+                step = 0;
+                nextMission = 7;
                 break;
             case 7: // MISSION 7: YELLOW HOLE
                 switch (step) {
@@ -241,9 +244,8 @@ int huro(void) {
                         step = (step == 7) ? 6 : 5;
                         break;
                     case 6:
-                        mission = 9;
+                        mission += 1;
                         step = 0;
-                        nextMission = 8;
                         break;
                     default:
                         break;
