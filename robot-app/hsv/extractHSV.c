@@ -1,29 +1,26 @@
-#include "./library/amazon2_sdk.h"
+#include "extractHSV.h"
 
-#include "./library/graphic_api.h"
-#include "./library/uart_api.h"
-#include "./library/robot_action.h"
-
-#include <stdio.h>
-#include <termios.h>
 
 U8 top, bot, left, right;
+
 
 void extractHSV(void)
 {
     U8 motion;
-    U8 H, S, V;
-    U8 cnt;
+    U32 H, S, V;
+    U16 cnt;
     U16 pos;
     U16 *fpga_videodata;
     U8 i, j;
 
-    fpga_videodata =  = (U16 *) malloc(WIDTH * HEIGHT * 2);
+    help();
 
+    fpga_videodata = (U16 *) malloc(WIDTH * HEIGHT * 2);
 
+    init_extract();
 
     do {
-        motion = getch();
+        motion = getchar();
         //동작 수행
 
         setFPGAVideoData(fpga_videodata);
@@ -40,9 +37,9 @@ void extractHSV(void)
                     for (j = left; j <= right; ++j)
                     {
                         pos = i * 180 + j;
-                        H += fpga_videodata[pos] >> 10;
-                        S += fpga_videodata[pos] << 6 >> 11;
-                        V += fpga_videodata[pos] << 11 >> 11;
+                        H += (fpga_videodata[pos] & BIT_H) SHIFT_H;
+                        S += (fpga_videodata[pos] & BIT_S) SHIFT_S;
+                        V += (fpga_videodata[pos] & BIT_V) SHIFT_V;
                         ++cnt;
                     }
                 }
@@ -50,16 +47,16 @@ void extractHSV(void)
                 S /= cnt;
                 V /= cnt;
 
-                printf("H : %d\tS : %d\tV : %d\n", H, S, V);
+                printf("cnt : %d\tH : %d\tS : %d\tV : %d\n", cnt, H, S, V);
                 break;
             case 's':
-                printf("top : ");
+                printf("top : \n");
                 scanf("%d", &top);
-                printf("bot : ");
+                printf("bot : \n");
                 scanf("%d", &bot);
-                printf("left : ");
+                printf("left : \n");
                 scanf("%d", &left);
-                printf("right : ");
+                printf("right : \n");
                 scanf("%d", &right);
                 break;
             case 'i':
@@ -74,7 +71,11 @@ void extractHSV(void)
             case 'r':
                 Action_RIGHT_TURN_HEAD_LONG();
                 break;
+            case 'h':
+                help();
+                break;
             default:
+            ;
         }
     } while(motion != 'q');
 
@@ -87,26 +88,39 @@ void setFPGAVideoData(U16 *buf) {
     read_fpga_video_data(buf);
 
     // draw white box
-    for (j = left; j <= right; ++j)
+    for (j = left - 1; j <= right + 1; ++j)
     {
-        pos = top * 180 + j;
+        pos = (top + 1) * 180 + j;
         buf[pos] = 0xffff;
-
-        pos = bot * 180 + j;
+        pos = (bot + 1) * 180 + j;
         buf[pos] = 0xffff;
     }
 
-    for (i = top; i <= bot; ++i)
+    for (i = top - 1; i <= bot + 1; ++i)
     {
-        pos = i * 180 + left;
+        pos = i * 180 + left - 1;
         buf[pos] = 0xffff;
 
-        pos = i * 180 + right;
+        pos = i * 180 + right + 1;
         buf[pos] = 0xffff;
     }
 
     draw_fpga_video_data_full(buf);
     flip();
+}
+
+void help(void)
+{
+    printf("----------------------------------------------------------------\n");
+    printf("e : extract HSV\n");
+    printf("s : set box\n");
+    printf("i : Action_INIT_ROBOT\n");
+    printf("b : Action_WATCH_BELOW_LONG\n");
+    printf("l : Action_LEFT_TURN_HEAD_LONG\n");
+    printf("r : Action_RIGHT_TURN_HEAD_LONG\n");
+    printf("h : help\n");
+    printf("q : exit\n");
+    printf("----------------------------------------------------------------\n");
 }
 
 int init_extract(void) {
@@ -144,10 +158,10 @@ int init_extract(void) {
 
     Action_INIT_ROBOT();
 
-    top = 58;
-    bot = 61;
-    left = 88;
-    right = 91;
+    top = 54;
+    bot = 65;
+    left = 84;
+    right = 95;
 
     return 0;
 }

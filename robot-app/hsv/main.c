@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "extractHSV.c"
+#include "extractHSV.h"
 
 int main(void) {
     extractHSV();
