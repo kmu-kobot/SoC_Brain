@@ -18,7 +18,7 @@ void DelayLoop(int delay_time) {
         delay_time--;
 }
 
-void Send_Command(unsigned char Ldata) {
+void Send_Command(unsigned char Ldata, unsigned char Hdata2) {
     unsigned char Command_Buffer[6] = {
             0,
     };
@@ -26,9 +26,9 @@ void Send_Command(unsigned char Ldata) {
     Command_Buffer[0] = START_CODE;  // Start Byte -> 0xff
     Command_Buffer[1] = START_CODE1; // Start Byte1 -> 0x55
     Command_Buffer[2] = Ldata;
-    Command_Buffer[3] = 255 - Ldata;
-    Command_Buffer[4] = Hdata;  // 0x00
-    Command_Buffer[5] = Hdata1; // 0xff
+    Command_Buffer[3] = (unsigned char) (255 - Ldata);
+    Command_Buffer[4] = Hdata2;
+    Command_Buffer[5] = (unsigned char) (255 - Hdata2);
 
     uart1_buffer_write(Command_Buffer, 6);
 }
@@ -39,7 +39,7 @@ int Receive_Ack(int status) {
     };
 
     uart1_buffer_read(command, 6);
-    
+
     int i = 0;
     int rResult = 0;
     for (i = 0; i < 6; ++i) {
@@ -54,8 +54,15 @@ int Receive_Ack(int status) {
 #define OK 1
 
 void RobotAction(unsigned char Ldata) {
-    Send_Command(Ldata);
+    Send_Command(Ldata, 0);
     printf("Started %d Motion\n", Ldata);
     while (!Receive_Ack(1));
     printf("Finished %d Motion\n", Ldata);
+}
+
+void RobotSleep(void) {
+    Send_Command(255, 0);
+    printf("SLEEP START...\t");
+    while (!Receive_Ack(1));
+    printf("END\t");
 }
