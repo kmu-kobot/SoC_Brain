@@ -155,6 +155,8 @@ void Send_Command(unsigned char Ldata, unsigned char Hdata2);
 int Receive_Ack(int status);
 
 void RobotAction(unsigned char Ldata);
+
+void RobotSleep(void);
 ////////////////////////////////////////////////////////////////////////////////
 
 #endif // __ROBOT_PROTOCOL_H__
