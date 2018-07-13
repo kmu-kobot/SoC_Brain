@@ -108,7 +108,16 @@ void Action_MISSION_4_HURDLING(void);
 
 #define MISSION_7_YELLOW_HOLE_BRIDG_DUMBLING 39
 
-void Action_MISSION_7_YELLOW_HOLE_BRIDG_DUMBLING(void);
+void Action_MISSION_7_YELLOW_HOLE_BRIDGE_DUMBLING(void);
+
+
+/////////////////////////////////
+//////// Motion: Mission 7 //////
+/////////////////////////////////
+
+#define MISSION_6_KICK_BALL 70
+
+void Action_MISSION_6_KICK_BALL(void);
 
 /////////////////////////////////
 

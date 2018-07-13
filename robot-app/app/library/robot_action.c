@@ -162,10 +162,19 @@ void Action_MISSION_4_HURDLING(void) {
 }
 
 /////////////////////////////////
+//////// Motion: Mission 6 //////
+/////////////////////////////////
+
+void Action_MISSION_6_KICK_BALL(void) {
+    Action_INIT_ROBOT();
+    RobotAction(MISSION_6_KICK_BALL);
+}
+
+/////////////////////////////////
 //////// Motion: Mission 7 //////
 /////////////////////////////////
 
-void Action_MISSION_7_YELLOW_HOLE_BRIDG_DUMBLING(void) {
+void Action_MISSION_7_YELLOW_HOLE_BRIDGE_DUMBLING(void) {
     Action_INIT_ROBOT();
     RobotAction(MISSION_7_YELLOW_HOLE_BRIDG_DUMBLING);
 }

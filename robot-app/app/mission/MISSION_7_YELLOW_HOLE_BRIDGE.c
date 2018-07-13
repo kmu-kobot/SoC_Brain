@@ -92,12 +92,12 @@ int mission_7_3_climb_yellow_hole_bridge() {
 }
 
 int mission_7_4_set_straight_on_yellow_bridge(U16 *image) {
-    
+
     U32 row, i;
     U16 yellow_len[2] = {0,}, col[2] = {
             MISSION_7_4_YELLOW_LINE_COL_POINT_1,
             MISSION_7_4_YELLOW_LINE_COL_POINT_2
-    };                  
+    };
 
     for (i = 0; i < 2; ++i) {
         for (row = HEIGHT; row > 0; --row) {
@@ -193,34 +193,34 @@ void mission_7_5_watch_below(void) {
     Action_WATCH_BELOW_LONG();
 }
 
-int mission_7_5_walk_until_black_line(U16* image, int repeat) {
+int mission_7_5_walk_until_black_line(U16 *image) {
 
-   U32 col, row;
-   U16 black_cnt = 0, ratio;
+    U32 col, row;
+    U16 black_cnt = 0;
 
-   for(row = 0; row < MISSION_7_5_HEIGHT_SCOPE; ++row) {
-       for(col = 0; col < WIDTH; ++col) {
-           if(GetValueRGBYOBK(GetPtr(image, row, col, WIDTH),BLACK) == 1)
-            black_cnt++;
-       }
-   }
+    for (row = 0; row < MISSION_7_5_HEIGHT_SCOPE; ++row) {
+        for (col = 0; col < WIDTH; ++col) {
+            if (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK) == 1)
+                black_cnt++;
+        }
+    }
 
-   ratio = black_cnt / (WIDTH * MISSION_7_5_HEIGHT_SCOPE) * 100;
+    double ratio = black_cnt / (WIDTH * MISSION_7_5_HEIGHT_SCOPE) * 100;
 
-   printf("7-5: walk_until_black_line\n");
-   printf("Ratio is %d.\n", ratio);
+    printf("7-5: walk_until_black_line\n");
+    printf("Ratio is %f.\n", ratio);
 
-   Action_INIT_ROBOT();
+    Action_INIT_ROBOT();
 
-   int rResult = 0; 
-   if(ratio > MISSION_7_5_BLACK_RATIO - MISSION_7_5_BLACK_RATIO_ERROR && 
-      ratio > MISSION_7_5_BLACK_RATIO - MISSION_7_5_BLACK_RATIO_ERROR) {
-       rResult = 1;
-   }
+    int rResult = 0;
+    if (ratio < MISSION_7_5_BLACK_RATIO - MISSION_7_5_BLACK_RATIO_ERROR &&
+        ratio > MISSION_7_5_BLACK_RATIO + MISSION_7_5_BLACK_RATIO_ERROR) {
+        rResult = 1;
+    }
 
-   Action_INIT_ROBOT();
+    Action_INIT_ROBOT();
 
-   return rResult;
+    return rResult;
 }
 
 int mission_7_6_jump_hole(void) {

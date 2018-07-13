@@ -23,10 +23,14 @@ int mission_4_2_ready_hurdle(U16 *image);
 
 int mission_4_4_jump_hurdle(void);
 
-int mission_4_5_set_straight(U16 *image);
+void mission_4_5_watch_diagonal_line(void);
 
-int mission_4_5_set_center(U16 *image);
+int mission_4_5_set_front_of_not_bk(U16 *image);
 
-void mission_4_5_watch_side(void);
+int mission_4_6_set_straight(U16 *image);
+
+int mission_4_6_set_center(U16 *image);
+
+void mission_4_6_watch_side(void);
 
 #endif //SOC_APP_MISSION_4_JUMP_HUDDLE_H
