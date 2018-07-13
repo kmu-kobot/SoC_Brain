@@ -86,24 +86,22 @@ int huro(void) {
                         step += mission_4_4_jump_hurdle();
                         break;
                     case 4:
-                        mission_4_7_watch_side();
+                        mission_4_5_watch_side();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_4_5_set_center(fpga_videodata);
+
+                        mission_4_5_watch_side();
                         setFPGAVideoData(fpga_videodata);
                         step += mission_4_5_set_straight(fpga_videodata);
+
+                        step = (step == 6) ? 5 : 4;
                         break;
                     case 5:
-                        step += mission_4_6_check_bk_line(fpga_videodata);
-                        break;
-                    case 6:
-                        mission_4_7_watch_side();
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_4_7_set_center(fpga_videodata);
-                        break;
-                    case 7:
                         mission += 1;
                         step = 0;
                         break;
                     default:
-                        mission_4_1_watch_front(4);
+                        mission_4_1_watch_front(2);
                         step += mission_4_2_ready_hurdle(fpga_videodata);
                         break;
                 }
