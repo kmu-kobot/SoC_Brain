@@ -61,7 +61,7 @@ void RobotAction(unsigned char Ldata) {
 }
 
 void RobotSleep(void) {
-    Send_Command(255, 255);
+    Send_Command(255, 0);
     printf("SLEEP START...\t");
     while (!Receive_Ack(1));
     printf("END\t");
