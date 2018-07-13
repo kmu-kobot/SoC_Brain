@@ -11,8 +11,16 @@
 #include <stdlib.h>
 #include <termios.h>
 
+#define BIT_H 0x07e0//0000011111100000
+#define BIT_S 0xf800//1111100000000000
+#define BIT_V 0x001f//0000000000011111
+#define SHIFT_H >> 3
+#define SHIFT_S >> 8
+#define SHIFT_V << 3
+
 void extractHSV(void);
 void setFPGAVideoData(U16* buf);
+void help(void);
 int init_extract(void);
 void destroy_extract(U16* buf);
 

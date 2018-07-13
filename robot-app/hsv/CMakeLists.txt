@@ -4,7 +4,7 @@ project(SoC_App C)
 set(CMAKE_C_STANDARD 99)
 
 add_executable(
-        HSV
+        hsv
         main.c
         extractHSV.c
         library/amazon2_sdk.h

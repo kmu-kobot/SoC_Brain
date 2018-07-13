@@ -25,9 +25,9 @@ LDLIBS	= -lm -lc
 
 export AS LD CC CPP AR NM STRIP OBJCOPY OBJDUMP RANLIB CFLAGS
 
-PROJ = HSV
+PROJ = hsv
 
-OBJS = main.o extractHSV.o ./library/graphic_api.o ./library/robot_protocol.o ./library/uart_api.o ./library/robot_action.o 
+OBJS = main.o extractHSV.o ./library/graphic_api.o ./library/robot_protocol.o ./library/uart_api.o ./library/robot_action.o
 
 all: $(PROJ)
 
