@@ -13,6 +13,7 @@
 
 #define WIDTH 180
 #define HEIGHT 120
+#define SIZE (WIDTH * HEIGHT)
 
 #define BIT_H 0x07e0//0000011111100000
 #define BIT_S 0xf800//1111100000000000

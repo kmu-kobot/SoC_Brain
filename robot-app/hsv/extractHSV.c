@@ -1,17 +1,25 @@
 #include "extractHSV.h"
 
+int cmp(const void* a, const void* b)
+{
+  return *(U8*)a - *(U8*)b;
+}
 
 U8 top, bot, left, right;
-
 
 void extractHSV(void)
 {
     U8 motion;
-    U32 H, S, V;
+    U8 H_buff[SIZE], H_R_buff[SIZE], S_buff[SIZE], V_buff[SIZE];
+    U32 H, H_R, S, V;
     U16 cnt;
     U16 pos;
-    U16 *fpga_videodata;
+    U16 cnt_valid;
+    U16 start, end;
+
     U8 i, j;
+
+    U16 *fpga_videodata;
 
     help();
 
@@ -29,6 +37,7 @@ void extractHSV(void)
         {
             case 'e':
                 H = 0;
+                H_R = 0;
                 S = 0;
                 V = 0;
                 cnt = 0;
@@ -37,17 +46,37 @@ void extractHSV(void)
                     for (j = left; j <= right; ++j)
                     {
                         pos = i * WIDTH + j;
-                        H += (fpga_videodata[pos] & BIT_H) SHIFT_H;
-                        S += (fpga_videodata[pos] & BIT_S) SHIFT_S;
-                        V += (fpga_videodata[pos] & BIT_V) SHIFT_V;
+                        H_buff[cnt] = (fpga_videodata[pos] & BIT_H) SHIFT_H;
+                        H_R_buff[cnt] = (((fpga_videodata[pos] & BIT_H) SHIFT_H) + 120) % 240;
+                        S_buff[cnt] = (fpga_videodata[pos] & BIT_S) SHIFT_S;
+                        V_buff[cnt] = (fpga_videodata[pos] & BIT_V) SHIFT_V;
                         ++cnt;
                     }
                 }
-                H /= cnt;
-                S /= cnt;
-                V /= cnt;
 
-                printf("cnt : %d\tH : %d\tS : %d\tV : %d\n", cnt, H, S, V);
+                qsort(H_buff, cnt, sizeof(U8), cmp);
+                qsort(H_R_buff, cnt, sizeof(U8), cmp);
+                qsort(S_buff, cnt, sizeof(U8), cmp);
+                qsort(V_buff, cnt, sizeof(U8), cmp);
+
+                start = cnt / 10;
+                end = cnt - start;
+                cnt_vaild = end - start;
+
+                for (i = start; i < end; ++i)
+                {
+                    H += H_buff[i];
+                    H_R += H_R_buff[i];
+                    S += S_buff[i];
+                    V += V_buff[i];
+                }
+
+                H /= cnt_valid;
+                H_R /= cnt_valid;
+                S /= cnt_valid;
+                V /= cnt_vaild;
+
+                printf("cnt : %d\tcnt_valid : %d\tH : %d\tH_R : %d\tS : %d\tV : %d\n", cnt, cnt_valid, H, H_R, S, V);
                 break;
             case 'w':
                 if (top < 1) break;
