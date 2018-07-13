@@ -232,11 +232,11 @@ int huro(void) {
                         // TODO: 각도랑 중심 체크
                         mission_7_2_watch_side();
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_7_7_after_bridge_set_center(fpga_videodata);// 길이 맞추기
+                        step += mission_7_7_after_yellow_bridge_set_center(fpga_videodata);// 길이 맞추기
 
                         mission_2_2_watch_side();
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_7_7_after_bridge_set_straight(fpga_videodata); // 직선 맞추기
+                        step += mission_7_7_after_yellow_bridge_set_straight(fpga_videodata); // 직선 맞추기
 
                         step = (step == 7) ? 6 : 5;
                         break;
