@@ -8,7 +8,7 @@ int mission_1_1_wait_yellow_barricade(U16 *image) {
     U32 col, row, cntYellow = 0;
 
     for (row = MISSION_1_UPPER; row < MISSION_1_UPPER + MISSION_1_RANGE; ++row) {
-        for (col = 0; col < WIDTH; col += 2) {
+        for (col = 0; col < WIDTH; ++col) {
             cntYellow += GetValueRGBYOBK(
                     GetPtr(image, row, col, WIDTH),
                     YELLOW
@@ -16,8 +16,8 @@ int mission_1_1_wait_yellow_barricade(U16 *image) {
         }
     }
 
-    printf("M1-1: WAIT: %d\n", cntYellow * 2 * 100 / (WIDTH * MISSION_1_RANGE));
-    return cntYellow * 2 * 100 / (WIDTH * MISSION_1_RANGE) > MISSION_1_THRESHOLDS;
+    printf("M1-1: WAIT: %d\n", cntYellow * 100 / (WIDTH * MISSION_1_RANGE));
+    return cntYellow * 100 / (WIDTH * MISSION_1_RANGE) > MISSION_1_THRESHOLDS;
 }
 
 int mission_1_2_end_yellow_barricade(U16 *image) {
@@ -37,6 +37,9 @@ int mission_1_2_end_yellow_barricade(U16 *image) {
 }
 
 void mission_1_3_escape_yellow_barricade(int repeat) {
-    RobotSleep();
+    int i;
+    for (i = 0; i < 2; ++i) {
+        RobotSleep();
+    }
     Action_WALK_FRONT_LONG(repeat);
 }
