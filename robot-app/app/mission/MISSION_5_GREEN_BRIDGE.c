@@ -6,13 +6,10 @@
 
 void mission_5_1_watch_below(int repeat) {
     Action_WALK_FRONT_LONG(repeat);
-
     Action_WATCH_BELOW_LONG();
 }
 
 int mission_5_1_check_black_line(U16 *image, int repeat) {
-    Action_INIT_ROBOT();
-
     U32 col, row, cntBlack = 0;
     for (row = 0; row < MISSION_5_1_BLACK_LINE_UPPER; ++row) {
         for (col = 0; col < WIDTH; col++) {
@@ -75,7 +72,6 @@ int mission_5_4_set_center_before_green_bridge(U16 *image) {
         rResult = 1;
     }
 
-    Action_INIT_ROBOT();
     return rResult;
 }
 
@@ -96,8 +92,6 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
         green_len[0] += GetValueRGBYOBK(GetPtr(image, row[0], col, WIDTH), GREEN);
         green_len[1] += GetValueRGBYOBK(GetPtr(image, row[1], col, WIDTH), GREEN);
     }
-
-    Action_INIT_ROBOT();
 
     int rResult = 0;
     int slope;

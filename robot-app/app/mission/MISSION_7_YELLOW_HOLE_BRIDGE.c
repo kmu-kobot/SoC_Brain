@@ -21,8 +21,6 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
         }
     }
 
-    Action_INIT_ROBOT();
-
     int rReturn = (cntYellow * 100 / (WIDTH * HEIGHT)) > MISSION_7_THRESHOLDS;
 
     if (rReturn) {

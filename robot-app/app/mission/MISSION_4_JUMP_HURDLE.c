@@ -69,8 +69,6 @@ int mission_4_5_set_straight(U16 *image) {
         }
     }
 
-    Action_INIT_ROBOT();
-
     int rResult = 0;
     if (
             (pos_bk[2] - pos_bk[1]) < -10 &&
@@ -144,8 +142,6 @@ int mission_4_7_set_center(U16 *image) {
             }
         }
     }
-
-    Action_INIT_ROBOT();
 
     int rResult = 0;
 
