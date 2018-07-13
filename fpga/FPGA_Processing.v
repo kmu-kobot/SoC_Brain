@@ -345,22 +345,23 @@ wire [ 7:0] V = C_MAX[ 7 :0];
 /////////////////////////////////////////////////////////////////////////////
 //	Binarization
 
-reg [ 7:0] H_THRES, S_THRES, V_THRES, 
+reg [ 7:0] H_THRES, S_THRES_H, S_THRES_L, V_THRES, 
 				R_H, G_H, B_H, Y_H, O_H, 
 				R_MIN, R_MAX, G_MIN, G_MAX, B_MIN, B_MAX, Y_MIN, Y_MAX, O_MIN, O_MAX;
-reg R_B, G_B, B_B, Y_B, O_B, BK_B, C;
+reg R_B, G_B, B_B, Y_B, O_B, BK_B, C_H, C_L;
 
 always @ (posedge clk_llc4)
 begin
 	H_THRES = 8'd10;
-	S_THRES = 8'd96;
-	V_THRES = 8'd96;
+	S_THRES_H = 8'd96;
+	S_THRES_L = 8'd48;
+	V_THRES = 8'd64;
 
 	R_H	= 8'd230;
-	G_H	= 8'd90;
-	B_H	= 8'd144;
-	Y_H	= 8'd40;
-	O_H	= 8'd15;
+	G_H	= 8'd85;
+	B_H	= 8'd148;
+	Y_H	= 8'd55;
+	O_H	= 8'd20;
 	
 	R_MIN = R_H - H_THRES;
 	R_MAX = R_H + H_THRES;
@@ -388,10 +389,17 @@ always @ (negedge resetx or posedge clk_llc4)
 
 
 always @ (negedge resetx or posedge clk_llc4)
-	if		(~resetx)	C <= 1'b0;
+	if		(~resetx)	C_H <= 1'b0;
 	else
 	begin
-		C <= ~BK_B & (S > S_THRES);
+		C_H <= ~BK_B & (S > S_THRES_H);
+	end
+
+always @ (negedge resetx or posedge clk_llc4)
+	if		(~resetx)	C_L <= 1'b0;
+	else
+	begin
+		C_L <= ~BK_B & (S > S_THRES_L);
 	end
 
 
@@ -399,35 +407,35 @@ always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	R_B <= 1'b0;
 	else
 	begin
-		R_B <= C & ((R_MIN < H) & (H < R_MAX));
+		R_B <= C_L & ((R_MIN < H) & (H < R_MAX));
 	end
 	
 always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	G_B <= 1'b0;
 	else
 	begin
-		G_B <= C & ((G_MIN < H) & (H < G_MAX));
+		G_B <= C_H & ((G_MIN < H) & (H < G_MAX));
 	end
 	
 always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	B_B <= 1'b0;
 	else
 	begin
-		B_B <= C & ((B_MIN < H) & (H < B_MAX));
+		B_B <= C_H & ((B_MIN < H) & (H < B_MAX));
 	end
 	
 always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	Y_B <= 1'b0;
 	else
 	begin
-		Y_B <= C & ((Y_MIN < H) & (H < Y_MAX));
+		Y_B <= C_L & ((Y_MIN < H) & (H < Y_MAX));
 	end
 	
 always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	O_B <= 1'b0;
 	else
 	begin
-		O_B <= C & ((O_MIN < H) & (H < O_MAX));
+		O_B <= C_L & ((O_MIN < H) & (H < O_MAX));
 	end
 
 //wire ROY = R_B | O_B | Y_B;
