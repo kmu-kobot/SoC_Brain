@@ -1,13 +1,8 @@
-#include "./library/amazon2_sdk.h"
+#include "extractHSV.h"
 
-#include "./library/graphic_api.h"
-#include "./library/uart_api.h"
-#include "./library/robot_action.h"
-
-#include <stdio.h>
-#include <termios.h>
 
 U8 top, bot, left, right;
+
 
 void extractHSV(void)
 {
@@ -18,12 +13,12 @@ void extractHSV(void)
     U16 *fpga_videodata;
     U8 i, j;
 
-    fpga_videodata =  = (U16 *) malloc(WIDTH * HEIGHT * 2);
+    fpga_videodata = (U16 *) malloc(WIDTH * HEIGHT * 2);
 
 
 
     do {
-        motion = getch();
+        motion = getchar();
         //동작 수행
 
         setFPGAVideoData(fpga_videodata);
@@ -75,6 +70,7 @@ void extractHSV(void)
                 Action_RIGHT_TURN_HEAD_LONG();
                 break;
             default:
+            ;
         }
     } while(motion != 'q');
 
