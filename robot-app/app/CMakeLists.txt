@@ -29,4 +29,5 @@ add_executable(
         mission/MISSION_9_LAST_BARRICADE.h
         mission/MISSION_7_YELLOW_HOLE_BRIDGE.c
         mission/MISSION_7_YELLOW_HOLE_BRIDGE.h
-)
+        mission/MISSION_6_KICK_BALL.c
+        mission/MISSION_6_KICK_BALL.h)

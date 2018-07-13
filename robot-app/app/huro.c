@@ -175,9 +175,22 @@ int huro(void) {
                 }
                 break;
             case 6: // MISSION 6: KICK BALL
-                mission = 10;
-                step = 0;
-                nextMission = 7;
+                switch (step) {
+                    case 0:
+                        // TODO: 1. 공을 중심으로 맞출때 까지 회전
+                        break;
+                    case 1:
+                        // TODO: 2. 앞으로 걸으면서 row(0~60) 지점에 공이 잡히는지 확인
+                        break;
+                    case 2:
+                        // TODO 3: 생각이 안난다..
+                        break;
+                    default:
+                        mission = 10;
+                        step = 0;
+                        nextMission = 7;
+                        break;
+                }
                 break;
             case 7: // MISSION 7: YELLOW HOLE
                 switch (step) {
