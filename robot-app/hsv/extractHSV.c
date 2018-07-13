@@ -88,6 +88,7 @@ void extractHSV(void)
                 if (left < 1 || right > WIDTH - 2) break;
                 left -= 1;
                 right += 1;
+                break;
             case 'i':
                 Action_INIT_ROBOT();
                 break;
