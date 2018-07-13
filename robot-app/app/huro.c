@@ -252,14 +252,30 @@ int huro(void) {
                 }
                 break;
             case 8: // MISSION 8: AVOID BOMB
+                mission += 1;
+                step = 0;
                 break;
             case 9: // MISSION 9: LAST BARRICADE
-                missionFinished = 1;
+                switch (step) {
+                    case 0:
+                        step += mission_9_1_wait_yellow_barricade(fpga_videodata);
+                        break;
+                    case 1:
+                        step += mission_9_2_end_yellow_barricade(fpga_videodata);
+                        break;
+                    case 2:
+                        mission_9_3_escape_yellow_barricade(30);
+                        break;
+                    default:
+                        missionFinished = 1;
+                        break;
+                }
                 break;
             case 10: // MISSION 10: BLUE GATE
                 mission = nextMission;
                 break;
             default:
+                missionFinished = 1;
                 break;
         }
 
