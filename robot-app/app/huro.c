@@ -103,7 +103,7 @@ int huro(void) {
                         step = (step == 7) ? 6 : 5;
                         break;
                     case 6:
-                        mission = 9;
+                        mission = 10;
                         step = 0;
                         nextMission = 5;
                         break;
@@ -175,7 +175,7 @@ int huro(void) {
                 }
                 break;
             case 6: // MISSION 6: KICK BALL
-                mission = 9;
+                mission = 10;
                 step = 0;
                 nextMission = 7;
                 break;
@@ -251,13 +251,31 @@ int huro(void) {
                         break;
                 }
                 break;
-            case 8: // MISSION 8: LAST BARRICADE
-                missionFinished = 1;
+            case 8: // MISSION 8: AVOID BOMB
+                mission += 1;
+                step = 0;
                 break;
-            case 9: // MISSION 9: BLUE GATE
+            case 9: // MISSION 9: LAST BARRICADE
+                switch (step) {
+                    case 0:
+                        step += mission_9_1_wait_yellow_barricade(fpga_videodata);
+                        break;
+                    case 1:
+                        step += mission_9_2_end_yellow_barricade(fpga_videodata);
+                        break;
+                    case 2:
+                        mission_9_3_escape_yellow_barricade(30);
+                        break;
+                    default:
+                        missionFinished = 1;
+                        break;
+                }
+                break;
+            case 10: // MISSION 10: BLUE GATE
                 mission = nextMission;
                 break;
             default:
+                missionFinished = 1;
                 break;
         }
 
