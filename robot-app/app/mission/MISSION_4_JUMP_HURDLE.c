@@ -5,7 +5,7 @@
 #include "MISSION_4_JUMP_HURDLE.h"
 
 void mission_4_1_watch_front(int repeat) {
-    Action_WALK_FRONT_SHORT(repeat);
+    Action_WALK_FRONT_LONG(repeat);
 }
 
 int mission_4_2_ready_hurdle(U16 *image) {
