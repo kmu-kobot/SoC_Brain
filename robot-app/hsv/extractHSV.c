@@ -36,7 +36,7 @@ void extractHSV(void)
                 {
                     for (j = left; j <= right; ++j)
                     {
-                        pos = i * 180 + j;
+                        pos = i * WIDTH + j;
                         H += (fpga_videodata[pos] & BIT_H) SHIFT_H;
                         S += (fpga_videodata[pos] & BIT_S) SHIFT_S;
                         V += (fpga_videodata[pos] & BIT_V) SHIFT_V;
@@ -49,15 +49,39 @@ void extractHSV(void)
 
                 printf("cnt : %d\tH : %d\tS : %d\tV : %d\n", cnt, H, S, V);
                 break;
+            case 'w':
+                if (top < 1) break;
+                top -= 1;
+                bot -= 1;
+                break;
             case 's':
-                printf("top : \n");
-                scanf("%d", &top);
-                printf("bot : \n");
-                scanf("%d", &bot);
-                printf("left : \n");
-                scanf("%d", &left);
-                printf("right : \n");
-                scanf("%d", &right);
+                if (bot > HEIGHT - 2) break;
+                top += 1;
+                bot += 1;
+                break;
+            case 'a':
+                if (left < 1) break;
+                left -= 1;
+                right -= 1;
+                break;
+            case 'd':
+                if (right > WIDTH - 2) break;
+                left += 1;
+                right += 1;
+                break;
+            case 'z':
+                if (bot - top < 3 || right - left < 3) break;
+                top += 1;
+                bot -= 1;
+                left += 1;
+                right -= 1;
+                break;
+            case 'x':
+                if (top < 1 || bot > HEIGHT - 2 || left < 1 || right > WIDTH - 2) break;
+                top -= 1;
+                bot += 1;
+                left -= 1;
+                right += 1;
                 break;
             case 'i':
                 Action_INIT_ROBOT();
@@ -90,18 +114,18 @@ void setFPGAVideoData(U16 *buf) {
     // draw white box
     for (j = left - 1; j <= right + 1; ++j)
     {
-        pos = (top + 1) * 180 + j;
+        pos = (top + 1) * WIDTH + j;
         buf[pos] = 0xffff;
-        pos = (bot + 1) * 180 + j;
+        pos = (bot + 1) * WIDTH + j;
         buf[pos] = 0xffff;
     }
 
     for (i = top - 1; i <= bot + 1; ++i)
     {
-        pos = i * 180 + left - 1;
+        pos = i * WIDTH + left - 1;
         buf[pos] = 0xffff;
 
-        pos = i * 180 + right + 1;
+        pos = i * WIDTH + right + 1;
         buf[pos] = 0xffff;
     }
 
@@ -113,7 +137,12 @@ void help(void)
 {
     printf("----------------------------------------------------------------\n");
     printf("e : extract HSV\n");
-    printf("s : set box\n");
+    printf("w : move box up\n");
+    printf("s : move box down\n");
+    printf("a : move box left\n");
+    printf("d : move box right\n");
+    printf("z : box size down\n");
+    printf("x : box size up\n");
     printf("i : Action_INIT_ROBOT\n");
     printf("b : Action_WATCH_BELOW_LONG\n");
     printf("l : Action_LEFT_TURN_HEAD_LONG\n");
