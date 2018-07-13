@@ -70,19 +70,24 @@ void extractHSV(void)
                 right += 1;
                 break;
             case 'z':
-                if (bot - top < 3 || right - left < 3) break;
+                if (bot - top < 3) break;
                 top += 1;
                 bot -= 1;
+                break;
+            case 'x':
+                if (top < 1 || bot > HEIGHT - 2) break;
+                top -= 1;
+                bot += 1;
+                break;
+            case 'c':
+                if (right - left < 3) break;
                 left += 1;
                 right -= 1;
                 break;
-            case 'x':
-                if (top < 1 || bot > HEIGHT - 2 || left < 1 || right > WIDTH - 2) break;
-                top -= 1;
-                bot += 1;
+            case 'v':
+                if (left < 1 || right > WIDTH - 2) break;
                 left -= 1;
                 right += 1;
-                break;
             case 'i':
                 Action_INIT_ROBOT();
                 break;
@@ -114,7 +119,7 @@ void setFPGAVideoData(U16 *buf) {
     // draw white box
     for (j = left - 1; j <= right + 1; ++j)
     {
-        pos = (top + 1) * WIDTH + j;
+        pos = (top - 1) * WIDTH + j;
         buf[pos] = 0xffff;
         pos = (bot + 1) * WIDTH + j;
         buf[pos] = 0xffff;
@@ -141,8 +146,10 @@ void help(void)
     printf("s : move box down\n");
     printf("a : move box left\n");
     printf("d : move box right\n");
-    printf("z : box size down\n");
-    printf("x : box size up\n");
+    printf("z : box height size down\n");
+    printf("x : box height size up\n");
+    printf("c : box width size down\n");
+    printf("v : box width size up\n");
     printf("i : Action_INIT_ROBOT\n");
     printf("b : Action_WATCH_BELOW_LONG\n");
     printf("l : Action_LEFT_TURN_HEAD_LONG\n");
