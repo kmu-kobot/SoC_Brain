@@ -6,6 +6,7 @@
 
 void mission_4_1_watch_front(int repeat) {
     Action_WALK_FRONT_LONG(repeat);
+    RobotSleep();
 }
 
 int mission_4_2_ready_hurdle(U16 *image) {
@@ -45,7 +46,9 @@ int mission_4_2_ready_hurdle(U16 *image) {
 }
 
 int mission_4_4_jump_hurdle(void) {
+    RobotSleep();
     Action_MISSION_4_HURDLING();
+    RobotSleep();
     return 1;
 }
 
@@ -69,6 +72,7 @@ int mission_4_5_set_straight(U16 *image) {
         }
     }
 
+    RobotSleep();
     int rResult = 0;
     if (
             (pos_bk[2] - pos_bk[1]) < -10 &&
@@ -119,6 +123,7 @@ int mission_4_5_set_center(U16 *image) {
     s /= MISSION_4_HURDLE_CRITERI;
     printf("M4-5: AVG: %f\n", s);
 
+    RobotSleep();
     int rResult = 0;
     if (s < MISSION_4_5_BK_LINE_RANGE - MISSION_4_5_BK_LINE_ERROR) {
         Action_RIGHT_MOVE_SHORT(3);
@@ -133,4 +138,5 @@ int mission_4_5_set_center(U16 *image) {
 
 void mission_4_5_watch_side(void) {
     Action_RIGHT_TURN_HEAD_LONG();
+    RobotSleep();
 }

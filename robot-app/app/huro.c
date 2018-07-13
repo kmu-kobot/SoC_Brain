@@ -13,6 +13,7 @@ int huro(void) {
 
     int missionFinished = 0;
     int mission = 0;
+    int nextMission = 0;
 
     int step = 0;
 
@@ -97,11 +98,13 @@ int huro(void) {
                         step = (step == 6) ? 5 : 4;
                         break;
                     case 5:
-                        mission += 1;
+                        mission = 9;
                         step = 0;
+                        nextMission = 5;
                         break;
                     default:
-                        mission_4_1_watch_front(2);
+                        mission_4_1_watch_front(4);
+                        setFPGAVideoData(fpga_videodata);
                         step += mission_4_2_ready_hurdle(fpga_videodata);
                         break;
                 }
@@ -122,7 +125,9 @@ int huro(void) {
                     case 2:
                         // 계단 오르기
                         Action_WALK_FRONT_SHORT(2);
+                        RobotSleep();
                         step += mission_5_3_climb_up_stairs();
+                        RobotSleep();
                         break;
                     case 3:
                         mission_5_2_watch_side();
@@ -206,17 +211,21 @@ int huro(void) {
                         step += 1;
                         break;
                     case 7:
-                        mission += 1;
+                        mission = 9;
                         step = 0;
+                        nextMission = 8;
                         break;
                     default:
                         break;
                 }
                 break;
             case 8: // MISSION 8: LAST BARRICADE
+                missionFinished = 1;
+                break;
+            case 9: // MISSION 9: BLUE GATE
+                mission = nextMission;
                 break;
             default:
-                missionFinished = 1;
                 break;
         }
 
