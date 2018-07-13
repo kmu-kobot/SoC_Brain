@@ -6,7 +6,10 @@
 
 void mission_5_1_watch_below(int repeat) {
     Action_WALK_FRONT_LONG(repeat);
+    RobotSleep();
+
     Action_WATCH_BELOW_LONG();
+    RobotSleep();
 }
 
 int mission_5_1_check_black_line(U16 *image, int repeat) {
@@ -22,15 +25,18 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
 
     int rResult = (cntBlack / (MISSION_5_1_BLACK_LINE_UPPER) * WIDTH) > MISSION_5_1_THRESHOLDS;
 
+    RobotSleep();
     if (rResult && !repeat) {
         Action_WALK_FRONT_SHORT(repeat);
     }
+    RobotSleep();
 
     return rResult;
 }
 
 void mission_5_2_watch_side(void) {
     Action_LEFT_TURN_HEAD_LONG();
+    RobotSleep();
 }
 
 int mission_5_3_climb_up_stairs(void) {
@@ -63,6 +69,7 @@ int mission_5_4_set_center_before_green_bridge(U16 *image) {
 
     int r = green_len[0] - green_len[1];
 
+    RobotSleep();
     int rResult = 0;
     if (r > MISSION_5_5_GREEN_BRIDGE_THRESHOLDS + MISSION_5_5_GREEN_BRIDGE_ERROR) {
         Action_LEFT_MOVE_SHORT(1);
@@ -77,6 +84,7 @@ int mission_5_4_set_center_before_green_bridge(U16 *image) {
 
 void mission_5_5_watch_below(void) {
     Action_WATCH_BELOW_LONG();
+    RobotSleep();
 }
 
 int mission_5_5_check_finish_black_line(U16 *image) {
@@ -96,6 +104,7 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
     int rResult = 0;
     int slope;
 
+    RobotSleep();
     if ((green_len[1] - green_len[0]) == 0) {
         Action_LEFT_TURN_BODY(2);
     } else {
@@ -107,21 +116,26 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
         else
             rResult = 1;
     }
+    RobotSleep();
 
     return rResult;
 }
 
 int mission_5_5_check_green_bridge_center(U16 *image) {
-    mission_5_4_set_center_before_green_bridge(image);
+    return mission_5_4_set_center_before_green_bridge(image);
 }
 
 int mission_5_5_short_walk_on_green_bridge(int repeat) {
+    RobotSleep();
     Action_WALK_FRONT_SHORT(repeat);
+    RobotSleep();
     return 1;
 }
 
 
 int mission_5_7_climb_down_stairs(void) {
+    RobotSleep();
     Action_CLIMB_DOWN_STAIRS();
+    RobotSleep();
     return 1;
 }

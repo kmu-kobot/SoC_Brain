@@ -6,7 +6,9 @@
 
 void mission_2_1_watch_below(int repeat) {
     Action_WALK_FRONT_LONG(repeat);
+    RobotSleep();
     Action_WATCH_BELOW_LONG();
+    RobotSleep();
 }
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat) {
@@ -32,6 +34,7 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat) {
 
 void mission_2_2_watch_side(void) {
     Action_LEFT_TURN_HEAD_LONG();
+    RobotSleep();
 }
 
 int mission_2_2_before_bridge_set_center(U16 *image) {
@@ -64,6 +67,7 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
 
     printf("length : %d\n", black_len[0]);
 
+    RobotSleep();
     int rResult = 0;
     if (black_len[0] < MISSION_2_2_BLACK_LINE_RANGE - MISSION_2_2_BLACK_LINE_ERROR) {
         Action_RIGHT_MOVE_SHORT(3);
@@ -72,12 +76,15 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
     } else {
         rResult = 1;
     }
+    RobotSleep();
 
     return rResult;
 }
 
 int mission_2_3_escape_red_bridge(void) {
+    RobotSleep();
     Action_ESCAPE_RED_BRIDGE();
+    RobotSleep();
     return 1;
 }
 
@@ -115,7 +122,7 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
     printf("Slope : %f\n", s);
 
     s *= 100;
-
+    RobotSleep();
     int rResult = 0;
     if (s < MISSION_2_4_BLACK_LINE_SLOPE + MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
         Action_RIGHT_TURN_BODY(1);
