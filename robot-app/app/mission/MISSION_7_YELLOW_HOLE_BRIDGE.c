@@ -6,9 +6,9 @@
 
 void mission_7_1_watch_below(int repeat) {
     Action_WALK_FRONT_LONG(repeat);
-    RobotSleep(1);
+    RobotSleep(5);
     Action_WATCH_BELOW_LONG();
-    RobotSleep(1);
+    RobotSleep(5);
 }
 
 int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
@@ -26,7 +26,7 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
 
     if (rReturn) {
         Action_WALK_FRONT_SHORT(repeat);
-        RobotSleep(1);
+        RobotSleep(5);
     }
 
     return rReturn;
@@ -35,7 +35,7 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
 
 void mission_7_2_watch_side(void) {
     Action_LEFT_TURN_HEAD_LONG();
-    RobotSleep(1);
+    RobotSleep(5);
 }
 
 int mission_7_2_before_bridge_set_center(U16 *image) {
@@ -79,7 +79,7 @@ int mission_7_2_before_bridge_set_center(U16 *image) {
     }
 
     if (!rResult) {
-        RobotSleep(1);
+        RobotSleep(5);
     }
     Action_WALK_FRONT_SHORT(3);
     return rResult;
@@ -87,12 +87,12 @@ int mission_7_2_before_bridge_set_center(U16 *image) {
 
 
 int mission_7_3_climb_yellow_hole_bridge() {
-    RobotSleep(1);
+    RobotSleep(5);
     Action_CLIMB_UP_STAIRS();
     Action_INIT_ROBOT();
-    RobotSleep(1);
+    RobotSleep(5);
     Action_WALK_FRONT_SHORT(3);
-    RobotSleep(1);
+    RobotSleep(5);
     return 0;
 }
 
@@ -143,7 +143,7 @@ int mission_7_4_set_straight_on_yellow_bridge(U16 *image) {
     }
 
     if (!rResult) {
-        RobotSleep(1);
+        RobotSleep(5);
     }
 
     return rResult;
@@ -191,7 +191,7 @@ int mission_7_4_set_center_on_yellow_bridge(U16 *image) {
     }
 
     if (!rResult) {
-        RobotSleep(1);
+        RobotSleep(5);
     }
 
     return rResult;
@@ -199,7 +199,7 @@ int mission_7_4_set_center_on_yellow_bridge(U16 *image) {
 
 void mission_7_5_watch_below(void) {
     Action_WATCH_BELOW_LONG();
-    RobotSleep(1);
+    RobotSleep(5);
 }
 
 int mission_7_5_walk_until_black_line(U16 *image) {
@@ -226,15 +226,15 @@ int mission_7_5_walk_until_black_line(U16 *image) {
     }
 
     Action_INIT_ROBOT();
-    RobotSleep(1);
+    RobotSleep(5);
 
     return rResult;
 }
 
 int mission_7_6_jump_hole(void) {
-    RobotSleep(1);
+    RobotSleep(5);
     Action_MISSION_7_YELLOW_HOLE_BRIDGE_DUMBLING();
-    RobotSleep(1);
+    RobotSleep(5);
     return 1;
 }
 
@@ -281,7 +281,7 @@ int mission_7_7_after_yellow_bridge_set_straight(U16 *image) {
         rResult = 1;
     }
     if (!rResult) {
-        RobotSleep(1);
+        RobotSleep(5);
     }
 
     return rResult;

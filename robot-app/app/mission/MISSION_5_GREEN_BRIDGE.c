@@ -6,10 +6,10 @@
 
 void mission_5_1_watch_below(int repeat) {
     Action_WALK_FRONT_LONG(repeat);
-    RobotSleep(1);
+    RobotSleep(5);
 
     Action_WATCH_BELOW_LONG();
-    RobotSleep(1);
+    RobotSleep(5);
 }
 
 int mission_5_1_check_black_line(U16 *image, int repeat) {
@@ -32,7 +32,7 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
 
     if (rResult && repeat) {
         Action_WALK_FRONT_SHORT(repeat);
-        RobotSleep(1);
+        RobotSleep(5);
     }
 
     return rResult;
@@ -40,16 +40,16 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
 
 void mission_5_2_watch_side(void) {
     Action_LEFT_TURN_HEAD_LONG();
-    RobotSleep(1);
+    RobotSleep(5);
 }
 
 int mission_5_3_climb_up_stairs(void) {
     Action_WALK_FRONT_SHORT(3);
-    RobotSleep(1);
+    RobotSleep(5);
     Action_CLIMB_UP_STAIRS();
-    RobotSleep(1);
+    RobotSleep(5);
     Action_WALK_FRONT_SHORT(3);
-    RobotSleep(1);
+    RobotSleep(5);
     return 1;
 }
 
@@ -69,7 +69,7 @@ int mission_5_4_set_front_of_green_bridge(U16 *image) {
 
 void mission_5_5_watch_below(void) {
     Action_WATCH_BELOW_LONG();
-    RobotSleep(1);
+    RobotSleep(5);
 }
 
 int mission_5_5_check_finish_black_line(U16 *image) {
@@ -102,7 +102,7 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
     }
 
     if (!rResult) {
-        RobotSleep(1);
+        RobotSleep(5);
     }
 
     return rResult;
@@ -145,25 +145,25 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
         } else {
             Action_RIGHT_MOVE_SHORT(4);
         }
-        RobotSleep(1);
+        RobotSleep(5);
     }
 
     return ((r > 0) ? r : (-r)) < MISSION_5_5_GREEN_BRIDGE_THRESHOLDS;
 }
 
 int mission_5_5_short_walk_on_green_bridge(int repeat) {
-    RobotSleep(1);
+    RobotSleep(5);
     Action_WALK_FRONT_SHORT(repeat);
-    RobotSleep(1);
+    RobotSleep(5);
     return 1;
 }
 
 
 int mission_5_7_climb_down_stairs(void) {
-    RobotSleep(1);
+    RobotSleep(5);
     Action_CLIMB_DOWN_STAIRS();
-    RobotSleep(1);
+    RobotSleep(5);
     Action_WALK_FRONT_SHORT(5);
-    RobotSleep(1);
+    RobotSleep(5);
     return 1;
 }

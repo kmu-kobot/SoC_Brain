@@ -6,7 +6,7 @@
 
 void mission_4_1_watch_front(int repeat) {
     Action_WALK_FRONT_LONG(repeat);
-    RobotSleep(1);
+    RobotSleep(5);
 }
 
 int mission_4_2_ready_hurdle(U16 *image) {
@@ -47,7 +47,7 @@ int mission_4_2_ready_hurdle(U16 *image) {
 
 int mission_4_4_jump_hurdle(void) {
     Action_MISSION_4_HURDLING();
-    RobotSleep(1);
+    RobotSleep(5);
     return 1;
 }
 
@@ -55,7 +55,7 @@ int mission_4_4_jump_hurdle(void) {
 void mission_4_5_watch_diagonal_line(void) {
     // TODO: 사선으로 앞에 보는 동작으로 바꿔야야함
     Action_INIT_ROBOT();
-    RobotSleep(1);
+    RobotSleep(5);
 }
 
 int mission_4_5_set_front_of_not_bk(U16 *image) {
@@ -94,7 +94,7 @@ int mission_4_5_set_front_of_not_bk(U16 *image) {
         Action_LEFT_TURN_BODY(3);
         rResult = 0;
     }
-    RobotSleep(1);
+    RobotSleep(5);
 
     return rResult;
 }
@@ -119,7 +119,7 @@ int mission_4_6_set_straight(U16 *image) {
         }
     }
 
-    RobotSleep(1);
+    RobotSleep(5);
     int rResult = 0;
     if (
             (pos_bk[2] - pos_bk[1]) < -10 &&
@@ -136,7 +136,7 @@ int mission_4_6_set_straight(U16 *image) {
     }
 
     if (!rResult) {
-        RobotSleep(1);
+        RobotSleep(5);
     }
 
     return rResult;
@@ -184,7 +184,7 @@ int mission_4_6_set_center(U16 *image) {
     }
 
     if (!rResult) {
-        RobotSleep(1);
+        RobotSleep(5);
     }
 
     return rResult;
@@ -192,5 +192,5 @@ int mission_4_6_set_center(U16 *image) {
 
 void mission_4_6_watch_side(void) {
     Action_RIGHT_TURN_HEAD_LONG();
-    RobotSleep(1);
+    RobotSleep(5);
 }

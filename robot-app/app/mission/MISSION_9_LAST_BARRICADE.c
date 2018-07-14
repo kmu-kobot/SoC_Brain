@@ -39,7 +39,7 @@ int mission_9_2_end_yellow_barricade(U16 *image) {
 void mission_9_3_escape_yellow_barricade(int repeat) {
     int i;
     for (i = 0; i < 2; ++i) {
-        RobotSleep(1);
+        RobotSleep(5);
     }
     Action_WALK_FRONT_LONG(repeat);
 }
