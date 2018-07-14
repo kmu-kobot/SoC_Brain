@@ -19,7 +19,7 @@ o load param_dest:var:data param_src:cm:1
 o load param_dest:var:status param_src:var:FAIL
 o if param_src:var:data lop:== param_src:bin_num:255 rop:then
 o begin
-o load param_dest:cm:6 param_src:hrtimer_num:700
+o load param_dest:cm:6 param_src:hrtimer_num:100
 o wait param_src:cm:6 lop:> param_src:timer_num:0 rop:then
 o load param_dest:var:status param_src:var:SUCCESS
 o end
