@@ -10,6 +10,7 @@
 
 #define SOC_APP_MISSION_1_YELLOW_BARRICADE_H
 
+// TODO: 상수 바꿔야함
 #define MISSION_1_UPPER 40
 #define MISSION_1_RANGE 40
 

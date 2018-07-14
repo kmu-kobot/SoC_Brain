@@ -15,6 +15,7 @@
 
 void DelayLoop(int delay_time) {
     while (delay_time)
+
         delay_time--;
 }
 
@@ -60,9 +61,11 @@ void RobotAction(unsigned char Ldata) {
     printf("Finished %d Motion\n", Ldata);
 }
 
-void RobotSleep(void) {
-    Send_Command(255, 0);
+void RobotSleep(int time) {
     printf("SLEEP START...\t");
-    while (!Receive_Ack(1));
+    for (; time != 0; --time) {
+        Send_Command(255, 0);
+        while (!Receive_Ack(1));
+    }
     printf("END\n");
 }

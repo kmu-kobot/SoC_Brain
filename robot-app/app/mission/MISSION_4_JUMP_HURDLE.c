@@ -6,7 +6,7 @@
 
 void mission_4_1_watch_front(int repeat) {
     Action_WALK_FRONT_LONG(repeat);
-    RobotSleep();
+    RobotSleep(1);
 }
 
 int mission_4_2_ready_hurdle(U16 *image) {
@@ -41,14 +41,13 @@ int mission_4_2_ready_hurdle(U16 *image) {
     s /= MISSION_4_HURDLE_CRITERI;
     printf("AVG: %f\n", s);
 
-    return (MISSION_4_2_HURDLE_THRESHOLDS - MISSION_4_HURDLE_ERROR > s ||
-            s > MISSION_4_2_HURDLE_THRESHOLDS + MISSION_4_HURDLE_ERROR);
+    return (MISSION_4_2_HURDLE_THRESHOLDS - MISSION_4_HURDLE_ERROR < s &&
+            s < MISSION_4_2_HURDLE_THRESHOLDS + MISSION_4_HURDLE_ERROR);
 }
 
 int mission_4_4_jump_hurdle(void) {
-    RobotSleep();
     Action_MISSION_4_HURDLING();
-    RobotSleep();
+    RobotSleep(1);
     return 1;
 }
 
@@ -56,7 +55,7 @@ int mission_4_4_jump_hurdle(void) {
 void mission_4_5_watch_diagonal_line(void) {
     // TODO: 사선으로 앞에 보는 동작으로 바꿔야야함
     Action_INIT_ROBOT();
-    RobotSleep();
+    RobotSleep(1);
 }
 
 int mission_4_5_set_front_of_not_bk(U16 *image) {
@@ -91,11 +90,11 @@ int mission_4_5_set_front_of_not_bk(U16 *image) {
     printf("AVG: %f\n", s);
 
     int rResult = 1;
-    if (s > 90) {
+    if (s > MISSION_4_5_WHITE_RANGE) {
         Action_LEFT_TURN_BODY(3);
         rResult = 0;
     }
-    RobotSleep();
+    RobotSleep(1);
 
     return rResult;
 }
@@ -120,7 +119,7 @@ int mission_4_6_set_straight(U16 *image) {
         }
     }
 
-    RobotSleep();
+    RobotSleep(1);
     int rResult = 0;
     if (
             (pos_bk[2] - pos_bk[1]) < -10 &&
@@ -134,6 +133,10 @@ int mission_4_6_set_straight(U16 *image) {
         Action_RIGHT_TURN_BODY(1);
     } else {
         rResult = 1;
+    }
+
+    if (!rResult) {
+        RobotSleep(1);
     }
 
     return rResult;
@@ -171,7 +174,6 @@ int mission_4_6_set_center(U16 *image) {
     s /= MISSION_4_HURDLE_CRITERI;
     printf("M4-5: AVG: %f\n", s);
 
-    RobotSleep();
     int rResult = 0;
     if (s < MISSION_4_5_BK_LINE_RANGE - MISSION_4_5_BK_LINE_ERROR) {
         Action_RIGHT_MOVE_SHORT(3);
@@ -181,10 +183,14 @@ int mission_4_6_set_center(U16 *image) {
         rResult = 1;
     }
 
+    if (!rResult) {
+        RobotSleep(1);
+    }
+
     return rResult;
 }
 
 void mission_4_6_watch_side(void) {
     Action_RIGHT_TURN_HEAD_LONG();
-    RobotSleep();
+    RobotSleep(1);
 }
