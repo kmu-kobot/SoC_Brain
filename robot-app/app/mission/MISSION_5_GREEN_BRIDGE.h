@@ -29,6 +29,8 @@ int mission_5_3_climb_up_stairs(void);
 
 int mission_5_4_set_center_before_green_bridge(U16 *image);
 
+int mission_5_4_set_front_of_green_bridge(U16 *image);
+
 void mission_5_5_watch_below(void);
 
 int mission_5_5_check_finish_black_line(U16 *image);

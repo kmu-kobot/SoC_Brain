@@ -156,7 +156,7 @@ int Receive_Ack(int status);
 
 void RobotAction(unsigned char Ldata);
 
-void RobotSleep(void);
+void RobotSleep(int time);
 ////////////////////////////////////////////////////////////////////////////////
 
 #endif // __ROBOT_PROTOCOL_H__

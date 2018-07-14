@@ -6,9 +6,9 @@
 
 void mission_2_1_watch_below(int repeat) {
     Action_WALK_FRONT_LONG(repeat);
-    RobotSleep();
+    RobotSleep(5);
     Action_WATCH_BELOW_LONG();
-    RobotSleep();
+    RobotSleep(5);
 }
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat) {
@@ -23,18 +23,23 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat) {
         }
     }
 
+    printf("\t\t- M2-1: WAIT FRONT OF RED BRIDGE\n");
+    printf("\t\t\t+ cntRed: %d\n", cntRed);
+    printf("\t\t\t+ RED / AREA: %f\n\n", (double) cntRed * 100 / (WIDTH * HEIGHT));
+
     int rReturn = (cntRed * 100 / (WIDTH * HEIGHT)) > MISSION_2_THRESHOLDS;
 
     if (rReturn) {
         Action_WALK_FRONT_SHORT(repeat);
     }
+    RobotSleep(5);
 
     return rReturn;
 }
 
 void mission_2_2_watch_side(void) {
     Action_LEFT_TURN_HEAD_LONG();
-    RobotSleep();
+    RobotSleep(5);
 }
 
 int mission_2_2_before_bridge_set_center(U16 *image) {
@@ -60,14 +65,13 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
     }
 
 
-    printf("M2-2: SET CENTER\n");
-    printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
+    printf("\t\t- M2-2: SET CENTER\n");
+    printf("\t\t\t+ black[0]: %d, black_len[1]: %d\n", black_len[0], black_len[1]);
 
     black_len[0] = (U16) ((black_len[0] + black_len[1]) / 2);
 
-    printf("length : %d\n", black_len[0]);
+    printf("\t\t\t+ LENGTH: %d\n\n", black_len[0]);
 
-    RobotSleep();
     int rResult = 0;
     if (black_len[0] < MISSION_2_2_BLACK_LINE_RANGE - MISSION_2_2_BLACK_LINE_ERROR) {
         Action_RIGHT_MOVE_SHORT(7);
@@ -76,16 +80,16 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
     } else {
         rResult = 1;
     }
+    RobotSleep(5);
     Action_WALK_FRONT_SHORT(2);
-    RobotSleep();
+    RobotSleep(5);
 
     return rResult;
 }
 
 int mission_2_3_escape_red_bridge(void) {
-    RobotSleep();
     Action_ESCAPE_RED_BRIDGE();
-    RobotSleep();
+    RobotSleep(5);
     return 1;
 }
 
@@ -123,7 +127,6 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
     printf("Slope : %f\n", s);
 
     s *= 100;
-    RobotSleep();
     int rResult = 0;
     if (s < MISSION_2_4_BLACK_LINE_SLOPE + MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
         Action_RIGHT_TURN_BODY(3);
@@ -131,6 +134,10 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
         Action_LEFT_TURN_BODY(3);
     } else {
         rResult = 1;
+    }
+
+    if (!rResult) {
+        RobotSleep(5);
     }
 
     return rResult;

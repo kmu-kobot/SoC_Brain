@@ -6,10 +6,10 @@
 
 void mission_5_1_watch_below(int repeat) {
     Action_WALK_FRONT_LONG(repeat);
-    RobotSleep();
+    RobotSleep(5);
 
     Action_WATCH_BELOW_LONG();
-    RobotSleep();
+    RobotSleep(5);
 }
 
 int mission_5_1_check_black_line(U16 *image, int repeat) {
@@ -30,39 +30,46 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
     printf("BLACK: %d, BLACK / (WIDTH * HEIGHT) : %f\n",
            cntBlack, (double) (cntBlack * 100 / (HEIGHT * WIDTH)));
 
-    RobotSleep();
     if (rResult && repeat) {
         Action_WALK_FRONT_SHORT(repeat);
+        RobotSleep(5);
     }
-    RobotSleep();
 
     return rResult;
 }
 
 void mission_5_2_watch_side(void) {
     Action_LEFT_TURN_HEAD_LONG();
-    RobotSleep();
+    RobotSleep(5);
 }
 
 int mission_5_3_climb_up_stairs(void) {
     Action_WALK_FRONT_SHORT(3);
-    RobotSleep();
+    RobotSleep(5);
     Action_CLIMB_UP_STAIRS();
-    RobotSleep();
-    Action_WALK_FRONT_SHORT(4);
-    RobotSleep();
+    RobotSleep(5);
+    Action_WALK_FRONT_SHORT(3);
+    RobotSleep(5);
     return 1;
 }
 
 int mission_5_4_set_center_before_green_bridge(U16 *image) {
     // TODO: 센터 맞추는거 개발해야함
+
     int rResult = 1;
-    return 1;
+    return rResult;
+}
+
+int mission_5_4_set_front_of_green_bridge(U16 *image) {
+    // TODO: 바로 앞에 초록색이 있는지 확인하는거 개발해야함
+
+    int rResult = 1;
+    return rResult;
 }
 
 void mission_5_5_watch_below(void) {
     Action_WATCH_BELOW_LONG();
-    RobotSleep();
+    RobotSleep(5);
 }
 
 int mission_5_5_check_finish_black_line(U16 *image) {
@@ -70,7 +77,7 @@ int mission_5_5_check_finish_black_line(U16 *image) {
 }
 
 int mission_5_5_check_green_bridge_straight(U16 *image) {
-    U32 col, i;
+    U32 col;
 
     U16 green_len[2] = {0,}, row[2] = {100, 30};
 
@@ -82,7 +89,6 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
     int rResult = 0;
     double slope;
 
-    RobotSleep();
     if ((green_len[1] - green_len[0]) == 0) {
         Action_LEFT_TURN_BODY(2);
     } else {
@@ -94,64 +100,70 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
         else
             rResult = 1;
     }
-    RobotSleep();
+
+    if (!rResult) {
+        RobotSleep(5);
+    }
 
     return rResult;
 }
 
 int mission_5_5_check_green_bridge_center(U16 *image) {
-    int col, i, cnt, row, flagDirection, flagSign, halfWidth = WIDTH / 2, green_len[2] = {0,};
-    for (i = 0; i < 2; ++i) {
-        flagDirection = (i) ? 0 : halfWidth - 1;
-        flagSign = (i) ? 1 : -1;
-        for (col = 0; col < halfWidth; ++col) {
+    U16 dir, cnt;
+    int col, row, flagDirection, flagSign, green_len[2] = {0,};
+
+    for (dir = 0; dir < 2; ++dir) {
+        flagDirection = (dir) ? WIDTH - 1 : 0;
+        flagSign = (dir) ? -1 : 1;
+        for (col = 0; col < WIDTH / 2; ++col) {
             cnt = 0;
-            for (row = MISSION_5_5_GREEN_BRIDGE_THRESHOLDS;
-                 row < MISSION_5_5_GREEN_BRIDGE_THRESHOLDS + MISSION_5_5_GREEN_BRIDGE_RANGE;
+            for (row = MISSION_5_5_GREEN_LINE_ROW_POINT;
+                 row < MISSION_5_5_GREEN_LINE_ROW_POINT + MISSION_5_5_GREEN_BRIDGE_RANGE;
                  ++row) {
                 cnt += GetValueRGBYOBK(
-                        GetPtr(image, row, flagDirection + col * flagSign),
+                        GetPtr(image, row, flagDirection + col * flagSign, WIDTH),
                         GREEN
                 );
             }
 
             if (cnt >= 2) {
-                green_len[i] += (U16) (halfWidth - col);
+                green_len[dir] = WIDTH / 2 - col;
                 break;
             }
         }
     }
 
-    double r = (green_len[0] - green_len[1]) / 2;
+    // 0: LEFT, 1: RIGHT
+    int r = green_len[0] - green_len[1];
 
-    printf("M5-5: SET CENTER\n");
-    printf("LEFT: %f, RIGHT: %f, r: %f\n",
-           (double) green_len[0] / 2, (double) green_len[1] / 2, r);
+    printf("\nM5-5: SET CENTER\n");
+    printf("LEFT: %d, RIGHT: %d, r: %d\n\n", green_len[0], green_len[1], r);
 
-    RobotSleep();
     if (((r > 0) ? r : (-r)) > MISSION_5_5_GREEN_BRIDGE_THRESHOLDS) {
         if (r > 0) {
             Action_LEFT_MOVE_SHORT(4);
         } else {
             Action_RIGHT_MOVE_SHORT(4);
         }
+        RobotSleep(5);
     }
-    RobotSleep();
 
     return ((r > 0) ? r : (-r)) < MISSION_5_5_GREEN_BRIDGE_THRESHOLDS;
 }
 
 int mission_5_5_short_walk_on_green_bridge(int repeat) {
-    RobotSleep();
+    RobotSleep(5);
     Action_WALK_FRONT_SHORT(repeat);
-    RobotSleep();
+    RobotSleep(5);
     return 1;
 }
 
 
 int mission_5_7_climb_down_stairs(void) {
-    RobotSleep();
+    RobotSleep(5);
     Action_CLIMB_DOWN_STAIRS();
-    RobotSleep();
+    RobotSleep(5);
+    Action_WALK_FRONT_SHORT(5);
+    RobotSleep(5);
     return 1;
 }

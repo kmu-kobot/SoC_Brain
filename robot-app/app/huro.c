@@ -21,7 +21,7 @@ int huro(void) {
 
         setFPGAVideoData(fpga_videodata);
 
-        printf("[START]\tMISSION[%d]: STEP [%d]\n", mission, step);
+        printf("\n[START]\tMISSION[%d]: STEP [%d]\n", mission, step);
 
         switch (mission) {
             case 0: // MISSION 0: READY PLAY
@@ -36,7 +36,7 @@ int huro(void) {
                         step += mission_1_2_end_yellow_barricade(fpga_videodata);
                         break;
                     case 2:
-                        mission_1_3_escape_yellow_barricade(8);
+                        mission_1_3_escape_yellow_barricade(10);
                         step = 0;
                         mission += 1;
                         break;
@@ -47,9 +47,9 @@ int huro(void) {
             case 2: // MISSION 2: RED BRIDGE
                 switch (step) {
                     case 0:
-                        mission_2_1_watch_below(8);
+                        mission_2_1_watch_below(10);
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_2_1_wait_front_of_red_bridge(fpga_videodata, 5);
+                        step += mission_2_1_wait_front_of_red_bridge(fpga_videodata, 7);
                         break;
                     case 1:
                         mission_2_2_watch_side();
@@ -68,6 +68,7 @@ int huro(void) {
                             mission_2_2_watch_side();
                             setFPGAVideoData(fpga_videodata);
                         }
+
                         step += mission_2_5_after_bridge_set_center(fpga_videodata);// 길이 맞추기
 
                         step = (step == 5) ? 4 : 3;
@@ -103,9 +104,7 @@ int huro(void) {
                             setFPGAVideoData(fpga_videodata);
                         }
 
-                        step += mission_4_6_set_straight(fpga_videodata);
-
-                        step = (step == 7) ? 6 : 5;
+                        step = (step + mission_4_6_set_straight(fpga_videodata) == 7) ? 6 : 5;
                         break;
                     case 6:
                         mission = 10;
@@ -122,9 +121,9 @@ int huro(void) {
             case 5: // MISSION 5: GREEN BRIDGE
                 switch (step) {
                     case 0:
-                        mission_5_1_watch_below(5);
+                        mission_5_1_watch_below(7);
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_5_1_check_black_line(fpga_videodata, 3);
+                        step += mission_5_1_check_black_line(fpga_videodata, 4);
                         break;
                     case 1:
                         // 맨 처음 다리 중심 맞추기
@@ -140,6 +139,14 @@ int huro(void) {
                         mission_5_2_watch_side();
                         setFPGAVideoData(fpga_videodata);
                         step += mission_5_4_set_center_before_green_bridge(fpga_videodata);
+
+                        if (step == 4) {
+                            mission_5_5_watch_below();
+                            setFPGAVideoData(fpga_videodata);
+                            step += mission_5_4_set_front_of_green_bridge(fpga_videodata);
+                        }
+
+                        step = (step == 5) ? 4 : 3;
                         break;
                     case 4:
                         mission_5_5_watch_below();
@@ -152,12 +159,9 @@ int huro(void) {
 
                         step += mission_5_5_check_green_bridge_center(fpga_videodata);
 
-                        if (step == 4) {
-                            mission_5_5_watch_below();
-                            setFPGAVideoData(fpga_videodata);
+                        if (step == 5) {
+                            step += mission_5_5_check_green_bridge_straight(fpga_videodata);
                         }
-
-                        step += mission_5_5_check_green_bridge_straight(fpga_videodata);
 
                         if (step == 6) {
                             mission_5_5_short_walk_on_green_bridge(4);
@@ -172,6 +176,11 @@ int huro(void) {
                         step += mission_5_7_climb_down_stairs();
                         break;
                     case 7:
+                        mission_5_2_watch_side();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_2_2_before_bridge_set_center(fpga_videodata);
+                        break;
+                    case 8:
                         mission += 1;
                         step = 0;
                         break;
@@ -213,19 +222,25 @@ int huro(void) {
                         step += mission_7_3_climb_yellow_hole_bridge();
                         break;
                     case 3:
+                        // TODO: 노란색 다리 위에서 중심 맞추는거 검은색 보고 맞추는거로 이거는 고려...
+
+                        // TODO: 1. 노란색 다리를 보고 먼저 중심을 맞춘다.
+                        // TODO: 2. 앞으로 조금씩 걸어가면서 검은색이 윗부분에 나올때 까지 반복한다.
+                        // TODO: 3. 검은색이 검출되었으면 중심을 다시 맞추고 발앞에 검은선이 있을때 까지 반복한다.
+
                         mission_7_2_watch_side();
                         setFPGAVideoData(fpga_videodata);
                         step += mission_7_4_set_center_on_yellow_bridge(fpga_videodata);
 
-                        // TODO: 이전 결과에 따라서 fpga set 여부 결정
-                        mission_7_2_watch_side();
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_7_4_set_straight_on_yellow_bridge(fpga_videodata);
+                        if (step == 4) {
+                            mission_7_2_watch_side();
+                            setFPGAVideoData(fpga_videodata);
+                            step += mission_7_4_set_straight_on_yellow_bridge(fpga_videodata);
+                        }
 
                         if (step == 5) {
                             mission_7_5_watch_below();
                             setFPGAVideoData(fpga_videodata);
-                            // TODO: 앞으로 걸어가면서 바로앞에 검은선인지 확인
                             step += mission_7_5_walk_until_black_line(fpga_videodata);
                             if (step == 5) {
                                 Action_WALK_FRONT_SHORT(2);
@@ -234,13 +249,17 @@ int huro(void) {
                         step = (step == 6) ? 4 : 3;
                         break;
                     case 4:
-                        mission_7_2_watch_side();
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_7_4_set_center_on_yellow_bridge(fpga_videodata);
-
+                        // TODO: 노란색 다리 위에서 중심 맞추는거 검은색 보고 맞추는거로
                         mission_7_2_watch_side();
                         setFPGAVideoData(fpga_videodata);
                         step += mission_7_4_set_straight_on_yellow_bridge(fpga_videodata);
+
+                        if (step == 4) {
+                            mission_7_2_watch_side();
+                            setFPGAVideoData(fpga_videodata);
+                        }
+
+                        step += mission_7_4_set_center_on_yellow_bridge(fpga_videodata);
 
                         if (step == 6) {
                             step = 4;
@@ -251,13 +270,14 @@ int huro(void) {
 
                         break;
                     case 5:
-                        // TODO: 각도랑 중심 체크
                         mission_7_2_watch_side();
                         setFPGAVideoData(fpga_videodata);
                         step += mission_7_7_after_yellow_bridge_set_center(fpga_videodata);// 길이 맞추기
 
-                        mission_2_2_watch_side();
-                        setFPGAVideoData(fpga_videodata);
+                        if (step == 5) {
+                            mission_7_2_watch_side();
+                            setFPGAVideoData(fpga_videodata);
+                        }
                         step += mission_7_7_after_yellow_bridge_set_straight(fpga_videodata); // 직선 맞추기
 
                         step = (step == 7) ? 6 : 5;
@@ -298,6 +318,7 @@ int huro(void) {
                 break;
         }
 
+        drawFPGAVideoData(fpga_videodata);
         printf("[END]\tMISSION[%d]: STEP [%d]\n", mission, step);
 
     }
@@ -357,8 +378,11 @@ void destroy_huro(U16 *buf) {
 }
 
 void setFPGAVideoData(U16 *buf) {
-    // clear_screen();
     read_fpga_video_data(buf);
+}
+
+void drawFPGAVideoData(U16 *buf) {
+    clear_screen();
     draw_fpga_video_data_full(buf);
     flip();
 }
