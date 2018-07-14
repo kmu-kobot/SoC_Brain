@@ -100,7 +100,8 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
 }
 
 int mission_5_5_check_green_bridge_center(U16 *image) {
-    int col, dir, cnt, row, flagDirection, flagSign, halfWidth = WIDTH / 2, green_len[2] = {0,};
+    U16 dir, cnt;
+    int col, row, flagDirection, flagSign, halfWidth = WIDTH / 2, green_len[2] = {0,};
 
     for (dir = 0; dir < 2; ++dir) {
         flagDirection = (dir) ? WIDTH - 1 : 0;
@@ -116,7 +117,7 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
                 );
             }
 
-            if (cnt >= 4) {
+            if (cnt >= 2) {
                 green_len[dir] = halfWidth - col;
                 break;
             }
