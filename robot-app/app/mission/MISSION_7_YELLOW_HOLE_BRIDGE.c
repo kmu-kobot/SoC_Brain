@@ -6,8 +6,9 @@
 
 void mission_7_1_watch_below(int repeat) {
     Action_WALK_FRONT_LONG(repeat);
-
+    RobotSleep();
     Action_WATCH_BELOW_LONG();
+    RobotSleep();
 }
 
 int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
@@ -21,8 +22,6 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
         }
     }
 
-    Action_INIT_ROBOT();
-
     int rReturn = (cntYellow * 100 / (WIDTH * HEIGHT)) > MISSION_7_THRESHOLDS;
 
     if (rReturn) {
@@ -35,6 +34,7 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
 
 void mission_7_2_watch_side(void) {
     Action_LEFT_TURN_HEAD_LONG();
+    RobotSleep();
 }
 
 int mission_7_2_before_bridge_set_center(U16 *image) {
@@ -64,30 +64,33 @@ int mission_7_2_before_bridge_set_center(U16 *image) {
     printf("M7-2: SET CENTER\n");
     printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
 
-    Action_INIT_ROBOT();
-
     black_len[0] = (U16) ((black_len[0] + black_len[1]) / 2);
 
     printf("length : %d\n", black_len[0]);
 
+    RobotSleep();
     int rResult = 0;
     if (black_len[0] < MISSION_7_2_BLACK_LINE_RANGE - MISSION_7_2_BLACK_LINE_ERROR) {
-        Action_RIGHT_MOVE_SHORT(3);
+        Action_RIGHT_MOVE_SHORT(10);
     } else if (black_len[0] > MISSION_7_2_BLACK_LINE_RANGE + MISSION_7_2_BLACK_LINE_ERROR) {
-        Action_LEFT_MOVE_SHORT(3);
+        Action_LEFT_MOVE_SHORT(10);
     } else {
         rResult = 1;
     }
+    Action_WALK_FRONT_SHORT(3);
+    RobotSleep();
 
-    Action_INIT_ROBOT();
     return rResult;
 }
 
 
 int mission_7_3_climb_yellow_hole_bridge() {
-    // TODO: 계단 오르는 동작
+    RobotSleep();
     Action_CLIMB_UP_STAIRS();
     Action_INIT_ROBOT();
+    RobotSleep();
+    Action_WALK_FRONT_SHORT(4);
+    RobotSleep();
     return 0;
 }
 
@@ -118,17 +121,17 @@ int mission_7_4_set_straight_on_yellow_bridge(U16 *image) {
     printf("M7-4: SLOPE\n");
     printf("yellow[0]: %d, yellow_len[1]: %d.\n", yellow_len[0], yellow_len[1]);
 
-    Action_INIT_ROBOT();
 
     double s = (
             (yellow_len[0] - yellow_len[1]) /
-            MISSION_7_4_YELLOW_LINE_COL_POINT_1 - MISSION_7_4_YELLOW_LINE_COL_POINT_2
+            (MISSION_7_4_YELLOW_LINE_COL_POINT_1 - MISSION_7_4_YELLOW_LINE_COL_POINT_2)
     );
 
     printf("Slope : %f\n", s);
 
     s *= 100;
 
+    RobotSleep();
     int rResult = 0;
     if (s < MISSION_7_4_YELLOW_LINE_SLOPE + MISSION_7_4_YELLOW_LINE_SLOPE_ERROR) {
         Action_RIGHT_TURN_BODY(1);
@@ -137,8 +140,6 @@ int mission_7_4_set_straight_on_yellow_bridge(U16 *image) {
     } else {
         rResult = 1;
     }
-
-    Action_INIT_ROBOT();
 
     return rResult;
 }
@@ -170,12 +171,12 @@ int mission_7_4_set_center_on_yellow_bridge(U16 *image) {
     printf("M7-4: SET CENTER\n");
     printf("yellow_len[0]: %d, yellow_len[1]: %d.\n", yellow_len[0], yellow_len[1]);
 
-    Action_INIT_ROBOT();
 
     yellow_len[0] = (U16) ((yellow_len[0] + yellow_len[1]) / 2);
 
     printf("length : %d\n", yellow_len[0]);
 
+    RobotSleep();
     int rResult = 0;
     if (yellow_len[0] < MISSION_7_4_YELLOW_LINE_RANGE - MISSION_7_4_YELLOW_LINE_ERROR) {
         Action_RIGHT_MOVE_SHORT(3);
@@ -185,12 +186,12 @@ int mission_7_4_set_center_on_yellow_bridge(U16 *image) {
         rResult = 1;
     }
 
-    Action_INIT_ROBOT();
     return rResult;
 }
 
 void mission_7_5_watch_below(void) {
     Action_WATCH_BELOW_LONG();
+    RobotSleep();
 }
 
 int mission_7_5_walk_until_black_line(U16 *image) {
@@ -209,8 +210,6 @@ int mission_7_5_walk_until_black_line(U16 *image) {
 
     printf("7-5: walk_until_black_line\n");
     printf("Ratio is %f.\n", ratio);
-
-    Action_INIT_ROBOT();
 
     int rResult = 0;
     if (ratio < MISSION_7_5_BLACK_RATIO - MISSION_7_5_BLACK_RATIO_ERROR &&
@@ -255,8 +254,6 @@ int mission_7_7_after_yellow_bridge_set_straight(U16 *image) {
     printf("M7-4: SLOPE\n");
     printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
 
-    Action_INIT_ROBOT();
-
     double s = (
             (black_len[0] - black_len[1]) /
             MISSION_7_2_BLACK_LINE_COL_POINT_1 - MISSION_7_2_BLACK_LINE_COL_POINT_2
@@ -265,17 +262,15 @@ int mission_7_7_after_yellow_bridge_set_straight(U16 *image) {
     printf("Slope : %f\n", s);
 
     s *= 100;
-
+    RobotSleep();
     int rResult = 0;
     if (s < MISSION_7_7_BLACK_LINE_SLOPE + MISSION_7_7_BLACK_LINE_SLOPE_ERROR) {
-        Action_RIGHT_TURN_BODY(1);
+        Action_RIGHT_TURN_BODY(3);
     } else if (s > MISSION_7_7_BLACK_LINE_SLOPE - MISSION_7_7_BLACK_LINE_SLOPE_ERROR) {
-        Action_LEFT_TURN_BODY(1);
+        Action_LEFT_TURN_BODY(3);
     } else {
         rResult = 1;
     }
-
-    Action_INIT_ROBOT();
 
     return rResult;
 }
