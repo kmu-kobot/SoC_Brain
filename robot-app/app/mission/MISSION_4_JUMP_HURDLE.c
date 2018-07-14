@@ -54,7 +54,8 @@ int mission_4_4_jump_hurdle(void) {
 
 
 void mission_4_5_watch_diagonal_line(void) {
-    Action_WATCH_BELOW_MIDDLE();
+    // TODO: 사선으로 앞에 보는 동작으로 바꿔야야함
+    Action_INIT_ROBOT();
     RobotSleep();
 }
 
