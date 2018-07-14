@@ -57,7 +57,7 @@ int mission_5_3_climb_up_stairs(void) {
 int mission_5_4_set_center_before_green_bridge(U16 *image) {
     // TODO: 센터 맞추는거 개발해야함
     int rResult = 1;
-    return 1;
+    return rResult;
 }
 
 void mission_5_5_watch_below(void) {
@@ -70,7 +70,7 @@ int mission_5_5_check_finish_black_line(U16 *image) {
 }
 
 int mission_5_5_check_green_bridge_straight(U16 *image) {
-    U32 col, i;
+    U32 col;
 
     U16 green_len[2] = {0,}, row[2] = {100, 30};
 
@@ -100,33 +100,34 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
 }
 
 int mission_5_5_check_green_bridge_center(U16 *image) {
-    int col, i, cnt, row, flagDirection, flagSign, halfWidth = WIDTH / 2, green_len[2] = {0,};
-    for (i = 0; i < 2; ++i) {
-        flagDirection = (i) ? 0 : halfWidth - 1;
-        flagSign = (i) ? 1 : -1;
+    int col, dir, cnt, row, flagDirection, flagSign, halfWidth = WIDTH / 2, green_len[2] = {0,};
+
+    for (dir = 0; dir < 2; ++dir) {
+        flagDirection = (dir) ? WIDTH - 1 : 0;
+        flagSign = (dir) ? -1 : 1;
         for (col = 0; col < halfWidth; ++col) {
             cnt = 0;
-            for (row = MISSION_5_5_GREEN_BRIDGE_THRESHOLDS;
-                 row < MISSION_5_5_GREEN_BRIDGE_THRESHOLDS + MISSION_5_5_GREEN_BRIDGE_RANGE;
+            for (row = MISSION_5_5_GREEN_LINE_ROW_POINT;
+                 row < MISSION_5_5_GREEN_LINE_ROW_POINT + MISSION_5_5_GREEN_BRIDGE_RANGE;
                  ++row) {
                 cnt += GetValueRGBYOBK(
-                        GetPtr(image, row, flagDirection + col * flagSign),
+                        GetPtr(image, row, flagDirection + col * flagSign, WIDTH),
                         GREEN
                 );
             }
 
-            if (cnt >= 2) {
-                green_len[i] += (U16) (halfWidth - col);
+            if (cnt >= 4) {
+                green_len[dir] = halfWidth - col;
                 break;
             }
         }
     }
 
-    double r = (green_len[0] - green_len[1]) / 2;
+    // 0: LEFT, 1: RIGHT
+    int r = green_len[0] - green_len[1];
 
-    printf("M5-5: SET CENTER\n");
-    printf("LEFT: %f, RIGHT: %f, r: %f\n",
-           (double) green_len[0] / 2, (double) green_len[1] / 2, r);
+    printf("\nM5-5: SET CENTER\n");
+    printf("LEFT: %d, RIGHT: %d, r: %d\n", green_len[0], green_len[1], r);
 
     RobotSleep();
     if (((r > 0) ? r : (-r)) > MISSION_5_5_GREEN_BRIDGE_THRESHOLDS) {
