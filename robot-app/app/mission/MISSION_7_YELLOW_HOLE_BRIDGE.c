@@ -77,8 +77,8 @@ int mission_7_2_before_bridge_set_center(U16 *image) {
     } else {
         rResult = 1;
     }
-    Action_WALK_FRONT_SHORT(3);
     RobotSleep();
+    Action_WALK_FRONT_SHORT(3);
 
     return rResult;
 }
@@ -89,7 +89,7 @@ int mission_7_3_climb_yellow_hole_bridge() {
     Action_CLIMB_UP_STAIRS();
     Action_INIT_ROBOT();
     RobotSleep();
-    Action_WALK_FRONT_SHORT(4);
+    Action_WALK_FRONT_SHORT(3);
     RobotSleep();
     return 0;
 }
