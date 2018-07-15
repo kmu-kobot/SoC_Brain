@@ -1,34 +1,12 @@
 #include "extractHSV.h"
 
-void sort(U8* arr, U8 left, U8 right) {
-      U16 i = left, j = right;
-      U16 pivot = arr[(left + right) / 2];
-      U8 temp;
-      do
-      {
-        while (arr[i] < pivot)
-            i++;
-        while (arr[j] > pivot)
-            j--;
-        if (i<= j)
-        {
-            temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-            i++;
-            j--;
-        }
-      } while (i<= j);
-
-    /* recursion */
-    if (left < j)
-        sort(arr, left, j);
-
-    if (i < right)
-        sort(arr, i, right);
+int cmp(const void* a, const void* b)
+{
+  return *(U8*)a - *(U8*)b;
 }
 
 U8 top, bot, left, right;
+U8 centerX, centerY;
 
 void extractHSV(void)
 {
@@ -53,6 +31,10 @@ void extractHSV(void)
     init_extract();
 
     do {
+        centerX = (right - left) >> 1;
+        centerY = (bot - top) >> 1;
+        printf("center of box : (%d, %d)\n", centerX, centerY);
+
         motion = getchar();
         //동작 수행
 
@@ -83,10 +65,10 @@ void extractHSV(void)
                     }
                 }
 
-                sort(H_buff, 0, cnt - 1);
-                sort(H_R_buff, 0, cnt -1);
-                sort(S_buff, 0, cnt - 1);
-                sort(V_buff, 0, cnt - 1);
+                qsort(H_buff, cnt, sizeof(U8), cmp);
+                qsort(H_R_buff, cnt, sizeof(U8), cmp);
+                qsort(S_buff, cnt, sizeof(U8), cmp);
+                qsort(V_buff, cnt, sizeof(U8), cmp);
 
                 start = cnt / 10;
                 end = cnt - start;
