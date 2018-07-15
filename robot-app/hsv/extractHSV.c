@@ -49,7 +49,7 @@ void extractHSV(void)
         motion = getchar();
         //동작 수행
 
-        setFPGAVideoData(fpga_videodata);
+        read(fpga_videodata);
 
         switch(motion)
         {
@@ -214,11 +214,12 @@ void extractHSV(void)
                 distance = sqrt(dx * dx + dy * dy);
 
                 printf("point1 : (%d, %d)\tpoint2 : (%d, %d)\n", p_x[0], p_y[0], p_x[1], p_y[1]);
-                printf("slope : %f\tdistance : %f", slope, distance);
+                printf("slope : %f\tdistance : %f\n", -slope, distance);
                 break;
             default:
             ;
         }
+        draw(fpga_videodata);
     } while(motion != 'q');
 
     free(H_buff);
@@ -228,10 +229,17 @@ void extractHSV(void)
     destroy_extract(fpga_videodata);
 }
 
-void setFPGAVideoData(U16 *buf) {
+void read(U16 *buf)
+{
+    read_fpga_video_data(buf);
+    draw_fpga_video_data_full(buf);
+    flip();
+}
+
+void draw(U16 *buf)
+{
     U8 i, j;
     U16 pos;
-    read_fpga_video_data(buf);
 
     // draw white box
     for (j = left - 1; j <= right + 1; ++j)
@@ -288,7 +296,8 @@ void help(void)
     printf("----------------------------------------------------------------\n");
 }
 
-int init_extract(void) {
+int init_extract(void)
+{
 
     // init uart
     int ret;
@@ -326,7 +335,8 @@ int init_extract(void) {
     return 0;
 }
 
-void destroy_extract(U16 *buf) {
+void destroy_extract(U16 *buf)
+{
     // free fpga video data
     free(buf);
 
