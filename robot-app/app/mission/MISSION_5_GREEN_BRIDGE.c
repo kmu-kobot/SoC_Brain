@@ -212,8 +212,8 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
                 }
             }
 
-            if (cnt >= 2) {
-                green_len[dir] = WIDTH / 2 - col;
+            if (cnt < 3) {
+                green_len[dir] = col;
                 break;
             }
         }
@@ -227,8 +227,10 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
 
     if (((r > 0) ? r : (-r)) > MISSION_5_5_GREEN_BRIDGE_THRESHOLDS) {
         if (r > 0) {
-            Action_LEFT_MOVE_SHORT(4);
+            Action_LEFT_MOVE_LONG(1);
+            Action_RIGHT_MOVE_SHORT(4);
         } else {
+            Action_RIGHT_MOVE_LONG(1);
             Action_RIGHT_MOVE_SHORT(4);
         }
         RobotSleep(5);

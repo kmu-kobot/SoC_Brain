@@ -81,7 +81,7 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
         rResult = 1;
     }
     RobotSleep(5);
-    Action_WALK_FRONT_SHORT(2);
+    Action_WALK_FRONT_SHORT(1);
     RobotSleep(5);
 
     return rResult;
@@ -120,7 +120,7 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
     printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
 
     double s = (
-            (black_len[0] - black_len[1]) /
+            (black_len[0] - black_len[1]) * 100 /
             MISSION_2_4_BLACK_LINE_COL_POINT_1 - MISSION_2_4_BLACK_LINE_COL_POINT_2
     );
 
@@ -128,10 +128,10 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
 
     s *= 100;
     int rResult = 0;
-    if (s < MISSION_2_4_BLACK_LINE_SLOPE + MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
-        Action_RIGHT_TURN_BODY(3);
-    } else if (s > MISSION_2_4_BLACK_LINE_SLOPE - MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
-        Action_LEFT_TURN_BODY(3);
+    if (s < MISSION_2_4_BLACK_LINE_SLOPE - MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
+        Action_RIGHT_TURN_BODY(((((s > 0) ? s : -s) > 13) ? 3 : 1));
+    } else if (s > MISSION_2_4_BLACK_LINE_SLOPE + MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
+        Action_LEFT_TURN_BODY(((((s > 0) ? s : -s) > 13) ? 3 : 1));
     } else {
         rResult = 1;
     }
