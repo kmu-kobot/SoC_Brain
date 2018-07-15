@@ -27,8 +27,7 @@
 #define COLOR_CYAN 0x07ff
 
 void extractHSV(void);
-void read(U16* buf);
-void draw(U16* buf);
+void setFPGAVideoData(U16* buf);
 void help(void);
 int init_extract(void);
 void destroy_extract(U16* buf);

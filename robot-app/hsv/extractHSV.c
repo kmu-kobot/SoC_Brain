@@ -49,7 +49,7 @@ void extractHSV(void)
         motion = getchar();
         //동작 수행
 
-        read(fpga_videodata);
+        setFPGAVideoData(fpga_videodata);
 
         switch(motion)
         {
@@ -219,7 +219,6 @@ void extractHSV(void)
             default:
             ;
         }
-        draw(fpga_videodata);
     } while(motion != 'q');
 
     free(H_buff);
@@ -229,17 +228,11 @@ void extractHSV(void)
     destroy_extract(fpga_videodata);
 }
 
-void read(U16 *buf)
-{
-    read_fpga_video_data(buf);
-    draw_fpga_video_data_full(buf);
-    flip();
-}
-
-void draw(U16 *buf)
+void setFPGAVideoData(U16 *buf)
 {
     U8 i, j;
     U16 pos;
+    read_fpga_video_data(buf);
 
     // draw white box
     for (j = left - 1; j <= right + 1; ++j)
