@@ -344,7 +344,13 @@ wire [ 7:0] V = C_MAX[ 7 :0];
 
 /////////////////////////////////////////////////////////////////////////////
 //	Binarization
-
+//
+// mission 0 barricade Y_H 42, 30 S 140, 220 V 170, 86
+// mission 1 redbridge R_H 232	 S 80	V 120
+// mission 5 grebridge G_H 85		 S 100 V 145
+//				 horizon   BK			 S 37  V 51
+// mission 7 yelbridge Y_H 34, 43 S 107 V 151
+//											 S 70  V 170
 reg [ 7:0] H_THRES, S_THRES_H, S_THRES_L, V_THRES, 
 				R_H, G_H, B_H, Y_H, O_H, 
 				R_MIN, R_MAX, G_MIN, G_MAX, B_MIN, B_MAX, Y_MIN, Y_MAX, O_MIN, O_MAX;
@@ -360,8 +366,8 @@ begin
 	R_H	= 8'd230;
 	G_H	= 8'd85;
 	B_H	= 8'd148;
-	Y_H	= 8'd55;
-	O_H	= 8'd20;
+	Y_H	= 8'd40;
+	O_H	= 8'd13;
 	
 	R_MIN = R_H - H_THRES;
 	R_MAX = R_H + H_THRES;
@@ -414,7 +420,7 @@ always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	G_B <= 1'b0;
 	else
 	begin
-		G_B <= C_H & ((G_MIN < H) & (H < G_MAX));
+		G_B <= C_L & ((G_MIN < H) & (H < G_MAX));
 	end
 	
 always @ (negedge resetx or posedge clk_llc4)
