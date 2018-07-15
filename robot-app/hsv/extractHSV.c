@@ -61,7 +61,7 @@ void extractHSV(void)
 
                 start = cnt / 10;
                 end = cnt - start;
-                cnt_vaild = end - start;
+                cnt_valid = end - start;
 
                 for (i = start; i < end; ++i)
                 {
@@ -74,7 +74,7 @@ void extractHSV(void)
                 H /= cnt_valid;
                 H_R /= cnt_valid;
                 S /= cnt_valid;
-                V /= cnt_vaild;
+                V /= cnt_valid;
 
                 printf("cnt : %d\tcnt_valid : %d\tH : %d\tH_R : %d\tS : %d\tV : %d\n", cnt, cnt_valid, H, H_R, S, V);
                 break;
