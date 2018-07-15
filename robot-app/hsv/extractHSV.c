@@ -1,8 +1,31 @@
 #include "extractHSV.h"
 
-int cmp(const void* a, const void* b)
-{
-  return *(U8*)a - *(U8*)b;
+void sort(U8* arr, U8 left, U8 right) {
+      U16 i = left, j = right;
+      U16 pivot = arr[(left + right) / 2];
+      U8 temp;
+      do
+      {
+        while (arr[i] < pivot)
+            i++;
+        while (arr[j] > pivot)
+            j--;
+        if (i<= j)
+        {
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;
+        }
+      } while (i<= j);
+
+    /* recursion */
+    if (left < j)
+        sort(arr, left, j);
+
+    if (i < right)
+        sort(arr, i, right);
 }
 
 U8 top, bot, left, right;
@@ -10,19 +33,21 @@ U8 top, bot, left, right;
 void extractHSV(void)
 {
     U8 motion;
-    U8 H_buff[SIZE], H_R_buff[SIZE], S_buff[SIZE], V_buff[SIZE];
+    U8 *H_buff, *H_R_buff, *S_buff, *V_buff;
     U32 H, H_R, S, V;
     U16 cnt;
     U16 pos;
     U16 cnt_valid;
     U16 start, end;
-
-    U8 i, j;
-
     U16 *fpga_videodata;
+    U8 i, j;
 
     help();
 
+    H_buff = (U8 *) malloc(SIZE * sizeof(U8));
+    H_R_buff = (U8 *) malloc(SIZE * sizeof(U8));
+    S_buff = (U8 *) malloc(SIZE * sizeof(U8));
+    V_buff = (U8 *) malloc(SIZE * sizeof(U8));
     fpga_videodata = (U16 *) malloc(WIDTH * HEIGHT * 2);
 
     init_extract();
@@ -50,14 +75,18 @@ void extractHSV(void)
                         H_R_buff[cnt] = (((fpga_videodata[pos] & BIT_H) SHIFT_H) + 120) % 240;
                         S_buff[cnt] = (fpga_videodata[pos] & BIT_S) SHIFT_S;
                         V_buff[cnt] = (fpga_videodata[pos] & BIT_V) SHIFT_V;
+                        // H += (fpga_videodata[pos] & BIT_H) SHIFT_H;
+                        // H_R += (((fpga_videodata[pos] & BIT_H) SHIFT_H) + 120) % 240;
+                        // S += (fpga_videodata[pos] & BIT_S) SHIFT_S;
+                        // V += (fpga_videodata[pos] & BIT_V) SHIFT_V;
                         ++cnt;
                     }
                 }
 
-                qsort(H_buff, cnt, sizeof(U8), cmp);
-                qsort(H_R_buff, cnt, sizeof(U8), cmp);
-                qsort(S_buff, cnt, sizeof(U8), cmp);
-                qsort(V_buff, cnt, sizeof(U8), cmp);
+                sort(H_buff, 0, cnt - 1);
+                sort(H_R_buff, 0, cnt -1);
+                sort(S_buff, 0, cnt - 1);
+                sort(V_buff, 0, cnt - 1);
 
                 start = cnt / 10;
                 end = cnt - start;
@@ -75,8 +104,13 @@ void extractHSV(void)
                 H_R /= cnt_valid;
                 S /= cnt_valid;
                 V /= cnt_valid;
+                // H /= cnt;
+                // H_R /= cnt;
+                // S /= cnt;
+                // V /= cnt;
 
                 printf("cnt : %d\tcnt_valid : %d\tH : %d\tH_R : %d\tS : %d\tV : %d\n", cnt, cnt_valid, H, H_R, S, V);
+                // printf("cnt : %d\tH : %d\tH_R : %d\tS : %d\tV : %d\n", cnt, H, H_R, S, V);
                 break;
             case 'w':
                 if (top < 1) break;
@@ -138,6 +172,10 @@ void extractHSV(void)
         }
     } while(motion != 'q');
 
+    free(H_buff);
+    free(H_R_buff);
+    free(S_buff);
+    free(V_buff);
     destroy_extract(fpga_videodata);
 }
 
