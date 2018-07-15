@@ -262,6 +262,8 @@ typedef struct _tag_DrawRaw_value {
 #define GetValueRGBYOBK(u16, color) ((U16)(u16 >> color) & 0x0001)
 #define GetPtr(arr, row, col, width) (arr[row * width + col])
 
+#define CheckCol(col)  (!(col < 0 || col > 180))
+
 /*#######################################################*/
 typedef enum {
     AMAZON2_IOCTL_CLEAR_SCREEN = 0,

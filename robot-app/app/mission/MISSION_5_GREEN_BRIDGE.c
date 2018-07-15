@@ -54,9 +54,47 @@ int mission_5_3_climb_up_stairs(void) {
 }
 
 int mission_5_4_set_center_before_green_bridge(U16 *image) {
-    // TODO: 센터 맞추는거 개발해야함
+    U32 col, row, cntBlackLen[7] = {0,}, cnt, bk_len = 0, flag = 0;
+    int i = -1;
+    for (row = HEIGHT; row > 0; --row) {
+        cnt = 0;
+        for (col = MISSION_5_4_WIDTH_LEFT; col < MISSION_5_4_WIDTH_LEFT + MISSION_5_4_WIDTH_RANGE; ++col) {
+            cnt += GetValueRGBYOBK(
+                    GetPtr(image, row, col, WIDTH),
+                    BLACK
+            );
+        }
 
-    int rResult = 1;
+        if (cnt >= MISSION_5_4_BLACK_LEN_THRESHOLDS) {
+
+            if (!flag) {
+                flag = 1;
+                i++;
+            }
+
+            bk_len = HEIGHT - row;
+            cntBlackLen[i] += 1;
+
+        } else {
+            flag = 0;
+        }
+
+    }
+
+    printf("\t\t- M5-4: SET CENTER\n");
+    printf("\t\t\t+ bk_len row: %d, bk: \n", bk_len, i);
+
+    int rResult = 0;
+    if (i < MISSION_5_4_NUMBER_OF_BLACK_LEN ||
+        bk_len > MISSION_5_4_BLACK_LEN_RANGE + MISSION_5_4_BLACK_LEN_ERROR) {
+        Action_LEFT_MOVE_SHORT(3);
+    } else if (i > MISSION_5_4_NUMBER_OF_BLACK_LEN ||
+               bk_len < MISSION_5_4_BLACK_LEN_RANGE - MISSION_5_4_BLACK_LEN_ERROR) {
+        Action_RIGHT_MOVE_SHORT(3);
+    } else {
+        rResult = 1;
+    }
+
     return rResult;
 }
 
@@ -95,53 +133,83 @@ int mission_5_5_check_finish_black_line(U16 *image) {
 }
 
 int mission_5_5_check_green_bridge_straight(U16 *image) {
-    U32 col;
+    U32 col, i, cnt, range, point[2][2] = {{0, MISSION_5_5_GREEN_BRIDGE_POINT_Y_1},
+                                           {0, MISSION_5_5_GREEN_BRIDGE_POINT_Y_2}};
 
-    U16 green_len[2] = {0,}, row[2] = {100, 30};
+    U32 max = MISSION_5_5_GREEN_BRIDGE_SLOPE_RANGE + 1;
+    int pixelQueue[max] = {0,};
+    int front = 0, rear = 0;
 
-    for (col = 90; col > 0; --col) {
-        green_len[0] += GetValueRGBYOBK(GetPtr(image, row[0], col, WIDTH), GREEN);
-        green_len[1] += GetValueRGBYOBK(GetPtr(image, row[1], col, WIDTH), GREEN);
+    for (i = 0; i < 2; ++i) {
+        front = 0;
+        rear = 0;
+        for (col = 0; col < WIDTH; ++col) {
+
+            if (front == rear) {
+                rear = ++rear % max;
+                for (range = 0; range < MISSION_5_5_GREEN_BRIDGE_SLOPE_RANGE; ++range) {
+                    pixelQueue[rear] = GetValueRGBYOBK(
+                            GetPtr(image, point[i][1], col + range, WIDTH),
+                            GREEN
+                    );
+                    rear = ++rear % max;
+                }
+            } else {
+                front = ++front % max;
+                pixelQueue[rear] = GetValueRGBYOBK(
+                        GetPtr(image, point[i][1], col + range, WIDTH),
+                        GREEN
+                );
+            }
+
+            cnt = 0;
+            for (range = 0; range < MISSION_5_5_GREEN_BRIDGE_SLOPE_RANGE; ++range) {
+                cnt += pixelQueue[range];
+            }
+
+            if (cnt >= 3) {
+                point[i][0] = col;
+                break;
+            }
+
+        }
     }
+
+    int r = (point[0][1] - point[1][1]);
 
     int rResult = 0;
-    double slope;
-
-    if ((green_len[1] - green_len[0]) == 0) {
-        Action_LEFT_TURN_BODY(2);
+    if (r < -MISSION_5_5_GREEN_BRIDGE_SLOPE) {
+        Action_LEFT_TURN_BODY(3);
+    } else if (r > MISSION_5_5_GREEN_BRIDGE_SLOPE) {
+        Action_RIGHT_TURN_BODY(3);
     } else {
-        slope = -70 / (green_len[1] - green_len[0]);
-        if (slope < MISSION_5_SLOPE - MISSION_5_SLOPE_RANGE)
-            Action_RIGHT_TURN_BODY(2);
-        else if (slope > MISSION_5_SLOPE + MISSION_5_SLOPE_RANGE)
-            Action_LEFT_TURN_BODY(2);
-        else
-            rResult = 1;
+        rResult = 1;
     }
 
-    if (!rResult) {
-        RobotSleep(5);
-    }
+    if (!rResult) { RobotSleep(5); }
 
     return rResult;
 }
 
 int mission_5_5_check_green_bridge_center(U16 *image) {
     U16 dir, cnt;
-    int col, row, flagDirection, flagSign, green_len[2] = {0,};
+    int col, row, flagSign, green_len[2] = {0,};
 
     for (dir = 0; dir < 2; ++dir) {
-        flagDirection = (dir) ? WIDTH - 1 : 0;
-        flagSign = (dir) ? -1 : 1;
+        flagSign = (dir) ? 1 : -1;
         for (col = 0; col < WIDTH / 2; ++col) {
             cnt = 0;
             for (row = MISSION_5_5_GREEN_LINE_ROW_POINT;
                  row < MISSION_5_5_GREEN_LINE_ROW_POINT + MISSION_5_5_GREEN_BRIDGE_RANGE;
                  ++row) {
-                cnt += GetValueRGBYOBK(
-                        GetPtr(image, row, flagDirection + col * flagSign, WIDTH),
-                        GREEN
-                );
+                if (CheckCol(WIDTH / 2 + ROBOT_CENTER_OFFSET + col * flagSign)) {
+                    cnt += GetValueRGBYOBK(
+                            GetPtr(image, row, WIDTH / 2 + ROBOT_CENTER_OFFSET + col * flagSign, WIDTH),
+                            GREEN
+                    );
+                } else {
+                    break;
+                }
             }
 
             if (cnt >= 2) {
