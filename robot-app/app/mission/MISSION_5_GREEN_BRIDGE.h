@@ -14,8 +14,22 @@
 
 #define MISSION_5_1_THRESHOLDS 20
 
-#define MISSION_5_5_GREEN_LINE_ROW_POINT 105
-#define MISSION_5_5_GREEN_BRIDGE_RANGE 10
+#define MISSION_5_4_WIDTH_LEFT 30
+#define MISSION_5_4_WIDTH_RANGE 60
+#define MISSION_5_4_BLACK_LEN_THRESHOLDS 20
+#define MISSION_5_4_BLACK_LEN_RANGE 30
+#define MISSION_5_4_BLACK_LEN_ERROR 10
+#define MISSION_5_4_NUMBER_OF_BLACK_LEN 3
+
+#define MISSION_5_4_FRONT_OF_GREEN_BRIDGE_THRESHOLDS 20
+
+#define MISSION_5_5_GREEN_LINE_ROW_POINT 20
+#define MISSION_5_5_GREEN_BRIDGE_RANGE 70
+
+#define MISSION_5_5_GREEN_BRIDGE_POINT_Y_1 30
+#define MISSION_5_5_GREEN_BRIDGE_POINT_Y_2 50
+#define MISSION_5_5_GREEN_BRIDGE_SLOPE_RANGE 7
+#define MISSION_5_5_GREEN_BRIDGE_SLOPE 7
 
 #define MISSION_5_5_GREEN_BRIDGE_THRESHOLDS 8
 
@@ -29,7 +43,7 @@ int mission_5_3_climb_up_stairs(void);
 
 int mission_5_4_set_center_before_green_bridge(U16 *image);
 
-int mission_5_4_set_front_of_green_bridge(U16 *image);
+int mission_5_4_set_front_of_green_bridge(U16 *image, int repeat);
 
 void mission_5_5_watch_below(void);
 

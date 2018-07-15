@@ -143,7 +143,7 @@ int huro(void) {
                         if (step == 4) {
                             mission_5_5_watch_below();
                             setFPGAVideoData(fpga_videodata);
-                            step += mission_5_4_set_front_of_green_bridge(fpga_videodata);
+                            step += mission_5_4_set_front_of_green_bridge(fpga_videodata, 4);
                         }
 
                         step = (step == 5) ? 4 : 3;
