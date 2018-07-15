@@ -22,6 +22,10 @@
 #define SHIFT_S >> 8
 #define SHIFT_V << 3
 
+#define COLOR_WHITE 0xffff
+#define COLOR_MAGENTA 0xf81f
+#define COLOR_CYAN 0x07ff
+
 void extractHSV(void);
 void setFPGAVideoData(U16* buf);
 void help(void);
