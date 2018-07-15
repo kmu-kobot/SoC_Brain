@@ -31,8 +31,8 @@ void extractHSV(void)
     init_extract();
 
     do {
-        centerX = (right - left) >> 1;
-        centerY = (bot - top) >> 1;
+        centerX = (right + left) >> 1;
+        centerY = (bot + top) >> 1;
         printf("center of box : (%d, %d)\n", centerX, centerY);
 
         motion = getchar();
