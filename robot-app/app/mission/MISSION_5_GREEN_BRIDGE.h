@@ -14,6 +14,8 @@
 
 #define MISSION_5_1_THRESHOLDS 20
 
+#define MISSION_5_4_FRONT_OF_GREEN_BRIDGE_THRESHOLDS 20
+
 #define MISSION_5_5_GREEN_LINE_ROW_POINT 105
 #define MISSION_5_5_GREEN_BRIDGE_RANGE 10
 
@@ -29,7 +31,7 @@ int mission_5_3_climb_up_stairs(void);
 
 int mission_5_4_set_center_before_green_bridge(U16 *image);
 
-int mission_5_4_set_front_of_green_bridge(U16 *image);
+int mission_5_4_set_front_of_green_bridge(U16 *image, int repeat);
 
 void mission_5_5_watch_below(void);
 

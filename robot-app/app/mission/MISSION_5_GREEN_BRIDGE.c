@@ -60,11 +60,29 @@ int mission_5_4_set_center_before_green_bridge(U16 *image) {
     return rResult;
 }
 
-int mission_5_4_set_front_of_green_bridge(U16 *image) {
-    // TODO: 바로 앞에 초록색이 있는지 확인하는거 개발해야함
+int mission_5_4_set_front_of_green_bridge(U16 *image, int repeat) {
+    U32 col, row, cntGreen = 0;
+    for (row = 0; row < HEIGHT; ++row) {
+        for (col = 0; col < WIDTH; ++col) {
+            cntGreen += GetValueRGBYOBK(
+                    GetPtr(image, row, col, WIDTH),
+                    GREEN
+            );
+        }
+    }
 
-    int rResult = 1;
-    return rResult;
+    printf("\t\t- M5-4: SET FRONT OF GREEN BRIDGE\n");
+    printf("\t\t\t+ cntGreen: %d\n", cntGreen);
+    printf("\t\t\t+ GREEN / AREA: %f\n\n", (double) cntGreen * 100 / (WIDTH * HEIGHT));
+
+    int rReturn = (cntGreen * 100 / (WIDTH * HEIGHT)) > MISSION_5_4_FRONT_OF_GREEN_BRIDGE_THRESHOLDS;
+
+    if (rReturn) {
+        Action_WALK_FRONT_SHORT(repeat);
+    }
+    RobotSleep(5);
+
+    return rReturn;
 }
 
 void mission_5_5_watch_below(void) {
