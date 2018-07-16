@@ -53,76 +53,6 @@ int mission_5_3_climb_up_stairs(void) {
     return 1;
 }
 
-int mission_5_4_set_center_before_green_bridge(U16 *image) {
-    U32 col, row, cntBlackLen[7] = {0,}, cnt, bk_len = 0, flag = 0;
-    int i = -1;
-    for (row = HEIGHT; row > 0; --row) {
-        cnt = 0;
-        for (col = MISSION_5_4_WIDTH_LEFT; col < MISSION_5_4_WIDTH_LEFT + MISSION_5_4_WIDTH_RANGE; ++col) {
-            cnt += GetValueRGBYOBK(
-                    GetPtr(image, row, col, WIDTH),
-                    BLACK
-            );
-        }
-
-        if (cnt >= MISSION_5_4_BLACK_LEN_THRESHOLDS) {
-
-            if (!flag) {
-                flag = 1;
-                i++;
-            }
-
-            bk_len = HEIGHT - row;
-            cntBlackLen[i] += 1;
-
-        } else {
-            flag = 0;
-        }
-
-    }
-
-    printf("\t\t- M5-4: SET CENTER\n");
-    printf("\t\t\t+ bk_len row: %d, bk: \n", bk_len, i);
-
-    int rResult = 0;
-    if (i < MISSION_5_4_NUMBER_OF_BLACK_LEN ||
-        bk_len > MISSION_5_4_BLACK_LEN_RANGE + MISSION_5_4_BLACK_LEN_ERROR) {
-        Action_LEFT_MOVE_SHORT(3);
-    } else if (i > MISSION_5_4_NUMBER_OF_BLACK_LEN ||
-               bk_len < MISSION_5_4_BLACK_LEN_RANGE - MISSION_5_4_BLACK_LEN_ERROR) {
-        Action_RIGHT_MOVE_SHORT(3);
-    } else {
-        rResult = 1;
-    }
-
-    return rResult;
-}
-
-int mission_5_4_set_front_of_green_bridge(U16 *image, int repeat) {
-    U32 col, row, cntGreen = 0;
-    for (row = 0; row < HEIGHT; ++row) {
-        for (col = 0; col < WIDTH; ++col) {
-            cntGreen += GetValueRGBYOBK(
-                    GetPtr(image, row, col, WIDTH),
-                    GREEN
-            );
-        }
-    }
-
-    printf("\t\t- M5-4: SET FRONT OF GREEN BRIDGE\n");
-    printf("\t\t\t+ cntGreen: %d\n", cntGreen);
-    printf("\t\t\t+ GREEN / AREA: %f\n\n", (double) cntGreen * 100 / (WIDTH * HEIGHT));
-
-    int rReturn = (cntGreen * 100 / (WIDTH * HEIGHT)) > MISSION_5_4_FRONT_OF_GREEN_BRIDGE_THRESHOLDS;
-
-    if (rReturn) {
-        Action_WALK_FRONT_SHORT(repeat);
-    }
-    RobotSleep(5);
-
-    return rReturn;
-}
-
 void mission_5_5_watch_below(void) {
     Action_WATCH_BELOW_LONG();
     RobotSleep(5);
@@ -137,7 +67,7 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
                                            {0, MISSION_5_5_GREEN_BRIDGE_POINT_Y_2}};
 
     U32 max = MISSION_5_5_GREEN_BRIDGE_SLOPE_RANGE + 1;
-    int pixelQueue[max] = {0,};
+    int pixelQueue[MISSION_5_5_GREEN_BRIDGE_SLOPE_RANGE + 1] = {0,};
     int front = 0, rear = 0;
 
     for (i = 0; i < 2; ++i) {
@@ -146,16 +76,19 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
         for (col = 0; col < WIDTH; ++col) {
 
             if (front == rear) {
-                rear = ++rear % max;
+                rear++;
+                rear %= max;
                 for (range = 0; range < MISSION_5_5_GREEN_BRIDGE_SLOPE_RANGE; ++range) {
                     pixelQueue[rear] = GetValueRGBYOBK(
                             GetPtr(image, point[i][1], col + range, WIDTH),
                             GREEN
                     );
-                    rear = ++rear % max;
+                    rear++;
+                    rear %= max;
                 }
             } else {
-                front = ++front % max;
+                front++;
+                front %= max;
                 pixelQueue[rear] = GetValueRGBYOBK(
                         GetPtr(image, point[i][1], col + range, WIDTH),
                         GREEN
@@ -246,6 +179,88 @@ int mission_5_5_short_walk_on_green_bridge(int repeat) {
     return 1;
 }
 
+
+int mission_5_6_set_only_one_bk_bar(U16 *image) {
+    U32 col, row, cntBlackLen[3] = {0,}, cnt, bk_len = 0, flag = 0;
+    int i = -1;
+    for (row = HEIGHT; row > 0; --row) {
+        cnt = 0;
+        for (col = MISSION_5_6_WIDTH_LEFT;
+             col < MISSION_5_6_WIDTH_LEFT + MISSION_5_6_WIDTH_RANGE;
+             ++col) {
+            cnt += GetValueRGBYOBK(
+                    GetPtr(image, row, col, WIDTH),
+                    BLACK
+            );
+        }
+
+        if (cnt >= MISSION_5_6_BLACK_LEN_THRESHOLDS) {
+
+            if (!flag) {
+                flag = 1;
+                i++;
+            }
+
+            bk_len = HEIGHT - row;
+            cntBlackLen[i] += 1;
+
+        } else {
+            flag = 0;
+        }
+
+    }
+
+    printf("\t\t- M5-6: SET CENTER\n");
+    printf("\t\t\t+ bk_len row: %d, bk: %d\n", bk_len, i);
+
+    int rResult = 0;
+    if (i > 1) {
+        Action_WALK_FRONT_SHORT(1);
+    } else {
+        rResult = 1;
+    }
+
+    return rResult;
+}
+
+int mission_5_6_set_straight(U16 *image) {
+    U32 cnt, row, i, range;
+    int point[2][2] = {{10,  0},
+                       {110, 0}};
+
+    for (i = 0; i < 2; ++i) {
+        for (row = HEIGHT; row > 0; --row) {
+            cnt = 0;
+            for (range = 0; range < 5; ++range) {
+                cnt += GetValueRGBYOBK(
+                        GetPtr(image, row, point[i][0] + range, WIDTH),
+                        BLACK
+                );
+            }
+
+            if (cnt < 2) {
+                point[i][1] = row;
+            }
+
+        }
+    }
+
+    printf("\t\t- M5-6: SET STRAIGHT\n");
+    printf("\t\t\t+ %d %d\n\n", point[0][1], point[1][1]);
+
+    int r = (point[0][1] - point[1][1]);
+
+    int rResult = 0;
+    if (r < -MISSION_5_6_GREEN_BRIDGE_SLOPE) {
+        Action_LEFT_TURN_BODY(1);
+    } else if (r > MISSION_5_6_GREEN_BRIDGE_SLOPE) {
+        Action_RIGHT_TURN_BODY(1);
+    } else {
+        rResult = 1;
+    }
+
+    if (!rResult) { RobotSleep(5); }
+}
 
 int mission_5_7_climb_down_stairs(void) {
     RobotSleep(5);

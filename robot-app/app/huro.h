@@ -42,6 +42,4 @@ void destroy_huro(U16 *buf);
 
 void setFPGAVideoData(U16 *buf);
 
-void drawFPGAVideoData(U16 *buf);
-
 #endif //SOC_APP_HURO_H
