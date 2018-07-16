@@ -127,16 +127,14 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
     printf("Slope : %f\n", s);
 
     s *= 100;
-    int rResult = 0;
-    if (s < MISSION_2_4_BLACK_LINE_SLOPE - MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
-        Action_RIGHT_TURN_BODY(((((s > 0) ? s : -s) > 13) ? 3 : 1));
-    } else if (s > MISSION_2_4_BLACK_LINE_SLOPE + MISSION_2_4_BLACK_LINE_SLOPE_ERROR) {
-        Action_LEFT_TURN_BODY(((((s > 0) ? s : -s) > 13) ? 3 : 1));
-    } else {
-        rResult = 1;
-    }
-
-    if (!rResult) {
+    int rResult = 1;
+    if (((s > 0) ? s : -s) > MISSION_2_4_BLACK_LINE_SLOPE) {
+        rResult = 0;
+        if (s < 0) {
+            Action_RIGHT_TURN_BODY(((((s > 0) ? s : -s) > 13) ? 3 : 1));
+        } else if (s > 0) {
+            Action_LEFT_TURN_BODY(((((s > 0) ? s : -s) > 13) ? 3 : 1));
+        }
         RobotSleep(5);
     }
 

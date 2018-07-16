@@ -96,14 +96,13 @@ int huro(void) {
                     case 5:
                         mission_4_6_watch_side();
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_2_4_after_bridge_set_straight(fpga_videodata);
+                        step += mission_4_6_set_center(fpga_videodata);
 
                         if (step == 5) {
-                            mission_4_6_watch_side();
-                            setFPGAVideoData(fpga_videodata);
+                            step += mission_2_4_after_bridge_set_straight(fpga_videodata);
                         }
 
-                        step = (step + mission_4_6_set_center(fpga_videodata) == 7) ? 6 : 5;
+                        step = (step == 7) ? 6 : 5;
                         break;
                     case 6:
                         mission = 10;
@@ -321,7 +320,37 @@ int huro(void) {
                 }
                 break;
             case 10: // MISSION 10: BLUE GATE
-                mission = nextMission;
+                switch (step) {
+                    case 0:
+                        mission_10_1_watch_up();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_10_1_catch_blue_gate(fpga_videodata);
+                        if (step != 1) {
+                            mission_10_1_front_walk(4);
+                        }
+                        step = (step == 1) ? 1 : 0;
+                    case 1:
+                        mission_10_1_watch_up();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_10_2_set_center_upper_gate(fpga_videodata);
+
+                        mission_10_1_watch_up();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_10_3_set_straight_upper_gate(fpga_videodata);
+
+                        step = (step == 3) ? 2 : 1;
+                        break;
+                    case 2:
+                        //위에 두 조건이 충족되면 걸어서 게이트 통과
+                        step += mission_10_4_escape_blue_gate();
+                        break;
+                    case 3:
+                        mission = nextMission;
+                        step = 0;
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
                 missionFinished = 1;
