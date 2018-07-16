@@ -53,7 +53,6 @@ int mission_4_4_jump_hurdle(void) {
 
 
 void mission_4_5_watch_diagonal_line(void) {
-    // TODO: 사선으로 앞에 보는 동작으로 바꿔야야함
     Action_INIT_ROBOT();
     RobotSleep(5);
 }
@@ -72,14 +71,14 @@ int mission_4_5_set_front_of_not_bk(U16 *image) {
                         GetPtr(image, row, col[i] + 1, WIDTH),
                         BLACK
                 )) {
+                checkHurdleLine[i] = (U16) (HEIGHT - row);
                 break;
             }
-            checkHurdleLine[i] += 1;
         }
     }
 
     double s = 0;
-    printf("BLACK LINE\n");
+    printf("\nM4-5: BLACK LINE\n");
     for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
         s += checkHurdleLine[i];
         printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);
@@ -87,7 +86,7 @@ int mission_4_5_set_front_of_not_bk(U16 *image) {
     printf("\n");
 
     s /= MISSION_4_HURDLE_CRITERI;
-    printf("AVG: %f\n", s);
+    printf("AVG: %f\n\n", s);
 
     int rResult = 1;
     if (s > MISSION_4_5_WHITE_RANGE) {
@@ -95,49 +94,6 @@ int mission_4_5_set_front_of_not_bk(U16 *image) {
         rResult = 0;
     }
     RobotSleep(5);
-
-    return rResult;
-}
-
-int mission_4_6_set_straight(U16 *image) {
-    U32 row, i, pos_bk[3] = {0,};
-    U16 col[3] = {45, 90, 135};
-
-    for (i = 0; i < 3; ++i) {
-        for (row = HEIGHT; row > 0; row--) {
-            if (GetValueRGBYOBK(
-                        GetPtr(image, row, col[i], WIDTH),
-                        BLACK
-                ) &&
-                GetValueRGBYOBK(
-                        GetPtr(image, row, col[i] + 1, WIDTH),
-                        BLACK
-                )) {
-                pos_bk[i] = row;
-                break;
-            }
-        }
-    }
-
-    RobotSleep(5);
-    int rResult = 0;
-    if (
-            (pos_bk[2] - pos_bk[1]) < -10 &&
-            (pos_bk[1] - pos_bk[0] < -10)
-            ) {
-        Action_LEFT_TURN_BODY(1);
-    } else if (
-            (pos_bk[2] - pos_bk[1]) > 10 &&
-            (pos_bk[1] - pos_bk[0] > 10)
-            ) {
-        Action_RIGHT_TURN_BODY(1);
-    } else {
-        rResult = 1;
-    }
-
-    if (!rResult) {
-        RobotSleep(5);
-    }
 
     return rResult;
 }
