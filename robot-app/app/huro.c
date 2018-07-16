@@ -148,7 +148,11 @@ int huro(void) {
                         mission_5_5_watch_below();
                         setFPGAVideoData(fpga_videodata);
 
-                        nextMission = mission_5_5_check_finish_black_line(fpga_videodata);
+                        if (mission_5_5_check_finish_black_line(fpga_videodata)) {
+                            step = 5;
+                            mission_5_5_short_walk_on_green_bridge(3);
+                            break;
+                        }
 
                         step += mission_5_5_check_green_bridge_straight(fpga_videodata);
 
@@ -161,12 +165,6 @@ int huro(void) {
                         }
 
                         step = 4;
-
-                        if (nextMission == 1) {
-                            step = 5;
-                        }
-
-                        nextMission = 0;
                         break;
                     case 5:
                         mission_5_5_watch_below();

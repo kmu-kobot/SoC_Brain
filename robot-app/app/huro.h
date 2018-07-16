@@ -25,8 +25,8 @@
 #include "./mission/MISSION_6_KICK_BALL.h"
 #include "./mission/MISSION_7_YELLOW_HOLE_BRIDGE.h"
 // AVOID BOMB
-#include "mission/MISSION_9_LAST_BARRICADE.h"
-#include "mission/MISSION_10_BLUE_GATE.h"
+#include "./mission/MISSION_9_LAST_BARRICADE.h"
+#include "./mission/MISSION_10_BLUE_GATE.h"
 
 #include <termios.h>
 
