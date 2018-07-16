@@ -27,6 +27,6 @@ int mission_10_2_set_center_upper_gate(U16 *image);
 
 int mission_10_3_set_straight_upper_gate(U16 *image);
 
-int mission_10_4_escape_blue_gate();
+int mission_10_4_escape_blue_gate(void);
 
 #endif //SOC_APP_MISSION_10_BLUE_GATE_H

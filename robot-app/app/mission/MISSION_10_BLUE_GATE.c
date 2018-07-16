@@ -158,7 +158,7 @@ int mission_10_3_set_straight_upper_gate(U16 *image) {
 
 }
 
-int mission_10_4_escape_blue_gate() {
+int mission_10_4_escape_blue_gate(void) {
     Action_WALK_FRONT_LONG(5);
     RobotSleep(3);
 }

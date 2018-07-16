@@ -89,8 +89,8 @@ int mission_4_5_set_front_of_not_bk(U16 *image) {
     printf("AVG: %f\n\n", s);
 
     int rResult = 1;
-    if (s > MISSION_4_5_WHITE_RANGE) {
-        Action_LEFT_TURN_BODY(3);
+    if (s < MISSION_4_5_WHITE_RANGE) {
+        Action_LEFT_TURN_BODY(4);
         rResult = 0;
     }
     RobotSleep(5);
@@ -99,7 +99,6 @@ int mission_4_5_set_front_of_not_bk(U16 *image) {
 }
 
 int mission_4_6_set_center(U16 *image) {
-
     U32 col[3] = {70, 60, 90}, row, i;
     U16 checkHurdleLine[MISSION_4_HURDLE_CRITERI] = {0,};
 
@@ -132,9 +131,9 @@ int mission_4_6_set_center(U16 *image) {
 
     int rResult = 0;
     if (s < MISSION_4_5_BK_LINE_RANGE - MISSION_4_5_BK_LINE_ERROR) {
-        Action_RIGHT_MOVE_SHORT(3);
+        Action_RIGHT_MOVE_LONG(1);
     } else if (s > MISSION_4_5_BK_LINE_RANGE + MISSION_4_5_BK_LINE_ERROR) {
-        Action_LEFT_MOVE_SHORT(3);
+        Action_LEFT_MOVE_LONG(1);
     } else {
         rResult = 1;
     }

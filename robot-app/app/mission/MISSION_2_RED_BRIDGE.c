@@ -95,10 +95,11 @@ int mission_2_3_escape_red_bridge(void) {
 
 int mission_2_4_after_bridge_set_straight(U16 *image) {
     U32 row, i;
-    U16 black_len[2] = {0,}, col[2] = {
+    U16 col[2] = {
             MISSION_2_4_BLACK_LINE_COL_POINT_1,
             MISSION_2_4_BLACK_LINE_COL_POINT_2
     };
+    int black_len[2] = {0,};
 
     for (i = 0; i < 2; ++i) {
         for (row = HEIGHT; row > 0; --row) {
@@ -110,9 +111,9 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
                         GetPtr(image, row, col[i] + 1, WIDTH),
                         BLACK
                 )) {
+                black_len[i] = -row;
                 break;
             }
-            black_len[i] += 1;
         }
     }
 
@@ -120,8 +121,8 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
     printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
 
     double s = (
-            (black_len[0] - black_len[1]) * 100 /
-            MISSION_2_4_BLACK_LINE_COL_POINT_1 - MISSION_2_4_BLACK_LINE_COL_POINT_2
+            (double) (black_len[0] - black_len[1]) /
+            (MISSION_2_4_BLACK_LINE_COL_POINT_1 - MISSION_2_4_BLACK_LINE_COL_POINT_2)
     );
 
     printf("Slope : %f\n", s);

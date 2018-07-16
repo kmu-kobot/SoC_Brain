@@ -25,8 +25,8 @@
 #include "./mission/MISSION_6_KICK_BALL.h"
 #include "./mission/MISSION_7_YELLOW_HOLE_BRIDGE.h"
 // AVOID BOMB
-#include "mission/MISSION_9_LAST_BARRICADE.h"
-#include "mission/MISSION_10_BLUE_GATE.h"
+#include "./mission/MISSION_9_LAST_BARRICADE.h"
+#include "./mission/MISSION_10_BLUE_GATE.h"
 
 #include <termios.h>
 
@@ -41,7 +41,5 @@ int init_huro(void);
 void destroy_huro(U16 *buf);
 
 void setFPGAVideoData(U16 *buf);
-
-void drawFPGAVideoData(U16 *buf);
 
 #endif //SOC_APP_HURO_H
