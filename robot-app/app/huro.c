@@ -81,7 +81,22 @@ int huro(void) {
                 }
                 break;
             case 3: // MISSION 3: AVOID BOMB
-                mission += 1;
+                switch (step) {
+                    case 4:
+                        mission_3_4_watch_front();
+                        setFPGAVideoData(fpga_videodata);
+                        if (mission_3_4_is_not_front_of_bomb(fpga_videodata)) {
+                            Action_WALK_FRONT_SHORT(3);
+                            mission += 1;
+                        }
+                        step = 0;
+                        break;
+                    default:
+                        mission_3_default_watch_below();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_3_default_avoid_bomb(fpga_videodata);
+                        break;
+                }
                 break;
             case 4: // MISSION 4: JUMP HURDLE
                 switch (step) {

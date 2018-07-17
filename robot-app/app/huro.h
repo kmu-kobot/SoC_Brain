@@ -19,7 +19,7 @@
 #include "./mission/MISSION_0_READY_PLAY.h"
 #include "./mission/MISSION_1_YELLOW_BARRICADE.h"
 #include "./mission/MISSION_2_RED_BRIDGE.h"
-// AVOID BOMB
+#include "./mission/MISSION_3_AVOID_BOMB.h"
 #include "./mission/MISSION_4_JUMP_HURDLE.h"
 #include "./mission/MISSION_5_GREEN_BRIDGE.h"
 #include "./mission/MISSION_6_KICK_BALL.h"
