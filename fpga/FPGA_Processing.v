@@ -361,13 +361,13 @@ begin
 	H_THRES = 8'd10;
 	S_THRES_H = 8'd96;
 	S_THRES_L = 8'd48;
-	V_THRES = 8'd64;
+	V_THRES = 8'd96;
 
 	R_H	= 8'd230;
 	G_H	= 8'd85;
 	B_H	= 8'd148;
 	Y_H	= 8'd40;
-	O_H	= 8'd13;
+	O_H	= 8'd10;
 	
 	R_MIN = R_H - H_THRES;
 	R_MAX = R_H + H_THRES;
@@ -390,7 +390,7 @@ always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	BK_B <= 1'b0;
 	else
 	begin
-		BK_B <= V < V_THRES;
+		BK_B <= (S < S_THRES_H) & (V < V_THRES);
 	end
 
 
@@ -413,35 +413,35 @@ always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	R_B <= 1'b0;
 	else
 	begin
-		R_B <= C_L & ((R_MIN < H) & (H < R_MAX));
+		R_B <= C_L & ((R_MIN <= H) & (H <= R_MAX));
 	end
 	
 always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	G_B <= 1'b0;
 	else
 	begin
-		G_B <= C_L & ((G_MIN < H) & (H < G_MAX));
+		G_B <= C_L & ((G_MIN <= H) & (H <= G_MAX));
 	end
 	
 always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	B_B <= 1'b0;
 	else
 	begin
-		B_B <= C_H & ((B_MIN < H) & (H < B_MAX));
+		B_B <= C_H & ((B_MIN <= H) & (H <= B_MAX));
 	end
 	
 always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	Y_B <= 1'b0;
 	else
 	begin
-		Y_B <= C_L & ((Y_MIN < H) & (H < Y_MAX));
+		Y_B <= C_L & ((Y_MIN <= H) & (H <= Y_MAX));
 	end
 	
 always @ (negedge resetx or posedge clk_llc4)
 	if		(~resetx)	O_B <= 1'b0;
 	else
 	begin
-		O_B <= C_L & ((O_MIN < H) & (H < O_MAX));
+		O_B <= C_L & ((O_MIN <= H) & (H <= O_MAX));
 	end
 
 //wire ROY = R_B | O_B | Y_B;
