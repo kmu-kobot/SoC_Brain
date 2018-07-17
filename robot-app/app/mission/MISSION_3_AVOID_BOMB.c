@@ -60,6 +60,9 @@ int mission_3_default_avoid_bomb(U16 *image) {
         s += ((check[i] != 0) ? 1 : 0) * (10 ^ (2 - i));
     }
 
+    printf("\n\t\t- M3-DEFAULT: AVOID BOMB\n");
+    printf("\t\t\t- BOMB: %d %d %d\n\n", check[0], check[1], check[2]);
+
     int rReturn = (s == 010) ? 1 : 0;
     if (!rReturn) {
         if (s == 100 || s == 110 || s == 111) {
@@ -90,6 +93,7 @@ int mission_3_default_avoid_bomb(U16 *image) {
         }
 
         check[2] += col_start_end[1][0];
+        printf("\t\t\t- O-x: %d", check[2]);
 
         if (check[2] < WIDTH / 2 - MISSION_3_DEFAULT_AVOID_BOMB_RANGE) {
             Action_LEFT_MOVE_SHORT(2);
