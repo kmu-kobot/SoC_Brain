@@ -49,7 +49,7 @@ void mission_2_2_watch_side(void) {
 
 int mission_2_2_before_bridge_set_center_version2(U16 *image) {
     U16 dir, cnt;
-    int col, row, flagSign, green_len[2] = {0,};
+    int col, row, flagSign, red_bridge[2] = {0,};
 
     for (dir = 0; dir < 2; ++dir) {
         flagSign = (dir) ? 1 : -1;
@@ -69,17 +69,17 @@ int mission_2_2_before_bridge_set_center_version2(U16 *image) {
             }
 
             if (cnt < 3) {
-                green_len[dir] = col;
+                red_bridge[dir] = col;
                 break;
             }
         }
     }
 
     // 0: LEFT, 1: RIGHT
-    int r = green_len[0] - green_len[1];
+    int r = red_bridge[0] - red_bridge[1];
 
     printf("\nM5-5: SET CENTER\n");
-    printf("LEFT: %d, RIGHT: %d, r: %d\n\n", green_len[0], green_len[1], r);
+    printf("LEFT: %d, RIGHT: %d, r: %d\n\n", red_bridge[0], red_bridge[1], r);
 
     if (((r > 0) ? r : (-r)) > MISSION_2_4_BED_BRIDGE_THRESHOLDS) {
         if (r > 0) {
