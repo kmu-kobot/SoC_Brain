@@ -143,7 +143,6 @@ always @(negedge resetx or posedge clk_llc2)
    else                      clk_div <= clk_div + 1'b1;
 
 // clk_llc8 : 180(720/4) clock generation
-wire clk_llc4  = clk_div[0];
 wire clk_llc8  = clk_div[1];
 
 // href2 : (480/2) clock generation
@@ -273,7 +272,7 @@ wire [ 7:0] B8 = (B_int[20]) ? 8'b0 : (B_int[19:18] == 2'b0) ? B_int[17:10] : 8'
 integer C_MAX, C_MIN, DELTA, H_DIFF, S_DATA, H_DATA;
 reg  [ 1:0] MAX;
 
-always @(negedge resetx or posedge clk_llc4)
+always @(negedge resetx or posedge clk_llc)
 	if (~resetx)
 		begin
 		C_MAX <= 0;
@@ -306,11 +305,11 @@ wire MAX_R = ~MAX[1] & ~MAX[0];
 wire MAX_G = ~MAX[1] & MAX[0];
 wire MAX_B = MAX[1] & ~MAX[0];
 
-always @(negedge resetx or posedge clk_llc4)
+always @(negedge resetx or posedge clk_llc)
 	if (~resetx)		DELTA <= 0;
 	else					DELTA <= C_MAX - C_MIN;
 
-always @(negedge resetx or posedge clk_llc4)
+always @(negedge resetx or posedge clk_llc)
 	if (~resetx)
 		begin
 		H_DIFF <= 0;
@@ -325,7 +324,7 @@ always @(negedge resetx or posedge clk_llc4)
 		S_DATA <= C_MAX > 0 ? DELTA * 255 / C_MAX : 0;
 		end
 
-always @(negedge resetx or posedge clk_llc4)
+always @(negedge resetx or posedge clk_llc)
 	if (~resetx)		H_DATA <= 0;
 	else
 		if (DELTA == 0) H_DATA <= 0;
@@ -356,7 +355,7 @@ reg [ 7:0] H_THRES, S_THRES_H, S_THRES_L, V_THRES,
 				R_MIN, R_MAX, G_MIN, G_MAX, B_MIN, B_MAX, Y_MIN, Y_MAX, O_MIN, O_MAX;
 reg R_B, G_B, B_B, Y_B, O_B, BK_B, C_H, C_L;
 
-always @ (posedge clk_llc4)
+always @ (posedge clk_llc)
 begin
 	H_THRES = 8'd10;
 	S_THRES_H = 8'd96;
@@ -386,7 +385,7 @@ begin
 end
 
 
-always @ (negedge resetx or posedge clk_llc4)
+always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	BK_B <= 1'b0;
 	else
 	begin
@@ -394,14 +393,14 @@ always @ (negedge resetx or posedge clk_llc4)
 	end
 
 
-always @ (negedge resetx or posedge clk_llc4)
+always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	C_H <= 1'b0;
 	else
 	begin
 		C_H <= ~BK_B & (S > S_THRES_H);
 	end
 
-always @ (negedge resetx or posedge clk_llc4)
+always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	C_L <= 1'b0;
 	else
 	begin
@@ -409,35 +408,35 @@ always @ (negedge resetx or posedge clk_llc4)
 	end
 
 
-always @ (negedge resetx or posedge clk_llc4)
+always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	R_B <= 1'b0;
 	else
 	begin
 		R_B <= C_L & ((R_MIN <= H) & (H <= R_MAX));
 	end
 	
-always @ (negedge resetx or posedge clk_llc4)
+always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	G_B <= 1'b0;
 	else
 	begin
 		G_B <= C_L & ((G_MIN <= H) & (H <= G_MAX));
 	end
 	
-always @ (negedge resetx or posedge clk_llc4)
+always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	B_B <= 1'b0;
 	else
 	begin
 		B_B <= C_H & ((B_MIN <= H) & (H <= B_MAX));
 	end
 	
-always @ (negedge resetx or posedge clk_llc4)
+always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	Y_B <= 1'b0;
 	else
 	begin
 		Y_B <= C_L & ((Y_MIN <= H) & (H <= Y_MAX));
 	end
 	
-always @ (negedge resetx or posedge clk_llc4)
+always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	O_B <= 1'b0;
 	else
 	begin
@@ -517,7 +516,7 @@ wire   vd_wrx    = ~(~vpo_wrxd1 & vpo_wrxd3);
 reg [15:0] vdata;
 reg [15:0] vadr;
 reg A_addr;
-always @(negedge resetx or posedge clk_llc8)
+always @(negedge resetx or posedge clk_llc)
    if      (~resetx)           vdata <= 16'b0;
 	else if (href2_wr)          vdata <= DecVData;
 
@@ -536,7 +535,7 @@ always @(negedge resetx or posedge Sys_clk)
 
 reg [ 5:0] vdata_C;
 reg [14:0] vadr_M;
-always @(negedge resetx or posedge clk_llc8)
+always @(negedge resetx or posedge clk_llc)
 	if		  (~resetx)			vdata_C <= 6'b0;
 	else if (~vref)			vdata_C <= 6'b0;
 	else if (href2_wr_A)		vdata_C <= DecVData_C;
@@ -549,7 +548,7 @@ always @(negedge resetx or posedge clk_llc8)
 
 reg [ 5:0] vdata_B;
 reg [14:0] vadr_B;
-always @(negedge resetx or posedge clk_llc8)
+always @(negedge resetx or posedge clk_llc)
 	if		  (~resetx)			vdata_B <= 6'b0;
 	else if (~vref)			vdata_B <= 6'b0;
 	else if (href2_wr_A)		vdata_B <= vmem_C_q;

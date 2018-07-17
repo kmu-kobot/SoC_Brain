@@ -1,5 +1,5 @@
 Analysis & Synthesis report for SoC_Brain
-Tue Jul 17 17:53:34 2018
+Tue Jul 17 22:57:16 2018
 Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -83,13 +83,13 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Jul 17 17:53:34 2018      ;
+; Analysis & Synthesis Status        ; Successful - Tue Jul 17 22:57:15 2018      ;
 ; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
 ; Revision Name                      ; SoC_Brain                                  ;
 ; Top-level Entity Name              ; FPGA_Processing                            ;
 ; Family                             ; Cyclone IV E                               ;
-; Total logic elements               ; 5,540                                      ;
-;     Total combinational functions  ; 5,203                                      ;
+; Total logic elements               ; 5,535                                      ;
+;     Total combinational functions  ; 5,198                                      ;
 ;     Dedicated logic registers      ; 913                                        ;
 ; Total registers                    ; 913                                        ;
 ; Total pins                         ; 60                                         ;
@@ -310,38 +310,38 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------+---------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                                                                                   ;
-+---------------------------------------------+---------------------------------------------------------------------------------+
-; Resource                                    ; Usage                                                                           ;
-+---------------------------------------------+---------------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 5,540                                                                           ;
-;                                             ;                                                                                 ;
-; Total combinational functions               ; 5203                                                                            ;
-; Logic element usage by number of LUT inputs ;                                                                                 ;
-;     -- 4 input functions                    ; 1565                                                                            ;
-;     -- 3 input functions                    ; 2120                                                                            ;
-;     -- <=2 input functions                  ; 1518                                                                            ;
-;                                             ;                                                                                 ;
-; Logic elements by mode                      ;                                                                                 ;
-;     -- normal mode                          ; 3485                                                                            ;
-;     -- arithmetic mode                      ; 1718                                                                            ;
-;                                             ;                                                                                 ;
-; Total registers                             ; 913                                                                             ;
-;     -- Dedicated logic registers            ; 913                                                                             ;
-;     -- I/O registers                        ; 0                                                                               ;
-;                                             ;                                                                                 ;
-; I/O pins                                    ; 60                                                                              ;
-; Total memory bits                           ; 2185792                                                                         ;
-; Embedded Multiplier 9-bit elements          ; 19                                                                              ;
-; Total PLLs                                  ; 1                                                                               ;
-;     -- PLLs                                 ; 1                                                                               ;
-;                                             ;                                                                                 ;
-; Maximum fan-out node                        ; pll:pll_inst|altpll:altpll_component|pll_altpll:auto_generated|wire_pll1_clk[0] ;
-; Maximum fan-out                             ; 392                                                                             ;
-; Total fan-out                               ; 25124                                                                           ;
-; Average fan-out                             ; 3.83                                                                            ;
-+---------------------------------------------+---------------------------------------------------------------------------------+
++-------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                 ;
++---------------------------------------------+---------------+
+; Resource                                    ; Usage         ;
++---------------------------------------------+---------------+
+; Estimated Total logic elements              ; 5,535         ;
+;                                             ;               ;
+; Total combinational functions               ; 5198          ;
+; Logic element usage by number of LUT inputs ;               ;
+;     -- 4 input functions                    ; 1563          ;
+;     -- 3 input functions                    ; 2119          ;
+;     -- <=2 input functions                  ; 1516          ;
+;                                             ;               ;
+; Logic elements by mode                      ;               ;
+;     -- normal mode                          ; 3480          ;
+;     -- arithmetic mode                      ; 1718          ;
+;                                             ;               ;
+; Total registers                             ; 913           ;
+;     -- Dedicated logic registers            ; 913           ;
+;     -- I/O registers                        ; 0             ;
+;                                             ;               ;
+; I/O pins                                    ; 60            ;
+; Total memory bits                           ; 2185792       ;
+; Embedded Multiplier 9-bit elements          ; 19            ;
+; Total PLLs                                  ; 1             ;
+;     -- PLLs                                 ; 1             ;
+;                                             ;               ;
+; Maximum fan-out node                        ; clk_llc~input ;
+; Maximum fan-out                             ; 426           ;
+; Total fan-out                               ; 25109         ;
+; Average fan-out                             ; 3.83          ;
++---------------------------------------------+---------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -349,7 +349,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                                                              ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                                                                                                                                                                                                  ; Library Name ;
 +---------------------------------------------------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |FPGA_Processing                                                                                        ; 5203 (493)        ; 913 (293)    ; 2185792     ; 19           ; 5       ; 7         ; 60   ; 0            ; |FPGA_Processing                                                                                                                                                                                                                                                                                                                                     ; work         ;
+; |FPGA_Processing                                                                                        ; 5198 (489)        ; 913 (293)    ; 2185792     ; 19           ; 5       ; 7         ; 60   ; 0            ; |FPGA_Processing                                                                                                                                                                                                                                                                                                                                     ; work         ;
 ;    |RAM:RAM_inst|                                                                                       ; 97 (0)            ; 8 (0)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM:RAM_inst                                                                                                                                                                                                                                                                                                                        ; work         ;
 ;       |altsyncram:altsyncram_component|                                                                 ; 97 (0)            ; 8 (0)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM:RAM_inst|altsyncram:altsyncram_component                                                                                                                                                                                                                                                                                        ; work         ;
 ;          |altsyncram_59g1:auto_generated|                                                               ; 97 (1)            ; 8 (8)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM:RAM_inst|altsyncram:altsyncram_component|altsyncram_59g1:auto_generated                                                                                                                                                                                                                                                         ; work         ;
@@ -417,8 +417,8 @@ applicable agreement for further details.
 ;    |pll:pll_inst|                                                                                       ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|pll:pll_inst                                                                                                                                                                                                                                                                                                                        ; work         ;
 ;       |altpll:altpll_component|                                                                         ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|pll:pll_inst|altpll:altpll_component                                                                                                                                                                                                                                                                                                ; work         ;
 ;          |pll_altpll:auto_generated|                                                                    ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|pll:pll_inst|altpll:altpll_component|pll_altpll:auto_generated                                                                                                                                                                                                                                                                      ; work         ;
-;    |sld_hub:auto_hub|                                                                                   ; 123 (1)           ; 90 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|sld_hub:auto_hub                                                                                                                                                                                                                                                                                                                    ; work         ;
-;       |sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|                                                    ; 122 (84)          ; 90 (62)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst                                                                                                                                                                                                                                                                       ; work         ;
+;    |sld_hub:auto_hub|                                                                                   ; 122 (1)           ; 90 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|sld_hub:auto_hub                                                                                                                                                                                                                                                                                                                    ; work         ;
+;       |sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|                                                    ; 121 (83)          ; 90 (62)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst                                                                                                                                                                                                                                                                       ; work         ;
 ;          |sld_rom_sr:hub_info_reg|                                                                      ; 21 (21)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|sld_rom_sr:hub_info_reg                                                                                                                                                                                                                                               ; work         ;
 ;          |sld_shadow_jsm:shadow_jsm|                                                                    ; 17 (17)           ; 19 (19)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|sld_shadow_jsm:shadow_jsm                                                                                                                                                                                                                                             ; work         ;
 ;    |sld_signaltap:auto_signaltap_0|                                                                     ; 365 (1)           ; 420 (6)      ; 24576       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|sld_signaltap:auto_signaltap_0                                                                                                                                                                                                                                                                                                      ; work         ;
@@ -589,7 +589,28 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; const1[6,7]                                     ; Stuck at GND due to stuck port data_in                                                                     ;
 ; const1[8]                                       ; Stuck at VCC due to stuck port data_in                                                                     ;
 ; const1[9]                                       ; Stuck at GND due to stuck port data_in                                                                     ;
-; H_DIFF[29..31]                                  ; Lost fanout                                                                                                ;
+; H_DIFF[29,30]                                   ; Lost fanout                                                                                                ;
+; C_MAX[8..30]                                    ; Merged with C_MAX[31]                                                                                      ;
+; C_MIN[8..30]                                    ; Merged with C_MIN[31]                                                                                      ;
+; H_DIFF[8..28]                                   ; Merged with H_DIFF[31]                                                                                     ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[31]~68  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[31]~31                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[31]~105 ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[31]~31                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[31]     ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[31]~31                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[32]~69  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[32]~32                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[32]~106 ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[32]~32                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[32]     ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[32]~32                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[33]~70  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[33]~33                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[33]~107 ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[33]~33                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[33]     ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[33]~33                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[34]~71  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[34]~34                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[34]~108 ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[34]~34                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[34]     ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[34]~34                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[35]~72  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[35]~35                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[35]~109 ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[35]~35                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[35]     ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[35]~35                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[36]~73  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[36]~36                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[36]~110 ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[36]~36                                                 ;
+; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[36]     ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[36]~36                                                 ;
 ; vdata[2,4]                                      ; Merged with vdata[1]                                                                                       ;
 ; vdata[6,7]                                      ; Merged with vdata[5]                                                                                       ;
 ; vadr_M[0]                                       ; Merged with vadr_B[0]                                                                                      ;
@@ -609,9 +630,6 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; vadr_M[14]                                      ; Merged with vadr_B[14]                                                                                     ;
 ; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[28]~65  ; Merged with RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][5]__2|altsyncram_s6h1:auto_generated|address_reg_b[0] ;
 ; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[30]~67  ; Merged with RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][5]__2|altsyncram_s6h1:auto_generated|address_reg_b[1] ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[36]~110 ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[36]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[36]~36  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[36]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[36]~73  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[36]                                                    ;
 ; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[0]~0    ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[0]                                                     ;
 ; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[0]~37   ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[0]                                                     ;
 ; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[0]~74   ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[0]                                                     ;
@@ -670,23 +688,6 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[30]     ; Merged with RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][5]__4|altsyncram_s6h1:auto_generated|address_reg_b[1] ;
 ; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[28]~28  ; Merged with RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][5]__1|altsyncram_s6h1:auto_generated|address_reg_b[0] ;
 ; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[30]~30  ; Merged with RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][5]__1|altsyncram_s6h1:auto_generated|address_reg_b[1] ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[35]~109 ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[35]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[35]~35  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[35]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[35]~72  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[35]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[34]~108 ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[34]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[34]~34  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[34]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[34]~71  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[34]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[33]~107 ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[33]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[33]~33  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[33]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[33]~70  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[33]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[32]~106 ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[32]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[32]~32  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[32]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[32]~69  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[32]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[31]~105 ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[31]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[31]~31  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[31]                                                    ;
-; RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[31]~68  ; Merged with RAM_CLEAN_2:RAM_inst_M|ram_0__5__bypass[31]                                                    ;
-; C_MAX[8,9,11..31]                               ; Merged with C_MAX[10]                                                                                      ;
-; H_DIFF[8,9,11..28]                              ; Merged with H_DIFF[10]                                                                                     ;
 ; Cb_Data2[7]                                     ; Merged with Cb_Data1[7]                                                                                    ;
 ; Cb_Data2[6]                                     ; Merged with Cb_Data1[6]                                                                                    ;
 ; Cb_Data2[5]                                     ; Merged with Cb_Data1[5]                                                                                    ;
@@ -703,32 +704,34 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; Cr_Data2[2]                                     ; Merged with Cr_Data1[2]                                                                                    ;
 ; Cr_Data2[1]                                     ; Merged with Cr_Data1[1]                                                                                    ;
 ; Cr_Data2[0]                                     ; Merged with Cr_Data1[0]                                                                                    ;
-; C_MIN[8,9,11..31]                               ; Merged with C_MIN[10]                                                                                      ;
 ; B1_int[6]                                       ; Merged with A_int[5]                                                                                       ;
+; B1_int[5]                                       ; Merged with A_int[4]                                                                                       ;
+; A_int[0]                                        ; Merged with A_int[4]                                                                                       ;
+; C_int[3]                                        ; Merged with A_int[4]                                                                                       ;
+; B1_int[1]                                       ; Merged with A_int[4]                                                                                       ;
+; X_int[0]                                        ; Merged with A_int[4]                                                                                       ;
+; B1_int[3]                                       ; Merged with A_int[4]                                                                                       ;
+; C_int[1]                                        ; Merged with A_int[4]                                                                                       ;
+; A_int[2]                                        ; Merged with A_int[4]                                                                                       ;
+; X_int[2]                                        ; Merged with A_int[4]                                                                                       ;
+; B2_int[0,1]                                     ; Merged with A_int[4]                                                                                       ;
 ; B1_int[4]                                       ; Merged with A_int[4]                                                                                       ;
 ; A_int[3]                                        ; Merged with A_int[4]                                                                                       ;
 ; C_int[2]                                        ; Merged with A_int[4]                                                                                       ;
-; B1_int[0,2]                                     ; Merged with A_int[4]                                                                                       ;
+; B1_int[2]                                       ; Merged with A_int[4]                                                                                       ;
 ; C_int[0]                                        ; Merged with A_int[4]                                                                                       ;
+; B1_int[0]                                       ; Merged with A_int[4]                                                                                       ;
 ; A_int[1]                                        ; Merged with A_int[4]                                                                                       ;
+; B2_int[3]                                       ; Merged with A_int[4]                                                                                       ;
 ; X_int[1]                                        ; Merged with A_int[4]                                                                                       ;
-; B2_int[0,3]                                     ; Merged with A_int[4]                                                                                       ;
-; B1_int[3,5]                                     ; Merged with A_int[4]                                                                                       ;
-; C_int[3]                                        ; Merged with A_int[4]                                                                                       ;
-; A_int[2]                                        ; Merged with A_int[4]                                                                                       ;
-; C_int[1]                                        ; Merged with A_int[4]                                                                                       ;
-; B1_int[1]                                       ; Merged with A_int[4]                                                                                       ;
-; A_int[0]                                        ; Merged with A_int[4]                                                                                       ;
-; X_int[0,2]                                      ; Merged with A_int[4]                                                                                       ;
-; B2_int[2]                                       ; Merged with A_int[4]                                                                                       ;
 ; C_int[6]                                        ; Merged with B2_int[6]                                                                                      ;
 ; C_int[5]                                        ; Merged with B2_int[5]                                                                                      ;
 ; C_int[4]                                        ; Merged with B2_int[4]                                                                                      ;
 ; DELTA[9..30]                                    ; Merged with DELTA[31]                                                                                      ;
-; B2_int[1]                                       ; Merged with A_int[4]                                                                                       ;
+; B2_int[2]                                       ; Merged with A_int[4]                                                                                       ;
 ; A_int[4]                                        ; Stuck at GND due to stuck port data_in                                                                     ;
-; C_MAX[10]                                       ; Stuck at GND due to stuck port data_in                                                                     ;
-; C_MIN[10]                                       ; Stuck at GND due to stuck port data_in                                                                     ;
+; C_MAX[31]                                       ; Stuck at GND due to stuck port data_in                                                                     ;
+; C_MIN[31]                                       ; Stuck at GND due to stuck port data_in                                                                     ;
 ; DELTA[31]                                       ; Merged with DELTA[8]                                                                                       ;
 ; X_int[3]                                        ; Lost fanout                                                                                                ;
 ; Total Number of Removed Registers = 388         ;                                                                                                            ;
@@ -969,7 +972,7 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|mixer_addr_reg[4]                       ;
 ; 5:1                ; 5 bits    ; 15 LEs        ; 5 LEs                ; 10 LEs                 ; Yes        ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|sld_rom_sr:hub_info_reg|word_counter[0] ;
 ; 6:1                ; 9 bits    ; 36 LEs        ; 9 LEs                ; 27 LEs                 ; Yes        ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|irsr_reg[2]                             ;
-; 34:1               ; 4 bits    ; 88 LEs        ; 56 LEs               ; 32 LEs                 ; Yes        ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|design_hash_reg[0]                      ;
+; 34:1               ; 4 bits    ; 88 LEs        ; 64 LEs               ; 24 LEs                 ; Yes        ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|design_hash_reg[0]                      ;
 ; 20:1               ; 4 bits    ; 52 LEs        ; 32 LEs               ; 20 LEs                 ; Yes        ; |FPGA_Processing|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|sld_rom_sr:hub_info_reg|WORD_SR[0]      ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------------------------------+
 
@@ -2431,8 +2434,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------------------+--------------+
 ; Partition Name   ; Elapsed Time ;
 +------------------+--------------+
-; Top              ; 00:03:06     ;
-; sld_hub:auto_hub ; 00:00:00     ;
+; Top              ; 00:03:20     ;
+; sld_hub:auto_hub ; 00:00:01     ;
 +------------------+--------------+
 
 
@@ -2457,7 +2460,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Tue Jul 17 17:49:26 2018
+    Info: Processing started: Tue Jul 17 22:52:51 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off SoC_Brain -c SoC_Brain
 Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
 Info (12021): Found 1 design units, including 1 entities, in source file ram.v
@@ -2470,18 +2473,18 @@ Info (12021): Found 4 design units, including 4 entities, in source file fpga_pr
 Info (12021): Found 1 design units, including 1 entities, in source file pll.v
     Info (12023): Found entity 1: pll
 Info (12127): Elaborating entity "FPGA_Processing" for the top level hierarchy
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(230): truncated value with size 32 to match size of target (21)
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(231): truncated value with size 32 to match size of target (21)
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(232): truncated value with size 32 to match size of target (21)
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(233): truncated value with size 32 to match size of target (21)
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(234): truncated value with size 32 to match size of target (21)
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(235): truncated value with size 32 to match size of target (21)
+Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(238): truncated value with size 32 to match size of target (21)
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(239): truncated value with size 32 to match size of target (21)
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(240): truncated value with size 32 to match size of target (21)
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(241): truncated value with size 32 to match size of target (21)
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(242): truncated value with size 32 to match size of target (21)
-Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(243): truncated value with size 32 to match size of target (21)
-Warning (10235): Verilog HDL Always Construct warning at FPGA_Processing.v(676): variable "vdd" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10766): Verilog HDL Synthesis Attribute warning at FPGA_Processing.v(676): ignoring full_case attribute on case statement with explicit default case item
+Warning (10235): Verilog HDL Always Construct warning at FPGA_Processing.v(675): variable "vdd" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10766): Verilog HDL Synthesis Attribute warning at FPGA_Processing.v(675): ignoring full_case attribute on case statement with explicit default case item
 Info (12128): Elaborating entity "pll" for hierarchy "pll:pll_inst"
 Info (12128): Elaborating entity "altpll" for hierarchy "pll:pll_inst|altpll:altpll_component"
 Info (12130): Elaborated megafunction instantiation "pll:pll_inst|altpll:altpll_component"
@@ -2929,7 +2932,7 @@ Info (13014): Ignored 109 buffer(s)
 Info (13000): Registers with preset signals will power-up high
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Info (286031): Timing-Driven Synthesis is running on partition "Top"
-Info (17049): 4 registers lost all their fanouts during netlist optimizations.
+Info (17049): 3 registers lost all their fanouts during netlist optimizations.
 Info (13000): Registers with preset signals will power-up high
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
@@ -2948,19 +2951,19 @@ Warning (21074): Design contains 8 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "vpo[5]"
     Warning (15610): No output dependent on input pin "vpo[6]"
     Warning (15610): No output dependent on input pin "vpo[7]"
-Info (21057): Implemented 5989 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 5984 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 43 input pins
     Info (21059): Implemented 5 output pins
     Info (21060): Implemented 16 bidirectional pins
-    Info (21061): Implemented 5635 logic cells
+    Info (21061): Implemented 5630 logic cells
     Info (21064): Implemented 269 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 19 DSP elements
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 50 warnings
-    Info: Peak virtual memory: 5727 megabytes
-    Info: Processing ended: Tue Jul 17 17:53:35 2018
-    Info: Elapsed time: 00:04:09
-    Info: Total CPU time (on all processors): 00:04:06
+    Info: Peak virtual memory: 5729 megabytes
+    Info: Processing ended: Tue Jul 17 22:57:16 2018
+    Info: Elapsed time: 00:04:25
+    Info: Total CPU time (on all processors): 00:04:21
 
 
 +------------------------------------------+
