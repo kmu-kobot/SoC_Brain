@@ -10,7 +10,6 @@
 
 #define MISSION_0_UPPER 60
 #define MISSION_0_RANGE 30
-
 #define MISSION_0_THRESHOLDS 50
 
 int mission_0_1_wait_play(U16 *image);

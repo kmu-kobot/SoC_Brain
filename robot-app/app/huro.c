@@ -65,8 +65,6 @@ int huro(void) {
                         step += mission_2_4_after_bridge_set_straight(fpga_videodata); // 직선 맞추기
 
                         if (step == 4) {
-                            mission_2_2_watch_side();
-                            setFPGAVideoData(fpga_videodata);
                             step += mission_2_5_after_bridge_set_center(fpga_videodata);// 길이 맞추기
                         }
 
@@ -85,10 +83,7 @@ int huro(void) {
                     case 4:
                         mission_3_4_watch_front();
                         setFPGAVideoData(fpga_videodata);
-                        if (mission_3_4_is_not_front_of_bomb(fpga_videodata)) {
-                            Action_WALK_FRONT_SHORT(3);
-                            mission += 1;
-                        }
+                        mission += mission_3_4_is_not_front_of_bomb(fpga_videodata);
                         step = 0;
                         break;
                     default:
@@ -113,11 +108,11 @@ int huro(void) {
                         setFPGAVideoData(fpga_videodata);
                         step += mission_4_6_set_center(fpga_videodata);
 
-//                        if (step == 6) {
-//                            step += mission_2_4_after_bridge_set_straight(fpga_videodata);
-//                        }
-//
-//                        step = (step == 7) ? 6 : 5;
+                        if (step == 6) {
+                            step += mission_2_4_after_bridge_set_straight(fpga_videodata);
+                        }
+
+                        step = (step == 7) ? 6 : 5;
                         break;
                     case 6:
                         mission = 10;
@@ -188,12 +183,12 @@ int huro(void) {
                         nextMission = mission_5_6_set_only_one_bk_bar(fpga_videodata);
                         step += nextMission;
 
-                        if (step == 6 && nextMission) {
-                            step += mission_5_6_set_straight(fpga_videodata);
-                        }
-
                         if (!nextMission) {
                             Action_WALK_FRONT_SHORT(1);
+                        }
+
+                        if (step == 6 && nextMission) {
+                            step += mission_5_6_set_straight(fpga_videodata);
                         }
 
                         nextMission = 0;
@@ -205,7 +200,7 @@ int huro(void) {
                     case 7:
                         mission_5_2_watch_side();
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_2_2_before_bridge_set_center(fpga_videodata);
+                        step += mission_2_5_after_bridge_set_center(fpga_videodata);
                         break;
                     case 8:
                         mission += 1;
@@ -236,12 +231,12 @@ int huro(void) {
             case 7: // MISSION 7: YELLOW HOLE
                 switch (step) {
                     case 0:
-                        mission_7_1_watch_below(8);
+                        mission_7_1_watch_below(5);
                         setFPGAVideoData(fpga_videodata);
                         step += mission_7_1_wait_front_of_yellow_hole_bridge(fpga_videodata, 5);
                         break;
                     case 1:
-                        mission_7_2_watch_side();
+                        mission_7_2_watch_below();
                         setFPGAVideoData(fpga_videodata);
                         step += mission_7_2_before_bridge_set_center(fpga_videodata);
                         break;
@@ -251,65 +246,46 @@ int huro(void) {
                     case 3:
                         // TODO: 노란색 다리 위에서 중심 맞추는거 검은색 보고 맞추는거로 이거는 고려...
 
-                        // TODO: 1. 노란색 다리를 보고 먼저 중심을 맞춘다.
-                        // TODO: 2. 앞으로 조금씩 걸어가면서 검은색이 윗부분에 나올때 까지 반복한다.
-                        // TODO: 3. 검은색이 검출되었으면 중심을 다시 맞추고 발앞에 검은선이 있을때 까지 반복한다.
+                        // 1. 노란색 다리를 보고 먼저 중심을 맞춘다.
+                        // 2. 앞으로 조금씩 걸어가면서 검은색이 윗부분에 나올때 까지 반복한다.
+                        // 3. 검은색이 검출되었으면 중심을 다시 맞추고 발앞에 검은선이 있을때 까지 반복한다.
 
-                        mission_7_2_watch_side();
+                        mission_7_4_watch_below(5);
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_7_4_set_center_on_yellow_bridge(fpga_videodata);
-
-                        if (step == 4) {
-                            mission_7_2_watch_side();
-                            setFPGAVideoData(fpga_videodata);
-                            step += mission_7_4_set_straight_on_yellow_bridge(fpga_videodata);
-                        }
-
-                        if (step == 5) {
-                            mission_7_5_watch_below();
-                            setFPGAVideoData(fpga_videodata);
-                            step += mission_7_5_walk_until_black_line(fpga_videodata);
-                            if (step == 5) {
-                                Action_WALK_FRONT_SHORT(2);
-                            }
-                        }
-                        step = (step == 6) ? 4 : 3;
+                        step += mission_7_4_walk_until_black_line(fpga_videodata);
                         break;
                     case 4:
                         // TODO: 노란색 다리 위에서 중심 맞추는거 검은색 보고 맞추는거로
-                        mission_7_2_watch_side();
+                        mission_7_4_watch_below(5);
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_7_4_set_straight_on_yellow_bridge(fpga_videodata);
+                        step += mission_7_5_set_center_on_yellow_bridge(fpga_videodata);
 
-                        if (step == 4) {
-                            mission_7_2_watch_side();
-                            setFPGAVideoData(fpga_videodata);
+                        if (step == 5) {
+                            step += mission_7_5_set_straight_on_yellow_bridge(fpga_videodata);
                         }
 
-                        step += mission_7_4_set_center_on_yellow_bridge(fpga_videodata);
-
                         if (step == 6) {
-                            step = 4;
-                            step += mission_7_6_jump_hole();
+                            step = 4 + mission_7_5_walk_until_line_front_of_feet(fpga_videodata);
                         } else {
                             step = 4;
                         }
 
                         break;
                     case 5:
-                        mission_7_2_watch_side();
+                        step += mission_7_6_jump_hole();
+                        break;
+                    case 6:
+                        mission_7_7_watch_side(5);
                         setFPGAVideoData(fpga_videodata);
                         step += mission_7_7_after_yellow_bridge_set_center(fpga_videodata);// 길이 맞추기
 
-                        if (step == 5) {
-                            mission_7_2_watch_side();
-                            setFPGAVideoData(fpga_videodata);
+                        if (step == 7) {
+                            step += mission_7_7_after_yellow_bridge_set_straight(fpga_videodata); // 직선 맞추기
                         }
-                        step += mission_7_7_after_yellow_bridge_set_straight(fpga_videodata); // 직선 맞추기
 
-                        step = (step == 7) ? 6 : 5;
+                        step = (step == 8) ? 7 : 6;
                         break;
-                    case 6:
+                    case 7:
                         mission += 1;
                         step = 0;
                         break;

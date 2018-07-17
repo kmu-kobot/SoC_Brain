@@ -46,6 +46,8 @@ int mission_4_2_ready_hurdle(U16 *image) {
 }
 
 int mission_4_4_jump_hurdle(void) {
+    Action_WALK_FRONT_LONG(3);
+    RobotSleep(5);
     Action_MISSION_4_HURDLING();
     RobotSleep(5);
     return 1;
@@ -90,7 +92,7 @@ int mission_4_5_set_front_of_not_bk(U16 *image) {
 
     int rResult = 1;
     if (s < MISSION_4_5_WHITE_RANGE) {
-        Action_LEFT_TURN_BODY(4);
+        Action_LEFT_TURN_BODY(5);
         rResult = 0;
     }
     RobotSleep(5);

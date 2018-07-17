@@ -48,46 +48,29 @@ void mission_2_2_watch_side(void) {
 }
 
 int mission_2_2_before_bridge_set_center_version2(U16 *image) {
-    U16 dir, cnt;
-    int col, row, flagSign, green_len[2] = {0,};
+    U16 dir;
+    int col, row, red_bridge[2] = {0,};
+    int w = WIDTH / 2;
 
     for (dir = 0; dir < 2; ++dir) {
-        flagSign = (dir) ? 1 : -1;
-        for (col = 0; col < WIDTH / 2; ++col) {
-            cnt = 0;
-            for (row = MISSION_2_2_REB_BRIDGE_ROW_POINT;
-                 row < MISSION_2_2_REB_BRIDGE_ROW_POINT + MISSION_2_2_REB_BRIDGE_ROW_RANGE;
-                 ++row) {
-                if (CheckCol(WIDTH / 2 + ROBOT_CENTER_OFFSET + col * flagSign)) {
-                    cnt += GetValueRGBYOBK(
-                            GetPtr(image, row, WIDTH / 2 + ROBOT_CENTER_OFFSET + col * flagSign, WIDTH),
-                            GREEN
-                    );
-                } else {
-                    break;
-                }
-            }
-
-            if (cnt < 3) {
-                green_len[dir] = col;
-                break;
+        for (row = 0; row < HEIGHT; ++row) {
+            for (col = w * (dir); col < w * (dir + 1); ++col) {
+                red_bridge[dir] += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED);
             }
         }
     }
 
     // 0: LEFT, 1: RIGHT
-    int r = green_len[0] - green_len[1];
+    int r = red_bridge[0] - red_bridge[1];
 
-    printf("\nM5-5: SET CENTER\n");
-    printf("LEFT: %d, RIGHT: %d, r: %d\n\n", green_len[0], green_len[1], r);
+    printf("\n\tM5-5: SET CENTER\n");
+    printf("\t\tLEFT: %d, RIGHT: %d, r: %d\n\n", red_bridge[0], red_bridge[1], r);
 
     if (((r > 0) ? r : (-r)) > MISSION_2_4_BED_BRIDGE_THRESHOLDS) {
         if (r > 0) {
             Action_LEFT_MOVE_LONG(1);
-            Action_RIGHT_MOVE_SHORT(4);
         } else {
             Action_RIGHT_MOVE_LONG(1);
-            Action_LEFT_MOVE_SHORT(4);
         }
         RobotSleep(5);
     }
@@ -156,14 +139,8 @@ int mission_2_4_after_bridge_set_straight(U16 *image) {
 
     for (i = 0; i < 2; ++i) {
         for (row = HEIGHT; row > 0; --row) {
-            if (GetValueRGBYOBK(
-                        GetPtr(image, row, col[i], WIDTH),
-                        BLACK
-                ) &&
-                GetValueRGBYOBK(
-                        GetPtr(image, row, col[i] + 1, WIDTH),
-                        BLACK
-                )) {
+            if (GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) &&
+                GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK)) {
                 black_len[i] = -row;
                 break;
             }
