@@ -16,8 +16,12 @@
 #define MISSION_2_2_BLACK_LINE_RANGE 50
 #define MISSION_2_2_BLACK_LINE_ERROR 3
 
+#define MISSION_2_2_REB_BRIDGE_ROW_POINT 60
+#define MISSION_2_2_REB_BRIDGE_ROW_RANGE 30
+
 #define MISSION_2_4_BLACK_LINE_COL_POINT_1 80
 #define MISSION_2_4_BLACK_LINE_COL_POINT_2 100
+#define MISSION_2_4_BED_BRIDGE_THRESHOLDS 8
 
 // TODO: 기울기 상수 다시 줘야함
 #define MISSION_2_4_BLACK_LINE_SLOPE 10
@@ -30,7 +34,11 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat);
 
 void mission_2_2_watch_side(void);
 
+void mission_2_2_watch_front(void);
+
 int mission_2_2_before_bridge_set_center(U16 *image);
+
+int mission_2_2_before_bridge_set_center_version2(U16 *image);
 
 int mission_2_3_escape_red_bridge(void);
 

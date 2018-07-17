@@ -37,9 +37,62 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat) {
     return rReturn;
 }
 
+void mission_2_2_watch_front(void) {
+    Action_INIT_ROBOT();
+    RobotSleep(5);
+}
+
 void mission_2_2_watch_side(void) {
     Action_LEFT_TURN_HEAD_LONG();
     RobotSleep(5);
+}
+
+int mission_2_2_before_bridge_set_center_version2(U16 *image) {
+    U16 dir, cnt;
+    int col, row, flagSign, green_len[2] = {0,};
+
+    for (dir = 0; dir < 2; ++dir) {
+        flagSign = (dir) ? 1 : -1;
+        for (col = 0; col < WIDTH / 2; ++col) {
+            cnt = 0;
+            for (row = MISSION_2_2_REB_BRIDGE_ROW_POINT;
+                 row < MISSION_2_2_REB_BRIDGE_ROW_POINT + MISSION_2_2_REB_BRIDGE_ROW_RANGE;
+                 ++row) {
+                if (CheckCol(WIDTH / 2 + ROBOT_CENTER_OFFSET + col * flagSign)) {
+                    cnt += GetValueRGBYOBK(
+                            GetPtr(image, row, WIDTH / 2 + ROBOT_CENTER_OFFSET + col * flagSign, WIDTH),
+                            GREEN
+                    );
+                } else {
+                    break;
+                }
+            }
+
+            if (cnt < 3) {
+                green_len[dir] = col;
+                break;
+            }
+        }
+    }
+
+    // 0: LEFT, 1: RIGHT
+    int r = green_len[0] - green_len[1];
+
+    printf("\nM5-5: SET CENTER\n");
+    printf("LEFT: %d, RIGHT: %d, r: %d\n\n", green_len[0], green_len[1], r);
+
+    if (((r > 0) ? r : (-r)) > MISSION_2_4_BED_BRIDGE_THRESHOLDS) {
+        if (r > 0) {
+            Action_LEFT_MOVE_LONG(1);
+            Action_RIGHT_MOVE_SHORT(4);
+        } else {
+            Action_RIGHT_MOVE_LONG(1);
+            Action_LEFT_MOVE_SHORT(4);
+        }
+        RobotSleep(5);
+    }
+
+    return ((r > 0) ? r : (-r)) < MISSION_2_4_BED_BRIDGE_THRESHOLDS;
 }
 
 int mission_2_2_before_bridge_set_center(U16 *image) {
