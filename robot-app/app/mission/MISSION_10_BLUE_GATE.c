@@ -105,8 +105,8 @@ int mission_10_3_set_straight_upper_gate(U16 *image) {
                         GetPtr(image, row, col + 1, WIDTH),
                         BLUE
                 )) {
-                pos_blue_col[0] == col;
-                pos_blue_row[0] == row;
+                pos_blue_col[0] = (U16) col;
+                pos_blue_row[0] = (U16) row;
                 break;
             }
         }
@@ -125,8 +125,8 @@ int mission_10_3_set_straight_upper_gate(U16 *image) {
                         GetPtr(image, row, col + 1, WIDTH),
                         BLUE
                 )) {
-                pos_blue_col[0] == col;
-                pos_blue_row[0] == row;
+                pos_blue_col[1] = (U16) col;
+                pos_blue_row[1] = (U16) row;
                 break;
             }
         }
@@ -162,7 +162,3 @@ int mission_10_4_escape_blue_gate(void) {
     Action_WALK_FRONT_LONG(5);
     RobotSleep(3);
 }
-
-
-
-

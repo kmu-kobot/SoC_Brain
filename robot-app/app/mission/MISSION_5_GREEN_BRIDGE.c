@@ -211,17 +211,10 @@ int mission_5_6_set_only_one_bk_bar(U16 *image) {
 
     }
 
-    printf("\t\t- M5-6: SET CENTER\n");
+    printf("\n\t\t- M5-6: SET CENTER\n");
     printf("\t\t\t+ bk_len row: %d, bk: %d\n", bk_len, ((i != -1) ? i + 1 : 0));
 
-    int rResult = 0;
-    if (i != 0) {
-        Action_WALK_FRONT_SHORT(1);
-    } else {
-        rResult = 1;
-    }
-
-    return rResult;
+    return i == 0;
 }
 
 int mission_5_6_set_straight(U16 *image) {
