@@ -5,7 +5,8 @@
 #include "MISSION_4_JUMP_HURDLE.h"
 
 void mission_4_1_watch_front(int repeat) {
-    Action_WALK_FRONT_SHORT(repeat);
+    Action_WALK_FRONT_LONG(repeat);
+    RobotSleep(5);
 }
 
 int mission_4_2_ready_hurdle(U16 *image) {
@@ -40,21 +41,28 @@ int mission_4_2_ready_hurdle(U16 *image) {
     s /= MISSION_4_HURDLE_CRITERI;
     printf("AVG: %f\n", s);
 
-    return (MISSION_4_2_HURDLE_THRESHOLDS - MISSION_4_HURDLE_ERROR > s ||
-            s > MISSION_4_2_HURDLE_THRESHOLDS + MISSION_4_HURDLE_ERROR);
+    return (MISSION_4_2_HURDLE_THRESHOLDS - MISSION_4_HURDLE_ERROR < s &&
+            s < MISSION_4_2_HURDLE_THRESHOLDS + MISSION_4_HURDLE_ERROR);
 }
 
 int mission_4_4_jump_hurdle(void) {
     Action_MISSION_4_HURDLING();
+    RobotSleep(5);
     return 1;
 }
 
-int mission_4_5_set_straight(U16 *image) {
-    U32 row, i, pos_bk[3] = {0,};
-    U16 col[3] = {45, 90, 135};
 
-    for (i = 0; i < 3; ++i) {
-        for (row = HEIGHT; row > 0; row--) {
+void mission_4_5_watch_diagonal_line(void) {
+    Action_INIT_ROBOT();
+    RobotSleep(5);
+}
+
+int mission_4_5_set_front_of_not_bk(U16 *image) {
+    U32 col[3] = {70, 60, 90}, row, i;
+    U16 checkHurdleLine[MISSION_4_HURDLE_CRITERI] = {0,};
+
+    for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
+        for (row = HEIGHT; row > 0; --row) {
             if (GetValueRGBYOBK(
                         GetPtr(image, row, col[i], WIDTH),
                         BLACK
@@ -63,106 +71,81 @@ int mission_4_5_set_straight(U16 *image) {
                         GetPtr(image, row, col[i] + 1, WIDTH),
                         BLACK
                 )) {
-                pos_bk[i] = row;
-                break;
-            }
-        }
-    }
-
-    Action_INIT_ROBOT();
-
-    int rResult = 0;
-    if (
-            (pos_bk[2] - pos_bk[1]) < -10 &&
-            (pos_bk[1] - pos_bk[0] < -10)
-            ) {
-        Action_LEFT_TURN_BODY(1);
-    } else if (
-            (pos_bk[2] - pos_bk[1]) > 10 &&
-            (pos_bk[1] - pos_bk[0] > 10)
-            ) {
-        Action_RIGHT_TURN_BODY(1);
-    } else {
-        rResult = 1;
-    }
-
-    return rResult;
-}
-
-int mission_4_6_check_bk_line(U16 *image) {
-    U32 col, row, i;
-    U16 checkHurdleLine[MISSION_4_HURDLE_CRITERI] = {0,};
-
-    for (row = HEIGHT; row > 0; --row) {
-        for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
-            col = (i + 1) * WIDTH / (MISSION_4_HURDLE_CRITERI + 1);
-            if (GetValueRGBYOBK(
-                        GetPtr(image, row, col, WIDTH),
-                        BLACK
-                ) &&
-                GetValueRGBYOBK(
-                        GetPtr(image, row, col + 1, WIDTH),
-                        BLACK
-                )) {
                 checkHurdleLine[i] = (U16) (HEIGHT - row);
                 break;
             }
         }
     }
 
-    int rResult = 1;
-    for (col = 0; col < 3; ++col) {
-        if (checkHurdleLine[col] <= MISSION_4_BK_LINE_RANGE) {
-            rResult = 0;
-            break;
-        }
+    double s = 0;
+    printf("\nM4-5: BLACK LINE\n");
+    for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
+        s += checkHurdleLine[i];
+        printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);
     }
+    printf("\n");
 
-    if (!rResult) {
-        Action_LEFT_TURN_BODY(2);
+    s /= MISSION_4_HURDLE_CRITERI;
+    printf("AVG: %f\n\n", s);
+
+    int rResult = 1;
+    if (s < MISSION_4_5_WHITE_RANGE) {
+        Action_LEFT_TURN_BODY(4);
+        rResult = 0;
     }
+    RobotSleep(5);
 
     return rResult;
 }
 
-int mission_4_7_set_center(U16 *image) {
-    U32 row, col, i, pos_bk[MISSION_4_HURDLE_CRITERI] = {0,};
+int mission_4_6_set_center(U16 *image) {
+    U32 col[3] = {70, 60, 90}, row, i;
+    U16 checkHurdleLine[MISSION_4_HURDLE_CRITERI] = {0,};
 
     for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
-        for (row = HEIGHT; row > 0; row--) {
-            col = (i + 1) * (WIDTH / (MISSION_4_HURDLE_CRITERI + 1));
+        for (row = HEIGHT; row > 0; --row) {
             if (GetValueRGBYOBK(
-                        GetPtr(image, row, col, WIDTH),
+                        GetPtr(image, row, col[i], WIDTH),
                         BLACK
                 ) &&
                 GetValueRGBYOBK(
-                        GetPtr(image, row, col + 1, WIDTH),
+                        GetPtr(image, row, col[i] + 1, WIDTH),
                         BLACK
                 )) {
-                pos_bk[i] = row;
+                checkHurdleLine[i] = (U16) row;
                 break;
             }
         }
     }
 
-    Action_INIT_ROBOT();
+    double s = 0;
+    printf("M4-5: BLACK LINE\n");
+    for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
+        s += checkHurdleLine[i];
+        printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);
+    }
+    printf("\n");
+
+    s /= MISSION_4_HURDLE_CRITERI;
+    printf("M4-5: AVG: %f\n", s);
 
     int rResult = 0;
-
-    if ((pos_bk[0] > MISSION_4_BK_LINE_LOWER) &&
-        (pos_bk[1] > MISSION_4_BK_LINE_LOWER) &&
-        (pos_bk[2] > MISSION_4_BK_LINE_LOWER)) {
-        Action_LEFT_TURN_BODY(1);
-    } else if ((pos_bk[0] > MISSION_4_BK_LINE_LOWER - MISSION_4_BK_LINE_RANGE) &&
-               (pos_bk[1] > MISSION_4_BK_LINE_LOWER - MISSION_4_BK_LINE_RANGE) &&
-               (pos_bk[2] > MISSION_4_BK_LINE_LOWER - MISSION_4_BK_LINE_RANGE)) {
-        Action_RIGHT_TURN_BODY(1);
-    } else
+    if (s < MISSION_4_5_BK_LINE_RANGE - MISSION_4_5_BK_LINE_ERROR) {
+        Action_RIGHT_MOVE_LONG(1);
+    } else if (s > MISSION_4_5_BK_LINE_RANGE + MISSION_4_5_BK_LINE_ERROR) {
+        Action_LEFT_MOVE_LONG(1);
+    } else {
         rResult = 1;
+    }
+
+    if (!rResult) {
+        RobotSleep(5);
+    }
 
     return rResult;
 }
 
-void mission_4_7_watch_side(void) {
+void mission_4_6_watch_side(void) {
     Action_RIGHT_TURN_HEAD_LONG();
+    RobotSleep(5);
 }

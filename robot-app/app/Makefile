@@ -27,7 +27,19 @@ export AS LD CC CPP AR NM STRIP OBJCOPY OBJDUMP RANLIB CFLAGS
 
 PROJ = SoC_App
 
-OBJS = main.o huro.o ./library/graphic_api.o ./library/robot_protocol.o ./library/uart_api.o ./library/robot_action.o ./mission/MISSION_0_READY_PLAY.o  ./mission/MISSION_1_YELLOW_BARRICADE.o ./mission/MISSION_2_RED_BRIDGE.o ./mission/MISSION_4_JUMP_HURDLE.o ./mission/MISSION_7_YELLOW_HOLE_BRIDGE.o ./mission/MISSION_5_GREEN_BRIDGE.o
+OBJS = main.o huro.o \
+    ./library/graphic_api.o \
+    ./library/robot_protocol.o \
+    ./library/uart_api.o \
+    ./library/robot_action.o \
+    ./mission/MISSION_0_READY_PLAY.o \
+    ./mission/MISSION_1_YELLOW_BARRICADE.o \
+    ./mission/MISSION_2_RED_BRIDGE.o \
+    ./mission/MISSION_4_JUMP_HURDLE.o \
+    ./mission/MISSION_5_GREEN_BRIDGE.o \
+    ./mission/MISSION_7_YELLOW_HOLE_BRIDGE.o \
+    ./mission/MISSION_9_LAST_BARRICADE.o \
+    ./mission/MISSION_10_BLUE_GATE.o
 
 
 all: $(PROJ)
