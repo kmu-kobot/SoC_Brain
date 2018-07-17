@@ -49,10 +49,7 @@ int mission_7_2_before_bridge_set_center(U16 *image) {
     for (dir = 0; dir < 2; ++dir) {
         for (col = w * dir; col < w * (dir + 1); ++col) {
             for (row = 0; row < HEIGHT; ++row) {
-                yellow_len[dir] += GetValueRGBYOBK(
-                        GetPtr(image, row, col, WIDTH),
-                        YELLOW
-                );
+                yellow_len[dir] += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW);
             }
         }
     }

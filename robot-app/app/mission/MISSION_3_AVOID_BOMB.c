@@ -18,12 +18,13 @@ int mission_3_4_is_not_front_of_bomb(U16 *image) {
     for (i = 0; i < 3; ++i) {
         for (col = col_start_end[0]; col < col_start_end[1]; ++col) {
             for (row = MISSION_3_4_HEIGHT_OFFSET; row < HEIGHT; ++row) {
-                check += GetValueRGBYOBK(
-                        GetPtr(image, row, col, WIDTH),
-                        BLACK
-                );
+                check += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
             }
         }
+    }
+
+    if (check < MISSION_3_4_BOMB) {
+        Action_WALK_FRONT_SHORT(3);
     }
 
     return check < MISSION_3_4_BOMB;
@@ -41,11 +42,8 @@ int mission_3_default_avoid_bomb(U16 *image) {
 
     for (i = 0; i < 3; ++i) {
         for (col = col_start_end[i][0]; col < col_start_end[i][1]; ++col) {
-            for (row = MISSION_3_DEFAULT_HEIGHT_OFFSET; row < HEIGHT - MISSION_3_DEFAULT_HEIGHT_OFFSET; ++row) {
-                check[i] += GetValueRGBYOBK(
-                        GetPtr(image, row, col, WIDTH),
-                        BLACK
-                );
+            for (row = 0; row < HEIGHT - MISSION_3_DEFAULT_HEIGHT_OFFSET; ++row) {
+                check[i] += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
             }
         }
 
@@ -79,20 +77,20 @@ int mission_3_default_avoid_bomb(U16 *image) {
         check[1] = 0;
         check[2] = 0;
 
-        for (col = col_start_end[1][0]; col < col_start_end[1][1]; ++col) {
+        for (row = 0; row < HEIGHT - MISSION_3_DEFAULT_HEIGHT_OFFSET; ++row) {
             check[0] = 0;
-            for (row = MISSION_3_DEFAULT_HEIGHT_OFFSET; row < HEIGHT - MISSION_3_DEFAULT_HEIGHT_OFFSET; ++row) {
+            for (col = col_start_end[1][0]; col < col_start_end[1][1]; ++col) {
                 check[0] += GetValueRGBYOBK(
                         GetPtr(image, row, col, WIDTH),
                         BLACK
                 );
             }
-            if (check[1] < check[0]) {
-                check[2] = col;
+            if (check[1] < check[0] && check[2] < row) {
+                check[2] = row;
+                check[1] = check[0];
             }
         }
 
-        check[2] += col_start_end[1][0];
         printf("\t\t\t- O-x: %d", check[2]);
 
         if (check[2] < WIDTH / 2 - MISSION_3_DEFAULT_AVOID_BOMB_RANGE) {

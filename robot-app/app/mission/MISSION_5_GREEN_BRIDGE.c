@@ -17,10 +17,7 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
     int cntBlack = 0;
     for (row = 0; row < HEIGHT; ++row) {
         for (col = 0; col < WIDTH; col++) {
-            cntBlack += GetValueRGBYOBK(
-                    GetPtr(image, row, col, WIDTH),
-                    BLACK
-            );
+            cntBlack += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
         }
     }
 
@@ -77,20 +74,14 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
 
             if (front == rear) {
                 for (range = 0; range < MISSION_5_5_GREEN_BRIDGE_SLOPE_RANGE; ++range) {
-                    pixelQueue[rear] = GetValueRGBYOBK(
-                            GetPtr(image, point[i][1], col + range, WIDTH),
-                            GREEN
-                    );
+                    pixelQueue[rear] = GetValueRGBYOBK(GetPtr(image, point[i][1], col + range, WIDTH), GREEN);
                     rear++;
                     rear %= max;
                 }
             } else {
                 front++;
                 front %= max;
-                pixelQueue[rear] = GetValueRGBYOBK(
-                        GetPtr(image, point[i][1], col + range, WIDTH),
-                        GREEN
-                );
+                pixelQueue[rear] = GetValueRGBYOBK(GetPtr(image, point[i][1], col + range, WIDTH), GREEN);
                 rear++;
                 rear %= max;
             }
@@ -114,9 +105,9 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
     if (((r > 0) ? r : -r) > MISSION_5_5_GREEN_BRIDGE_SLOPE) {
         rResult = 0;
         if (r > 0) {
-            Action_RIGHT_TURN_BODY(2);
-        } else {
             Action_LEFT_TURN_BODY(2);
+        } else {
+            Action_RIGHT_TURN_BODY(2);
         }
     }
 
@@ -226,10 +217,7 @@ int mission_5_6_set_straight(U16 *image) {
         for (row = 0; row < HEIGHT; ++row) {
             cnt = 0;
             for (range = 0; range < MISSION_5_6_BLACK_RANGE; ++range) {
-                cnt += GetValueRGBYOBK(
-                        GetPtr(image, row, point[i][0] + range, WIDTH),
-                        BLACK
-                );
+                cnt += GetValueRGBYOBK(GetPtr(image, row, point[i][0] + range, WIDTH), BLACK);
             }
 
             if (cnt > 2) {
