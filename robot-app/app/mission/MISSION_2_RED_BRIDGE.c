@@ -48,29 +48,18 @@ void mission_2_2_watch_side(void) {
 }
 
 int mission_2_2_before_bridge_set_center_version2(U16 *image) {
-    U16 dir, cnt;
+    U16 dir;
     int col, row, flagSign, red_bridge[2] = {0,};
 
     for (dir = 0; dir < 2; ++dir) {
-        flagSign = (dir) ? 1 : -1;
-        for (col = 0; col < WIDTH / 2; ++col) {
-            cnt = 0;
-            for (row = MISSION_2_2_REB_BRIDGE_ROW_POINT;
-                 row < MISSION_2_2_REB_BRIDGE_ROW_POINT + MISSION_2_2_REB_BRIDGE_ROW_RANGE;
+        for (col = WIDTH / 2 * (dir); col < WIDTH / 2 * (dir + 1); ++col) {
+            for (row = 0;
+                 row < HEIGHT;
                  ++row) {
-                if (CheckCol(WIDTH / 2 + ROBOT_CENTER_OFFSET + col * flagSign)) {
-                    cnt += GetValueRGBYOBK(
-                            GetPtr(image, row, WIDTH / 2 + ROBOT_CENTER_OFFSET + col * flagSign, WIDTH),
-                            GREEN
-                    );
-                } else {
-                    break;
-                }
-            }
-
-            if (cnt < 3) {
-                red_bridge[dir] = col;
-                break;
+                red_bridge[dir] += GetValueRGBYOBK(
+                        GetPtr(image, row, WIDTH / 2 + ROBOT_CENTER_OFFSET + col * flagSign, WIDTH),
+                        RED
+                );
             }
         }
     }
