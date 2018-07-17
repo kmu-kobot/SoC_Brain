@@ -13,6 +13,7 @@
 
 #define WIDTH 180
 #define HEIGHT 120
+#define SIZE (WIDTH * HEIGHT)
 
 #define BIT_H 0x07e0//0000011111100000
 #define BIT_S 0xf800//1111100000000000
@@ -20,6 +21,10 @@
 #define SHIFT_H >> 3
 #define SHIFT_S >> 8
 #define SHIFT_V << 3
+
+#define COLOR_WHITE 0xffff
+#define COLOR_MAGENTA 0xf81f
+#define COLOR_CYAN 0x07ff
 
 void extractHSV(void);
 void setFPGAVideoData(U16* buf);
