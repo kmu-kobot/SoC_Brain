@@ -81,7 +81,22 @@ int huro(void) {
                 }
                 break;
             case 3: // MISSION 3: AVOID BOMB
-                mission += 1;
+                switch (step) {
+                    case 4:
+                        mission_3_4_watch_front();
+                        setFPGAVideoData(fpga_videodata);
+                        if (mission_3_4_is_not_front_of_bomb(fpga_videodata)) {
+                            Action_WALK_FRONT_SHORT(3);
+                            mission += 1;
+                        }
+                        step = 0;
+                        break;
+                    default:
+                        mission_3_default_watch_below();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_3_default_avoid_bomb(fpga_videodata);
+                        break;
+                }
                 break;
             case 4: // MISSION 4: JUMP HURDLE
                 switch (step) {
@@ -170,12 +185,18 @@ int huro(void) {
                         mission_5_5_watch_below();
                         setFPGAVideoData(fpga_videodata);
 
-                        step += mission_5_6_set_only_one_bk_bar(fpga_videodata);
+                        nextMission = mission_5_6_set_only_one_bk_bar(fpga_videodata);
+                        step += nextMission;
 
-                        if (step == 6) {
+                        if (step == 6 && nextMission) {
                             step += mission_5_6_set_straight(fpga_videodata);
                         }
 
+                        if (!nextMission) {
+                            Action_WALK_FRONT_SHORT(1);
+                        }
+
+                        nextMission = 0;
                         step = (step == 7) ? 6 : 5;
                         break;
                     case 6:
