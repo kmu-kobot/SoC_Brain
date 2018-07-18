@@ -58,9 +58,9 @@ int mission_7_2_before_bridge_set_center(U16 *image);
 
 int mission_7_3_climb_yellow_hole_bridge(void);
 
-int mission_7_4_set_center(U16* image);
+int mission_7_4_set_center(U16 *image);
 
-int mission_7_4_set_straight(U16* image);
+int mission_7_4_set_straight(U16 *image);
 
 void mission_7_4_watch_below(int repeat);
 

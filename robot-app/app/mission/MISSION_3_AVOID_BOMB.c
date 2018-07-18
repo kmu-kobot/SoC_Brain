@@ -2,6 +2,7 @@
 // Created by Gihyeon Yang on 2018. 7. 17..
 //
 
+#include <math.h>
 #include "MISSION_3_AVOID_BOMB.h"
 
 void mission_3_4_watch_front(void) {
@@ -36,13 +37,15 @@ void mission_3_default_watch_below(void) {
 }
 
 int mission_3_default_avoid_bomb(U16 *image) {
-    U32 row, col, check[3] = {0,}, i, col_start_end[3][2] = {{0,                       MISSION_3_DEFAULT_WIDTH},
-                                                             {MISSION_3_DEFAULT_WIDTH, WIDTH - MISSION_3_DEFAULT_WIDTH},
-                                                             {WIDTH - MISSION_3_DEFAULT_WIDTH, WIDTH}};
+    U32 row, col, check[3] = {0,}, i, col_start_end[3][2] = {{MISSION_3_DEFAULT_WIDTH_MARGIN, MISSION_3_DEFAULT_WIDTH},
+                                                             {MISSION_3_DEFAULT_WIDTH,        WIDTH -
+                                                                                              MISSION_3_DEFAULT_WIDTH},
+                                                             {WIDTH - MISSION_3_DEFAULT_WIDTH,
+                                                                     WIDTH - MISSION_3_DEFAULT_WIDTH_MARGIN}};
 
     for (i = 0; i < 3; ++i) {
         for (col = col_start_end[i][0]; col < col_start_end[i][1]; ++col) {
-            for (row = 0; row < HEIGHT - MISSION_3_DEFAULT_HEIGHT_OFFSET; ++row) {
+            for (row = 10; row < HEIGHT - MISSION_3_DEFAULT_HEIGHT_OFFSET; ++row) {
                 check[i] += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
             }
         }
@@ -55,20 +58,28 @@ int mission_3_default_avoid_bomb(U16 *image) {
 
     int s = 0;
     for (i = 0; i < 3; ++i) {
-        s += ((check[i] != 0) ? 1 : 0) * (10 ^ (2 - i));
+        s += ((check[i] == 0) ? 0 : (int) pow((double) 10, (double) (2 - i)));
     }
 
     printf("\n\t\t- M3-DEFAULT: AVOID BOMB\n");
-    printf("\t\t\t- BOMB: %d %d %d\n\n", check[0], check[1], check[2]);
+    printf("\t\t\t- BOMB: %d %d %d %03d\n\n", check[0], check[1], check[2], s);
 
-    int rReturn = (s == 010) ? 1 : 0;
+    int rReturn = (s == 10) ? 1 : 0;
     if (!rReturn) {
         if (s == 100 || s == 110 || s == 111) {
-            Action_RIGHT_MOVE_SHORT(check[0]);
-        } else if (s == 001 || s == 011) {
-            Action_LEFT_MOVE_SHORT(check[2]);
-        } else if (s == 101 || s == 000) {
-            Action_WALK_FRONT_SHORT(3);
+            if (check[0] == 1) {
+                Action_RIGHT_MOVE_SHORT(4);
+            } else {
+                Action_RIGHT_MOVE_LONG(1);
+            }
+        } else if (s == 1 || s == 11) {
+            if (check[2] == 1) {
+                Action_LEFT_MOVE_SHORT(4);
+            } else {
+                Action_LEFT_MOVE_LONG(1);
+            }
+        } else if (s == 101 || s == 0) {
+            Action_WALK_FRONT_LONG(3);
             rReturn = 1;
         }
     } else {
@@ -77,7 +88,7 @@ int mission_3_default_avoid_bomb(U16 *image) {
         check[1] = 0;
         check[2] = 0;
 
-        for (row = 0; row < HEIGHT - MISSION_3_DEFAULT_HEIGHT_OFFSET; ++row) {
+        for (row = 10; row < HEIGHT - MISSION_3_DEFAULT_HEIGHT_OFFSET; ++row) {
             check[0] = 0;
             for (col = col_start_end[1][0]; col < col_start_end[1][1]; ++col) {
                 check[0] += GetValueRGBYOBK(
