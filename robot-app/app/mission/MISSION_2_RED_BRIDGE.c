@@ -61,21 +61,27 @@ int mission_2_2_before_bridge_set_center_version2(U16 *image) {
     }
 
     // 0: LEFT, 1: RIGHT
-    int r = red_bridge[0] - red_bridge[1];
+    double r[2] = {
+            (double) red_bridge[0] / (HEIGHT * w) * 100,
+            (double) red_bridge[1] / (HEIGHT * w) * 100
+    };
+
+    double s = r[0] - r[1];
 
     printf("\n\tM5-5: SET CENTER\n");
-    printf("\t\tLEFT: %d, RIGHT: %d, r: %d\n\n", red_bridge[0], red_bridge[1], r);
+    printf("\t\tLEFT: %f, RIGHT: %f, r: %f\n\n", r[0], r[1], s);
 
-    if (((r > 0) ? r : (-r)) > MISSION_2_4_BED_BRIDGE_THRESHOLDS) {
-        if (r > 0) {
+    if (((s > 0) ? s : (-s)) > MISSION_2_4_BED_BRIDGE_THRESHOLDS) {
+        if (s > 0) {
             Action_LEFT_MOVE_LONG(1);
         } else {
             Action_RIGHT_MOVE_LONG(1);
         }
         RobotSleep(5);
     }
+    Action_WALK_FRONT_SHORT(0);
 
-    return ((r > 0) ? r : (-r)) < MISSION_2_4_BED_BRIDGE_THRESHOLDS;
+    return ((s > 0) ? s : (-s)) < MISSION_2_4_BED_BRIDGE_THRESHOLDS;
 }
 
 int mission_2_2_before_bridge_set_center(U16 *image) {
