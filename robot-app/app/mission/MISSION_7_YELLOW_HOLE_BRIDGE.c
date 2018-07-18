@@ -89,6 +89,83 @@ int mission_7_3_climb_yellow_hole_bridge() {
     return 1;
 }
 
+int mission_7_4_set_center(U16* image) {
+    U32 i, row, col[2] = {MISSION_7_4_COL_POINT_1,
+                          MISSION_7_4_COL_POINT_2};
+    U16 yellow_len[2] = {0,};
+    for(i = 0; i < 2;++i) {
+        for(row = 30; row < HEIGHT; ++row) {
+            if(GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), YELLOW) == 1 &&
+               GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), YELLOW) == 1) {
+                   yellow_len[i] = HEIGHT - row;
+                   break;
+               }
+        }
+    }
+
+    printf("yellow_len[0] = %d, yellow_len[1] = %d\n", yellow_len[0], yellow_len[1]);
+
+    double e = (double) (yellow_len[0] + yellow_len[1]) / 2;
+
+    printf("distance is %f", e);
+
+    Action_INIT_ROBOT();
+
+    int rResult = 0;
+    if(e < MISSION_7_4_YELLOW_LENGTH - MISSION_7_4_YELLOW_LENGTH_ERROR) {
+        //오른쪽 이동
+        Action_RIGHT_MOVE_LONG(1);
+    }
+    else if(e > MISSION_7_4_YELLOW_LENGTH + MISSION_7_4_YELLOW_LENGTH_ERROR) {
+        //왼쪽 이동
+        Action_LEFT_MOVE_LONG(1);
+    }
+    else {
+        rResult = 1;
+    }
+
+    Action_INIT_ROBOT();
+
+    return rResult;
+}
+
+int mission_7_4_set_straight(U16* image) {
+    U32 i, row, col[2] = {MISSION_7_4_COL_POINT_1,
+                          MISSION_7_4_COL_POINT_2};
+    U16 pos_yellow[2] = {0,};
+    for(i = 0; i < 2; ++i) {
+        for(row = 30;row < HEIGHT;++row) {
+            if(GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), YELLOW) == 1 &&
+               GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), YELLOW) == 1) {
+                   break;
+            }
+            pos_yellow[i] += 1;
+        }
+    }
+
+    printf("pos_yellow[0]: %d, pos_yellow[1]: %d\n", pos_yellow[0], pos_yellow[1]);
+
+// s>0 l
+// s < 0
+    double slope = (double) (pos_yellow[0] - pos_yellow[1]);
+
+    printf("Slope is %f\n", slope);
+
+    Action_INIT_ROBOT();
+
+    int rResult = 1;
+    if (((slope>0)?slope : -slope) > MISSION_7_4_YELLOW_BRIDGE_SLOPE) {
+        rResult = 0;
+        if (slope > 0) {
+            Action_LEFT_TURN_BODY(2);
+        } else if (slope < 0) {
+            Action_RIGHT_TURN_BODY(2);
+        }
+    }
+    
+    return rResult;
+}
+
 void mission_7_4_watch_below(int repeat) {
     Action_WATCH_BELOW_LONG();
     RobotSleep(repeat);
@@ -112,7 +189,7 @@ int mission_7_4_walk_until_black_line(U16 *image) {
     printf("Ratio is %f.\n", ratio);
 
     int rResult = 1;
-    if (ratio < MISSION_7_4_BLACK_RATIO - MISSION_7_4_BLACK_RATIO_ERROR &&
+    if (ratio < MISSION_7_4_BLACK_RATIO - MISSION_7_4_BLACK_RATIO_ERROR ||
         ratio > MISSION_7_4_BLACK_RATIO + MISSION_7_4_BLACK_RATIO_ERROR) {
         rResult = 0;
         Action_WALK_FRONT_SHORT(2);
@@ -125,7 +202,7 @@ int mission_7_4_walk_until_black_line(U16 *image) {
 int mission_7_5_set_center_on_yellow_bridge(U16 *image) {
 
     U32 row, col, dir;
-    U16 yellow[2] = {0,};
+    int yellow[2] = {0,};
     int w = WIDTH / 2;
 
     for (dir = 0; dir < 2; ++dir) {
@@ -135,30 +212,29 @@ int mission_7_5_set_center_on_yellow_bridge(U16 *image) {
                         GetValueRGBYOBK(
                                 GetPtr(image, row, col, WIDTH),
                                 YELLOW
-                        ) ||
-                        GetValueRGBYOBK(
-                                GetPtr(image, row, col, WIDTH),
-                                BLACK
                         )
                 );
             }
         }
     }
 
+    double r[2] = {
+        (double)yellow[0] / (HEIGHT * w) * 100,
+        (double)yellow[1] / (HEIGHT * w) * 100
+     };
+
     printf("M7-5: SET CENTER\n");
-    printf("black_len[0]: %d, black_len[1]: %d.\n", yellow[0], yellow[1]);
+    printf("black_len[0]: %f, black_len[1]: %f. error: %f\n", r[0], r[1],r[0] - r[1]);
 
+    double s = (r[0] - r[1]);
+    printf("%d\n",( ((s > 0) ? s : (-s)) <= MISSION_7_5_BLACK_LINE_RANGE + MISSION_7_5_BLACK_LINE_ERROR));
 
-    w = (yellow[0] - yellow[1]);
-
-    printf("length : %d\n", w);
-
-    int rResult = ((w > 0) ? w : -w) <= MISSION_7_5_BLACK_LINE_RANGE + MISSION_7_5_BLACK_LINE_ERROR;
+    int rResult =( ((s > 0) ? s : -s) <= MISSION_7_5_BLACK_LINE_RANGE + MISSION_7_5_BLACK_LINE_ERROR);
     if (!rResult) {
-        if (w > 0) {
-            Action_LEFT_MOVE_SHORT(3);
-        } else if (w < 0) {
-            Action_RIGHT_MOVE_SHORT(3);
+        if (s > 0) {
+            Action_RIGHT_MOVE_LONG(1);
+        } else if (s < 0) {
+            Action_LEFT_MOVE_LONG(1);
         }
         RobotSleep(5);
         Action_INIT_ROBOT();
@@ -235,11 +311,11 @@ int mission_7_5_set_straight_on_yellow_bridge(U16 *image) {
     for (i = 0; i < 2; ++i) {
         front = 0;
         rear = 0;
-        for (col = 0; col < WIDTH; ++col) {
+        for (col = WIDTH / 2; col < WIDTH; ++col) {
 
             if (front == rear) {
                 for (range = 0; range < MISSION_7_5_YELLOW_BRIDGE_SLOPE_RANGE; ++range) {
-                    pixelQueue[rear] = GetValueRGBYOBK(
+                    pixelQueue[rear] = !GetValueRGBYOBK(
                             GetPtr(image, point[i][1], col + range, WIDTH),
                             YELLOW
                     );
@@ -249,7 +325,7 @@ int mission_7_5_set_straight_on_yellow_bridge(U16 *image) {
             } else {
                 front++;
                 front %= max;
-                pixelQueue[rear] = GetValueRGBYOBK(
+                pixelQueue[rear] = !GetValueRGBYOBK(
                         GetPtr(image, point[i][1], col + range, WIDTH),
                         YELLOW
                 );
@@ -262,17 +338,19 @@ int mission_7_5_set_straight_on_yellow_bridge(U16 *image) {
                 cnt += pixelQueue[range];
             }
 
-            if (cnt >= 3) {
-                point[i][0] = col;
+            if (cnt <= 3) {
+                point[i][0] = col - WIDTH / 2;
                 break;
             }
 
         }
     }
 
-    double r = (double) (point[0][0] - point[1][0]);
+    int r = (point[0][0] - point[1][0]);
 
-    printf("slope is %f", r);
+    printf("point[0][0]: %d, point[1][0]: %d, error: %d\n\n", point[0][0],point[1][0],point[0][0]-point[1][0]);
+
+    printf("slope is %d", r);
 
     int rResult = 1;
     if (((r > 0) ? r : -r) > MISSION_7_5_YELLOW_BRIDGE_SLOPE) {
@@ -294,24 +372,26 @@ int mission_7_5_walk_until_line_front_of_feet(U16 *image) {
     U32 col, row;
     U16 black_cnt = 0;
 
-    for (row = MISSION_7_5_HEIGHT_START; row < MISSION_7_5_HEIGHT_START + MISSION_7_5_HEIGHT_RANGE; ++row) {
-        for (col = 0; col < WIDTH; ++col) {
-            black_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
+    for (row = 30; row < HEIGHT; ++row) {
+        black_cnt = 0;
+        for (col = 55; col < 65; ++col) {
+            black_cnt += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK)||
+            GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW));
         }
+
+        if (black_cnt > 7) {
+            black_cnt = row;
+            break;
+        }
+
     }
 
-    double ratio = black_cnt / (WIDTH * MISSION_7_5_HEIGHT_RANGE) * 100;
-
     printf("7-5: walk_until_black_line\n");
-    printf("Ratio is %f.\n", ratio);
+    printf("Ratio is %d.\n", black_cnt);
 
-    int rResult = 0;
-    if (ratio < MISSION_7_5_LINE_RATIO - MISSION_7_5_LINE_RATIO_ERROR &&
-        ratio > MISSION_7_5_LINE_RATIO + MISSION_7_5_LINE_RATIO_ERROR) {
-        rResult = 1;
-    } else {
-        //앞으로 걷는 동작
-        Action_WALK_FRONT_SHORT(2);
+    int rResult = black_cnt > MISSION_7_5_LINE_RATIO;
+    if (!rResult) {
+        Action_WALK_FRONT_SHORT(0);
     }
 
     Action_INIT_ROBOT();
@@ -359,6 +439,8 @@ int mission_7_7_after_yellow_bridge_set_straight(U16 *image) {
     printf("M7-4: SLOPE\n");
     printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
 
+    Action_INIT_ROBOT();
+
     double s = (
             (black_len[0] - black_len[1]) /
             MISSION_7_2_BLACK_LINE_COL_POINT_1 - MISSION_7_2_BLACK_LINE_COL_POINT_2
@@ -367,17 +449,17 @@ int mission_7_7_after_yellow_bridge_set_straight(U16 *image) {
     printf("Slope : %f\n", s);
 
     s *= 100;
+
     int rResult = 0;
     if (s < MISSION_7_7_BLACK_LINE_SLOPE + MISSION_7_7_BLACK_LINE_SLOPE_ERROR) {
-        Action_RIGHT_TURN_BODY(3);
+        Action_RIGHT_TURN_BODY(1);
     } else if (s > MISSION_7_7_BLACK_LINE_SLOPE - MISSION_7_7_BLACK_LINE_SLOPE_ERROR) {
-        Action_LEFT_TURN_BODY(3);
+        Action_LEFT_TURN_BODY(1);
     } else {
         rResult = 1;
     }
-    if (!rResult) {
-        RobotSleep(5);
-    }
+
+    Action_INIT_ROBOT();
 
     return rResult;
 }
@@ -385,6 +467,10 @@ int mission_7_7_after_yellow_bridge_set_straight(U16 *image) {
 int mission_7_7_after_yellow_bridge_set_center(U16 *image) {
     return mission_7_2_before_bridge_set_center(image);
 }
+
+
+
+
 
 
 
