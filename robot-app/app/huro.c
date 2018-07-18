@@ -236,7 +236,10 @@ int huro(void) {
                         step += mission_7_1_wait_front_of_yellow_hole_bridge(fpga_videodata, 5);
                         break;
                     case 1:
-                        mission_7_2_watch_below();
+                        //mission_7_2_watch_below();
+                        //todo: 살짝 아래보는 동작
+                        Action_INIT_ROBOT();
+                        RobotSleep(5);
                         setFPGAVideoData(fpga_videodata);
                         step += mission_7_2_before_bridge_set_center(fpga_videodata);
                         break;
@@ -244,48 +247,72 @@ int huro(void) {
                         step += mission_7_3_climb_yellow_hole_bridge();
                         break;
                     case 3:
+                        mission_7_7_watch_side(3);
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_7_4_set_straight(fpga_videodata);
+
+                        if(step == 4) {
+                            step += mission_7_4_set_center(fpga_videodata);
+                        }
+
+                        if(step == 5) {
+                            mission_7_4_watch_below(5);
+                        setFPGAVideoData(fpga_videodata);
+                            step += mission_7_5_walk_until_line_front_of_feet(fpga_videodata);
+                        }                      
+
+                        step = (step == 6) ? 6 : 3;
+                        break;
+                    case 4:
                         // TODO: 노란색 다리 위에서 중심 맞추는거 검은색 보고 맞추는거로 이거는 고려...
 
-                        // 1. 노란색 다리를 보고 먼저 중심을 맞춘다.
-                        // 2. 앞으로 조금씩 걸어가면서 검은색이 윗부분에 나올때 까지 반복한다.
-                        // 3. 검은색이 검출되었으면 중심을 다시 맞추고 발앞에 검은선이 있을때 까지 반복한다.
+                        // TODO: 1. 노란색 다리를 보고 먼저 중심을 맞춘다.
+                        // TODO: 2. 앞으로 조금씩 걸어가면서 검은색이 윗부분에 나올때 까지 반복한다.
+                        // TODO: 3. 검은색이 검출되었으면 중심을 다시 맞추고 발앞에 검은선이 있을때 까지 반복한다.
 
                         mission_7_4_watch_below(5);
                         setFPGAVideoData(fpga_videodata);
                         step += mission_7_4_walk_until_black_line(fpga_videodata);
+                        
                         break;
-                    case 4:
+                    case 5:
                         // TODO: 노란색 다리 위에서 중심 맞추는거 검은색 보고 맞추는거로
                         mission_7_4_watch_below(5);
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_7_5_set_center_on_yellow_bridge(fpga_videodata);
-
-                        if (step == 5) {
-                            step += mission_7_5_set_straight_on_yellow_bridge(fpga_videodata);
-                        }
+                        step += mission_7_5_walk_until_line_front_of_feet(fpga_videodata);
 
                         if (step == 6) {
-                            step = 4 + mission_7_5_walk_until_line_front_of_feet(fpga_videodata);
+
+                        step += mission_7_5_set_straight_on_yellow_bridge(fpga_videodata);
+
+                        }
+
+                        if (step == 7) {
+                            step = 5;
+                            step += mission_7_5_set_center_on_yellow_bridge(fpga_videodata);
+
+
                         } else {
-                            step = 4;
+                            step = 5;
                         }
 
                         break;
-                    case 5:
+                    case 6:
                         step += mission_7_6_jump_hole();
                         break;
-                    case 6:
+                    case 7:
                         mission_7_7_watch_side(5);
                         setFPGAVideoData(fpga_videodata);
                         step += mission_7_7_after_yellow_bridge_set_center(fpga_videodata);// 길이 맞추기
 
-                        if (step == 7) {
+                        if(step == 8) {
                             step += mission_7_7_after_yellow_bridge_set_straight(fpga_videodata); // 직선 맞추기
                         }
+                        
 
-                        step = (step == 8) ? 7 : 6;
+                        step = (step == 9) ? 8 : 7;
                         break;
-                    case 7:
+                    case 8:
                         mission += 1;
                         step = 0;
                         break;
