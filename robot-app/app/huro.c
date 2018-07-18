@@ -251,51 +251,17 @@ int huro(void) {
                         setFPGAVideoData(fpga_videodata);
                         step += mission_7_4_set_straight(fpga_videodata);
 
-                        if(step == 4) {
+                        if (step == 4) {
                             step += mission_7_4_set_center(fpga_videodata);
                         }
 
-                        if(step == 5) {
+                        if (step == 5) {
                             mission_7_4_watch_below(5);
-                        setFPGAVideoData(fpga_videodata);
+                            setFPGAVideoData(fpga_videodata);
                             step += mission_7_5_walk_until_line_front_of_feet(fpga_videodata);
-                        }                      
+                        }
 
                         step = (step == 6) ? 6 : 3;
-                        break;
-                    case 4:
-                        // TODO: 노란색 다리 위에서 중심 맞추는거 검은색 보고 맞추는거로 이거는 고려...
-
-                        // TODO: 1. 노란색 다리를 보고 먼저 중심을 맞춘다.
-                        // TODO: 2. 앞으로 조금씩 걸어가면서 검은색이 윗부분에 나올때 까지 반복한다.
-                        // TODO: 3. 검은색이 검출되었으면 중심을 다시 맞추고 발앞에 검은선이 있을때 까지 반복한다.
-
-                        mission_7_4_watch_below(5);
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_7_4_walk_until_black_line(fpga_videodata);
-                        
-                        break;
-                    case 5:
-                        // TODO: 노란색 다리 위에서 중심 맞추는거 검은색 보고 맞추는거로
-                        mission_7_4_watch_below(5);
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_7_5_walk_until_line_front_of_feet(fpga_videodata);
-
-                        if (step == 6) {
-
-                        step += mission_7_5_set_straight_on_yellow_bridge(fpga_videodata);
-
-                        }
-
-                        if (step == 7) {
-                            step = 5;
-                            step += mission_7_5_set_center_on_yellow_bridge(fpga_videodata);
-
-
-                        } else {
-                            step = 5;
-                        }
-
                         break;
                     case 6:
                         step += mission_7_6_jump_hole();
@@ -305,10 +271,10 @@ int huro(void) {
                         setFPGAVideoData(fpga_videodata);
                         step += mission_7_7_after_yellow_bridge_set_center(fpga_videodata);// 길이 맞추기
 
-                        if(step == 8) {
+                        if (step == 8) {
                             step += mission_7_7_after_yellow_bridge_set_straight(fpga_videodata); // 직선 맞추기
                         }
-                        
+
 
                         step = (step == 9) ? 8 : 7;
                         break;
