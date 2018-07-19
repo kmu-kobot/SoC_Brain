@@ -210,13 +210,20 @@ int huro(void) {
             case 6: // MISSION 6: KICK BALL
                 switch (step) {
                     case 0:
-                        // TODO: 1. 공을 중심으로 맞출때 까지 회전
+                        mission_6_1_watch_front();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_6_1_detection_ball(fpga_videodata);
                         break;
                     case 1:
-                        // TODO: 2. 앞으로 걸으면서 row(0~60) 지점에 공이 잡히는지 확인
+                        mission_6_2_watch_below();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_6_2_set_center_of_ball(fpga_videodata);
                         break;
                     case 2:
-                        // TODO 3: 생각이 안난다..
+                        // TODO: 아래보면서 공이랑 구멍이랑 센터 맞추기
+                        break;
+                    case 3:
+                        // TODO: 공차기
                         break;
                     default:
                         mission = 10;
@@ -233,8 +240,6 @@ int huro(void) {
                         step += mission_7_1_wait_front_of_yellow_hole_bridge(fpga_videodata, 5);
                         break;
                     case 1:
-                        //mission_7_2_watch_below();
-                        //todo: 살짝 아래보는 동작
                         Action_INIT_ROBOT();
                         RobotSleep(5);
                         setFPGAVideoData(fpga_videodata);
