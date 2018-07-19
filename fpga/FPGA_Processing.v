@@ -33,17 +33,20 @@ reg [ 5:0] ram [0:21599];
 reg [14:0] top, bot, left, right;
 reg [ 5:0] result;
 
+reg [14:0] addr_prev;
+
+always @(posedge clock)
+	addr_prev <= (addr + 21599) % 21600;
+
 always @(posedge clock)
 begin
-	if (wren) ram[addr] <= data;
+	if (wren) ram[addr_prev] <= data;
 
 	top <= addr / 180 < 1 ? addr : addr - 180;
 	bot <= addr / 180 < 119 ? addr + 180 : addr;
 	left <= addr % 180 < 1 ? addr : addr - 1;
 	right <= addr % 180 < 179 ? addr + 1 : addr;
 	
-//	result <= (ram[top] | ram[bot] | ram[left] | ram[right]) & ram[addr_rd];  //  clean
-//	result <= ram[top] & ram[bot] & ram[left] & ram[right] & ram[addr_rd];  //  erode
 	result <= ((ram[top] & ram[bot]) | (ram[top] & ram[left]) | (ram[top] & ram[right]) | (ram[bot] & ram[left]) | (ram[bot] & ram[right]) | (ram[left] & ram[right])) & ram[addr];
 end
 
@@ -64,7 +67,7 @@ reg [ 5:0] ram [0:21599];
 
 reg [14:0] top, bot, left, right;
 reg [ 5:0] result;
-
+	
 always @(posedge clock)
 begin
 	if (wren) ram[addr] <= data;
@@ -91,9 +94,14 @@ output [ 5:0] q;
 
 reg [ 5:0] ram [0:21599];
 
+reg [14:0] addr_prev;
+
+always @(posedge clock)
+	addr_prev <= (addr + 21599) % 21600;
+
 always @(posedge clock)
 begin
-	if (wren) ram[addr] <= data;
+	if (wren) ram[addr_prev] <= data;
 end
 
 assign q = ram[addr];
@@ -443,12 +451,12 @@ always @ (negedge resetx or posedge clk_llc)
 		O_B <= C_L & ((O_MIN <= H) & (H <= O_MAX));
 	end
 
-//wire ROY = R_B | O_B | Y_B;
-//wire ROYBK = R_B | O_B | Y_B | BK_B;
-//wire GY	= G_B | Y_B;
-//wire GYO = G_B | Y_B | O_B;
-//wire GYOBK = G_B | Y_B | O_B | BK_B;
-//wire BBK = B_B | BK_B;
+wire ROY = R_B | O_B | Y_B;
+wire ROYBK = R_B | O_B | Y_B | BK_B;
+wire GY	= G_B | Y_B;
+wire GYO = G_B | Y_B | O_B;
+wire GYOBK = G_B | Y_B | O_B | BK_B;
+wire BBK = B_B | BK_B;
 //wire [15:0] DecVData = {ROY, ROYBK, R_B, O_B, Y_B,		GY, GYOBK, GYO, G_B, G_B, G_B,	B_B, BBK, B_B, B_B, BK_B};
 wire [ 5:0] DecVData_C = {R_B, O_B, Y_B, G_B, B_B, BK_B};
 
@@ -534,16 +542,16 @@ always @(negedge resetx or posedge Sys_clk)
    else                    A_addr <= AMAmem_irq1;
 
 reg [ 5:0] vdata_C;
-reg [14:0] vadr_M;
+reg [14:0] vadr_C;
 always @(negedge resetx or posedge clk_llc)
 	if		  (~resetx)			vdata_C <= 6'b0;
 	else if (~vref)			vdata_C <= 6'b0;
 	else if (href2_wr_A)		vdata_C <= DecVData_C;
 	
 always @(negedge resetx or posedge clk_llc8)
-	if		  (~resetx)			vadr_M <= 15'b0;
-	else if (~vref)			vadr_M <= 15'b0;
-	else if (href2_wr_A)		vadr_M <= vadr_M + 1'b1;
+	if		  (~resetx)			vadr_C <= 15'b0;
+	else if (~vref)			vadr_C <= 15'b0;
+	else if (href2_wr_A)		vadr_C <= vadr_C + 1'b1;
 	
 
 reg [ 5:0] vdata_B;
@@ -723,7 +731,7 @@ assign vmem_C_wren   = href2_wr & clk_llc8;
 
 assign vmem_C_data   = vdata_C;
 
-assign vmem_C_addr   = vadr_M;
+assign vmem_C_addr   = vadr_C;
 
 
 assign vmem_B_wren   = href2_wr_E & clk_llc8;

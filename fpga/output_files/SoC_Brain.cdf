@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CE75) Path("C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/") File("output_file.jic") MfrSpec(OpMask(1) SEC_Device(EPCS64) Child_OpMask(1 1));
+		Device PartName(EP4CE75U19) Path("C:/Users/thdtj/OneDrive/SoC/SoC_Brain/fpga/output_files/") File("SoC_Brain.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 
