@@ -10,10 +10,10 @@ U8 p_x[2], p_y[2];
 
 void extractHSV(void)
 {
-    U8 motion;
+    U8 key_input, speed_input, dir_input, pose_input, view_input, mod_input;
     U8 centerX, centerY;
     float dx, dy, slope, distance;
-    U8 picked;
+    U8 mod;
 
     U8 *H_buff, *H_R_buff, *S_buff, *V_buff;
     U32 H, H_R, S, V;
@@ -41,17 +41,17 @@ void extractHSV(void)
     p_x[1] = 90;
     p_y[0] = 59;
     p_y[1] = 60;
-    picked = 0;
+    mod = 0;
 
     init_extract();
 
     do {
-        motion = getchar();
+        key_input = getchar();
         //동작 수행
 
         setFPGAVideoData(fpga_videodata);
 
-        switch(motion)
+        switch(key_input)
         {
             case 'e':
                 H = 0;
@@ -106,7 +106,7 @@ void extractHSV(void)
                 // printf("cnt : %d\tH : %d\tH_R : %d\tS : %d\tV : %d\n", cnt, H, H_R, S, V);
                 break;
             case 'w':
-                if (picked == 0)
+                if (mod == 0)
                 {
                     if (top < 1) break;
                     --top;
@@ -114,12 +114,12 @@ void extractHSV(void)
                 }
                 else
                 {
-                    if (p_y[picked - 1] < 1) break;
-                    --p_y[picked - 1];
+                    if (p_y[mod - 1] < 1) break;
+                    --p_y[mod - 1];
                 }
                 break;
             case 's':
-                if (picked == 0)
+                if (mod == 0)
                 {
                     if (bot > HEIGHT - 2) break;
                     ++top;
@@ -127,12 +127,12 @@ void extractHSV(void)
                 }
                 else
                 {
-                    if (p_y[picked - 1] > HEIGHT - 2) break;
-                    ++p_y[picked - 1];
+                    if (p_y[mod - 1] > HEIGHT - 2) break;
+                    ++p_y[mod - 1];
                 }
                 break;
             case 'a':
-                if (picked == 0)
+                if (mod == 0)
                 {
                     if (left < 1) break;
                     --left;
@@ -140,12 +140,12 @@ void extractHSV(void)
                 }
                 else
                 {
-                    if (p_x[picked - 1] < 1) break;
-                    --p_x[picked - 1];
+                    if (p_x[mod - 1] < 1) break;
+                    --p_x[mod - 1];
                 }
                 break;
             case 'd':
-                if (picked == 0)
+                if (mod == 0)
                 {
                     if (right > WIDTH - 2) break;
                     ++left;
@@ -153,8 +153,8 @@ void extractHSV(void)
                 }
                 else
                 {
-                    if (p_x[picked - 1] > WIDTH - 2) break;
-                    ++p_x[picked - 1];
+                    if (p_x[mod - 1] > WIDTH - 2) break;
+                    ++p_x[mod - 1];
                 }
                 break;
             case 'z':
@@ -178,28 +178,92 @@ void extractHSV(void)
                 ++right;
                 break;
             case 'i':
-                Action_INIT_ROBOT();
-                break;
-            case 'b':
-                Action_WATCH_BELOW_LONG();
-                break;
-            case 'l':
-                Action_LEFT_TURN_HEAD_LONG();
+                printf("\t1 : LOW\n");
+                printf("\t2 : MIDDLE\n");
+                printf("\t3 : HIGH\n");
+                pose_input = getchar();
+
+                printf("\t1 : DOWN\n");
+                printf("\t2 : OBLIQUE\n");
+                printf("\t3 : UP\n");
+                printf("\t4 : LEFT\n");
+                printf("\t5 : RIGHT\n");
+                view_input = getchar();
+
+                printf("INIT\tpose : %d\tview : %d", pose_input - '1', view_input - '1');
+                ACTION_INIT(pose_input - '1', view_input - '1');
                 break;
             case 'r':
-                Action_RIGHT_TURN_HEAD_LONG();
+                printf("\t1 : FAST\n");
+                printf("\t2 : SLOW\n");
+                speed_input = getchar();
+
+                printf("\t1 : DOWN\n");
+                printf("\t2 : OBLIQUE\n");
+                printf("\t3 : UP\n");
+                view_input = getchar();
+
+                printf("WALK\tspeed : %d\tview : %d", speed_input - '1', view_input - '1');
+                ACTION_WALK(speed_input - '1', view_input - '1', 3);
                 break;
-            case 'h':
-                help();
+            case 't':
+                printf("\t1 : LEFT\n");
+                printf("\t2 : RIGHT\n");
+                dir_input = getchar();
+
+                printf("\t1 : LOW\n");
+                printf("\t3 : HIGH\n");
+                pose_input = getchar();
+
+                printf("\t1 : DOWN\n");
+                printf("\t2 : OBLIQUE\n");
+                printf("\t4 : LEFT\n");
+                printf("\t5 : RIGHT\n");
+                view_input = getchar();
+
+                printf("TURN\tdir : %d\tpose : %d\tview : %d\t%d\n", dir_input - '1', pose_input - '1', view_input - '1', TURN);
+                ACTION_TURN(dir_input - '1', pose_input - '1', view_input - '1', 3);
                 break;
-            case '1':
-                picked = 0;
+            case 'y':
+                printf("\t1 : LEFT\n");
+                printf("\t2 : RIGHT\n");
+                dir_input = getchar();
+
+                printf("\t1 : LOW\n");
+                printf("\t2 : MIDDLE\n");
+                printf("\t3 : HIGH\n");
+                pose_input = getchar();
+
+                printf("\t1 : DOWN\n");
+                printf("\t2 : OBLIQUE\n");
+                printf("\t4 : LEFT\n");
+                printf("\t5 : RIGHT\n");
+                view_input = getchar();
+
+                printf("MOVE\tdir : %d\tpose : %d\tview : %d", dir_input - '1', pose_input - '1', view_input - '1');
+                ACTION_MOVE(dir_input -  '1', pose_input - '1', view_input - '1', 3);
                 break;
-            case '2':
-                picked = 1;
-                break;
-            case '3':
-                picked = 2;
+            case 'm':
+                printf("\t1 : box\n");
+                printf("\t2 : point 1\n");
+                printf("\t3 : point 2\n");
+
+                mod_input = getchar();
+                printf("mod_input");
+                switch (mod_input)
+                {
+                    case '1':
+                        mod = 0;
+                        break;
+                    case '2':
+                        mod = 1;
+                        break;
+                    case '3':
+                        mod = 2;
+                        break;
+                    default:
+                        ;
+                }
                 break;
             case 'o':
                 centerX = (right + left) >> 1;
@@ -216,10 +280,13 @@ void extractHSV(void)
                 printf("point1 : (%d, %d)\tpoint2 : (%d, %d)\n", p_x[0], p_y[0], p_x[1], p_y[1]);
                 printf("slope : %f\tdistance : %f\n", -slope, distance);
                 break;
+            case 'h':
+                help();
+                break;
             default:
             ;
         }
-    } while(motion != 'q');
+    } while(key_input != 'q');
 
     free(H_buff);
     free(H_R_buff);
@@ -267,21 +334,20 @@ void help(void)
 {
     printf("----------------------------------------------------------------\n");
     printf("e : extract HSV\n");
-    printf("w : move box up\n");
-    printf("s : move box down\n");
-    printf("a : move box left\n");
-    printf("d : move box right\n");
+    printf("w : move picked up\n");
+    printf("s : move picked down\n");
+    printf("a : move picked left\n");
+    printf("d : move picked right\n");
     printf("z : box height size down\n");
     printf("x : box height size up\n");
     printf("c : box width size down\n");
     printf("v : box width size up\n");
-    printf("i : Action_INIT_ROBOT\n");
-    printf("b : Action_WATCH_BELOW_LONG\n");
-    printf("l : Action_LEFT_TURN_HEAD_LONG\n");
-    printf("r : Action_RIGHT_TURN_HEAD_LONG\n");
-    printf("1 : pick box\n");
-    printf("2 : pick point 1\n");
-    printf("3 : pick point 2\n");
+    printf("i : Action_INIT\n");
+    printf("r : Action_WALK\n");
+    printf("t : Action_TURN\n");
+    printf("y : Action_MOVE\n");
+    printf("u : Action_MISSION\n");
+    printf("m : change mod\n");
     printf("o : print box position\n");
     printf("p : print points position, slope, distance\n");
     printf("h : help\n");
@@ -323,7 +389,7 @@ int init_extract(void)
 
     direct_camera_display_off();
 
-    Action_INIT_ROBOT();
+    ACTION_INIT(MIDDLE, UP);
 
     return 0;
 }

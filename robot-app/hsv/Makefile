@@ -46,4 +46,4 @@ $(PROJ): $(OBJS)
 	$(AS) $< -o $@
 
 clean:
-	rm -f *.o *.elf *.bflt *.dis $(PROJ) *.dbg ImageLoad_Test
+	rm -f *.o *.elf *.bflt *.dis $(PROJ) *.dbg
