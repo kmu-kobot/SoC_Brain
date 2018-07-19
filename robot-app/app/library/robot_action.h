@@ -8,7 +8,7 @@
 
 #define SOC_APP_ROBOT_ACTION_H
 
-#define ROBOT_CENTER_OFFSET 10
+#define ROBOT_CENTER_OFFSET 0
 
 /////////////////////////////////
 //////// Motion: Default ////////
