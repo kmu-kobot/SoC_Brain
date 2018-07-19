@@ -180,15 +180,12 @@ int huro(void) {
                         mission_5_5_watch_below();
                         setFPGAVideoData(fpga_videodata);
 
-                        nextMission = mission_5_6_set_only_one_bk_bar(fpga_videodata);
+                        nextMission = mission_5_6_set_straight(fpga_videodata);
                         step += nextMission;
 
-                        if (!nextMission) {
-                            Action_WALK_FRONT_SHORT(1);
-                        }
-
-                        if (step == 6 && nextMission) {
-                            step += mission_5_6_set_straight(fpga_videodata);
+                        if (nextMission) {
+                            step += mission_5_6_set_only_one_bk_bar(fpga_videodata);
+                            if (step == 6) { Action_WALK_FRONT_SHORT(0); }
                         }
 
                         nextMission = 0;

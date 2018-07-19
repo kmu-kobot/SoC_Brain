@@ -116,9 +116,9 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
 
     int rResult = 0;
     if (black_len[0] < MISSION_2_2_BLACK_LINE_RANGE - MISSION_2_2_BLACK_LINE_ERROR) {
-        Action_RIGHT_MOVE_SHORT(7);
+        Action_RIGHT_MOVE_LONG(1);
     } else if (black_len[0] > MISSION_2_2_BLACK_LINE_RANGE + MISSION_2_2_BLACK_LINE_ERROR) {
-        Action_LEFT_MOVE_SHORT(7);
+        Action_LEFT_MOVE_LONG(1);
     } else {
         rResult = 1;
     }
