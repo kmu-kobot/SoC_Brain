@@ -11,13 +11,13 @@ void mission_10_1_watch_up(void) {
 }
 
 void mission_10_1_watch_side(int repeat) {
-    Action_RIGHT_TURN_HEAD_LONG();
+    ACTION_INIT(LOW, RIGHT);
     RobotSleep(repeat);
 }
 
 
 void mission_10_1_front_walk(int repeat) {
-    Action_WALK_FRONT_LONG(repeat);
+    ACTION_WALK(FAST, OBLIQUErepeat);
     RobotSleep(5);
 }
 
@@ -41,22 +41,22 @@ int mission_10_1_set_center(U16 *image) {
 
     printf("distance is %f", e);
 
-    Action_INIT_ROBOT();
+    ACTION_INIT(LOW, OBLIQUE);
 
     int rResult = 0;
     if(e < MISSION_10_1_BLACK_LENGTH - MISSION_10_1_BLACK_LENGTH_ERROR) {
         //오른쪽 이동
-        Action_LEFT_MOVE_LONG(1);
+        ACTION_MOVE(LONG, DIR_LEFT, LOW, OBLIQUE, 1);
     }
     else if(e > MISSION_10_1_BLACK_LENGTH + MISSION_10_1_BLACK_LENGTH_ERROR) {
         //왼쪽 이동
-        Action_RIGHT_MOVE_LONG(1);
+        ACTION_MOVE(LONG, DIR_RIGHT, LOW, OBLIQUE, 1);
     }
     else {
         rResult = 1;
     }
 
-    Action_INIT_ROBOT();
+    ACTION_INIT(LOW, OBLIQUE);
 
     return rResult;
 }
@@ -84,25 +84,25 @@ int mission_10_1_set_straight(U16 *image) {
 
     printf("Slope is %f\n", slope);
 
-    Action_INIT_ROBOT();
+    ACTION_INIT(LOW, OBLIQUE);
 
     int rResult = 1;
     if (((slope>0)?slope : -slope) > MISSION_10_1_BLUE_GATE_SLOPE) {
         rResult = 0;
         if (slope > 0) {
-            Action_RIGHT_TURN_BODY(2);
+            ACTION_TURN(DIR_RIGHT, LOW, OBLIQUE, 2);
         } else if (slope < 0) {
-            Action_LEFT_TURN_BODY(2);
+            ACTION_TURN(DIR_LEFT, LOW, OBLIQUE, 2);
         }
     }
-    
+
     return rResult;
 	//return 0;
 
 }
 
 void mission_10_2_watch_side(int repeat) {
-	Action_LEFT_TURN_HEAD_LONG();
+	ACTION_INIT(LOW, LEFT);
     RobotSleep(repeat);
 
 }
@@ -140,7 +140,7 @@ int mission_10_2_catch_green_bridge(U16* image) {
 
 	printf("green ratio is %f\n\n", ratio);
 
-	Action_INIT_ROBOT();
+	ACTION_INIT(LOW, OBLIQUE);
 
 	int rResult = 0;
 	if(ratio > 5) {
@@ -151,7 +151,7 @@ int mission_10_2_catch_green_bridge(U16* image) {
 }
 
 int mission_10_3_escape_blue_gate(void) {
-    Action_WALK_FRONT_LONG(5);
+    ACTION_WALK(FAST, OBLIQUE5);
     RobotSleep(3);
 
     return 1;

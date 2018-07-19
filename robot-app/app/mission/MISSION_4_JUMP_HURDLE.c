@@ -5,7 +5,7 @@
 #include "MISSION_4_JUMP_HURDLE.h"
 
 void mission_4_1_watch_front(int repeat) {
-    Action_WALK_FRONT_LONG(repeat);
+    ACTION_WALK(FAST, OBLIQUE, repeat);
     RobotSleep(5);
 }
 
@@ -46,16 +46,16 @@ int mission_4_2_ready_hurdle(U16 *image) {
 }
 
 int mission_4_4_jump_hurdle(void) {
-    Action_WALK_FRONT_LONG(3);
+    ACTION_WALK(FAST, OBLIQUE, 3);
     RobotSleep(5);
-    Action_MISSION_4_HURDLING();
+    ACTION_MOTION(MISSION_4_HURDLING);
     RobotSleep(5);
     return 1;
 }
 
 
 void mission_4_5_watch_diagonal_line(void) {
-    Action_INIT_ROBOT();
+    ACTION_INIT(LOW, OBLIQUE);
     RobotSleep(5);
 }
 
@@ -92,7 +92,7 @@ int mission_4_5_set_front_of_not_bk(U16 *image) {
 
     int rResult = 1;
     if (s < MISSION_4_5_WHITE_RANGE) {
-        Action_LEFT_TURN_BODY(5);
+        ACTION_TURN(DIR_LEFT, LOW, OBLIQUE, 5);
         rResult = 0;
     }
     RobotSleep(5);
@@ -133,9 +133,9 @@ int mission_4_6_set_center(U16 *image) {
 
     int rResult = 0;
     if (s < MISSION_4_5_BK_LINE_RANGE - MISSION_4_5_BK_LINE_ERROR) {
-        Action_RIGHT_MOVE_LONG(1);
+        ACTION_MOVE(LONG, DIR_RIGHT, LOW, OBLIQUE, 1);
     } else if (s > MISSION_4_5_BK_LINE_RANGE + MISSION_4_5_BK_LINE_ERROR) {
-        Action_LEFT_MOVE_LONG(1);
+        ACTION_MOVE(LONG, DIR_LET, LOW, OBLIQUE, 1);
     } else {
         rResult = 1;
     }
@@ -148,6 +148,6 @@ int mission_4_6_set_center(U16 *image) {
 }
 
 void mission_4_6_watch_side(void) {
-    Action_RIGHT_TURN_HEAD_LONG();
+    ACTION_INIT(LOW, RIGHT);
     RobotSleep(5);
 }

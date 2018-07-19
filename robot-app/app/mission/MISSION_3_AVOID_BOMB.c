@@ -6,7 +6,7 @@
 #include "MISSION_3_AVOID_BOMB.h"
 
 void mission_3_4_watch_front(void) {
-    Action_INIT_ROBOT();
+    ACTION_INIT(LOW, OBLIQUE);
     // TODO: 적당히 사선 보면 좋겠음
     RobotSleep(5);
 }
@@ -25,14 +25,14 @@ int mission_3_4_is_not_front_of_bomb(U16 *image) {
     }
 
     if (check < MISSION_3_4_BOMB) {
-        Action_WALK_FRONT_SHORT(3);
+        ACTION_WALK(SLOW, LOW, OBLIQUE, 3);
     }
 
     return check < MISSION_3_4_BOMB;
 }
 
 void mission_3_default_watch_below(void) {
-    Action_WATCH_BELOW_LONG();
+    ACTION_INIT(LOW, DOWN);
     RobotSleep(5);
 }
 
@@ -68,18 +68,18 @@ int mission_3_default_avoid_bomb(U16 *image) {
     if (!rReturn) {
         if (s == 100 || s == 110 || s == 111) {
             if (check[0] == 1) {
-                Action_RIGHT_MOVE_SHORT(4);
+                ACTION_MOVE(SHORT, DIR_RIGHT, LOW, DOWN, 4);
             } else {
-                Action_RIGHT_MOVE_LONG(1);
+                ACTION_MOVE(LONG, DIR_RIGHT, LOW, DOWN, 1);
             }
         } else if (s == 1 || s == 11) {
             if (check[2] == 1) {
-                Action_LEFT_MOVE_SHORT(4);
+                ACTION_MOVE(SHORT, DIR_LEFT, LOW, DOWN, 4);
             } else {
-                Action_LEFT_MOVE_LONG(1);
+                ACTION_MOVE(LONG, DIR_LET, LOW, DOWN, 4);
             }
         } else if (s == 101 || s == 0) {
-            Action_WALK_FRONT_LONG(3);
+            ACTION_WALK(FAST, LOW, DOWN, 3);
             rReturn = 1;
         }
     } else {
@@ -105,12 +105,12 @@ int mission_3_default_avoid_bomb(U16 *image) {
         printf("\t\t\t- O-x: %d", check[2]);
 
         if (check[2] < WIDTH / 2 - MISSION_3_DEFAULT_AVOID_BOMB_RANGE) {
-            Action_LEFT_MOVE_SHORT(2);
+            ACTION_MOVE(SHORT, DIR_LEFT, LOW, DOWN, 2);
         } else if (check[2] > WIDTH / 2 + MISSION_3_DEFAULT_AVOID_BOMB_RANGE) {
-            Action_RIGHT_MOVE_SHORT(2);
+            ACTION_MOVE(SHORT, DIR_RIGHT, LOW, DOWN, 2);
         } else {
             // TODO: 지뢰 피하는 동작
-            Action_WALK_FRONT_SHORT(6);
+            ACTION_MISSION_3(6);
             rReturn = 1;
         }
 

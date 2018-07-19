@@ -185,7 +185,7 @@ int huro(void) {
 
                         if (nextMission) {
                             step += mission_5_6_set_only_one_bk_bar(fpga_videodata);
-                            if (step == 6) { Action_WALK_FRONT_SHORT(0); }
+                            if (step == 6) { ACTION_WALK(SLOW, DOWN, 1)); }
                         }
 
                         nextMission = 0;
@@ -240,7 +240,7 @@ int huro(void) {
                         step += mission_7_1_wait_front_of_yellow_hole_bridge(fpga_videodata, 5);
                         break;
                     case 1:
-                        Action_INIT_ROBOT();
+                        ACTION_INIT(LOW, OBLIQUE);
                         RobotSleep(5);
                         setFPGAVideoData(fpga_videodata);
                         step += mission_7_2_before_bridge_set_center(fpga_videodata);
@@ -326,17 +326,17 @@ int huro(void) {
                             setFPGAVideoData(fpga_videodata);
                             step += mission_10_2_catch_blue_gate(fpga_videodata);
 
-                            Action_INIT_ROBOT();
+                            ACTION_INIT(LOW, OBLIQUE);
                             setFPGAVideoData(fpga_videodata);
                             step += mission_10_2_catch_green_bridge(fpga_videodata);
-        
+
                             if(step == 3 || step == 4) {
                                 step = 0;
                                 step += mission_10_3_escape_blue_gate();
                             }
                             else {
                                 //4걸음 걷기
-                                Action_WALK_FRONT_LONG(7);
+                                ACTION_WALK(FAST, LOW, 7);
                                 step = 0;
                             }
                         }
@@ -395,7 +395,7 @@ int init_huro(void) {
 
     direct_camera_display_off();
 
-    Action_INIT_ROBOT();
+    ACTION_INIT(LOW, OBLIQUE);
 
     return 0;
 }
