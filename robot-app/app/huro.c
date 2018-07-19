@@ -306,31 +306,40 @@ int huro(void) {
             case 10: // MISSION 10: BLUE GATE
                 switch (step) {
                     case 0:
-                        mission_10_1_watch_up();
+                        //오른쪽 보기
+                        mission_10_1_watch_side(3);
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_10_1_catch_blue_gate(fpga_videodata);
-                        if (step != 1) {
-                            mission_10_1_front_walk(4);
+                        step += mission_10_1_set_straight(fpga_videodata);
+
+                        if(step == 1) {
+                            step += mission_10_1_set_center(fpga_videodata);
                         }
-                        step = (step == 1) ? 1 : 0;
+
+                        if(step == 2) {
+                            //왼쪽 보기
+                            mission_10_2_watch_side(3);
+                            setFPGAVideoData(fpga_videodata);
+                            step += mission_10_2_catch_blue_gate(fpga_videodata);
+
+                            Action_INIT_ROBOT();
+                            setFPGAVideoData(fpga_videodata);
+                            step += mission_10_2_catch_green_bridge(fpga_videodata);
+        
+                            if(step == 3 || step == 4) {
+                                step = 0;
+                                step += mission_10_3_escape_blue_gate();
+                            }
+                            else {
+                                //4걸음 걷기
+                                Action_WALK_FRONT_LONG(7);
+                                step = 0;
+                            }
+                        }
+                        break;
                     case 1:
-                        mission_10_1_watch_up();
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_10_2_set_center_upper_gate(fpga_videodata);
-
-                        mission_10_1_watch_up();
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_10_3_set_straight_upper_gate(fpga_videodata);
-
-                        step = (step == 3) ? 2 : 1;
-                        break;
-                    case 2:
-                        //위에 두 조건이 충족되면 걸어서 게이트 통과
-                        step += mission_10_4_escape_blue_gate();
-                        break;
-                    case 3:
-                        mission = nextMission;
+                        printf("MISISON 10 END\n\n");
                         step = 0;
+                        nextMission = 5;
                         break;
                     default:
                         break;
