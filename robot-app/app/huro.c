@@ -238,8 +238,15 @@ int huro(void) {
                         break;
                     case 5:
                         // TODO: 노란색 보는 방향으로 센터랑 직각 맞추기
-                        break;
-                    case 6:
+                        mission_6_6_watch_side();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_6_6_set_straight_black_line(fpga_videodata);
+
+                        if(step == 6) {
+                            step += mission_6_6_set_center_black_line(fpga_videodata);
+                        }
+
+                        step = (step == 7) ? 6 : 5;
                         break;
                     default:
                         mission = 10;
