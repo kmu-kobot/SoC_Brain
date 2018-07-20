@@ -18,4 +18,12 @@ void mission_6_2_watch_below(void);
 
 int mission_6_2_set_center_of_ball(U16 *image);
 
+int mission_6_3_find_hole(U16 *image);
+
+int countColor(U16 *image, int row, int col, int range, int color);
+
+int mission_6_4_set_front_of_ball(U16 *image);
+
+int mission_6_5_kick_ball(void);
+
 #endif //SOC_APP_MISSION_6_KICK_BALL_H
