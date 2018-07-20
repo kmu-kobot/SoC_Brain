@@ -41,5 +41,5 @@ void mission_1_3_escape_yellow_barricade(int repeat) {
     for (i = 0; i < 2; ++i) {
         RobotSleep(5);
     }
-    Action_WALK_FRONT_LONG(repeat);
+    Action_WALK(FAST, OBLIQUE, repeat);
 }

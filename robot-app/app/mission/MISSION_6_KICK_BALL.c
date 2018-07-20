@@ -5,7 +5,7 @@
 #include "MISSION_6_KICK_BALL.h"
 
 void mission_6_1_watch_front(void) {
-    Action_INIT_ROBOT();
+    ACTION_INIT(LOW, OBLIQUE);
     RobotSleep(3);
 }
 
@@ -48,19 +48,19 @@ int mission_6_1_detection_ball(U16 *image) {
                 (30 <= detection && detection < 60) ? 2 :
                 (60 <= detection && detection < 80) ? 1 : 0;
         if (cnt) {
-            Action_LEFT_MOVE_LONG(range);
+            ACTION_MOVE(LONG, DIR_LEFT, LOW, OBLIQUE, range);
         } else {
-            Action_RIGHT_MOVE_LONG(range);
+            ACTION_MOVE(LONG, DIR_RIGHT, LOW, OBLIQUE, range);
         }
     } else {
-        Action_WALK_FRONT_LONG(range);
+        ACTION_WALK(FAST, OBLIQUE, range);
     }
 
     return 0;
 }
 
 void mission_6_2_watch_below(void) {
-    Action_WATCH_BELOW_LONG();
+    ACTION_INIT(LOW, DOWN);
     RobotSleep(3);
 }
 

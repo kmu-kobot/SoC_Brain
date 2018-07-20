@@ -5,10 +5,10 @@
 #include "MISSION_5_GREEN_BRIDGE.h"
 
 void mission_5_1_watch_below(int repeat) {
-    Action_WALK_FRONT_LONG(repeat);
+    ACTION_WALK(FAST, DOWN, repeat);
     RobotSleep(5);
 
-    Action_WATCH_BELOW_LONG();
+    ACTION_INIT(LOW, DOWN);
     RobotSleep(5);
 }
 
@@ -28,7 +28,7 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
            cntBlack, (double) (cntBlack * 100 / (HEIGHT * WIDTH)));
 
     if (rResult && repeat) {
-        Action_WALK_FRONT_SHORT(repeat);
+        ACTION_WALK(SLOW, DOWN, repeat);
         RobotSleep(5);
     }
 
@@ -36,22 +36,22 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
 }
 
 void mission_5_2_watch_side(void) {
-    Action_LEFT_TURN_HEAD_LONG();
+    ACTION_INIT(LOW, LEFT);
     RobotSleep(5);
 }
 
 int mission_5_3_climb_up_stairs(void) {
-    Action_WALK_FRONT_SHORT(3);
+    ACTION_WALK(SLOW, DOWN, 3);
     RobotSleep(5);
-    Action_CLIMB_UP_STAIRS();
+    ACTION_MOTION(MISSION_5_STAIR_UP);
     RobotSleep(5);
-    Action_WALK_FRONT_SHORT(3);
+    ACTION_WALK(SLOW, DOWN, 3);
     RobotSleep(5);
     return 1;
 }
 
 void mission_5_5_watch_below(void) {
-    Action_WATCH_BELOW_LONG();
+    ACTION_INIT(LOW, DOWN);
     RobotSleep(5);
 }
 
@@ -105,9 +105,9 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
     if (((r > 0) ? r : -r) > MISSION_5_5_GREEN_BRIDGE_SLOPE) {
         rResult = 0;
         if (r > 0) {
-            Action_RIGHT_TURN_BODY(2);
+            ACTION_TURN(DIR_RIGHT, LOW, DOWN, 3);
         } else {
-            Action_LEFT_TURN_BODY(2);
+            ACTION_TURN(DIR_LEFT, LOW, DOWN, 3);
         }
     }
 
@@ -152,11 +152,11 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
 
     if (((r > 0) ? r : (-r)) > MISSION_5_5_GREEN_BRIDGE_THRESHOLDS) {
         if (r > 0) {
-            Action_LEFT_MOVE_LONG(1);
-            Action_RIGHT_MOVE_SHORT(4);
+            ACTION_MOVE(LONG, DIR_LEFT, LOW, DOWN, 1);
+            ACTION_MOVE(SHORT, DIR_RIGHT, LOW, DOWN, 4);
         } else {
-            Action_RIGHT_MOVE_LONG(1);
-            Action_LEFT_MOVE_SHORT(4);
+            ACTION_MOVE(LONG, DIR_RIGHT, LOW, DOWN, 1);
+            ACTION_MOVE(SHORT, DIR_LET, LOW, DOWN, 4);
         }
         RobotSleep(5);
     }
@@ -166,7 +166,7 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
 
 int mission_5_5_short_walk_on_green_bridge(int repeat) {
     RobotSleep(5);
-    Action_WALK_FRONT_SHORT(repeat);
+    ACTION_WALK(SLOW, DOWN, repeat);
     RobotSleep(5);
     return 1;
 }
@@ -225,9 +225,9 @@ int mission_5_6_set_straight(U16 *image) {
     int rResult = 1;
     if (((r > 0) ? r : -r) > MISSION_5_6_GREEN_BRIDGE_SLOPE) {
         if (r < 0) {
-            Action_LEFT_TURN_BODY(1);
+            ACTION_TURN(DIR_LEFT, LOW, DOWN, 3);
         } else {
-            Action_RIGHT_TURN_BODY(1);
+            ACTION_TURN(DIR_RIGHT, LOW, DOWN, 3);
         }
         rResult = 0;
         RobotSleep(5);
@@ -238,9 +238,9 @@ int mission_5_6_set_straight(U16 *image) {
 
 int mission_5_7_climb_down_stairs(void) {
     RobotSleep(5);
-    Action_CLIMB_DOWN_STAIRS();
+    ACTION_MOTION(MISSION_5_STAIR_DOWN);
     RobotSleep(5);
-    Action_WALK_FRONT_SHORT(5);
+    ACTION_WALK(SLOW, DOWN, 5);
     RobotSleep(5);
     return 1;
 }
