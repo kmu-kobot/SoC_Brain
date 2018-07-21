@@ -8,7 +8,7 @@
 
 #define SOC_APP_ROBOT_ACTION_H
 
-#define ROBOT_CENTER_OFFSET 0
+#define
 
 #define INIT_POSE_COEF 5
 #define INIT_VIEW_COEF 1
@@ -29,8 +29,7 @@
 #define TURN_MOTION(dir, pose, view) (TURN_LEFT_LOW_DOWN + TURN_DIR_COEF*dir + TURN_POSE_COEF*pose + TURN_VIEW_COEF*view)
 #define MOVE_MOTION(dir, pose, view) (MOVE_LEFT_LOW_DOWN + MOVE_DIR_COEF*dir + MOVE_POSE_COEF*pose + MOVE_VIEW_COEF*view)
 
-typedef enum
-{
+typedef enum {
     INIT_LOW_DOWN = 1,
     INIT_LOW_OBLIQUE,
     INIT_LOW_UP,
@@ -152,8 +151,7 @@ typedef enum
     NIL = 0xff
 } MOTION;
 
-typedef enum
-{
+typedef enum {
     LOW_DOWN = INIT_LOW_DOWN,
     LOW_OBLIQUE = INIT_LOW_OBLIQUE,
     LOW_UP = INIT_LOW_UP,
@@ -175,15 +173,13 @@ typedef enum
     INIT_NIL = NIL
 } MOTION_INIT;
 
-typedef enum
-{
+typedef enum {
     LOW = 0,
     MIDDLE,
     HIGH
 } POSE;
 
-typedef enum
-{
+typedef enum {
     DOWN = 0,
     OBLIQUE,
     UP,
@@ -191,34 +187,29 @@ typedef enum
     RIGHT
 } VIEW;
 
-typedef enum
-{
+typedef enum {
     FAST = 0,
     SLOW
 } SPEED;
 
-typedef enum
-{
+typedef enum {
     STEP_LEFT = 0,
     STEP_RIGHT
 } STEP;
 
-typedef enum
-{
+typedef enum {
     DIR_LEFT = 0,
     DIR_RIGHT
 } DIRECTION;
 
-typedef enum
-{
+typedef enum {
     CHECK = 0,
     SET
 } FOO_MOD;
 
 void foo(MOTION_INIT motion, FOO_MOD mod);
 
-static inline void action(MOTION_INIT init, MOTION motion)
-{
+static inline void action(MOTION_INIT init, MOTION motion) {
     foo(init, CHECK);
     RobotAction(motion);
 }
@@ -227,8 +218,7 @@ static inline void action(MOTION_INIT init, MOTION motion)
 //  MOTION INIT             //
 //////////////////////////////
 
-static inline void ACTION_INIT(POSE pose, VIEW view)
-{
+static inline void ACTION_INIT(POSE pose, VIEW view) {
     RobotAction(INIT_MOTION(pose, view));
 }
 
@@ -237,12 +227,10 @@ static inline void ACTION_INIT(POSE pose, VIEW view)
 //  MOTION WALK             //
 //////////////////////////////
 
-static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat)
-{
+static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat) {
     action(INIT_MOTION(LOW, view), WALK_START_MOTION(speed, view));
 
-    for(; repeat > 0; --repeat)
-    {
+    for (; repeat > 0; --repeat) {
         RobotAction(WALK_MOTION(STEP_LEFT, speed, view));
         RobotAction(WALK_MOTION(STEP_RIGHT, speed, view));
     }
@@ -255,12 +243,10 @@ static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat)
 //  MOTION TURN             //
 //////////////////////////////
 
-static inline void ACTION_TURN(DIRECTION dir, POSE pose, VIEW view, int repeat)
-{
+static inline void ACTION_TURN(DIRECTION dir, POSE pose, VIEW view, int repeat) {
     action(INIT_MOTION(pose, view), TURN_MOTION(dir, pose, view));
 
-    for(; repeat > 1; --repeat)
-    {
+    for (; repeat > 1; --repeat) {
         RobotAction(TURN_MOTION(dir, pose, view));
     }
 }
@@ -270,12 +256,10 @@ static inline void ACTION_TURN(DIRECTION dir, POSE pose, VIEW view, int repeat)
 //  MOTION MOVE             //
 //////////////////////////////
 
-static inline void ACTION_MOVE(DIRECTION dir, POSE pose, VIEW view, int repeat)
-{
+static inline void ACTION_MOVE(DIRECTION dir, POSE pose, VIEW view, int repeat) {
     action(INIT_MOTION(pose, view), MOVE_MOTION(dir, pose, view));
 
-    for(; repeat > 1; --repeat)
-    {
+    for (; repeat > 1; --repeat) {
         RobotAction(MOVE_MOTION(dir, pose, view));
     }
 }
@@ -284,8 +268,7 @@ static inline void ACTION_MOVE(DIRECTION dir, POSE pose, VIEW view, int repeat)
 //  MOTION MISSION          //
 //////////////////////////////
 
-static inline void ACTION_MISSION(MOTION mission)
-{
+static inline void ACTION_MISSION(MOTION mission) {
     action(MIDDLE_UP, mission);
 }
 

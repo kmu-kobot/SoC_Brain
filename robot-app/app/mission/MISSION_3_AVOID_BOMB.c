@@ -67,17 +67,9 @@ int mission_3_default_avoid_bomb(U16 *image) {
     int rReturn = (s == 10) ? 1 : 0;
     if (!rReturn) {
         if (s == 100 || s == 110 || s == 111) {
-            if (check[0] == 1) {
-                ACTION_MOVE(DIR_RIGHT, LOW, DOWN, 4);
-            } else {
-                ACTION_MOVE(DIR_RIGHT, LOW, DOWN, 1);
-            }
+            ACTION_MOVE(DIR_RIGHT, LOW, DOWN, ((check[0] == 1) ? 4 : 1));
         } else if (s == 1 || s == 11) {
-            if (check[2] == 1) {
-                ACTION_MOVE(DIR_LEFT, LOW, DOWN, 4);
-            } else {
-                ACTION_MOVE(DIR_LEFT, LOW, DOWN, 4);
-            }
+            ACTION_MOVE(DIR_LEFT, LOW, DOWN, ((check[2] == 1) ? 4 : 1));
         } else if (s == 101 || s == 0) {
             ACTION_WALK(FAST, DOWN, 3);
             rReturn = 1;
