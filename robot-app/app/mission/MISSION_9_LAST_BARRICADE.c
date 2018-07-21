@@ -24,7 +24,7 @@ int mission_9_2_end_yellow_barricade(U16 *image) {
     U32 col, row, cntYellow = 0;
 
     for (row = 0; row < HEIGHT; ++row) {
-        for (col = 0; col < WIDTH; col += 2) {
+        for (col = 0; col < WIDTH; col++) {
             cntYellow += GetValueRGBYOBK(
                     GetPtr(image, row, col, WIDTH),
                     YELLOW
@@ -32,7 +32,7 @@ int mission_9_2_end_yellow_barricade(U16 *image) {
         }
     }
 
-    printf("M9-2: END: %d\n", cntYellow * 2 * 100 / (WIDTH * HEIGHT));
+    printf("M9-2: END: %d\n", cntYellow * 100 / (WIDTH * HEIGHT));
     return cntYellow * 2 * 100 / (WIDTH * HEIGHT) <= (MISSION_9_THRESHOLDS - 20);
 }
 

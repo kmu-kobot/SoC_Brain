@@ -29,7 +29,7 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
     int rReturn = r > MISSION_7_1_THRESHOLDS;
 
     if (rReturn) {
-        ACTION_WALK(SLOW, DOWN, repeat);
+        ACTION_WALK(SLOW, OBLIQUE, repeat);
         RobotSleep(5);
     }
 
@@ -82,9 +82,9 @@ int mission_7_2_before_bridge_set_center(U16 *image) {
 int mission_7_3_climb_yellow_hole_bridge() {
     RobotSleep(5);
 //    ACTION_MOTION(MISSION_5_STAIR_UP);
-    ACTION_INIT(LOW, DOWN);
+    ACTION_INIT(LOW, LEFT);
     RobotSleep(5);
-    ACTION_WALK(SLOW, DOWN, 3);
+    ACTION_WALK(SLOW, LEFT, 3);
     RobotSleep(5);
     return 1;
 }
@@ -403,6 +403,7 @@ int mission_7_6_jump_hole(void) {
     RobotSleep(5);
 //    ACTION_MOTION(MISSION_7_YELLOW_DUMBLING);
     RobotSleep(5);
+    ACTION_WALK(SLOW, LEFT, 3);
     return 1;
 }
 
@@ -437,8 +438,6 @@ int mission_7_7_after_yellow_bridge_set_straight(U16 *image) {
     printf("M7-4: SLOPE\n");
     printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
 
-    ACTION_INIT(LOW, LEFT);
-
     double s = (
             (black_len[0] - black_len[1]) /
             MISSION_7_2_BLACK_LINE_COL_POINT_1 - MISSION_7_2_BLACK_LINE_COL_POINT_2
@@ -463,5 +462,6 @@ int mission_7_7_after_yellow_bridge_set_straight(U16 *image) {
 }
 
 int mission_7_7_after_yellow_bridge_set_center(U16 *image) {
+    // TODO: 옆에 보고 센터 맞추는거로 다시 바꿔야함
     return mission_7_2_before_bridge_set_center(image);
 }

@@ -242,7 +242,7 @@ int huro(void) {
                         setFPGAVideoData(fpga_videodata);
                         step += mission_6_6_set_straight_black_line(fpga_videodata);
 
-                        if(step == 6) {
+                        if (step == 6) {
                             step += mission_6_6_set_center_black_line(fpga_videodata);
                         }
 
@@ -294,12 +294,11 @@ int huro(void) {
                     case 7:
                         mission_7_7_watch_side(5);
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_7_7_after_yellow_bridge_set_center(fpga_videodata);// 길이 맞추기
+                        step += mission_7_7_after_yellow_bridge_set_straight(fpga_videodata); // 직선 맞추기
 
                         if (step == 8) {
-                            step += mission_7_7_after_yellow_bridge_set_straight(fpga_videodata); // 직선 맞추기
+                            step += mission_7_7_after_yellow_bridge_set_center(fpga_videodata);// 길이 맞추기
                         }
-
 
                         step = (step == 9) ? 8 : 7;
                         break;
@@ -318,9 +317,11 @@ int huro(void) {
             case 9: // MISSION 9: LAST BARRICADE
                 switch (step) {
                     case 0:
+                        ACTION_INIT(LOW, OBLIQUE);
                         step += mission_9_1_wait_yellow_barricade(fpga_videodata);
                         break;
                     case 1:
+                        ACTION_INIT(LOW, OBLIQUE);
                         step += mission_9_2_end_yellow_barricade(fpga_videodata);
                         break;
                     case 2:

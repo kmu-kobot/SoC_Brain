@@ -116,12 +116,13 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
 
     int rResult = 0;
     if (black_len[0] < MISSION_2_2_BLACK_LINE_RANGE - MISSION_2_2_BLACK_LINE_ERROR) {
-        ACTION_MOVE(DIR_RIGHT, LOW, LEFT, 1);
+        ACTION_MOVE(DIR_RIGHT, LOW, LEFT, 4);
     } else if (black_len[0] > MISSION_2_2_BLACK_LINE_RANGE + MISSION_2_2_BLACK_LINE_ERROR) {
-        ACTION_MOVE(DIR_LEFT, LOW, LEFT, 1);
+        ACTION_MOVE(DIR_LEFT, LOW, LEFT, 4);
     } else {
         rResult = 1;
     }
+    ACTION_WALK(SLOW, LEFT, 1);
     RobotSleep(5);
 
     return rResult;
