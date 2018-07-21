@@ -73,9 +73,9 @@ int mission_2_2_before_bridge_set_center_version2(U16 *image) {
 
     if (((s > 0) ? s : (-s)) > MISSION_2_4_BED_BRIDGE_THRESHOLDS) {
         if (s > 0) {
-            ACTION_MOVE(LONG, DIR_LEFT, LOW, LEFT, 1);
+            ACTION_MOVE(DIR_LEFT, LOW, LEFT, 1);
         } else {
-            ACTION_MOVE(LONG, DIR_RIGHT, LOW, LEFT, 1);
+            ACTION_MOVE(DIR_RIGHT, LOW, LEFT, 1);
         }
         RobotSleep(5);
     }
@@ -116,9 +116,9 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
 
     int rResult = 0;
     if (black_len[0] < MISSION_2_2_BLACK_LINE_RANGE - MISSION_2_2_BLACK_LINE_ERROR) {
-        ACTION_MOVE(LONG, DIR_RIGHT, LOW, LEFT, 1);
+        ACTION_MOVE(DIR_RIGHT, LOW, LEFT, 1);
     } else if (black_len[0] > MISSION_2_2_BLACK_LINE_RANGE + MISSION_2_2_BLACK_LINE_ERROR) {
-        ACTION_MOVE(LONG, DIR_LEFT, LOW, LEFT, 1);
+        ACTION_MOVE(DIR_LEFT, LOW, LEFT, 1);
     } else {
         rResult = 1;
     }
@@ -130,7 +130,8 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
 }
 
 int mission_2_3_escape_red_bridge(void) {
-    ACTION_MOTION(MISSION_2_RED_DUMBLING, LOW, OBLIQUE);
+    // TODO: 미션 동작 추가
+//    ACTION_MOTION(MISSION_2_RED_DUMBLING, LOW, OBLIQUE);
     RobotSleep(5);
     return 1;
 }
