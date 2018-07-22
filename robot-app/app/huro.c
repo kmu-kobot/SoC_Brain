@@ -311,8 +311,19 @@ int huro(void) {
                 }
                 break;
             case 8: // MISSION 8: AVOID BOMB
-                mission += 1;
-                step = 0;
+                switch (step) {
+                    case 4:
+                        mission_3_4_watch_front();
+                        setFPGAVideoData(fpga_videodata);
+                        mission += mission_8_4_is_front_of_finish_line(fpga_videodata);
+                        step = 0;
+                        break;
+                    default:
+                        mission_3_default_watch_below();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_3_default_avoid_bomb(fpga_videodata);
+                        break;
+                }
                 break;
             case 9: // MISSION 9: LAST BARRICADE
                 switch (step) {
