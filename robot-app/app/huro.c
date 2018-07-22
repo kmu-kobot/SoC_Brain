@@ -238,8 +238,15 @@ int huro(void) {
                         break;
                     case 5:
                         // TODO: 노란색 보는 방향으로 센터랑 직각 맞추기
-                        break;
-                    case 6:
+                        mission_6_6_watch_side();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_6_6_set_straight_black_line(fpga_videodata);
+
+                        if (step == 6) {
+                            step += mission_6_6_set_center_black_line(fpga_videodata);
+                        }
+
+                        step = (step == 7) ? 6 : 5;
                         break;
                     default:
                         mission = 10;
@@ -287,12 +294,11 @@ int huro(void) {
                     case 7:
                         mission_7_7_watch_side(5);
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_7_7_after_yellow_bridge_set_center(fpga_videodata);// 길이 맞추기
+                        step += mission_7_7_after_yellow_bridge_set_straight(fpga_videodata); // 직선 맞추기
 
                         if (step == 8) {
-                            step += mission_7_7_after_yellow_bridge_set_straight(fpga_videodata); // 직선 맞추기
+                            step += mission_7_7_after_yellow_bridge_set_center(fpga_videodata);// 길이 맞추기
                         }
-
 
                         step = (step == 9) ? 8 : 7;
                         break;
@@ -305,15 +311,28 @@ int huro(void) {
                 }
                 break;
             case 8: // MISSION 8: AVOID BOMB
-                mission += 1;
-                step = 0;
+                switch (step) {
+                    case 4:
+                        mission_3_4_watch_front();
+                        setFPGAVideoData(fpga_videodata);
+                        mission += mission_8_4_is_front_of_finish_line(fpga_videodata);
+                        step = 0;
+                        break;
+                    default:
+                        mission_3_default_watch_below();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_3_default_avoid_bomb(fpga_videodata);
+                        break;
+                }
                 break;
             case 9: // MISSION 9: LAST BARRICADE
                 switch (step) {
                     case 0:
+                        ACTION_INIT(LOW, OBLIQUE);
                         step += mission_9_1_wait_yellow_barricade(fpga_videodata);
                         break;
                     case 1:
+                        ACTION_INIT(LOW, OBLIQUE);
                         step += mission_9_2_end_yellow_barricade(fpga_videodata);
                         break;
                     case 2:

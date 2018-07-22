@@ -189,5 +189,92 @@ int countColor(U16 *image, int row, int col, int range, int color) {
 
 int mission_6_5_kick_ball(void) {
     ACTION_MOTION(MISSION_6_RIGHT_KICK, MIDDLE, OBLIQUE);
+    ACTION_TURN(LEFT, MIDDLE, OBLIQUE, 6);
+    ACTION_WALK(FAST, OBLIQUE, 6);
     return 1;
+}
+
+int mission_6_6_set_straight_black_line(U16* image) {
+    U32 i, row, col[2] = {MISSION_6_6_COL_POINT_1,
+                          MISSION_6_6_COL_POINT_2};
+    U16 pos_black[2] = {0,};
+    for(i = 0; i < 2; ++i) {
+        for(row = HEIGHT;row > 0; --row) {
+            if(GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) == 1 &&
+               GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK) == 1) {
+                break;
+            }
+            pos_black[i] += 1;
+        }
+    }
+
+    printf("pos_black[0]: %d, pos_black[1]: %d\n", pos_black[0], pos_black[1]);
+
+// s>0 l
+// s < 0
+    double slope = (double) (pos_black[0] - pos_black[1]);
+
+    printf("Slope is %f\n", slope);
+
+    ACTION_INIT(LOW, OBLIQUE);
+
+    int rResult = 1;
+    if (((slope>0)?slope : -slope) > MISSION_6_6_BLUE_GATE_SLOPE) {
+        rResult = 0;
+        if (slope > 0) {
+            ACTION_TURN(DIR_LEFT, LOW, OBLIQUE, 2);
+        } else if (slope < 0) {
+            ACTION_TURN(DIR_RIGHT, LOW, OBLIQUE, 2);
+        }
+    }
+
+    ACTION_INIT(LOW, OBLIQUE);
+
+    return rResult;
+}
+
+void mission_6_6_watch_side(void) {
+    ACTION_INIT(LOW, LEFT);
+    RobotSleep(3);
+
+}
+
+int mission_6_6_set_center_black_line(U16* image) {
+    U32 i, row, col[2] = {MISSION_6_6_COL_POINT_1,
+                          MISSION_6_6_COL_POINT_2};
+    U16 black_len[2] = {0,};
+    for(i = 0; i < 2;++i) {
+        for(row = HEIGHT; row > 0; --row) {
+            if(GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) == 1 &&
+               GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK) == 1) {
+                black_len[i] = HEIGHT - row;
+                break;
+            }
+        }
+    }
+
+    printf("black_len[0] = %d, black_len[1] = %d\n", black_len[0], black_len[1]);
+
+    double e = (double) (black_len[0] + black_len[1]) / 2;
+
+    printf("distance is %f", e);
+
+    ACTION_INIT(LOW, OBLIQUE);
+
+    int rResult = 0;
+    if(e < MISSION_6_6_BLACK_LENGTH - MISSION_6_6_BLACK_LENGTH_ERROR) {
+        //오른쪽 이동
+        ACTION_MOVE(LONG, DIR_RIGHT, LOW, OBLIQUE, 1);
+    }
+    else if(e > MISSION_6_6_BLACK_LENGTH + MISSION_6_6_BLACK_LENGTH_ERROR) {
+        //왼쪽 이동
+        ACTION_MOVE(LONG, DIR_LEFT, LOW, OBLIQUE, 1);
+    }
+    else {
+        rResult = 1;
+    }
+
+    ACTION_INIT(LOW, OBLIQUE);
+
+    return rResult;
 }

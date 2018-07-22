@@ -37,4 +37,4 @@ add_executable(
         mission/MISSION_9_LAST_BARRICADE.h
         mission/MISSION_10_BLUE_GATE.c
         mission/MISSION_10_BLUE_GATE.h
-)
+        mission/MISSION_8_AVOID_BOMB.c mission/MISSION_8_AVOID_BOMB.h)

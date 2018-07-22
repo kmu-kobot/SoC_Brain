@@ -25,7 +25,7 @@ int mission_3_4_is_not_front_of_bomb(U16 *image) {
     }
 
     if (check < MISSION_3_4_BOMB) {
-        ACTION_WALK(SLOW, LOW, OBLIQUE, 3);
+        ACTION_WALK(SLOW, DOWN, 3);
     }
 
     return check < MISSION_3_4_BOMB;
@@ -67,19 +67,11 @@ int mission_3_default_avoid_bomb(U16 *image) {
     int rReturn = (s == 10) ? 1 : 0;
     if (!rReturn) {
         if (s == 100 || s == 110 || s == 111) {
-            if (check[0] == 1) {
-                ACTION_MOVE(SHORT, DIR_RIGHT, LOW, DOWN, 4);
-            } else {
-                ACTION_MOVE(LONG, DIR_RIGHT, LOW, DOWN, 1);
-            }
+            ACTION_MOVE(DIR_RIGHT, LOW, DOWN, ((check[0] == 1) ? 4 : 1));
         } else if (s == 1 || s == 11) {
-            if (check[2] == 1) {
-                ACTION_MOVE(SHORT, DIR_LEFT, LOW, DOWN, 4);
-            } else {
-                ACTION_MOVE(LONG, DIR_LET, LOW, DOWN, 4);
-            }
+            ACTION_MOVE(DIR_LEFT, LOW, DOWN, ((check[2] == 1) ? 4 : 1));
         } else if (s == 101 || s == 0) {
-            ACTION_WALK(FAST, LOW, DOWN, 3);
+            ACTION_WALK(FAST, DOWN, 3);
             rReturn = 1;
         }
     } else {
@@ -105,12 +97,12 @@ int mission_3_default_avoid_bomb(U16 *image) {
         printf("\t\t\t- O-x: %d", check[2]);
 
         if (check[2] < WIDTH / 2 - MISSION_3_DEFAULT_AVOID_BOMB_RANGE) {
-            ACTION_MOVE(SHORT, DIR_LEFT, LOW, DOWN, 2);
+            ACTION_MOVE(DIR_LEFT, LOW, DOWN, 2);
         } else if (check[2] > WIDTH / 2 + MISSION_3_DEFAULT_AVOID_BOMB_RANGE) {
-            ACTION_MOVE(SHORT, DIR_RIGHT, LOW, DOWN, 2);
+            ACTION_MOVE(DIR_RIGHT, LOW, DOWN, 2);
         } else {
             // TODO: 지뢰 피하는 동작
-            ACTION_MISSION_3(6);
+//            ACTION_MISSION_3(6);
             rReturn = 1;
         }
 

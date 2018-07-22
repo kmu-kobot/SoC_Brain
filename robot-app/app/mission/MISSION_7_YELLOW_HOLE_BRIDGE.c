@@ -29,7 +29,7 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
     int rReturn = r > MISSION_7_1_THRESHOLDS;
 
     if (rReturn) {
-        ACTION_WALK(SLOW, DOWN, repeat);
+        ACTION_WALK(SLOW, OBLIQUE, repeat);
         RobotSleep(5);
     }
 
@@ -68,9 +68,9 @@ int mission_7_2_before_bridge_set_center(U16 *image) {
 
     if (((s > 0) ? s : -s) > MISSION_7_2_RED_BRIDGE_THRESHOLDS) {
         if (s > 0) {
-            ACTION_MVOE(LONG, DIR_LEFT, LOW, OBLIQUE, 1);
+            ACTION_MOVE(DIR_LEFT, LOW, OBLIQUE, 1);
         } else if (s < 0) {
-            ACTION_MVOE(LONG, DIR_RIGHT, LOW, OBLIQUE, 1);
+            ACTION_MOVE(DIR_RIGHT, LOW, OBLIQUE, 1);
         }
         ACTION_WALK(SLOW, OBLIQUE, 1);
         RobotSleep(4);
@@ -81,10 +81,10 @@ int mission_7_2_before_bridge_set_center(U16 *image) {
 
 int mission_7_3_climb_yellow_hole_bridge() {
     RobotSleep(5);
-    ACTION_MOTION(MISSION_5_STAIR_UP);
-    ACTION_INIT(LOW, DOWN);
+//    ACTION_MOTION(MISSION_5_STAIR_UP);
+    ACTION_INIT(LOW, LEFT);
     RobotSleep(5);
-    ACTION_WALK(SLOW, DOWN, 3);
+    ACTION_WALK(SLOW, LEFT, 3);
     RobotSleep(5);
     return 1;
 }
@@ -114,10 +114,10 @@ int mission_7_4_set_center(U16 *image) {
     int rResult = 0;
     if (e < MISSION_7_4_YELLOW_LENGTH - MISSION_7_4_YELLOW_LENGTH_ERROR) {
         //오른쪽 이동
-        ACTION_MVOE(LONG, DIR_RIGHT, LOW, LEFT, 1);
+        ACTION_MOVE(DIR_RIGHT, LOW, LEFT, 1);
     } else if (e > MISSION_7_4_YELLOW_LENGTH + MISSION_7_4_YELLOW_LENGTH_ERROR) {
         //왼쪽 이동
-        ACTION_MVOE(LONG, DIR_LEFT, LOW, LEFT, 1);
+        ACTION_MOVE(DIR_LEFT, LOW, LEFT, 1);
     } else {
         rResult = 1;
     }
@@ -230,9 +230,9 @@ int mission_7_5_set_center_on_yellow_bridge(U16 *image) {
     int rResult = (((s > 0) ? s : -s) <= MISSION_7_5_BLACK_LINE_RANGE + MISSION_7_5_BLACK_LINE_ERROR);
     if (!rResult) {
         if (s > 0) {
-            ACTION_MVOE(LONG, DIR_RIGHT, LOW, DOWN, 1);
+            ACTION_MOVE(DIR_RIGHT, LOW, DOWN, 1);
         } else if (s < 0) {
-            ACTION_MVOE(LONG, DIR_LEFT, LOW, DOWN, 1);
+            ACTION_MOVE(DIR_LEFT, LOW, DOWN, 1);
         }
         RobotSleep(5);
         ACTION_INIT(LOW, DOWN);
@@ -401,8 +401,9 @@ int mission_7_5_walk_until_line_front_of_feet(U16 *image) {
 
 int mission_7_6_jump_hole(void) {
     RobotSleep(5);
-    ACTION_MOTION(MISSION_7_YELLOW_DUMBLING);
+//    ACTION_MOTION(MISSION_7_YELLOW_DUMBLING);
     RobotSleep(5);
+    ACTION_WALK(SLOW, LEFT, 3);
     return 1;
 }
 
@@ -437,8 +438,6 @@ int mission_7_7_after_yellow_bridge_set_straight(U16 *image) {
     printf("M7-4: SLOPE\n");
     printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
 
-    ACTION_INIT(LOW, LEFT);
-
     double s = (
             (black_len[0] - black_len[1]) /
             MISSION_7_2_BLACK_LINE_COL_POINT_1 - MISSION_7_2_BLACK_LINE_COL_POINT_2
@@ -463,5 +462,6 @@ int mission_7_7_after_yellow_bridge_set_straight(U16 *image) {
 }
 
 int mission_7_7_after_yellow_bridge_set_center(U16 *image) {
+    // TODO: 옆에 보고 센터 맞추는거로 다시 바꿔야함
     return mission_7_2_before_bridge_set_center(image);
 }

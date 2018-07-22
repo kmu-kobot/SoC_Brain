@@ -17,7 +17,7 @@ void mission_10_1_watch_side(int repeat) {
 
 
 void mission_10_1_front_walk(int repeat) {
-    ACTION_WALK(FAST, OBLIQUErepeat);
+    ACTION_WALK(FAST, OBLIQUE, 3);
     RobotSleep(5);
 }
 
@@ -25,13 +25,13 @@ int mission_10_1_set_center(U16 *image) {
     U32 i, row, col[2] = {MISSION_10_1_COL_POINT_1,
                           MISSION_10_1_COL_POINT_2};
     U16 black_len[2] = {0,};
-    for(i = 0; i < 2;++i) {
-        for(row = HEIGHT; row > 0; --row) {
-            if(GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) == 1 &&
-               GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK) == 1) {
-                   black_len[i] = HEIGHT - row;
-                   break;
-               }
+    for (i = 0; i < 2; ++i) {
+        for (row = HEIGHT; row > 0; --row) {
+            if (GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) == 1 &&
+                GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK) == 1) {
+                black_len[i] = HEIGHT - row;
+                break;
+            }
         }
     }
 
@@ -44,15 +44,13 @@ int mission_10_1_set_center(U16 *image) {
     ACTION_INIT(LOW, OBLIQUE);
 
     int rResult = 0;
-    if(e < MISSION_10_1_BLACK_LENGTH - MISSION_10_1_BLACK_LENGTH_ERROR) {
+    if (e < MISSION_10_1_BLACK_LENGTH - MISSION_10_1_BLACK_LENGTH_ERROR) {
         //오른쪽 이동
-        ACTION_MOVE(LONG, DIR_LEFT, LOW, OBLIQUE, 1);
-    }
-    else if(e > MISSION_10_1_BLACK_LENGTH + MISSION_10_1_BLACK_LENGTH_ERROR) {
+        ACTION_MOVE(DIR_LEFT, LOW, OBLIQUE, 1);
+    } else if (e > MISSION_10_1_BLACK_LENGTH + MISSION_10_1_BLACK_LENGTH_ERROR) {
         //왼쪽 이동
-        ACTION_MOVE(LONG, DIR_RIGHT, LOW, OBLIQUE, 1);
-    }
-    else {
+        ACTION_MOVE(DIR_RIGHT, LOW, OBLIQUE, 1);
+    } else {
         rResult = 1;
     }
 
@@ -66,11 +64,11 @@ int mission_10_1_set_straight(U16 *image) {
     U32 i, row, col[2] = {MISSION_10_1_COL_POINT_1,
                           MISSION_10_1_COL_POINT_2};
     U16 pos_black[2] = {0,};
-    for(i = 0; i < 2; ++i) {
-        for(row = HEIGHT;row > 0; --row) {
-            if(GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) == 1 &&
-               GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK) == 1) {
-                   break;
+    for (i = 0; i < 2; ++i) {
+        for (row = HEIGHT; row > 0; --row) {
+            if (GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) == 1 &&
+                GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK) == 1) {
+                break;
             }
             pos_black[i] += 1;
         }
@@ -87,7 +85,7 @@ int mission_10_1_set_straight(U16 *image) {
     ACTION_INIT(LOW, OBLIQUE);
 
     int rResult = 1;
-    if (((slope>0)?slope : -slope) > MISSION_10_1_BLUE_GATE_SLOPE) {
+    if (((slope > 0) ? slope : -slope) > MISSION_10_1_BLUE_GATE_SLOPE) {
         rResult = 0;
         if (slope > 0) {
             ACTION_TURN(DIR_RIGHT, LOW, OBLIQUE, 2);
@@ -97,12 +95,12 @@ int mission_10_1_set_straight(U16 *image) {
     }
 
     return rResult;
-	//return 0;
+    //return 0;
 
 }
 
 void mission_10_2_watch_side(int repeat) {
-	ACTION_INIT(LOW, LEFT);
+    ACTION_INIT(LOW, LEFT);
     RobotSleep(repeat);
 
 }
@@ -120,38 +118,38 @@ int mission_10_2_catch_blue_gate(U16 *image) {
         }
     }
 
-	double ratio = blue_cnt / (HEIGHT * WIDTH) * 100;
+    double ratio = blue_cnt / (HEIGHT * WIDTH) * 100;
 
-	printf("blue ratio is %f\n\n", ratio);
+    printf("blue ratio is %f\n\n", ratio);
 
     return ratio > MISSION_10_1_BLUE_GATE_RATIO;
 }
 
-int mission_10_2_catch_green_bridge(U16* image) {
-	U32 col, row;
-	U16 green_cnt = 0;
-	for(row = 0;row < HEIGHT; ++row) {
-		for(col =0; col < WIDTH; ++col) {
-			green_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), GREEN);
-		}
-	}
+int mission_10_2_catch_green_bridge(U16 *image) {
+    U32 col, row;
+    U16 green_cnt = 0;
+    for (row = 0; row < HEIGHT; ++row) {
+        for (col = 0; col < WIDTH; ++col) {
+            green_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), GREEN);
+        }
+    }
 
-	double ratio = green_cnt / (HEIGHT * WIDTH) * 100;
+    double ratio = green_cnt / (HEIGHT * WIDTH) * 100;
 
-	printf("green ratio is %f\n\n", ratio);
+    printf("green ratio is %f\n\n", ratio);
 
-	ACTION_INIT(LOW, OBLIQUE);
+    ACTION_INIT(LOW, OBLIQUE);
 
-	int rResult = 0;
-	if(ratio > 5) {
-		rResult = 1;
-	}
+    int rResult = 0;
+    if (ratio > 5) {
+        rResult = 1;
+    }
 
-	return rResult;
+    return rResult;
 }
 
 int mission_10_3_escape_blue_gate(void) {
-    ACTION_WALK(FAST, OBLIQUE5);
+    ACTION_WALK(FAST, OBLIQUE, 3);
     RobotSleep(3);
 
     return 1;
