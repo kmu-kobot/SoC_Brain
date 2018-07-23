@@ -1,5 +1,27 @@
-fpga/db/*
-fpga/incremental_db/*
+fpga/*
+!/*.gitignore
+##
+!*.qpf
+!*.qsf
+!*.qws
+##
+!*.bdf
+!*.vhd
+!*.v
+##
+!*.ptf
+!*.bsf
+##
+!**/class.ptf
+##
+!*.tbd
+##
+!*.sof
+##
+## tbd
+
+!*.tcl
+
 
 # Created by https://www.gitignore.io/api/clion,visualstudiocode
 
