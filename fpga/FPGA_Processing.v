@@ -346,6 +346,8 @@ always @(negedge resetx or posedge clk_llc)
 wire [ 7:0] H = H_DATA[7 :0];
 wire [ 7:0] S = S_DATA[7 :0];
 wire [ 7:0] V = C_MAX[ 7 :0];
+
+wire [15:0] SHV565 = {S[7:3], H[7:2], V[7:3]};
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -365,16 +367,16 @@ reg R_B, G_B, B_B, Y_B, O_B, BK_B, C_H, C_L;
 
 always @ (posedge clk_llc)
 begin
-	H_THRES = 8'd10;
+	H_THRES = 8'd20;
 	S_THRES_H = 8'd96;
-	S_THRES_L = 8'd48;
+	S_THRES_L = 8'd36;
 	V_THRES = 8'd96;
 
-	R_H	= 8'd230;
+	R_H	= 8'd220;
 	G_H	= 8'd85;
 	B_H	= 8'd148;
 	Y_H	= 8'd40;
-	O_H	= 8'd10;
+	O_H	= 8'd20;
 	
 	R_MIN = R_H - H_THRES;
 	R_MAX = R_H + H_THRES;
@@ -527,7 +529,8 @@ reg A_addr;
 always @(negedge resetx or posedge clk_llc)
    if      (~resetx)           vdata <= 16'b0;
 	else if (href2_wr)          vdata <= DecVData;
-
+//	else if (href2_wr)			 vdata <= SHV565;
+	
 always @(negedge resetx or posedge clk_llc8)
    if      (~resetx)           vadr[14:0] <= 15'b0;
    else if (~oddframe)         vadr[14:0] <= 15'b0;
