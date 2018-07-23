@@ -50,6 +50,7 @@ int mission_4_4_jump_hurdle(void) {
     RobotSleep(5);
 //    ACTION_MOTION(MISSION_4_HURDLING);
     RobotSleep(5);
+    ACTION_WALK(FAST, OBLIQUE, 3);
     return 1;
 }
 

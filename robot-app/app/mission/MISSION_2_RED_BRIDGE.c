@@ -7,8 +7,6 @@
 void mission_2_1_watch_below(int repeat) {
     ACTION_WALK(FAST, DOWN, repeat);
     RobotSleep(5);
-    ACTION_INIT(LOW, DOWN);
-    RobotSleep(5);
 }
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat) {
@@ -30,7 +28,7 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat) {
     int rReturn = (cntRed * 100 / (WIDTH * HEIGHT)) > MISSION_2_THRESHOLDS;
 
     if (rReturn) {
-        ACTION_WALK(SLOW, DOWN, repeat);
+        ACTION_WALK(SLOW, OBLIQUE, repeat);
     }
     RobotSleep(5);
 

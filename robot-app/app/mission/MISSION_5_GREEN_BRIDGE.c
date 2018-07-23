@@ -7,9 +7,6 @@
 void mission_5_1_watch_below(int repeat) {
     ACTION_WALK(FAST, DOWN, repeat);
     RobotSleep(5);
-
-    ACTION_INIT(LOW, DOWN);
-    RobotSleep(5);
 }
 
 int mission_5_1_check_black_line(U16 *image, int repeat) {
@@ -45,7 +42,7 @@ int mission_5_3_climb_up_stairs(void) {
     RobotSleep(5);
 //    ACTION_MOTION(MISSION_5_STAIR_UP);
     RobotSleep(5);
-    ACTION_WALK(SLOW, DOWN, 3);
+    ACTION_WALK(SLOW, DOWN, 2);
     RobotSleep(5);
     return 1;
 }

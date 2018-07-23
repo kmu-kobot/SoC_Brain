@@ -7,8 +7,6 @@
 void mission_7_1_watch_below(int repeat) {
     ACTION_WALK(FAST, DOWN, repeat);
     RobotSleep(5);
-    ACTION_INIT(LOW, DOWN);
-    RobotSleep(5);
 }
 
 int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
@@ -109,8 +107,6 @@ int mission_7_4_set_center(U16 *image) {
 
     printf("distance is %f", e);
 
-    ACTION_INIT(LOW, LEFT);
-
     int rResult = 0;
     if (e < MISSION_7_4_YELLOW_LENGTH - MISSION_7_4_YELLOW_LENGTH_ERROR) {
         //오른쪽 이동
@@ -121,8 +117,6 @@ int mission_7_4_set_center(U16 *image) {
     } else {
         rResult = 1;
     }
-
-    ACTION_INIT(LOW, LEFT);
 
     return rResult;
 }
@@ -148,8 +142,6 @@ int mission_7_4_set_straight(U16 *image) {
     double slope = (double) (pos_yellow[0] - pos_yellow[1]);
 
     printf("Slope is %f\n", slope);
-
-    ACTION_INIT(LOW, OBLIQUE);
 
     int rResult = 1;
     if (((slope > 0) ? slope : -slope) > MISSION_7_4_YELLOW_BRIDGE_SLOPE) {
@@ -389,7 +381,7 @@ int mission_7_5_walk_until_line_front_of_feet(U16 *image) {
 
     int rResult = black_cnt > MISSION_7_5_LINE_RATIO;
     if (!rResult) {
-        ACTION_WALK(SLOW, DOWN, 0);
+        ACTION_WALK(SLOW, DOWN, 1);
     }
 
     ACTION_INIT(LOW, DOWN);

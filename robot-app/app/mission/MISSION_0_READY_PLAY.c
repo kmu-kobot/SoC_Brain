@@ -9,10 +9,7 @@ int mission_0_1_wait_play(U16 *image) {
 
     for (row = MISSION_0_UPPER; row < MISSION_0_UPPER + MISSION_0_RANGE; ++row) {
         for (col = 0; col < WIDTH; col++) {
-            cntYellow += GetValueRGBYOBK(
-                    GetPtr(image, row, col, WIDTH),
-                    YELLOW
-            );
+            cntYellow += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW);
         }
     }
 

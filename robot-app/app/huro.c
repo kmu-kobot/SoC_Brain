@@ -263,8 +263,7 @@ int huro(void) {
                         step += mission_7_1_wait_front_of_yellow_hole_bridge(fpga_videodata, 5);
                         break;
                     case 1:
-                        ACTION_INIT(LOW, OBLIQUE);
-                        RobotSleep(5);
+                        mission_7_2_watch_below();
                         setFPGAVideoData(fpga_videodata);
                         step += mission_7_2_before_bridge_set_center(fpga_videodata);
                         break;
