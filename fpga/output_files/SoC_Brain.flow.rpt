@@ -1,5 +1,5 @@
 Flow report for SoC_Brain
-Wed Jul 18 23:14:55 2018
+Mon Jul 23 16:54:52 2018
 Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -40,20 +40,20 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Flow Summary                                                                    ;
 +------------------------------------+--------------------------------------------+
-; Flow Status                        ; Successful - Wed Jul 18 23:14:41 2018      ;
+; Flow Status                        ; Successful - Mon Jul 23 16:54:18 2018      ;
 ; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
 ; Revision Name                      ; SoC_Brain                                  ;
 ; Top-level Entity Name              ; FPGA_Processing                            ;
 ; Family                             ; Cyclone IV E                               ;
 ; Device                             ; EP4CE75U19I7                               ;
 ; Timing Models                      ; Final                                      ;
-; Total logic elements               ; 5,546 / 75,408 ( 7 % )                     ;
-;     Total combinational functions  ; 5,294 / 75,408 ( 7 % )                     ;
-;     Dedicated logic registers      ; 930 / 75,408 ( 1 % )                       ;
-; Total registers                    ; 930                                        ;
+; Total logic elements               ; 4,891 / 75,408 ( 6 % )                     ;
+;     Total combinational functions  ; 4,805 / 75,408 ( 6 % )                     ;
+;     Dedicated logic registers      ; 420 / 75,408 ( < 1 % )                     ;
+; Total registers                    ; 420                                        ;
 ; Total pins                         ; 60 / 293 ( 20 % )                          ;
 ; Total virtual pins                 ; 0                                          ;
-; Total memory bits                  ; 2,185,792 / 2,810,880 ( 78 % )             ;
+; Total memory bits                  ; 2,161,216 / 2,810,880 ( 77 % )             ;
 ; Embedded Multiplier 9-bit elements ; 19 / 400 ( 5 % )                           ;
 ; Total PLLs                         ; 1 / 4 ( 25 % )                             ;
 +------------------------------------+--------------------------------------------+
@@ -64,61 +64,36 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 07/18/2018 23:09:24 ;
+; Start date & time ; 07/23/2018 16:50:47 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; SoC_Brain           ;
 +-------------------+---------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                                                   ;
-+-------------------------------------+---------------------------------------------------------+---------------+-----------------+------------------+
-; Assignment Name                     ; Value                                                   ; Default Value ; Entity Name     ; Section Id       ;
-+-------------------------------------+---------------------------------------------------------+---------------+-----------------+------------------+
-; COMPILER_SIGNATURE_ID               ; 176770276696553.153192296425504                         ; --            ; --              ; --               ;
-; ENABLE_OCT_DONE                     ; Off                                                     ; On            ; --              ; --               ;
-; ENABLE_SIGNALTAP                    ; On                                                      ; --            ; --              ; --               ;
-; IP_TOOL_NAME                        ; ALTPLL                                                  ; --            ; --              ; --               ;
-; IP_TOOL_VERSION                     ; 13.1                                                    ; --            ; --              ; --               ;
-; MAX_CORE_JUNCTION_TEMP              ; 100                                                     ; --            ; --              ; --               ;
-; MIN_CORE_JUNCTION_TEMP              ; -40                                                     ; --            ; --              ; --               ;
-; MISC_FILE                           ; pll_bb.v                                                ; --            ; --              ; --               ;
-; MISC_FILE                           ; pll.ppf                                                 ; --            ; --              ; --               ;
-; NOMINAL_CORE_SUPPLY_VOLTAGE         ; 1.2V                                                    ; --            ; --              ; --               ;
-; PARTITION_COLOR                     ; 16764057                                                ; --            ; FPGA_Processing ; Top              ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING                                   ; --            ; FPGA_Processing ; Top              ;
-; PARTITION_NETLIST_TYPE              ; SOURCE                                                  ; --            ; FPGA_Processing ; Top              ;
-; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                                     ; --            ; --              ; --               ;
-; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW                   ; --            ; --              ; --               ;
-; PROJECT_OUTPUT_DIRECTORY            ; output_files                                            ; --            ; --              ; --               ;
-; SLD_FILE                            ; db/stp1_auto_stripped.stp                               ; --            ; --              ; --               ;
-; SLD_NODE_CREATOR_ID                 ; 110                                                     ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_ENTITY_NAME                ; sld_signaltap                                           ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_RAM_BLOCK_TYPE=AUTO                                 ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_DATA_BITS=3                                         ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_TRIGGER_BITS=3                                      ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_NODE_INFO=805334528                                 ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_POWER_UP_TRIGGER=0                                  ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_STORAGE_QUALIFIER_INVERSION_MASK_LENGTH=0           ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_ATTRIBUTE_MEM_MODE=OFF                              ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_STATE_FLOW_USE_GENERATED=0                          ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_STATE_BITS=11                                       ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_BUFFER_FULL_STOP=1                                  ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_CURRENT_RESOURCE_WIDTH=1                            ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_TRIGGER_LEVEL=1                                     ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_TRIGGER_IN_ENABLED=0                                ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_ADVANCED_TRIGGER_ENTITY=basic,1,                    ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_TRIGGER_LEVEL_PIPELINE=1                            ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_ENABLE_ADVANCED_TRIGGER=0                           ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_INVERSION_MASK=000000000000000000000000000000000000 ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_INVERSION_MASK_LENGTH=36                            ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_SEGMENT_SIZE=8192                                   ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_SAMPLE_DEPTH=8192                                   ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_NODE_CRC_LOWORD=9975                                ; --            ; --              ; auto_signaltap_0 ;
-; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_NODE_CRC_HIWORD=63808                               ; --            ; --              ; auto_signaltap_0 ;
-; TOP_LEVEL_ENTITY                    ; FPGA_Processing                                         ; SoC_Brain     ; --              ; --               ;
-; USE_SIGNALTAP_FILE                  ; output_files/stp1.stp                                   ; --            ; --              ; --               ;
-+-------------------------------------+---------------------------------------------------------+---------------+-----------------+------------------+
++----------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                           ;
++-------------------------------------+---------------------------------------+---------------+-----------------+------------+
+; Assignment Name                     ; Value                                 ; Default Value ; Entity Name     ; Section Id ;
++-------------------------------------+---------------------------------------+---------------+-----------------+------------+
+; COMPILER_SIGNATURE_ID               ; 75361038640982.153233224607000        ; --            ; --              ; --         ;
+; ENABLE_OCT_DONE                     ; Off                                   ; On            ; --              ; --         ;
+; ENABLE_SIGNALTAP                    ; On                                    ; --            ; --              ; --         ;
+; IP_TOOL_NAME                        ; ALTPLL                                ; --            ; --              ; --         ;
+; IP_TOOL_VERSION                     ; 13.1                                  ; --            ; --              ; --         ;
+; MAX_CORE_JUNCTION_TEMP              ; 100                                   ; --            ; --              ; --         ;
+; MIN_CORE_JUNCTION_TEMP              ; -40                                   ; --            ; --              ; --         ;
+; MISC_FILE                           ; pll_bb.v                              ; --            ; --              ; --         ;
+; MISC_FILE                           ; pll.ppf                               ; --            ; --              ; --         ;
+; NOMINAL_CORE_SUPPLY_VOLTAGE         ; 1.2V                                  ; --            ; --              ; --         ;
+; PARTITION_COLOR                     ; 16764057                              ; --            ; FPGA_Processing ; Top        ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING                 ; --            ; FPGA_Processing ; Top        ;
+; PARTITION_NETLIST_TYPE              ; SOURCE                                ; --            ; FPGA_Processing ; Top        ;
+; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                   ; --            ; --              ; --         ;
+; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW ; --            ; --              ; --         ;
+; PROJECT_OUTPUT_DIRECTORY            ; output_files                          ; --            ; --              ; --         ;
+; TOP_LEVEL_ENTITY                    ; FPGA_Processing                       ; SoC_Brain     ; --              ; --         ;
+; USE_SIGNALTAP_FILE                  ; output_files/stp1.stp                 ; --            ; --              ; --         ;
++-------------------------------------+---------------------------------------+---------------+-----------------+------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------+
@@ -126,11 +101,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:04:10     ; 1.0                     ; 5735 MB             ; 00:04:06                           ;
-; Fitter                    ; 00:00:48     ; 1.2                     ; 5396 MB             ; 00:00:54                           ;
-; Assembler                 ; 00:00:08     ; 1.0                     ; 4650 MB             ; 00:00:08                           ;
-; TimeQuest Timing Analyzer ; 00:00:11     ; 1.0                     ; 4785 MB             ; 00:00:10                           ;
-; Total                     ; 00:05:17     ; --                      ; --                  ; 00:05:18                           ;
+; Analysis & Synthesis      ; 00:02:21     ; 1.0                     ; 5708 MB             ; 00:02:19                           ;
+; Fitter                    ; 00:01:00     ; 2.5                     ; 5630 MB             ; 00:01:31                           ;
+; Assembler                 ; 00:00:04     ; 1.0                     ; 4667 MB             ; 00:00:04                           ;
+; TimeQuest Timing Analyzer ; 00:00:32     ; 1.9                     ; 5273 MB             ; 00:00:33                           ;
+; Total                     ; 00:03:57     ; --                      ; --                  ; 00:04:27                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -139,10 +114,10 @@ applicable agreement for further details.
 +---------------------------+------------------+-----------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
 +---------------------------+------------------+-----------+------------+----------------+
-; Analysis & Synthesis      ; DESKTOP-F571VNV  ; Windows 7 ; 6.2        ; x86_64         ;
-; Fitter                    ; DESKTOP-F571VNV  ; Windows 7 ; 6.2        ; x86_64         ;
-; Assembler                 ; DESKTOP-F571VNV  ; Windows 7 ; 6.2        ; x86_64         ;
-; TimeQuest Timing Analyzer ; DESKTOP-F571VNV  ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; DESKTOP-J1583IM  ; Windows 7 ; 6.2        ; x86_64         ;
+; Fitter                    ; DESKTOP-J1583IM  ; Windows 7 ; 6.2        ; x86_64         ;
+; Assembler                 ; DESKTOP-J1583IM  ; Windows 7 ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; DESKTOP-J1583IM  ; Windows 7 ; 6.2        ; x86_64         ;
 +---------------------------+------------------+-----------+------------+----------------+
 
 
