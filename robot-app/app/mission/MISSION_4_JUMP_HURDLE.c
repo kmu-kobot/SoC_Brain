@@ -48,7 +48,7 @@ int mission_4_2_ready_hurdle(U16 *image) {
 int mission_4_4_jump_hurdle(void) {
     ACTION_WALK(FAST, OBLIQUE, 3);
     RobotSleep(5);
-    ACTION_MOTION(MISSION_4_HURDLING);
+//    ACTION_MOTION(MISSION_4_HURDLING);
     RobotSleep(5);
     return 1;
 }
@@ -133,9 +133,9 @@ int mission_4_6_set_center(U16 *image) {
 
     int rResult = 0;
     if (s < MISSION_4_5_BK_LINE_RANGE - MISSION_4_5_BK_LINE_ERROR) {
-        ACTION_MOVE(LONG, DIR_RIGHT, LOW, OBLIQUE, 1);
+        ACTION_MOVE(DIR_RIGHT, LOW, OBLIQUE, 1);
     } else if (s > MISSION_4_5_BK_LINE_RANGE + MISSION_4_5_BK_LINE_ERROR) {
-        ACTION_MOVE(LONG, DIR_LET, LOW, OBLIQUE, 1);
+        ACTION_MOVE(DIR_LEFT, LOW, OBLIQUE, 1);
     } else {
         rResult = 1;
     }

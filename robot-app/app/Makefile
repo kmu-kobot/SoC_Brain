@@ -38,7 +38,9 @@ OBJS = main.o huro.o \
     ./mission/MISSION_3_AVOID_BOMB.o \
     ./mission/MISSION_4_JUMP_HURDLE.o \
     ./mission/MISSION_5_GREEN_BRIDGE.o \
+    ./mission/MISSION_6_KICK_BALL.o \
     ./mission/MISSION_7_YELLOW_HOLE_BRIDGE.o \
+    ./mission/MISSION_8_AVOID_BOMB.o \
     ./mission/MISSION_9_LAST_BARRICADE.o \
     ./mission/MISSION_10_BLUE_GATE.o
 

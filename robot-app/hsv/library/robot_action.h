@@ -327,7 +327,7 @@ static inline void ACTION_MOVE(LENGTH len, DIRECTION dir, POSE pose, VIEW view, 
 
 static inline void ACTION_BIT(DIRECTION dir, int repeat)
 {
-    action(INIT_MOTION(MIDDLE, DOWN), BIT_MOTIN(dir));
+    action(INIT_MOTION(MIDDLE, DOWN), BIT_MOTION(dir));
 
     for(; repeat > 1; --repeat)
     {
@@ -339,9 +339,14 @@ static inline void ACTION_BIT(DIRECTION dir, int repeat)
 //  MOTION NUMBER           //
 //////////////////////////////
 
-static inline void ACTION_MOTION(MOTION mission, POSE pose, VIEW view, int repeat = 1)
+static inline void ACTION_MOTION(MOTION mission, POSE pose, VIEW view)
 {
-    action(ACTION_INIT(pose, view), mission);
+    action(INIT_MOTION(pose, view), mission);
+}
+
+static inline void ACTION_MOTION_REPEAT(MOTION mission, POSE pose, VIEW view, int repeat)
+{
+    action(INIT_MOTION(pose, view), mission);
 
     for (; repeat > 1; --repeat)
     {
