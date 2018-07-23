@@ -190,7 +190,7 @@ void extractHSV(void)
                 printf("\t5 : RIGHT\n");
                 view_input = getchar();
 
-                printf("INIT\tpose : %d\tview : %d", pose_input - '1', view_input - '1');
+                printf("INIT\tpose : %d\tview : %d\n", pose_input - '1', view_input - '1');
                 ACTION_INIT(pose_input - '1', view_input - '1');
                 break;
             case 'r':
@@ -203,7 +203,7 @@ void extractHSV(void)
                 printf("\t3 : UP\n");
                 view_input = getchar();
 
-                printf("WALK\tspeed : %d\tview : %d", speed_input - '1', view_input - '1');
+                printf("WALK\tspeed : %d\tview : %d\n", speed_input - '1', view_input - '1');
                 ACTION_WALK(speed_input - '1', view_input - '1', 3);
                 break;
             case 't':
@@ -225,8 +225,9 @@ void extractHSV(void)
                 ACTION_TURN(dir_input - '1', pose_input - '1', view_input - '1', 3);
                 break;
             case 'y':
-                printf("\t1 : LONG");
-                printf("\t2 : SHORT");
+                printf("\t1 : LONG\n");
+                printf("\t2 : SHORT\n");
+                len_input = getchar();
 
                 printf("\t1 : LEFT\n");
                 printf("\t2 : RIGHT\n");
@@ -243,7 +244,7 @@ void extractHSV(void)
                 printf("\t5 : RIGHT\n");
                 view_input = getchar();
 
-                printf("MOVE\tlen : %d\tdir : %d\tpose : %d\tview : %d", len_input - '1', dir_input - '1', pose_input - '1', view_input - '1');
+                printf("MOVE\tlen : %d\tdir : %d\tpose : %d\tview : %d\n", len_input - '1', dir_input - '1', pose_input - '1', view_input - '1');
                 ACTION_MOVE(len_input - '1', dir_input -  '1', pose_input - '1', view_input - '1', 3);
                 break;
             case 'b':
@@ -254,13 +255,49 @@ void extractHSV(void)
                 printf("BIT\tdir : %d\n", dir_input - '1');
                 ACTION_BIT(dir_input - '1', 3);
                 break;
+            case 'u':
+                printf("\t1 : MISSION 2\n");
+                printf("\t2 : MISSION 3\n");
+                printf("\t3 : MISSION 4\n");
+                printf("\t4 : MISSION 5 UP\n");
+                printf("\t5 : MISSION 5 DOWN\n");
+                printf("\t6 : MISSION 6\n");
+                printf("\t7 : MISSION 7\n");
+                key_input = getchar();
+
+                switch(key_input)
+                {
+                    case '1':
+                        ACTION_MOTION(MISSION_2_RED_DUMBLING, MIDDLE, DOWN);
+                        break;
+                    case '2':
+                        ACTION_MOTION(MISSION_3_MINE_WALK, LOW, DOWN);
+                        break;
+                    case '3':
+                        ACTION_MOTION(MISSION_4_HURDLING, MIDDLE, DOWN);
+                        break;
+                    case '4':
+                        ACTION_MOTION(MISSION_5_STAIR_UP, MIDDLE, DOWN);
+                        break;
+                    case '5':
+                        ACTION_MOTION(MISSION_5_STAIR_DOWN, MIDDLE, DOWN);
+                        break;
+                    case '6':
+                        ACTION_MOTION(MISSION_6_RIGHT_KICK, MIDDLE, DOWN);
+                        break;
+                    case '7':
+                        ACTION_MOTION(MISSION_7_YELLOW_DUMBLING, MIDDLE, DOWN);
+                        break;
+                    default:
+                        ;
+                }
+                break;
             case 'm':
                 printf("\t1 : box\n");
                 printf("\t2 : point 1\n");
                 printf("\t3 : point 2\n");
 
                 mod_input = getchar();
-                printf("mod_input");
                 switch (mod_input)
                 {
                     case '1':
