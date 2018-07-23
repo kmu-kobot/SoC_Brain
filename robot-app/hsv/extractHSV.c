@@ -10,7 +10,7 @@ U8 p_x[2], p_y[2];
 
 void extractHSV(void)
 {
-    U8 key_input, speed_input, dir_input, pose_input, view_input, mod_input;
+    U8 key_input, speed_input, len_input, dir_input, pose_input, view_input, mod_input;
     U8 centerX, centerY;
     float dx, dy, slope, distance;
     U8 mod;
@@ -221,10 +221,13 @@ void extractHSV(void)
                 printf("\t5 : RIGHT\n");
                 view_input = getchar();
 
-                printf("TURN\tdir : %d\tpose : %d\tview : %d\t%d\n", dir_input - '1', pose_input - '1', view_input - '1', TURN);
+                printf("TURN\tdir : %d\tpose : %d\tview : %d\t%d\n", dir_input - '1', pose_input - '1', view_input - '1');
                 ACTION_TURN(dir_input - '1', pose_input - '1', view_input - '1', 3);
                 break;
             case 'y':
+                printf("\t1 : LONG");
+                printf("\t2 : SHORT");
+
                 printf("\t1 : LEFT\n");
                 printf("\t2 : RIGHT\n");
                 dir_input = getchar();
@@ -240,8 +243,16 @@ void extractHSV(void)
                 printf("\t5 : RIGHT\n");
                 view_input = getchar();
 
-                printf("MOVE\tdir : %d\tpose : %d\tview : %d", dir_input - '1', pose_input - '1', view_input - '1');
-                ACTION_MOVE(dir_input -  '1', pose_input - '1', view_input - '1', 3);
+                printf("MOVE\tlen : %d\tdir : %d\tpose : %d\tview : %d", len_input - '1', dir_input - '1', pose_input - '1', view_input - '1');
+                ACTION_MOVE(len_input - '1', dir_input -  '1', pose_input - '1', view_input - '1', 3);
+                break;
+            case 'b':
+                printf("\t1 : FRONT\n");
+                printf("\t2 : BACK\n");
+                dir_input = getchar();
+
+                printf("BIT\tdir : %d\n", dir_input - '1');
+                ACTION_BIT(dir_input - '1', 3);
                 break;
             case 'm':
                 printf("\t1 : box\n");
@@ -347,6 +358,7 @@ void help(void)
     printf("t : Action_TURN\n");
     printf("y : Action_MOVE\n");
     printf("u : Action_MISSION\n");
+    printf("b : Action_BIT\n");
     printf("m : change mod\n");
     printf("o : print box position\n");
     printf("p : print points position, slope, distance\n");
