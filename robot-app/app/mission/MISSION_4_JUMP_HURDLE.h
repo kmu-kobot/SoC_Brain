@@ -11,13 +11,13 @@
 #define SOC_APP_MISSION_4_JUMP_HUDDLE_H
 
 #define MISSION_4_HURDLE_CRITERI 3
-#define MISSION_4_2_HURDLE_THRESHOLDS 104
-#define MISSION_4_HURDLE_ERROR 13
+#define MISSION_4_2_HURDLE_THRESHOLDS 13
+#define MISSION_4_HURDLE_ERROR 8
 
 // TODO: White Range 상수 바꿔야함
-#define MISSION_4_5_WHITE_RANGE 120
-#define MISSION_4_5_BK_LINE_RANGE 50
-#define MISSION_4_5_BK_LINE_ERROR 3
+#define MISSION_4_5_WHITE_RANGE 90
+#define MISSION_4_5_BK_LINE_RANGE 60
+#define MISSION_4_5_BK_LINE_ERROR 5
 
 void mission_4_1_watch_front(int repeat);
 
@@ -29,7 +29,7 @@ void mission_4_5_watch_diagonal_line(void);
 
 int mission_4_5_set_front_of_not_bk(U16 *image);
 
-int mission_4_6_set_center(U16 *image);
+int mission_4_6_set_center(U16 *image, int length);
 
 void mission_4_6_watch_side(void);
 

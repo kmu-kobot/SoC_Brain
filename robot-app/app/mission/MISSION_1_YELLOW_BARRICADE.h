@@ -12,7 +12,7 @@
 
 // TODO: 상수 바꿔야함
 #define MISSION_1_UPPER 0
-#define MISSION_1_RANGE 60
+#define MISSION_1_LOWER 110
 
 #define MISSION_1_THRESHOLDS 10
 

@@ -255,6 +255,7 @@ typedef struct _tag_DrawRaw_value {
 #define YELLOW 11
 #define ORANGE 12
 #define BLACK 0
+#define YELLOW_CH2 6
 
 #define HEIGHT 120
 #define WIDTH 180
