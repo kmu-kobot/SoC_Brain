@@ -6,9 +6,8 @@
 #include "MISSION_3_AVOID_BOMB.h"
 
 void mission_3_4_watch_front(void) {
-    ACTION_INIT(LOW, OBLIQUE);
-    // TODO: 적당히 사선 보면 좋겠음
-    RobotSleep(5);
+    ACTION_INIT(MIDDLE, OBLIQUE);
+    RobotSleep(2);
 }
 
 int mission_3_4_is_not_front_of_bomb(U16 *image) {
@@ -32,8 +31,8 @@ int mission_3_4_is_not_front_of_bomb(U16 *image) {
 }
 
 void mission_3_default_watch_below(void) {
-    ACTION_INIT(LOW, DOWN);
-    RobotSleep(5);
+    ACTION_INIT(MIDDLE, DOWN);
+    RobotSleep(2);
 }
 
 int mission_3_default_avoid_bomb(U16 *image) {
@@ -67,9 +66,9 @@ int mission_3_default_avoid_bomb(U16 *image) {
     int rReturn = (s == 10) ? 1 : 0;
     if (!rReturn) {
         if (s == 100 || s == 110 || s == 111) {
-            ACTION_MOVE(DIR_RIGHT, LOW, DOWN, ((check[0] == 1) ? 4 : 1));
+            ACTION_MOVE(SHORT, DIR_RIGHT, MIDDLE, DOWN, ((check[0] == 1) ? 4 : 1));
         } else if (s == 1 || s == 11) {
-            ACTION_MOVE(DIR_LEFT, LOW, DOWN, ((check[2] == 1) ? 4 : 1));
+            ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, ((check[2] == 1) ? 4 : 1));
         } else if (s == 101 || s == 0) {
             ACTION_WALK(FAST, DOWN, 3);
             rReturn = 1;
@@ -97,12 +96,11 @@ int mission_3_default_avoid_bomb(U16 *image) {
         printf("\t\t\t- O-x: %d", check[2]);
 
         if (check[2] < WIDTH / 2 - MISSION_3_DEFAULT_AVOID_BOMB_RANGE) {
-            ACTION_MOVE(DIR_LEFT, LOW, DOWN, 2);
+            ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, 2);
         } else if (check[2] > WIDTH / 2 + MISSION_3_DEFAULT_AVOID_BOMB_RANGE) {
-            ACTION_MOVE(DIR_RIGHT, LOW, DOWN, 2);
+            ACTION_MOVE(SHORT, DIR_RIGHT, MIDDLE, DOWN, 2);
         } else {
             // TODO: 지뢰 피하는 동작
-//            ACTION_MISSION_3(6);
             rReturn = 1;
         }
 
