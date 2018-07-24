@@ -24,14 +24,14 @@ module RAM_CLEAN_2 ( clock, wren, addr, data, q );
 input clock;
 input wren;
 input [14:0] addr;
-input [ 5:0] data;
+input [ 6:0] data;
 
-output [ 5:0] q;
+output [ 6:0] q;
 
-reg [ 5:0] ram [0:21599];
+reg [ 6:0] ram [0:21599];
 
 reg [14:0] top, bot, left, right;
-reg [ 5:0] result;
+reg [ 6:0] result;
 
 reg [14:0] addr_prev;
 
@@ -59,14 +59,14 @@ module RAM_BRIDGE ( clock, wren, addr, data, q );
 input clock;
 input wren;
 input [14:0] addr;
-input [ 5:0] data;
+input [ 6:0] data;
 
-output [ 5:0] q;
+output [ 6:0] q;
 
-reg [ 5:0] ram [0:21599];
+reg [ 6:0] ram [0:21599];
 
 reg [14:0] top, bot, left, right;
-reg [ 5:0] result;
+reg [ 6:0] result;
 	
 always @(posedge clock)
 begin
@@ -89,10 +89,10 @@ module RAM_BUFF ( clock, wren, addr, data, q );
 input clock,
 		wren;
 input [14:0] addr;
-input [ 5:0] data;
-output [ 5:0] q;
+input [ 6:0] data;
+output [ 6:0] q;
 
-reg [ 5:0] ram [0:21599];
+reg [ 6:0] ram [0:21599];
 
 reg [14:0] addr_prev;
 
@@ -264,7 +264,7 @@ always @ (posedge clk_llc or negedge resetx)
 
 
 //wire [ 4:0] R = (R_int[20]) ? 5'b0 : (R_int[19:18] == 2'b0) ? R_int[17:13] : 5'b11111;
-//wire [ 5:0] G = (G_int[20]) ? 6'b0 : (G_int[19:18] == 2'b0) ? G_int[17:12] : 6'b111111;
+//wire [ 6:0] G = (G_int[20]) ? 6'b0 : (G_int[19:18] == 2'b0) ? G_int[17:12] : 6'b111111;
 //wire [ 4:0] B = (B_int[20]) ? 5'b0 : (B_int[19:18] == 2'b0) ? B_int[17:13] : 5'b11111;	  
 
 wire [ 7:0] R8 = (R_int[20]) ? 8'b0 : (R_int[19:18] == 2'b0) ? R_int[17:10] : 8'b11111111;
@@ -346,6 +346,8 @@ always @(negedge resetx or posedge clk_llc)
 wire [ 7:0] H = H_DATA[7 :0];
 wire [ 7:0] S = S_DATA[7 :0];
 wire [ 7:0] V = C_MAX[ 7 :0];
+
+wire [15:0] SHV565 = {S[7:3], H[7:2], V[7:3]};
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -358,23 +360,25 @@ wire [ 7:0] V = C_MAX[ 7 :0];
 //				 horizon   BK			 S 37  V 51
 // mission 7 yelbridge Y_H 34, 43 S 107 V 151
 //											 S 70  V 170
-reg [ 7:0] H_THRES, S_THRES_H, S_THRES_L, V_THRES, 
-				R_H, G_H, B_H, Y_H, O_H, 
+reg [ 7:0] H_THRES, S_THRES_H, S_THRES_L, S_THRES_Y, V_THRES, V_THRES_Y, 
+				R_H, G_H, B_H, Y_H, O_H,
 				R_MIN, R_MAX, G_MIN, G_MAX, B_MIN, B_MAX, Y_MIN, Y_MAX, O_MIN, O_MAX;
-reg R_B, G_B, B_B, Y_B, O_B, BK_B, C_H, C_L;
+reg R_B, G_B, B_B, Y_B, O_B, BK_B, C_H, C_L, Y2_B;
 
 always @ (posedge clk_llc)
 begin
-	H_THRES = 8'd10;
+	H_THRES = 8'd20;
 	S_THRES_H = 8'd96;
-	S_THRES_L = 8'd48;
+	S_THRES_L = 8'd36;
+	S_THRES_Y = 8'd24;
 	V_THRES = 8'd96;
+	V_THRES_Y = 8'd212;
 
-	R_H	= 8'd230;
+	R_H	= 8'd220;
 	G_H	= 8'd85;
 	B_H	= 8'd148;
 	Y_H	= 8'd40;
-	O_H	= 8'd10;
+	O_H	= 8'd20;
 	
 	R_MIN = R_H - H_THRES;
 	R_MAX = R_H + H_THRES;
@@ -441,7 +445,14 @@ always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	Y_B <= 1'b0;
 	else
 	begin
-		Y_B <= C_L & ((Y_MIN <= H) & (H <= Y_MAX));
+		Y_B <= C_H & ((Y_MIN <= H) & (H <= Y_MAX));
+	end
+	
+always @ (negedge resetx or posedge clk_llc)
+	if		(~resetx)	Y2_B <= 1'b0;
+	else
+	begin
+		Y2_B <= ~BK_B & (S > S_THRES_Y) & (V < V_THRES_Y) & ((Y_MIN <= H) & (H <= Y_MAX));
 	end
 	
 always @ (negedge resetx or posedge clk_llc)
@@ -458,8 +469,9 @@ wire GYO = G_B | Y_B | O_B;
 wire GYOBK = G_B | Y_B | O_B | BK_B;
 wire BBK = B_B | BK_B;
 //wire [15:0] DecVData = {ROY, ROYBK, R_B, O_B, Y_B,		GY, GYOBK, GYO, G_B, G_B, G_B,	B_B, BBK, B_B, B_B, BK_B};
-wire [ 5:0] DecVData_C = {R_B, O_B, Y_B, G_B, B_B, BK_B};
+wire [ 6:0] DecVData_C = {Y2_B, R_B, O_B, Y_B, G_B, B_B, BK_B};
 
+wire Y2_M = vmem_B_q[6];
 wire R_M = vmem_B_q[5];
 wire O_M = vmem_B_q[4];
 wire Y_M = vmem_B_q[3];
@@ -468,13 +480,13 @@ wire B_M = vmem_B_q[1];
 wire BK_M = vmem_B_q[0];
 
 wire ROY_M = R_M | O_M | Y_M;
-wire ROYBK_M = R_M | O_M | Y_M | BK_M;
+wire ROYBK_M = R_M | O_M | Y_M | BK_M | Y2_M;
 wire GY_M = G_M | Y_M;
-wire GYO_M = G_M | Y_M | O_M;
-wire GYOBK_M = G_M | Y_M | O_M | BK_M;
-wire BBK_M = B_M | BK_M;
+wire GYO_M = G_M | Y_M | O_M | Y2_M;
+wire GYOBK_M = G_M | Y_M | O_M | BK_M | Y2_M;
+wire BBKY2_M = B_M | BK_M | Y2_M;
 
-wire [15:0] DecVData = {ROY_M, ROYBK_M, R_M, O_M, Y_M,	GY_M, GYOBK_M, GYO_M, G_M, G_M, G_M,	B_M, BBK_M, B_M, B_M, BK_M};
+wire [15:0] DecVData = {ROY_M, ROYBK_M, R_M, O_M, Y_M,	GY_M, GYOBK_M, GYO_M, G_M, Y2_M, G_M,	B_M, BBKY2_M, B_M, B_M, BK_M};
 /////////////////////////////////////////////////////////////////////////////
 
 // 180x120 write clock generation 
@@ -527,7 +539,8 @@ reg A_addr;
 always @(negedge resetx or posedge clk_llc)
    if      (~resetx)           vdata <= 16'b0;
 	else if (href2_wr)          vdata <= DecVData;
-
+//	else if (href2_wr)			 vdata <= SHV565;
+	
 always @(negedge resetx or posedge clk_llc8)
    if      (~resetx)           vadr[14:0] <= 15'b0;
    else if (~oddframe)         vadr[14:0] <= 15'b0;
@@ -541,7 +554,7 @@ always @(negedge resetx or posedge Sys_clk)
    if      (~resetx)       A_addr <= 1'b0;
    else                    A_addr <= AMAmem_irq1;
 
-reg [ 5:0] vdata_C;
+reg [ 6:0] vdata_C;
 reg [14:0] vadr_C;
 always @(negedge resetx or posedge clk_llc)
 	if		  (~resetx)			vdata_C <= 6'b0;
@@ -554,7 +567,7 @@ always @(negedge resetx or posedge clk_llc8)
 	else if (href2_wr_A)		vadr_C <= vadr_C + 1'b1;
 	
 
-reg [ 5:0] vdata_B;
+reg [ 6:0] vdata_B;
 reg [14:0] vadr_B;
 always @(negedge resetx or posedge clk_llc)
 	if		  (~resetx)			vdata_B <= 6'b0;
@@ -602,15 +615,15 @@ wire	        	vmem_wren;
 wire  [15:0]  	vmem_q;
 
 wire  [14:0]  	vmem_C_addr;
-wire	[ 5:0]  	vmem_C_data;
+wire	[ 6:0]  	vmem_C_data;
 wire				vmem_C_wren;
-wire	[ 5:0]	vmem_C_q;
+wire	[ 6:0]	vmem_C_q;
 
 wire	[14:0]  	vmem_B_addr;
-wire	[ 5:0]  	vmem_B_data;
+wire	[ 6:0]  	vmem_B_data;
 wire	        	vmem_B_rden;
 wire	        	vmem_B_wren;
-wire  [ 5:0]  	vmem_B_q;
+wire  [ 6:0]  	vmem_B_q;
 
 //////////////////////////// MEGA Wizard //////////////////////////////////
 // FPGA PLL

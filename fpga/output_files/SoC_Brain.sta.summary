@@ -3,24 +3,24 @@ TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1200mV 100C Model Setup 'clk_llc'
-Slack : -173.804
-TNS   : -2172.435
+Slack : -172.682
+TNS   : -2194.477
 
 Type  : Slow 1200mV 100C Model Setup 'pll_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : -33.737
-TNS   : -11733.541
+Slack : -33.632
+TNS   : -12757.139
 
 Type  : Slow 1200mV 100C Model Setup 'clk_div[1]'
-Slack : -7.096
-TNS   : -388.305
+Slack : -6.146
+TNS   : -356.665
 
 Type  : Slow 1200mV 100C Model Setup 'vadr[14]'
-Slack : -0.963
-TNS   : -3.563
+Slack : -0.838
+TNS   : -3.114
 
 Type  : Slow 1200mV 100C Model Setup 'clk_llc2'
-Slack : -0.243
-TNS   : -0.243
+Slack : -0.410
+TNS   : -0.410
 
 Type  : Slow 1200mV 100C Model Setup 'href'
 Slack : 0.203
@@ -31,23 +31,23 @@ Slack : 0.203
 TNS   : 0.000
 
 Type  : Slow 1200mV 100C Model Hold 'clk_llc'
-Slack : -1.535
-TNS   : -16.995
+Slack : -1.945
+TNS   : -25.112
 
 Type  : Slow 1200mV 100C Model Hold 'clk_div[1]'
-Slack : -0.610
-TNS   : -6.997
-
-Type  : Slow 1200mV 100C Model Hold 'clk_llc2'
-Slack : -0.088
-TNS   : -0.088
+Slack : -1.406
+TNS   : -19.929
 
 Type  : Slow 1200mV 100C Model Hold 'pll_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.172
+Slack : -0.008
+TNS   : -0.008
+
+Type  : Slow 1200mV 100C Model Hold 'clk_llc2'
+Slack : 0.193
 TNS   : 0.000
 
 Type  : Slow 1200mV 100C Model Hold 'vadr[14]'
-Slack : 0.414
+Slack : 0.416
 TNS   : 0.000
 
 Type  : Slow 1200mV 100C Model Hold 'href'
@@ -72,39 +72,39 @@ TNS   : -4.285
 
 Type  : Slow 1200mV 100C Model Minimum Pulse Width 'clk_div[1]'
 Slack : -2.710
-TNS   : -160.080
+TNS   : -179.050
 
 Type  : Slow 1200mV 100C Model Minimum Pulse Width 'vadr[14]'
 Slack : -1.285
 TNS   : -7.710
 
 Type  : Slow 1200mV 100C Model Minimum Pulse Width 'pll_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 4.701
+Slack : 4.704
 TNS   : 0.000
 
 Type  : Slow 1200mV 100C Model Minimum Pulse Width 'clk_llc'
-Slack : 18.274
+Slack : 18.267
 TNS   : 0.000
 
 Type  : Slow 1200mV -40C Model Setup 'clk_llc'
-Slack : -145.044
-TNS   : -1790.036
+Slack : -144.211
+TNS   : -1813.640
 
 Type  : Slow 1200mV -40C Model Setup 'pll_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : -29.076
-TNS   : -10072.701
+Slack : -28.999
+TNS   : -10930.249
 
 Type  : Slow 1200mV -40C Model Setup 'clk_div[1]'
-Slack : -6.051
-TNS   : -332.554
+Slack : -5.198
+TNS   : -302.038
 
 Type  : Slow 1200mV -40C Model Setup 'vadr[14]'
-Slack : -0.671
-TNS   : -2.357
+Slack : -0.593
+TNS   : -1.966
 
 Type  : Slow 1200mV -40C Model Setup 'clk_llc2'
-Slack : -0.098
-TNS   : -0.098
+Slack : -0.238
+TNS   : -0.238
 
 Type  : Slow 1200mV -40C Model Setup 'href'
 Slack : 0.320
@@ -115,23 +115,23 @@ Slack : 0.320
 TNS   : 0.000
 
 Type  : Slow 1200mV -40C Model Hold 'clk_llc'
-Slack : -1.177
-TNS   : -12.281
+Slack : -1.545
+TNS   : -18.868
 
 Type  : Slow 1200mV -40C Model Hold 'clk_div[1]'
-Slack : -0.501
-TNS   : -4.777
+Slack : -1.247
+TNS   : -17.559
 
 Type  : Slow 1200mV -40C Model Hold 'pll_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : -0.019
-TNS   : -0.019
+Slack : -0.192
+TNS   : -0.192
 
 Type  : Slow 1200mV -40C Model Hold 'clk_llc2'
-Slack : 0.015
+Slack : 0.282
 TNS   : 0.000
 
 Type  : Slow 1200mV -40C Model Hold 'vadr[14]'
-Slack : 0.354
+Slack : 0.353
 TNS   : 0.000
 
 Type  : Slow 1200mV -40C Model Hold 'href'
@@ -156,38 +156,38 @@ TNS   : -4.285
 
 Type  : Slow 1200mV -40C Model Minimum Pulse Width 'clk_div[1]'
 Slack : -2.649
-TNS   : -157.518
+TNS   : -176.061
 
 Type  : Slow 1200mV -40C Model Minimum Pulse Width 'vadr[14]'
 Slack : -1.285
 TNS   : -7.710
 
 Type  : Slow 1200mV -40C Model Minimum Pulse Width 'pll_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 4.678
+Slack : 4.679
 TNS   : 0.000
 
 Type  : Slow 1200mV -40C Model Minimum Pulse Width 'clk_llc'
-Slack : 18.296
+Slack : 18.302
 TNS   : 0.000
 
 Type  : Fast 1200mV -40C Model Setup 'clk_llc'
-Slack : -60.986
-TNS   : -691.685
+Slack : -60.244
+TNS   : -699.410
 
 Type  : Fast 1200mV -40C Model Setup 'pll_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : -15.904
-TNS   : -5678.787
+Slack : -15.763
+TNS   : -6164.443
 
 Type  : Fast 1200mV -40C Model Setup 'clk_div[1]'
-Slack : -2.994
-TNS   : -150.264
-
-Type  : Fast 1200mV -40C Model Setup 'vadr[14]'
-Slack : 0.102
-TNS   : 0.000
+Slack : -2.470
+TNS   : -134.758
 
 Type  : Fast 1200mV -40C Model Setup 'clk_llc2'
-Slack : 0.166
+Slack : 0.064
+TNS   : 0.000
+
+Type  : Fast 1200mV -40C Model Setup 'vadr[14]'
+Slack : 0.161
 TNS   : 0.000
 
 Type  : Fast 1200mV -40C Model Setup 'href'
@@ -199,23 +199,23 @@ Slack : 0.642
 TNS   : 0.000
 
 Type  : Fast 1200mV -40C Model Hold 'clk_llc'
-Slack : -0.940
-TNS   : -12.441
+Slack : -1.101
+TNS   : -16.435
 
 Type  : Fast 1200mV -40C Model Hold 'clk_div[1]'
-Slack : -0.367
-TNS   : -4.621
-
-Type  : Fast 1200mV -40C Model Hold 'clk_llc2'
-Slack : -0.139
-TNS   : -0.139
+Slack : -0.705
+TNS   : -11.179
 
 Type  : Fast 1200mV -40C Model Hold 'pll_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.006
-TNS   : 0.000
+Slack : -0.076
+TNS   : -0.076
+
+Type  : Fast 1200mV -40C Model Hold 'clk_llc2'
+Slack : -0.048
+TNS   : -0.048
 
 Type  : Fast 1200mV -40C Model Hold 'vadr[14]'
-Slack : 0.180
+Slack : 0.179
 TNS   : 0.000
 
 Type  : Fast 1200mV -40C Model Hold 'href'
@@ -228,7 +228,7 @@ TNS   : 0.000
 
 Type  : Fast 1200mV -40C Model Minimum Pulse Width 'clk_llc2'
 Slack : -3.000
-TNS   : -5.102
+TNS   : -5.100
 
 Type  : Fast 1200mV -40C Model Minimum Pulse Width 'href'
 Slack : -3.000
@@ -240,18 +240,18 @@ TNS   : -4.000
 
 Type  : Fast 1200mV -40C Model Minimum Pulse Width 'clk_div[1]'
 Slack : -1.000
-TNS   : -78.000
+TNS   : -85.000
 
 Type  : Fast 1200mV -40C Model Minimum Pulse Width 'vadr[14]'
 Slack : -1.000
 TNS   : -6.000
 
 Type  : Fast 1200mV -40C Model Minimum Pulse Width 'pll_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 4.744
+Slack : 4.745
 TNS   : 0.000
 
 Type  : Fast 1200mV -40C Model Minimum Pulse Width 'clk_llc'
-Slack : 17.947
+Slack : 17.948
 TNS   : 0.000
 
 ------------------------------------------------------------
