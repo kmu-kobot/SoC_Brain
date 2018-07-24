@@ -7,14 +7,11 @@
 int mission_0_1_wait_play(U16 *image) {
     U32 col, row, cntYellow = 0;
 
-    for (row = MISSION_0_UPPER; row < MISSION_0_UPPER + MISSION_0_RANGE; ++row) {
+    for (row = MISSION_0_UPPER; row < MISSION_0_LOWER; ++row) {
         for (col = 0; col < WIDTH; col++) {
-            cntYellow += GetValueRGBYOBK(
-                    GetPtr(image, row, col, WIDTH),
-                    YELLOW
-            );
+            cntYellow += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW);
         }
     }
 
-    return cntYellow * 100 / (WIDTH * MISSION_0_RANGE) > MISSION_0_THRESHOLDS;
+    return (double) cntYellow * 100 / (WIDTH * (MISSION_0_LOWER - MISSION_0_UPPER)) > MISSION_0_THRESHOLDS;
 }
