@@ -322,7 +322,7 @@ static inline void ACTION_MOVE(LENGTH len, DIRECTION dir, POSE pose, VIEW view, 
 
 static inline void ACTION_BIT(DIRECTION dir, int repeat)
 {
-    action(INIT_MOTION(MIDDLE, DOWN), (dir));
+    action(INIT_MOTION(MIDDLE, DOWN), BIT_MOTION(dir));
 
     for(; repeat > 1; --repeat)
     {

@@ -7,6 +7,7 @@ int cmp(const void* a, const void* b)
 
 U8 top, bot, left, right;
 U8 p_x[2], p_y[2];
+U16 filter;
 
 void extractHSV(void)
 {
@@ -33,14 +34,6 @@ void extractHSV(void)
     V_buff = (U8 *) malloc(SIZE * sizeof(U8));
     fpga_videodata = (U16 *) malloc(WIDTH * HEIGHT * 2);
 
-    top = 54;
-    bot = 65;
-    left = 84;
-    right = 95;
-    p_x[0] = 89;
-    p_x[1] = 90;
-    p_y[0] = 59;
-    p_y[1] = 60;
     mod = 0;
 
     init_extract();
@@ -328,6 +321,27 @@ void extractHSV(void)
                 printf("point1 : (%d, %d)\tpoint2 : (%d, %d)\n", p_x[0], p_y[0], p_x[1], p_y[1]);
                 printf("slope : %f\tdistance : %f\n", -slope, distance);
                 break;
+            case 'l':
+                filter = 0;
+                do
+                {
+                    printf("\t1 : RED\n");
+                    printf("\t2 : GREEN\n");
+                    printf("\t3 : BLUE\n");
+                    printf("\t4 : YELLOW\n");
+                    printf("\t5 : YELLOW CH2\n");
+                    printf("\t6 : ORANGE\n");
+                    printf("\t7 : BLACK\n");
+                    printf("\t8 : CLEAR\n");
+                    printf("\t9 : SAVE\n");
+                    mod_input = getchar();
+
+                    if ('1' <= mod_input && mod_input <= '7')
+                        filter |= COLOR_BITS[mod_input - '1'];
+                    else if (mod_input == '8')
+                        filter = 0;
+                } while(mod_input != '9');
+                break;
             case 'h':
                 help();
                 break;
@@ -348,6 +362,11 @@ void setFPGAVideoData(U16 *buf)
     U8 i, j;
     U16 pos;
     read_fpga_video_data(buf);
+
+    for (i = 0; i < WIDTH * HEIGHT; ++i)
+    {
+        buf[i] &= filter;
+    }
 
     // draw white box
     for (j = left - 1; j <= right + 1; ++j)
@@ -399,6 +418,7 @@ void help(void)
     printf("m : change mod\n");
     printf("o : print box position\n");
     printf("p : print points position, slope, distance\n");
+    printf("l : set filter");
     printf("h : help\n");
     printf("q : exit\n");
     printf("----------------------------------------------------------------\n");
@@ -406,6 +426,15 @@ void help(void)
 
 int init_extract(void)
 {
+    top = 54;
+    bot = 65;
+    left = 84;
+    right = 95;
+    p_x[0] = 89;
+    p_x[1] = 90;
+    p_y[0] = 59;
+    p_y[1] = 60;
+    filter = 0xffff;
 
     // init uart
     int ret;
@@ -438,7 +467,7 @@ int init_extract(void)
 
     direct_camera_display_off();
 
-    ACTION_INIT(MIDDLE, UP);
+    ACTION_INIT(MIDDLE, OBLIQUE);
 
     return 0;
 }
