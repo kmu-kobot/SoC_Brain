@@ -1,5 +1,5 @@
 Analysis & Synthesis report for SoC_Brain
-Tue Jul 24 22:29:03 2018
+Thu Jul 26 01:33:00 2018
 Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -81,13 +81,13 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Jul 24 22:29:03 2018      ;
+; Analysis & Synthesis Status        ; Successful - Thu Jul 26 01:33:00 2018      ;
 ; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
 ; Revision Name                      ; SoC_Brain                                  ;
 ; Top-level Entity Name              ; FPGA_Processing                            ;
 ; Family                             ; Cyclone IV E                               ;
-; Total logic elements               ; 4,975                                      ;
-;     Total combinational functions  ; 4,832                                      ;
+; Total logic elements               ; 4,978                                      ;
+;     Total combinational functions  ; 4,835                                      ;
 ;     Dedicated logic registers      ; 428                                        ;
 ; Total registers                    ; 428                                        ;
 ; Total pins                         ; 60                                         ;
@@ -230,11 +230,11 @@ applicable agreement for further details.
 ; db/mux_qob.tdf                   ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/mux_qob.tdf             ;         ;
 ; db/altsyncram_u6h1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/altsyncram_u6h1.tdf     ;         ;
 ; db/decode_msa.tdf                ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/decode_msa.tdf          ;         ;
-; db/mux_5nb.tdf                   ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/mux_5nb.tdf             ;         ;
+; db/mux_7nb.tdf                   ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/mux_7nb.tdf             ;         ;
 ; db/altsyncram_29d1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/altsyncram_29d1.tdf     ;         ;
 ; db/decode_lsa.tdf                ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/decode_lsa.tdf          ;         ;
 ; db/decode_e8a.tdf                ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/decode_e8a.tdf          ;         ;
-; db/mux_6nb.tdf                   ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/mux_6nb.tdf             ;         ;
+; db/mux_4nb.tdf                   ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/mux_4nb.tdf             ;         ;
 ; db/altsyncram_4ad1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/altsyncram_4ad1.tdf     ;         ;
 ; db/decode_f8a.tdf                ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/decode_f8a.tdf          ;         ;
 ; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_divide.tdf             ;         ;
@@ -247,14 +247,14 @@ applicable agreement for further details.
 ; db/add_sub_8pc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/add_sub_8pc.tdf         ;         ;
 ; db/lpm_divide_8bm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/lpm_divide_8bm.tdf      ;         ;
 ; db/sign_div_unsign_tlh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/sign_div_unsign_tlh.tdf ;         ;
-; db/alt_u_div_f7f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/alt_u_div_f7f.tdf       ;         ;
+; db/alt_u_div_e7f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/alt_u_div_e7f.tdf       ;         ;
 ; db/lpm_divide_92p.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/lpm_divide_92p.tdf      ;         ;
 ; db/abs_divider_4dg.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/abs_divider_4dg.tdf     ;         ;
 ; db/alt_u_div_6af.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/alt_u_div_6af.tdf       ;         ;
 ; db/lpm_abs_i0a.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/lpm_abs_i0a.tdf         ;         ;
 ; db/lpm_divide_0po.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/lpm_divide_0po.tdf      ;         ;
 ; db/abs_divider_obg.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/abs_divider_obg.tdf     ;         ;
-; db/alt_u_div_e7f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/alt_u_div_e7f.tdf       ;         ;
+; db/alt_u_div_f7f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/alt_u_div_f7f.tdf       ;         ;
 ; db/lpm_abs_6v9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/lpm_abs_6v9.tdf         ;         ;
 ; db/lpm_divide_5jm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/kobot/Documents/GitHub/SoC_Brain/fpga/db/lpm_divide_5jm.tdf      ;         ;
 ; lpm_mult.tdf                     ; yes             ; Megafunction                 ; c:/altera/13.1/quartus/libraries/megafunctions/lpm_mult.tdf               ;         ;
@@ -274,16 +274,16 @@ applicable agreement for further details.
 +---------------------------------------------+---------------------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                           ;
 +---------------------------------------------+---------------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 4,975                                                                           ;
+; Estimated Total logic elements              ; 4,978                                                                           ;
 ;                                             ;                                                                                 ;
-; Total combinational functions               ; 4832                                                                            ;
+; Total combinational functions               ; 4835                                                                            ;
 ; Logic element usage by number of LUT inputs ;                                                                                 ;
-;     -- 4 input functions                    ; 1416                                                                            ;
-;     -- 3 input functions                    ; 1986                                                                            ;
-;     -- <=2 input functions                  ; 1430                                                                            ;
+;     -- 4 input functions                    ; 1417                                                                            ;
+;     -- 3 input functions                    ; 1987                                                                            ;
+;     -- <=2 input functions                  ; 1431                                                                            ;
 ;                                             ;                                                                                 ;
 ; Logic elements by mode                      ;                                                                                 ;
-;     -- normal mode                          ; 3174                                                                            ;
+;     -- normal mode                          ; 3177                                                                            ;
 ;     -- arithmetic mode                      ; 1658                                                                            ;
 ;                                             ;                                                                                 ;
 ; Total registers                             ; 428                                                                             ;
@@ -298,7 +298,7 @@ applicable agreement for further details.
 ;                                             ;                                                                                 ;
 ; Maximum fan-out node                        ; pll:pll_inst|altpll:altpll_component|pll_altpll:auto_generated|wire_pll1_clk[0] ;
 ; Maximum fan-out                             ; 436                                                                             ;
-; Total fan-out                               ; 22972                                                                           ;
+; Total fan-out                               ; 22981                                                                           ;
 ; Average fan-out                             ; 4.02                                                                            ;
 +---------------------------------------------+---------------------------------------------------------------------------------+
 
@@ -308,7 +308,7 @@ applicable agreement for further details.
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                     ; Library Name ;
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |FPGA_Processing                          ; 4832 (494)        ; 428 (297)    ; 2346656     ; 19           ; 5       ; 7         ; 60   ; 0            ; |FPGA_Processing                                                                                                                        ; work         ;
+; |FPGA_Processing                          ; 4835 (497)        ; 428 (297)    ; 2346656     ; 19           ; 5       ; 7         ; 60   ; 0            ; |FPGA_Processing                                                                                                                        ; work         ;
 ;    |RAM:RAM_inst|                         ; 97 (0)            ; 8 (0)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM:RAM_inst                                                                                                           ; work         ;
 ;       |altsyncram:altsyncram_component|   ; 97 (0)            ; 8 (0)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM:RAM_inst|altsyncram:altsyncram_component                                                                           ; work         ;
 ;          |altsyncram_59g1:auto_generated| ; 97 (1)            ; 8 (8)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM:RAM_inst|altsyncram:altsyncram_component|altsyncram_59g1:auto_generated                                            ; work         ;
@@ -327,28 +327,28 @@ applicable agreement for further details.
 ;    |RAM_CLEAN_2:RAM_inst_M|               ; 600 (175)         ; 98 (88)      ; 1146880     ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M                                                                                                 ; work         ;
 ;       |altsyncram:ram[0][6]__1|           ; 14 (0)            ; 2 (0)        ; 229376      ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1                                                                         ; work         ;
 ;          |altsyncram_u6h1:auto_generated| ; 14 (0)            ; 2 (2)        ; 229376      ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1|altsyncram_u6h1:auto_generated                                          ; work         ;
-;             |mux_5nb:mux3|                ; 14 (14)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1|altsyncram_u6h1:auto_generated|mux_5nb:mux3                             ; work         ;
+;             |mux_7nb:mux3|                ; 14 (14)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1|altsyncram_u6h1:auto_generated|mux_7nb:mux3                             ; work         ;
 ;       |altsyncram:ram[0][6]__2|           ; 18 (0)            ; 2 (0)        ; 229376      ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__2                                                                         ; work         ;
 ;          |altsyncram_u6h1:auto_generated| ; 18 (0)            ; 2 (2)        ; 229376      ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__2|altsyncram_u6h1:auto_generated                                          ; work         ;
 ;             |decode_msa:decode2|          ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__2|altsyncram_u6h1:auto_generated|decode_msa:decode2                       ; work         ;
-;             |mux_5nb:mux3|                ; 14 (14)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__2|altsyncram_u6h1:auto_generated|mux_5nb:mux3                             ; work         ;
+;             |mux_7nb:mux3|                ; 14 (14)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__2|altsyncram_u6h1:auto_generated|mux_7nb:mux3                             ; work         ;
 ;       |altsyncram:ram[0][6]__3|           ; 14 (0)            ; 2 (0)        ; 229376      ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__3                                                                         ; work         ;
 ;          |altsyncram_u6h1:auto_generated| ; 14 (0)            ; 2 (2)        ; 229376      ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__3|altsyncram_u6h1:auto_generated                                          ; work         ;
-;             |mux_5nb:mux3|                ; 14 (14)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__3|altsyncram_u6h1:auto_generated|mux_5nb:mux3                             ; work         ;
+;             |mux_7nb:mux3|                ; 14 (14)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__3|altsyncram_u6h1:auto_generated|mux_7nb:mux3                             ; work         ;
 ;       |altsyncram:ram[0][6]__4|           ; 14 (0)            ; 2 (0)        ; 229376      ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__4                                                                         ; work         ;
 ;          |altsyncram_u6h1:auto_generated| ; 14 (0)            ; 2 (2)        ; 229376      ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__4|altsyncram_u6h1:auto_generated                                          ; work         ;
-;             |mux_5nb:mux3|                ; 14 (14)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__4|altsyncram_u6h1:auto_generated|mux_5nb:mux3                             ; work         ;
+;             |mux_7nb:mux3|                ; 14 (14)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__4|altsyncram_u6h1:auto_generated|mux_7nb:mux3                             ; work         ;
 ;       |altsyncram:ram_rtl_0|              ; 1 (0)             ; 2 (0)        ; 229376      ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram_rtl_0                                                                            ; work         ;
 ;          |altsyncram_4ad1:auto_generated| ; 1 (0)             ; 2 (2)        ; 229376      ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram_rtl_0|altsyncram_4ad1:auto_generated                                             ; work         ;
 ;             |decode_f8a:rden_decode_b|    ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|altsyncram:ram_rtl_0|altsyncram_4ad1:auto_generated|decode_f8a:rden_decode_b                    ; work         ;
 ;       |lpm_divide:Div0|                   ; 179 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|lpm_divide:Div0                                                                                 ; work         ;
 ;          |lpm_divide_5jm:auto_generated|  ; 179 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|lpm_divide:Div0|lpm_divide_5jm:auto_generated                                                   ; work         ;
 ;             |sign_div_unsign_tlh:divider| ; 179 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|lpm_divide:Div0|lpm_divide_5jm:auto_generated|sign_div_unsign_tlh:divider                       ; work         ;
-;                |alt_u_div_f7f:divider|    ; 179 (179)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|lpm_divide:Div0|lpm_divide_5jm:auto_generated|sign_div_unsign_tlh:divider|alt_u_div_f7f:divider ; work         ;
+;                |alt_u_div_e7f:divider|    ; 179 (179)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|lpm_divide:Div0|lpm_divide_5jm:auto_generated|sign_div_unsign_tlh:divider|alt_u_div_e7f:divider ; work         ;
 ;       |lpm_divide:Mod1|                   ; 185 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|lpm_divide:Mod1                                                                                 ; work         ;
 ;          |lpm_divide_8bm:auto_generated|  ; 185 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|lpm_divide:Mod1|lpm_divide_8bm:auto_generated                                                   ; work         ;
 ;             |sign_div_unsign_tlh:divider| ; 185 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|lpm_divide:Mod1|lpm_divide_8bm:auto_generated|sign_div_unsign_tlh:divider                       ; work         ;
-;                |alt_u_div_f7f:divider|    ; 185 (185)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|lpm_divide:Mod1|lpm_divide_8bm:auto_generated|sign_div_unsign_tlh:divider|alt_u_div_f7f:divider ; work         ;
+;                |alt_u_div_e7f:divider|    ; 185 (185)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|RAM_CLEAN_2:RAM_inst_M|lpm_divide:Mod1|lpm_divide_8bm:auto_generated|sign_div_unsign_tlh:divider|alt_u_div_e7f:divider ; work         ;
 ;    |lpm_divide:Div0|                      ; 1382 (0)          ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|lpm_divide:Div0                                                                                                        ; work         ;
 ;       |lpm_divide_92p:auto_generated|     ; 1382 (0)          ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|lpm_divide:Div0|lpm_divide_92p:auto_generated                                                                          ; work         ;
 ;          |abs_divider_4dg:divider|        ; 1382 (8)          ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|lpm_divide:Div0|lpm_divide_92p:auto_generated|abs_divider_4dg:divider                                                  ; work         ;
@@ -363,7 +363,7 @@ applicable agreement for further details.
 ;    |lpm_divide:Mod0|                      ; 708 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|lpm_divide:Mod0                                                                                                        ; work         ;
 ;       |lpm_divide_0po:auto_generated|     ; 708 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|lpm_divide:Mod0|lpm_divide_0po:auto_generated                                                                          ; work         ;
 ;          |abs_divider_obg:divider|        ; 708 (12)          ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|lpm_divide:Mod0|lpm_divide_0po:auto_generated|abs_divider_obg:divider                                                  ; work         ;
-;             |alt_u_div_e7f:divider|       ; 644 (644)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|lpm_divide:Mod0|lpm_divide_0po:auto_generated|abs_divider_obg:divider|alt_u_div_e7f:divider                            ; work         ;
+;             |alt_u_div_f7f:divider|       ; 644 (644)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|lpm_divide:Mod0|lpm_divide_0po:auto_generated|abs_divider_obg:divider|alt_u_div_f7f:divider                            ; work         ;
 ;             |lpm_abs_i0a:my_abs_num|      ; 52 (52)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FPGA_Processing|lpm_divide:Mod0|lpm_divide_0po:auto_generated|abs_divider_obg:divider|lpm_abs_i0a:my_abs_num                           ; work         ;
 ;    |lpm_mult:Mult0|                       ; 3 (0)             ; 0 (0)        ; 0           ; 3            ; 1       ; 1         ; 0    ; 0            ; |FPGA_Processing|lpm_mult:Mult0                                                                                                         ; work         ;
 ;       |mult_6ft:auto_generated|           ; 3 (3)             ; 0 (0)        ; 0           ; 3            ; 1       ; 1         ; 0    ; 0            ; |FPGA_Processing|lpm_mult:Mult0|mult_6ft:auto_generated                                                                                 ; work         ;
@@ -441,18 +441,18 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; S_THRES_L[3,4]                                  ; Stuck at GND due to stuck port data_in                                                                     ;
 ; S_THRES_L[2]                                    ; Stuck at VCC due to stuck port data_in                                                                     ;
 ; S_THRES_L[0,1]                                  ; Stuck at GND due to stuck port data_in                                                                     ;
-; S_THRES_Y[5..7]                                 ; Stuck at GND due to stuck port data_in                                                                     ;
-; S_THRES_Y[3,4]                                  ; Stuck at VCC due to stuck port data_in                                                                     ;
-; S_THRES_Y[0..2]                                 ; Stuck at GND due to stuck port data_in                                                                     ;
+; S_THRES_SP[5..7]                                ; Stuck at GND due to stuck port data_in                                                                     ;
+; S_THRES_SP[3,4]                                 ; Stuck at VCC due to stuck port data_in                                                                     ;
+; S_THRES_SP[0..2]                                ; Stuck at GND due to stuck port data_in                                                                     ;
 ; V_THRES[7]                                      ; Stuck at GND due to stuck port data_in                                                                     ;
 ; V_THRES[5,6]                                    ; Stuck at VCC due to stuck port data_in                                                                     ;
 ; V_THRES[0..4]                                   ; Stuck at GND due to stuck port data_in                                                                     ;
-; V_THRES_Y[6,7]                                  ; Stuck at VCC due to stuck port data_in                                                                     ;
-; V_THRES_Y[5]                                    ; Stuck at GND due to stuck port data_in                                                                     ;
-; V_THRES_Y[4]                                    ; Stuck at VCC due to stuck port data_in                                                                     ;
-; V_THRES_Y[3]                                    ; Stuck at GND due to stuck port data_in                                                                     ;
-; V_THRES_Y[2]                                    ; Stuck at VCC due to stuck port data_in                                                                     ;
-; V_THRES_Y[0,1]                                  ; Stuck at GND due to stuck port data_in                                                                     ;
+; V_THRES_SP[6,7]                                 ; Stuck at VCC due to stuck port data_in                                                                     ;
+; V_THRES_SP[5]                                   ; Stuck at GND due to stuck port data_in                                                                     ;
+; V_THRES_SP[4]                                   ; Stuck at VCC due to stuck port data_in                                                                     ;
+; V_THRES_SP[3]                                   ; Stuck at GND due to stuck port data_in                                                                     ;
+; V_THRES_SP[2]                                   ; Stuck at VCC due to stuck port data_in                                                                     ;
+; V_THRES_SP[0,1]                                 ; Stuck at GND due to stuck port data_in                                                                     ;
 ; R_MIN[6,7]                                      ; Stuck at VCC due to stuck port data_in                                                                     ;
 ; R_MIN[4,5]                                      ; Stuck at GND due to stuck port data_in                                                                     ;
 ; R_MIN[3]                                        ; Stuck at VCC due to stuck port data_in                                                                     ;
@@ -2314,7 +2314,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:01:56     ;
+; Top            ; 00:01:51     ;
 +----------------+--------------+
 
 
@@ -2324,7 +2324,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Tue Jul 24 22:26:28 2018
+    Info: Processing started: Thu Jul 26 01:30:31 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off SoC_Brain -c SoC_Brain
 Info (11104): Parallel Compilation has detected 8 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 4 of the 4 physical processors detected instead.
 Info (12021): Found 1 design units, including 1 entities, in source file ram.v
@@ -2543,9 +2543,9 @@ Info (12128): Elaborating entity "altsyncram_u6h1" for hierarchy "RAM_CLEAN_2:RA
 Info (12021): Found 1 design units, including 1 entities, in source file db/decode_msa.tdf
     Info (12023): Found entity 1: decode_msa
 Info (12128): Elaborating entity "decode_msa" for hierarchy "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1|altsyncram_u6h1:auto_generated|decode_msa:decode2"
-Info (12021): Found 1 design units, including 1 entities, in source file db/mux_5nb.tdf
-    Info (12023): Found entity 1: mux_5nb
-Info (12128): Elaborating entity "mux_5nb" for hierarchy "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1|altsyncram_u6h1:auto_generated|mux_5nb:mux3"
+Info (12021): Found 1 design units, including 1 entities, in source file db/mux_7nb.tdf
+    Info (12023): Found entity 1: mux_7nb
+Info (12128): Elaborating entity "mux_7nb" for hierarchy "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1|altsyncram_u6h1:auto_generated|mux_7nb:mux3"
 Info (12128): Elaborating entity "RAM_BUFF" for hierarchy "RAM_BUFF:RAM_inst_B"
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(100): truncated value with size 32 to match size of target (15)
 Warning (13046): Tri-state node(s) do not directly drive top-level pin(s)
@@ -2633,8 +2633,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/deco
     Info (12023): Found entity 1: decode_lsa
 Info (12021): Found 1 design units, including 1 entities, in source file db/decode_e8a.tdf
     Info (12023): Found entity 1: decode_e8a
-Info (12021): Found 1 design units, including 1 entities, in source file db/mux_6nb.tdf
-    Info (12023): Found entity 1: mux_6nb
+Info (12021): Found 1 design units, including 1 entities, in source file db/mux_4nb.tdf
+    Info (12023): Found entity 1: mux_4nb
 Info (12130): Elaborated megafunction instantiation "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram_rtl_0"
 Info (12133): Instantiated megafunction "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram_rtl_0" with the following parameter:
     Info (12134): Parameter "OPERATION_MODE" = "DUAL_PORT"
@@ -2681,8 +2681,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_
     Info (12023): Found entity 1: lpm_divide_8bm
 Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_tlh.tdf
     Info (12023): Found entity 1: sign_div_unsign_tlh
-Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_f7f.tdf
-    Info (12023): Found entity 1: alt_u_div_f7f
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_e7f.tdf
+    Info (12023): Found entity 1: alt_u_div_e7f
 Info (12130): Elaborated megafunction instantiation "lpm_divide:Div0"
 Info (12133): Instantiated megafunction "lpm_divide:Div0" with the following parameter:
     Info (12134): Parameter "LPM_WIDTHN" = "32"
@@ -2716,8 +2716,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_
     Info (12023): Found entity 1: lpm_divide_0po
 Info (12021): Found 1 design units, including 1 entities, in source file db/abs_divider_obg.tdf
     Info (12023): Found entity 1: abs_divider_obg
-Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_e7f.tdf
-    Info (12023): Found entity 1: alt_u_div_e7f
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_f7f.tdf
+    Info (12023): Found entity 1: alt_u_div_f7f
 Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_abs_6v9.tdf
     Info (12023): Found entity 1: lpm_abs_6v9
 Info (12130): Elaborated megafunction instantiation "RAM_CLEAN_2:RAM_inst_M|lpm_divide:Div0"
@@ -2810,19 +2810,19 @@ Warning (21074): Design contains 8 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "vpo[5]"
     Warning (15610): No output dependent on input pin "vpo[6]"
     Warning (15610): No output dependent on input pin "vpo[7]"
-Info (21057): Implemented 5423 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 5426 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 40 input pins
     Info (21059): Implemented 4 output pins
     Info (21060): Implemented 16 bidirectional pins
-    Info (21061): Implemented 5054 logic cells
+    Info (21061): Implemented 5057 logic cells
     Info (21064): Implemented 289 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 19 DSP elements
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 57 warnings
-    Info: Peak virtual memory: 5806 megabytes
-    Info: Processing ended: Tue Jul 24 22:29:03 2018
-    Info: Elapsed time: 00:02:35
-    Info: Total CPU time (on all processors): 00:02:34
+    Info: Peak virtual memory: 5797 megabytes
+    Info: Processing ended: Thu Jul 26 01:33:00 2018
+    Info: Elapsed time: 00:02:29
+    Info: Total CPU time (on all processors): 00:02:27
 
 
 +------------------------------------------+

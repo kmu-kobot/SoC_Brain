@@ -360,19 +360,19 @@ wire [15:0] SHV565 = {S[7:3], H[7:2], V[7:3]};
 //				 horizon   BK			 S 37  V 51
 // mission 7 yelbridge Y_H 34, 43 S 107 V 151
 //											 S 70  V 170
-reg [ 7:0] H_THRES, S_THRES_H, S_THRES_L, S_THRES_Y, V_THRES, V_THRES_Y, 
+reg [ 7:0] H_THRES, S_THRES_H, S_THRES_L, S_THRES_SP, V_THRES, V_THRES_SP, 
 				R_H, G_H, B_H, Y_H, O_H,
 				R_MIN, R_MAX, G_MIN, G_MAX, B_MIN, B_MAX, Y_MIN, Y_MAX, O_MIN, O_MAX;
-reg R_B, G_B, B_B, Y_B, O_B, BK_B, C_H, C_L, Y2_B;
+reg R_B, G_B, B_B, Y_B, O_B, BK_B, C_H, C_L, SP_B;
 
 always @ (posedge clk_llc)
 begin
 	H_THRES = 8'd20;
 	S_THRES_H = 8'd96;
 	S_THRES_L = 8'd36;
-	S_THRES_Y = 8'd24;
+	S_THRES_SP = 8'd24;
 	V_THRES = 8'd96;
-	V_THRES_Y = 8'd212;
+	V_THRES_SP = 8'd212;
 
 	R_H	= 8'd220;
 	G_H	= 8'd85;
@@ -449,10 +449,10 @@ always @ (negedge resetx or posedge clk_llc)
 	end
 	
 always @ (negedge resetx or posedge clk_llc)
-	if		(~resetx)	Y2_B <= 1'b0;
+	if		(~resetx)	SP_B <= 1'b0;
 	else
 	begin
-		Y2_B <= ~BK_B & (S > S_THRES_Y) & (V < V_THRES_Y) & ((Y_MIN <= H) & (H <= Y_MAX));
+		SP_B <= ~BK_B & (S > S_THRES_SP) & (V < V_THRES_SP) & (((Y_MIN <= H) & (H <= Y_MAX)) | ((R_MIN <= H) & (H <= R_MAX)));
 	end
 	
 always @ (negedge resetx or posedge clk_llc)
@@ -469,9 +469,9 @@ wire GYO = G_B | Y_B | O_B;
 wire GYOBK = G_B | Y_B | O_B | BK_B;
 wire BBK = B_B | BK_B;
 //wire [15:0] DecVData = {ROY, ROYBK, R_B, O_B, Y_B,		GY, GYOBK, GYO, G_B, G_B, G_B,	B_B, BBK, B_B, B_B, BK_B};
-wire [ 6:0] DecVData_C = {Y2_B, R_B, O_B, Y_B, G_B, B_B, BK_B};
+wire [ 6:0] DecVData_C = {SP_B, R_B, O_B, Y_B, G_B, B_B, BK_B};
 
-wire Y2_M = vmem_B_q[6];
+wire SP_M = vmem_B_q[6];
 wire R_M = vmem_B_q[5];
 wire O_M = vmem_B_q[4];
 wire Y_M = vmem_B_q[3];
@@ -480,13 +480,13 @@ wire B_M = vmem_B_q[1];
 wire BK_M = vmem_B_q[0];
 
 wire ROY_M = R_M | O_M | Y_M;
-wire ROYBK_M = R_M | O_M | Y_M | BK_M | Y2_M;
+wire ROYBK_M = R_M | O_M | Y_M | BK_M | SP_M;
 wire GY_M = G_M | Y_M;
-wire GYO_M = G_M | Y_M | O_M | Y2_M;
-wire GYOBK_M = G_M | Y_M | O_M | BK_M | Y2_M;
-wire BBKY2_M = B_M | BK_M | Y2_M;
+wire GYO_M = G_M | Y_M | O_M | SP_M;
+wire GYOBK_M = G_M | Y_M | O_M | BK_M | SP_M;
+wire BBKSP_M = B_M | BK_M | SP_M;
 
-wire [15:0] DecVData = {ROY_M, ROYBK_M, R_M, O_M, Y_M,	GY_M, GYOBK_M, GYO_M, G_M, Y2_M, G_M,	B_M, BBKY2_M, B_M, B_M, BK_M};
+wire [15:0] DecVData = {ROY_M, ROYBK_M, R_M, O_M, Y_M,	GY_M, GYOBK_M, GYO_M, G_M, SP_M, G_M,	B_M, BBKSP_M, B_M, B_M, BK_M};
 /////////////////////////////////////////////////////////////////////////////
 
 // 180x120 write clock generation 
