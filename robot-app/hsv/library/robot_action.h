@@ -11,16 +11,16 @@
 #define INIT_POSE_COEF 5
 #define INIT_VIEW_COEF 1
 #define WALK_STEP_COEF 1
-#define WALK_SPEED_COEF 15
+#define WALK_SPEED_COEF 20
 #define WALK_VIEW_COEF 5
 #define TURN_DIR_COEF 1
-#define TURN_POSE_COEF 15
-#define TURN_VIEW_COEF 3
-#define MOVE_LEN_COEF 33
+#define TURN_POSE_COEF 9
+#define TURN_VIEW_COEF 2
+#define MOVE_LEN_COEF 27
 #define MOVE_DIR_COEF 1
-#define MOVE_POSE_COEF 11
+#define MOVE_POSE_COEF 9
 #define MOVE_VIEW_COEF 2
-#define BIT_DIR_COEF 5
+#define BIT_DIR_COEF 2
 
 #define INIT_MOTION(pose, view) (INIT_LOW_DOWN + INIT_POSE_COEF*pose + INIT_VIEW_COEF*view)
 #define WALK_START_MOTION(speed, view) (WALK_FAST_START_DOWN + WALK_SPEED_COEF*speed + WALK_VIEW_COEF*view)
@@ -55,7 +55,7 @@ typedef enum
     WALK_FAST_L_DOWN,
     WALK_FAST_R_DOWN,
 
-    WALK_FAST_START_OBLIQUE = 21,
+    WALK_FAST_START_OBLIQUE = 23,
     WALK_FAST_END_OBLIQUE,
     WALK_FAST_L_OBLIQUE,
     WALK_FAST_R_OBLIQUE,
@@ -231,7 +231,7 @@ typedef enum
     DOWN = 0,
     OBLIQUE,
     LEFT,
-    RIGHT
+    RIGHT,
     UP
 } VIEW;
 
@@ -290,7 +290,7 @@ static inline void ACTION_INIT(POSE pose, VIEW view)
 
 static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat)
 {
-    action(INIT_MOTION(LOW, view), WALK_START_MOTION(speed, view));
+    action(INIT_MOTION(MIDDLE, view), WALK_START_MOTION(speed, view));
 
     for(; repeat > 1; --repeat)
     {
