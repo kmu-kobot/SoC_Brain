@@ -71,11 +71,13 @@ void CASE_0_SET_STRAIGHT(U16 *image, int dir) {
             (20)
     );
 
-    printf("Slope : %f\n", s);
+    printf("Slope : %f\n", s * 100);
 
+    int l = ((dir) ? CASE_0_DEFAULT_RIGHT_SLOPE : CASE_0_DEFAULT_LEFT_SLOPE);
+    printf("%d %d\n", l, (l - 2 <= s && s <= l + 2));
     s *= 100;
-    if (((s > 0) ? s : -s) > ((dir) ? CASE_0_DEFAULT_RIGHT_SLOPE : CASE_0_DEFAULT_LEFT_SLOPE)) {
-        printf(((s < 0) ? "RIGHT\n" : "LEFT\n"));
+    if (!(l - CASE_0_DEFAULT_SLOPE_ERROR < s && s < l + CASE_0_DEFAULT_SLOPE_ERROR)) {
+        printf(((l - CASE_0_DEFAULT_SLOPE_ERROR > s) ? "LEFT\n" : "RIGHT\n"));
     } else {
         printf("SUCCESS\n\n");
     }
@@ -388,9 +390,85 @@ void CASE_7_SET_CENTER(U16 *image) {
     }
 }
 
-void CASE_7_SET_CENTER_ON_YELLOW_BRIDGE(U16 *image) {}
+void CASE_7_SET_CENTER_ON_YELLOW_BRIDGE(U16 *image) {
+    U32 col[3] = {CASE_7_1_POINT_X_1, CASE_7_1_POINT_X_2, CASE_7_1_POINT_X_3}, row, i, j;
+    U16 checkHurdleLine[3] = {0,};
 
-void CASE_7_SET_STRAIGHT_ON_YELLOW_BRIDGE(U16 *image) {}
+    for (i = 0; i < 3; ++i) {
+        for (row = HEIGHT - 1; row > 0; --row) {
+            checkHurdleLine[i] = 0;
+
+            for (j = 0; j < 5; j++) {
+                checkHurdleLine[i] += (GetValueRGBYOBK(GetPtr(image, row, col[i] + j, WIDTH), YELLOW)||
+                GetValueRGBYOBK(GetPtr(image, row, col[i] + j, WIDTH), 6));
+            }
+
+            if (checkHurdleLine[i] < 1) {
+                checkHurdleLine[i] = (U16) (HEIGHT - row);
+                break;
+            }
+        }
+    }
+
+    double s = 0;
+    printf("M4-5: BLACK LINE\n");
+    for (i = 0; i < 3; ++i) {
+        s += checkHurdleLine[i];
+        printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);
+    }
+    printf("\n");
+
+    s /= 3;
+
+    printf("M4-5: AVG: %f\n", s);
+
+    if (!(CASE_7_1_CENTER - CASE_7_1_ERROR <= s && s <= CASE_7_1_CENTER + CASE_7_1_ERROR)) {
+        printf((CASE_7_1_CENTER - CASE_7_1_ERROR > s) ? "RIGHT\n" : "LEFT\n");
+    } else {
+        printf("SUCCESS\n");
+    }
+}
+
+void CASE_7_SET_STRAIGHT_ON_YELLOW_BRIDGE(U16 *image) {
+    U32 row, i;
+    U16 col[2] = {
+            CASE_7_2_POINT_X_1,
+            CASE_7_2_POINT_X_2
+    };
+    int black_len[2] = {0,};
+
+    for (i = 0; i < 2; ++i) {
+        for (row = HEIGHT - 1; row > 0; --row) {
+            if (!(
+                GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), YELLOW) ||
+                GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), 6) &&
+                GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), YELLOW) ||
+                GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), 6)
+            )) {
+                black_len[i] = -row;
+                break;
+            }
+        }
+    }
+
+    printf("M2-4: SLOPE\n");
+    printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
+
+    double s = (
+            (double) (black_len[0] - black_len[1]) /
+            (20)
+    );
+
+    printf("Slope : %f\n", s * 100);
+
+    s *= 100;
+
+    if (!(CASE_7_2_SLOPE - CASE_7_2_SLOPE_ERROR <= s && s <= CASE_7_2_SLOPE + CASE_7_2_SLOPE_ERROR)) {
+        printf((CASE_7_2_SLOPE - CASE_7_2_SLOPE_ERROR > s) ? "LEFT\n" : "RIGHT\n");
+    } else {
+        printf("SUCCESS\n");
+    }
+}
 
 void CASE_7_CHECK_RANGE(U16 *image) {
     U32 col, row;

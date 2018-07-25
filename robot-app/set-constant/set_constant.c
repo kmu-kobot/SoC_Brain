@@ -62,16 +62,20 @@ void set_constant(void) {
                     case 0:
                         switch (step) {
                             case 0:
-                            case 1:
                                 printf("\t0- TURN LEFT / SET CENTER\n");
+                                CASE_0_SET_CENTER(fpga_videodata, 0);
+                                break;
+                            case 1:
                                 printf("\t1- TURN RIGHT / SET CENTER\n");
-                                CASE_0_SET_CENTER(fpga_videodata, ((step == 0) ? 0 : 1));
+                                CASE_0_SET_CENTER(fpga_videodata, 1);
                                 break;
                             case 2:
-                            case 3:
                                 printf("\t2- TURN LEFT / SET STRAIGHT\n");
+                                CASE_0_SET_STRAIGHT(fpga_videodata, 0);
+                                break;
+                            case 3:
                                 printf("\t3- TURN RIGHT / SET STRAIGHT\n");
-                                CASE_0_SET_STRAIGHT(fpga_videodata, ((step == 0) ? 0 : 1));
+                                CASE_0_SET_STRAIGHT(fpga_videodata, 1);
                                 break;
                             default:;
                         }
