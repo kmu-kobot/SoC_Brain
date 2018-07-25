@@ -2,7 +2,7 @@
 
 int cmp(const void* a, const void* b)
 {
-  return *(U8*)a - *(U8*)b;
+    return *(U8*)a - *(U8*)b;
 }
 
 U8 top, bot, left, right;
@@ -40,6 +40,7 @@ void extractHSV(void)
 
     do {
         key_input = getchar();
+        printf("%c\n", key_input);
         //동작 수행
 
         setFPGAVideoData(fpga_videodata);
@@ -178,9 +179,9 @@ void extractHSV(void)
 
                 printf("\t1 : DOWN\n");
                 printf("\t2 : OBLIQUE\n");
-                printf("\t3 : UP\n");
-                printf("\t4 : LEFT\n");
-                printf("\t5 : RIGHT\n");
+                printf("\t3 : LEFT\n");
+                printf("\t4 : RIGHT\n");
+                printf("\t5 : UP\n");
                 view_input = getchar();
 
                 printf("INIT\tpose : %d\tview : %d\n", pose_input - '1', view_input - '1');
@@ -193,7 +194,8 @@ void extractHSV(void)
 
                 printf("\t1 : DOWN\n");
                 printf("\t2 : OBLIQUE\n");
-                printf("\t3 : UP\n");
+                printf("\t3 : LEFT\n");
+                printf("\t4 : RIGHT\n");
                 view_input = getchar();
 
                 printf("WALK\tspeed : %d\tview : %d\n", speed_input - '1', view_input - '1');
@@ -205,13 +207,14 @@ void extractHSV(void)
                 dir_input = getchar();
 
                 printf("\t1 : LOW\n");
+                printf("\t2 : MIDDLE\n");
                 printf("\t3 : HIGH\n");
                 pose_input = getchar();
 
                 printf("\t1 : DOWN\n");
                 printf("\t2 : OBLIQUE\n");
-                printf("\t4 : LEFT\n");
-                printf("\t5 : RIGHT\n");
+                printf("\t3 : LEFT\n");
+                printf("\t4 : RIGHT\n");
                 view_input = getchar();
 
                 printf("TURN\tdir : %d\tpose : %d\tview : %d\t%d\n", dir_input - '1', pose_input - '1', view_input - '1');
@@ -233,8 +236,8 @@ void extractHSV(void)
 
                 printf("\t1 : DOWN\n");
                 printf("\t2 : OBLIQUE\n");
-                printf("\t4 : LEFT\n");
-                printf("\t5 : RIGHT\n");
+                printf("\t3 : LEFT\n");
+                printf("\t4 : RIGHT\n");
                 view_input = getchar();
 
                 printf("MOVE\tlen : %d\tdir : %d\tpose : %d\tview : %d\n", len_input - '1', dir_input - '1', pose_input - '1', view_input - '1');
@@ -264,7 +267,10 @@ void extractHSV(void)
                         ACTION_MOTION(MISSION_2_RED_DUMBLING, MIDDLE, DOWN);
                         break;
                     case '2':
-                        ACTION_MOTION(MISSION_3_MINE_WALK, LOW, DOWN);
+                        ACTION_MOTION(MISSION_3_MINE_WALK_START, MIDDLE, DOWN);
+                        ACTION_MOTION(MISSION_3_MINE_WALK_L, MIDDLE, DOWN);
+                        ACTION_MOTION(MISSION_3_MINE_WALK_R, MIDDLE, DOWN);
+                        ACTION_MOTION(MISSION_3_MINE_WALK_END, MIDDLE, DOWN);
                         break;
                     case '3':
                         ACTION_MOTION(MISSION_4_HURDLING, MIDDLE, DOWN);
@@ -337,10 +343,15 @@ void extractHSV(void)
                     mod_input = getchar();
 
                     if ('1' <= mod_input && mod_input <= '7')
-                        filter |= COLOR_BITS[mod_input - '1'];
+                    {
+                        filter |= COLOR_BITS[(mod_input - '1' + 2)];
+                    }
                     else if (mod_input == '8')
+                    {
                         filter = 0;
+                    }
                 } while(mod_input != '9');
+                printf("filter : %x\n", filter);
                 break;
             case 'h':
                 help();
@@ -359,13 +370,25 @@ void extractHSV(void)
 
 void setFPGAVideoData(U16 *buf)
 {
-    U8 i, j;
+    U16 i, j;
     U16 pos;
+    U16 tmp;
+
     read_fpga_video_data(buf);
 
-    for (i = 0; i < WIDTH * HEIGHT; ++i)
+    if (filter != 0xffff)
     {
-        buf[i] &= filter;
+        for (i = 0; i < WIDTH * HEIGHT; ++i)
+        {
+            tmp = buf[i] & filter;
+            buf[i] = GetValueRGBYOBK(tmp, RED)*COLOR_BITS[0] |
+                    GetValueRGBYOBK(tmp, GREEN)*COLOR_BITS[1] |
+                    GetValueRGBYOBK(tmp, BLUE)*COLOR_BITS[2] |
+                    GetValueRGBYOBK(tmp, YELLOW)*COLOR_BITS[3] |
+                    GetValueRGBYOBK(tmp, YELLOW_CH2)*COLOR_BITS[4] |
+                    GetValueRGBYOBK(tmp, ORANGE)*COLOR_BITS[5] |
+                    GetValueRGBYOBK(tmp, BLACK)*COLOR_BITS[6];
+        }
     }
 
     // draw white box
@@ -426,6 +449,8 @@ void help(void)
 
 int init_extract(void)
 {
+    int ret;
+
     top = 54;
     bot = 65;
     left = 84;
@@ -437,7 +462,6 @@ int init_extract(void)
     filter = 0xffff;
 
     // init uart
-    int ret;
 
     tcgetattr(0, &inittio);
     newtio = inittio;
