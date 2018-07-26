@@ -25,9 +25,19 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
     int rReturn = r > MISSION_7_1_THRESHOLDS;
 
     if (rReturn && repeat != -1) {
-        ACTION_WALK(FAST, OBLIQUE, repeat);
-        RobotSleep(2);
-        ACTION_WALK(CLOSE, OBLIQUE, 2);
+        cntYellow = 0;
+        for (row = 20; row < ROBOT_KNEE; ++row) {
+            for (col = 0; col < WIDTH; ++col) {
+                cntYellow += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW) ||
+                              GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), CH2));
+            }
+        }
+
+        if ((double) (cntYellow / ((ROBOT_KNEE - 20) * WIDTH)) > 5) {
+            ACTION_WALK(CLOSE, OBLIQUE, 3);
+        } else {
+            ACTION_WALK(FAST, OBLIQUE, repeat);
+        }
     }
 
     return rReturn;
@@ -65,10 +75,10 @@ int mission_7_2_before_bridge_set_center(U16 *image) {
     printf("LEFT: %f, RIGHT: %f, r: %f\n\n", r[0], r[1], r[0] - r[1]);
 
     if (((s > 0) ? s : -s) > MISSION_7_2_RED_BRIDGE_THRESHOLDS) {
-        ACTION_MOVE(LONG, ((s > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, OBLIQUE, 1);
+        ACTION_MOVE(LONG, ((s > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, OBLIQUE, ((s > 0) ? 1 : 2));
     } else {
         ACTION_WALK(CLOSE, OBLIQUE, 2);
-        RobotSleep(2);
+        RobotSleep(1);
     }
 
     return ((s > 0) ? s : -s) <= MISSION_7_2_RED_BRIDGE_THRESHOLDS;
@@ -79,7 +89,8 @@ int mission_7_3_climb_yellow_hole_bridge() {
     RobotSleep(1);
     ACTION_MOTION(MISSION_5_STAIR_UP, MIDDLE, OBLIQUE);
     RobotSleep(1);
-    ACTION_WALK(SLOW, OBLIQUE, 2);
+    ACTION_INIT(MIDDLE, DOWN);
+    ACTION_WALK(FAST, OBLIQUE, 4);
     RobotSleep(1);
     return 1;
 }
@@ -199,7 +210,7 @@ int mission_7_5_set_straight(U16 *image) {
 
     int rResult = 1;
     if (((r > 0) ? r : -r) > MISSION_7_5_YELLOW_BLACK_LINE_SLOPE) {
-        ACTION_TURN(SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 1);
+        ACTION_TURN(SHORT, ((r < 0) ? DIR_RIGHT : DIR_LEFT), MIDDLE, DOWN, 1);
         RobotSleep(1);
         rResult = 0;
     }
@@ -243,8 +254,9 @@ int mission_7_5_walk_until_line_front_of_feet(U16 *image) {
 
 
 int mission_7_6_jump_hole(void) {
+    ACTION_WALK(CLOSE, OBLIQUE, 3);
     RobotSleep(2);
-    ACTION_MOTION(MISSION_5_STAIR_DOWN, MIDDLE, OBLIQUE);
+    ACTION_MOTION(MISSION_7_YELLOW_DUMBLING, MIDDLE, OBLIQUE);
     RobotSleep(2);
     ACTION_WALK(SLOW, LEFT, 3);
     return 1;
