@@ -41,7 +41,7 @@ int mission_4_2_ready_hurdle(U16 *image) {
 }
 
 int mission_4_4_jump_hurdle(void) {
-    ACTION_WALK(SLOW, OBLIQUE, 2);
+    ACTION_WALK(CLOSE, OBLIQUE, 2);
     RobotSleep(2);
     ACTION_MOTION(MISSION_4_HURDLING, MIDDLE, OBLIQUE);
     RobotSleep(2);
