@@ -253,11 +253,11 @@ typedef struct _tag_DrawRaw_value {
 #define GREEN 7
 #define BLUE 4
 #define YELLOW 11
-#define YELLOW_CH2 6
 #define ORANGE 12
 #define BLACK 0
+#define CH2 6
 
-static const U16 COLOR_BITS[7] = {0xe000, 0x07a0, 0x001e, 0xcf00, 0x4348, 0xd300, 0x4209};
+static const U16 COLOR_BITS[] = {0xe000, 0x07a0, 0x001e, 0xcf00, 0xd300, 0x4209, 0x4348};
 
 #define HEIGHT 120
 #define WIDTH 180

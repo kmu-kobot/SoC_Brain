@@ -190,6 +190,7 @@ void extractHSV(void)
             case 'r':
                 printf("\t1 : FAST\n");
                 printf("\t2 : SLOW\n");
+                printf("\t3 : CLOSE\n");
                 speed_input = getchar();
 
                 printf("\t1 : DOWN\n");
@@ -202,6 +203,10 @@ void extractHSV(void)
                 ACTION_WALK(speed_input - '1', view_input - '1', 3);
                 break;
             case 't':
+                printf("\t1 : LONG\n");
+                printf("\t2 : SHORT\n");
+                len_input = getchar();
+
                 printf("\t1 : LEFT\n");
                 printf("\t2 : RIGHT\n");
                 dir_input = getchar();
@@ -217,8 +222,8 @@ void extractHSV(void)
                 printf("\t4 : RIGHT\n");
                 view_input = getchar();
 
-                printf("TURN\tdir : %d\tpose : %d\tview : %d\t%d\n", dir_input - '1', pose_input - '1', view_input - '1');
-                ACTION_TURN(dir_input - '1', pose_input - '1', view_input - '1', 3);
+                printf("TURN\tlen : %d\tdir : %d\tpose : %d\tview : %d\t%d\n", len_input - '1', dir_input - '1', pose_input - '1', view_input - '1');
+                ACTION_TURN(len_input - '1', dir_input - '1', pose_input - '1', view_input - '1', 3);
                 break;
             case 'y':
                 printf("\t1 : LONG\n");
@@ -335,9 +340,9 @@ void extractHSV(void)
                     printf("\t2 : GREEN\n");
                     printf("\t3 : BLUE\n");
                     printf("\t4 : YELLOW\n");
-                    printf("\t5 : YELLOW CH2\n");
-                    printf("\t6 : ORANGE\n");
-                    printf("\t7 : BLACK\n");
+                    printf("\t5 : ORANGE\n");
+                    printf("\t6 : BLACK\n");
+                    printf("\t7 : CH2\n");
                     printf("\t8 : CLEAR\n");
                     printf("\t9 : SAVE\n");
                     mod_input = getchar();
@@ -385,9 +390,9 @@ void setFPGAVideoData(U16 *buf)
                     GetValueRGBYOBK(tmp, GREEN)*COLOR_BITS[1] |
                     GetValueRGBYOBK(tmp, BLUE)*COLOR_BITS[2] |
                     GetValueRGBYOBK(tmp, YELLOW)*COLOR_BITS[3] |
-                    GetValueRGBYOBK(tmp, YELLOW_CH2)*COLOR_BITS[4] |
-                    GetValueRGBYOBK(tmp, ORANGE)*COLOR_BITS[5] |
-                    GetValueRGBYOBK(tmp, BLACK)*COLOR_BITS[6];
+                    GetValueRGBYOBK(tmp, ORANGE)*COLOR_BITS[4] |
+                    GetValueRGBYOBK(tmp, BLACK)*COLOR_BITS[5] |
+                    GetValueRGBYOBK(tmp, CH2)*COLOR_BITS[6];
         }
     }
 
