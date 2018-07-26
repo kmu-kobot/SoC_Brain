@@ -6,6 +6,7 @@
 
 int mission_1_1_wait_yellow_barricade(U16 *image) {
     U32 col, row, cntYellow = 0;
+
     for (row = CASE_1_UPPER; row < CASE_1_LOWER; ++row) {
         for (col = 0; col < WIDTH; col++) {
             cntYellow += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW);

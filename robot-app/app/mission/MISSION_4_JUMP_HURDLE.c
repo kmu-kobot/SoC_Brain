@@ -78,12 +78,15 @@ int mission_4_5_set_front_of_not_bk(U16 *image) {
 
     s /= 3;
     printf("AVG: %f\n\n", s);
+
     printf((s < CASE_4_1_NON_BLACK_LINE) ? "SUCCESS\n" : "FAIL\n");
 
     if (s < CASE_4_1_NON_BLACK_LINE) {
-        ACTION_TURN(DIR_LEFT, MIDDLE, OBLIQUE, 5);
+        ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 1);
+        RobotSleep(2);
         return 0;
     } else {
+        ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 7);
         return 1;
     }
 }

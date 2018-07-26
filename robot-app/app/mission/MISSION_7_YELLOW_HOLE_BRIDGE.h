@@ -12,21 +12,26 @@
 #define CASE_7_1_POINT_X_1 90
 #define CASE_7_1_POINT_X_2 120
 #define CASE_7_1_POINT_X_3 140
-#define CASE_7_1_CENTER 30
+#define CASE_7_1_CENTER 27
 #define CASE_7_1_ERROR 5
 #define CASE_7_2_POINT_X_1 120
 #define CASE_7_2_POINT_X_2 140
 #define CASE_7_2_SLOPE (-5)
-#define CASE_7_2_SLOPE_ERROR 5
+#define CASE_7_2_SLOPE_ERROR 10
+
+#define MISSION_7_5_BLACK_COL_1 70
+#define MISSION_7_5_BLACK_COL_2 110
+#define MISSION_7_5_BLACK_RANGE 4
+#define MISSION_7_5_YELLOW_BLACK_LINE_SLOPE 3
 
 #define MISSION_7_1_THRESHOLDS 15
 
 #define MISSION_7_2_BLACK_LINE_COL_POINT_1 70
 #define MISSION_7_2_BLACK_LINE_COL_POINT_2 110
 
-#define MISSION_7_2_RED_BRIDGE_THRESHOLDS 3
+#define MISSION_7_2_RED_BRIDGE_THRESHOLDS 2
 
-#define MISSION_7_5_LINE_RATIO 43
+#define MISSION_7_5_LINE_RATIO 36
 #define MISSION_7_5_POINT_X_1 70
 #define MISSION_7_5_POINT_X_2 110
 
@@ -51,13 +56,11 @@ void mission_7_4_watch_below(void);
 
 int mission_7_5_walk_until_line_front_of_feet(U16 *image);
 
+int mission_7_5_set_straight(U16 *image);
+
 int mission_7_6_jump_hole(void);
 
 void mission_7_7_watch_side(void);
-
-int mission_7_7_after_yellow_bridge_set_straight(U16 *image);
-
-int mission_7_7_after_yellow_bridge_set_center(U16 *image);
 
 #endif //SOC_APP_MISSION_7_YELLOW_HOLE_BRIDGE_H
 
