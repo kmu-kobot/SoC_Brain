@@ -32,7 +32,7 @@ int mission_3_4_is_not_front_of_bomb(U16 *image) {
 
 void mission_3_default_watch_below(void) {
     ACTION_INIT(MIDDLE, DOWN);
-    RobotSleep(2);
+    RobotSleep(1);
 }
 
 int mission_3_default_avoid_bomb(U16 *image) {
@@ -44,7 +44,7 @@ int mission_3_default_avoid_bomb(U16 *image) {
 
     for (i = 0; i < 3; ++i) {
         for (col = col_start_end[i][0]; col < col_start_end[i][1]; ++col) {
-            for (row = 10; row < HEIGHT - MISSION_3_DEFAULT_HEIGHT_OFFSET; ++row) {
+            for (row = 10; row < ROBOT_KNEE; ++row) {
                 check[i] += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
             }
         }
@@ -66,12 +66,12 @@ int mission_3_default_avoid_bomb(U16 *image) {
     int rReturn = (s == 10) ? 1 : 0;
     if (!rReturn) {
         if (s == 100 || s == 110 || s == 111) {
-            ACTION_MOVE(SHORT, DIR_RIGHT, MIDDLE, DOWN, ((check[0] == 1) ? 4 : 1));
+            ACTION_MOVE(((check[0] == 2) ? LONG : SHORT), DIR_RIGHT, MIDDLE, DOWN, 2);
         } else if (s == 1 || s == 11) {
-            ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, ((check[2] == 1) ? 4 : 1));
+            ACTION_MOVE(((check[2] == 2) ? LONG : SHORT), DIR_LEFT, MIDDLE, DOWN, 2);
         } else if (s == 101 || s == 0) {
-            ACTION_WALK(FAST, DOWN, 3);
-            rReturn = 1;
+            // ACTION_WALK(FAST, DOWN, 3);
+            // rReturn = 1;
         }
     } else {
         rReturn = 0;
@@ -79,7 +79,9 @@ int mission_3_default_avoid_bomb(U16 *image) {
         check[1] = 0;
         check[2] = 0;
 
-        for (row = 10; row < HEIGHT - MISSION_3_DEFAULT_HEIGHT_OFFSET; ++row) {
+        int px, py;
+
+        for (row = 10; row < ROBOT_KNEE; ++row) {
             check[0] = 0;
             for (col = col_start_end[1][0]; col < col_start_end[1][1]; ++col) {
                 check[0] += GetValueRGBYOBK(
@@ -87,26 +89,63 @@ int mission_3_default_avoid_bomb(U16 *image) {
                         BLACK
                 );
             }
-            if (check[1] < check[0] && check[2] < row) {
+            if (check[1] < check[0] && check[2] <= row) {
                 check[2] = row;
                 check[1] = check[0];
             }
         }
 
-        printf("\t\t\t- O-x: %d", check[2]);
+        printf("\t\t\t- O-y: %d\n", check[2]);
 
-        if (check[2] < WIDTH / 2 - MISSION_3_DEFAULT_AVOID_BOMB_RANGE) {
-            ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, 2);
-        } else if (check[2] > WIDTH / 2 + MISSION_3_DEFAULT_AVOID_BOMB_RANGE) {
-            ACTION_MOVE(SHORT, DIR_RIGHT, MIDDLE, DOWN, 2);
-        } else {
-            // TODO: 지뢰 피하는 동작
-            rReturn = 1;
+        py = check[2];
+
+        check[1] = 0;
+        check[2] = 0;
+        check[0] = 0;
+
+        for (col = col_start_end[1][0]; col < col_start_end[1][1]; ++col) {
+            check[0] = 0;
+            for (row = 0; row < ROBOT_KNEE; ++row) {
+                check[0] += GetValueRGBYOBK(
+                        GetPtr(image, row, col, WIDTH),
+                        BLACK
+                );
+            }
+
+            if (check[1] < check[0]) {
+                check[2] = col;
+                check[1] = check[0];
+            }
+
         }
 
+        printf("\t\t\t- O-x: %d\n", check[2]);
+        px = check[2];
+        printf("\t\t\t\t (%d, %d)\n", px, py);
+
+        if (py < MISSION_3_POINT_LENGTH) {
+            ACTION_WALK(CLOSE, DOWN,
+                        (py < MISSION_3_POINT_LENGTH - 12) ? 4 :
+                        (py < MISSION_3_POINT_LENGTH - 5) ? 2 : 1);
+            RobotSleep(1);
+            return 0;
+        }
+
+        if (WIDTH / 2 - MISSION_3_DEFAULT_AVOID_BOMB_RANGE > px) {
+            // right
+            ACTION_MOVE(SHORT, DIR_RIGHT, MIDDLE, DOWN, 2);
+            return 0;
+        } else if (px > WIDTH / 2 + MISSION_3_DEFAULT_AVOID_BOMB_RANGE) {
+            // left
+            ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, 2);
+            return 0;
+        } else {
+            ACTION_INIT(MIDDLE, UP);
+            return 1;
+        }
     }
 
-    RobotSleep(5);
+    RobotSleep(1);
 
     return rReturn;
 }

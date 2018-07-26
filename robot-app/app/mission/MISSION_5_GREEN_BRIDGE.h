@@ -46,6 +46,8 @@ int mission_5_5_check_green_bridge_center(U16 *image);
 
 int mission_5_5_short_walk_on_green_bridge(int repeat);
 
+int mission_5_5_get_repeat(U16 *image);
+
 int mission_5_6_set_only_one_bk_bar(U16 *image);
 
 int mission_5_6_set_straight(U16 *image);

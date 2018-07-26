@@ -33,8 +33,9 @@ add_executable(
         mission/MISSION_6_KICK_BALL.h
         mission/MISSION_7_YELLOW_HOLE_BRIDGE.c
         mission/MISSION_7_YELLOW_HOLE_BRIDGE.h
+        mission/MISSION_8_AVOID_BOMB.c
+        mission/MISSION_8_AVOID_BOMB.h
         mission/MISSION_9_LAST_BARRICADE.c
         mission/MISSION_9_LAST_BARRICADE.h
         mission/MISSION_10_BLUE_GATE.c
-        mission/MISSION_10_BLUE_GATE.h
-        mission/MISSION_8_AVOID_BOMB.c mission/MISSION_8_AVOID_BOMB.h)
+        mission/MISSION_10_BLUE_GATE.h)

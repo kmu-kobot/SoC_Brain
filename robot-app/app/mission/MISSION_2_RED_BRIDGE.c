@@ -24,9 +24,22 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
     printf(((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION) ? "SUCCESS\n" : "FAIL\n");
 
     if (((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION)) {
-        ACTION_WALK(SLOW, OBLIQUE, 3);
+        cntRed = 0;
+        for (row = 20; row < ROBOT_KNEE; ++row) {
+            for (col = 0; col < WIDTH; ++col) {
+                cntRed += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
+                           GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE) ||
+                           GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), CH2));
+            }
+        }
+
+        if ((double) cntRed / (WIDTH * (ROBOT_KNEE - 20)) > 5) {
+            ACTION_WALK(CLOSE, OBLIQUE, 3);
+        } else {
+            ACTION_WALK(FAST, OBLIQUE, 2);
+        }
         RobotSleep(1);
-        ACTION_WALK(CLOSE, OBLIQUE, 2);
+
         return 1;
     } else {
         return 0;
@@ -112,15 +125,9 @@ int mission_2_2_before_bridge_set_center(U16 *image, int mode) {
 
     if (s < CASE_0_DEFAULT_LEFT_RANGE - CASE_0_DEFAULT_RANGE_ERROR) {
         ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, LEFT, 1);
-        if (mode == 1) {
-            ACTION_WALK(CLOSE, LEFT, 1);
-        }
         return 0;
     } else if (s > CASE_0_DEFAULT_LEFT_RANGE + CASE_0_DEFAULT_RANGE_ERROR) {
         ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, LEFT, 1);
-        if (mode == 1) {
-            ACTION_WALK(CLOSE, LEFT, 1);
-        }
         return 0;
     } else {
         if (mode == 1) {
@@ -177,7 +184,7 @@ int mission_2_4_after_bridge_set_straight(U16 *image, int mode) {
                 DIR_RIGHT,
                 MIDDLE, (mode) ? RIGHT : LEFT, 1
         );
-        RobotSleep(2);
+        RobotSleep(1);
         return 0;
     } else {
         printf("SUCCESS\n\n");
