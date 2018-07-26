@@ -11,7 +11,7 @@ o load param_dest:var:SUCCESS param_src:bin_num:4
 o load param_dest:var:FAIL param_src:bin_num:255
 o load param_dest:var:status param_src:var:FAIL
 - 
-o load param_dest:motion:-:50 param_src:dec_num:1
+o load param_dest:motion:-:50 param_src:dec_num:7
 - 
 o while(1)
 o begin
