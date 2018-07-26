@@ -10,11 +10,9 @@
 
 #define SOC_APP_MISSION_1_YELLOW_BARRICADE_H
 
-// TODO: 상수 바꿔야함
-#define MISSION_1_UPPER 0
-#define MISSION_1_LOWER 110
-
-#define MISSION_1_THRESHOLDS 10
+#define CASE_1_UPPER 0
+#define CASE_1_LOWER 110
+#define CASE_1_RATIO 10
 
 int mission_1_1_wait_yellow_barricade(U16 *image);
 

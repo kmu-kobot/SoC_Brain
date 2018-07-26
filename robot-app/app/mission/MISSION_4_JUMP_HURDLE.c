@@ -33,23 +33,25 @@ int mission_4_2_ready_hurdle(U16 *image) {
 
     printf("AVG: %f\n", s);
 
-    return (MISSION_4_2_HURDLE_THRESHOLDS - MISSION_4_HURDLE_ERROR <= s &&
-            s <= MISSION_4_2_HURDLE_THRESHOLDS + MISSION_4_HURDLE_ERROR);
+    printf((CASE_4_0_LENGTH - CASE_4_0_LENGTH_ERROR <= s &&
+            s <= CASE_4_0_LENGTH + CASE_4_0_LENGTH_ERROR) ? "SUCCESS\n"
+                                                          : "FAIL\n");
+    return (CASE_4_0_LENGTH - CASE_4_0_LENGTH_ERROR <= s &&
+            s <= CASE_4_0_LENGTH + CASE_4_0_LENGTH_ERROR);
 }
 
 int mission_4_4_jump_hurdle(void) {
-    ACTION_WALK(FAST, OBLIQUE, 2);
+    ACTION_WALK(SLOW, OBLIQUE, 2);
     RobotSleep(2);
     ACTION_MOTION(MISSION_4_HURDLING, MIDDLE, OBLIQUE);
     RobotSleep(2);
-    ACTION_WALK(FAST, OBLIQUE, 10);
+    ACTION_WALK(FAST, OBLIQUE, 4);
     return 1;
 }
 
 
 void mission_4_5_watch_diagonal_line(void) {
     ACTION_INIT(MIDDLE, OBLIQUE);
-    RobotSleep(2);
 }
 
 int mission_4_5_set_front_of_not_bk(U16 *image) {
@@ -76,20 +78,21 @@ int mission_4_5_set_front_of_not_bk(U16 *image) {
 
     s /= 3;
     printf("AVG: %f\n\n", s);
+    printf((s < CASE_4_1_NON_BLACK_LINE) ? "SUCCESS\n" : "FAIL\n");
 
-    int rResult = 1;
-    if (s < MISSION_4_5_WHITE_RANGE) {
+    if (s < CASE_4_1_NON_BLACK_LINE) {
         ACTION_TURN(DIR_LEFT, MIDDLE, OBLIQUE, 5);
-        rResult = 0;
+        return 0;
+    } else {
+        return 1;
     }
-    return rResult;
 }
 
 int mission_4_6_set_center(U16 *image, int length) {
     U32 col[3] = {85, 95, 90}, row, i, j;
-    U16 checkHurdleLine[MISSION_4_HURDLE_CRITERI] = {0,};
+    U16 checkHurdleLine[3] = {0,};
 
-    for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
+    for (i = 0; i < 3; ++i) {
         for (row = HEIGHT - 1; row > 0; --row) {
             checkHurdleLine[i] = 0;
 
@@ -106,7 +109,7 @@ int mission_4_6_set_center(U16 *image, int length) {
 
     double s = 0;
     printf("M4-5: BLACK LINE\n");
-    for (i = 0; i < MISSION_4_HURDLE_CRITERI; ++i) {
+    for (i = 0; i < 3; ++i) {
         if (s < checkHurdleLine[i]) {
             s = checkHurdleLine[i];
         }
@@ -116,23 +119,20 @@ int mission_4_6_set_center(U16 *image, int length) {
 
     printf("M4-5: AVG: %f\n", s);
 
-    int rResult = 0;
+    length = (length != 0) ? CASE_0_DEFAULT_RIGHT_RANGE : length;
 
-    length = (length != 0) ? length : MISSION_4_5_BK_LINE_RANGE;
-
-    if (s < length - MISSION_4_5_BK_LINE_ERROR) {
+    if (s < length - CASE_0_DEFAULT_RANGE_ERROR) {
+        printf("LEFT\n\n");
         ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, RIGHT, 1);
-    } else if (s > length + MISSION_4_5_BK_LINE_ERROR) {
+        return 0;
+    } else if (s > length + CASE_0_DEFAULT_RANGE_ERROR) {
+        printf("RIGHT\n\n");
         ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, RIGHT, 1);
+        return 0;
     } else {
-        rResult = 1;
+        printf("SUCCESS\n\n");
+        return 1;
     }
-
-    if (!rResult) {
-        RobotSleep(1);
-    }
-
-    return rResult;
 }
 
 void mission_4_6_watch_side(void) {

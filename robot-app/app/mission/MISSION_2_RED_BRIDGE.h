@@ -10,23 +10,18 @@
 
 #define SOC_APP_MISSION_2_RED_BRIDGE_H
 
-#define MISSION_2_2_BLACK_LINE_COL_POINT_1 80
-#define MISSION_2_2_BLACK_LINE_COL_POINT_2 90
-
-#define MISSION_2_2_BLACK_LINE_RANGE 65
-#define MISSION_2_2_BLACK_LINE_ERROR 5
-
-#define MISSION_2_4_BLACK_LINE_COL_POINT_1 80
-#define MISSION_2_4_BLACK_LINE_COL_POINT_2 100
-#define MISSION_2_4_BED_BRIDGE_THRESHOLDS 5
-
-#define MISSION_2_4_BLACK_LINE_SLOPE 10
-
-#define MISSION_2_THRESHOLDS 15
+#define CASE_2_0_DETECTION 15
+#define CASE_2_1_CENTER 5
+#define CASE_0_DEFAULT_LEFT_RANGE 60
+#define CASE_0_DEFAULT_RIGHT_RANGE 70
+#define CASE_0_DEFAULT_RANGE_ERROR 6
+#define CASE_0_DEFAULT_LEFT_SLOPE 0
+#define CASE_0_DEFAULT_RIGHT_SLOPE 10
+#define CASE_0_DEFAULT_SLOPE_ERROR 4
 
 void mission_2_1_watch_below(int repeat);
 
-int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat);
+int mission_2_1_wait_front_of_red_bridge(U16 *image);
 
 void mission_2_2_watch_side(void);
 

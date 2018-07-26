@@ -9,7 +9,7 @@ void mission_2_1_watch_below(int repeat) {
     RobotSleep(1);
 }
 
-int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat) {
+int mission_2_1_wait_front_of_red_bridge(U16 *image) {
     U32 col, row, cntRed = 0;
     for (row = 0; row < HEIGHT; ++row) {
         for (col = 0; col < WIDTH; ++col) {
@@ -18,19 +18,18 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image, int repeat) {
         }
     }
 
-    printf("\t\t- M2-1: WAIT FRONT OF RED BRIDGE\n");
-    printf("\t\t\t+ cntRed: %d\n", cntRed);
-    printf("\t\t\t+ RED / AREA: %f\n\n", (double) cntRed * 100 / (WIDTH * HEIGHT));
+    printf("cntRed: %d\n", cntRed);
+    printf("RED / AREA: %f\n\n", (double) cntRed * 100 / (WIDTH * HEIGHT));
+    printf(((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION) ? "SUCCESS\n" : "FAIL\n");
 
-    int rReturn = (cntRed * 100 / (WIDTH * HEIGHT)) > MISSION_2_THRESHOLDS;
-
-    if (rReturn) {
+    if (((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION)) {
         // TODO: 붙이는 동작
-        ACTION_WALK(SLOW, OBLIQUE, repeat);
+        ACTION_WALK(SLOW, OBLIQUE, 3);
         RobotSleep(3);
+        return 1;
+    } else {
+        return 0;
     }
-
-    return rReturn;
 }
 
 void mission_2_2_watch_front(void) {
@@ -66,68 +65,77 @@ int mission_2_2_before_bridge_set_center_version2(U16 *image) {
 
     double s = r[0] - r[1];
 
-    printf("\n\tM5-5: SET CENTER\n");
-    printf("\t\tLEFT: %f, RIGHT: %f, r: %f\n\n", r[0], r[1], s);
+    printf("LEFT: %f, RIGHT: %f, r: %f\n\n", r[0], r[1], s);
 
-    if (((s > 0) ? s : (-s)) > MISSION_2_4_BED_BRIDGE_THRESHOLDS) {
+    if (((s > 0) ? s : (-s)) > CASE_2_1_CENTER) {
         ACTION_MOVE(LONG, ((s > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, OBLIQUE, 1);
-        RobotSleep(1);
+        // TODO: 붙이기 동작
+        return 0;
+    } else {
+        // TODO: 붙이기 동작
         ACTION_WALK(SLOW, OBLIQUE, 2);
+        printf("SUCCESS\n");
+        return 1;
     }
-
-    return ((s > 0) ? s : (-s)) <= MISSION_2_4_BED_BRIDGE_THRESHOLDS;
 }
 
 int mission_2_2_before_bridge_set_center(U16 *image) {
-    U32 row, i;
-    U16 black_len[2] = {0,}, col[2] = {
-            MISSION_2_2_BLACK_LINE_COL_POINT_1,
-            MISSION_2_2_BLACK_LINE_COL_POINT_2
-    };
+    U32 col[3] = {85, 95, 90}, row, i, j;
+    U16 checkHurdleLine[3] = {0,};
 
-    for (i = 0; i < 2; ++i) {
+    for (i = 0; i < 3; ++i) {
         for (row = HEIGHT - 1; row > 0; --row) {
-            if (GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) &&
-                GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK))
+            checkHurdleLine[i] = 0;
+
+            for (j = 0; j < 5; j++) {
+                checkHurdleLine[i] += GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK);
+            }
+
+            if (checkHurdleLine[i] > 3) {
+                checkHurdleLine[i] = (U16) (HEIGHT - row);
                 break;
-            black_len[i] += 1;
+            }
         }
     }
 
+    double s = 0;
+    printf("M4-5: BLACK LINE\n");
+    for (i = 0; i < 3; ++i) {
+        if (s < checkHurdleLine[i]) {
+            s = checkHurdleLine[i];
+        }
+        printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);
+    }
+    printf("\n");
 
-    printf("\t\t- M2-2: SET CENTER\n");
-    printf("\t\t\t+ black[0]: %d, black_len[1]: %d\n", black_len[0], black_len[1]);
+    printf("M4-5: AVG: %f\n", s);
 
-    black_len[0] = (U16) ((black_len[0] + black_len[1]) / 2);
-
-    printf("\t\t\t+ LENGTH: %d\n\n", black_len[0]);
-
-    int rResult = 0;
-    if (black_len[0] < MISSION_2_2_BLACK_LINE_RANGE - MISSION_2_2_BLACK_LINE_ERROR) {
+    if (s < CASE_0_DEFAULT_LEFT_RANGE - CASE_0_DEFAULT_RANGE_ERROR) {
         ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, LEFT, 1);
-    } else if (black_len[0] > MISSION_2_2_BLACK_LINE_RANGE + MISSION_2_2_BLACK_LINE_ERROR) {
+        // TODO: 붙이기 동작
+        return 0;
+    } else if (s > CASE_0_DEFAULT_LEFT_RANGE + CASE_0_DEFAULT_RANGE_ERROR) {
         ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, LEFT, 1);
+        // TODO: 붙이기 동작
+        return 0;
     } else {
-        rResult = 1;
+        // TODO: 붙이기 동작
+        printf("SUCCESS\n\n");
+        return 1;
     }
-
-    if (!rResult) {
-        RobotSleep(2);
-    }
-
-    return rResult;
 }
 
 int mission_2_3_escape_red_bridge(void) {
     ACTION_MOTION(MISSION_2_RED_DUMBLING, MIDDLE, OBLIQUE);
+    RobotSleep(3);
     return 1;
 }
 
 int mission_2_4_after_bridge_set_straight(U16 *image, int mode) {
     U32 row, i;
     U16 col[2] = {
-            MISSION_2_4_BLACK_LINE_COL_POINT_1,
-            MISSION_2_4_BLACK_LINE_COL_POINT_2
+            80,
+            100
     };
     int black_len[2] = {0,};
 
@@ -146,20 +154,24 @@ int mission_2_4_after_bridge_set_straight(U16 *image, int mode) {
 
     double s = (
             (double) (black_len[0] - black_len[1]) /
-            (MISSION_2_4_BLACK_LINE_COL_POINT_1 - MISSION_2_4_BLACK_LINE_COL_POINT_2)
+            (20)
     );
 
-    printf("Slope : %f\n", s);
+    printf("Slope : %f\n", s * 100);
 
+    int l = ((mode) ? CASE_0_DEFAULT_RIGHT_SLOPE : CASE_0_DEFAULT_LEFT_SLOPE);
+    printf("%d %d\n", l, (l - 2 <= s && s <= l + 2));
     s *= 100;
-    int rResult = 1;
-    if (((s > 0) ? s : -s) > MISSION_2_4_BLACK_LINE_SLOPE) {
-        rResult = 0;
-        ACTION_TURN(((s < 0) ? DIR_RIGHT : DIR_LEFT), MIDDLE, ((mode == 0) ? LEFT : RIGHT), (-s > 13) ? 3 : 1);
-        RobotSleep(1);
+    if (!(l - CASE_0_DEFAULT_SLOPE_ERROR < s && s < l + CASE_0_DEFAULT_SLOPE_ERROR)) {
+        ACTION_TURN(((l - CASE_0_DEFAULT_SLOPE_ERROR > s) ?
+                     ((mode) ? DIR_LEFT : DIR_RIGHT) : ((mode) ? DIR_RIGHT : DIR_LEFT)),
+                    MIDDLE,
+                    ((mode) ? RIGHT : LEFT), (-s > 13) ? 3 : 1);
+        return 0;
+    } else {
+        printf("SUCCESS\n\n");
+        return 1;
     }
-
-    return rResult;
 }
 
 int mission_2_5_after_bridge_set_center(U16 *image) {
