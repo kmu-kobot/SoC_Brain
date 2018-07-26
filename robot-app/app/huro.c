@@ -268,42 +268,109 @@ int huro(void) {
             case 6: // MISSION 6: KICK BALL
                 switch (step) {
                     case 0:
+                        flag = 0;
                         mission_6_1_watch_front();
                         setFPGAVideoData(fpga_videodata);
                         step += mission_6_1_detection_ball(fpga_videodata);
                         break;
                     case 1:
-                        mission_6_2_watch_below();
+
+                        if (flag == 0) {
+                            mission_6_2_watch_below();
+                            flag++;
+                        }
                         setFPGAVideoData(fpga_videodata);
                         step += mission_6_2_set_center_of_ball(fpga_videodata);
-                        break;
-                    case 2:
-                        mission_6_2_watch_below();
-                        setFPGAVideoData(fpga_videodata);
-                        if (mission_6_2_set_center_of_ball(fpga_videodata)) {
-                            mission_6_1_watch_front();
-                            setFPGAVideoData(fpga_videodata);
-                            step += mission_6_3_find_hole(fpga_videodata);
+
+                        if (step == 2) {
+                            flag = 0;
                         }
                         break;
-                    case 3:
-                        mission_6_2_watch_below();
+                    case 2:
+                        if (flag == 0) {
+                            mission_6_2_watch_right();
+                        }
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_6_4_set_front_of_ball(fpga_videodata);
+                        step += mission_6_2_set_straight_black_line(fpga_videodata);
+                        break;
+                    case 3:
+                        mission_6_1_watch_front();
+                        if (!mission_6_3_find_hole(fpga_videodata)) {
+                            mission_6_4_turn_to_detect_hole();
+                        } else {
+                            step++;
+                        }
                         break;
                     case 4:
-                        step += mission_6_5_kick_ball();
+                        flag = 0;
+                        mission_6_1_watch_front();
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_6_3_set_straight_hole(fpga_videodata);
                         break;
                     case 5:
-                        mission_6_6_watch_side();
+                        if (!flag) {
+                            flag = 1;
+                            mission_6_1_watch_front();
+                        }
+
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_6_6_set_straight_black_line(fpga_videodata);
+                        step += mission_6_3_locate_hole_on_center(fpga_videodata);
 
                         if (step == 6) {
+                            flag = 0;
+                            mission_6_2_watch_below();
+                            while (TRUE) {
+                                setFPGAVideoData(fpga_videodata);
+                                //step += mission_6_2_set_center_of_ball(fpga_videodata);
+                                step += mission_6_4_set_front_of_ball(fpga_videodata);
+
+                                printf("step:%d\n", step);
+                                if (step == 7) {
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (step == 7) {
+                            //mission_6_2_watch_below();
+                            setFPGAVideoData(fpga_videodata);
+                            step += mission_6_4_set_front_of_ball(fpga_videodata);
+
+                            mission_6_1_watch_front();
+                            setFPGAVideoData(fpga_videodata);
+                            step += mission_6_3_locate_hole_on_center(fpga_videodata);
+                        }
+
+                        step = (step == 9) ? 6 : 5;
+
+                        break;
+                    case 6:
+                        // if(flag == 0) {
+                        //     flag++;
+                        //     mission_6_2_watch_below();
+                        // }
+                        // setFPGAVideoData(fpga_videodata);
+                        // step += mission_6_4_set_front_of_ball(fpga_videodata);
+                        step++;
+                        break;
+                    case 7:
+                        flag = 0;
+                        step += mission_6_5_kick_ball();
+                        break;
+                    case 8:
+                        // TODO: 노란색 보는 방향으로 센터랑 직각 맞추기
+                        if (flag == 0) {
+                            flag++;
+                            mission_6_2_watch_right();
+                        }
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_6_2_set_straight_black_line(fpga_videodata);
+
+                        if (step == 9) {
                             step += mission_6_6_set_center_black_line(fpga_videodata);
                         }
 
-                        step = (step == 7) ? 6 : 5;
+                        step = (step == 10) ? 9 : 8;
                         break;
                     default:
                         mission = 10;
