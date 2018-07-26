@@ -452,15 +452,18 @@ int huro(void) {
                             mission_10_1_front_walk(5);
                         }
 
-                        ACTION_INIT(MIDDLE, DOWN);
-                        setFPGAVideoData(fpga_videodata);
+                        if (flag++ == 2) {
+                            flag = 0;
+                            ACTION_INIT(MIDDLE, DOWN);
+                            setFPGAVideoData(fpga_videodata);
 
-                        if (nextMission == 5) { // GREEN
-                            step += mission_5_1_check_black_line(fpga_videodata, 0);
-                            break;
-                        } else if (nextMission == 7) { // YELLOW
-                            step += mission_7_1_wait_front_of_yellow_hole_bridge(fpga_videodata, -1);
-                            break;
+                            if (nextMission == 5) { // GREEN
+                                step += mission_5_1_check_black_line(fpga_videodata, 0);
+                                break;
+                            } else if (nextMission == 7) { // YELLOW
+                                step += mission_7_1_wait_front_of_yellow_hole_bridge(fpga_videodata, -1);
+                                break;
+                            }
                         }
 
                         step = 0;
