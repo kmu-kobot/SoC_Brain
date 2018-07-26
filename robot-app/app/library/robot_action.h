@@ -277,7 +277,9 @@ typedef enum {
 
 typedef enum {
     DIR_LEFT = 0,
-    DIR_RIGHT
+    DIR_RIGHT,
+    FRONT = 0,
+    BACK
 } DIRECTION;
 
 typedef enum {

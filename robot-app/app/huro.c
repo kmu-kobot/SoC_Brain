@@ -220,7 +220,7 @@ int huro(void) {
                         if (nextMission) {
                             step += mission_5_6_set_only_one_bk_bar(fpga_videodata);
                             if (step == 6) {
-                                ACTION_BIT(BIT_FRONT, 1);
+                                ACTION_BIT(FRONT, 1);
                                 RobotSleep(1);
                             }
                         }
