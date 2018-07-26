@@ -435,10 +435,7 @@ int huro(void) {
                         // 선이 직선이고 일정 거리인지 확인
                         //오른쪽 보기
 
-                        if (flag == 0) {
-                            mission_4_6_watch_side();
-                            flag++;
-                        }
+                        mission_4_6_watch_side();
 
                         setFPGAVideoData(fpga_videodata);
 
@@ -453,6 +450,17 @@ int huro(void) {
                             mission_4_6_set_center(fpga_videodata, ((nextMission == 7) ? 70 : 60))) {
                             // 앞에꺼는 다음이 옐로우 뒤에는 다음이 초록다리
                             mission_10_1_front_walk(5);
+                        }
+
+                        ACTION_INIT(MIDDLE, DOWN);
+                        setFPGAVideoData(fpga_videodata);
+
+                        if (nextMission == 5) { // GREEN
+                            step += mission_5_1_check_black_line(fpga_videodata, 0);
+                            break;
+                        } else if (nextMission == 7) { // YELLOW
+                            step += mission_7_1_wait_front_of_yellow_hole_bridge(fpga_videodata, -1);
+                            break;
                         }
 
                         step = 0;
