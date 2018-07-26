@@ -13,6 +13,7 @@
 #define WALK_STEP_COEF 1
 #define WALK_SPEED_COEF 20
 #define WALK_VIEW_COEF 5
+#define TURN_LEN_COEF 18
 #define TURN_DIR_COEF 1
 #define TURN_POSE_COEF 9
 #define TURN_VIEW_COEF 2
@@ -26,12 +27,11 @@
 #define WALK_START_MOTION(speed, view) (WALK_FAST_START_DOWN + WALK_SPEED_COEF*speed + WALK_VIEW_COEF*view)
 #define WALK_END_MOTION(speed, view) (WALK_FAST_END_DOWN + WALK_SPEED_COEF*speed + WALK_VIEW_COEF*view)
 #define WALK_MOTION(step, speed, view) (WALK_FAST_L_DOWN + WALK_STEP_COEF*step + WALK_SPEED_COEF*speed + WALK_VIEW_COEF*view)
-#define TURN_MOTION(dir, pose, view) (TURN_LEFT_LOW_DOWN + TURN_DIR_COEF*dir + TURN_POSE_COEF*pose + TURN_VIEW_COEF*view)
+#define TURN_MOTION(len, dir, pose, view) (LONG_TURN_LEFT_LOW_DOWN + TURN_LEN_COEF*len + TURN_DIR_COEF*dir + TURN_POSE_COEF*pose + TURN_VIEW_COEF*view)
 #define MOVE_MOTION(len, dir, pose, view) (LONG_MOVE_LEFT_LOW_DOWN + MOVE_LEN_COEF*len + MOVE_DIR_COEF*dir + MOVE_POSE_COEF*pose + MOVE_VIEW_COEF*view)
 #define BIT_MOTION(dir) (BIT_FRONT + BIT_DIR_COEF*dir)
 
-typedef enum
-{
+typedef enum {
     INIT_LOW_DOWN = 1,
     INIT_LOW_OBLIQUE,
     INIT_LOW_LEFT,
@@ -80,43 +80,75 @@ typedef enum
     WALK_SLOW_L_RIGHT,
     WALK_SLOW_R_RIGHT,
 
-    TURN_LEFT_LOW_DOWN = 59,
-    TURN_RIGHT_LOW_DOWN,
+    WALK_CLOSE_START_DOWN = 58,
+    WALK_CLOSE_END_DOWN,
+    WALK_CLOSE_L_DOWN,
+    WALK_CLOSE_R_DOWN,
 
-    TURN_LEFT_LOW_OBLIQUE,
-    TURN_RIGHT_LOW_OBLIQUE,
+    WALK_CLOSE_START_OBLIQUE = 63,
+    WALK_CLOSE_END_OBLIQUE,
+    WALK_CLOSE_L_OBLIQUE,
+    WALK_CLOSE_R_OBLIQUE,
 
-    TURN_LEFT_LOW_LEFT,
-    TURN_RIGHT_LOW_LEFT,
+    WALK_CLOSE_START_LEFT = 68,
+    WALK_CLOSE_END_LEFT,
+    WALK_CLOSE_L_LEFT,
+    WALK_CLOSE_R_LEFT,
 
-    TURN_LEFT_LOW_RIGHT,
-    TURN_RIGHT_LOW_RIGHT,
+    WALK_CLOSE_START_RIGHT = 73,
+    WALK_CLOSE_END_RIGHT,
+    WALK_CLOSE_L_RIGHT,
+    WALK_CLOSE_R_RIGHT,
 
-    TURN_LEFT_MIDDLE_DOWN = 68,
-    TURN_RIGHT_MIDDLE_DOWN,
+    LONG_TURN_LEFT_LOW_DOWN = 79,
+    LONG_TURN_RIGHT_LOW_DOWN,
 
-    TURN_LEFT_MIDDLE_OBLIQUE,
-    TURN_RIGHT_MIDDLE_OBLIQUE,
+    LONG_TURN_LEFT_LOW_OBLIQUE,
+    LONG_TURN_RIGHT_LOW_OBLIQUE,
 
-    TURN_LEFT_MIDDLE_LEFT,
-    TURN_RIGHT_MIDDLE_LEFT,
+    LONG_TURN_LEFT_LOW_LEFT,
+    LONG_TURN_RIGHT_LOW_LEFT,
 
-    TURN_LEFT_MIDDLE_RIGHT,
-    TURN_RIGHT_MIDDLE_RIGHT,
+    LONG_TURN_LEFT_LOW_RIGHT,
+    LONG_TURN_RIGHT_LOW_RIGHT,
 
-    TURN_LEFT_HIGH_DOWN = 77,
-    TURN_RIGHT_HIGH_DOWN,
+    LONG_TURN_LEFT_MIDDLE_DOWN = 88,
+    LONG_TURN_RIGHT_MIDDLE_DOWN,
 
-    TURN_LEFT_HIGH_OBLIQUE,
-    TURN_RIGHT_HIGH_OBLIQUE,
+    LONG_TURN_LEFT_MIDDLE_OBLIQUE,
+    LONG_TURN_RIGHT_MIDDLE_OBLIQUE,
 
-    TURN_LEFT_HIGH_LEFT,
-    TURN_RIGHT_HIGH_LEFT,
+    LONG_TURN_LEFT_MIDDLE_LEFT,
+    LONG_TURN_RIGHT_MIDDLE_LEFT,
 
-    TURN_LEFT_HIGH_RIGHT,
-    TURN_RIGHT_HIGH_RIGHT,
+    LONG_TURN_LEFT_MIDDLE_RIGHT,
+    LONG_TURN_RIGHT_MIDDLE_RIGHT,
 
-    LONG_MOVE_LEFT_LOW_DOWN = 87,
+    SHORT_TURN_LEFT_LOW_DOWN = 97,
+    SHORT_TURN_RIGHT_LOW_DOWN,
+
+    SHORT_TURN_LEFT_LOW_OBLIQUE,
+    SHORT_TURN_RIGHT_LOW_OBLIQUE,
+
+    SHORT_TURN_LEFT_LOW_LEFT,
+    SHORT_TURN_RIGHT_LOW_LEFT,
+
+    SHORT_TURN_LEFT_LOW_RIGHT,
+    SHORT_TURN_RIGHT_LOW_RIGHT,
+
+    SHORT_TURN_LEFT_MIDDLE_DOWN = 106,
+    SHORT_TURN_RIGHT_MIDDLE_DOWN,
+
+    SHORT_TURN_LEFT_MIDDLE_OBLIQUE,
+    SHORT_TURN_RIGHT_MIDDLE_OBLIQUE,
+
+    SHORT_TURN_LEFT_MIDDLE_LEFT,
+    SHORT_TURN_RIGHT_MIDDLE_LEFT,
+
+    SHORT_TURN_LEFT_MIDDLE_RIGHT,
+    SHORT_TURN_RIGHT_MIDDLE_RIGHT,
+
+    LONG_MOVE_LEFT_LOW_DOWN = 116,
     LONG_MOVE_RIGHT_LOW_DOWN,
     LONG_MOVE_LEFT_LOW_OBLIQUE,
     LONG_MOVE_RIGHT_LOW_OBLIQUE,
@@ -125,7 +157,7 @@ typedef enum
     LONG_MOVE_LEFT_LOW_RIGHT,
     LONG_MOVE_RIGHT_LOW_RIGHT,
 
-    LONG_MOVE_LEFT_MIDDLE_DOWN = 96,
+    LONG_MOVE_LEFT_MIDDLE_DOWN = 125,
     LONG_MOVE_RIGHT_MIDDLE_DOWN,
     LONG_MOVE_LEFT_MIDDLE_OBLIQUE,
     LONG_MOVE_RIGHT_MIDDLE_OBLIQUE,
@@ -134,7 +166,7 @@ typedef enum
     LONG_MOVE_LEFT_MIDDLE_RIGHT,
     LONG_MOVE_RIGHT_MIDDLE_RIGHT,
 
-    LONG_MOVE_LEFT_HIGH_DOWN = 105,
+    LONG_MOVE_LEFT_HIGH_DOWN = 134,
     LONG_MOVE_RIGHT_HIGH_DOWN,
     LONG_MOVE_LEFT_HIGH_OBLIQUE,
     LONG_MOVE_RIGHT_HIGH_OBLIQUE,
@@ -143,7 +175,7 @@ typedef enum
     LONG_MOVE_LEFT_HIGH_RIGHT,
     LONG_MOVE_RIGHT_HIGH_RIGHT,
 
-    SHORT_MOVE_LEFT_LOW_DOWN = 114,
+    SHORT_MOVE_LEFT_LOW_DOWN = 143,
     SHORT_MOVE_RIGHT_LOW_DOWN,
     SHORT_MOVE_LEFT_LOW_OBLIQUE,
     SHORT_MOVE_RIGHT_LOW_OBLIQUE,
@@ -152,7 +184,7 @@ typedef enum
     SHORT_MOVE_LEFT_LOW_RIGHT,
     SHORT_MOVE_RIGHT_LOW_RIGHT,
 
-    SHORT_MOVE_LEFT_MIDDLE_DOWN = 123,
+    SHORT_MOVE_LEFT_MIDDLE_DOWN = 152,
     SHORT_MOVE_RIGHT_MIDDLE_DOWN,
     SHORT_MOVE_LEFT_MIDDLE_OBLIQUE,
     SHORT_MOVE_RIGHT_MIDDLE_OBLIQUE,
@@ -161,7 +193,7 @@ typedef enum
     SHORT_MOVE_LEFT_MIDDLE_RIGHT,
     SHORT_MOVE_RIGHT_MIDDLE_RIGHT,
 
-    SHORT_MOVE_LEFT_HIGH_DOWN = 132,
+    SHORT_MOVE_LEFT_HIGH_DOWN = 161,
     SHORT_MOVE_RIGHT_HIGH_DOWN,
     SHORT_MOVE_LEFT_HIGH_OBLIQUE,
     SHORT_MOVE_RIGHT_HIGH_OBLIQUE,
@@ -170,34 +202,33 @@ typedef enum
     SHORT_MOVE_LEFT_HIGH_RIGHT,
     SHORT_MOVE_RIGHT_HIGH_RIGHT,
 
-    BIT_FRONT = 142,
+    BIT_FRONT = 171,
 
-    BIT_BACK = 144,
+    BIT_BACK = 173,
 
-    MISSION_2_RED_DUMBLING = 147,
+    MISSION_2_RED_DUMBLING = 176,
 
-    MISSION_3_MINE_WALK_START = 152,
+    MISSION_3_MINE_WALK_START = 181,
     MISSION_3_MINE_WALK_END,
     MISSION_3_MINE_WALK_L,
     MISSION_3_MINE_WALK_R,
 
-    MISSION_4_HURDLING = 158,
+    MISSION_4_HURDLING = 187,
 
-    MISSION_5_STAIR_UP = 162,
+    MISSION_5_STAIR_UP = 191,
 
-    MISSION_5_STAIR_DOWN = 166,
+    MISSION_5_STAIR_DOWN = 195,
 
-    MISSION_6_RIGHT_KICK = 171,
+    MISSION_6_RIGHT_KICK = 200,
 
-    MISSION_7_YELLOW_DUMBLING = 174,
+    MISSION_7_YELLOW_DUMBLING = 203,
 
-    TAKE_REST = 179,
+    TAKE_REST = 208,
 
     NIL = 0xff
 } MOTION;
 
-typedef enum
-{
+typedef enum {
     LOW_DOWN = INIT_LOW_DOWN,
     LOW_OBLIQUE = INIT_LOW_OBLIQUE,
     LOW_LEFT = INIT_LOW_LEFT,
@@ -219,15 +250,13 @@ typedef enum
     INIT_NIL = NIL
 } MOTION_INIT;
 
-typedef enum
-{
+typedef enum {
     LOW = 0,
     MIDDLE,
     HIGH
 } POSE;
 
-typedef enum
-{
+typedef enum {
     DOWN = 0,
     OBLIQUE,
     LEFT,
@@ -235,40 +264,35 @@ typedef enum
     UP
 } VIEW;
 
-typedef enum
-{
+typedef enum {
     FAST = 0,
-    SLOW
+    SLOW,
+    CLOSE
 } SPEED;
 
-typedef enum
-{
+typedef enum {
     STEP_LEFT = 0,
     STEP_RIGHT
 } STEP;
 
-typedef enum
-{
+typedef enum {
     DIR_LEFT = 0,
     DIR_RIGHT
 } DIRECTION;
 
-typedef enum
-{
+typedef enum {
     LONG = 0,
     SHORT,
 } LENGTH;
 
-typedef enum
-{
+typedef enum {
     CHECK = 0,
     SET
 } FOO_MOD;
 
 void foo(MOTION_INIT motion, FOO_MOD mod);
 
-static inline void action(MOTION_INIT init, MOTION motion)
-{
+static inline void action(MOTION_INIT init, MOTION motion) {
     foo(init, CHECK);
     RobotAction(motion);
 }
@@ -277,8 +301,7 @@ static inline void action(MOTION_INIT init, MOTION motion)
 //  MOTION INIT             //
 //////////////////////////////
 
-static inline void ACTION_INIT(POSE pose, VIEW view)
-{
+static inline void ACTION_INIT(POSE pose, VIEW view) {
     RobotAction(INIT_MOTION(pose, view));
     foo(INIT_MOTION(pose, view), SET);
 }
@@ -288,12 +311,10 @@ static inline void ACTION_INIT(POSE pose, VIEW view)
 //  MOTION WALK             //
 //////////////////////////////
 
-static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat)
-{
+static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat) {
     action(INIT_MOTION(MIDDLE, view), WALK_START_MOTION(speed, view));
 
-    for(; repeat > 1; --repeat)
-    {
+    for (; repeat > 1; --repeat) {
         RobotAction(WALK_MOTION(STEP_LEFT, speed, view));
         RobotAction(WALK_MOTION(STEP_RIGHT, speed, view));
     }
@@ -306,13 +327,11 @@ static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat)
 //  MOTION TURN             //
 //////////////////////////////
 
-static inline void ACTION_TURN(DIRECTION dir, POSE pose, VIEW view, int repeat)
-{
-    action(INIT_MOTION(pose, view), TURN_MOTION(dir, pose, view));
+static inline void ACTION_TURN(LENGTH len, DIRECTION dir, POSE pose, VIEW view, int repeat) {
+    action(INIT_MOTION(pose, view), TURN_MOTION(len, dir, pose, view));
 
-    for(; repeat > 1; --repeat)
-    {
-        RobotAction(TURN_MOTION(dir, pose, view));
+    for (; repeat > 1; --repeat) {
+        RobotAction(TURN_MOTION(len, dir, pose, view));
     }
 }
 
@@ -334,7 +353,7 @@ static inline void ACTION_MOVE(LENGTH len, DIRECTION dir, POSE pose, VIEW view, 
 //////////////////////////////
 
 static inline void ACTION_BIT(DIRECTION dir, int repeat) {
-    action(INIT_MOTION(MIDDLE, DOWN), (dir));
+    action(INIT_MOTION(MIDDLE, DOWN), BIT_MOTION(dir));
 
     for (; repeat > 1; --repeat) {
         RobotAction(BIT_MOTION(dir));
@@ -345,15 +364,15 @@ static inline void ACTION_BIT(DIRECTION dir, int repeat) {
 //  MOTION NUMBER           //
 //////////////////////////////
 
-static inline void ACTION_MOTION(MOTION mission, POSE pose, VIEW view) {
-    action(INIT_MOTION(pose, view), mission);
+static inline void ACTION_MOTION(MOTION motion, POSE pose, VIEW view) {
+    action(INIT_MOTION(pose, view), motion);
 }
 
-static inline void ACTION_MOTION_REPEAT(MOTION mission, POSE pose, VIEW view, int repeat) {
-    action(INIT_MOTION(pose, view), mission);
+static inline void ACTION_MOTION_REPEAT(MOTION motion, POSE pose, VIEW view, int repeat) {
+    action(INIT_MOTION(pose, view), motion);
 
     for (; repeat > 1; --repeat) {
-        RobotAction(mission);
+        RobotAction(motion);
     }
 }
 

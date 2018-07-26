@@ -25,7 +25,7 @@
 
 #define MISSION_5_6_BLACK_COL_1 30
 #define MISSION_5_6_BLACK_COL_2 150
-#define MISSION_5_6_BLACK_RANGE 10
+#define MISSION_5_6_BLACK_RANGE 5
 #define MISSION_5_6_BLACK_LEN_LENGTH 76
 
 void mission_5_1_watch_below(int repeat);

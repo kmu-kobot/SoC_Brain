@@ -14,7 +14,8 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
     for (row = 0; row < HEIGHT; ++row) {
         for (col = 0; col < WIDTH; ++col) {
             cntRed += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
-                       GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE));
+                       GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE) ||
+                       GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), CH2));
         }
     }
 
@@ -23,9 +24,9 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
     printf(((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION) ? "SUCCESS\n" : "FAIL\n");
 
     if (((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION)) {
-        // TODO: 붙이는 동작
         ACTION_WALK(SLOW, OBLIQUE, 3);
-        RobotSleep(3);
+        RobotSleep(1);
+        ACTION_WALK(CLOSE, OBLIQUE, 2);
         return 1;
     } else {
         return 0;
@@ -69,17 +70,16 @@ int mission_2_2_before_bridge_set_center_version2(U16 *image) {
 
     if (((s > 0) ? s : (-s)) > CASE_2_1_CENTER) {
         ACTION_MOVE(LONG, ((s > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, OBLIQUE, 1);
-        // TODO: 붙이기 동작
+        ACTION_WALK(CLOSE, OBLIQUE, 1);
         return 0;
     } else {
-        // TODO: 붙이기 동작
-        ACTION_WALK(SLOW, OBLIQUE, 2);
+        ACTION_WALK(CLOSE, OBLIQUE, 2);
         printf("SUCCESS\n");
         return 1;
     }
 }
 
-int mission_2_2_before_bridge_set_center(U16 *image) {
+int mission_2_2_before_bridge_set_center(U16 *image, int mode) {
     U32 col[3] = {85, 95, 90}, row, i, j;
     U16 checkHurdleLine[3] = {0,};
 
@@ -112,14 +112,20 @@ int mission_2_2_before_bridge_set_center(U16 *image) {
 
     if (s < CASE_0_DEFAULT_LEFT_RANGE - CASE_0_DEFAULT_RANGE_ERROR) {
         ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, LEFT, 1);
-        // TODO: 붙이기 동작
+        if (mode == 1) {
+            ACTION_WALK(CLOSE, LEFT, 1);
+        }
         return 0;
     } else if (s > CASE_0_DEFAULT_LEFT_RANGE + CASE_0_DEFAULT_RANGE_ERROR) {
         ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, LEFT, 1);
-        // TODO: 붙이기 동작
+        if (mode == 1) {
+            ACTION_WALK(CLOSE, LEFT, 1);
+        }
         return 0;
     } else {
-        // TODO: 붙이기 동작
+        if (mode == 1) {
+            ACTION_WALK(CLOSE, LEFT, 2);
+        }
         printf("SUCCESS\n\n");
         return 1;
     }
@@ -161,12 +167,17 @@ int mission_2_4_after_bridge_set_straight(U16 *image, int mode) {
 
     int l = ((mode) ? CASE_0_DEFAULT_RIGHT_SLOPE : CASE_0_DEFAULT_LEFT_SLOPE);
     printf("%d %d\n", l, (l - 2 <= s && s <= l + 2));
+
     s *= 100;
-    if (!(l - CASE_0_DEFAULT_SLOPE_ERROR < s && s < l + CASE_0_DEFAULT_SLOPE_ERROR)) {
-        ACTION_TURN(((l - CASE_0_DEFAULT_SLOPE_ERROR > s) ?
-                     ((mode) ? DIR_LEFT : DIR_RIGHT) : ((mode) ? DIR_RIGHT : DIR_LEFT)),
-                    MIDDLE,
-                    ((mode) ? RIGHT : LEFT), (-s > 13) ? 3 : 1);
+    if (!(l - CASE_0_DEFAULT_SLOPE_ERROR <= s && s <= l + CASE_0_DEFAULT_SLOPE_ERROR)) {
+        ACTION_TURN(
+                LONG,
+                (l - CASE_0_DEFAULT_SLOPE_ERROR > s) ?
+                DIR_LEFT :
+                DIR_RIGHT,
+                MIDDLE, (mode) ? RIGHT : LEFT, 1
+        );
+        RobotSleep(2);
         return 0;
     } else {
         printf("SUCCESS\n\n");
@@ -175,5 +186,5 @@ int mission_2_4_after_bridge_set_straight(U16 *image, int mode) {
 }
 
 int mission_2_5_after_bridge_set_center(U16 *image) {
-    return mission_2_2_before_bridge_set_center(image);
+    return mission_2_2_before_bridge_set_center(image, 0);
 }
