@@ -17,14 +17,16 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
         }
     }
 
-    int rResult = (cntBlack * 100 / (60 * WIDTH)) > MISSION_5_1_THRESHOLDS;
+    int rResult = (cntBlack * 100 / (60 * WIDTH)) > CASE_5_0_DETECTION;
 
     printf("M5-1: BLACK LINE\n");
     printf("BLACK: %d, BLACK / (WIDTH * HEIGHT) : %f\n",
            cntBlack, (double) (cntBlack * 100 / (HEIGHT * WIDTH)));
+    printf((rResult) ? "SUCCESS\n" : "FAIL\n");
 
     if (rResult && repeat) {
-        ACTION_WALK(FAST, DOWN, repeat);
+        // TODO: 붙이기 동작
+        ACTION_WALK(SLOW, DOWN, repeat);
         RobotSleep(2);
     }
 
@@ -37,11 +39,10 @@ void mission_5_2_watch_side(void) {
 }
 
 int mission_5_3_climb_up_stairs(void) {
-    ACTION_WALK(SLOW, OBLIQUE, 2);
-    RobotSleep(2);
+    RobotSleep(1);
     ACTION_MOTION(MISSION_5_STAIR_UP, MIDDLE, OBLIQUE);
     RobotSleep(2);
-    ACTION_WALK(FAST, DOWN, 1);
+    ACTION_WALK(SLOW, DOWN, 1);
     RobotSleep(2);
     return 1;
 }
@@ -56,6 +57,7 @@ int mission_5_5_check_finish_black_line(U16 *image) {
 }
 
 int mission_5_5_check_green_bridge_straight(U16 *image) {
+    // TODO: 오른쪽에 많이 붙었을때 왼쪽으로 걷는거 개발
     U32 col, i, cnt, range = 0, point[2][2] = {{0, MISSION_5_5_GREEN_BRIDGE_POINT_Y_1},
                                                {0, MISSION_5_5_GREEN_BRIDGE_POINT_Y_2}};
 

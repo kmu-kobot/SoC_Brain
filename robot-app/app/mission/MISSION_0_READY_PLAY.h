@@ -5,12 +5,13 @@
 #ifndef SOC_APP_MISSION_0_READY_PLAY_H
 
 #include "./../library/amazon2_sdk.h"
+#include "stdio.h"
 
 #define SOC_APP_MISSION_0_READY_PLAY_H
 
-#define MISSION_0_UPPER 0
-#define MISSION_0_LOWER 119
-#define MISSION_0_THRESHOLDS 10
+#define CASE_1_UPPER 0
+#define CASE_1_LOWER 110
+#define CASE_1_RATIO 10
 
 int mission_0_1_wait_play(U16 *image);
 
