@@ -360,7 +360,7 @@ wire [15:0] SHV565 = {S[7:3], H[7:2], V[7:3]};
 //				 horizon   BK			 S 37  V 51
 // mission 7 yelbridge Y_H 34, 43 S 107 V 151
 //											 S 70  V 170
-reg [ 7:0] H_THRES, S_THRES_H, S_THRES_L, S_THRES_SP, V_THRES, V_THRES_SP, 
+reg [ 7:0] H_THRES, S_THRES_H, S_THRES_L, S_THRES_SP, V_THRES, 
 				R_H, G_H, B_H, Y_H, O_H,
 				R_MIN, R_MAX, G_MIN, G_MAX, B_MIN, B_MAX, Y_MIN, Y_MAX, O_MIN, O_MAX;
 reg R_B, G_B, B_B, Y_B, O_B, BK_B, C_H, C_L, SP_B;
@@ -372,7 +372,6 @@ begin
 	S_THRES_L = 8'd36;
 	S_THRES_SP = 8'd24;
 	V_THRES = 8'd96;
-	V_THRES_SP = 8'd212;
 
 	R_H	= 8'd220;
 	G_H	= 8'd85;
@@ -452,7 +451,7 @@ always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	SP_B <= 1'b0;
 	else
 	begin
-		SP_B <= ~BK_B & (S > S_THRES_SP) & (V < V_THRES_SP) & (((Y_MIN <= H) & (H <= Y_MAX)) | ((R_MIN <= H) & (H <= R_MAX)));
+		SP_B <= ~BK_B & (S > S_THRES_SP) & (((Y_MIN <= H) & (H <= Y_MAX)) | ((R_MIN <= H) & (H <= R_MAX)));
 	end
 	
 always @ (negedge resetx or posedge clk_llc)
