@@ -7,27 +7,22 @@
 
 void mission_3_4_watch_front(void) {
     ACTION_INIT(MIDDLE, OBLIQUE);
-    RobotSleep(2);
 }
 
 int mission_3_4_is_not_front_of_bomb(U16 *image) {
 
-    U32 row, col, check, i, col_start_end[2] = {MISSION_3_DEFAULT_WIDTH, WIDTH - MISSION_3_DEFAULT_WIDTH};
-
+    U32 row, col, check;
     check = 0;
-    for (i = 0; i < 3; ++i) {
-        for (col = col_start_end[0]; col < col_start_end[1]; ++col) {
-            for (row = MISSION_3_4_HEIGHT_OFFSET; row < HEIGHT; ++row) {
-                check += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
-            }
+
+    for (col = 0; col < WIDTH; col++) {
+        for (row = 60; row < HEIGHT; row++) {
+            check += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLUE);
         }
     }
 
-    if (check < MISSION_3_4_BOMB) {
-        ACTION_WALK(SLOW, DOWN, 3);
-    }
+    printf("%d %f\n", check, (double) check * 100 / (WIDTH * 60));
 
-    return check < MISSION_3_4_BOMB;
+    return (double) check * 100 / (WIDTH * 60) >= 10;
 }
 
 void mission_3_default_watch_below(void) {
@@ -70,11 +65,11 @@ int mission_3_default_avoid_bomb(U16 *image) {
         } else if (s == 1 || s == 11) {
             ACTION_MOVE(((check[2] == 2) ? LONG : SHORT), DIR_LEFT, MIDDLE, DOWN, 2);
         } else if (s == 101 || s == 0) {
-            // ACTION_WALK(FAST, DOWN, 3);
-            // rReturn = 1;
+            ACTION_WALK(SLOW, DOWN, 3);
+            rReturn = 1;
         }
     } else {
-        rReturn = 0;
+        rReturn = 3;
 
         check[1] = 0;
         check[2] = 0;
@@ -123,22 +118,22 @@ int mission_3_default_avoid_bomb(U16 *image) {
         px = check[2];
         printf("\t\t\t\t (%d, %d)\n", px, py);
 
+        if (WIDTH / 2 - MISSION_3_DEFAULT_AVOID_BOMB_RANGE > px) {
+            // right
+            ACTION_MOVE(SHORT, DIR_RIGHT, MIDDLE, DOWN, 1);
+            return 3;
+        } else if (px > WIDTH / 2 + MISSION_3_DEFAULT_AVOID_BOMB_RANGE) {
+            // left
+            ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, 1);
+            return 3;
+        }
+
         if (py < MISSION_3_POINT_LENGTH) {
             ACTION_WALK(CLOSE, DOWN,
                         (py < MISSION_3_POINT_LENGTH - 12) ? 4 :
                         (py < MISSION_3_POINT_LENGTH - 5) ? 2 : 1);
             RobotSleep(1);
-            return 0;
-        }
-
-        if (WIDTH / 2 - MISSION_3_DEFAULT_AVOID_BOMB_RANGE > px) {
-            // right
-            ACTION_MOVE(SHORT, DIR_RIGHT, MIDDLE, DOWN, 2);
-            return 0;
-        } else if (px > WIDTH / 2 + MISSION_3_DEFAULT_AVOID_BOMB_RANGE) {
-            // left
-            ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, 2);
-            return 0;
+            return 3;
         } else {
             ACTION_INIT(MIDDLE, UP);
             return 1;

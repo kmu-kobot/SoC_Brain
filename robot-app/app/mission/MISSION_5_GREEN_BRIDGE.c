@@ -34,14 +34,15 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
             }
         }
 
-        if ((double) cntBlack / (ROBOT_KNEE - 20) * WIDTH > 5) {
-            ACTION_WALK(CLOSE, DOWN, 3);
-        } else {
-            ACTION_WALK(FAST, DOWN, repeat);
+        ACTION_WALK(FAST, DOWN, 2);
 
-        }
+        // if ((double) cntBlack * 100 / (ROBOT_KNEE - 20) * WIDTH > 5) {
+        //     ACTION_WALK(CLOSE, DOWN, 3);
+        // } else {
+        //     ACTION_WALK(FAST, DOWN, repeat);
+        // }
 
-        RobotSleep(1);
+        // RobotSleep(1);
     }
 
     return rResult;
@@ -55,11 +56,11 @@ void mission_5_2_watch_side(void) {
 int mission_5_3_climb_up_stairs(void) {
     RobotSleep(1);
     ACTION_MOTION(MISSION_5_STAIR_UP, MIDDLE, OBLIQUE);
-    RobotSleep(2);
+    RobotSleep(1);
     ACTION_INIT(MIDDLE, DOWN);
     RobotSleep(1);
-    ACTION_WALK(CLOSE, DOWN, 2);
-    RobotSleep(2);
+    ACTION_WALK(CLOSE, DOWN, 4);
+    RobotSleep(1);
     return 1;
 }
 
@@ -85,17 +86,17 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
         }
     }
 
-    double s = (double) cnt / (30 * HEIGHT) * 100;
+    double s = (double) cnt * 100 / (30 * HEIGHT);
 
     printf("%d %f\n", cnt, s);
 
-    // if (s > 13) {
-    //     printf("GOGO");
-    //     ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, 2);
-    //     ACTION_TURN(SHORT, DIR_RIGHT, MIDDLE, DOWN, 1);
-    //     return 0;
-    // }
-    //
+    if (s > 13) {
+        printf("GOGO");
+        ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, 2);
+        ACTION_TURN(SHORT, DIR_RIGHT, MIDDLE, DOWN, 1);
+        return 0;
+    }
+
 
     // // 왼쪽에 많이 붙었을때 왼쪽으로 걷는거 개발
     // cnt = 0;
@@ -217,12 +218,12 @@ int mission_5_5_short_walk_on_green_bridge(int repeat) {
 int mission_5_5_get_repeat(U16 *image) {
     U32 col, row, cnt = 0;
     for (row = 0; row < ROBOT_KNEE; ++row) {
-        for (col = 0; col < WIDTH; ++col) {
+        for (col = 40; col < 140; ++col) {
             cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), GREEN);
         }
     }
 
-    return ((double) (cnt / ROBOT_KNEE * WIDTH) >= 5) ? 4 : 1;
+    return ((double) cnt * 100 / ROBOT_KNEE * 100 >= 5) ? 4 : 2;
 }
 
 
@@ -287,8 +288,8 @@ int mission_5_6_set_straight(U16 *image) {
 int mission_5_7_climb_down_stairs(void) {
     RobotSleep(1);
     ACTION_MOTION(MISSION_5_STAIR_DOWN, MIDDLE, OBLIQUE);
-    RobotSleep(2);
-    ACTION_WALK(SLOW, OBLIQUE, 5);
-    RobotSleep(2);
+    RobotSleep(1);
+    ACTION_WALK(FAST, OBLIQUE, 5);
+    ACTION_TURN(LONG, DIR_RIGHT, MIDDLE, OBLIQUE, 2);
     return 1;
 }

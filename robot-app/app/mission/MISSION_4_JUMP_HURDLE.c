@@ -6,7 +6,6 @@
 
 void mission_4_1_watch_front(int repeat) {
     ACTION_WALK(SLOW, OBLIQUE, repeat);
-    RobotSleep(1);
 }
 
 int mission_4_2_ready_hurdle(U16 *image) {
@@ -41,9 +40,8 @@ int mission_4_2_ready_hurdle(U16 *image) {
 }
 
 int mission_4_4_jump_hurdle(void) {
-    RobotSleep(1);
+    ACTION_WALK(CLOSE, OBLIQUE, 1);
     ACTION_MOTION(MISSION_4_HURDLING, MIDDLE, OBLIQUE);
-    RobotSleep(1);
     ACTION_WALK(FAST, OBLIQUE, 8);
     ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 10);
     return 1;

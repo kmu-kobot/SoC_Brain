@@ -22,6 +22,7 @@
 #define MOVE_POSE_COEF 9
 #define MOVE_VIEW_COEF 2
 #define BIT_DIR_COEF 2
+#define MINE_WALK_REPEAT 7
 
 #define INIT_MOTION(pose, view) (INIT_LOW_DOWN + INIT_POSE_COEF*pose + INIT_VIEW_COEF*view)
 #define WALK_START_MOTION(speed, view) (WALK_FAST_START_DOWN + WALK_SPEED_COEF*speed + WALK_VIEW_COEF*view)
@@ -288,6 +289,16 @@ typedef enum {
 } LENGTH;
 
 typedef enum {
+    RED_DUMBLING = MISSION_2_RED_DUMBLING,
+    MINE_WALK = MISSION_3_MINE_WALK_START,
+    HURDLING = MISSION_4_HURDLING,
+    STAIR_UP = MISSION_5_STAIR_UP,
+    STAIR_DOWN = MISSION_5_STAIR_DOWN,
+    RIGHT_KICK = MISSION_6_RIGHT_KICK,
+    YELLOW_DUMBLING = MISSION_7_YELLOW_DUMBLING
+} MISSION;
+
+typedef enum {
     CHECK = 0,
     SET
 } FOO_MOD;
@@ -304,7 +315,8 @@ static inline void action(MOTION_INIT init, MOTION motion) {
 //////////////////////////////
 
 static inline void ACTION_INIT(POSE pose, VIEW view) {
-    foo(INIT_MOTION(pose, view), CHECK);
+    RobotAction(INIT_MOTION(pose, view));
+    foo(INIT_MOTION(pose, view), SET);
 }
 
 
@@ -375,6 +387,26 @@ static inline void ACTION_MOTION_REPEAT(MOTION motion, POSE pose, VIEW view, int
     for (; repeat > 1; --repeat) {
         RobotAction(motion);
     }
+}
+
+//////////////////////////////
+//  MOTION MISSION          //
+//////////////////////////////
+
+static inline void ACTION_MINE_WALK() {
+    int i;
+    action(INIT_MOTION(MIDDLE, DOWN), MISSION_3_MINE_WALK_START);
+
+    for (i = 0; i < MINE_WALK_REPEAT; ++i) {
+        RobotAction(MISSION_3_MINE_WALK_L);
+        RobotAction(MISSION_3_MINE_WALK_R);
+    }
+
+    RobotAction(MISSION_3_MINE_WALK_END);
+}
+
+static inline void ACTION_MISSION(MISSION mission, POSE pose, VIEW view) {
+    mission == MINE_WALK ? ACTION_MINE_WALK() : ACTION_MOTION(mission, pose, view);
 }
 
 #endif //SOC_APP_ROBOT_ACTION_H
