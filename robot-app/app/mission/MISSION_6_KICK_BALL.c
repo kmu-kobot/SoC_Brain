@@ -349,11 +349,11 @@ int mission_6_3_locate_hole_on_center(U16 *image) {
     mission_6_3_find_hole(image);
 
     int rResult = 0;
-    if (hole_points[0] <= 91) {
+    if (hole_points[0] <= 105) {
         //ACTION_MOVE(SHORT, DIR_RIGHT, MIDDLE, OBLIQUE, 1);
         ACTION_TURN(SHORT, DIR_LEFT, MIDDLE, OBLIQUE, 2);
         RobotSleep(2);
-    } else if (hole_points[0] >= 102) {
+    } else if (hole_points[0] >= 115) {
         //ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, OBLIQUE, 1);
         ACTION_TURN(SHORT, DIR_RIGHT, MIDDLE, OBLIQUE, 1);
         RobotSleep(2);
@@ -509,8 +509,8 @@ int mission_6_4_set_front_of_ball(U16 *image) {
         return 0;
     }
 
-    ball_points[0] = (int) ((int) ball_left + (int) ball_right) / 2;
-    ball_points[1] = (int) ((int) ball_top + (int) ball_bottom) / 2;
+    ball_points[0] = (U32) ((int) ball_left + (int) ball_right) / 2;
+    ball_points[1] = (U32) ((int) ball_top + (int) ball_bottom) / 2;
     printf("ball_points[0] : %d\n\n", ball_points[0]);
     printf("ball_points[1] : %d\n\n", ball_points[1]);
 
