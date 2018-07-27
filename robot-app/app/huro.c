@@ -403,7 +403,7 @@ int huro(void) {
                         }
 
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_7_1_wait_front_of_yellow_hole_bridge(fpga_videodata, 3);
+                        step += mission_7_1_wait_front_of_yellow_hole_bridge(fpga_videodata, 2);
                         flag = (step == 1) ? 0 : 1;
                         break;
                     case 1:
@@ -412,39 +412,16 @@ int huro(void) {
                             mission_7_2_watch_below();
                         }
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_7_2_before_bridge_set_center(fpga_videodata);
+                        step += mission_2_2_before_bridge_set_center(fpga_videodata, 3);
                         break;
                     case 2:
-                        flag = 0;
-                        step += mission_7_3_climb_yellow_hole_bridge();
-                        break;
-                    case 3:
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_7_5_walk_until_line_front_of_feet(fpga_videodata);
-
-                        flag = (step == 4) ? 0 : 1;
-                        break;
-                    case 4:
-                        setFPGAVideoData(fpga_videodata);
-                        // TODO: 테스트해야함
-                        step += mission_7_5_set_straight(fpga_videodata);
-                        flag = 0;
-                        break;
-                    case 5:
-                        if (flag == 0) {
-                            flag++;
-                            mission_7_7_watch_side();
-                        }
-                        setFPGAVideoData(fpga_videodata);
-                        // TODO: 테스트해야함
-                        step += mission_7_4_set_center(fpga_videodata);
+                        step = 6;
                         break;
                     case 6:
                         step += mission_7_6_jump_hole();
                         flag = 0;
                         break;
                     case 7:
-
                         if (flag == 0) {
                             flag++;
                             mission_2_2_watch_side();
