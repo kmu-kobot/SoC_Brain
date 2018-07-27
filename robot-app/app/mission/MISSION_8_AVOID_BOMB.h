@@ -9,6 +9,7 @@
 #include "stdio.h"
 
 #define SOC_APP_MISSION_8_AVOID_BOMB_H
+
 #define MISSION_8_4_LOWER 40
 #define MISSION_8_4_UPPER 80
 #define MISSION_8_4_THRESHOLDS 30

@@ -7,7 +7,7 @@
 
 void mission_3_4_watch_front(void) {
     ACTION_INIT(MIDDLE, OBLIQUE);
-    RobotSleep(2);
+    RobotSleep(1);
 }
 
 int mission_3_4_is_not_front_of_bomb(U16 *image) {
@@ -70,8 +70,8 @@ int mission_3_default_avoid_bomb(U16 *image) {
         } else if (s == 1 || s == 11) {
             ACTION_MOVE(((check[2] == 2) ? LONG : SHORT), DIR_LEFT, MIDDLE, DOWN, 2);
         } else if (s == 101 || s == 0) {
-            // ACTION_WALK(FAST, DOWN, 3);
-            // rReturn = 1;
+             ACTION_WALK(SLOW, DOWN, 3);
+             rReturn = 1;
         }
     } else {
         rReturn = 0;

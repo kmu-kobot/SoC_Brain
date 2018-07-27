@@ -94,7 +94,8 @@ int huro(void) {
                     case 4:
                         mission_3_4_watch_front();
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_3_4_is_not_front_of_bomb(fpga_videodata);
+                        step = (mission_3_4_is_not_front_of_bomb(fpga_videodata)) ? 5 : 1;
+                        flag = 0;
                         break;
                     case 5:
                         ACTION_WALK(SLOW, OBLIQUE, 5);
@@ -134,13 +135,16 @@ int huro(void) {
                         break;
                     default:
                         flag = 0;
-                        mission_4_1_watch_front(2);
+
+                        if (step == 2) {
+                            mission_4_1_watch_front(2);
+                        }
 
                         ACTION_INIT(MIDDLE, UP);
                         RobotSleep(1);
 
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_4_2_ready_hurdle(fpga_videodata);
+                        step = (mission_4_2_ready_hurdle(fpga_videodata)) ? 3 : 2;
                         break;
                 }
                 break;

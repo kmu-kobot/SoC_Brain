@@ -19,7 +19,7 @@
 #define MISSION_3_POINT_LENGTH 27
 
 #define MISSION_3_4_HEIGHT_OFFSET 30
-#define MISSION_3_4_BOMB 3
+#define MISSION_3_4_BOMB 10
 
 void mission_3_default_watch_below(void);
 
