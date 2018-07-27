@@ -33,7 +33,7 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
             }
         }
 
-        if ((double) (cntYellow / ((ROBOT_KNEE - 20) * WIDTH)) > 5) {
+        if ((double) (cntYellow * 100 / ((ROBOT_KNEE - 20) * WIDTH)) > 5) {
             ACTION_WALK(CLOSE, OBLIQUE, 3);
         } else {
             ACTION_WALK(FAST, OBLIQUE, repeat);
@@ -78,7 +78,6 @@ int mission_7_2_before_bridge_set_center(U16 *image) {
         ACTION_MOVE(LONG, ((s > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, OBLIQUE, ((s > 0) ? 1 : 2));
     } else {
         ACTION_WALK(CLOSE, OBLIQUE, 2);
-        RobotSleep(1);
     }
 
     return ((s > 0) ? s : -s) <= MISSION_7_2_RED_BRIDGE_THRESHOLDS;
@@ -90,17 +89,18 @@ int mission_7_3_climb_yellow_hole_bridge() {
     ACTION_MOTION(MISSION_5_STAIR_UP, MIDDLE, OBLIQUE);
     RobotSleep(1);
     ACTION_INIT(MIDDLE, DOWN);
-    ACTION_WALK(FAST, OBLIQUE, 4);
+    ACTION_WALK(FAST, DOWN, 3);
     RobotSleep(1);
     return 1;
 }
 
 int mission_7_4_set_center(U16 *image) {
-    U32 col[3] = {CASE_7_1_POINT_X_1, CASE_7_1_POINT_X_2, CASE_7_1_POINT_X_3}, row, i, j;
+    U32 col[3] = {CASE_7_1_POINT_X_1, CASE_7_1_POINT_X_2, CASE_7_1_POINT_X_3}, row, i, j, k = 0;
     U16 checkHurdleLine[3] = {0,};
 
     for (i = 0; i < 3; ++i) {
-        for (row = HEIGHT - 1; row > 0; --row) {
+        k = 0;
+        for (row = HEIGHT - 1; row >= 0; --row) {
             checkHurdleLine[i] = 0;
 
             for (j = 0; j < 5; j++) {
@@ -108,9 +108,24 @@ int mission_7_4_set_center(U16 *image) {
                                        GetValueRGBYOBK(GetPtr(image, row, col[i] + j, WIDTH), CH2));
             }
 
-            if (checkHurdleLine[i] < 1) {
-                checkHurdleLine[i] = (U16) (HEIGHT - row);
-                break;
+            if (k == 0) {
+                if (checkHurdleLine[i] < 1) {
+                    k = 1;
+                } else {
+                    k = 2;
+                }
+            }
+
+            if (k == 2) {
+                if (checkHurdleLine[i] < 1) {
+                    checkHurdleLine[i] = (U16) (HEIGHT - row);
+                    break;
+                }
+            } else { // k == 1
+                if (checkHurdleLine[i] > 1) {
+                    k = 2;
+                    checkHurdleLine[i] = (U16) (HEIGHT - row);
+                }
             }
         }
     }
@@ -246,19 +261,15 @@ int mission_7_5_walk_until_line_front_of_feet(U16 *image) {
         ACTION_WALK(CLOSE, DOWN, (black_cnt < 10) ? 6 : 2);
     }
 
-    ACTION_INIT(MIDDLE, DOWN);
-    RobotSleep(1);
-
     return black_cnt >= MISSION_7_5_LINE_RATIO;
 }
 
 
 int mission_7_6_jump_hole(void) {
     ACTION_WALK(CLOSE, OBLIQUE, 3);
-    RobotSleep(2);
+    RobotSleep(1);
     ACTION_MOTION(MISSION_7_YELLOW_DUMBLING, MIDDLE, OBLIQUE);
-    RobotSleep(2);
-    ACTION_WALK(SLOW, LEFT, 3);
+    RobotSleep(1);
     return 1;
 }
 

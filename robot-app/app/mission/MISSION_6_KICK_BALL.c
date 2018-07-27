@@ -558,12 +558,13 @@ int countColor(U16 *image, int row, int col, int range, int color) {
 }
 
 int mission_6_5_kick_ball(void) {
-    RobotSleep(2);
+    RobotSleep(1);
     ACTION_MOTION(MISSION_6_RIGHT_KICK, MIDDLE, OBLIQUE);
-    ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 7);
+    ACTION_WALK(FAST, OBLIQUE, 2);
+    ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 10);
     ACTION_WALK(FAST, OBLIQUE, 5);
     ACTION_INIT(MIDDLE, OBLIQUE);
-    RobotSleep(5);
+    RobotSleep(1);
     return 1;
 }
 

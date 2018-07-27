@@ -33,8 +33,8 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
             }
         }
 
-        if ((double) cntRed / (WIDTH * (ROBOT_KNEE - 20)) > 5) {
-            ACTION_WALK(CLOSE, OBLIQUE, 3);
+        if ((double) cntRed * 100 / (WIDTH * (ROBOT_KNEE - 20)) > 5) {
+            ACTION_WALK(CLOSE, OBLIQUE, 2);
         } else {
             ACTION_WALK(FAST, OBLIQUE, 2);
         }
@@ -125,13 +125,19 @@ int mission_2_2_before_bridge_set_center(U16 *image, int mode) {
 
     if (s < CASE_0_DEFAULT_LEFT_RANGE - CASE_0_DEFAULT_RANGE_ERROR) {
         ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, LEFT, 1);
+        if (mode == 1) {
+            ACTION_WALK(CLOSE, LEFT, 1);
+        }
         return 0;
     } else if (s > CASE_0_DEFAULT_LEFT_RANGE + CASE_0_DEFAULT_RANGE_ERROR) {
         ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, LEFT, 1);
+        if (mode == 1) {
+            ACTION_WALK(CLOSE, LEFT, 1);
+        }
         return 0;
     } else {
-        if (mode == 1) {
-            ACTION_WALK(CLOSE, LEFT, 2);
+        if (mode == 1 || mode == -1) {
+            ACTION_WALK(CLOSE, LEFT, 3);
         }
         printf("SUCCESS\n\n");
         return 1;
@@ -184,7 +190,6 @@ int mission_2_4_after_bridge_set_straight(U16 *image, int mode) {
                 DIR_RIGHT,
                 MIDDLE, (mode) ? RIGHT : LEFT, 1
         );
-        RobotSleep(1);
         return 0;
     } else {
         printf("SUCCESS\n\n");

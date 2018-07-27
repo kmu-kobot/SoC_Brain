@@ -304,7 +304,8 @@ static inline void action(MOTION_INIT init, MOTION motion) {
 //////////////////////////////
 
 static inline void ACTION_INIT(POSE pose, VIEW view) {
-    foo(INIT_MOTION(pose, view), CHECK);
+    RobotAction(INIT_MOTION(pose, view));
+    foo(INIT_MOTION(pose, view), SET);
 }
 
 
@@ -330,6 +331,7 @@ static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat) {
 
 static inline void ACTION_TURN(LENGTH len, DIRECTION dir, POSE pose, VIEW view, int repeat) {
     action(INIT_MOTION(pose, view), TURN_MOTION(len, dir, pose, view));
+
 
     for (; repeat > 1; --repeat) {
         RobotAction(TURN_MOTION(len, dir, pose, view));
