@@ -123,20 +123,20 @@ int mission_2_2_before_bridge_set_center(U16 *image, int mode) {
 
     printf("M4-5: AVG: %f\n", s);
 
-    if (s < CASE_0_DEFAULT_LEFT_RANGE - CASE_0_DEFAULT_RANGE_ERROR) {
+    if (s < CASE_0_DEFAULT_LEFT_RANGE - ((mode == 3) ? 3 : CASE_0_DEFAULT_RANGE_ERROR)) {
         ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, LEFT, 1);
         if (mode == 1) {
             ACTION_WALK(CLOSE, LEFT, 1);
         }
         return 0;
-    } else if (s > CASE_0_DEFAULT_LEFT_RANGE + CASE_0_DEFAULT_RANGE_ERROR) {
+    } else if (s > CASE_0_DEFAULT_LEFT_RANGE + ((mode == 3) ? 3 : CASE_0_DEFAULT_RANGE_ERROR)) {
         ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, LEFT, 1);
         if (mode == 1) {
             ACTION_WALK(CLOSE, LEFT, 1);
         }
         return 0;
     } else {
-        if (mode == 1 || mode == -1) {
+        if (mode == 1 || mode == -1 || mode == 3) {
             ACTION_WALK(CLOSE, LEFT, 3);
         }
         printf("SUCCESS\n\n");

@@ -265,40 +265,39 @@ void mission_6_4_turn_to_detect_hole(void) {
 // }
 
 int mission_6_3_find_hole(U16 *image) {
-    U32 row, col, blue_cnt, asd = 0;
-    U8 prev[3] = {0, 0, 0};
+    U32 row, col, blue_cnt, pos;
+    U8 hole[4] = {0, 0, 0, 0};
     U8 hole_right = 0, hole_left = 0;
 
+    pos = 0;
     //ball_top 찾기
     for (col = 0; col < WIDTH; ++col) {
         blue_cnt = 0;
         for (row = 0; row < HEIGHT; ++row) {
             blue_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLUE);
         }
-        if (blue_cnt > MISSION_6_3_THRES && (prev[0] + prev[1] + prev[2] > 2)) {
+        hole[pos] = blue_cnt > MISSION_6_3_THRES;
+        if (hole[0] + hole[1] + hole[2] + hole[3] > 2) {
             hole_left = col - 2;
+            pos = (pos + 1) % 4;
             break;
         }
-        prev[2] = prev[1];
-        prev[1] = prev[0];
-        prev[0] = blue_cnt > MISSION_6_3_THRES;
+        pos = (pos + 1) % 4;
     }
 
     printf("hole_left: %d\n\n", hole_left);
     //ball_bottom 찾기
-    for (col = hole_left; col < WIDTH; ++col) {
+    for (col = hole_left + 1; col < WIDTH; ++col) {
         blue_cnt = 0;
         for (row = 0; row < HEIGHT; ++row) {
             blue_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLUE);
         }
-
-        if (blue_cnt <= MISSION_6_3_THRES & (prev[0] + prev[1] + prev[2] < 2)) {
+        hole[pos] = blue_cnt > MISSION_6_3_THRES;
+        if (hole[0] + hole[1] + hole[2] + hole[3] < 2) {
             hole_right = col - 2;
             break;
         }
-        prev[2] = prev[1];
-        prev[1] = prev[0];
-        prev[0] = blue_cnt > MISSION_6_3_THRES;
+        pos = (pos + 1) % 4;
     }
 
     printf("hole_right: %d\n\n", hole_right);
@@ -349,11 +348,11 @@ int mission_6_3_locate_hole_on_center(U16 *image) {
     mission_6_3_find_hole(image);
 
     int rResult = 0;
-    if (hole_points[0] <= 91) {
+    if (hole_points[0] <= 105) {
         //ACTION_MOVE(SHORT, DIR_RIGHT, MIDDLE, OBLIQUE, 1);
         ACTION_TURN(SHORT, DIR_LEFT, MIDDLE, OBLIQUE, 2);
         RobotSleep(2);
-    } else if (hole_points[0] >= 102) {
+    } else if (hole_points[0] >= 115) {
         //ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, OBLIQUE, 1);
         ACTION_TURN(SHORT, DIR_RIGHT, MIDDLE, OBLIQUE, 1);
         RobotSleep(2);
@@ -418,8 +417,8 @@ int mission_6_3_locate_hole_on_center(U16 *image) {
 // }
 
 int mission_6_4_set_front_of_ball(U16 *image) {
-    U32 row, col, ball_cnt, asd = 0;
-    U8 prev[3] = {0, 0, 0};
+    U32 row, col, ball_cnt, pos = 0;
+    U8 ball[4] = {0, 0, 0, 0};
     U8 ball_top = 0, ball_bottom = 0, ball_right = 0, ball_left = 0;
 
     //ball_left 찾기
@@ -429,34 +428,29 @@ int mission_6_4_set_front_of_ball(U16 *image) {
             ball_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
                         GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE);
         }
-        printf("col : %d, count: %d\n\n", col, ball_cnt);
-        if (ball_cnt > MISSION_6_4_THRES && (prev[0] + prev[1] + prev[2] > 2)) {
+        ball[pos] = MISSION_6_4_THRES;
+        if (ball[0] + ball[1] + ball[2] + ball[3] > 2) {
             ball_left = col - 2;
+            pos = (pos + 1) % 4;
             break;
         }
-        prev[2] = prev[1];
-        prev[1] = prev[0];
-        prev[0] = ball_cnt > MISSION_6_4_THRES;
+        pos = (pos + 1) % 4;
     }
 
     printf("ball_left: %d\n\n", ball_left);
     //ball_right 찾기
-    for (col = ball_left; col < WIDTH; ++col) {
+    for (col = ball_left + 1; col < WIDTH; ++col) {
         ball_cnt = 0;
         for (row = 0; row < HEIGHT; ++row) {
             ball_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
                         GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE);
         }
-        printf("col : %d, count: %d\n\n", col, ball_cnt);
-
-
-        if (ball_cnt <= MISSION_6_4_THRES & (prev[0] + prev[1] + prev[2] < 2)) {
+        ball[pos] = MISSION_6_4_THRES;
+        if (ball[0] + ball[1] + ball[2] + ball[3] < 2) {
             ball_right = col - 2;
             break;
         }
-        prev[2] = prev[1];
-        prev[1] = prev[0];
-        prev[0] = ball_cnt > MISSION_6_4_THRES;
+        pos = (pos + 1) % 4;
     }
 
     printf("ball_right: %d\n\n", ball_right);
@@ -465,6 +459,9 @@ int mission_6_4_set_front_of_ball(U16 *image) {
         return 0;
     }
 
+    ball[0] = ball[1] = ball[2] = ball[3] = 0;
+    pos = 0;
+
     //ball_top 찾기
     for (row = 0; row < HEIGHT; ++row) {
         ball_cnt = 0;
@@ -472,15 +469,13 @@ int mission_6_4_set_front_of_ball(U16 *image) {
             ball_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
                         GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE);
         }
-        printf("row : %d, count: %d\n\n", row, ball_cnt);
-
-        if (ball_cnt > MISSION_6_4_THRES && (prev[0] + prev[1] + prev[2] > 2)) {
+        ball[pos] = ball_cnt > MISSION_6_4_THRES;
+        if (ball[0] + ball[1] + ball[2] + ball[3] > 2) {
             ball_top = row - 2;
+            pos = (pos + 1) % 4;
             break;
         }
-        prev[2] = prev[1];
-        prev[1] = prev[0];
-        prev[0] = ball_cnt > MISSION_6_4_THRES;
+        pos = (pos + 1) % 4;
     }
 
     printf("ball_top: %d\n\n", ball_top);
@@ -492,15 +487,12 @@ int mission_6_4_set_front_of_ball(U16 *image) {
             ball_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
                         GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE);
         }
-        printf("row : %d, count: %d\n\n", row, ball_cnt);
-
-        if (ball_cnt <= MISSION_6_4_THRES & (prev[0] + prev[1] + prev[2] < 2)) {
+        ball[pos] = ball_cnt  > MISSION_6_4_THRES;
+        if (ball[0] + ball[1] + ball[2] + ball[3] < 2) {
             ball_bottom = row - 2;
             break;
         }
-        prev[2] = prev[1];
-        prev[1] = prev[0];
-        prev[0] = ball_cnt > MISSION_6_4_THRES;
+        pos = (pos + 1) % 4;
     }
 
     printf("ball_bottom: %d\n\n", ball_bottom);
@@ -509,8 +501,8 @@ int mission_6_4_set_front_of_ball(U16 *image) {
         return 0;
     }
 
-    ball_points[0] = (int) ((int) ball_left + (int) ball_right) / 2;
-    ball_points[1] = (int) ((int) ball_top + (int) ball_bottom) / 2;
+    ball_points[0] = (U32) ((int) ball_left + (int) ball_right) / 2;
+    ball_points[1] = (U32) ((int) ball_top + (int) ball_bottom) / 2;
     printf("ball_points[0] : %d\n\n", ball_points[0]);
     printf("ball_points[1] : %d\n\n", ball_points[1]);
 
