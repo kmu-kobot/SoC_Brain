@@ -16,10 +16,10 @@ void mission_3_init_global(void) {
 
 int mission_3_4_is_not_front_of_bomb(U16 *image) {
     U32 row, col, i;
-    int check;
+    int check, check2 = 0;
     check = 0;
 
-    if (c == 3) return 1;
+    if (c == 3 || c == 4) return 1;
 
     if (c == 0) { // 파란선있는지 확인
         for (col = 0; col < WIDTH; col++) {
@@ -35,21 +35,22 @@ int mission_3_4_is_not_front_of_bomb(U16 *image) {
         c = 1;
     } else {
         for (col = 0; col < WIDTH; col++) {
-            for (row = 0; row < 90; row++) {
+            for (row = 0; row < HEIGHT; row++) {
                 check += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLUE);
             }
         }
 
-        printf("%f\n", (double) check * 100 / (WIDTH * 60));
+        return (double) check * 100 / (WIDTH * HEIGHT) < 1;
 
-        if ((double) check * 100 / (WIDTH * 60) < 10) return 1;
     }
+
+    int sign;
 
     U32 h[3] = {0,};
     U32 w[2] = {0, 179};
     U32 cols[3] = {80, 90, 100};
 
-    int range = 0, sign;
+    int range = 0;
 
     for (i = 0; i < 3; i++) {
         for (row = HEIGHT - 1; row >= 0; row--) {
@@ -93,13 +94,13 @@ int mission_3_4_is_not_front_of_bomb(U16 *image) {
     }
 
     if (w[0] != 0) {
-        w[0] = WIDTH / 2 - w[0] + 10;
+        w[0] = WIDTH / 2 - w[0] + 20;
     }
 
-    w[1] = WIDTH / 2 + w[1] - 10;
+    w[1] = WIDTH / 2 + w[1] - 20;
 
     check = 0;
-    for (row = rH; row < HEIGHT; row++) {
+    for (row = (U32) rH; row < HEIGHT - 10; row++) {
         for (col = w[0]; col < w[1]; col++) {
             check += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
         }
@@ -107,11 +108,27 @@ int mission_3_4_is_not_front_of_bomb(U16 *image) {
 
     printf("3. (%d, %d)\t(%d, %d)\t%d\n", w[0], rH, w[1], rH, check);
 
-    if (check < 5) {
+    int bLen[2] = {
+            WIDTH / 2 - (w[0] - 20), (w[1] + 20) - WIDTH / 2
+    };
+
+    int r = bLen[0] - bLen[1];
+    printf("%d %d %d\n", bLen[0], bLen[1], r);
+    if (((r > 0) ? r : (-r) > 30)) {
+        ACTION_TURN(LONG, (r > 0) ? DIR_LEFT : DIR_RIGHT, MIDDLE, OBLIQUE, 1);
+        return 3;
+    }
+
+    if (rH > 100) {
+        c = 3;
+        return 1;
+    }
+
+    if (check == 0) {
         c = 3;
     }
 
-    return check < 5;
+    return check == 0;
 }
 
 void mission_3_default_watch_below(void) {
@@ -120,8 +137,12 @@ void mission_3_default_watch_below(void) {
 }
 
 int mo = 0;
+int rp = 0;
+int bc = 0;
 
 int mission_3_default_avoid_bomb(U16 *image) {
+
+    int mine[5] = {0,};
 
     U32 section[5][2] = {
             {20,  40},
@@ -144,14 +165,19 @@ int mission_3_default_avoid_bomb(U16 *image) {
     for (i = 0; i < 5; ++i) {
         for (col = section[i][0]; col < section[i][1]; ++col) {
             for (row = heights[i][0]; row < heights[i][1]; ++row) {
-                check[i] += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
+                mine[i] += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
             }
         }
-
-        check[i] = ((check[i] > MISSION_3_DEFAULT_BOMB_THRESHOLDS) ?
-                    ((check[i] > MISSION_3_DEFAULT_LINE_THRESHOLDS) ? 2 : 1) : 0);
-
     }
+
+    double per;
+    for (i = 0; i < 5; ++i) {
+        per = (double) mine[i] * 100 / ((heights[i][1] - heights[i][0]) * (section[i][1] - section[i][0]));
+        mine[i] = ((mine[i] > MISSION_3_DEFAULT_BOMB_THRESHOLDS) ?
+                   ((per > MISSION_3_DEFAULT_LINE_THRESHOLDS) ? 2 : 1) : 0);
+        check[i] = (U32) mine[i];
+    }
+
 
     int s = 0;
     for (i = 0; i < 3; ++i) {
@@ -160,6 +186,11 @@ int mission_3_default_avoid_bomb(U16 *image) {
 
     printf("\n\t\t- M3-DEFAULT: AVOID BOMB\n");
     printf("\t\t\t- BOMB: %d %d %d %d %d %03d\n\n", check[0], check[1], check[2], check[3], check[4], s);
+
+    if (check[0] == 2 || check[4] == 2) {
+        ACTION_MOVE(LONG, (check[0] == 2) ? DIR_RIGHT : DIR_LEFT, MIDDLE, DOWN, 2);
+        return 0;
+    }
 
     int rReturn = (s == 0) ? 1 : 0;
 
@@ -173,24 +204,29 @@ int mission_3_default_avoid_bomb(U16 *image) {
     // * 010 지뢰 피하는 동작
 
     if (rReturn) {
+        rReturn = bc;
         mo++;
-        ACTION_WALK(FAST, DOWN, 3);
+        ACTION_WALK(FAST, DOWN, (mo > 3 || bc == 0) ? 2 : 3);
         RobotSleep(2);
+        bc = 0;
     } else {
+        bc = 1;
         if (s == 10) {
             ACTION_MOVE(
                     LONG,
                     (check[0] > check[4]) ? DIR_RIGHT : DIR_LEFT,
-                    MIDDLE, DOWN, 1
+                    MIDDLE, DOWN, 2
             );
-        } else if (s == 110 || s == 011) {
+        } else if (s == 110 || s == 11) {
             ACTION_MOVE(LONG, (s == 110) ? DIR_RIGHT : DIR_LEFT, MIDDLE, DOWN, 1);
-        } else if (s == 100 || s == 001) {
+        } else if (s == 100 || s == 1) {
 
             ACTION_MOVE(
                     LONG,
+                    (check[0] == 2) ? DIR_RIGHT :
+                    (check[4] == 2) ? DIR_LEFT :
                     (s == 100) ? DIR_RIGHT : DIR_LEFT,
-                    MIDDLE, DOWN, 1
+                    MIDDLE, DOWN, 2
             );
             // * 001 왼쪽으로 이동, 왼쪽 사이드보고 롱으로할지 쇼트로할지 결정 ( 10010 ) 쇼트, ( 00010 ) 롱
             // * 100 오른쪽으로 이동, 오른쪽 사이드보고 롱으로 할지 쇼트로할지 결정 ( 01001 ) 쇼트, ( 00010 ) 롱
@@ -198,22 +234,22 @@ int mission_3_default_avoid_bomb(U16 *image) {
             ACTION_MOVE(
                     LONG,
                     (
-                            (check[0] != 0 && check[4] == 0) ? DIR_RIGHT :
-                            (check[0] == 0 && check[4] != 0) ? DIR_LEFT :
+                            (check[0] > check[4]) ? DIR_RIGHT :
+                            (check[0] < check[4]) ? DIR_LEFT :
                             ((mo % 2) ? DIR_RIGHT : DIR_LEFT)
                     ),
-                    MIDDLE, DOWN, 1
+                    MIDDLE, DOWN, 2
             );
             // * 101 양쪽 사이드 보고 좌우 어디로 이동할지 결정 ( 11010 ) 오른, ( 01011 ) 왼, ( 11011 ) 왼 or 오른
         } else if (s == 111) {
             ACTION_MOVE(
                     LONG,
                     (
-                            (check[0] != 0 && check[4] == 0) ? DIR_RIGHT :
-                            (check[0] == 0 && check[4] != 0) ? DIR_LEFT :
+                            (check[0] > check[4]) ? DIR_RIGHT :
+                            (check[0] < check[4]) ? DIR_LEFT :
                             ((mo % 2) ? DIR_RIGHT : DIR_LEFT)
                     ),
-                    MIDDLE, DOWN, 1
+                    MIDDLE, DOWN, 2
             );
             // * 111 양쪽 사이드 보고 좌우 어디로 이동할지 결정, 롱으로 이동 ( 11110 ) 오른, ( 01111 ) 왼 ( 11111 ) 왼 or 오른
         }
@@ -222,8 +258,7 @@ int mission_3_default_avoid_bomb(U16 *image) {
     return rReturn;
 }
 
-void mission_3_7_attach_hurdle(U16 *image) {
-
+int mission_3_7_get_attach(U16 *image) {
     U32 row, col;
     int cnt = 0;
 
@@ -233,6 +268,20 @@ void mission_3_7_attach_hurdle(U16 *image) {
         }
     }
 
-    ACTION_WALK(FAST, OBLIQUE, ((double) cnt * 100 / (WIDTH * HEIGHT) > 10) ? 7 : 2);
+    return ((double) cnt * 100 / (WIDTH * HEIGHT) < 10);
+}
+
+void mission_3_7_attach_hurdle(U16 *image) {
+
+    U32 row, col;
+    int cnt = 0;
+
+    for (row = 90; row < HEIGHT; ++row) {
+        for (col = 0; col < WIDTH; ++col) {
+            cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLUE);
+        }
+    }
+
+    ACTION_WALK(FAST, OBLIQUE, 4);
 
 }

@@ -25,15 +25,15 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
     int rReturn = r > MISSION_7_1_THRESHOLDS;
 
     if (rReturn && repeat != -1) {
-        cntYellow = 0;
-        for (row = 20; row < ROBOT_KNEE; ++row) {
-            for (col = 0; col < WIDTH; ++col) {
-                cntYellow += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW) ||
-                              GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), CH2));
-            }
-        }
+        // cntYellow = 0;
+        // for (row = 20; row < ROBOT_KNEE; ++row) {
+        //     for (col = 0; col < WIDTH; ++col) {
+        //         cntYellow += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW) ||
+        //                       GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), CH2));
+        //     }
+        // }
 
-        ACTION_WALK(FAST, DOWN, repeat);
+        ACTION_WALK(CLOSE, DOWN, 4);
 
     }
 

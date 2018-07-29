@@ -7,8 +7,6 @@
 #include "./../library/amazon2_sdk.h"
 #include "./../library/robot_action.h"
 #include "stdio.h"
-#include <math.h>
-#include <stdlib.h>
 
 #define SOC_APP_MISSION_6_KICK_BALL_H
 
@@ -22,15 +20,15 @@
 #define MISSION_6_2_KICK_BALL_THRESHOLDS 7
 #define MISSION_6_2_BLACK_LINE_SLOPE 10
 
-#define CASE_6_9_NON_BLACK_LINE 80
+#define CASE_6_9_NON_BLACK_LINE 110
 
 #define MISSION_6_3_THRES 2
 
-#define MISSION_6_3_CENTER 90
+#define MISSION_6_3_CENTER 96
 
 #define MISSION_6_4_THRES 5
 
-#define MISSION_6_4_CENTER 109
+#define MISSION_6_4_CENTER 111
 
 #define MISSION_6_6_COL_POINT_1 80
 #define MISSION_6_6_COL_POINT_2 120

@@ -52,4 +52,6 @@ int mission_5_6_set_straight(U16 *image);
 
 int mission_5_7_climb_down_stairs(void);
 
+void mission_5_5_set_center(U16 *image);
+
 #endif //SOC_APP_MISSION_5_GREEN_BRIDGE_H

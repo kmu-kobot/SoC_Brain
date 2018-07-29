@@ -6,7 +6,7 @@
 
 void mission_2_1_watch_below(int repeat) {
     ACTION_WALK(FAST, DOWN, repeat);
-    RobotSleep(2);
+    RobotSleep(1);
 }
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image) {
@@ -33,9 +33,8 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
             }
         }
 
-        ACTION_WALK(FAST, OBLIQUE, 4);
+        ACTION_WALK(CLOSE, DOWN, 4);
         RobotSleep(1);
-
 
         return 1;
     } else {
