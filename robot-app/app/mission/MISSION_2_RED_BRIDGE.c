@@ -38,7 +38,6 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
         } else {
             ACTION_WALK(FAST, OBLIQUE, 2);
         }
-        RobotSleep(1);
 
         return 1;
     } else {
@@ -53,7 +52,6 @@ void mission_2_2_watch_front(void) {
 
 void mission_2_2_watch_side(void) {
     ACTION_INIT(MIDDLE, LEFT);
-    RobotSleep(1);
 }
 
 int mission_2_2_before_bridge_set_center_version2(U16 *image) {
@@ -92,7 +90,7 @@ int mission_2_2_before_bridge_set_center_version2(U16 *image) {
     }
 }
 
-int mission_2_2_before_bridge_set_center(U16 *image, int mode) {
+int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) {
     U32 col[3] = {85, 95, 90}, row, i, j;
     U16 checkHurdleLine[3] = {0,};
 
@@ -123,21 +121,26 @@ int mission_2_2_before_bridge_set_center(U16 *image, int mode) {
 
     printf("M4-5: AVG: %f\n", s);
 
-    if (s < CASE_0_DEFAULT_LEFT_RANGE - ((mode == 3) ? 3 : CASE_0_DEFAULT_RANGE_ERROR)) {
+    int len = (length != 0) ? length : CASE_0_DEFAULT_LEFT_RANGE;
+    int err = ((mode == 3) ? 3 : CASE_0_DEFAULT_RANGE_ERROR);
+
+    if (s < len - err) {
         ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, LEFT, 1);
         if (mode == 1) {
             ACTION_WALK(CLOSE, LEFT, 1);
         }
         return 0;
-    } else if (s > CASE_0_DEFAULT_LEFT_RANGE + ((mode == 3) ? 3 : CASE_0_DEFAULT_RANGE_ERROR)) {
+    } else if (s > len + err) {
         ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, LEFT, 1);
         if (mode == 1) {
             ACTION_WALK(CLOSE, LEFT, 1);
         }
         return 0;
     } else {
-        if (mode == 1 || mode == -1 || mode == 3) {
-            ACTION_WALK(CLOSE, LEFT, 3);
+        if (mode == 1 || mode == -1) {
+            ACTION_WALK(CLOSE, LEFT, 4);
+        } else if (mode == 3) {
+            ACTION_WALK(CLOSE, LEFT, 2);
         }
         printf("SUCCESS\n\n");
         return 1;
@@ -146,7 +149,7 @@ int mission_2_2_before_bridge_set_center(U16 *image, int mode) {
 
 int mission_2_3_escape_red_bridge(void) {
     ACTION_MOTION(MISSION_2_RED_DUMBLING, MIDDLE, OBLIQUE);
-    RobotSleep(3);
+    RobotSleep(1);
     return 1;
 }
 
@@ -188,7 +191,7 @@ int mission_2_4_after_bridge_set_straight(U16 *image, int mode) {
                 (l - CASE_0_DEFAULT_SLOPE_ERROR > s) ?
                 DIR_LEFT :
                 DIR_RIGHT,
-                MIDDLE, (mode) ? RIGHT : LEFT, 1
+                MIDDLE, (mode) ? RIGHT : LEFT, 2
         );
         return 0;
     } else {
@@ -198,5 +201,5 @@ int mission_2_4_after_bridge_set_straight(U16 *image, int mode) {
 }
 
 int mission_2_5_after_bridge_set_center(U16 *image) {
-    return mission_2_2_before_bridge_set_center(image, 0);
+    return mission_2_2_before_bridge_set_center(image, 0, 0);
 }

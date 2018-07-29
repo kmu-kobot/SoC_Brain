@@ -50,7 +50,7 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
 
 void mission_5_2_watch_side(void) {
     ACTION_INIT(MIDDLE, LEFT);
-    RobotSleep(2);
+    RobotSleep(1);
 }
 
 int mission_5_3_climb_up_stairs(void) {
@@ -59,14 +59,11 @@ int mission_5_3_climb_up_stairs(void) {
     RobotSleep(1);
     ACTION_INIT(MIDDLE, DOWN);
     RobotSleep(1);
-    ACTION_WALK(CLOSE, DOWN, 4);
-    RobotSleep(1);
     return 1;
 }
 
 void mission_5_5_watch_below(void) {
     ACTION_INIT(MIDDLE, DOWN);
-    RobotSleep(1);
 }
 
 int mission_5_5_check_finish_black_line(U16 *image) {
@@ -93,7 +90,7 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
     if (s > 13) {
         printf("GOGO");
         ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, 2);
-        ACTION_TURN(SHORT, DIR_RIGHT, MIDDLE, DOWN, 1);
+        ACTION_TURN(SHORT, DIR_LEFT, MIDDLE, DOWN, 1);
         return 0;
     }
 
@@ -106,7 +103,7 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
     //     }
     // }
 
-    // s = (double) cnt / (30 * HEIGHT) * 100;
+    // s = (double) cnt * 100 / (30 * HEIGHT);
 
     // printf("%d %f\n", cnt, s);
 
@@ -176,7 +173,7 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
 
     for (dir = 0; dir < 2; ++dir) {
         flagSign = (dir) ? 1 : -1;
-        for (col = 0; col < WIDTH / 2; ++col) {
+        for (col = 0; col < WIDTH / 2 - 1; ++col) {
             cnt = 0;
             for (row = 10;
                  row < 60;
@@ -202,7 +199,7 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
     printf("LEFT: %d, RIGHT: %d, r: %d\n\n", green_len[0], green_len[1], r);
 
     if (((r > 0) ? r : (-r)) > MISSION_5_5_GREEN_BRIDGE_THRESHOLDS) {
-        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 1);
+        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 2);
         RobotSleep(1);
     }
 
@@ -286,10 +283,8 @@ int mission_5_6_set_straight(U16 *image) {
 }
 
 int mission_5_7_climb_down_stairs(void) {
-    RobotSleep(1);
     ACTION_MOTION(MISSION_5_STAIR_DOWN, MIDDLE, OBLIQUE);
-    RobotSleep(1);
-    ACTION_WALK(FAST, OBLIQUE, 5);
-    ACTION_TURN(LONG, DIR_RIGHT, MIDDLE, OBLIQUE, 2);
+    ACTION_INIT(MIDDLE, OBLIQUE);
+    ACTION_WALK(FAST, OBLIQUE, 9);
     return 1;
 }

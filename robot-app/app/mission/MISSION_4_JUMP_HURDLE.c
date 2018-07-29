@@ -40,10 +40,9 @@ int mission_4_2_ready_hurdle(U16 *image) {
 }
 
 int mission_4_4_jump_hurdle(void) {
-    ACTION_WALK(CLOSE, OBLIQUE, 1);
     ACTION_MOTION(MISSION_4_HURDLING, MIDDLE, OBLIQUE);
     ACTION_WALK(FAST, OBLIQUE, 8);
-    ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 10);
+    ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 9);
     return 1;
 }
 

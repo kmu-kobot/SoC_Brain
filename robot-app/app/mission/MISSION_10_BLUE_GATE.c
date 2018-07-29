@@ -24,5 +24,5 @@ int mission_10_1_catch_blue_gate(U16 *image) {
 
 void mission_10_1_front_walk(int repeat) {
     ACTION_WALK(FAST, DOWN, repeat);
-    RobotSleep(2);
+    RobotSleep(1);
 }

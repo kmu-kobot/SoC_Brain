@@ -7,11 +7,12 @@
 #include "./../library/amazon2_sdk.h"
 #include "./../library/robot_action.h"
 #include "stdio.h"
+#include "math.h"
 
 #define SOC_APP_MISSION_3_AVOID_BOMB_H
 
 #define MISSION_3_DEFAULT_WIDTH_MARGIN 40
-#define MISSION_3_DEFAULT_WIDTH 60
+#define MISSION_3_DEFAULT_WIDTH 35
 #define MISSION_3_DEFAULT_BOMB_THRESHOLDS 5
 #define MISSION_3_DEFAULT_LINE_THRESHOLDS 100
 #define MISSION_3_DEFAULT_AVOID_BOMB_RANGE 4

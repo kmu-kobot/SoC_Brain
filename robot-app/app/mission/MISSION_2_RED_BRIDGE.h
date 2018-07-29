@@ -27,7 +27,7 @@ void mission_2_2_watch_side(void);
 
 void mission_2_2_watch_front(void);
 
-int mission_2_2_before_bridge_set_center(U16 *image, int mode);
+int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length);
 
 int mission_2_2_before_bridge_set_center_version2(U16 *image);
 
