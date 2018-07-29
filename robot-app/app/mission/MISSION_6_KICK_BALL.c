@@ -872,13 +872,13 @@ int mission_6_9_set_front_of_not_bk(U16 *image) {
     s /= 3;
     printf("AVG: %f\n\n", s);
 
-    printf((s < CASE_6_9_NON_BLACK_LINE) ? "SUCCESS\n" : "FAIL\n");
+    printf((s > CASE_6_9_NON_BLACK_LINE) ? "SUCCESS\n" : "FAIL\n");
 
     if (s > CASE_6_9_NON_BLACK_LINE) {
         ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 2);
         return 0;
     } else {
-        ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 2);
+        ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 4);
         return 1;
     }
 }

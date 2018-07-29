@@ -34,15 +34,8 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
             }
         }
 
-        ACTION_WALK(CLOSE, DOWN, 4);
+        ACTION_WALK(FAST, DOWN, 4);
 
-        // if ((double) cntBlack * 100 / (ROBOT_KNEE - 20) * WIDTH > 5) {
-        //     ACTION_WALK(CLOSE, DOWN, 3);
-        // } else {
-        //     ACTION_WALK(FAST, DOWN, repeat);
-        // }
-
-        // RobotSleep(1);
     }
 
     return rResult;
@@ -60,10 +53,6 @@ int mission_5_3_climb_up_stairs(void) {
     ACTION_INIT(MIDDLE, DOWN);
     RobotSleep(1);
     return 1;
-}
-
-void mission_5_5_watch_below(void) {
-    ACTION_INIT(MIDDLE, DOWN);
 }
 
 int mission_5_5_check_finish_black_line(U16 *image) {

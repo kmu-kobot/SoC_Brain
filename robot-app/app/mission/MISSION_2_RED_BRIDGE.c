@@ -33,62 +33,18 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
             }
         }
 
-        if ((double) cntRed * 100 / (WIDTH * (ROBOT_KNEE - 20)) > 5) {
-            ACTION_WALK(CLOSE, OBLIQUE, 2);
-        } else {
-            ACTION_WALK(FAST, OBLIQUE, 2);
-            RobotSleep();
-        }
+        ACTION_WALK(FAST, OBLIQUE, 4);
+        RobotSleep(1);
+
 
         return 1;
     } else {
         return 0;
     }
-}
-
-void mission_2_2_watch_front(void) {
-    ACTION_INIT(MIDDLE, OBLIQUE);
-    RobotSleep(1);
 }
 
 void mission_2_2_watch_side(void) {
     ACTION_INIT(MIDDLE, LEFT);
-}
-
-int mission_2_2_before_bridge_set_center_version2(U16 *image) {
-    U16 dir;
-    int col, row, red_bridge[2] = {0,};
-
-    for (dir = 0; dir < 2; ++dir) {
-        for (row = 0; row < HEIGHT; ++row) {
-            for (col = WIDTH / 2 * (dir); col < WIDTH / 2 * (dir + 1); ++col) {
-                red_bridge[dir] += (
-                        GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
-                        GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE)
-                );
-            }
-        }
-    }
-
-    // 0: LEFT, 1: RIGHT
-    double r[2] = {
-            (double) red_bridge[0] / (HEIGHT * WIDTH / 2) * 100,
-            (double) red_bridge[1] / (HEIGHT * WIDTH / 2) * 100
-    };
-
-    double s = r[0] - r[1];
-
-    printf("LEFT: %f, RIGHT: %f, r: %f\n\n", r[0], r[1], s);
-
-    if (((s > 0) ? s : (-s)) > CASE_2_1_CENTER) {
-        ACTION_MOVE(LONG, ((s > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, OBLIQUE, 1);
-        ACTION_WALK(CLOSE, OBLIQUE, 1);
-        return 0;
-    } else {
-        ACTION_WALK(CLOSE, OBLIQUE, 2);
-        printf("SUCCESS\n");
-        return 1;
-    }
 }
 
 int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) {

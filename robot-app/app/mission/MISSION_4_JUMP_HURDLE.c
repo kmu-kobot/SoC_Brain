@@ -47,47 +47,6 @@ int mission_4_4_jump_hurdle(void) {
     return 1;
 }
 
-
-void mission_4_5_watch_diagonal_line(void) {
-    ACTION_INIT(MIDDLE, OBLIQUE);
-}
-
-int mission_4_5_set_front_of_not_bk(U16 *image) {
-    U32 col[3] = {85, 95, 90}, row, i;
-    int checkHurdleLine[3] = {0,};
-
-    for (i = 0; i < 3; ++i) {
-        for (row = HEIGHT - 1; row >= 0; --row) {
-            if (GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) &&
-                GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK)) {
-                checkHurdleLine[i] = (HEIGHT - row);
-                break;
-            }
-        }
-    }
-
-    double s = 0;
-    printf("\nM4-5: BLACK LINE\n");
-    for (i = 0; i < 3; ++i) {
-        s += checkHurdleLine[i];
-        printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);
-    }
-    printf("\n");
-
-    s /= 3;
-    printf("AVG: %f\n\n", s);
-
-    printf((s < CASE_4_1_NON_BLACK_LINE) ? "SUCCESS\n" : "FAIL\n");
-
-    if (s < CASE_4_1_NON_BLACK_LINE) {
-        ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 1);
-        return 0;
-    } else {
-        ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 3);
-        return 1;
-    }
-}
-
 int mission_4_6_set_center(U16 *image, int length) {
     U32 col[3] = {85, 95, 90}, row, i;
     U16 checkHurdleLine[3] = {0,};

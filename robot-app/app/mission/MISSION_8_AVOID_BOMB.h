@@ -14,6 +14,4 @@
 #define MISSION_8_4_UPPER 80
 #define MISSION_8_4_THRESHOLDS 30
 
-int mission_8_4_is_front_of_finish_line(U16 *image);
-
 #endif //SOC_APP_MISSION_8_AVOID_BOMB_H

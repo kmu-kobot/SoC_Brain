@@ -2,7 +2,6 @@
 // Created by Gihyeon Yang on 2018. 7. 17..
 //
 
-#include <math.h>
 #include "MISSION_3_AVOID_BOMB.h"
 
 void mission_3_4_watch_front(void) {
@@ -175,7 +174,7 @@ int mission_3_default_avoid_bomb(U16 *image) {
 
     if (rReturn) {
         mo++;
-        ACTION_WALK(FAST, DOWN, 2);
+        ACTION_WALK(FAST, DOWN, 3);
         RobotSleep(2);
     } else {
         if (s == 10) {
@@ -234,6 +233,6 @@ void mission_3_7_attach_hurdle(U16 *image) {
         }
     }
 
-    ACTION_WALK(FAST, OBLIQUE, ((double) cnt * 100 / (WIDTH * (HEIGHT - 90)) > 10) ? 7 : 2);
+    ACTION_WALK(FAST, OBLIQUE, ((double) cnt * 100 / (WIDTH * HEIGHT) > 10) ? 7 : 2);
 
 }

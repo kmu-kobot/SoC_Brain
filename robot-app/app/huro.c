@@ -51,7 +51,7 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         if (flag == 3) {
-                            mission_2_1_watch_below(6);
+                            mission_2_1_watch_below(10);
                         }
 
                         setFPGAVideoData(fpga_videodata);
@@ -99,7 +99,7 @@ int huro(void) {
                     case 4:
                         mission_3_4_watch_front();
                         setFPGAVideoData(fpga_videodata);
-                        step = (mission_3_4_is_not_front_of_bomb(fpga_videodata)) ? 5 : 2;
+                        step = (mission_3_4_is_not_front_of_bomb(fpga_videodata)) ? 5 : 1;
                         flag = 0;
                         break;
                     case 5:
@@ -215,7 +215,7 @@ int huro(void) {
                         }
 
                         if (step == 6) {
-                            mission_5_5_short_walk_on_green_bridge((flag++ >= 2) ? 4 : 6);
+                            mission_5_5_short_walk_on_green_bridge((flag++ >= 2) ? 4 : 5);
                         }
 
                         step = 4;
@@ -371,6 +371,7 @@ int huro(void) {
                     case 9:
                         mission_6_9_walk_front();
                         ++step;
+                        break;
                     default:
                         mission = 10;
                         step = 0;

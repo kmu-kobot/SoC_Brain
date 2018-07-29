@@ -36,8 +36,6 @@ void mission_5_2_watch_side(void);
 
 int mission_5_3_climb_up_stairs(void);
 
-void mission_5_5_watch_below(void);
-
 int mission_5_5_check_finish_black_line(U16 *image);
 
 int mission_5_5_check_green_bridge_straight(U16 *image);
