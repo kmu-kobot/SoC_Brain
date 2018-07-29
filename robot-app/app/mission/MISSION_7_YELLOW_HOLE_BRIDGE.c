@@ -34,7 +34,7 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
         }
 
         if ((double) (cntYellow * 100 / ((ROBOT_KNEE - 20) * WIDTH)) > 5) {
-            ACTION_WALK(CLOSE, OBLIQUE, 3);
+            ACTION_WALK(CLOSE, OBLIQUE, 4);
         } else {
             ACTION_WALK(FAST, OBLIQUE, repeat);
         }
@@ -45,7 +45,6 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
 
 void mission_7_2_watch_below(void) {
     ACTION_INIT(MIDDLE, OBLIQUE);
-    RobotSleep(1);
 }
 
 int mission_7_6_jump_hole(void) {
