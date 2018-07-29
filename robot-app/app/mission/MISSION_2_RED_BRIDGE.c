@@ -6,7 +6,7 @@
 
 void mission_2_1_watch_below(int repeat) {
     ACTION_WALK(FAST, DOWN, repeat);
-    RobotSleep(1);
+    RobotSleep(2);
 }
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image) {
@@ -37,6 +37,7 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
             ACTION_WALK(CLOSE, OBLIQUE, 2);
         } else {
             ACTION_WALK(FAST, OBLIQUE, 2);
+            RobotSleep();
         }
 
         return 1;
@@ -191,7 +192,7 @@ int mission_2_4_after_bridge_set_straight(U16 *image, int mode) {
                 (l - CASE_0_DEFAULT_SLOPE_ERROR > s) ?
                 DIR_LEFT :
                 DIR_RIGHT,
-                MIDDLE, (mode) ? RIGHT : LEFT, 2
+                MIDDLE, (mode) ? RIGHT : LEFT, 1
         );
         return 0;
     } else {

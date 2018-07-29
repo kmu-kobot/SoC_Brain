@@ -22,6 +22,8 @@
 #define MISSION_3_4_HEIGHT_OFFSET 30
 #define MISSION_3_4_BOMB 10
 
+void mission_3_init_global(void);
+
 void mission_3_default_watch_below(void);
 
 int mission_3_default_avoid_bomb(U16 *image);
@@ -29,6 +31,8 @@ int mission_3_default_avoid_bomb(U16 *image);
 void mission_3_4_watch_front(void);
 
 int mission_3_4_is_not_front_of_bomb(U16 *image);
+
+void mission_3_7_attach_hurdle(U16 *image);
 
 
 #endif //SOC_APP_MISSION_3_AVOID_BOMB_H

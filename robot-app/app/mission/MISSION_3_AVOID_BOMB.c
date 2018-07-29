@@ -11,6 +11,10 @@ void mission_3_4_watch_front(void) {
 
 int c = 0;
 
+void mission_3_init_global(void) {
+    c = 0;
+}
+
 int mission_3_4_is_not_front_of_bomb(U16 *image) {
     U32 row, col, i;
     int check;
@@ -129,11 +133,11 @@ int mission_3_default_avoid_bomb(U16 *image) {
     };
 
     U32 heights[5][2] = {
-            {0,  HEIGHT},
+            {10, HEIGHT - 10},
             {10, ROBOT_KNEE},
             {10, ROBOT_KNEE},
             {10, ROBOT_KNEE},
-            {0,  HEIGHT}
+            {10, HEIGHT - 10}
     };
 
     U32 row, col, i, check[5] = {0,};
@@ -171,7 +175,7 @@ int mission_3_default_avoid_bomb(U16 *image) {
 
     if (rReturn) {
         mo++;
-        ACTION_WALK(FAST, DOWN, 4);
+        ACTION_WALK(FAST, DOWN, 2);
         RobotSleep(2);
     } else {
         if (s == 10) {
@@ -185,9 +189,9 @@ int mission_3_default_avoid_bomb(U16 *image) {
         } else if (s == 100 || s == 001) {
 
             ACTION_MOVE(
-                    SHORT,
+                    LONG,
                     (s == 100) ? DIR_RIGHT : DIR_LEFT,
-                    MIDDLE, DOWN, 2
+                    MIDDLE, DOWN, 1
             );
             // * 001 왼쪽으로 이동, 왼쪽 사이드보고 롱으로할지 쇼트로할지 결정 ( 10010 ) 쇼트, ( 00010 ) 롱
             // * 100 오른쪽으로 이동, 오른쪽 사이드보고 롱으로 할지 쇼트로할지 결정 ( 01001 ) 쇼트, ( 00010 ) 롱
@@ -217,4 +221,19 @@ int mission_3_default_avoid_bomb(U16 *image) {
     }
 
     return rReturn;
+}
+
+void mission_3_7_attach_hurdle(U16 *image) {
+
+    U32 row, col;
+    int cnt = 0;
+
+    for (row = 0; row < HEIGHT; ++row) {
+        for (col = 0; col < WIDTH; ++col) {
+            cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLUE);
+        }
+    }
+
+    ACTION_WALK(FAST, OBLIQUE, ((double) cnt * 100 / (WIDTH * (HEIGHT - 90)) > 10) ? 7 : 2);
+
 }

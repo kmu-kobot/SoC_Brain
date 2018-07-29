@@ -6,7 +6,7 @@
 
 void mission_5_1_watch_below(int repeat) {
     ACTION_WALK(FAST, DOWN, repeat);
-    RobotSleep(1);
+    RobotSleep(2);
 }
 
 int mission_5_1_check_black_line(U16 *image, int repeat) {
@@ -34,7 +34,7 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
             }
         }
 
-        ACTION_WALK(FAST, DOWN, 2);
+        ACTION_WALK(CLOSE, DOWN, 4);
 
         // if ((double) cntBlack * 100 / (ROBOT_KNEE - 20) * WIDTH > 5) {
         //     ACTION_WALK(CLOSE, DOWN, 3);
@@ -208,7 +208,7 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
 
 int mission_5_5_short_walk_on_green_bridge(int repeat) {
     ACTION_WALK(FAST, DOWN, repeat);
-    RobotSleep(1);
+    RobotSleep(4);
     return 1;
 }
 
@@ -220,7 +220,7 @@ int mission_5_5_get_repeat(U16 *image) {
         }
     }
 
-    return ((double) cnt * 100 / ROBOT_KNEE * 100 >= 5) ? 4 : 2;
+    return ((double) cnt * 100 / ROBOT_KNEE * 100 >= 5) ? 4 : 3;
 }
 
 

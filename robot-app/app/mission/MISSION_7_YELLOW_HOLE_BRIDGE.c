@@ -37,6 +37,7 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
             ACTION_WALK(CLOSE, OBLIQUE, 4);
         } else {
             ACTION_WALK(FAST, OBLIQUE, repeat);
+            RobotSleep(2);
         }
     }
 
