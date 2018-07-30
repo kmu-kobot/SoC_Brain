@@ -99,7 +99,6 @@ int huro(void) {
                     case 1:
                         if (flag == 0) {
                             mission_3_4_watch_front();
-                            flag++;
                         }
 
                         setFPGAVideoData(fpga_videodata);
