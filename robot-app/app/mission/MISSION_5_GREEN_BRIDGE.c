@@ -6,7 +6,7 @@
 
 void mission_5_1_watch_below(int repeat) {
     ACTION_WALK(FAST, DOWN, repeat);
-    RobotSleep(1);
+    RobotSleep(2);
 }
 
 int mission_5_1_check_black_line(U16 *image, int repeat) {
@@ -34,15 +34,8 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
             }
         }
 
-        ACTION_WALK(FAST, DOWN, 2);
+        ACTION_WALK(CLOSE, DOWN, 4);
 
-        // if ((double) cntBlack * 100 / (ROBOT_KNEE - 20) * WIDTH > 5) {
-        //     ACTION_WALK(CLOSE, DOWN, 3);
-        // } else {
-        //     ACTION_WALK(FAST, DOWN, repeat);
-        // }
-
-        // RobotSleep(1);
     }
 
     return rResult;
@@ -60,10 +53,6 @@ int mission_5_3_climb_up_stairs(void) {
     ACTION_INIT(MIDDLE, DOWN);
     RobotSleep(1);
     return 1;
-}
-
-void mission_5_5_watch_below(void) {
-    ACTION_INIT(MIDDLE, DOWN);
 }
 
 int mission_5_5_check_finish_black_line(U16 *image) {
@@ -89,8 +78,8 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
 
     if (s > 13) {
         printf("GOGO");
-        ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, 2);
-        ACTION_TURN(SHORT, DIR_LEFT, MIDDLE, DOWN, 1);
+        ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, 3);
+        ACTION_TURN(SHORT, DIR_LEFT, MIDDLE, DOWN, 4);
         return 0;
     }
 
@@ -199,7 +188,7 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
     printf("LEFT: %d, RIGHT: %d, r: %d\n\n", green_len[0], green_len[1], r);
 
     if (((r > 0) ? r : (-r)) > MISSION_5_5_GREEN_BRIDGE_THRESHOLDS) {
-        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 2);
+        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 1);
         RobotSleep(1);
     }
 
@@ -208,7 +197,7 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
 
 int mission_5_5_short_walk_on_green_bridge(int repeat) {
     ACTION_WALK(FAST, DOWN, repeat);
-    RobotSleep(1);
+    RobotSleep(4);
     return 1;
 }
 
@@ -220,7 +209,7 @@ int mission_5_5_get_repeat(U16 *image) {
         }
     }
 
-    return ((double) cnt * 100 / ROBOT_KNEE * 100 >= 5) ? 4 : 2;
+    return ((double) cnt * 100 / (ROBOT_KNEE * 100) >= 5) ? 4 : 3;
 }
 
 
@@ -274,7 +263,7 @@ int mission_5_6_set_straight(U16 *image) {
 
     int rResult = 1;
     if (((r > 0) ? r : -r) > MISSION_5_6_GREEN_BRIDGE_SLOPE) {
-        ACTION_TURN(SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 1);
+        ACTION_TURN(SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 2);
         RobotSleep(1);
         rResult = 0;
     }
@@ -287,4 +276,42 @@ int mission_5_7_climb_down_stairs(void) {
     ACTION_INIT(MIDDLE, OBLIQUE);
     ACTION_WALK(FAST, OBLIQUE, 9);
     return 1;
+}
+
+void mission_5_5_set_center(U16 *image) {
+    U16 dir, cnt;
+    int col, row, flagSign, green_len[2] = {0,};
+
+    for (dir = 0; dir < 2; ++dir) {
+        flagSign = (dir) ? 1 : -1;
+        for (col = 0; col < WIDTH / 2 - 1; ++col) {
+            cnt = 0;
+            for (row = ROBOT_KNEE;
+                 row < HEIGHT;
+                 ++row) {
+                if (CheckCol(WIDTH / 2 + ROBOT_OFFSET + col * flagSign)) {
+                    cnt += GetValueRGBYOBK(GetPtr(image, row, WIDTH / 2 + ROBOT_OFFSET + col * flagSign, WIDTH), GREEN);
+                } else {
+                    break;
+                }
+            }
+
+            if (cnt < 3) {
+                green_len[dir] = col;
+                break;
+            }
+        }
+    }
+
+    // 0: LEFT, 1: RIGHT
+    int r = green_len[0] - green_len[1];
+
+    printf("\nM5-5: SET CENTER\n");
+    printf("LEFT: %d, RIGHT: %d, r: %d\n\n", green_len[0], green_len[1], r);
+
+    if (((r > 0) ? r : (-r)) > 7) {
+        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 3);
+        RobotSleep(1);
+    }
+
 }

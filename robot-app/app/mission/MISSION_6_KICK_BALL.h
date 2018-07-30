@@ -15,17 +15,20 @@
 #define DEFAULT_RIGHT_RANGE 66
 #define DEFAULT_RANGE_ERROR 6
 
-
 #define MISSION_6_2_BLACK_LINE_COL_POINT_1 60
 #define MISSION_6_2_BLACK_LINE_COL_POINT_2 120
 #define MISSION_6_2_KICK_BALL_THRESHOLDS 7
 #define MISSION_6_2_BLACK_LINE_SLOPE 10
 
-#define CASE_6_9_NON_BLACK_LINE 90
+#define CASE_6_9_NON_BLACK_LINE 110
 
 #define MISSION_6_3_THRES 2
 
-#define MISSION_6_4_THRES 10
+#define MISSION_6_3_CENTER 96
+
+#define MISSION_6_4_THRES 5
+
+#define MISSION_6_4_CENTER 111
 
 #define MISSION_6_6_COL_POINT_1 80
 #define MISSION_6_6_COL_POINT_2 120
@@ -57,6 +60,8 @@ int mission_6_3_set_straight_hole(U16 *image);
 
 int countColor(U16 *image, int row, int col, int range, int color);
 
+int mission_6_4_find_ball(U16 *image);
+
 int mission_6_4_set_front_of_ball(U16 *image);
 
 int mission_6_5_kick_ball(void);
@@ -66,6 +71,8 @@ void mission_6_6_watch_side(void);
 int mission_6_6_set_center_black_line(U16 *image, int mode);
 
 int mission_6_9_set_front_of_not_bk(U16 *image);
+
+int mission_6_9_walk_front(void);
 
 void mission_test(U16 *image);
 

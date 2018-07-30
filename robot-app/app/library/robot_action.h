@@ -209,10 +209,7 @@ typedef enum {
 
     MISSION_2_RED_DUMBLING = 176,
 
-    MISSION_3_MINE_WALK_START = 181,
-    MISSION_3_MINE_WALK_END,
-    MISSION_3_MINE_WALK_L,
-    MISSION_3_MINE_WALK_R,
+    MISSION_3_MINE_WALK = 181,
 
     MISSION_4_HURDLING = 187,
 
@@ -223,8 +220,6 @@ typedef enum {
     MISSION_6_RIGHT_KICK = 200,
 
     MISSION_7_YELLOW_DUMBLING = 203,
-
-    TAKE_REST = 208,
 
     NIL = 0xff
 } MOTION;
@@ -290,7 +285,7 @@ typedef enum {
 
 typedef enum {
     RED_DUMBLING = MISSION_2_RED_DUMBLING,
-    MINE_WALK = MISSION_3_MINE_WALK_START,
+    MINE_WALK = MISSION_3_MINE_WALK,
     HURDLING = MISSION_4_HURDLING,
     STAIR_UP = MISSION_5_STAIR_UP,
     STAIR_DOWN = MISSION_5_STAIR_DOWN,
@@ -393,20 +388,8 @@ static inline void ACTION_MOTION_REPEAT(MOTION motion, POSE pose, VIEW view, int
 //  MOTION MISSION          //
 //////////////////////////////
 
-static inline void ACTION_MINE_WALK() {
-    int i;
-    action(INIT_MOTION(MIDDLE, DOWN), MISSION_3_MINE_WALK_START);
-
-    for (i = 0; i < MINE_WALK_REPEAT; ++i) {
-        RobotAction(MISSION_3_MINE_WALK_L);
-        RobotAction(MISSION_3_MINE_WALK_R);
-    }
-
-    RobotAction(MISSION_3_MINE_WALK_END);
-}
-
 static inline void ACTION_MISSION(MISSION mission, POSE pose, VIEW view) {
-    mission == MINE_WALK ? ACTION_MINE_WALK() : ACTION_MOTION(mission, pose, view);
+    ACTION_MOTION(mission, pose, view);
 }
 
 #endif //SOC_APP_ROBOT_ACTION_H
