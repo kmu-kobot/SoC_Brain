@@ -13,11 +13,7 @@ void foo(MOTION_INIT init_motion, FOO_MOD mod)
         if (init_motion != prev)
         {
             RobotAction(init_motion);
-            prev = init_motion;
         }
     }
-    else if (mod == SET)
-    {
-        prev = init_motion;
-    }
+    prev = init_motion;
 }

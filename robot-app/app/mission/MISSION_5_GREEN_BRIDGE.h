@@ -20,13 +20,13 @@
 
 #define MISSION_5_6_POINT_X_1 10
 #define MISSION_5_6_POINT_X_2 170
-#define MISSION_5_6_BLACK_LEN_THRESHOLDS 60
+#define MISSION_5_6_BLACK_LEN_THRESHOLDS 50
 #define MISSION_5_6_GREEN_BRIDGE_SLOPE 3
 
 #define MISSION_5_6_BLACK_COL_1 30
 #define MISSION_5_6_BLACK_COL_2 150
 #define MISSION_5_6_BLACK_RANGE 5
-#define MISSION_5_6_BLACK_LEN_LENGTH 60
+#define MISSION_5_6_BLACK_LEN_LENGTH 70
 
 void mission_5_1_watch_below(int repeat);
 
@@ -53,5 +53,7 @@ int mission_5_6_set_straight(U16 *image);
 int mission_5_7_climb_down_stairs(void);
 
 void mission_5_5_set_center(U16 *image);
+
+int mission_5_11_attach(U16 *image);
 
 #endif //SOC_APP_MISSION_5_GREEN_BRIDGE_H

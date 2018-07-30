@@ -537,3 +537,9 @@ void close_graphic(void)
 	if (graphic_handle != -1)
 		close(graphic_handle);
 }
+
+void setFPGAVideoData(U16 *buf) {
+    read_fpga_video_data(buf);
+    draw_fpga_video_data_full(buf);
+    flip();
+}

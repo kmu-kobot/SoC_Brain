@@ -6,7 +6,24 @@
 
 void mission_5_1_watch_below(int repeat) {
     ACTION_WALK(FAST, DOWN, repeat);
-    RobotSleep(2);
+    RobotSleep(1);
+}
+
+int mission_5_11_attach(U16 *image) {
+    U32 row, col, cnt = 0;
+    for (row = 20; row < ROBOT_KNEE; ++row) {
+        for (col = 0; col < WIDTH; ++col) {
+            cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
+        }
+    }
+
+    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH) > 20) {
+        ACTION_WALK(CLOSE, DOWN, 2);
+        return 1;
+    } else {
+        ACTION_WALK(CLOSE, DOWN, 2);
+        return 0;
+    }
 }
 
 int mission_5_1_check_black_line(U16 *image, int repeat) {
@@ -310,7 +327,7 @@ void mission_5_5_set_center(U16 *image) {
     printf("LEFT: %d, RIGHT: %d, r: %d\n\n", green_len[0], green_len[1], r);
 
     if (((r > 0) ? r : (-r)) > 7) {
-        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 3);
+        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 2);
         RobotSleep(1);
     }
 

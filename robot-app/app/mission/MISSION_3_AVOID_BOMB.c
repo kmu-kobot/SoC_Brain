@@ -16,7 +16,7 @@ void mission_3_init_global(void) {
 
 int mission_3_4_is_not_front_of_bomb(U16 *image) {
     U32 row, col, i;
-    int check, check2 = 0;
+    int check;
     check = 0;
 
     if (c == 3 || c == 4) return 1;
@@ -40,7 +40,7 @@ int mission_3_4_is_not_front_of_bomb(U16 *image) {
             }
         }
 
-        return (double) check * 100 / (WIDTH * HEIGHT) < 1;
+        return (double) check * 100 / (WIDTH * HEIGHT) < 4;
 
     }
 
@@ -222,15 +222,16 @@ int mission_3_default_avoid_bomb(U16 *image) {
         } else if (s == 100 || s == 1) {
 
             ACTION_MOVE(
-                    LONG,
+                    SHORT,
                     (check[0] == 2) ? DIR_RIGHT :
                     (check[4] == 2) ? DIR_LEFT :
                     (s == 100) ? DIR_RIGHT : DIR_LEFT,
-                    MIDDLE, DOWN, 2
+                    MIDDLE, DOWN, 3
             );
             // * 001 왼쪽으로 이동, 왼쪽 사이드보고 롱으로할지 쇼트로할지 결정 ( 10010 ) 쇼트, ( 00010 ) 롱
             // * 100 오른쪽으로 이동, 오른쪽 사이드보고 롱으로 할지 쇼트로할지 결정 ( 01001 ) 쇼트, ( 00010 ) 롱
         } else if (s == 101) {
+
             ACTION_MOVE(
                     LONG,
                     (
@@ -241,6 +242,7 @@ int mission_3_default_avoid_bomb(U16 *image) {
                     MIDDLE, DOWN, 2
             );
             // * 101 양쪽 사이드 보고 좌우 어디로 이동할지 결정 ( 11010 ) 오른, ( 01011 ) 왼, ( 11011 ) 왼 or 오른
+
         } else if (s == 111) {
             ACTION_MOVE(
                     LONG,

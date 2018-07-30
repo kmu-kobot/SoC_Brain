@@ -14,6 +14,8 @@
 
 void mission_7_1_watch_below(int repeat);
 
+int mission_7_1_attach_yellow_bridge(U16 *image);
+
 int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat);
 
 void mission_7_2_watch_below(void);

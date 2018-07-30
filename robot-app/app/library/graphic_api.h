@@ -23,4 +23,6 @@ SURFACE *loadbmp(char *fname);
 
 int open_graphic(void);
 void close_graphic(void);
+
+void setFPGAVideoData(U16 *buf);
 #endif //__AMAZON2_GRAPHIC_API_H__

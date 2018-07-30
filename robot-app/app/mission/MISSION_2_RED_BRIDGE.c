@@ -9,6 +9,25 @@ void mission_2_1_watch_below(int repeat) {
     RobotSleep(1);
 }
 
+int mission_2_1_attach_red_bridge(U16 *image) {
+    U32 row, col, cnt = 0;
+    for (row = 20; row < ROBOT_KNEE; ++row) {
+        for (col = 0; col < WIDTH; ++col) {
+            cnt += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
+                    GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE) ||
+                    GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), CH2));
+        }
+    }
+
+    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH) > 50) {
+        ACTION_WALK(CLOSE, DOWN, 1);
+        return 1;
+    } else {
+        ACTION_WALK(CLOSE, DOWN, 2);
+        return 0;
+    }
+}
+
 int mission_2_1_wait_front_of_red_bridge(U16 *image) {
     U32 col, row, cntRed = 0;
     for (row = 0; row < HEIGHT; ++row) {
@@ -24,18 +43,6 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
     printf(((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION) ? "SUCCESS\n" : "FAIL\n");
 
     if (((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION)) {
-        cntRed = 0;
-        for (row = 20; row < ROBOT_KNEE; ++row) {
-            for (col = 0; col < WIDTH; ++col) {
-                cntRed += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
-                           GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE) ||
-                           GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), CH2));
-            }
-        }
-
-        ACTION_WALK(CLOSE, DOWN, 4);
-        RobotSleep(1);
-
         return 1;
     } else {
         return 0;
