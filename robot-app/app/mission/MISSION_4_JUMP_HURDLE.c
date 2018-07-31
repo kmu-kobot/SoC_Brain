@@ -44,8 +44,6 @@ int mission_4_4_jump_hurdle(void) {
     ACTION_WALK(FAST, OBLIQUE, 4);
     RobotSleep(2);
     ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 7);
-    ACTION_INIT(MIDDLE, RIGHT);
-    ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, RIGHT, 3);
     return 1;
 }
 

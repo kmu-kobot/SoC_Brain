@@ -10,8 +10,6 @@
 
 #define SOC_APP_MISSION_8_AVOID_BOMB_H
 
-#define MISSION_8_4_LOWER 40
-#define MISSION_8_4_UPPER 80
-#define MISSION_8_4_THRESHOLDS 30
+int mission_8_1_is_not_front_of_bomb(U16 *image);
 
 #endif //SOC_APP_MISSION_8_AVOID_BOMB_H

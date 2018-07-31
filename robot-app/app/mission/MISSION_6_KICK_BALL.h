@@ -55,6 +55,8 @@ int mission_6_3_locate_hole_on_center(U16 *image);
 
 void mission_6_4_turn_to_detect_hole(void);
 
+void mission_6_4_turn_left(void);
+
 int mission_6_3_find_hole_interpolation(U16 *image);
 
 int mission_6_3_find_hole(U16 *image);

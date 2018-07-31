@@ -54,8 +54,9 @@ int mission_6_1_detection_ball(U16 *image) {
         double degree = atan2(hole_points[0] - ball_points[0], hole_points[1] - ball_points[1]);
         DIRECTION turn_dir = degree < 0;
 
-        if (abs(WIDTH / 2 - ball_points[0] < 20) && abs(degree) > 20.0 * M_PI / 180.0) {
-            ACTION_TURN(LONG, turn_dir, MIDDLE, OBLIQUE, (int) (abs(degree) * 180.0 / 20.0 / M_PI));
+        if (abs(WIDTH / 2 - ball_points[0] < 20) && abs(degree) > 20.0 * M_PI / 180.0)
+        {
+            ACTION_TURN(LONG, turn_dir, MIDDLE, OBLIQUE, (int)(abs(degree) * 180.0 / 20.0 / M_PI));
             RobotSleep(2);
             return 0;
         }
@@ -65,7 +66,8 @@ int mission_6_1_detection_ball(U16 *image) {
 
     if (ball_state == 0) {
         return 1;
-    } else if (ball_state == 2) {
+    }
+    else if (ball_state == 2) {
         return 0;
     }
 
@@ -83,9 +85,11 @@ int mission_6_1_detection_ball(U16 *image) {
 
     if (ball_points[0] < 70 || ball_points[0] > 110) {
         ACTION_MOVE(LONG, move_dir, MIDDLE, OBLIQUE, abs(WIDTH / 2 - ball_points[0]) / 15);
-    } else if (ball_points[1] <= 60) {
+    }
+    else if (ball_points[1] <= 60) {
         ACTION_WALK(FAST, OBLIQUE, 4);
-    } else {
+    }
+    else {
         ACTION_WALK(FAST, OBLIQUE, 3);
     }
     RobotSleep(2);
@@ -118,7 +122,7 @@ int mission_6_2_set_straight_black_line(U16 *image, int mode) {
     int black_len[2] = {0,};
 
     for (i = 0; i < 2; ++i) {
-        for (row = HEIGHT; row > 0; --row) {
+        for (row = HEIGHT- 20; row > 0; --row) {
             if (GetValueRGBYOBK(GetPtr(image, row, col[i] - 1, WIDTH), BLACK) &&
                 GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) &&
                 GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK)) {
@@ -131,12 +135,17 @@ int mission_6_2_set_straight_black_line(U16 *image, int mode) {
     printf("M6-2: SLOPE\n");
     printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
 
-    double degree = atan2(black_len[1] - black_len[0], col[1] - col[0]);
+    double degree = atan2(black_len[1] - black_len[0], col[1] - col[0]) * 180.0 / M_PI;
     DIRECTION dir = degree < 0;
 
-    if (degree > 10.0 / 180.0 * M_PI) {
-        ACTION_TURN(LONG, dir, MIDDLE, mode ? RIGHT : LEFT, (int) (abs(degree) * 180.0 / 10.0 / M_PI));
-    } else {
+    printf("degree : %f, dir : %d\n", degree, dir);
+
+    if (abs(degree) > 10.0) {
+        printf("degree > 10.0\n");
+        ACTION_TURN(LONG, dir, MIDDLE, mode ? RIGHT : LEFT, (int)(abs(degree) / 10.0));
+    }
+    else {
+        printf("degree <= 10.0\n");
         return 1;
     }
 
@@ -146,15 +155,13 @@ int mission_6_2_set_straight_black_line(U16 *image, int mode) {
 }
 
 void mission_6_4_turn_to_detect_hole(void) {
+    ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, RIGHT, hole_points[0] / 50 + 1);
+    ACTION_TURN(SHORT, DIR_RIGHT, MIDDLE, RIGHT, hole_points[0] / 7 + 3);
+}
 
-    if (ball_points[0] - hole_points[1] < 0) {
-        ACTION_TURN(LONG, DIR_RIGHT, MIDDLE, OBLIQUE, 3);
-        RobotSleep(2);
-    } else if (ball_points[0] - hole_points[1] > 0) {
-        ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 3);
-        RobotSleep(2);
-    }
-
+void mission_6_4_turn_left(void) {
+    ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, OBLIQUE, 1);
+    ACTION_TURN(SHORT, DIR_LEFT, MIDDLE, OBLIQUE, 5);
 }
 
 int mission_6_3_find_hole_interpolation(U16 *image) {
@@ -162,7 +169,8 @@ int mission_6_3_find_hole_interpolation(U16 *image) {
     int state;
     int x[5], y[5];
 
-    for (; cnt < 10 && success < 5; ++cnt) {
+    for (; cnt < 10 && success < 5; ++cnt)
+    {
         setFPGAVideoData(image);
         state = mission_6_3_find_hole(image);
         if (state == 1) {
@@ -238,8 +246,9 @@ int mission_6_3_find_hole(U16 *image) {
         return 0;
     }
 
-    for (++col; col < WIDTH; ++col) {
-        hole_cnt = 0;
+    for (++col; col < WIDTH; ++col)
+    {
+       hole_cnt = 0;
         for (row = 0; row < HEIGHT; ++row) {
             hole_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLUE);
         }
@@ -258,7 +267,7 @@ int mission_6_3_find_hole(U16 *image) {
     //hole_top 찾기
     for (row = 0; row < HEIGHT; ++row) {
         hole_cnt = 0;
-        for (col = MAX(hole_left - 5, 0); col < MIN(hole_right + 6, WIDTH); ++col) {
+        for (col = MAX(hole_left - 5, 0); col < MIN(hole_right + 6 , WIDTH); ++col) {
             hole_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLUE);
         }
         hole[pos] = hole_cnt > MISSION_6_3_THRES;
@@ -273,7 +282,7 @@ int mission_6_3_find_hole(U16 *image) {
     //hole_bottom 찾기
     for (++row; row < HEIGHT; ++row) {
         hole_cnt = 0;
-        for (col = MAX(hole_left - 5, 0); col < MIN(hole_right + 6, WIDTH); ++col) {
+        for (col = MAX(hole_left - 5, 0); col < MIN(hole_right + 6 , WIDTH); ++col) {
             hole_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLUE);
         }
         hole[pos] = hole_cnt > MISSION_6_3_THRES;
@@ -284,7 +293,7 @@ int mission_6_3_find_hole(U16 *image) {
         }
         pos = (pos + 1) % 4;
     }
-
+    
     if (hole[0] + hole[1] + hole[2] + hole[3] > 2) {
         hole_bottom = --row;
     }
@@ -296,7 +305,7 @@ int mission_6_3_find_hole(U16 *image) {
 
     for (++row; row < HEIGHT; ++row) {
         hole_cnt = 0;
-        for (col = MAX(hole_left - 5, 0); col < MIN(hole_right + 6, WIDTH); ++col) {
+        for (col = MAX(hole_left - 5, 0); col < MIN(hole_right + 6 , WIDTH); ++col) {
             hole_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLUE);
         }
         hole[pos] = hole_cnt > MISSION_6_3_THRES;
@@ -312,7 +321,7 @@ int mission_6_3_find_hole(U16 *image) {
     hole_points[1] = (int) ((int) hole_top + (int) hole_bottom) / 2;
     int hole_size = hole_right - hole_left;
     printf("hole_points : %d, %d\n", hole_points[0], hole_points[1]);
-
+    
 
     return 1;
 }
@@ -323,12 +332,13 @@ int mission_6_3_set_straight_hole(U16 *image) {
     mission_6_3_find_hole_interpolation(image);
 
     double degree = atan2(hole_points[0] - ball_points[0], hole_points[1] - HEIGHT);
-    DIRECTION dir = degree < 0;
+    DIRECTION dir = degree > 0;
 
     printf("degree : %f\n", degree);
 
-    if (abs(degree) > 30.0 * M_PI / 180.0) {
-        ACTION_MOVE(LONG, dir, MIDDLE, OBLIQUE, (int) (abs(degree) * 180.0 / 30.0 / M_PI));
+    if (abs(degree) > 10.0 * M_PI / 180.0) {
+        ACTION_MOVE(LONG, dir, MIDDLE, OBLIQUE, (int)(abs(degree) * 180.0 / 10.0 / M_PI));
+        return 0;
     }
 
     return 1;
@@ -337,7 +347,7 @@ int mission_6_3_set_straight_hole(U16 *image) {
 
 int mission_6_3_locate_hole_on_center(U16 *image) {
 
-    if (mission_6_3_find_hole_interpolation(image) != 1) {
+    if(mission_6_3_find_hole_interpolation(image) != 1) {
         return 0;
     }
 
@@ -370,7 +380,7 @@ int mission_6_3_locate_hole_on_center(U16 *image) {
     } else {
         return 1;
     }
-
+    
     RobotSleep(5);
 
     return 0;
@@ -381,14 +391,16 @@ int mission_6_4_find_ball_interpolation(U16 *image, int limit) {
     int state;
     int x[5], y[5];
 
-    for (; cnt < 10 && success < 5; ++cnt) {
+    for (; cnt < 10 && success < 5; ++cnt)
+    {
         setFPGAVideoData(image);
         state = mission_6_4_find_ball(image, limit);
         if (state == 1) {
             x[success] = ball_points[0];
             y[success] = ball_points[1];
             ++success;
-        } else if (state == 2) {
+        }
+        else if (state == 2) {
             ++many;
         }
     }
@@ -419,8 +431,9 @@ int mission_6_4_find_ball(U16 *image, int limit) {
     for (col = 0; col < WIDTH; ++col) {
         ball_cnt = 0;
         for (row = 0; row < HEIGHT - limit; ++row) {
-            ball_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
-                        GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE);
+            ball_cnt += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
+                        GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE)) &&
+                        !GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW);
         }
         ball[pos] = ball_cnt > MISSION_6_4_THRES;
         if (ball[0] + ball[1] + ball[2] + ball[3] > 2) {
@@ -435,8 +448,9 @@ int mission_6_4_find_ball(U16 *image, int limit) {
     for (++col; col < WIDTH; ++col) {
         ball_cnt = 0;
         for (row = 0; row < HEIGHT - limit; ++row) {
-            ball_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
-                        GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE);
+            ball_cnt += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
+                        GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE)) &&
+                        !GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW);
         }
         ball[pos] = ball_cnt > MISSION_6_4_THRES;
         if (ball[0] + ball[1] + ball[2] + ball[3] < 2) {
@@ -460,8 +474,9 @@ int mission_6_4_find_ball(U16 *image, int limit) {
     for (++col; col < WIDTH; ++col) {
         ball_cnt = 0;
         for (row = 0; row < HEIGHT - limit; ++row) {
-            ball_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
-                        GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE);
+            ball_cnt += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
+                        GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE)) &&
+                        !GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW);
         }
         ball[pos] = ball_cnt > MISSION_6_4_THRES;
         if (ball[0] + ball[1] + ball[2] + ball[3] > 2) {
@@ -481,14 +496,15 @@ int mission_6_4_find_ball(U16 *image, int limit) {
     //ball_top 찾기
     for (row = 0; row < HEIGHT - limit; ++row) {
         ball_cnt = 0;
-        for (col = MAX(ball_left - 5, 0); col < MIN(ball_right + 6, WIDTH); ++col) {
-            ball_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
-                        GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE);
+        for (col = MAX(ball_left - 5, 0); col < MIN(ball_right + 6 , WIDTH); ++col) {
+            ball_cnt += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
+                        GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE)) &&
+                        !GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW);
         }
         ball[pos] = ball_cnt > MISSION_6_4_THRES;
         if (ball[0] + ball[1] + ball[2] + ball[3] > 2) {
             ball_top = row - 2;
-
+            
             pos = (pos + 1) % 4;
             break;
         }
@@ -499,9 +515,10 @@ int mission_6_4_find_ball(U16 *image, int limit) {
     //ball_bottom 찾기
     for (++row; row < HEIGHT - limit; ++row) {
         ball_cnt = 0;
-        for (col = MAX(ball_left - 5, 0); col < MIN(ball_right + 6, WIDTH); ++col) {
-            ball_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
-                        GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE);
+        for (col = MAX(ball_left - 5, 0); col < MIN(ball_right + 6 , WIDTH); ++col) {
+            ball_cnt += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
+                        GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE)) &&
+                        !GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW);
         }
         ball[pos] = ball_cnt > MISSION_6_4_THRES;
         if (ball[0] + ball[1] + ball[2] + ball[3] < 2) {
@@ -524,9 +541,10 @@ int mission_6_4_find_ball(U16 *image, int limit) {
 
     for (++row; row < HEIGHT - limit; ++row) {
         ball_cnt = 0;
-        for (col = MAX(ball_left - 5, 0); col < MIN(ball_right + 6, WIDTH); ++col) {
-            ball_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
-                        GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE);
+        for (col = MAX(ball_left - 5, 0); col < MIN(ball_right + 6 , WIDTH); ++col) {
+            ball_cnt += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
+                        GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE)) &&
+                        !GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW);
         }
         ball[pos] = ball_cnt > MISSION_6_4_THRES;
         if (ball[0] + ball[1] + ball[2] + ball[3] > 2) {
@@ -549,37 +567,47 @@ int mission_6_4_find_ball(U16 *image, int limit) {
 
 int mission_6_4_set_front_of_ball(U16 *image) {
 
-    if (mission_6_4_find_ball_interpolation(image, 10) == 0) {
+    if(mission_6_4_find_ball_interpolation(image, 10) == 0) {
         ACTION_WALK(FAST, DOWN, 2);
         RobotSleep(2);
         return 0;
     }
 
-    if (ball_points[1] < 20) {
+    if (ball_points[1] < 25) {
         ACTION_WALK(CLOSE, DOWN, 2);
-    } else if (ball_points[1] > 30) {
-        ACTION_BIT(BACK, 1);
-    } else if (ball_points[0] < MISSION_6_4_CENTER - 45) {
+    }
+    else if (ball_points[1] > 35) {
+       ACTION_BIT(BACK, 1);
+    }
+    else if (ball_points[0] < MISSION_6_4_CENTER - 45 ) {
         ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, DOWN, 2);
-    } else if (ball_points[0] < MISSION_6_4_CENTER - 15) {
+    }
+    else if (ball_points[0] < MISSION_6_4_CENTER - 15) {
         ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, DOWN, 1);
-    } else if (ball_points[0] < MISSION_6_4_CENTER - 8) {
+    }
+    else if (ball_points[0] < MISSION_6_4_CENTER - 8) {
         ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, 2);
         RobotSleep(2);
-    } else if (ball_points[0] < MISSION_6_4_CENTER - 2) {
+    }
+    else if (ball_points[0] < MISSION_6_4_CENTER - 2) {
         ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, 1);
         RobotSleep(2);
-    } else if (ball_points[0] > MISSION_6_4_CENTER + 45) {
+    }
+    else if (ball_points[0] > MISSION_6_4_CENTER + 45) {
         ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, DOWN, 2);
-    } else if (ball_points[0] > MISSION_6_4_CENTER + 15) {
+    }
+    else if (ball_points[0] > MISSION_6_4_CENTER + 15) {
         ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, DOWN, 1);
-    } else if (ball_points[0] > MISSION_6_4_CENTER + 8) {
+    }
+    else if (ball_points[0] > MISSION_6_4_CENTER + 8) {
         ACTION_MOVE(SHORT, DIR_RIGHT, MIDDLE, DOWN, 2);
         RobotSleep(2);
-    } else if (ball_points[0] > MISSION_6_4_CENTER + 2) {
+    }
+    else if (ball_points[0] > MISSION_6_4_CENTER + 2) {
         ACTION_MOVE(SHORT, DIR_RIGHT, MIDDLE, DOWN, 1);
         RobotSleep(2);
-    } else {
+    }
+    else {
         return 1;
     }
 
@@ -612,6 +640,7 @@ int mission_6_5_kick_ball(void) {
     RobotSleep(1);
     //ACTION_TURN();
     ACTION_MOTION(MISSION_6_RIGHT_KICK, MIDDLE, OBLIQUE);
+    ACTION_TURN(FAST, DIR_LEFT, MIDDLE, OBLIQUE, 5);
     RobotSleep(1);
     return 1;
 }
@@ -661,7 +690,7 @@ int mission_6_9_set_front_of_not_bk(U16 *image) {
 }
 
 int mission_6_6_set_center_black_line(U16 *image, int mode) {
-    U32 col[3] = {85, 95, 90}, row, i, j;
+   U32 col[3] = {85, 95, 90}, row, i, j;
     U16 checkHurdleLine[3] = {0,};
 
     for (i = 0; i < 3; ++i) {

@@ -12,13 +12,15 @@ void mission_5_1_watch_below(int repeat) {
 int mission_5_11_attach(U16 *image) {
     U32 row, col, cnt = 0;
     for (row = 20; row < ROBOT_KNEE; ++row) {
-        for (col = 0; col < WIDTH; ++col) {
+        for (col = 50; col < WIDTH - 50; ++col) {
             cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
         }
     }
 
-    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH) > 20) {
-        ACTION_WALK(CLOSE, DOWN, 2);
+    printf("\n\n xxx %f \n\n", (double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH));
+
+    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) >= 33) {
+        ACTION_WALK(CLOSE, DOWN, 4);
         return 1;
     } else {
         ACTION_WALK(CLOSE, DOWN, 2);
@@ -44,15 +46,6 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
 
     if (rResult && repeat) {
         cntBlack = 0;
-
-        for (row = 20; row < ROBOT_KNEE; ++row) {
-            for (col = 0; col < WIDTH; ++col) {
-                cntBlack += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
-            }
-        }
-
-        ACTION_WALK(CLOSE, DOWN, 4);
-
     }
 
     return rResult;
@@ -220,13 +213,13 @@ int mission_5_5_short_walk_on_green_bridge(int repeat) {
 
 int mission_5_5_get_repeat(U16 *image) {
     U32 col, row, cnt = 0;
-    for (row = 0; row < ROBOT_KNEE; ++row) {
+    for (row = 0; row < HEIGHT; ++row) {
         for (col = 40; col < 140; ++col) {
             cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), GREEN);
         }
     }
 
-    return ((double) cnt * 100 / (ROBOT_KNEE * 100) >= 5) ? 4 : 3;
+    return ((double) cnt * 100 / (HEIGHT * 100) >= 5) ? 4 : 3;
 }
 
 

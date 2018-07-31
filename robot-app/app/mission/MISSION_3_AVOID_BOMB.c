@@ -119,7 +119,7 @@ int mission_3_4_is_not_front_of_bomb(U16 *image) {
         return 3;
     }
 
-    if (rH > 100) {
+    if (rH > 80) {
         c = 3;
         return 1;
     }
@@ -146,18 +146,18 @@ int mission_3_default_avoid_bomb(U16 *image) {
 
     U32 section[5][2] = {
             {20,  40},
-            {40,  79},
-            {79,  105},
-            {105, 147},
+            {40,  70},
+            {70,  114},
+            {114, 147},
             {147, 160}
     };
 
     U32 heights[5][2] = {
-            {10, HEIGHT - 10},
+            {20, HEIGHT - 10},
+            {20, ROBOT_KNEE},
             {10, ROBOT_KNEE},
-            {10, ROBOT_KNEE},
-            {10, ROBOT_KNEE},
-            {10, HEIGHT - 10}
+            {20, ROBOT_KNEE},
+            {20, HEIGHT - 10}
     };
 
     U32 row, col, i, check[5] = {0,};
@@ -212,11 +212,31 @@ int mission_3_default_avoid_bomb(U16 *image) {
     } else {
         bc = 1;
         if (s == 10) {
-            ACTION_MOVE(
-                    LONG,
-                    (check[0] > check[4]) ? DIR_RIGHT : DIR_LEFT,
-                    MIDDLE, DOWN, 2
-            );
+
+            int cLine = 0, cCount = 0, cTemp = 0;
+            for (row = heights[2][0]; row < heights[2][1]; ++row) {
+                cTemp = 0;
+                for (col = section[2][0]; col < section[2][1]; ++col) {
+                    cTemp += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
+                }
+
+                if (cTemp > cCount) {
+                    cCount = cTemp;
+                    cLine = row;
+                }
+
+            }
+
+            cLine = HEIGHT - cLine;
+
+            if (cLine > 20) {
+                ACTION_WALK(SLOW, DOWN, 1);
+            } else {
+                ACTION_WALK(CLOSE, DOWN, 2);
+            }
+
+            ACTION_MISSION(MISSION_3_MINE_WALK, MIDDLE, DOWN);
+
         } else if (s == 110 || s == 11) {
             ACTION_MOVE(LONG, (s == 110) ? DIR_RIGHT : DIR_LEFT, MIDDLE, DOWN, 1);
         } else if (s == 100 || s == 1) {
@@ -284,6 +304,6 @@ void mission_3_7_attach_hurdle(U16 *image) {
         }
     }
 
-    ACTION_WALK(FAST, OBLIQUE, 4);
+    ACTION_WALK(FAST, OBLIQUE, 6);
 
 }

@@ -12,17 +12,19 @@ void mission_7_1_watch_below(int repeat) {
 int mission_7_1_attach_yellow_bridge(U16 *image) {
     U32 row, col, cnt = 0;
     for (row = 20; row < ROBOT_KNEE; ++row) {
-        for (col = 0; col < WIDTH; ++col) {
+        for (col = 50; col < WIDTH - 50; ++col) {
             cnt += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), YELLOW) ||
                     GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), CH2));
         }
     }
 
-    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH) > 50) {
-        ACTION_WALK(CLOSE, DOWN, 1);
+    printf("\n\n xxxx %f\n", (double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH));
+
+    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 90) {
+        ACTION_WALK(CLOSE, DOWN, 2);
         return 1;
     } else {
-        ACTION_WALK(CLOSE, DOWN, 2);
+        ACTION_WALK(CLOSE, DOWN, 4);
         return 0;
     }
 }
@@ -43,7 +45,6 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
     int rReturn = r > MISSION_7_1_THRESHOLDS;
 
     if (rReturn && repeat != -1) {
-        ACTION_WALK(CLOSE, DOWN, 2);
     }
 
     return rReturn;
