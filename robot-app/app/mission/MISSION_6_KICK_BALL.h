@@ -6,6 +6,7 @@
 
 #include "./../library/amazon2_sdk.h"
 #include "./../library/robot_action.h"
+#include "./../library/graphic_api.h"
 #include "stdio.h"
 
 #define SOC_APP_MISSION_6_KICK_BALL_H
@@ -24,11 +25,11 @@
 
 #define MISSION_6_3_THRES 2
 
-#define MISSION_6_3_CENTER 96
+#define MISSION_6_3_CENTER 97
 
 #define MISSION_6_4_THRES 5
 
-#define MISSION_6_4_CENTER 111
+#define MISSION_6_4_CENTER 108
 
 #define MISSION_6_6_COL_POINT_1 80
 #define MISSION_6_6_COL_POINT_2 120
@@ -54,13 +55,19 @@ int mission_6_3_locate_hole_on_center(U16 *image);
 
 void mission_6_4_turn_to_detect_hole(void);
 
+void mission_6_4_turn_left(void);
+
+int mission_6_3_find_hole_interpolation(U16 *image);
+
 int mission_6_3_find_hole(U16 *image);
 
 int mission_6_3_set_straight_hole(U16 *image);
 
 int countColor(U16 *image, int row, int col, int range, int color);
 
-int mission_6_4_find_ball(U16 *image);
+int mission_6_4_find_ball_interpolation(U16 *image, int limit);
+
+int mission_6_4_find_ball(U16 *image, int limit);
 
 int mission_6_4_set_front_of_ball(U16 *image);
 

@@ -6,7 +6,26 @@
 
 void mission_5_1_watch_below(int repeat) {
     ACTION_WALK(FAST, DOWN, repeat);
-    RobotSleep(2);
+    RobotSleep(1);
+}
+
+int mission_5_11_attach(U16 *image) {
+    U32 row, col, cnt = 0;
+    for (row = 20; row < ROBOT_KNEE; ++row) {
+        for (col = 50; col < WIDTH - 50; ++col) {
+            cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
+        }
+    }
+
+    printf("\n\n xxx %f \n\n", (double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH));
+
+    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) >= 33) {
+        ACTION_WALK(CLOSE, DOWN, 4);
+        return 1;
+    } else {
+        ACTION_WALK(CLOSE, DOWN, 2);
+        return 0;
+    }
 }
 
 int mission_5_1_check_black_line(U16 *image, int repeat) {
@@ -27,15 +46,6 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
 
     if (rResult && repeat) {
         cntBlack = 0;
-
-        for (row = 20; row < ROBOT_KNEE; ++row) {
-            for (col = 0; col < WIDTH; ++col) {
-                cntBlack += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
-            }
-        }
-
-        ACTION_WALK(CLOSE, DOWN, 4);
-
     }
 
     return rResult;
@@ -203,13 +213,13 @@ int mission_5_5_short_walk_on_green_bridge(int repeat) {
 
 int mission_5_5_get_repeat(U16 *image) {
     U32 col, row, cnt = 0;
-    for (row = 0; row < ROBOT_KNEE; ++row) {
+    for (row = 0; row < HEIGHT; ++row) {
         for (col = 40; col < 140; ++col) {
             cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), GREEN);
         }
     }
 
-    return ((double) cnt * 100 / (ROBOT_KNEE * 100) >= 5) ? 4 : 3;
+    return ((double) cnt * 100 / (HEIGHT * 100) >= 5) ? 4 : 3;
 }
 
 
@@ -310,7 +320,7 @@ void mission_5_5_set_center(U16 *image) {
     printf("LEFT: %d, RIGHT: %d, r: %d\n\n", green_len[0], green_len[1], r);
 
     if (((r > 0) ? r : (-r)) > 7) {
-        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 3);
+        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 2);
         RobotSleep(1);
     }
 

@@ -9,7 +9,7 @@ void mission_4_1_watch_front(int repeat) {
 }
 
 int mission_4_2_ready_hurdle(U16 *image) {
-    U32 col[3] = {70, 60, 90}, row, i;
+    U32 col[3] = {90, 70, 110}, row, i;
     U16 checkHurdleLine[3] = {0,};
 
     for (i = 0; i < 3; ++i) {
@@ -41,7 +41,7 @@ int mission_4_2_ready_hurdle(U16 *image) {
 
 int mission_4_4_jump_hurdle(void) {
     ACTION_MOTION(MISSION_4_HURDLING, MIDDLE, OBLIQUE);
-    ACTION_WALK(FAST, OBLIQUE, 8);
+    ACTION_WALK(FAST, OBLIQUE, 4);
     RobotSleep(2);
     ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 7);
     return 1;

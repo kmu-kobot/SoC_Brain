@@ -309,6 +309,10 @@ static inline void action(MOTION_INIT init, MOTION motion) {
 //  MOTION INIT             //
 //////////////////////////////
 
+static inline void CHECK_INIT(POSE pose, VIEW view) {
+    foo(INIT_MOTION(pose, view), CHECK);
+}
+
 static inline void ACTION_INIT(POSE pose, VIEW view) {
     RobotAction(INIT_MOTION(pose, view));
     foo(INIT_MOTION(pose, view), SET);

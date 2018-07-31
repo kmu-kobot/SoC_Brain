@@ -14,6 +14,8 @@
 #define MISSION_9_RANGE 100
 #define MISSION_9_THRESHOLDS 10
 
+int mission_9_1_go_front_of_yellow_barricade(U16 *image);
+
 int mission_9_1_wait_yellow_barricade(U16 *image);
 
 int mission_9_2_end_yellow_barricade(U16 *image);
