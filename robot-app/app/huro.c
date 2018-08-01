@@ -131,12 +131,19 @@ int huro(void) {
             case 3: // MISSION 3: AVOID BOMB
                 switch (step) {
                     case 0:
+                        ck = 0;
                         mission_3_4_watch_front();
                         setFPGAVideoData(fpga_videodata);
                         step = (mission_3_1_ver2(fpga_videodata) && mission_4_2_ready_hurdle(fpga_videodata)) ? 2 : 1;
                         flag = 0;
                         break;
                     case 1:
+
+                        if (ck++ == 20) {
+                            step = 0;
+                            break;
+                        }
+
                         if (flag == 0) {
                             flag++;
                             mission_3_default_watch_below();

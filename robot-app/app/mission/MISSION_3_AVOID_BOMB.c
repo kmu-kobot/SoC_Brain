@@ -149,7 +149,7 @@ void mission_3_init(void) {
 
 void mission_3_4_watch_side(void) {
     CHECK_INIT(MIDDLE, (mdir % 2 == 1) ? LEFT : RIGHT);
-    RobotSleep(2);
+    RobotSleep(1);
 }
 
 int mission_3_4_getMDir(void) {
