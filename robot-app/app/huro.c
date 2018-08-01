@@ -120,7 +120,8 @@ int huro(void) {
                         setFPGAVideoData(fpga_videodata);
 
                         if (flag >= 4) {
-                            flag = (mission_2_4_after_bridge_set_straight(fpga_videodata, mission_3_4_getMDir(), 1)) ? 0 : (flag + 1);
+                            flag = (mission_2_4_after_bridge_set_straight(
+                                    fpga_videodata, mission_3_4_getMDir(), 1)) ? 0 : (flag + 1);
                             step = (flag == 0) ? 0 : 1;
                             break;
                         }
@@ -129,7 +130,7 @@ int huro(void) {
 
                         if (tmp == 3) {
                             flag = 4;
-                        }else if (tmp == 4) {
+                        } else if (tmp == 4) {
                             step = 2;
                         } else {
                             flag += tmp;
@@ -247,10 +248,6 @@ int huro(void) {
 
                         if (nextMission) {
                             step += mission_5_6_set_only_one_bk_bar(fpga_videodata);
-                            if (step == 6) {
-                                ACTION_BIT(FRONT, 2);
-                                RobotSleep(1);
-                            }
                         }
 
                         nextMission = 0;
@@ -289,7 +286,7 @@ int huro(void) {
                         break;
                 }
                 break;
-            
+
             case 6: // MISSION 6: KICK BALL
                 switch (step) {
                     case 0:
@@ -304,7 +301,7 @@ int huro(void) {
                         setFPGAVideoData(fpga_videodata);
                         step += mission_6_2_set_center_of_ball(fpga_videodata);
 
-                        if(step == 2) {
+                        if (step == 2) {
                             flag = 0;
                         }
                         break;
@@ -335,50 +332,50 @@ int huro(void) {
                     case 3:
                         ++step;
                         break;
-                    case 4:          
+                    case 4:
                         mission_6_1_watch_front();
                         setFPGAVideoData(fpga_videodata);
                         if (mission_6_3_set_straight_hole(fpga_videodata)) {
                             ++step;
-                        }  
+                        }
                         break;
                     case 5:
-                        if(!flag) {
+                        if (!flag) {
                             flag = 1;
                             mission_6_1_watch_front();
-                        }                      
-                                                     
+                        }
+
                         setFPGAVideoData(fpga_videodata);
                         step += mission_6_3_locate_hole_on_center(fpga_videodata);
 
-                        if(step == 6) {
+                        if (step == 6) {
                             flag = 0;
-                            mission_6_2_watch_below();      
-                            while(TRUE) {
+                            mission_6_2_watch_below();
+                            while (TRUE) {
                                 setFPGAVideoData(fpga_videodata);
                                 step += mission_6_4_set_front_of_ball(fpga_videodata);
-                                
+
                                 printf("step:%d\n", step);
-                                if(step == 7) {
+                                if (step == 7) {
                                     break;
                                 }
-                            }       
+                            }
                         }
 
-                        if(step == 7) {
+                        if (step == 7) {
                             mission_6_1_watch_front();
                             setFPGAVideoData(fpga_videodata);
                             step += mission_6_3_locate_hole_on_center(fpga_videodata);
-                        }           
+                        }
 
-                        if(step == 8) {
+                        if (step == 8) {
                             mission_6_2_watch_below();
                             setFPGAVideoData(fpga_videodata);
                             step += mission_6_4_set_front_of_ball(fpga_videodata);
-                        }   
+                        }
 
                         step = (step == 9) ? 6 : 5;
-                        
+
                         break;
                     case 6:
                         flag = 0;
@@ -386,7 +383,7 @@ int huro(void) {
                         break;
                     case 7:
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_6_9_set_front_of_not_bk(fpga_videodata); 
+                        step += mission_6_9_set_front_of_not_bk(fpga_videodata);
                         break;
                     case 8:
                         mission_6_9_walk_front();
@@ -456,14 +453,58 @@ int huro(void) {
                 break;
             case 8: // MISSION 8: AVOID BOMB
                 switch (step) {
-                    case 1:
-                        mission = 10;
-                        nextMission = 9;
+                    case 0:
+                        mission_3_4_watch_front();
+                        setFPGAVideoData(fpga_videodata);
+                        step = (mission_8_1_is_not_front_of_bomb(fpga_videodata)) ? 2 : 1;
                         flag = 0;
+                        break;
+                    case 1:
+                        if (flag == 0) {
+                            flag++;
+                            mission_3_default_watch_below();
+                        } else if (flag == 4) {
+                            mission_3_4_watch_side();
+                        }
+
+                        setFPGAVideoData(fpga_videodata);
+
+                        if (flag >= 4) {
+                            flag = (mission_2_4_after_bridge_set_straight(
+                                    fpga_videodata, mission_3_4_getMDir(), 1)) ? 0 : (flag + 1);
+                            step = (flag == 0) ? 0 : 1;
+                            break;
+                        }
+
+                        tmp = mission_3_default_avoid_bomb(fpga_videodata);
+
+                        if (tmp == 3) {
+                            flag = 4;
+                        } else if (tmp == 4) {
+                            step = 2;
+                        } else {
+                            flag += tmp;
+                        }
+                        break;
+                    case 2:
+                        ACTION_WALK(FAST, OBLIQUE, 6);
+                        step += 1;
+                        flag = 0;
+                        break;
+                    case 3:
+                        if (flag == 0) {
+                            mission_5_2_watch_side();
+                            flag++;
+                        }
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_2_2_before_bridge_set_center(fpga_videodata, 0, 0);
+                        break;
+                    case 4:
                         step = 0;
+                        flag = 0;
+                        mission += 1;
                         break;
                     default:
-                        step += 1;
                         break;
                 }
                 break;
@@ -471,7 +512,7 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         CHECK_INIT(MIDDLE, OBLIQUE);
-                        RobotSleep(3);
+                        RobotSleep(2);
                         break;
                     case 1:
                         setFPGAVideoData(fpga_videodata);

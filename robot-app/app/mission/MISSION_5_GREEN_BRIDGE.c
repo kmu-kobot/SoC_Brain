@@ -243,6 +243,15 @@ int mission_5_6_set_only_one_bk_bar(U16 *image) {
     printf("\n\t\t- M5-6: SET CENTER\n");
     printf("\t\t\t+ bk_len length: %d\n", blackLen);
 
+    if (blackLen > MISSION_5_6_BLACK_LEN_LENGTH) {
+        if (MISSION_5_6_BLACK_LEN_LENGTH - blackLen >= 15) {
+            ACTION_BIT(FRONT, 4);
+        } else {
+            ACTION_BIT(FRONT, 2);
+        }
+        RobotSleep(1);
+    }
+
     return blackLen < MISSION_5_6_BLACK_LEN_LENGTH;
 }
 

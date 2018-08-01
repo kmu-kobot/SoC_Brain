@@ -30,6 +30,8 @@ void mission_3_7_attach_hurdle(U16 *image);
 
 int mission_3_7_get_attach(U16 *image);
 
+int mission_3_4_getMDir(void);
+
 int mission_3_1_ver2(U16 *image);
 
 #endif //SOC_APP_MISSION_3_AVOID_BOMB_H

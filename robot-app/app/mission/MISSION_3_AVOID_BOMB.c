@@ -146,7 +146,7 @@ void mission_3_4_watch_side(void) {
     RobotSleep(2);
 }
 
-int mission_3_4_getMDir() {
+int mission_3_4_getMDir(void) {
     return (mdir % 2 == 1) ? 0 : 1;
 }
 
@@ -164,7 +164,7 @@ int mission_3_default_avoid_bomb(U16 *image) {
 
     printf("blue_pixel ratio : %f\n", s);
 
-    if(s > 5) {
+    if (s > 5) {
         return 4;
     }
 
@@ -220,7 +220,7 @@ int mission_3_default_avoid_bomb(U16 *image) {
     if (mine[0] == 0 && mine[1] == 0) {
 
         if (mcheck == 1) {
-            
+
             ACTION_MOVE(SHORT, (mdir % 2 == 1) ? DIR_LEFT : DIR_RIGHT, MIDDLE, DOWN, 1);
 
             mdir++;
@@ -229,7 +229,7 @@ int mission_3_default_avoid_bomb(U16 *image) {
             return 3;
         }
 
-        ACTION_WALK(FAST, DOWN, 2);
+        ACTION_WALK(FAST, DOWN, 3);
 
         return 1;
     } else {
