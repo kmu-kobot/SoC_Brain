@@ -52,15 +52,15 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
 }
 
 void mission_5_2_watch_side(void) {
-    ACTION_INIT(MIDDLE, LEFT);
-    RobotSleep(1);
+    CHECK_INIT(MIDDLE, LEFT);
+    RobotSleep(5);
 }
 
 int mission_5_3_climb_up_stairs(void) {
     RobotSleep(1);
     ACTION_MOTION(MISSION_5_STAIR_UP, MIDDLE, OBLIQUE);
     RobotSleep(1);
-    ACTION_INIT(MIDDLE, DOWN);
+    CHECK_INIT(MIDDLE, DOWN);
     RobotSleep(1);
     return 1;
 }
@@ -274,7 +274,6 @@ int mission_5_6_set_straight(U16 *image) {
     int rResult = 1;
     if (((r > 0) ? r : -r) > MISSION_5_6_GREEN_BRIDGE_SLOPE) {
         ACTION_TURN(SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 2);
-        RobotSleep(1);
         rResult = 0;
     }
 
@@ -283,8 +282,8 @@ int mission_5_6_set_straight(U16 *image) {
 
 int mission_5_7_climb_down_stairs(void) {
     ACTION_MOTION(MISSION_5_STAIR_DOWN, MIDDLE, OBLIQUE);
-    ACTION_INIT(MIDDLE, OBLIQUE);
-    ACTION_WALK(FAST, OBLIQUE, 9);
+    CHECK_INIT(MIDDLE, OBLIQUE);
+    ACTION_WALK(FAST, OBLIQUE, 13);
     return 1;
 }
 

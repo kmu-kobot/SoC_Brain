@@ -25,7 +25,7 @@
 
 #define MISSION_6_3_THRES 2
 
-#define MISSION_6_3_CENTER 97
+#define MISSION_6_3_CENTER 101
 
 #define MISSION_6_4_THRES 5
 
@@ -57,17 +57,25 @@ void mission_6_4_turn_to_detect_hole(void);
 
 void mission_6_4_turn_left(void);
 
-int mission_6_3_find_hole_interpolation(U16 *image);
+int mission_6_3_find_hole_interpolation(U16 *image, U32 top, U32 bot, U32 left, U32 right, U8 last);
 
-int mission_6_3_find_hole(U16 *image);
+int mission_6_3_find_hole(U16 *image, U32 top, U32 bot, U32 left, U32 right, U8 last);
+
+int mission_6_3_find_hole_row(U16 *image, U32 top, U32 bot, U32 left, U32 right, U8 last);
+
+int mission_6_3_find_hole_col(U16 *image, U32 top, U32 bot, U32 left, U32 right, U8 last);
 
 int mission_6_3_set_straight_hole(U16 *image);
 
 int countColor(U16 *image, int row, int col, int range, int color);
 
-int mission_6_4_find_ball_interpolation(U16 *image, int limit);
+int mission_6_4_find_ball_interpolation(U16 *image, U32 top, U32 bot, U32 left, U32 right, U8 last);
 
-int mission_6_4_find_ball(U16 *image, int limit);
+int mission_6_4_find_ball(U16 *image, U32 top, U32 bot, U32 left, U32 right, U8 last);
+
+int mission_6_4_find_ball_row(U16 *image, U32 top, U32 bot, U32 left, U32 right, U8 last);
+
+int mission_6_4_find_ball_col(U16 *image, U32 top, U32 bot, U32 left, U32 right, U8 last);
 
 int mission_6_4_set_front_of_ball(U16 *image);
 

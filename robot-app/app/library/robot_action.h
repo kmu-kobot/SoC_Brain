@@ -221,6 +221,16 @@ typedef enum {
 
     MISSION_7_YELLOW_DUMBLING = 203,
 
+    HEAD_MIDDLE_DOWN = 210,
+    HEAD_MIDDLE_OBLIQUE,
+    HAED_MIDDLE_LEFT,
+    HEAD_MIDDLE_RIGHT,
+    HEAD_MIDDLE_UP,
+
+    HEAD_MIDDLE_SIDE_TO_DOWN = 216,
+    HEAD_MIDDLE_DOWN_TO_LEFT,
+    HEAD_MIDDLE_DOWN_TO_RIGHT,
+
     NIL = 0xff
 } MOTION;
 
@@ -295,13 +305,17 @@ typedef enum {
 
 typedef enum {
     CHECK = 0,
-    SET
-} FOO_MOD;
+    SET,
+    HEAD
+} PREV_CHECK_MOD;
 
-void foo(MOTION_INIT motion, FOO_MOD mod);
+void prev_check(MOTION_INIT motion, PREV_CHECK_MOD mod);
+
+#define GET_INIT_POSE(motion) ((motion - 1) / 5)
+#define GET_INIT_VIEW(motion) ((motion - 1) % 5)
 
 static inline void action(MOTION_INIT init, MOTION motion) {
-    foo(init, CHECK);
+    prev_check(init, HEAD);
     RobotAction(motion);
 }
 
@@ -310,12 +324,12 @@ static inline void action(MOTION_INIT init, MOTION motion) {
 //////////////////////////////
 
 static inline void CHECK_INIT(POSE pose, VIEW view) {
-    foo(INIT_MOTION(pose, view), CHECK);
+    prev_check(INIT_MOTION(pose, view), HEAD);
 }
 
 static inline void ACTION_INIT(POSE pose, VIEW view) {
     RobotAction(INIT_MOTION(pose, view));
-    foo(INIT_MOTION(pose, view), SET);
+    prev_check(INIT_MOTION(pose, view), SET);
 }
 
 
@@ -394,6 +408,7 @@ static inline void ACTION_MOTION_REPEAT(MOTION motion, POSE pose, VIEW view, int
 
 static inline void ACTION_MISSION(MISSION mission, POSE pose, VIEW view) {
     ACTION_MOTION(mission, pose, view);
+    prev_check(INIT_MOTION(MIDDLE, OBLIQUE), SET);
 }
 
 #endif //SOC_APP_ROBOT_ACTION_H

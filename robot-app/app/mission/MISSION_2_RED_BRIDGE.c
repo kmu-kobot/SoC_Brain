@@ -50,7 +50,8 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
 }
 
 void mission_2_2_watch_side(void) {
-    ACTION_INIT(MIDDLE, LEFT);
+    CHECK_INIT(MIDDLE, LEFT);
+    RobotSleep(2);
 }
 
 int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) {
@@ -116,7 +117,7 @@ int mission_2_3_escape_red_bridge(void) {
     return 1;
 }
 
-int mission_2_4_after_bridge_set_straight(U16 *image, int mode) {
+int mission_2_4_after_bridge_set_straight(U16 *image, int mode, int pppo) {
     U32 row, i;
     U16 col[2] = {
             80,
@@ -145,16 +146,18 @@ int mission_2_4_after_bridge_set_straight(U16 *image, int mode) {
     printf("Slope : %f\n", s * 100);
 
     int l = ((mode) ? CASE_0_DEFAULT_RIGHT_SLOPE : CASE_0_DEFAULT_LEFT_SLOPE);
+    printf((mode) ? "RIGHT\n" : "LEFT\n");
     printf("%d %d\n", l, (l - 2 <= s && s <= l + 2));
 
     s *= 100;
     if (!(l - CASE_0_DEFAULT_SLOPE_ERROR <= s && s <= l + CASE_0_DEFAULT_SLOPE_ERROR)) {
         ACTION_TURN(
-                LONG,
+                (pppo == 1) ? SHORT : LONG,
                 (l - CASE_0_DEFAULT_SLOPE_ERROR > s) ?
                 DIR_LEFT :
                 DIR_RIGHT,
-                MIDDLE, (mode) ? RIGHT : LEFT, 1
+                MIDDLE, (mode) ? RIGHT : LEFT,
+                (pppo == 1) ? 3 : 1
         );
         return 0;
     } else {

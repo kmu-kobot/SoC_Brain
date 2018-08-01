@@ -43,7 +43,8 @@ int mission_4_4_jump_hurdle(void) {
     ACTION_MOTION(MISSION_4_HURDLING, MIDDLE, OBLIQUE);
     ACTION_WALK(FAST, OBLIQUE, 4);
     RobotSleep(2);
-    ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 7);
+    ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 5);
+    ACTION_WALK(FAST, OBLIQUE, 13);
     return 1;
 }
 
@@ -96,6 +97,6 @@ int mission_4_6_set_center(U16 *image, int length) {
 }
 
 void mission_4_6_watch_side(void) {
-    ACTION_INIT(MIDDLE, RIGHT);
-    RobotSleep(1);
+    CHECK_INIT(MIDDLE, RIGHT);
+    RobotSleep(3);
 }

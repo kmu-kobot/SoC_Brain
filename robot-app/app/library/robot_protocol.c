@@ -62,10 +62,12 @@ void RobotAction(unsigned char Ldata) {
 }
 
 void RobotSleep(int time) {
-    printf("SLEEP START...\t");
-    for (; time != 0; --time) {
-        Send_Command(255, 0);
-        while (!Receive_Ack(1));
+    if (time == 0 || time > 20) {
+        return;
     }
+
+    printf("SLEEP START...\t");
+    Send_Command(time, 1);
+    while (!Receive_Ack(1));
     printf("END\n");
 }

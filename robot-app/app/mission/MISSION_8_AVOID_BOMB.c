@@ -18,7 +18,7 @@ int mission_8_1_is_not_front_of_bomb(U16 *image) {
         }
     }
 
-    if (checkHurdleLine[0] + checkHurdleLine[1] + checkHurdleLine[2] < 50) {
+    if (checkHurdleLine[0] + checkHurdleLine[1] + checkHurdleLine[2] < 50 ) {
         printf("yet...\n\n");
         return 0;
     }
@@ -36,5 +36,5 @@ int mission_8_1_is_not_front_of_bomb(U16 *image) {
 
     printf("AVG: %d\n", s);
 
-    return (40 - 10 <= s);
+    return  (40 - 10 <= s);
 }

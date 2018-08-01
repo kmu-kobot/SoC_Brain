@@ -18,7 +18,7 @@ int mission_7_1_attach_yellow_bridge(U16 *image) {
         }
     }
 
-    printf("\n\n xxxx %f\n", (double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH));
+    printf("\n\n xxxx %f\n", (double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH) );
 
     if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 90) {
         ACTION_WALK(CLOSE, DOWN, 2);
@@ -51,7 +51,7 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
 }
 
 void mission_7_2_watch_below(void) {
-    ACTION_INIT(MIDDLE, OBLIQUE);
+    CHECK_INIT(MIDDLE, OBLIQUE);
 }
 
 int mission_7_6_jump_hole(void) {
