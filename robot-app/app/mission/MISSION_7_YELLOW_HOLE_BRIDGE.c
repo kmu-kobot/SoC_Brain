@@ -45,6 +45,7 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
     int rReturn = r > MISSION_7_1_THRESHOLDS;
 
     if (rReturn && repeat != -1) {
+        ACTION_WALK(FAST, DOWN, 2);
     }
 
     return rReturn;

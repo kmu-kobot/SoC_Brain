@@ -5,6 +5,7 @@
 #ifndef SOC_APP_ROBOT_ACTION_H
 
 #include "./robot_protocol.h"
+#include "./graphic_api.h"
 
 #define SOC_APP_ROBOT_ACTION_H
 
@@ -223,13 +224,16 @@ typedef enum {
 
     HEAD_MIDDLE_DOWN = 210,
     HEAD_MIDDLE_OBLIQUE,
-    HAED_MIDDLE_LEFT,
+    HEAD_MIDDLE_LEFT,
     HEAD_MIDDLE_RIGHT,
     HEAD_MIDDLE_UP,
 
     HEAD_MIDDLE_SIDE_TO_DOWN = 216,
     HEAD_MIDDLE_DOWN_TO_LEFT,
     HEAD_MIDDLE_DOWN_TO_RIGHT,
+    HEAD_MIDDLE_HALF_LEFT,
+    HEAD_MIDDLE_HALF_RIGHT,
+    
 
     NIL = 0xff
 } MOTION;
@@ -348,6 +352,17 @@ static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat) {
     RobotAction(WALK_END_MOTION(speed, view));
 }
 
+static inline void ACTION_WALK_CHECK(SPEED speed, VIEW view, int repeat, int (*check)(U16 *), U16 *image) {
+    action(INIT_MOTION(MIDDLE, view), WALK_START_MOTION(speed, view));
+
+    for (; repeat > 1 && !check(image); --repeat) {
+        RobotAction(WALK_MOTION(STEP_LEFT, speed, view));
+        RobotAction(WALK_MOTION(STEP_RIGHT, speed, view));
+        setFPGAVideoData(image);
+    }
+
+    RobotAction(WALK_END_MOTION(speed, view));
+}
 
 //////////////////////////////
 //  MOTION TURN             //

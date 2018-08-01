@@ -54,6 +54,7 @@ int uart_tx_buf_full(int ch) {
 int uart_write(int ch, unsigned char *ubuf, int size) {
     struct uart_data uart_d;
 
+
     uart_d.uart_ch = ch;
     uart_d.buf_size = size;
     uart_d.uart_buf = ubuf;
@@ -86,5 +87,5 @@ void uart1_buffer_write(unsigned char *buf, int size) {
 }
 
 void uart1_buffer_read(unsigned char *buf, int size) {
-    uart_read(UART1, buf, 6);
+    uart_read(UART1, buf, 1);
 }

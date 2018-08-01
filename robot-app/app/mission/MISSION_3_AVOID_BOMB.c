@@ -15,6 +15,7 @@ void mission_3_init_global(void) {
     c = 0;
 }
 
+
 int mission_3_4_is_not_front_of_bomb(U16 *image) {
     U32 row, col, i;
     int check;
@@ -29,7 +30,7 @@ int mission_3_4_is_not_front_of_bomb(U16 *image) {
             }
         }
 
-        printf("%f\n", (double) check * 100 / (WIDTH * 60));
+        // printf("%f\n", (double) check * 100 / (WIDTH * 60));
 
         if ((double) check * 100 / (WIDTH * 60) < 10) return 0;
 
@@ -107,14 +108,14 @@ int mission_3_4_is_not_front_of_bomb(U16 *image) {
         }
     }
 
-    printf("3. (%d, %d)\t(%d, %d)\t%d\n", w[0], rH, w[1], rH, check);
+    // printf("3. (%d, %d)\t(%d, %d)\t%d\n", w[0], rH, w[1], rH, check);
 
     int bLen[2] = {
             WIDTH / 2 - (w[0] - 20), (w[1] + 20) - WIDTH / 2
     };
 
     int r = bLen[0] - bLen[1];
-    printf("%d %d %d\n", bLen[0], bLen[1], r);
+    // printf("%d %d %d\n", bLen[0], bLen[1], r);
     if (((r > 0) ? r : (-r) > 30)) {
         ACTION_TURN(LONG, (r > 0) ? DIR_LEFT : DIR_RIGHT, MIDDLE, OBLIQUE, 1);
         return 3;
@@ -141,6 +142,11 @@ void mission_3_default_watch_below(void) {
 int mdir = 0;
 int mcheck = 0;
 
+void mission_3_init(void) {
+    mdir = 0;
+    mcheck = 0;
+}
+
 void mission_3_4_watch_side(void) {
     CHECK_INIT(MIDDLE, (mdir % 2 == 1) ? LEFT : RIGHT);
     RobotSleep(2);
@@ -162,7 +168,7 @@ int mission_3_default_avoid_bomb(U16 *image) {
 
     double s = (double) blue_cnt * 100 / ((HEIGHT) * (WIDTH));
 
-    printf("blue_pixel ratio : %f\n", s);
+    // printf("blue_pixel ratio : %f\n", s);
 
     if (s > 5) {
         return 4;
@@ -203,14 +209,14 @@ int mission_3_default_avoid_bomb(U16 *image) {
     }
 
     double per;
-    printf("\n\n");
+    // printf("\n\n");
     for (i = 0; i < 2; ++i) {
         per = (double) mine[i] * 100 / ((heights[i][1] - heights[i][0]) * (section[i][1] - section[i][0]));
         printf("%f ", per);
         mine[i] = ((mine[i] > MISSION_3_DEFAULT_BOMB_THRESHOLDS) ?
                    ((per > MISSION_3_DEFAULT_LINE_THRESHOLDS) ? 2 : 1) : 0);
     }
-    printf("\n\n");
+    // printf("\n\n");
 
     // if(mine[0] == 2 || mine[1] == 2) {
     //     ACTION_MOVE(LONG, (mine[0] == 2) ? RIGHT : LEFT, MIDDLE, DOWN, 2);
@@ -327,8 +333,8 @@ int mission_3_4_after_bridge_set_straight(U16 *image) {
         }
     }
 
-    printf("M2-4: SLOPE\n");
-    printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
+    // printf("M2-4: SLOPE\n");
+    // printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
 
     double s = (
             (double) (black_len[0] - black_len[1]) /
@@ -338,10 +344,10 @@ int mission_3_4_after_bridge_set_straight(U16 *image) {
     int pi = (black_len[0] - black_len[1]);
     pi = ((pi > 0) ? pi : (-pi));
 
-    printf("Slope : %f\n", s * 100);
+    // printf("Slope : %f\n", s * 100);
 
     int l = -5;
-    printf("%d %d\n", l, (l - 2 <= s && s <= l + 2));
+    // printf("%d %d\n", l, (l - 2 <= s && s <= l + 2));
 
     s *= 100;
     if (!(l - 3 <= s && s <= l + 3)) {
@@ -358,7 +364,7 @@ int mission_3_4_after_bridge_set_straight(U16 *image) {
         RobotSleep(2);
         return 0;
     } else {
-        printf("SUCCESS\n\n");
+        // printf("SUCCESS\n\n");
         return 1;
     }
 }

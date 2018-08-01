@@ -45,7 +45,7 @@ int mission_5_1_check_black_line(U16 *image, int repeat) {
     printf((rResult) ? "SUCCESS\n" : "FAIL\n");
 
     if (rResult && repeat) {
-        cntBlack = 0;
+        ACTION_WALK(FAST, DOWN, 2);
     }
 
     return rResult;

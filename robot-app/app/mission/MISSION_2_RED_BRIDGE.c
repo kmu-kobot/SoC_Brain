@@ -43,6 +43,7 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
     printf(((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION) ? "SUCCESS\n" : "FAIL\n");
 
     if (((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION)) {
+        ACTION_WALK(FAST, DOWN, 2);
         return 1;
     } else {
         return 0;
@@ -156,8 +157,8 @@ int mission_2_4_after_bridge_set_straight(U16 *image, int mode, int pppo) {
                 (l - CASE_0_DEFAULT_SLOPE_ERROR > s) ?
                 DIR_LEFT :
                 DIR_RIGHT,
-                MIDDLE, (mode) ? RIGHT : LEFT,
-                (pppo == 1) ? 3 : 1
+                (pppo == 1) ? LOW : MIDDLE, (mode) ? RIGHT : LEFT,
+                1
         );
         return 0;
     } else {

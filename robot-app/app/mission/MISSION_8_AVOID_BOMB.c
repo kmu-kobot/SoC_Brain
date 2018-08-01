@@ -28,10 +28,10 @@ int mission_8_1_is_not_front_of_bomb(U16 *image) {
         return 0;
     }
 
-    int s = 0;
+    int s = 120;
     printf("BLACK LINE\n");
     for (i = 0; i < 3; ++i) {
-        if (s <= checkHurdleLine[i]) {
+        if (s >= checkHurdleLine[i]) {
             s = checkHurdleLine[i];
         }
         printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);

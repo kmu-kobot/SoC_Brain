@@ -31,12 +31,14 @@ int mission_9_1_go_front_of_yellow_barricade(U16 *image) {
 
     s /= 3;
 
-    if (s > 60) {
+    printf("%f", s);
+
+    if (s > 70) {
         CHECK_INIT(MIDDLE, OBLIQUE);
         CHECK_INIT(MIDDLE, UP);
         return 1;
     } else {
-        ACTION_WALK(FAST, OBLIQUE, 3);
+        ACTION_WALK(FAST, OBLIQUE, 2);
         return 0;
     }
 
@@ -54,8 +56,8 @@ int mission_9_1_wait_yellow_barricade(U16 *image) {
         }
     }
 
-    printf("M9-1: WAIT: %d\n", cntYellow * 100 / (WIDTH * HEIGHT));
-    return cntYellow * 100 / (WIDTH * HEIGHT) > MISSION_9_THRESHOLDS;
+    printf("M9-1: WAIT: %f\n", (double) cntYellow * 100 / (WIDTH * HEIGHT));
+    return (double) cntYellow * 100 / (WIDTH * HEIGHT) > MISSION_9_THRESHOLDS;
 }
 
 int mission_9_2_end_yellow_barricade(U16 *image) {
@@ -70,8 +72,8 @@ int mission_9_2_end_yellow_barricade(U16 *image) {
         }
     }
 
-    printf("M9-2: END: %d\n", cntYellow * 100 / (WIDTH * HEIGHT));
-    return cntYellow * 100 / (WIDTH * HEIGHT) < (5);
+    printf("M9-2: END: %f\n", (double) cntYellow * 100 / (WIDTH * HEIGHT));
+    return (double) cntYellow * 100 / (WIDTH * HEIGHT) < (1);
 }
 
 void mission_9_3_escape_yellow_barricade(int repeat) {

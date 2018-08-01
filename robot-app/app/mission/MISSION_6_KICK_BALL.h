@@ -57,6 +57,8 @@ void mission_6_4_turn_to_detect_hole(void);
 
 void mission_6_4_turn_left(void);
 
+int mission_6_3_find_side_hole(U16 *image, U8 step);
+
 int mission_6_3_find_hole_interpolation(U16 *image, U32 top, U32 bot, U32 left, U32 right, U8 last);
 
 int mission_6_3_find_hole(U16 *image, U32 top, U32 bot, U32 left, U32 right, U8 last);

@@ -9,13 +9,18 @@ void mission_4_1_watch_front(int repeat) {
 }
 
 int mission_4_2_ready_hurdle(U16 *image) {
-    U32 col[3] = {90, 70, 110}, row, i;
+    U32 col[3] = {90, 70, 110}, row, i, cnt;
     U16 checkHurdleLine[3] = {0,};
+    int range = 0;
 
     for (i = 0; i < 3; ++i) {
         for (row = HEIGHT - 1; row > 0; --row) {
-            if (GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) &&
-                GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK)) {
+            cnt = 0;
+            for (range = -3; range < 3; ++range) {
+                cnt += (GetValueRGBYOBK(GetPtr(image, row, col[i] + range, WIDTH), BLACK));
+            }
+
+            if (cnt > 3) {
                 checkHurdleLine[i] = (U16) row;
                 break;
             }
