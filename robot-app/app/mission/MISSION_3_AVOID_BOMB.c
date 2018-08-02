@@ -141,6 +141,7 @@ void mission_3_default_watch_below(void) {
 
 int mdir = 0;
 int mcheck = 0;
+int prev = 0;
 
 void mission_3_init(void) {
     mdir = 0;
@@ -156,38 +157,38 @@ int mission_3_4_getMDir(void) {
     return (mdir % 2 == 1) ? 0 : 1;
 }
 
-int mission_3_default_avoid_bomb(U16 *image) {
+int mission_3_default_avoid_bomb(U16 *image, int mode) {
 
     U32 col, row, i, blue_cnt = 0, black_cnt = 0;
 
-    for (row = 0; row < HEIGHT; ++row) {
+    for (row = 0; row < ROBOT_KNEE; ++row) {
         for (col = 0; col < WIDTH; ++col) {
             blue_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLUE);
         }
     }
 
-    double s = (double) blue_cnt * 100 / ((HEIGHT) * (WIDTH));
+    double s = (double) blue_cnt * 100 / ((HEIGHT) * (ROBOT_KNEE));
 
     // printf("blue_pixel ratio : %f\n", s);
 
-    if (s > 5) {
+    if (s > 1) {
         return 4;
     }
 
-    // for(row = ROBOT_KNEE - 20; row < ROBOT_KNEE; ++row) {
-    //     for(col = 0; col < WIDTH; ++col) {
-    //         black_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
-    //     }
-    // }
+    for (row = 10; row < ROBOT_KNEE; ++row) {
+        for (col = 30; col < WIDTH - 30; ++col) {
+            black_cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
+        }
+    }
 
-    // s = (double) black_cnt * 100 / (20 * WIDTH);
-    // printf("black pixel ratio : %f\n", s);
+    s = (double) black_cnt * 100 / ((ROBOT_KNEE - 10) * 120);
+    printf("black pixel ratio : %f\n", s);
 
-    // if(s > 5) {
-    //     return 4;
-    // }
+    if (s > 50) {
+        return 4;
+    }
 
-    int mine[2] = {0,};
+    int mine[3] = {0,};
 
     U32 section[2][2] = {
             {30, 90},
@@ -206,11 +207,12 @@ int mission_3_default_avoid_bomb(U16 *image) {
                 mine[i] += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
             }
         }
+        mine[2] += mine[i];
     }
 
     double per;
     // printf("\n\n");
-    for (i = 0; i < 2; ++i) {
+    for (i = 0; i < 3; ++i) {
         per = (double) mine[i] * 100 / ((heights[i][1] - heights[i][0]) * (section[i][1] - section[i][0]));
         printf("%f ", per);
         mine[i] = ((mine[i] > MISSION_3_DEFAULT_BOMB_THRESHOLDS) ?
@@ -224,6 +226,10 @@ int mission_3_default_avoid_bomb(U16 *image) {
     //     return 0}
 
     if (mine[0] == 0 && mine[1] == 0) {
+        mine[0] += mine[2];
+    }
+
+    if (mine[0] == 0 && mine[1] == 0) {
 
         if (mcheck == 1) {
 
@@ -231,13 +237,15 @@ int mission_3_default_avoid_bomb(U16 *image) {
 
             mdir++;
             mcheck = 0;
+            prev = 1;
 
             return 3;
+        } else {
+            ACTION_WALK(FAST, DOWN, (prev == 1) ? ((mode == 0) ? 6 : 3) : 3);
+            prev = 0;
+            return 1;
         }
 
-        ACTION_WALK(FAST, DOWN, 3);
-
-        return 1;
     } else {
         mcheck = 1;
         if (mdir == 0) {

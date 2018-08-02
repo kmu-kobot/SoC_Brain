@@ -22,7 +22,7 @@ void mission_3_default_watch_below(void);
 
 void mission_3_init(void);
 
-int mission_3_default_avoid_bomb(U16 *image);
+int mission_3_default_avoid_bomb(U16 *image, int mode);
 
 void mission_3_4_watch_front(void);
 

@@ -19,7 +19,7 @@ int mission_2_1_attach_red_bridge(U16 *image) {
         }
     }
 
-    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 90) {
+    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 70) {
         ACTION_WALK(CLOSE, DOWN, 2);
         return 1;
     } else {
@@ -43,7 +43,7 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
     printf(((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION) ? "SUCCESS\n" : "FAIL\n");
 
     if (((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION)) {
-        ACTION_WALK(FAST, DOWN, 2);
+//        ACTION_WALK(FAST, DOWN, 2);
         return 1;
     } else {
         return 0;
@@ -87,16 +87,17 @@ int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) {
     printf("M4-5: AVG: %f\n", s);
 
     int len = (length != 0) ? length : CASE_0_DEFAULT_LEFT_RANGE;
-    int err = ((mode == 3) ? 3 : CASE_0_DEFAULT_RANGE_ERROR);
+    int err = ((mode == 3 || mode == 4) ? 3 : CASE_0_DEFAULT_RANGE_ERROR);
 
     if (s < len - err) {
-        ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, LEFT, 1);
+        ACTION_MOVE((mode == 4) ? ((s < len - err * 2) ? SHORT : LONG) : LONG, DIR_RIGHT, MIDDLE, LEFT,
+                    (mode == 4) ? 3 : 1);
         if (mode == 1) {
             ACTION_WALK(CLOSE, LEFT, 1);
         }
         return 0;
     } else if (s > len + err) {
-        ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, LEFT, 1);
+        ACTION_MOVE((mode == 4) ? ((s < len - err * 2) ? SHORT : LONG), DIR_LEFT, MIDDLE, LEFT, (mode == 4) ? 3 : 1);
         if (mode == 1) {
             ACTION_WALK(CLOSE, LEFT, 1);
         }
@@ -104,7 +105,7 @@ int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) {
     } else {
         if (mode == 1 || mode == -1) {
             ACTION_WALK(CLOSE, LEFT, 4);
-        } else if (mode == 3) {
+        } else if (mode == 3 || mode == 4) {
             ACTION_WALK(CLOSE, LEFT, 2);
         }
         printf("SUCCESS\n\n");

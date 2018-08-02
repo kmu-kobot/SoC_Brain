@@ -5,7 +5,7 @@
 #include "MISSION_4_JUMP_HURDLE.h"
 
 void mission_4_1_watch_front(int repeat) {
-    ACTION_WALK(SLOW, OBLIQUE, repeat);
+    ACTION_WALK(FAST, OBLIQUE, repeat);
 }
 
 int mission_4_2_ready_hurdle(U16 *image) {
@@ -46,7 +46,7 @@ int mission_4_2_ready_hurdle(U16 *image) {
 
 int mission_4_4_jump_hurdle(void) {
     ACTION_MOTION(MISSION_4_HURDLING, MIDDLE, OBLIQUE);
-    ACTION_WALK(FAST, OBLIQUE, 4);
+    ACTION_WALK(FAST, OBLIQUE, 6);
     RobotSleep(2);
     ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 5);
     ACTION_WALK(FAST, OBLIQUE, 13);
