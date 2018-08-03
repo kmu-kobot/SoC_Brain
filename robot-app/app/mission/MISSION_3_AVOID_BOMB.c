@@ -25,6 +25,7 @@ int mission_3_avoid(U16 *image) {
     return cnt < 4;
 }
 
+
 int mission_3_measure_line(U16 *image) {
     U32 cols[3] = {85, 95, 90}, row, i;
     U16 line[3] = {0,};

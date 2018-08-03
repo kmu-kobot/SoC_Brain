@@ -19,13 +19,9 @@ int mission_2_1_attach_red_bridge(U16 *image) {
         }
     }
 
-    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 70) {
-        ACTION_WALK(CLOSE, DOWN, 2);
-        return 1;
-    } else {
-        ACTION_WALK(CLOSE, DOWN, 4);
-        return 0;
-    }
+    // TODO: 시간 줄일때 없애기
+    ACTION_WALK(CLOSE, DOWN, 2);
+    return (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 70;
 }
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image) {
