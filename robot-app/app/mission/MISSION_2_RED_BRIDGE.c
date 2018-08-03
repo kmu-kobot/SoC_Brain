@@ -4,8 +4,8 @@
 
 #include "MISSION_2_RED_BRIDGE.h"
 
-void mission_2_1_watch_below(int repeat) {
-    ACTION_WALK(FAST, DOWN, repeat);
+void mission_2_1_watch_below(int repeat, U16 *image) {
+    ACTION_WALK_CHECK(SLOW, DOWN, repeat, mission_2_1_wait_front_of_red_bridge, image, 1);
     RobotSleep(1);
 }
 
@@ -42,12 +42,7 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
     printf("RED / AREA: %f\n\n", (double) cntRed * 100 / (WIDTH * HEIGHT));
     printf(((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION) ? "SUCCESS\n" : "FAIL\n");
 
-    if (((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION)) {
-//        ACTION_WALK(FAST, DOWN, 2);
-        return 1;
-    } else {
-        return 0;
-    }
+    return ((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION);
 }
 
 void mission_2_2_watch_side(void) {
@@ -90,23 +85,24 @@ int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) {
     int err = ((mode == 3 || mode == 4) ? 3 : CASE_0_DEFAULT_RANGE_ERROR);
 
     if (s < len - err) {
-        ACTION_MOVE((mode == 4) ? ((s < len - err * 2) ? SHORT : LONG) : LONG, DIR_RIGHT, MIDDLE, LEFT,
-                    (mode == 4) ? 3 : 1);
+        ACTION_MOVE((mode == 4) ? SHORT : LONG, DIR_RIGHT, MIDDLE, LEFT,
+                    (mode == 4) ? 2 : 1);
         if (mode == 1) {
             ACTION_WALK(CLOSE, LEFT, 1);
         }
         return 0;
     } else if (s > len + err) {
-        ACTION_MOVE((mode == 4) ? ((s < len - err * 2) ? SHORT : LONG), DIR_LEFT, MIDDLE, LEFT, (mode == 4) ? 3 : 1);
+        ACTION_MOVE((mode == 4) ? SHORT : LONG, DIR_LEFT, MIDDLE, LEFT,
+                    (mode == 4) ? 2 : 1);
         if (mode == 1) {
             ACTION_WALK(CLOSE, LEFT, 1);
         }
         return 0;
     } else {
         if (mode == 1 || mode == -1) {
-            ACTION_WALK(CLOSE, LEFT, 4);
+            ACTION_WALK(CLOSE, OBLIQUE, 4);
         } else if (mode == 3 || mode == 4) {
-            ACTION_WALK(CLOSE, LEFT, 2);
+            ACTION_WALK(CLOSE, OBLIQUE, 4);
         }
         printf("SUCCESS\n\n");
         return 1;

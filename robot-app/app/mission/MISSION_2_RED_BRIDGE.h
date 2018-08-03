@@ -10,15 +10,15 @@
 
 #define SOC_APP_MISSION_2_RED_BRIDGE_H
 
-#define CASE_2_0_DETECTION 15
-#define CASE_0_DEFAULT_LEFT_RANGE 67
-#define CASE_0_DEFAULT_RIGHT_RANGE 61
+#define CASE_2_0_DETECTION 32
+#define CASE_0_DEFAULT_LEFT_RANGE 54
+#define CASE_0_DEFAULT_RIGHT_RANGE 65
 #define CASE_0_DEFAULT_RANGE_ERROR 6
 #define CASE_0_DEFAULT_LEFT_SLOPE (-5)
 #define CASE_0_DEFAULT_RIGHT_SLOPE 10
 #define CASE_0_DEFAULT_SLOPE_ERROR 5
 
-void mission_2_1_watch_below(int repeat);
+void mission_2_1_watch_below(int repeat, U16 *image);
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image);
 

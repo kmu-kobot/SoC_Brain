@@ -16,21 +16,19 @@
 
 void mission_3_4_watch_side(void);
 
+int mission_3_isFrontOf_Blue(U16 *image);
+
+int mission_3_measure_line(U16 *image);
+
 void mission_3_init_global(void);
 
-void mission_3_default_watch_below(void);
+int mission_3_avoid(U16 *image);
 
-void mission_3_init(void);
+void mission_3_default_watch_below(int repeat, U16 *image);
 
-int mission_3_default_avoid_bomb(U16 *image, int mode);
+int mission_3_default_avoid_bomb(U16 *image);
 
 void mission_3_4_watch_front(void);
-
-int mission_3_4_is_not_front_of_bomb(U16 *image);
-
-void mission_3_7_attach_hurdle(U16 *image);
-
-int mission_3_7_get_attach(U16 *image);
 
 int mission_3_4_getMDir(void);
 

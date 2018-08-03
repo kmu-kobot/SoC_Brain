@@ -22,4 +22,6 @@ int mission_9_2_end_yellow_barricade(U16 *image);
 
 void mission_9_3_escape_yellow_barricade(int repeat);
 
+int mission_9_1_go_front(U16 *image);
+
 #endif //SOC_APP_MISSION_9_LAST_BARRICADE_H

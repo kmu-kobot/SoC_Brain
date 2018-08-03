@@ -10,13 +10,13 @@
 
 #define SOC_APP_MISSION_7_YELLOW_HOLE_BRIDGE_H
 
-#define MISSION_7_1_THRESHOLDS 15
+#define MISSION_7_1_THRESHOLDS 30
 
-void mission_7_1_watch_below(int repeat);
+void mission_7_1_watch_below(int repeat, U16 *image);
 
 int mission_7_1_attach_yellow_bridge(U16 *image);
 
-int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat);
+int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image);
 
 void mission_7_2_watch_below(void);
 

@@ -233,7 +233,7 @@ typedef enum {
     HEAD_MIDDLE_DOWN_TO_RIGHT,
     HEAD_MIDDLE_HALF_LEFT,
     HEAD_MIDDLE_HALF_RIGHT,
-    
+
 
     NIL = 0xff
 } MOTION;
@@ -340,7 +340,6 @@ static inline void ACTION_INIT(POSE pose, VIEW view) {
 //////////////////////////////
 //  MOTION WALK             //
 //////////////////////////////
-
 static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat) {
     action(INIT_MOTION(MIDDLE, view), WALK_START_MOTION(speed, view));
 
@@ -352,16 +351,27 @@ static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat) {
     RobotAction(WALK_END_MOTION(speed, view));
 }
 
-static inline void ACTION_WALK_CHECK(SPEED speed, VIEW view, int repeat, int (*check)(U16 *), U16 *image) {
+static inline int ACTION_WALK_CHECK(SPEED speed, VIEW view, int repeat, int (*check)(U16 *), U16 *image, int finish) {
+    int result, i;
     action(INIT_MOTION(MIDDLE, view), WALK_START_MOTION(speed, view));
 
-    for (; repeat > 1 && !check(image); --repeat) {
-        RobotAction(WALK_MOTION(STEP_LEFT, speed, view));
-        RobotAction(WALK_MOTION(STEP_RIGHT, speed, view));
+    for (i = 0; i >> 1 < repeat; ++i) {
         setFPGAVideoData(image);
+        result = check(image);
+        if (result == finish) {
+            break;
+        } else {
+            RobotAction(WALK_MOTION((i & 1), speed, view));
+        }
+    }
+
+    if (i & 1) {
+        RobotAction(WALK_MOTION(DIR_RIGHT, speed, view));
     }
 
     RobotAction(WALK_END_MOTION(speed, view));
+
+    return result;
 }
 
 //////////////////////////////

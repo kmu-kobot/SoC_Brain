@@ -7,8 +7,7 @@
 int mineset = 0;
 
 int mission_8_1_is_not_front_of_bomb(U16 *image) {
-
-    if (mineset++ < 4) {
+    if (mineset++ < 3) {
         return 0;
     }
 
@@ -30,6 +29,12 @@ int mission_8_1_is_not_front_of_bomb(U16 *image) {
         }
     }
 
+    printf("\n\n");
+    for (i = 0; i < 5; ++i) {
+        printf("%d\t", checkHurdleLine[i]);
+    }
+    printf("\n\n");
+
     if (checkHurdleLine[0] + checkHurdleLine[1] + checkHurdleLine[2] + checkHurdleLine[3] + checkHurdleLine[4] < 80) {
         printf("yet...\n\n");
         return 0;
@@ -48,5 +53,5 @@ int mission_8_1_is_not_front_of_bomb(U16 *image) {
 
     printf("AVG: %d\n", checkHurdleLine[2]);
 
-    return (40 - 10 <= checkHurdleLine[2]);
+    return (60 <= checkHurdleLine[2]);
 }
