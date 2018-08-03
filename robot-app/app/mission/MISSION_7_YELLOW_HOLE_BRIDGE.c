@@ -20,13 +20,9 @@ int mission_7_1_attach_yellow_bridge(U16 *image) {
 
     printf("\n\n xxxx %f\n", (double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH));
 
-    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 70) {
-        ACTION_WALK(CLOSE, DOWN, 2);
-        return 1;
-    } else {
-        ACTION_WALK(CLOSE, DOWN, 4);
-        return 0;
-    }
+    // TODO: 시간 줄일때 없애기
+    ACTION_WALK(CLOSE, DOWN, 2);
+    return (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 70;
 }
 
 int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image) {
