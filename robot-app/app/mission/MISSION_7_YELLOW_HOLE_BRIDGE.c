@@ -4,9 +4,9 @@
 
 #include "MISSION_7_YELLOW_HOLE_BRIDGE.h"
 
-void mission_7_1_watch_below(int repeat) {
-    ACTION_WALK(FAST, DOWN, repeat);
-    RobotSleep(2);
+void mission_7_1_watch_below(int repeat, U16 *image) {
+    ACTION_WALK_CHECK(SLOW, DOWN, repeat, mission_7_1_wait_front_of_yellow_hole_bridge, image, 1);
+    RobotSleep(1);
 }
 
 int mission_7_1_attach_yellow_bridge(U16 *image) {
@@ -20,7 +20,7 @@ int mission_7_1_attach_yellow_bridge(U16 *image) {
 
     printf("\n\n xxxx %f\n", (double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH));
 
-    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 90) {
+    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 70) {
         ACTION_WALK(CLOSE, DOWN, 2);
         return 1;
     } else {
@@ -29,7 +29,7 @@ int mission_7_1_attach_yellow_bridge(U16 *image) {
     }
 }
 
-int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
+int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image) {
     U32 col, row, cntYellow = 0;
     for (row = 0; row < HEIGHT; ++row) {
         for (col = 0; col < WIDTH; ++col) {
@@ -44,14 +44,7 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image, int repeat) {
 
     int rReturn = r > MISSION_7_1_THRESHOLDS;
 
-    if (rReturn && repeat != -1) {
-    }
-
     return rReturn;
-}
-
-void mission_7_2_watch_below(void) {
-    ACTION_INIT(MIDDLE, OBLIQUE);
 }
 
 int mission_7_6_jump_hole(void) {

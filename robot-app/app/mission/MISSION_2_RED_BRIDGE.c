@@ -4,8 +4,8 @@
 
 #include "MISSION_2_RED_BRIDGE.h"
 
-void mission_2_1_watch_below(int repeat) {
-    ACTION_WALK(FAST, DOWN, repeat);
+void mission_2_1_watch_below(int repeat, U16 *image) {
+    ACTION_WALK_CHECK(SLOW, DOWN, repeat, mission_2_1_wait_front_of_red_bridge, image, 1);
     RobotSleep(1);
 }
 
@@ -19,7 +19,7 @@ int mission_2_1_attach_red_bridge(U16 *image) {
         }
     }
 
-    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 90) {
+    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 70) {
         ACTION_WALK(CLOSE, DOWN, 2);
         return 1;
     } else {
@@ -42,15 +42,12 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
     printf("RED / AREA: %f\n\n", (double) cntRed * 100 / (WIDTH * HEIGHT));
     printf(((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION) ? "SUCCESS\n" : "FAIL\n");
 
-    if (((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION)) {
-        return 1;
-    } else {
-        return 0;
-    }
+    return ((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION);
 }
 
 void mission_2_2_watch_side(void) {
-    ACTION_INIT(MIDDLE, LEFT);
+    CHECK_INIT(MIDDLE, LEFT);
+    RobotSleep(2);
 }
 
 int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) {
@@ -85,25 +82,27 @@ int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) {
     printf("M4-5: AVG: %f\n", s);
 
     int len = (length != 0) ? length : CASE_0_DEFAULT_LEFT_RANGE;
-    int err = ((mode == 3) ? 3 : CASE_0_DEFAULT_RANGE_ERROR);
+    int err = ((mode == 3 || mode == 4) ? 3 : CASE_0_DEFAULT_RANGE_ERROR);
 
     if (s < len - err) {
-        ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, LEFT, 1);
+        ACTION_MOVE((mode == 4) ? SHORT : LONG, DIR_RIGHT, MIDDLE, LEFT,
+                    (mode == 4) ? 2 : 1);
         if (mode == 1) {
             ACTION_WALK(CLOSE, LEFT, 1);
         }
         return 0;
     } else if (s > len + err) {
-        ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, LEFT, 1);
+        ACTION_MOVE((mode == 4) ? SHORT : LONG, DIR_LEFT, MIDDLE, LEFT,
+                    (mode == 4) ? 2 : 1);
         if (mode == 1) {
             ACTION_WALK(CLOSE, LEFT, 1);
         }
         return 0;
     } else {
         if (mode == 1 || mode == -1) {
-            ACTION_WALK(CLOSE, LEFT, 4);
-        } else if (mode == 3) {
-            ACTION_WALK(CLOSE, LEFT, 2);
+            ACTION_WALK(CLOSE, OBLIQUE, 4);
+        } else if (mode == 3 || mode == 4) {
+            ACTION_WALK(CLOSE, OBLIQUE, 4);
         }
         printf("SUCCESS\n\n");
         return 1;
@@ -116,7 +115,7 @@ int mission_2_3_escape_red_bridge(void) {
     return 1;
 }
 
-int mission_2_4_after_bridge_set_straight(U16 *image, int mode) {
+int mission_2_4_after_bridge_set_straight(U16 *image, int mode, int pppo) {
     U32 row, i;
     U16 col[2] = {
             80,
@@ -145,16 +144,18 @@ int mission_2_4_after_bridge_set_straight(U16 *image, int mode) {
     printf("Slope : %f\n", s * 100);
 
     int l = ((mode) ? CASE_0_DEFAULT_RIGHT_SLOPE : CASE_0_DEFAULT_LEFT_SLOPE);
+    printf((mode) ? "RIGHT\n" : "LEFT\n");
     printf("%d %d\n", l, (l - 2 <= s && s <= l + 2));
 
     s *= 100;
     if (!(l - CASE_0_DEFAULT_SLOPE_ERROR <= s && s <= l + CASE_0_DEFAULT_SLOPE_ERROR)) {
         ACTION_TURN(
-                LONG,
+                (pppo == 1) ? SHORT : LONG,
                 (l - CASE_0_DEFAULT_SLOPE_ERROR > s) ?
                 DIR_LEFT :
                 DIR_RIGHT,
-                MIDDLE, (mode) ? RIGHT : LEFT, 1
+                (pppo == 1) ? LOW : MIDDLE, (mode) ? RIGHT : LEFT,
+                1
         );
         return 0;
     } else {

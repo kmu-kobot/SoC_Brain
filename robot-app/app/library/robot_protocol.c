@@ -39,11 +39,11 @@ int Receive_Ack(int status) {
             0,
     };
 
-    uart1_buffer_read(command, 6);
+    uart1_buffer_read(command, 1);
 
     int i = 0;
     int rResult = 0;
-    for (i = 0; i < 6; ++i) {
+    for (i = 0; i < 1; ++i) {
         rResult += (command[i] == 4);
     }
 
@@ -62,10 +62,12 @@ void RobotAction(unsigned char Ldata) {
 }
 
 void RobotSleep(int time) {
-    printf("SLEEP START...\t");
-    for (; time != 0; --time) {
-        Send_Command(255, 0);
-        while (!Receive_Ack(1));
+    if (time == 0 || time > 20) {
+        return;
     }
+
+    printf("SLEEP START...\t");
+    Send_Command(time, 1);
+    while (!Receive_Ack(1));
     printf("END\n");
 }

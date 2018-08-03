@@ -5,17 +5,22 @@
 #include "MISSION_4_JUMP_HURDLE.h"
 
 void mission_4_1_watch_front(int repeat) {
-    ACTION_WALK(SLOW, OBLIQUE, repeat);
+    ACTION_WALK(FAST, OBLIQUE, repeat);
 }
 
 int mission_4_2_ready_hurdle(U16 *image) {
-    U32 col[3] = {90, 70, 110}, row, i;
+    U32 col[3] = {90, 70, 110}, row, i, cnt;
     U16 checkHurdleLine[3] = {0,};
+    int range = 0;
 
     for (i = 0; i < 3; ++i) {
         for (row = HEIGHT - 1; row > 0; --row) {
-            if (GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) &&
-                GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK)) {
+            cnt = 0;
+            for (range = -3; range < 3; ++range) {
+                cnt += (GetValueRGBYOBK(GetPtr(image, row, col[i] + range, WIDTH), BLACK));
+            }
+
+            if (cnt > 3) {
                 checkHurdleLine[i] = (U16) row;
                 break;
             }
@@ -41,9 +46,10 @@ int mission_4_2_ready_hurdle(U16 *image) {
 
 int mission_4_4_jump_hurdle(void) {
     ACTION_MOTION(MISSION_4_HURDLING, MIDDLE, OBLIQUE);
-    ACTION_WALK(FAST, OBLIQUE, 4);
+    ACTION_WALK(FAST, OBLIQUE, 6);
     RobotSleep(2);
-    ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 7);
+    ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 5);
+    ACTION_WALK(FAST, OBLIQUE, 13);
     return 1;
 }
 
@@ -96,6 +102,6 @@ int mission_4_6_set_center(U16 *image, int length) {
 }
 
 void mission_4_6_watch_side(void) {
-    ACTION_INIT(MIDDLE, RIGHT);
-    RobotSleep(1);
+    CHECK_INIT(MIDDLE, RIGHT);
+    RobotSleep(3);
 }

@@ -4,8 +4,8 @@
 
 #include "MISSION_5_GREEN_BRIDGE.h"
 
-void mission_5_1_watch_below(int repeat) {
-    ACTION_WALK(FAST, DOWN, repeat);
+void mission_5_1_watch_below(int repeat, U16 *image) {
+    ACTION_WALK_CHECK(SLOW, DOWN, repeat, mission_5_1_check_black_line, image, 1);
     RobotSleep(1);
 }
 
@@ -20,53 +20,55 @@ int mission_5_11_attach(U16 *image) {
     printf("\n\n xxx %f \n\n", (double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH));
 
     if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) >= 33) {
-        ACTION_WALK(CLOSE, DOWN, 4);
+        ACTION_WALK(CLOSE, DOWN, 6);
         return 1;
     } else {
-        ACTION_WALK(CLOSE, DOWN, 2);
+        ACTION_WALK(CLOSE, DOWN, 4);
         return 0;
     }
 }
 
-int mission_5_1_check_black_line(U16 *image, int repeat) {
+int mission_5_1_check_black_line(U16 *image) {
     U32 col, row, cntBlack = 0;
 
-    for (row = 0; row < 60; ++row) {
+    for (row = ROBOT_KNEE - 10; row > 0; --row) {
+        cntBlack = 0;
         for (col = 0; col < WIDTH; col++) {
             cntBlack += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
         }
+        if (cntBlack > 50) {
+            cntBlack = row;
+            break;
+        } else {
+            cntBlack = 0;
+        }
     }
 
-    int rResult = (cntBlack * 100 / (60 * WIDTH)) > CASE_5_0_DETECTION;
-
-    printf("M5-1: BLACK LINE\n");
-    printf("BLACK: %d, BLACK / (WIDTH * HEIGHT) : %f\n",
-           cntBlack, (double) (cntBlack * 100 / (HEIGHT * WIDTH)));
-    printf((rResult) ? "SUCCESS\n" : "FAIL\n");
-
-    if (rResult && repeat) {
-        cntBlack = 0;
+    if (cntBlack < 0) {
+        return 0;
     }
 
-    return rResult;
+    printf("%d\n", cntBlack);
+
+    return cntBlack > 30;
 }
 
 void mission_5_2_watch_side(void) {
-    ACTION_INIT(MIDDLE, LEFT);
-    RobotSleep(1);
+    CHECK_INIT(MIDDLE, LEFT);
+    RobotSleep(5);
 }
 
-int mission_5_3_climb_up_stairs(void) {
+void mission_5_3_climb_up_stairs(void) {
     RobotSleep(1);
     ACTION_MOTION(MISSION_5_STAIR_UP, MIDDLE, OBLIQUE);
     RobotSleep(1);
-    ACTION_INIT(MIDDLE, DOWN);
+    CHECK_INIT(MIDDLE, DOWN);
     RobotSleep(1);
-    return 1;
+    ACTION_BIT(FRONT, 2);
 }
 
 int mission_5_5_check_finish_black_line(U16 *image) {
-    return mission_5_1_check_black_line(image, 0);
+    return mission_5_1_check_black_line(image);
 }
 
 int mission_5_5_check_green_bridge_straight(U16 *image) {
@@ -123,7 +125,7 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
     for (i = 0; i < 2; ++i) {
         front = 0;
         rear = 0;
-        for (col = 0; col < WIDTH; ++col) {
+        for (col = 0; col < WIDTH - 10; ++col) {
 
             if (front == rear) {
                 for (range = 0; range < MISSION_5_5_GREEN_BRIDGE_SLOPE_RANGE; ++range) {
@@ -159,7 +161,7 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
     if (((r > 0) ? r : -r) > MISSION_5_5_GREEN_BRIDGE_SLOPE) {
         rResult = 0;
         ACTION_TURN(SHORT, ((r > 0) ? DIR_RIGHT : DIR_LEFT),
-                    MIDDLE, DOWN, 2);
+                    (((r > 0) ? r : -r) > 4) ? LOW : MIDDLE, DOWN, 1);
         RobotSleep(1);
     }
 
@@ -172,7 +174,7 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
 
     for (dir = 0; dir < 2; ++dir) {
         flagSign = (dir) ? 1 : -1;
-        for (col = 0; col < WIDTH / 2 - 1; ++col) {
+        for (col = 0; col < WIDTH / 2 - 3; ++col) {
             cnt = 0;
             for (row = 10;
                  row < 60;
@@ -207,7 +209,7 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
 
 int mission_5_5_short_walk_on_green_bridge(int repeat) {
     ACTION_WALK(FAST, DOWN, repeat);
-    RobotSleep(4);
+    RobotSleep(3);
     return 1;
 }
 
@@ -243,7 +245,50 @@ int mission_5_6_set_only_one_bk_bar(U16 *image) {
     printf("\n\t\t- M5-6: SET CENTER\n");
     printf("\t\t\t+ bk_len length: %d\n", blackLen);
 
+    if (blackLen > MISSION_5_6_BLACK_LEN_LENGTH) {
+        if (MISSION_5_6_BLACK_LEN_LENGTH - blackLen >= 15) {
+            ACTION_BIT(FRONT, 4);
+        } else {
+            ACTION_BIT(FRONT, 2);
+        }
+        RobotSleep(1);
+    }
+
     return blackLen < MISSION_5_6_BLACK_LEN_LENGTH;
+}
+
+int mission_5_12_set_straight(U16 *image) {
+    U32 cnt, row, i;
+    int range, point[2][2] = {{80,  0},
+                              {100, 0}};
+
+    for (i = 0; i < 2; ++i) {
+        for (row = HEIGHT - 1; row > 0; --row) {
+            cnt = 0;
+            for (range = (-MISSION_5_6_BLACK_RANGE); range < MISSION_5_6_BLACK_RANGE; ++range) {
+                cnt += GetValueRGBYOBK(GetPtr(image, row, point[i][0] + range, WIDTH), GREEN);
+            }
+
+            if (cnt > 5) {
+                point[i][1] = HEIGHT - row;
+                break;
+            }
+
+        }
+    }
+
+    printf("\t\t- M5-6: SET STRAIGHT\n");
+    printf("\t\t\t+ %d %d\n\n", point[0][1], point[1][1]);
+
+    int r = (point[0][1] - point[1][1]);
+
+    int rResult = 1;
+    if (((r > 0) ? r : -r) > MISSION_5_6_GREEN_BRIDGE_SLOPE) {
+        ACTION_TURN(SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), (((r > 0) ? r : -r) > 6) ? LOW : MIDDLE, DOWN, 1);
+        rResult = 0;
+    }
+
+    return rResult;
 }
 
 int mission_5_6_set_straight(U16 *image) {
@@ -273,8 +318,7 @@ int mission_5_6_set_straight(U16 *image) {
 
     int rResult = 1;
     if (((r > 0) ? r : -r) > MISSION_5_6_GREEN_BRIDGE_SLOPE) {
-        ACTION_TURN(SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 2);
-        RobotSleep(1);
+        ACTION_TURN(SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), (((r > 0) ? r : -r) > 5) ? LOW : MIDDLE, DOWN, 1);
         rResult = 0;
     }
 
@@ -283,8 +327,8 @@ int mission_5_6_set_straight(U16 *image) {
 
 int mission_5_7_climb_down_stairs(void) {
     ACTION_MOTION(MISSION_5_STAIR_DOWN, MIDDLE, OBLIQUE);
-    ACTION_INIT(MIDDLE, OBLIQUE);
-    ACTION_WALK(FAST, OBLIQUE, 9);
+    CHECK_INIT(MIDDLE, OBLIQUE);
+    ACTION_WALK(FAST, OBLIQUE, 13);
     return 1;
 }
 
@@ -294,7 +338,7 @@ void mission_5_5_set_center(U16 *image) {
 
     for (dir = 0; dir < 2; ++dir) {
         flagSign = (dir) ? 1 : -1;
-        for (col = 0; col < WIDTH / 2 - 1; ++col) {
+        for (col = 0; col < WIDTH / 2 - 3; ++col) {
             cnt = 0;
             for (row = ROBOT_KNEE;
                  row < HEIGHT;
@@ -319,8 +363,8 @@ void mission_5_5_set_center(U16 *image) {
     printf("\nM5-5: SET CENTER\n");
     printf("LEFT: %d, RIGHT: %d, r: %d\n\n", green_len[0], green_len[1], r);
 
-    if (((r > 0) ? r : (-r)) > 7) {
-        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 2);
+    if (((r > 0) ? r : (-r)) > 4) {
+        ACTION_MOVE(SHORT, ((r > 0) ? DIR_RIGHT : DIR_LEFT), MIDDLE, DOWN, 2);
         RobotSleep(1);
     }
 

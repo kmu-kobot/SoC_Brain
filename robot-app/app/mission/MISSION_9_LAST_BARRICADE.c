@@ -4,35 +4,57 @@
 
 #include "MISSION_9_LAST_BARRICADE.h"
 
-int mission_9_1_go_front_of_yellow_barricade(U16 *image) {
-    U32 cols[3] = {80, 90, 100}, row, i;
-    U16 checkHurdleLine[3] = {0,};
+int mission_9_1_go_front(U16 *image) {
+    ACTION_WALK_CHECK(SLOW, OBLIQUE, 20, mission_9_1_go_front_of_yellow_barricade, image, 1);
+    RobotSleep(1);
+}
 
-    for (i = 0; i < 3; ++i) {
+int mission_9_1_go_front_of_yellow_barricade(U16 *image) {
+    U32 cols[6] = {50, 70, 90, 110, 130}, row, i, cnt;
+    U16 checkHurdleLine[5] = {0,}, tmp;
+    int range = 0;
+
+    for (i = 0; i < 5; ++i) {
         for (row = HEIGHT - 1; row > 0; --row) {
-            if (GetValueRGBYOBK(GetPtr(image, row, cols[i], WIDTH), BLACK) &&
-                GetValueRGBYOBK(GetPtr(image, row, cols[i] + 1, WIDTH), BLACK)) {
+            cnt = 0;
+            for (range = -5; range < 5; range++) {
+                cnt += GetValueRGBYOBK(GetPtr(image, row, cols[i] + range, WIDTH), BLACK);
+            }
+
+            if (cnt > 7) {
                 checkHurdleLine[i] = (U16) row;
                 break;
             }
         }
     }
 
-    double s = 0;
-    for (i = 0; i < 3; i++) {
-        s += checkHurdleLine[i];
+    printf("\n\n");
+    for (i = 0; i < 5; ++i) {
+        printf("%d\t", checkHurdleLine[i]);
     }
+    printf("\n\n");
 
-    s /= 3;
-
-    if (s > 60) {
-        return 1;
-    } else {
-        ACTION_WALK(FAST, OBLIQUE, 3);
+    if (checkHurdleLine[0] + checkHurdleLine[1] + checkHurdleLine[2] + checkHurdleLine[3] + checkHurdleLine[4] < 80) {
+        printf("yet...\n\n");
         return 0;
     }
 
+    int j;
+    for (i = 0; i < 4; ++i) {
+        for (j = 0; j < 4 - i; ++j) {
+            if (checkHurdleLine[i] > checkHurdleLine[i + 1]) {
+                tmp = checkHurdleLine[i];
+                checkHurdleLine[i] = checkHurdleLine[i + 1];
+                checkHurdleLine[i + 1] = tmp;
+            }
+        }
+    }
+
+    printf("AVG: %d\n", checkHurdleLine[2]);
+
+    return (80 <= checkHurdleLine[2]);
 }
+
 
 int mission_9_1_wait_yellow_barricade(U16 *image) {
     U32 col, row, cntYellow = 0;
@@ -46,8 +68,8 @@ int mission_9_1_wait_yellow_barricade(U16 *image) {
         }
     }
 
-    printf("M9-1: WAIT: %d\n", cntYellow * 100 / (WIDTH * HEIGHT));
-    return cntYellow * 100 / (WIDTH * HEIGHT) > MISSION_9_THRESHOLDS;
+    printf("M9-1: WAIT: %f\n", (double) cntYellow * 100 / (WIDTH * HEIGHT));
+    return (double) cntYellow * 100 / (WIDTH * HEIGHT) > MISSION_9_THRESHOLDS;
 }
 
 int mission_9_2_end_yellow_barricade(U16 *image) {
@@ -62,11 +84,12 @@ int mission_9_2_end_yellow_barricade(U16 *image) {
         }
     }
 
-    printf("M9-2: END: %d\n", cntYellow * 100 / (WIDTH * HEIGHT));
-    return cntYellow * 100 / (WIDTH * HEIGHT) < (5);
+    printf("M9-2: END: %f\n", (double) cntYellow * 100 / (WIDTH * HEIGHT));
+    return (double) cntYellow * 100 / (WIDTH * HEIGHT) < (1);
 }
 
 void mission_9_3_escape_yellow_barricade(int repeat) {
+    CHECK_INIT(MIDDLE, OBLIQUE);
     RobotSleep(2);
     ACTION_WALK(FAST, OBLIQUE, repeat);
 }

@@ -5,6 +5,7 @@
 #ifndef SOC_APP_ROBOT_ACTION_H
 
 #include "./robot_protocol.h"
+#include "./graphic_api.h"
 
 #define SOC_APP_ROBOT_ACTION_H
 
@@ -221,6 +222,19 @@ typedef enum {
 
     MISSION_7_YELLOW_DUMBLING = 203,
 
+    HEAD_MIDDLE_DOWN = 210,
+    HEAD_MIDDLE_OBLIQUE,
+    HEAD_MIDDLE_LEFT,
+    HEAD_MIDDLE_RIGHT,
+    HEAD_MIDDLE_UP,
+
+    HEAD_MIDDLE_SIDE_TO_DOWN = 216,
+    HEAD_MIDDLE_DOWN_TO_LEFT,
+    HEAD_MIDDLE_DOWN_TO_RIGHT,
+    HEAD_MIDDLE_HALF_LEFT,
+    HEAD_MIDDLE_HALF_RIGHT,
+
+
     NIL = 0xff
 } MOTION;
 
@@ -295,13 +309,17 @@ typedef enum {
 
 typedef enum {
     CHECK = 0,
-    SET
-} FOO_MOD;
+    SET,
+    HEAD
+} PREV_CHECK_MOD;
 
-void foo(MOTION_INIT motion, FOO_MOD mod);
+void prev_check(MOTION_INIT motion, PREV_CHECK_MOD mod);
+
+#define GET_INIT_POSE(motion) ((motion - 1) / 5)
+#define GET_INIT_VIEW(motion) ((motion - 1) % 5)
 
 static inline void action(MOTION_INIT init, MOTION motion) {
-    foo(init, CHECK);
+    prev_check(init, HEAD);
     RobotAction(motion);
 }
 
@@ -310,19 +328,18 @@ static inline void action(MOTION_INIT init, MOTION motion) {
 //////////////////////////////
 
 static inline void CHECK_INIT(POSE pose, VIEW view) {
-    foo(INIT_MOTION(pose, view), CHECK);
+    prev_check(INIT_MOTION(pose, view), HEAD);
 }
 
 static inline void ACTION_INIT(POSE pose, VIEW view) {
     RobotAction(INIT_MOTION(pose, view));
-    foo(INIT_MOTION(pose, view), SET);
+    prev_check(INIT_MOTION(pose, view), SET);
 }
 
 
 //////////////////////////////
 //  MOTION WALK             //
 //////////////////////////////
-
 static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat) {
     action(INIT_MOTION(MIDDLE, view), WALK_START_MOTION(speed, view));
 
@@ -334,6 +351,28 @@ static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat) {
     RobotAction(WALK_END_MOTION(speed, view));
 }
 
+static inline int ACTION_WALK_CHECK(SPEED speed, VIEW view, int repeat, int (*check)(U16 *), U16 *image, int finish) {
+    int result, i;
+    action(INIT_MOTION(MIDDLE, view), WALK_START_MOTION(speed, view));
+
+    for (i = 0; i >> 1 < repeat; ++i) {
+        setFPGAVideoData(image);
+        result = check(image);
+        if (result == finish) {
+            break;
+        } else {
+            RobotAction(WALK_MOTION((i & 1), speed, view));
+        }
+    }
+
+    if (i & 1) {
+        RobotAction(WALK_MOTION(DIR_RIGHT, speed, view));
+    }
+
+    RobotAction(WALK_END_MOTION(speed, view));
+
+    return result;
+}
 
 //////////////////////////////
 //  MOTION TURN             //
@@ -394,6 +433,7 @@ static inline void ACTION_MOTION_REPEAT(MOTION motion, POSE pose, VIEW view, int
 
 static inline void ACTION_MISSION(MISSION mission, POSE pose, VIEW view) {
     ACTION_MOTION(mission, pose, view);
+    prev_check(INIT_MOTION(MIDDLE, OBLIQUE), SET);
 }
 
 #endif //SOC_APP_ROBOT_ACTION_H
