@@ -24,7 +24,7 @@ o load param_dest:var:status param_src:var:FAIL
 o if param_src:bin_num:255 lop:<= param_src:var:data rop:&& param_src:var:data lop:<= param_src:bin_num:275 rop:then
 o begin
 o compute param_dest:var:repeat param_src:var:data aop:- param_src:bin_num:255
-o compute param_dest:cm:6 param_src:hrtimer_num:120 aop:* param_src:var:repeat
+o compute param_dest:cm:6 param_src:hrtimer_num:150 aop:* param_src:var:repeat
 o wait param_src:cm:6 lop:> param_src:timer_num:0 rop:then
 o load param_dest:var:status param_src:var:SUCCESS
 o end
