@@ -12,4 +12,6 @@
 
 int mission_8_1_is_not_front_of_bomb(U16 *image);
 
+int mission_8_4_check_finish_line(U16 *image);
+
 #endif //SOC_APP_MISSION_8_AVOID_BOMB_H

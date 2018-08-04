@@ -179,6 +179,18 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
     return rResult;
 }
 
+int mission_5_3_attach_green(U16 *image) {
+    U32 col, row, cnt = 0;
+    for (col = 75; col < 105; ++col) {
+        for (row = ROBOT_KNEE; row < HEIGHT; ++row) {
+            cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), GREEN);
+        }
+    }
+
+    ACTION_BIT(FRONT, 1);
+    return (double) cnt * 100 / ((HEIGHT - ROBOT_KNEE) * 30) > 5;
+}
+
 int mission_5_5_check_green_bridge_center(U16 *image) {
     U16 dir, cnt;
     int col, row, flagSign, green_len[2] = {0,};

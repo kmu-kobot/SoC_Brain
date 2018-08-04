@@ -97,6 +97,8 @@ int mission_3_4_getMDir(void) {
     return (mdir % 2 == 1) ? 0 : 1;
 }
 
+int minecount = 0;
+
 int mission_3_default_avoid_bomb(U16 *image) {
     U32 col, row, cnt = 0;
 
@@ -122,6 +124,8 @@ int mission_3_default_avoid_bomb(U16 *image) {
             mine += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
         }
     }
+
+    minecount += mine > MISSION_3_DEFAULT_BOMB_THRESHOLDS;
 
     return mine > MISSION_3_DEFAULT_BOMB_THRESHOLDS;
 }
