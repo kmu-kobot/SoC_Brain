@@ -20,7 +20,9 @@ int mission_2_1_attach_red_bridge(U16 *image) {
     }
 
     // TODO: 시간 줄일때 없애기
-    ACTION_WALK(CLOSE, DOWN, 2);
+    if ( (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) < 70) {
+        ACTION_WALK(CLOSE, DOWN, 2);
+    }
     return (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 70;
 }
 
@@ -78,7 +80,7 @@ int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) {
     printf("M4-5: AVG: %f\n", s);
 
     int len = (length != 0) ? length : CASE_0_DEFAULT_LEFT_RANGE;
-    int err = ((mode == 3 || mode == 4) ? 3 : CASE_0_DEFAULT_RANGE_ERROR);
+    int err = ((mode == 3 || mode == 4 || mode == 5) ? 3 : CASE_0_DEFAULT_RANGE_ERROR);
 
     if (s < len - err) {
         ACTION_MOVE((mode == 4) ? SHORT : LONG, DIR_RIGHT, MIDDLE, LEFT,
@@ -99,6 +101,8 @@ int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) {
             ACTION_WALK(CLOSE, OBLIQUE, 4);
         } else if (mode == 3 || mode == 4) {
             ACTION_WALK(CLOSE, OBLIQUE, 4);
+        } else if (mode == 5) {
+            ACTION_WALK(CLOSE, OBLIQUE, 2);
         }
         printf("SUCCESS\n\n");
         return 1;
@@ -146,11 +150,11 @@ int mission_2_4_after_bridge_set_straight(U16 *image, int mode, int pppo) {
     s *= 100;
     if (!(l - CASE_0_DEFAULT_SLOPE_ERROR <= s && s <= l + CASE_0_DEFAULT_SLOPE_ERROR)) {
         ACTION_TURN(
-                (pppo == 1) ? SHORT : LONG,
+                (pppo == 1) ? MID : LONG,
                 (l - CASE_0_DEFAULT_SLOPE_ERROR > s) ?
                 DIR_LEFT :
                 DIR_RIGHT,
-                (pppo == 1) ? LOW : MIDDLE, (mode) ? RIGHT : LEFT,
+                MIDDLE, (mode) ? RIGHT : LEFT,
                 1
         );
         return 0;

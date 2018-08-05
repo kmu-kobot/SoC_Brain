@@ -39,11 +39,11 @@ int Receive_Ack(int status) {
             0,
     };
 
-    uart1_buffer_read(command, 1);
+    uart1_buffer_read(command, 6);
 
     int i = 0;
     int rResult = 0;
-    for (i = 0; i < 1; ++i) {
+    for (i = 0; i < 6; ++i) {
         rResult += (command[i] == 4);
     }
 

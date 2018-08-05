@@ -14,13 +14,16 @@ int mdir = 0;
 int mission_3_avoid(U16 *image) {
     U32 col, row, cnt = 0;
 
-    for (row = 20; row < ROBOT_KNEE; ++row) {
-        for (col = 30; col < 150; ++col) {
+    for (row = 10; row < ROBOT_KNEE; ++row) {
+        for (col = 45; col < 135; ++col) {
             cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
         }
     }
 
-    ACTION_MOVE((cnt < 4) ? SHORT : LONG, (mdir % 2) ? DIR_RIGHT : DIR_LEFT, MIDDLE, DOWN, (cnt < 4) ? 3 : 1);
+    if (cnt > 4) {
+        ACTION_MOVE(LONG, (mdir % 2) ? DIR_RIGHT : DIR_LEFT, MIDDLE, DOWN, 1);
+    }
+    
 
     return cnt < 4;
 }
@@ -69,13 +72,13 @@ int mission_3_measure_line(U16 *image) {
 int mission_3_isFrontOf_Blue(U16 *image) {
     U32 col, row, cnt = 0;
 
-    for (row = 0; row < ROBOT_KNEE; ++row) {
+    for (row = 0; row < 35; ++row) {
         for (col = 0; col < WIDTH; ++col) {
             cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLUE);
         }
     }
 
-    return (double) cnt * 100 / ((HEIGHT) * (ROBOT_KNEE)) > 1;
+    return (double) cnt * 100 / ((HEIGHT) * (ROBOT_KNEE)) > 5;
 }
 
 void mission_3_default_watch_below(int repeat, U16 *image) {
@@ -97,23 +100,25 @@ int mission_3_4_getMDir(void) {
     return (mdir % 2 == 1) ? 0 : 1;
 }
 
+int minecount = 0;
+
 int mission_3_default_avoid_bomb(U16 *image) {
     U32 col, row, cnt = 0;
 
     cnt = 0;
-    for (row = 0; row < ROBOT_KNEE; ++row) {
+    for (row = 0; row < 35; ++row) {
         for (col = 0; col < WIDTH; ++col) {
             cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLUE);
         }
     }
 
-    if ((double) cnt * 100 / ((HEIGHT) * (ROBOT_KNEE)) > 1) {
+    if ((double) cnt * 100 / ((HEIGHT) * (ROBOT_KNEE)) > 10) {
         return 1;
     }
 
     U32 mine = 0, area[2][2] = {
-            {60, 25},
-            {120, ROBOT_KNEE}
+            {50, 0},
+            {130, 40}
     };
 
     mine = 0;
@@ -122,6 +127,8 @@ int mission_3_default_avoid_bomb(U16 *image) {
             mine += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
         }
     }
+
+    minecount += mine > MISSION_3_DEFAULT_BOMB_THRESHOLDS;
 
     return mine > MISSION_3_DEFAULT_BOMB_THRESHOLDS;
 }

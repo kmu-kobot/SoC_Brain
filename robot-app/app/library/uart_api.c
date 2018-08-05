@@ -87,5 +87,5 @@ void uart1_buffer_write(unsigned char *buf, int size) {
 }
 
 void uart1_buffer_read(unsigned char *buf, int size) {
-    uart_read(UART1, buf, 1);
+    uart_read(UART1, buf, 6);
 }
