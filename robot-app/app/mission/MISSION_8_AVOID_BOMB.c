@@ -59,7 +59,10 @@ int mission_8_1_is_not_front_of_bomb(U16 *image) {
 int walkCnt = 0;
 
 int mission_8_4_check_finish_line(U16 *image) {
-    if (++walkCnt > 15) {
+    if (++walkCnt > 20) {
+
+        ACTION_WALK(FAST, OBLIQUE, 30);
+
         return 1;
     }
 
@@ -82,7 +85,7 @@ int mission_8_4_check_finish_line(U16 *image) {
             cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
         }
 
-        if (cnt < 1) {
+        if (cnt < 4) {
             line = col;
             break;
         } else {
@@ -91,6 +94,6 @@ int mission_8_4_check_finish_line(U16 *image) {
 
     }
 
-    return line < 80;
+    return line < 100;
 
 }

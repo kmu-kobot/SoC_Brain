@@ -140,16 +140,16 @@ int mission_6_3_find_side_hole(U16 *image, U8 step) {
     if (state == 1) {
         if (step == 0) {
             ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, OBLIQUE, hole_points[0] / 90 + 1);
-            ACTION_TURN(SHORT, DIR_RIGHT, LOW, OBLIQUE, hole_points[0] / 20 + 3);
+            ACTION_TURN(MID, DIR_RIGHT, MIDDLE, OBLIQUE, hole_points[0] / 20 + 3);
         } else if (step == 1) {
             ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, OBLIQUE, hole_points[0] / 90 + 2);
-            ACTION_TURN(SHORT, DIR_RIGHT, LOW, OBLIQUE, hole_points[0] / 20 + 6);
+            ACTION_TURN(MID, DIR_RIGHT, MIDDLE, OBLIQUE, hole_points[0] / 20 + 6);
         } else if (step == 2) {
             ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, OBLIQUE, hole_points[0] / 50 + 1);
-            ACTION_TURN(SHORT, DIR_LEFT, LOW, OBLIQUE, hole_points[0] / 20 + 3);
+            ACTION_TURN(MID, DIR_LEFT, MIDDLE, OBLIQUE, hole_points[0] / 20 + 3);
         } else if (step == 3) {
             ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, OBLIQUE, (WIDTH - hole_points[0]) / 90 + 2);
-            ACTION_TURN(SHORT, DIR_LEFT, LOW, OBLIQUE, (WIDTH - hole_points[0]) / 20 + 6);
+            ACTION_TURN(MID, DIR_LEFT, MIDDLE, OBLIQUE, (WIDTH - hole_points[0]) / 20 + 6);
         } else {
             mission_6_4_turn_left();
             return 0;

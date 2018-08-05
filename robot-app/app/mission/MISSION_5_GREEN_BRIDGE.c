@@ -19,8 +19,9 @@ int mission_5_11_attach(U16 *image) {
 
     printf("\n\n xxx %f \n\n", (double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH));
 
-    // TODO: 시간 줄일때 없애기
-    ACTION_WALK(CLOSE, DOWN, 2);
+    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) < 20) {
+        ACTION_WALK(CLOSE, DOWN, 2);
+    }
     return (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) >= 20;
 }
 
@@ -181,13 +182,13 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
 
 int mission_5_3_attach_green(U16 *image) {
     U32 col, row, cnt = 0;
-    for (col = 75; col < 105; ++col) {
+    for (col = 0; col < 45; ++col) {
         for (row = ROBOT_KNEE; row < HEIGHT; ++row) {
-            cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), GREEN);
+            cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
         }
     }
 
-    ACTION_BIT(FRONT, 1);
+    ACTION_BIT(FRONT, 5);
     return (double) cnt * 100 / ((HEIGHT - ROBOT_KNEE) * 30) > 5;
 }
 
@@ -231,7 +232,8 @@ int mission_5_5_check_green_bridge_center(U16 *image) {
 }
 
 int mission_5_5_short_walk_on_green_bridge(int repeat) {
-    ACTION_WALK(FAST, DOWN, repeat);
+    // TODO
+    ACTION_MOTION(WALK_FAST_SET_5, MIDDLE, DOWN);
     RobotSleep(3);
     return 1;
 }
@@ -303,7 +305,7 @@ int mission_5_12_set_straight(U16 *image) {
 
     int rResult = 1;
     if (((r > 0) ? r : -r) > MISSION_5_5_GREEN_BRIDGE_SLOPE) {
-        ACTION_TURN(SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), (((r > 0) ? r : -r) > 6) ? LOW : MIDDLE, DOWN, 1);
+        ACTION_TURN((((r > 0) ? r : -r) > 6) ? MID : SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 1);
         rResult = 0;
     }
 
@@ -349,7 +351,8 @@ int mission_5_7_climb_down_stairs(void) {
     RobotSleep(1);
     ACTION_MOTION(MISSION_5_STAIR_DOWN, MIDDLE, OBLIQUE);
     CHECK_INIT(MIDDLE, OBLIQUE);
-    ACTION_WALK(FAST, OBLIQUE, 13);
+    //TODO
+    ACTION_MOTION(WALK_FAST_SET_9, MIDDLE, DOWN);
     return 1;
 }
 
@@ -404,10 +407,10 @@ int mission_14_set_straight(U16 *image) {
                               {105, 0}};
 
     for (i = 0; i < 2; ++i) {
-        for (row = 0; row > HEIGHT; ++row) {
+        for (row = ROBOT_KNEE; row > 0; --row) {
             cnt = 0;
             for (range = (-MISSION_5_6_BLACK_RANGE); range < MISSION_5_6_BLACK_RANGE; ++range) {
-                cnt += GetValueRGBYOBK(GetPtr(image, row, point[i][0] + range, WIDTH), GREEN);
+                cnt += GetValueRGBYOBK(GetPtr(image, row, point[i][0] + range, WIDTH), BLACK);
             }
 
             if (cnt > 3) {
@@ -425,7 +428,7 @@ int mission_14_set_straight(U16 *image) {
 
     int rResult = 1;
     if (((r > 0) ? r : -r) > MISSION_5_6_GREEN_BRIDGE_SLOPE) {
-        ACTION_TURN(SHORT, ((r > 0) ? DIR_RIGHT : DIR_LEFT), MIDDLE, DOWN, 1);
+        ACTION_TURN((((r > 0) ? r : -r) > 5) ? MID : SHORT, ((r > 0) ? DIR_RIGHT : DIR_LEFT), MIDDLE, DOWN, 1);
         RobotSleep(1);
         rResult = 0;
     }

@@ -45,10 +45,16 @@ int mission_4_2_ready_hurdle(U16 *image) {
 }
 
 int mission_4_4_jump_hurdle(void) {
+    ACTION_INIT(MIDDLE, OBLIQUE);
     ACTION_MOTION(MISSION_4_HURDLING, MIDDLE, OBLIQUE);
-    ACTION_WALK(FAST, OBLIQUE, 8);
+    // TODO
+    RobotSleep(1);
+    ACTION_MOTION(WALK_FAST_SET_9, MIDDLE, DOWN);
     RobotSleep(2);
-    ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 8);
+    ACTION_TURN(LONG, DIR_LEFT, MIDDLE, DOWN, 3);
+    RobotSleep(1);
+    CHECK_INIT(MIDDLE, OBLIQUE);
+    RobotSleep(1);
     return 1;
 }
 
