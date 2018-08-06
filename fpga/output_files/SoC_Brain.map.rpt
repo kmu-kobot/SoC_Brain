@@ -1,5 +1,5 @@
 Analysis & Synthesis report for SoC_Brain
-Thu Jul 26 02:10:57 2018
+Thu Aug 02 00:46:26 2018
 Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -19,43 +19,42 @@ Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
  11. Registers Removed During Synthesis
  12. General Register Statistics
  13. Inverted Register Statistics
- 14. Registers Added for RAM Pass-Through Logic
- 15. Registers Packed Into Inferred Megafunctions
- 16. Multiplexer Restructuring Statistics (Restructuring Performed)
- 17. Source assignments for RAM:RAM_inst|altsyncram:altsyncram_component|altsyncram_59g1:auto_generated
- 18. Source assignments for RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1|altsyncram_u6h1:auto_generated
- 19. Source assignments for RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__2|altsyncram_u6h1:auto_generated
- 20. Source assignments for RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__3|altsyncram_u6h1:auto_generated
- 21. Source assignments for RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__4|altsyncram_u6h1:auto_generated
- 22. Source assignments for RAM_BUFF:RAM_inst_B|altsyncram:ram_rtl_0|altsyncram_29d1:auto_generated
- 23. Source assignments for RAM_CLEAN_2:RAM_inst_M|altsyncram:ram_rtl_0|altsyncram_4ad1:auto_generated
- 24. Parameter Settings for User Entity Instance: Top-level Entity: |FPGA_Processing
- 25. Parameter Settings for User Entity Instance: pll:pll_inst|altpll:altpll_component
- 26. Parameter Settings for User Entity Instance: RAM:RAM_inst|altsyncram:altsyncram_component
- 27. Parameter Settings for User Entity Instance: RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1
- 28. Parameter Settings for User Entity Instance: RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__2
- 29. Parameter Settings for User Entity Instance: RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__3
- 30. Parameter Settings for User Entity Instance: RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__4
- 31. Parameter Settings for Inferred Entity Instance: RAM_BUFF:RAM_inst_B|altsyncram:ram_rtl_0
- 32. Parameter Settings for Inferred Entity Instance: RAM_CLEAN_2:RAM_inst_M|altsyncram:ram_rtl_0
- 33. Parameter Settings for Inferred Entity Instance: RAM_BUFF:RAM_inst_B|lpm_divide:Mod0
- 34. Parameter Settings for Inferred Entity Instance: RAM_CLEAN_2:RAM_inst_M|lpm_divide:Mod1
- 35. Parameter Settings for Inferred Entity Instance: lpm_divide:Div0
- 36. Parameter Settings for Inferred Entity Instance: lpm_divide:Div1
- 37. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0
- 38. Parameter Settings for Inferred Entity Instance: RAM_CLEAN_2:RAM_inst_M|lpm_divide:Div0
- 39. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult5
- 40. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
- 41. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult6
- 42. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult8
- 43. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult9
- 44. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult7
- 45. altpll Parameter Settings by Entity Instance
- 46. altsyncram Parameter Settings by Entity Instance
- 47. lpm_mult Parameter Settings by Entity Instance
- 48. Elapsed Time Per Partition
- 49. Analysis & Synthesis Messages
- 50. Analysis & Synthesis Suppressed Messages
+ 14. Registers Packed Into Inferred Megafunctions
+ 15. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 16. Source assignments for RAM:RAM_inst|altsyncram:altsyncram_component|altsyncram_59g1:auto_generated
+ 17. Source assignments for RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1|altsyncram_u6h1:auto_generated
+ 18. Source assignments for RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__2|altsyncram_u6h1:auto_generated
+ 19. Source assignments for RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__3|altsyncram_u6h1:auto_generated
+ 20. Source assignments for RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__4|altsyncram_u6h1:auto_generated
+ 21. Source assignments for RAM_BUFF:RAM_inst_B|altsyncram:ram_rtl_0|altsyncram_29d1:auto_generated
+ 22. Source assignments for RAM_CLEAN_2:RAM_inst_M|altsyncram:ram_rtl_0|altsyncram_4ad1:auto_generated
+ 23. Parameter Settings for User Entity Instance: Top-level Entity: |FPGA_Processing
+ 24. Parameter Settings for User Entity Instance: pll:pll_inst|altpll:altpll_component
+ 25. Parameter Settings for User Entity Instance: RAM:RAM_inst|altsyncram:altsyncram_component
+ 26. Parameter Settings for User Entity Instance: RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1
+ 27. Parameter Settings for User Entity Instance: RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__2
+ 28. Parameter Settings for User Entity Instance: RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__3
+ 29. Parameter Settings for User Entity Instance: RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__4
+ 30. Parameter Settings for Inferred Entity Instance: RAM_BUFF:RAM_inst_B|altsyncram:ram_rtl_0
+ 31. Parameter Settings for Inferred Entity Instance: RAM_CLEAN_2:RAM_inst_M|altsyncram:ram_rtl_0
+ 32. Parameter Settings for Inferred Entity Instance: RAM_BUFF:RAM_inst_B|lpm_divide:Mod0
+ 33. Parameter Settings for Inferred Entity Instance: RAM_CLEAN_2:RAM_inst_M|lpm_divide:Mod1
+ 34. Parameter Settings for Inferred Entity Instance: lpm_divide:Div0
+ 35. Parameter Settings for Inferred Entity Instance: lpm_divide:Div1
+ 36. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0
+ 37. Parameter Settings for Inferred Entity Instance: RAM_CLEAN_2:RAM_inst_M|lpm_divide:Div0
+ 38. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult5
+ 39. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
+ 40. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult6
+ 41. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult8
+ 42. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult9
+ 43. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult7
+ 44. altpll Parameter Settings by Entity Instance
+ 45. altsyncram Parameter Settings by Entity Instance
+ 46. lpm_mult Parameter Settings by Entity Instance
+ 47. Elapsed Time Per Partition
+ 48. Analysis & Synthesis Messages
+ 49. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -81,7 +80,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Jul 26 02:10:57 2018      ;
+; Analysis & Synthesis Status        ; Successful - Thu Aug 02 00:46:26 2018      ;
 ; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
 ; Revision Name                      ; SoC_Brain                                  ;
 ; Top-level Entity Name              ; FPGA_Processing                            ;
@@ -278,9 +277,9 @@ applicable agreement for further details.
 ;                                             ;                                                                                 ;
 ; Total combinational functions               ; 4832                                                                            ;
 ; Logic element usage by number of LUT inputs ;                                                                                 ;
-;     -- 4 input functions                    ; 1415                                                                            ;
+;     -- 4 input functions                    ; 1414                                                                            ;
 ;     -- 3 input functions                    ; 1988                                                                            ;
-;     -- <=2 input functions                  ; 1429                                                                            ;
+;     -- <=2 input functions                  ; 1430                                                                            ;
 ;                                             ;                                                                                 ;
 ; Logic elements by mode                      ;                                                                                 ;
 ;     -- normal mode                          ; 3174                                                                            ;
@@ -298,7 +297,7 @@ applicable agreement for further details.
 ;                                             ;                                                                                 ;
 ; Maximum fan-out node                        ; pll:pll_inst|altpll:altpll_component|pll_altpll:auto_generated|wire_pll1_clk[0] ;
 ; Maximum fan-out                             ; 436                                                                             ;
-; Total fan-out                               ; 22972                                                                           ;
+; Total fan-out                               ; 22970                                                                           ;
 ; Average fan-out                             ; 4.02                                                                            ;
 +---------------------------------------------+---------------------------------------------------------------------------------+
 
@@ -704,166 +703,6 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; vpo_wrxd2                              ; 1       ;
 ; Total number of inverted registers = 4 ;         ;
 +----------------------------------------+---------+
-
-
-+------------------------------------------------+
-; Registers Added for RAM Pass-Through Logic     ;
-+----------------------+-------------------------+
-; Register Name        ; RAM Name                ;
-+----------------------+-------------------------+
-; ram_0__6__bypass[0]  ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[1]  ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[2]  ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[3]  ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[4]  ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[5]  ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[6]  ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[7]  ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[8]  ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[9]  ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[10] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[11] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[12] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[13] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[14] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[15] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[16] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[17] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[18] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[19] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[20] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[21] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[22] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[23] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[24] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[25] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[26] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[27] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[28] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[29] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[30] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[31] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[32] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[33] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[34] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[35] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[36] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[37] ; altsyncram:ram[0][6]__1 ;
-; ram_0__6__bypass[0]  ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[1]  ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[2]  ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[3]  ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[4]  ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[5]  ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[6]  ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[7]  ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[8]  ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[9]  ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[10] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[11] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[12] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[13] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[14] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[15] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[16] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[17] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[18] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[19] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[20] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[21] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[22] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[23] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[24] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[25] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[26] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[27] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[28] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[29] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[30] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[31] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[32] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[33] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[34] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[35] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[36] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[37] ; altsyncram:ram[0][6]__2 ;
-; ram_0__6__bypass[0]  ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[1]  ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[2]  ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[3]  ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[4]  ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[5]  ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[6]  ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[7]  ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[8]  ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[9]  ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[10] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[11] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[12] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[13] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[14] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[15] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[16] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[17] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[18] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[19] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[20] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[21] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[22] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[23] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[24] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[25] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[26] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[27] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[28] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[29] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[30] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[31] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[32] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[33] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[34] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[35] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[36] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[37] ; altsyncram:ram[0][6]__3 ;
-; ram_0__6__bypass[0]  ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[1]  ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[2]  ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[3]  ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[4]  ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[5]  ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[6]  ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[7]  ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[8]  ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[9]  ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[10] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[11] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[12] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[13] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[14] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[15] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[16] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[17] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[18] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[19] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[20] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[21] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[22] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[23] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[24] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[25] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[26] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[27] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[28] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[29] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[30] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[31] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[32] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[33] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[34] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[35] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[36] ; altsyncram:ram[0][6]__4 ;
-; ram_0__6__bypass[37] ; altsyncram:ram[0][6]__4 ;
-+----------------------+-------------------------+
 
 
 +--------------------------------------------------------------------------------------+
@@ -2308,7 +2147,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:02:32     ;
+; Top            ; 00:01:45     ;
 +----------------+--------------+
 
 
@@ -2318,7 +2157,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Thu Jul 26 02:07:38 2018
+    Info: Processing started: Thu Aug 02 00:44:23 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off SoC_Brain -c SoC_Brain
 Info (11104): Parallel Compilation has detected 8 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 4 of the 4 physical processors detected instead.
 Info (12021): Found 1 design units, including 1 entities, in source file ram.v
@@ -2444,75 +2283,6 @@ Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(45): trunca
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(46): truncated value with size 32 to match size of target (15)
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(47): truncated value with size 32 to match size of target (15)
 Warning (10230): Verilog HDL assignment warning at FPGA_Processing.v(48): truncated value with size 32 to match size of target (15)
-Warning (276020): Inferred RAM node "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1" from synchronous design logic.  Pass-through logic has been added to match the read-during-write behavior of the original design.
-Warning (276020): Inferred RAM node "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__2" from synchronous design logic.  Pass-through logic has been added to match the read-during-write behavior of the original design.
-Warning (276020): Inferred RAM node "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__3" from synchronous design logic.  Pass-through logic has been added to match the read-during-write behavior of the original design.
-Warning (276020): Inferred RAM node "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__4" from synchronous design logic.  Pass-through logic has been added to match the read-during-write behavior of the original design.
-Info (19000): Inferred 4 megafunctions from design logic
-    Info (276029): Inferred altsyncram megafunction from the following design logic: "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1" 
-        Info (286033): Parameter OPERATION_MODE set to DUAL_PORT
-        Info (286033): Parameter WIDTH_A set to 7
-        Info (286033): Parameter WIDTHAD_A set to 15
-        Info (286033): Parameter NUMWORDS_A set to 32768
-        Info (286033): Parameter WIDTH_B set to 7
-        Info (286033): Parameter WIDTHAD_B set to 15
-        Info (286033): Parameter NUMWORDS_B set to 32768
-        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
-        Info (286033): Parameter OUTDATA_REG_B set to UNREGISTERED
-        Info (286033): Parameter ADDRESS_ACLR_B set to NONE
-        Info (286033): Parameter OUTDATA_ACLR_B set to NONE
-        Info (286033): Parameter ADDRESS_REG_B set to CLOCK0
-        Info (286033): Parameter INDATA_ACLR_A set to NONE
-        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
-        Info (286033): Parameter READ_DURING_WRITE_MODE_MIXED_PORTS set to OLD_DATA
-    Info (276029): Inferred altsyncram megafunction from the following design logic: "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__2" 
-        Info (286033): Parameter OPERATION_MODE set to DUAL_PORT
-        Info (286033): Parameter WIDTH_A set to 7
-        Info (286033): Parameter WIDTHAD_A set to 15
-        Info (286033): Parameter NUMWORDS_A set to 32768
-        Info (286033): Parameter WIDTH_B set to 7
-        Info (286033): Parameter WIDTHAD_B set to 15
-        Info (286033): Parameter NUMWORDS_B set to 32768
-        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
-        Info (286033): Parameter OUTDATA_REG_B set to UNREGISTERED
-        Info (286033): Parameter ADDRESS_ACLR_B set to NONE
-        Info (286033): Parameter OUTDATA_ACLR_B set to NONE
-        Info (286033): Parameter ADDRESS_REG_B set to CLOCK0
-        Info (286033): Parameter INDATA_ACLR_A set to NONE
-        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
-        Info (286033): Parameter READ_DURING_WRITE_MODE_MIXED_PORTS set to OLD_DATA
-    Info (276029): Inferred altsyncram megafunction from the following design logic: "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__3" 
-        Info (286033): Parameter OPERATION_MODE set to DUAL_PORT
-        Info (286033): Parameter WIDTH_A set to 7
-        Info (286033): Parameter WIDTHAD_A set to 15
-        Info (286033): Parameter NUMWORDS_A set to 32768
-        Info (286033): Parameter WIDTH_B set to 7
-        Info (286033): Parameter WIDTHAD_B set to 15
-        Info (286033): Parameter NUMWORDS_B set to 32768
-        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
-        Info (286033): Parameter OUTDATA_REG_B set to UNREGISTERED
-        Info (286033): Parameter ADDRESS_ACLR_B set to NONE
-        Info (286033): Parameter OUTDATA_ACLR_B set to NONE
-        Info (286033): Parameter ADDRESS_REG_B set to CLOCK0
-        Info (286033): Parameter INDATA_ACLR_A set to NONE
-        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
-        Info (286033): Parameter READ_DURING_WRITE_MODE_MIXED_PORTS set to OLD_DATA
-    Info (276029): Inferred altsyncram megafunction from the following design logic: "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__4" 
-        Info (286033): Parameter OPERATION_MODE set to DUAL_PORT
-        Info (286033): Parameter WIDTH_A set to 7
-        Info (286033): Parameter WIDTHAD_A set to 15
-        Info (286033): Parameter NUMWORDS_A set to 32768
-        Info (286033): Parameter WIDTH_B set to 7
-        Info (286033): Parameter WIDTHAD_B set to 15
-        Info (286033): Parameter NUMWORDS_B set to 32768
-        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
-        Info (286033): Parameter OUTDATA_REG_B set to UNREGISTERED
-        Info (286033): Parameter ADDRESS_ACLR_B set to NONE
-        Info (286033): Parameter OUTDATA_ACLR_B set to NONE
-        Info (286033): Parameter ADDRESS_REG_B set to CLOCK0
-        Info (286033): Parameter INDATA_ACLR_A set to NONE
-        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
-        Info (286033): Parameter READ_DURING_WRITE_MODE_MIXED_PORTS set to OLD_DATA
 Info (12128): Elaborating entity "altsyncram" for hierarchy "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1"
 Info (12130): Elaborated megafunction instantiation "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1"
 Info (12133): Instantiated megafunction "RAM_CLEAN_2:RAM_inst_M|altsyncram:ram[0][6]__1" with the following parameter:
@@ -2812,11 +2582,11 @@ Info (21057): Implemented 5423 device resources after synthesis - the final reso
     Info (21064): Implemented 289 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 19 DSP elements
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 57 warnings
-    Info: Peak virtual memory: 5802 megabytes
-    Info: Processing ended: Thu Jul 26 02:10:57 2018
-    Info: Elapsed time: 00:03:19
-    Info: Total CPU time (on all processors): 00:03:18
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 53 warnings
+    Info: Peak virtual memory: 5709 megabytes
+    Info: Processing ended: Thu Aug 02 00:46:26 2018
+    Info: Elapsed time: 00:02:03
+    Info: Total CPU time (on all processors): 00:02:02
 
 
 +------------------------------------------+

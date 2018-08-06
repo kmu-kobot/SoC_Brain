@@ -437,7 +437,7 @@ always @ (negedge resetx or posedge clk_llc)
 	if		(~resetx)	B_B <= 1'b0;
 	else
 	begin
-		B_B <= C_H & ((B_MIN <= H) & (H <= B_MAX));
+		B_B <= C_L & ((B_MIN <= H) & (H <= B_MAX));
 	end
 	
 always @ (negedge resetx or posedge clk_llc)
