@@ -8,7 +8,7 @@ void mission_4_1_watch_front(int repeat) {
     ACTION_WALK(FAST, OBLIQUE, repeat);
 }
 
-int mission_4_2_ready_hurdle(U16 *image) {
+int mission_4_2_ready_hurdle(U16 *image) { // 굳이? 필요한가
     U32 col[3] = {90, 70, 110}, row, i, cnt;
     U16 checkHurdleLine[3] = {0,};
     int range = 0;
@@ -58,7 +58,7 @@ int mission_4_4_jump_hurdle(void) {
     return 1;
 }
 
-int mission_4_6_set_center(U16 *image, int length) {
+int mission_4_6_set_center(U16 *image, int length) { // 얘도 여러 프레임
     U32 col[3] = {85, 95, 90}, row, i;
     U16 checkHurdleLine[3] = {0,};
     int j;

@@ -23,13 +23,13 @@ int mission_3_avoid(U16 *image) {
     if (cnt > 4) {
         ACTION_MOVE(LONG, (mdir % 2) ? DIR_RIGHT : DIR_LEFT, MIDDLE, DOWN, 1);
     }
-    
+
 
     return cnt < 4;
 }
 
 
-int mission_3_measure_line(U16 *image) {
+int mission_3_measure_line(U16 *image) { // 여기도 col 갯수 늘리고 여러 프레임 돌리느넥 좋을듯
     U32 cols[3] = {85, 95, 90}, row, i;
     U16 line[3] = {0,};
     int range;
@@ -112,7 +112,7 @@ int mission_3_default_avoid_bomb(U16 *image) {
         }
     }
 
-    if ((double) cnt * 100 / ((HEIGHT) * (ROBOT_KNEE)) > 10) {
+    if ((double) cnt * 100 / ((HEIGHT) * (ROBOT_KNEE)) > 10) { // 여기 HEIGHT * ROBOT_KNEE 맞음? 35 * WIDTH 여야되는거같은데
         return 1;
     }
 
@@ -144,7 +144,7 @@ int mission_3_1_ver2(U16 *image) {
         }
     }
 
-    double s = (double) cnt * 100 / ((120) * (120));
+    double s = (double) cnt * 100 / ((120) * (120)); // 120 * 120 을 HEIGHT * (WIDTH - 30 - 30)으로 하는게 보기 좋을듯
 
     if (k == 0) {
         if (s > 5) {

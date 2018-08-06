@@ -144,7 +144,7 @@ int huro(void) {
                         setFPGAVideoData(fpga_videodata);
                         step = (mission_3_default_avoid_bomb(fpga_videodata)) ? 1 : 2;
 
-                        if (mission_3_isFrontOf_Blue(fpga_videodata)) {
+                        if (mission_3_isFrontOf_Blue(fpga_videodata)) { // 얘를 윗줄이랑 합쳐서 a ? 4 : b ? 1 : 2 형태로 만드는게 나을듯
                             step = 4;
                         }
 
@@ -185,11 +185,11 @@ int huro(void) {
                     case 3:
                         mission_3_4_watch_front();
                         setFPGAVideoData(fpga_videodata);
-                        step = (mission_3_1_ver2(fpga_videodata) && mission_4_2_ready_hurdle(fpga_videodata)) ? 4 : 0;
+                        step = (mission_3_1_ver2(fpga_videodata) && mission_4_2_ready_hurdle(fpga_videodata)) ? 4 : 0; // ready hurdle 뺴도 될거같음
                         flag = 0;
                         break;
                     case 4:
-                        ACTION_WALK(CLOSE, OBLIQUE, 10);
+                        ACTION_WALK(CLOSE, OBLIQUE, 10); // close 10번이나 해야되나? fast로 거리 붙이고 closw 조금만 하면 될거같음
                         step += 1;
                         flag = 0;
                         break;
@@ -218,7 +218,7 @@ int huro(void) {
                         break;
                     case 5:
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_6_9_set_front_of_not_bk(fpga_videodata);
+                        step += mission_6_9_set_front_of_not_bk(fpga_videodata); // 얘도 6_9 떼버리고 공용함수로 하는게 나을듯
                         break;
                     case 6:
                         mission = 10;
@@ -240,7 +240,7 @@ int huro(void) {
                         RobotSleep(1);
 
                         setFPGAVideoData(fpga_videodata);
-                        step = (mission_4_2_ready_hurdle(fpga_videodata)) ? 3 : 2;
+                        step = (mission_4_2_ready_hurdle(fpga_videodata)) ? 3 : 2; // ready_hurdle 이 앞에 검은라인 보는거임? 이거 빼도 될거같은데
                         break;
                 }
                 break;
@@ -304,7 +304,7 @@ int huro(void) {
                         break;
                     case 5:
                         setFPGAVideoData(fpga_videodata);
-                        nextMission = mission_5_6_set_straight(fpga_videodata);
+                        nextMission = mission_5_6_set_straight(fpga_videodata); // 이거 nextMission 다른곳에서 쓰는 변수 아닌가? 다른변수 하나 만드는게 나을듯
                         step += nextMission;
 
                         if (nextMission) {

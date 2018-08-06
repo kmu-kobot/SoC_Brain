@@ -34,7 +34,7 @@ int mission_5_1_check_black_line(U16 *image) {
             cntBlack += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
         }
         if (cntBlack > 50) {
-            cntBlack = row;
+            cntBlack = row; // 이거 변수 하나로 2개 역할 하는건가?? 그런거면 변수 하나 더만들어서 나눠주는게 나을거같음 그냥 여기서 row 검사해서 바로 return해도 될듯
             break;
         } else {
             cntBlack = 0;
@@ -89,7 +89,7 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
     U32 col, row, cnt;
 
     // 오른쪽에 많이 붙었을때 왼쪽으로 걷는거 개발
-    cnt = 0;
+    cnt = 0;  // 한쪽만 보고 맞추는거보다 양쪽 다 보는게 좋을거같음
     for (col = 0; col < 30; col++) {
         for (row = 0; row < HEIGHT; row++) {
             cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), GREEN);
@@ -127,6 +127,8 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
     //     return 0;
     // }
     // //
+
+    // 포인트 더 늘리고 여러 프레임 확인하는게 좋을거같음
 
     U32 i, range = 0, point[2][2] = {{0, MISSION_5_5_GREEN_BRIDGE_POINT_Y_1},
                                      {0, MISSION_5_5_GREEN_BRIDGE_POINT_Y_2}};
@@ -192,7 +194,7 @@ int mission_5_3_attach_green(U16 *image) {
     return (double) cnt * 100 / ((HEIGHT - ROBOT_KNEE) * 30) > 5;
 }
 
-int mission_5_5_check_green_bridge_center(U16 *image) {
+int mission_5_5_check_green_bridge_center(U16 *image) { // 여러프레임 여러점
     U16 dir, cnt;
     int col, row, flagSign, green_len[2] = {0,};
 
@@ -250,14 +252,14 @@ int mission_5_5_get_repeat(U16 *image) {
 }
 
 
-int mission_5_6_set_only_one_bk_bar(U16 *image) {
+int mission_5_6_set_only_one_bk_bar(U16 *image) { // 기울어져있을때 똑바로 작동 못함
     U32 col, row, blackLen = 0;
     for (row = 0; row < HEIGHT; ++row) {
         blackLen = 0;
-        for (col = MISSION_5_6_POINT_X_1;
+        for (col = MISSION_5_6_POINT_X_1; // 여기도 딱히 이유 없으면 for문 한줄로
              col < MISSION_5_6_POINT_X_2;
              ++col) {
-            blackLen += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
+            blackLen += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK); // cnt 변수 따로 만드는게 나을듯
         }
 
         if (blackLen >= MISSION_5_6_BLACK_LEN_THRESHOLDS) {
@@ -270,7 +272,7 @@ int mission_5_6_set_only_one_bk_bar(U16 *image) {
     printf("\n\t\t- M5-6: SET CENTER\n");
     printf("\t\t\t+ bk_len length: %d\n", blackLen);
 
-    if (blackLen > MISSION_5_6_BLACK_LEN_LENGTH) {
+    if (blackLen > MISSION_5_6_BLACK_LEN_LENGTH) { // 멀면 fast로
         ACTION_BIT(FRONT, 1);
         RobotSleep(1);
     }
@@ -278,7 +280,7 @@ int mission_5_6_set_only_one_bk_bar(U16 *image) {
     return blackLen < MISSION_5_6_BLACK_LEN_LENGTH;
 }
 
-int mission_5_12_set_straight(U16 *image) {
+int mission_5_12_set_straight(U16 *image) { // 여러점 여러프레임
     U32 cnt, row, i;
     int range, point[2][2] = {{80,  0},
                               {100, 0}};
@@ -312,7 +314,7 @@ int mission_5_12_set_straight(U16 *image) {
     return rResult;
 }
 
-int mission_5_6_set_straight(U16 *image) {
+int mission_5_6_set_straight(U16 *image) { // 여러점 여러프레임
     U32 cnt, row, i;
     int range, point[2][2] = {{MISSION_5_6_BLACK_COL_1, 0},
                               {MISSION_5_6_BLACK_COL_2, 0}};
@@ -356,7 +358,7 @@ int mission_5_7_climb_down_stairs(void) {
     return 1;
 }
 
-void mission_5_5_set_center(U16 *image) {
+void mission_5_5_set_center(U16 *image) { // 이거는 중심부터 좌우 초록색 길이 재는건가?? 담에 설명 한번 들어봐야 알듯
     U16 dir;
     int col, row, flagSign, green_len[2] = {0,};
 
@@ -365,7 +367,7 @@ void mission_5_5_set_center(U16 *image) {
         for (col = 0; col < WIDTH / 2 - 3; ++col) {
             for (row = ROBOT_KNEE;
                  row < HEIGHT;
-                 ++row) {
+                 ++row) { // 여기는 for문 왜 이렇게 써둔거?? 이유 딱히 없으면 그냥 평범하게 쓰는게 알아보기 편할듯
                 green_len[dir] += GetValueRGBYOBK(GetPtr(image, row, WIDTH / 2 + ROBOT_OFFSET + col * flagSign, WIDTH),
                                                   GREEN);
             }
@@ -386,7 +388,7 @@ void mission_5_5_set_center(U16 *image) {
 
 }
 
-int mission_13_attach_black(U16 *image) {
+int mission_13_attach_black(U16 *image) { // 여러프레임 돌리고 수치에 따라서 fast로 빨리 가버리는게 필요할듯
     U32 col, row, cnt = 0;
 
     for (col = 0; col < WIDTH; ++col) {
@@ -401,7 +403,7 @@ int mission_13_attach_black(U16 *image) {
 
 }
 
-int mission_14_set_straight(U16 *image) {
+int mission_14_set_straight(U16 *image) { // 여러프레임 여러점, 수치 가지고 repeat조절
     U32 cnt, row, i;
     int range, point[2][2] = {{75,  0},
                               {105, 0}};

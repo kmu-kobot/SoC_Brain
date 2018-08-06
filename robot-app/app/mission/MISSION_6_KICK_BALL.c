@@ -7,8 +7,6 @@
 #include <math.h>
 #include <limits.h>
 
-#define MIN(a, b) (a > b ? b : a)
-#define MAX(a, b) (a < b ? b : a)
 
 U32 hole_points[2] = {0,};
 U32 ball_points[2] = {0,};
@@ -58,15 +56,6 @@ int mission_6_1_detection_ball(U16 *image) {
         return 0;
     }
 
-
-    // 3        2           1           0
-    // 0 25     25 55       55 85       85 95
-    // R        LEFT     RIGHT
-    // 3:       (0, 25)  (155, 180)
-    // 2:       (25, 55) (125, 155)
-    // 1:       (55, 85) (155, 180)
-    // FRONT:   (85, 95)
-
     // LEFT or RIGHT
     DIRECTION move_dir = ball_points[0] > WIDTH / 2;
 
@@ -89,45 +78,6 @@ int mission_6_2_set_center_of_ball(U16 *image) {
 
 void mission_6_2_watch_right(void) {
     CHECK_INIT(MIDDLE, RIGHT);
-}
-
-int mission_6_2_set_straight_black_line(U16 *image, int mode) {
-
-    U32 row, i;
-    U16 col[2] = {
-            MISSION_6_2_BLACK_LINE_COL_POINT_1,
-            MISSION_6_2_BLACK_LINE_COL_POINT_2
-    };
-    int black_len[2] = {0,};
-
-    for (i = 0; i < 2; ++i) {
-        for (row = HEIGHT - 20; row > 0; --row) {
-            if (GetValueRGBYOBK(GetPtr(image, row, col[i] - 1, WIDTH), BLACK) &&
-                GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) &&
-                GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK)) {
-                black_len[i] = HEIGHT - row;
-                break;
-            }
-        }
-    }
-
-    printf("M6-2: SLOPE\n");
-    printf("black[0]: %d, black_len[1]: %d.\n", black_len[0], black_len[1]);
-
-    double degree = atan2(black_len[1] - black_len[0], col[1] - col[0]) * 180.0 / M_PI;
-    DIRECTION dir = degree < 0;
-
-    printf("degree : %f, dir : %d\n", degree, dir);
-
-    if (abs(degree) > 10.0) {
-        printf("degree > 10.0\n");
-        ACTION_TURN(LONG, dir, MIDDLE, mode ? RIGHT : LEFT, (int) (abs(degree) / 10.0));
-    } else {
-        printf("degree <= 10.0\n");
-        return 1;
-    }
-
-    return 0;
 }
 
 int mission_6_3_find_side_hole(U16 *image, U8 step) {
@@ -169,11 +119,6 @@ int mission_6_3_find_side_hole(U16 *image, U8 step) {
     }
 
     return 0;
-}
-
-void mission_6_4_turn_to_detect_hole(void) {
-    ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, OBLIQUE, hole_points[0] / 50 + 2);
-    ACTION_TURN(SHORT, DIR_RIGHT, MIDDLE, OBLIQUE, hole_points[0] / 7 + 9);
 }
 
 void mission_6_4_turn_left(void) {
@@ -667,26 +612,6 @@ int mission_6_4_set_front_of_ball(U16 *image) {
     return 0;
 }
 
-int countColor(U16 *image, int row, int col, int range, int color) {
-    int cnt = 0, x, y;
-    // 0: RED, ORANGE 1: BLUE
-
-    for (x = col - range; x < col + range + 1; ++x) {
-        for (y = row - range; y < row + range + 1; ++y) {
-            cnt += (color) ?
-                   GetValueRGBYOBK(GetPtr(image, y, x, WIDTH), BLUE) :
-                   GetValueRGBYOBK(GetPtr(image, y, x, WIDTH), RED) ||
-                   GetValueRGBYOBK(GetPtr(image, y, x, WIDTH), ORANGE);
-
-            if (cnt > 180 || cnt < 0) {
-                continue;
-            }
-        }
-
-    }
-    return cnt;
-}
-
 int mission_6_5_kick_ball(void) {
     ACTION_MOTION(MISSION_6_RIGHT_KICK, MIDDLE, OBLIQUE);
     return 1;
@@ -696,7 +621,7 @@ void mission_6_6_watch_side(void) {
     CHECK_INIT(MIDDLE, LEFT);
 }
 
-int mission_6_9_set_front_of_not_bk(U16 *image) {
+int mission_6_9_set_front_of_not_bk(U16 *image) { // 여러프레임, 점 추가
     U32 col[3] = {85, 95, 90}, row, i;
     int checkHurdleLine[3] = {0,};
 
@@ -733,59 +658,6 @@ int mission_6_9_set_front_of_not_bk(U16 *image) {
         ACTION_TURN(LONG, DIR_LEFT, MIDDLE, OBLIQUE, 2);
         return 0;
     }
-}
-
-int mission_6_6_set_center_black_line(U16 *image, int mode) {
-    U32 col[3] = {85, 95, 90}, row, i, j;
-    U16 checkHurdleLine[3] = {0,};
-
-    for (i = 0; i < 3; ++i) {
-        for (row = HEIGHT - 1; row > 0; --row) {
-            checkHurdleLine[i] = 0;
-
-            for (j = 0; j < 5; j++) {
-                checkHurdleLine[i] += GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK);
-            }
-
-            if (checkHurdleLine[i] > 3) {
-                checkHurdleLine[i] = (U16) (HEIGHT - row);
-                break;
-            }
-        }
-    }
-
-    double s = 0;
-    printf("M6-6: BLACK LINE\n");
-    for (i = 0; i < 3; ++i) {
-        if (s < checkHurdleLine[i]) {
-            s = checkHurdleLine[i];
-        }
-        printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);
-    }
-    printf("\n");
-
-    printf("M6-6: AVG: %f\n", s);
-
-    if (s < DEFAULT_RIGHT_RANGE - ((mode == 3) ? 3 : DEFAULT_RANGE_ERROR)) {
-        ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, RIGHT, 1);
-        if (mode == 1) {
-            ACTION_WALK(CLOSE, RIGHT, 2);
-        }
-        return 0;
-    } else if (s > DEFAULT_RIGHT_RANGE + ((mode == 3) ? 3 : DEFAULT_RANGE_ERROR)) {
-        ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, RIGHT, 1);
-        if (mode == 1) {
-            ACTION_WALK(CLOSE, RIGHT, 2);
-        }
-        return 0;
-    } else {
-        if (mode == 1 || mode == -1 || mode == 3) {
-            ACTION_WALK(CLOSE, RIGHT, 3);
-        }
-        printf("SUCCESS\n\n");
-        return 1;
-    }
-
 }
 
 int mission_6_9_walk_front(void) {
