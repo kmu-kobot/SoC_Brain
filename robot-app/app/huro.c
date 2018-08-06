@@ -37,7 +37,7 @@ int huro(void) {
         printf("\n[START]\tMISSION[%d]: STEP [%d]\n", mission, step);
 
         switch (mission) {
-            case 0: // MISSION 0: READY PLAY
+            case 0: // MISSION 0: READY PLAY   // 빼도 될거같음
                 mission += mission_0_1_wait_play(fpga_videodata);
                 break;
             case 1: // MISSION 1: YELLOW BARRICADE
@@ -56,18 +56,18 @@ int huro(void) {
                     case 3:
                         if (flag == 0) {
                             flag++;
-                            mission_2_2_watch_side();
+                            mission_2_2_watch_side(); // watch 류 함수들 헤더 하나 새로 만들어서 하나로 묶어버려도 될거같음
                         }
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_2_4_after_bridge_set_straight(fpga_videodata, 0, 0); // 직선 맞추기
+                        step += mission_2_4_after_bridge_set_straight(fpga_videodata, 0, 0); // 직선 맞추기 // 묶어버려도 될거같음
 
                         if (step == 4) {
-                            step += mission_2_5_after_bridge_set_center(fpga_videodata);// 길이 맞추기
+                            step += mission_2_5_after_bridge_set_center(fpga_videodata);// 길이 맞추기 // 묶어버려도 될거같음
                         }
 
                         step = (step == 5) ? 4 : 3;
                         break;
-                    case 4:
+                    case 4: // 슬립만 합치거나 줄이면 될듯
                         CHECK_INIT(MIDDLE, DOWN);
                         RobotSleep(1);
 
@@ -84,7 +84,7 @@ int huro(void) {
             case 2: // MISSION 2: RED BRIDGE
                 switch (step) {
                     case 0:
-                        if (flag == 3) {
+                        if (flag == 3) { // 어차피 이 스텝에서 flag 3밖에 안쓰니까 이 if 문 없어도 될거같음
                             setFPGAVideoData(fpga_videodata);
                             mission_2_1_watch_below(30, fpga_videodata);
                             ACTION_WALK(CLOSE, DOWN, 4);
@@ -92,9 +92,9 @@ int huro(void) {
 
                         setFPGAVideoData(fpga_videodata);
                         step += mission_2_1_wait_front_of_red_bridge(fpga_videodata);
-                        flag = (step == 1) ? 0 : 3;
+                        flag = (step == 1) ? 0 : 3; // 어차피 step 0에서는 flag 3만 있고, step 1에서는 0으로 한번 초기화 해주니까 필요 없는듯
                         break;
-                    case 1:
+                    case 1: // 영상처리 걷기로 붙이면 이 스텝 필요 없을거같음
                         flag = 0;
                         setFPGAVideoData(fpga_videodata);
                         step += mission_2_1_attach_red_bridge(fpga_videodata);
