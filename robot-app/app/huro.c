@@ -38,7 +38,8 @@ int huro(void) {
 
         switch (mission) {
             case 0: // MISSION 0: READY PLAY   // 빼도 될거같음
-                mission += mission_0_1_wait_play(fpga_videodata);
+                // mission += mission_0_1_wait_play(fpga_videodata);
+                ++mission;
                 break;
             case 1: // MISSION 1: YELLOW BARRICADE
                 switch (step) {
@@ -467,7 +468,7 @@ int huro(void) {
                         if (flag == 0) {
                             setFPGAVideoData(fpga_videodata);
                             mission_7_1_watch_below(20, fpga_videodata);
-                            ACTION_WALK(CLOSE, DOWN, 4);
+                            ACTION_WALK(CLOSE, DOWN, 4); // 4개 너무 많음
                         }
 
                         setFPGAVideoData(fpga_videodata);

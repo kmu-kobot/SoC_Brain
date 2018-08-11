@@ -50,7 +50,7 @@ int mission_9_1_go_front_of_yellow_barricade(U16 *image) {
         }
     }
 
-    printf("AVG: %d\n", checkHurdleLine[2]);
+    printf("AVG: %d\n", checkHurdleLine[2]); // AVG -> MEDIAN
 
     return (80 <= checkHurdleLine[2]);
 }
@@ -85,7 +85,7 @@ int mission_9_2_end_yellow_barricade(U16 *image) {
     }
 
     printf("M9-2: END: %f\n", (double) cntYellow * 100 / (WIDTH * HEIGHT));
-    return (double) cntYellow * 100 / (WIDTH * HEIGHT) < (1);
+    return (double) cntYellow * 100 / (WIDTH * HEIGHT) < (1); // 1보다 조금 높게 주는게 나을지도? 이거는 대회장 바리게이트 상태에 따라 다르겠다
 }
 
 void mission_9_3_escape_yellow_barricade(int repeat) {

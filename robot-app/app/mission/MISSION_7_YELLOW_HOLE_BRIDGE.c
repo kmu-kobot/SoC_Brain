@@ -4,12 +4,12 @@
 
 #include "MISSION_7_YELLOW_HOLE_BRIDGE.h"
 
-void mission_7_1_watch_below(int repeat, U16 *image) {
+void mission_7_1_watch_below(int repeat, U16 *image) { // 합쳐도 될듯
     ACTION_WALK_CHECK(SLOW, DOWN, repeat, mission_7_1_wait_front_of_yellow_hole_bridge, image, 1);
     RobotSleep(1);
 }
 
-int mission_7_1_attach_yellow_bridge(U16 *image) {
+int mission_7_1_attach_yellow_bridge(U16 *image) { // 무작정 붙이기 쓰는거보다 기울기 보고 회전 조금 시키는것도 좋을거같음
     U32 row, col, cnt = 0;
     for (row = 20; row < ROBOT_KNEE; ++row) {
         for (col = 50; col < WIDTH - 50; ++col) {
@@ -22,7 +22,7 @@ int mission_7_1_attach_yellow_bridge(U16 *image) {
 
     // TODO: 시간 줄일때 없애기
     ACTION_WALK(CLOSE, DOWN, 2);
-    return (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 70;
+    return (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 70; // 80 대신 WIDTH - 50 - 50 이 나을듯
 }
 
 int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image) {

@@ -35,13 +35,13 @@ int mission_8_1_is_not_front_of_bomb(U16 *image) {
     }
     printf("\n\n");
 
-    if (checkHurdleLine[0] + checkHurdleLine[1] + checkHurdleLine[2] + checkHurdleLine[3] + checkHurdleLine[4] < 80) {
+    if (checkHurdleLine[0] + checkHurdleLine[1] + checkHurdleLine[2] + checkHurdleLine[3] + checkHurdleLine[4] < 80) { // 조금 더 세분화 할 필요가 있는듯
         printf("yet...\n\n");
         return 0;
     }
 
     int j;
-    for (i = 0; i < 4; ++i) {
+    for (i = 0; i < 4; ++i) { // 솔팅 알고리즘 바꾸는걸로 / 예를들어 간단하게 sort()함수라던지
         for (j = 0; j < 4 - i; ++j) {
             if (checkHurdleLine[i] > checkHurdleLine[i + 1]) {
                 tmp = checkHurdleLine[i];
@@ -51,9 +51,9 @@ int mission_8_1_is_not_front_of_bomb(U16 *image) {
         }
     }
 
-    printf("AVG: %d\n", checkHurdleLine[2]);
+    printf("AVG: %d\n", checkHurdleLine[2]); // AVG가 아니라 MEDIAN인듯?
 
-    return (60 <= checkHurdleLine[2]);
+    return (60 <= checkHurdleLine[2]); // 이렇게 리턴하면 잘 잡힘?? 좀 불안한데
 }
 
 int walkCnt = 0;
@@ -79,13 +79,13 @@ int mission_8_4_check_finish_line(U16 *image) {
         return 1;
     }
 
-    for (col = 0; col < WIDTH; ++col) {
+    for (col = 0; col < WIDTH; ++col) { // for문 이렇게 돌릴 필요가 있나? 좀 더 영역을 좁게 잡거나 row가 밖으로 오게 하거나
         cnt = 0;
         for (row = 0; row < HEIGHT; ++row) {
             cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
         }
 
-        if (cnt < 4) {
+        if (cnt < 4) { // 연속된 검은색을 찾았으면 좋겠음
             line = col;
             break;
         } else {

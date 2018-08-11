@@ -334,7 +334,7 @@ int mission_6_3_set_straight_hole(U16 *image) {
 
 int mission_6_3_locate_hole_on_center(U16 *image) {
 
-    if (mission_6_3_find_hole_interpolation(image, 0, HEIGHT, 0, WIDTH, 0) != 1) {
+    if (mission_6_3_find_hole_interpolation(image, 0, HEIGHT, 0, WIDTH, 0) != 1) { // 못찾았을때 주변 탐색 추가
         // mission_6_3_find_side_hole(image, 0);
         return 0;
     }
