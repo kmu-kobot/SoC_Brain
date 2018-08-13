@@ -13,6 +13,7 @@
 #include <math.h>
 
 #include "./library/graphic_api.h"
+#include "./library/imageProcess.h"
 #include "./library/uart_api.h"
 #include "./library/robot_action.h"
 

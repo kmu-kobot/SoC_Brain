@@ -6,6 +6,8 @@
 
 #include "./../library/amazon2_sdk.h"
 #include "./../library/robot_action.h"
+#include "./../library/imageProcess.h"
+#include "DEFAULT.h"
 #include "stdio.h"
 
 #define SOC_APP_MISSION_9_LAST_BARRICADE_H

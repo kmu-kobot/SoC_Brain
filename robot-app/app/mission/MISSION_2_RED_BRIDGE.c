@@ -4,8 +4,9 @@
 
 #include "MISSION_2_RED_BRIDGE.h"
 
-void mission_2_1_watch_below(int repeat, U16 *image) { // 이름을 바꾸는게 좋을거같음
-    ACTION_WALK_CHECK(SLOW, DOWN, repeat, mission_2_1_wait_front_of_red_bridge, image, 1);
+void mission_2_1_watch_below(U16 *image, int repeat) { // 이름을 바꾸는게 좋을거같음
+    ACTION_WALK_CHECK(DOWN, image, mission_2_1_wait_front_of_red_bridge, 1, repeat);
+    // ACTION_WALK_CHECK(SLOW, DOWN, repeat, mission_2_1_wait_front_of_red_bridge, image, 1);
     RobotSleep(1); // 슬립 빼도 될거같음
 }
 
@@ -21,7 +22,7 @@ int mission_2_1_attach_red_bridge(U16 *image) {
 
     // TODO: 시간 줄일때 없애기
     if ( (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) < 70) { // * 80 부분 WIDTH - 50 - 50 으로 하면 알아보기 좀 더 좋을거같음
-        ACTION_WALK(CLOSE, DOWN, 2);
+        ACTION_ATTACH(1);
     }
     return (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 70;
 }
@@ -41,11 +42,6 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
     printf(((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION) ? "SUCCESS\n" : "FAIL\n");
 
     return ((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION);
-}
-
-void mission_2_2_watch_side(void) {
-    CHECK_INIT(MIDDLE, LEFT);
-    RobotSleep(2);
 }
 
 int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) { // 여러 프레임에 걸쳐서 보정할 필요가 있어보임
@@ -83,26 +79,26 @@ int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) { // 
     int err = ((mode == 3 || mode == 4 || mode == 5) ? 3 : CASE_0_DEFAULT_RANGE_ERROR);
 
     if (s < len - err) {
-        ACTION_MOVE((mode == 4) ? SHORT : LONG, DIR_RIGHT, MIDDLE, LEFT,
+        ACTION_MOVE((mode == 4) ? SHORT : LONG, DIR_RIGHT, LEFT,
                     (mode == 4) ? 2 : 1);
         if (mode == 1) {
-            ACTION_WALK(CLOSE, LEFT, 1);
+            ACTION_ATTACH(1);
         }
         return 0;
     } else if (s > len + err) {
-        ACTION_MOVE((mode == 4) ? SHORT : LONG, DIR_LEFT, MIDDLE, LEFT,
+        ACTION_MOVE((mode == 4) ? SHORT : LONG, DIR_LEFT, LEFT,
                     (mode == 4) ? 2 : 1);
         if (mode == 1) {
-            ACTION_WALK(CLOSE, LEFT, 1);
+            ACTION_ATTACH(1);
         }
         return 0;
     } else {
         if (mode == 1 || mode == -1) {
-            ACTION_WALK(CLOSE, OBLIQUE, 4);
+            ACTION_ATTACH(2);
         } else if (mode == 3 || mode == 4) {
-            ACTION_WALK(CLOSE, OBLIQUE, 4);
+            ACTION_ATTACH(2);
         } else if (mode == 5) {
-            ACTION_WALK(CLOSE, OBLIQUE, 2);
+            ACTION_ATTACH(1);
         }
         printf("SUCCESS\n\n");
         return 1;
@@ -110,7 +106,7 @@ int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) { // 
 }
 
 int mission_2_3_escape_red_bridge(void) {
-    ACTION_MOTION(MISSION_2_RED_DUMBLING, MIDDLE, OBLIQUE);
+    ACTION_MOTION(MISSION_2_RED_DUMBLING, OBLIQUE);
     RobotSleep(1); // 슬립이 굳이 필요할까
     return 1;
 }
@@ -150,11 +146,11 @@ int mission_2_4_after_bridge_set_straight(U16 *image, int mode, int pppo) {
     s *= 100;
     if (!(l - CASE_0_DEFAULT_SLOPE_ERROR <= s && s <= l + CASE_0_DEFAULT_SLOPE_ERROR)) {
         ACTION_TURN(
-                (pppo == 1) ? MID : LONG,
+                (pppo == 1) ? MIDDLE : LONG,
                 (l - CASE_0_DEFAULT_SLOPE_ERROR > s) ?
                 DIR_LEFT :
                 DIR_RIGHT,
-                MIDDLE, (mode) ? RIGHT : LEFT,
+                (mode) ? RIGHT : LEFT,
                 1
         );
         return 0;

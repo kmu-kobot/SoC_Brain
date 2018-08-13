@@ -5,7 +5,7 @@
 #include "MISSION_9_LAST_BARRICADE.h"
 
 int mission_9_1_go_front(U16 *image) {
-    ACTION_WALK_CHECK(SLOW, OBLIQUE, 20, mission_9_1_go_front_of_yellow_barricade, image, 1);
+    ACTION_WALK_CHECK(OBLIQUE, image, mission_9_1_go_front_of_yellow_barricade, 1, 20);
     RobotSleep(1);
 }
 
@@ -89,9 +89,9 @@ int mission_9_2_end_yellow_barricade(U16 *image) {
 }
 
 void mission_9_3_escape_yellow_barricade(int repeat) {
-    CHECK_INIT(MIDDLE, DOWN);
+    CHECK_INIT(DOWN);
     RobotSleep(2);
     // TODO:
-    ACTION_MOTION(WALK_FAST_SET_9, MIDDLE, DOWN);
-    ACTION_MOTION(WALK_FAST_SET_9, MIDDLE, DOWN);
+    ACTION_WALK(FAST, DOWN, 9);
+    ACTION_WALK(FAST, DOWN, 9);
 }

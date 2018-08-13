@@ -6,6 +6,8 @@
 
 #include "./../library/amazon2_sdk.h"
 #include "./../library/robot_action.h"
+#include "./../library/imageProcess.h"
+#include "DEFAULT.h"
 #include "stdio.h"
 #include "math.h"
 
@@ -24,7 +26,7 @@ void mission_3_init_global(void);
 
 int mission_3_avoid(U16 *image);
 
-void mission_3_default_watch_below(int repeat, U16 *image);
+void mission_3_default_watch_below(U16 *image, int repeat);
 
 int mission_3_default_avoid_bomb(U16 *image);
 

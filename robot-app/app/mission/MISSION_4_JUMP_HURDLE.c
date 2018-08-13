@@ -45,15 +45,15 @@ int mission_4_2_ready_hurdle(U16 *image) { // 굳이? 필요한가
 }
 
 int mission_4_4_jump_hurdle(void) {
-    ACTION_INIT(MIDDLE, OBLIQUE);
-    ACTION_MOTION(MISSION_4_HURDLING, MIDDLE, OBLIQUE);
+    ACTION_INIT(OBLIQUE);
+    ACTION_MOTION(MISSION_4_HURDLING, OBLIQUE);
     // TODO
     RobotSleep(1);
-    ACTION_MOTION(WALK_FAST_SET_9, MIDDLE, DOWN);
+    ACTION_WALK(FAST, DOWN, 9);
     RobotSleep(2);
-    ACTION_TURN(LONG, DIR_LEFT, MIDDLE, DOWN, 3);
+    ACTION_TURN(LONG, DIR_LEFT, DOWN, 3);
     RobotSleep(1);
-    CHECK_INIT(MIDDLE, OBLIQUE);
+    CHECK_INIT(OBLIQUE);
     RobotSleep(1);
     return 1;
 }
@@ -94,11 +94,11 @@ int mission_4_6_set_center(U16 *image, int length) { // 얘도 여러 프레임
 
     if (s < k - CASE_0_DEFAULT_RANGE_ERROR) {
         printf("LEFT\n\n");
-        ACTION_MOVE(LONG, DIR_LEFT, MIDDLE, RIGHT, 1);
+        ACTION_MOVE(LONG, DIR_LEFT, RIGHT, 1);
         return 0;
     } else if (s > k + CASE_0_DEFAULT_RANGE_ERROR) {
         printf("RIGHT\n\n");
-        ACTION_MOVE(LONG, DIR_RIGHT, MIDDLE, RIGHT, 1);
+        ACTION_MOVE(LONG, DIR_RIGHT, RIGHT, 1);
         return 0;
     } else {
         printf("SUCCESS\n\n");
@@ -107,6 +107,6 @@ int mission_4_6_set_center(U16 *image, int length) { // 얘도 여러 프레임
 }
 
 void mission_4_6_watch_side(void) {
-    CHECK_INIT(MIDDLE, RIGHT);
+    CHECK_INIT(RIGHT);
     RobotSleep(3);
 }

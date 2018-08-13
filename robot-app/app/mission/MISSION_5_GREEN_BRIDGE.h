@@ -6,6 +6,8 @@
 
 #include "./../library/amazon2_sdk.h"
 #include "./../library/robot_action.h"
+#include "./../library/imageProcess.h"
+#include "DEFAULT.h"
 #include "stdio.h"
 
 #define SOC_APP_MISSION_5_GREEN_BRIDGE_H
@@ -28,7 +30,7 @@
 #define MISSION_5_6_BLACK_RANGE 5
 #define MISSION_5_6_BLACK_LEN_LENGTH 65
 
-void mission_5_1_watch_below(int repeat, U16 *image);
+void mission_5_1_watch_below(U16 *image, int repeat);
 
 int mission_5_1_check_black_line(U16 *image);
 

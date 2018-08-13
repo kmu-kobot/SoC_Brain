@@ -6,6 +6,8 @@
 
 #include "./../library/amazon2_sdk.h"
 #include "./../library/robot_action.h"
+#include "./../library/imageProcess.h"
+#include "DEFAULT.h"
 #include "stdio.h"
 
 #define SOC_APP_MISSION_2_RED_BRIDGE_H
@@ -18,11 +20,9 @@
 #define CASE_0_DEFAULT_RIGHT_SLOPE 10
 #define CASE_0_DEFAULT_SLOPE_ERROR 5
 
-void mission_2_1_watch_below(int repeat, U16 *image);
+void mission_2_1_watch_below(U16 *image, int repeat);
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image);
-
-void mission_2_2_watch_side(void);
 
 int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length);
 

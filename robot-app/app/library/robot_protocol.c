@@ -1,6 +1,6 @@
 /************************************************************************
   Title     : Robot Body Protocol Source File
-  File name : robot_protocol.c    
+  File name : robot_protocol.c
 
   Author    : adc inc. (oxyang@adc.co.kr)
   History
@@ -9,6 +9,7 @@
 ************************************************************************/
 #include <stdio.h>
 #include <string.h>
+#include "amazon2_sdk.h"
 #include "robot_protocol.h"
 #include "uart_api.h"
 //////////////////////////////////////////////////// Protocol Test
@@ -56,9 +57,13 @@ int Receive_Ack(int status) {
 
 void RobotAction(unsigned char Ldata) {
     Send_Command(Ldata, 0);
+#ifdef DEBUG
     printf("Started %d Motion\n", Ldata);
+#endif
     while (!Receive_Ack(1));
+#ifdef DEBUG
     printf("Finished %d Motion\n", Ldata);
+#endif
 }
 
 void RobotSleep(int time) {
@@ -66,8 +71,12 @@ void RobotSleep(int time) {
         return;
     }
 
+#ifdef DEBUG
     printf("SLEEP START...\t");
+#endif
     Send_Command(time, 1);
     while (!Receive_Ack(1));
+#ifdef DEBUG
     printf("END\n");
+#endif
 }

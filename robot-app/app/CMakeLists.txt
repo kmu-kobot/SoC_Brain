@@ -11,12 +11,16 @@ add_executable(
         library/amazon2_sdk.h
         library/graphic_api.c
         library/graphic_api.h
+        library/imageProcess.c
+        library/imageProcess.h
         library/robot_protocol.c
         library/robot_protocol.h
         library/uart_api.c
         library/uart_api.h
         library/robot_action.h
         library/robot_action.c
+        misison/DEFAULT.c
+        mission/DEFAULT.h
         mission/MISSION_0_READY_PLAY.c
         mission/MISSION_0_READY_PLAY.h
         mission/MISSION_1_YELLOW_BARRICADE.c

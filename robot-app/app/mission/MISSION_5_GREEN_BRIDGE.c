@@ -4,8 +4,8 @@
 
 #include "MISSION_5_GREEN_BRIDGE.h"
 
-void mission_5_1_watch_below(int repeat, U16 *image) {
-    ACTION_WALK_CHECK(SLOW, DOWN, repeat, mission_5_1_check_black_line, image, 1);
+void mission_5_1_watch_below(U16 *image, int repeat) {
+    ACTION_WALK_CHECK(DOWN, image, mission_5_1_check_black_line, 1, image);
     RobotSleep(1);
 }
 
@@ -20,7 +20,7 @@ int mission_5_11_attach(U16 *image) {
     printf("\n\n xxx %f \n\n", (double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH));
 
     if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) < 20) {
-        ACTION_WALK(CLOSE, DOWN, 2);
+        ACTION_ATTACH(1);
     }
     return (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) >= 20;
 }
@@ -51,15 +51,15 @@ int mission_5_1_check_black_line(U16 *image) {
 }
 
 void mission_5_2_watch_side(void) {
-    CHECK_INIT(MIDDLE, LEFT);
+    CHECK_INIT(LEFT);
     RobotSleep(5);
 }
 
 void mission_5_3_climb_up_stairs(void) {
     RobotSleep(1);
-    ACTION_MOTION(MISSION_5_STAIR_UP, MIDDLE, OBLIQUE);
+    ACTION_MOTION(MISSION_5_STAIR_UP, OBLIQUE);
     RobotSleep(1);
-    CHECK_INIT(MIDDLE, DOWN);
+    CHECK_INIT(DOWN);
     RobotSleep(1);
     ACTION_BIT(FRONT, 2);
 }
@@ -102,8 +102,8 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
 
     if (s > 13) {
         printf("GOGO");
-        ACTION_MOVE(SHORT, DIR_LEFT, MIDDLE, DOWN, 3);
-        ACTION_TURN(SHORT, DIR_LEFT, MIDDLE, DOWN, 4);
+        ACTION_MOVE(SHORT, DIR_LEFT, DOWN, 3);
+        ACTION_TURN(SHORT, DIR_LEFT, DOWN, 4);
         return 0;
     }
 
@@ -122,8 +122,8 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
 
     // if (s > 13) {
     //     printf("GOGO");
-    //     ACTION_MOVE(SHORT, DIR_RIGHT, MIDDLE, DOWN, 1);
-    //     ACTION_TURN(SHORT, DIR_LEFT, MIDDLE, DOWN, 1);
+    //     ACTION_MOVE(SHORT, DIR_RIGHT, DOWN, 1);
+    //     ACTION_TURN(SHORT, DIR_LEFT, DOWN, 1);
     //     return 0;
     // }
     // //
@@ -175,7 +175,7 @@ int mission_5_5_check_green_bridge_straight(U16 *image) {
     if (((r > 0) ? r : -r) > MISSION_5_5_GREEN_BRIDGE_SLOPE) {
         rResult = 0;
         ACTION_TURN(SHORT, ((r > 0) ? DIR_RIGHT : DIR_LEFT),
-                    MIDDLE, DOWN, 1);
+                    DOWN, 1);
         RobotSleep(1);
     }
 
@@ -226,7 +226,7 @@ int mission_5_5_check_green_bridge_center(U16 *image) { // 여러프레임 여�
     printf("LEFT: %d, RIGHT: %d, r: %d\n\n", green_len[0], green_len[1], r);
 
     if (((r > 0) ? r : (-r)) > MISSION_5_5_GREEN_BRIDGE_THRESHOLDS) {
-        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 1);
+        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), DOWN, 1);
         RobotSleep(1);
     }
 
@@ -235,7 +235,7 @@ int mission_5_5_check_green_bridge_center(U16 *image) { // 여러프레임 여�
 
 int mission_5_5_short_walk_on_green_bridge(int repeat) {
     // TODO
-    ACTION_MOTION(WALK_FAST_SET_5, MIDDLE, DOWN);
+    ACTION_WALK(FAST, DOWN, 5);
     RobotSleep(3);
     return 1;
 }
@@ -307,7 +307,7 @@ int mission_5_12_set_straight(U16 *image) { // 여러점 여러프레임
 
     int rResult = 1;
     if (((r > 0) ? r : -r) > MISSION_5_5_GREEN_BRIDGE_SLOPE) {
-        ACTION_TURN((((r > 0) ? r : -r) > 6) ? MID : SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 1);
+        ACTION_TURN((((r > 0) ? r : -r) > 6) ? MIDDLE : SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), DOWN, 1);
         rResult = 0;
     }
 
@@ -341,7 +341,7 @@ int mission_5_6_set_straight(U16 *image) { // 여러점 여러프레임
 
     int rResult = 1;
     if (((r > 0) ? r : -r) > MISSION_5_6_GREEN_BRIDGE_SLOPE) {
-        ACTION_TURN(SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 1);
+        ACTION_TURN(SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), DOWN, 1);
         RobotSleep(1);
         rResult = 0;
     }
@@ -351,10 +351,10 @@ int mission_5_6_set_straight(U16 *image) { // 여러점 여러프레임
 
 int mission_5_7_climb_down_stairs(void) {
     RobotSleep(1);
-    ACTION_MOTION(MISSION_5_STAIR_DOWN, MIDDLE, OBLIQUE);
-    CHECK_INIT(MIDDLE, OBLIQUE);
+    ACTION_MOTION(MISSION_5_STAIR_DOWN, OBLIQUE);
+    CHECK_INIT(OBLIQUE);
     //TODO
-    ACTION_MOTION(WALK_FAST_SET_9, MIDDLE, DOWN);
+    ACTION_WALK(FAST, DOWN, 9);
     return 1;
 }
 
@@ -382,7 +382,7 @@ void mission_5_5_set_center(U16 *image) { // 이거는 중심부터 좌우 초�
     printf("LEFT: %d, RIGHT: %d, r: %d\n\n", green_len[0], green_len[1], r);
 
     if (((r > 0) ? r : (-r)) > 20) {
-        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), MIDDLE, DOWN, 1);
+        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), DOWN, 1);
         RobotSleep(1);
     }
 
@@ -430,7 +430,7 @@ int mission_14_set_straight(U16 *image) { // 여러프레임 여러점, 수치 �
 
     int rResult = 1;
     if (((r > 0) ? r : -r) > MISSION_5_6_GREEN_BRIDGE_SLOPE) {
-        ACTION_TURN((((r > 0) ? r : -r) > 5) ? MID : SHORT, ((r > 0) ? DIR_RIGHT : DIR_LEFT), MIDDLE, DOWN, 1);
+        ACTION_TURN((((r > 0) ? r : -r) > 5) ? MIDDLE : SHORT, ((r > 0) ? DIR_RIGHT : DIR_LEFT), DOWN, 1);
         RobotSleep(1);
         rResult = 0;
     }

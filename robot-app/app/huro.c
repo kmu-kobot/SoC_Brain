@@ -13,7 +13,7 @@ int huro(void) {
 
     int missionFinished = 0;
 
-    int mission = 5;
+    int mission = 0;
     int step = 0;
 
     int nextMission = 0;
@@ -34,7 +34,9 @@ int huro(void) {
 
         setFPGAVideoData(fpga_videodata);
 
+#ifdef DEBUG
         printf("\n[START]\tMISSION[%d]: STEP [%d]\n", mission, step);
+#endif
 
         switch (mission) {
             case 0: // MISSION 0: READY PLAY   // 빼도 될거같음
@@ -57,7 +59,7 @@ int huro(void) {
                     case 3:
                         if (flag == 0) {
                             flag++;
-                            mission_2_2_watch_side(); // watch 류 함수들 헤더 하나 새로 만들어서 하나로 묶어버려도 될거같음
+                            default_watch_side(LEFT);
                         }
                         setFPGAVideoData(fpga_videodata);
                         step += mission_2_4_after_bridge_set_straight(fpga_videodata, 0, 0); // 직선 맞추기 // 묶어버려도 될거같음
@@ -69,10 +71,10 @@ int huro(void) {
                         step = (step == 5) ? 4 : 3;
                         break;
                     case 4: // 슬립만 합치거나 줄이면 될듯
-                        CHECK_INIT(MIDDLE, DOWN);
+                        CHECK_INIT(DOWN);
                         RobotSleep(1);
 
-//                        ACTION_MOTION(WALK_FAST_SET_7, MIDDLE, DOWN);
+//                        ACTION_WALK(FAST, DOWN, 7);
                         RobotSleep(1);
                         step = 0;
                         mission += 1;
@@ -87,8 +89,8 @@ int huro(void) {
                     case 0:
                         if (flag == 3) { // 어차피 이 스텝에서 flag 3밖에 안쓰니까 이 if 문 없어도 될거같음
                             setFPGAVideoData(fpga_videodata);
-                            mission_2_1_watch_below(30, fpga_videodata);
-                            ACTION_WALK(CLOSE, DOWN, 4);
+                            mission_2_1_watch_below(fpga_videodata, 30);
+                            ACTION_ATTACH(2);
                         }
 
                         setFPGAVideoData(fpga_videodata);
@@ -116,7 +118,7 @@ int huro(void) {
                     case 4:
                         if (flag == 0) {
                             flag++;
-                            mission_2_2_watch_side();
+                            default_watch_side(LEFT);
                         }
                         setFPGAVideoData(fpga_videodata);
                         step += mission_2_4_after_bridge_set_straight(fpga_videodata, 0, 0); // 직선 맞추기
@@ -140,7 +142,7 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         setFPGAVideoData(fpga_videodata);
-                        mission_3_default_watch_below(10, fpga_videodata);
+                        mission_3_default_watch_below(fpga_videodata, 10);
 
                         setFPGAVideoData(fpga_videodata);
                         step = (mission_3_default_avoid_bomb(fpga_videodata)) ? 1 : 2;
@@ -160,7 +162,7 @@ int huro(void) {
                             break;
                         } else if (flag == 1) {
                             flag = 2;
-                            CHECK_INIT(MIDDLE, DOWN);
+                            CHECK_INIT(DOWN);
                             RobotSleep(1);
                         }
 
@@ -190,7 +192,7 @@ int huro(void) {
                         flag = 0;
                         break;
                     case 4:
-                        ACTION_WALK(CLOSE, OBLIQUE, 10); // close 10번이나 해야되나? fast로 거리 붙이고 closw 조금만 하면 될거같음
+                        ACTION_ATTACH(1);
                         step += 1;
                         flag = 0;
                         break;
@@ -231,13 +233,13 @@ int huro(void) {
                         flag = 0;
 
                         if (step == 2) {
-                            CHECK_INIT(MIDDLE, OBLIQUE);
+                            CHECK_INIT(OBLIQUE);
                             // mission_4_1_watch_front(2);
                             step = 3;
                             break;
                         }
 
-                        CHECK_INIT(MIDDLE, UP);
+                        CHECK_INIT(UP);
                         RobotSleep(1);
 
                         setFPGAVideoData(fpga_videodata);
@@ -250,8 +252,8 @@ int huro(void) {
                     case 0:
                         if (flag == 0) {
                             setFPGAVideoData(fpga_videodata);
-                            mission_5_1_watch_below(40, fpga_videodata);
-                            ACTION_WALK(CLOSE, DOWN, 4);
+                            mission_5_1_watch_below(fpga_videodata, 40);
+                            ACTION_ATTACH(2);
                         }
 
                         step = 11;
@@ -273,7 +275,8 @@ int huro(void) {
                         step = 12;
                         break;
                     case 3:
-                        ACTION_MOTION(MISSION_5_ESCAPE_BLACK_STAIR, MIDDLE, DOWN);
+                        // 고쳐야됨
+                        // ACTION_MOTION(MISSION_5_ESCAPE_BLACK_STAIR, DOWN);
                         RobotSleep(1);
                         step += 1;
 
@@ -350,7 +353,7 @@ int huro(void) {
                                 mission_5_5_check_green_bridge_center(fpga_videodata)) ? 3 : 12;
 
                         if (step == 3) {
-                            ACTION_MOVE(SHORT, DIR_RIGHT, MIDDLE, DOWN, 2);
+                            ACTION_MOVE(SHORT, DIR_RIGHT, DOWN, 2);
                             RobotSleep(1);
                         }
                         break;
@@ -420,8 +423,9 @@ int huro(void) {
                             while (TRUE) {
                                 setFPGAVideoData(fpga_videodata);
                                 step += mission_6_4_set_front_of_ball(fpga_videodata);
-
+#ifdef DEBUG
                                 printf("step:%d\n", step);
+#endif
                                 if (step == 7) {
                                     break;
                                 }
@@ -467,8 +471,8 @@ int huro(void) {
                     case 0:
                         if (flag == 0) {
                             setFPGAVideoData(fpga_videodata);
-                            mission_7_1_watch_below(20, fpga_videodata);
-                            ACTION_WALK(CLOSE, DOWN, 4); // 4개 너무 많음
+                            mission_7_1_watch_below(fpga_videodata, 20);
+                            ACTION_ATTACH(2); // 4개 너무 많음
                         }
 
                         setFPGAVideoData(fpga_videodata);
@@ -483,7 +487,7 @@ int huro(void) {
                     case 2:
                         if (flag == 0) {
                             flag++;
-                            mission_2_2_watch_side();
+                            default_watch_side(LEFT);
                         }
                         setFPGAVideoData(fpga_videodata);
                         step += mission_2_2_before_bridge_set_center(fpga_videodata, 5, userStaticValue[2]);
@@ -498,7 +502,7 @@ int huro(void) {
                     case 7:
                         if (flag == 0) {
                             flag++;
-                            mission_2_2_watch_side();
+                            default_watch_side(LEFT);
                         }
                         setFPGAVideoData(fpga_videodata);
                         step += mission_2_4_after_bridge_set_straight(fpga_videodata, 0, 0); // 직선 맞추기
@@ -522,7 +526,7 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         setFPGAVideoData(fpga_videodata);
-                        mission_3_default_watch_below(10, fpga_videodata);
+                        mission_3_default_watch_below(fpga_videodata, 10);
 
                         setFPGAVideoData(fpga_videodata);
                         step = (mission_3_default_avoid_bomb(fpga_videodata)) ? 1 : 2;
@@ -538,7 +542,7 @@ int huro(void) {
                             break;
                         } else if (flag == 1) {
                             flag = 2;
-                            CHECK_INIT(MIDDLE, DOWN);
+                            CHECK_INIT(DOWN);
                             RobotSleep(1);
                         }
 
@@ -561,7 +565,7 @@ int huro(void) {
                         flag = (step == 3) ? 0 : 1;
                         break;
                     case 3:
-                        CHECK_INIT(MIDDLE, UP);
+                        CHECK_INIT(UP);
                         RobotSleep(2);
                         setFPGAVideoData(fpga_videodata);
                         flag += mission_8_1_is_not_front_of_bomb(fpga_videodata);
@@ -572,7 +576,7 @@ int huro(void) {
                             break;
                         }
 
-                        ACTION_MOTION(HEAD_MIDDLE_HALF_LEFT, MIDDLE, LEFT);
+                        ACTION_MOTION(HEAD_HALF_LEFT, LEFT);
                         RobotSleep(2);
                         setFPGAVideoData(fpga_videodata);
                         flag += mission_8_4_check_finish_line(fpga_videodata);
@@ -592,7 +596,7 @@ int huro(void) {
                     case 5:
                         if (flag == 0) {
                             flag++;
-                            mission_2_2_watch_side();
+                            default_watch_side(LEFT);
                             RobotSleep(1);
                         }
                         setFPGAVideoData(fpga_videodata);
@@ -605,7 +609,7 @@ int huro(void) {
                         step = (step == 7) ? 6 : 5;
                         break;
                     case 6:
-                        CHECK_INIT(MIDDLE, OBLIQUE);
+                        CHECK_INIT(OBLIQUE);
                         RobotSleep(2);
                         mission += 1;
                         step = 0;
@@ -624,7 +628,7 @@ int huro(void) {
 //                        step += 1;
                         break;
                     case 1:
-                        CHECK_INIT(MIDDLE, UP);
+                        CHECK_INIT(UP);
                         RobotSleep(1);
                         step += 1;
                         break;
@@ -662,8 +666,8 @@ int huro(void) {
                             flag = 0;
                             step += 1;
 
-                            CHECK_INIT(MIDDLE, DOWN);
-                            ACTION_MOTION(WALK_FAST_SET_9, MIDDLE, DOWN);
+                            CHECK_INIT(DOWN);
+                            ACTION_WALK(FAST, DOWN, 9);
                             RobotSleep(1);
                             break;
                         }
@@ -684,15 +688,15 @@ int huro(void) {
                             flag = 0;
                             step += 1;
 
-                            CHECK_INIT(MIDDLE, DOWN);
-                            ACTION_MOTION(WALK_FAST_SET_9, MIDDLE, DOWN);
+                            CHECK_INIT(DOWN);
+                            ACTION_WALK(FAST, DOWN, 9);
                             RobotSleep(1);
                             break;
                         }
                         break;
                     case 2:
-                        CHECK_INIT(MIDDLE, DOWN);
-                        ACTION_MOTION(WALK_FAST_SET_9, MIDDLE, DOWN);
+                        CHECK_INIT(DOWN);
+                        ACTION_WALK(FAST, DOWN, 9);
                         step += 1;
                         break;
                     case 3:
@@ -709,7 +713,9 @@ int huro(void) {
                 missionFinished = 1;
                 break;
         }
+#ifdef DEBUG
         printf("[END]\tMISSION[%d]: STEP [%d]\n", mission, step);
+#endif
 
     }
 
@@ -752,7 +758,8 @@ int init_huro(void) {
 
     RobotSleep(7);
 
-    CHECK_INIT(MIDDLE, OBLIQUE);
+    // CHECK_INIT(OBLIQUE);
+    CHECK_INIT(OBLIQUE);
 
     return 0;
 }
@@ -764,7 +771,7 @@ void destroy_huro(U16 *buf) {
     // graphic close
     close_graphic();
 
-    // UART CLOSE
+    // UART
     uart_close();
 
 }

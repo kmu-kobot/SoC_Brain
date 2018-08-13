@@ -4,8 +4,8 @@
 
 #include "MISSION_7_YELLOW_HOLE_BRIDGE.h"
 
-void mission_7_1_watch_below(int repeat, U16 *image) { // 합쳐도 될듯
-    ACTION_WALK_CHECK(SLOW, DOWN, repeat, mission_7_1_wait_front_of_yellow_hole_bridge, image, 1);
+void mission_7_1_watch_below(U16 *image, int repeat) { // 합쳐도 될듯
+    ACTION_WALK_CHECK(DOWN, image, mission_7_1_wait_front_of_yellow_hole_bridge, 1, repeat);
     RobotSleep(1);
 }
 
@@ -21,7 +21,7 @@ int mission_7_1_attach_yellow_bridge(U16 *image) { // 무작정 붙이기 쓰는
     printf("\n\n xxxx %f\n", (double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH));
 
     // TODO: 시간 줄일때 없애기
-    ACTION_WALK(CLOSE, DOWN, 2);
+    ACTION_ATTACH(1);
     return (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 70; // 80 대신 WIDTH - 50 - 50 이 나을듯
 }
 
@@ -44,9 +44,9 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image) {
 }
 
 int mission_7_6_jump_hole(void) {
-    ACTION_WALK(CLOSE, OBLIQUE, 1);
+    ACTION_ATTACH(1);
     RobotSleep(1);
-    ACTION_MOTION(MISSION_7_YELLOW_DUMBLING, MIDDLE, OBLIQUE);
+    ACTION_MOTION(MISSION_7_YELLOW_DUMBLING, OBLIQUE);
     RobotSleep(1);
     return 1;
 }

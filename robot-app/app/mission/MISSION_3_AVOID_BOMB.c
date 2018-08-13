@@ -5,7 +5,7 @@
 #include "MISSION_3_AVOID_BOMB.h"
 
 void mission_3_4_watch_front(void) {
-    CHECK_INIT(MIDDLE, OBLIQUE);
+    CHECK_INIT(OBLIQUE);
     RobotSleep(2);
 }
 
@@ -21,7 +21,7 @@ int mission_3_avoid(U16 *image) {
     }
 
     if (cnt > 4) {
-        ACTION_MOVE(LONG, (mdir % 2) ? DIR_RIGHT : DIR_LEFT, MIDDLE, DOWN, 1);
+        ACTION_MOVE(LONG, (mdir % 2) ? DIR_RIGHT : DIR_LEFT, DOWN, 1);
     }
 
 
@@ -81,8 +81,8 @@ int mission_3_isFrontOf_Blue(U16 *image) {
     return (double) cnt * 100 / ((HEIGHT) * (ROBOT_KNEE)) > 5;
 }
 
-void mission_3_default_watch_below(int repeat, U16 *image) {
-    ACTION_WALK_CHECK(SLOW, DOWN, repeat, mission_3_default_avoid_bomb, image, 1);
+void mission_3_default_watch_below(U16 *image, int repeat) {
+    ACTION_WALK_CHECK(DOWN, image, mission_3_default_avoid_bomb, 1, repeat);
     RobotSleep(1);
 }
 
@@ -92,7 +92,7 @@ void mission_3_init_global(void) {
 }
 
 void mission_3_4_watch_side(void) {
-    CHECK_INIT(MIDDLE, (mdir % 2 == 1) ? LEFT : RIGHT);
+    CHECK_INIT((mdir % 2 == 1) ? LEFT : RIGHT);
     RobotSleep(1);
 }
 

@@ -14,13 +14,13 @@ OBJDUMP	= $(CROSS_COMPILE)objdump
 RANLIB	= $(CROSS_COMPILE)ranlib
 ELF2FLT	= $(CROSS_COMPILE)elf2flt
 
-CFLAGS	= -O2 -Wall -Wstrict-prototypes -Dlinux -D__linux__ -Dunix -D__uClinux__ -DEMBED
+CFLAGS	= -O2 -Wall -Wstrict-prototypes -Dlinux -D__linux__ -Dunix -D__uClinux__ -DEMBED -lpthread
 
 COMPILER_PREFIX=/usr/local/ae32000-elf-uclibc-tools
 LDFLAGS = -r -Xlinker -T$(COMPILER_PREFIX)/lib/ae32000-elf2flt.ld
 LDFLAGS_DBG = -Xlinker -T$(COMPILER_PREFIX)/lib/ae32000-elf2flt.ld
 
-LDLIBS	= -lm -lc 
+LDLIBS	= -lm -lc
 
 
 export AS LD CC CPP AR NM STRIP OBJCOPY OBJDUMP RANLIB CFLAGS
@@ -29,9 +29,11 @@ PROJ = SoC_App
 
 OBJS = main.o huro.o \
     ./library/graphic_api.o \
+	./library/imageProcess.o \
     ./library/robot_protocol.o \
     ./library/uart_api.o \
     ./library/robot_action.o \
+	./mission/DEFAULT.o \
     ./mission/MISSION_0_READY_PLAY.o \
     ./mission/MISSION_1_YELLOW_BARRICADE.o \
     ./mission/MISSION_2_RED_BRIDGE.o \
@@ -57,10 +59,9 @@ $(PROJ): $(OBJS)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@
-	
+
 .s.o:
 	$(AS) $< -o $@
-	
-clean:
-	rm -f *.o *.elf *.bflt *.dis $(PROJ) *.dbg ImageLoad_Test
 
+clean:
+	rm -f *.o **/*.o *.elf *.bflt *.dis $(PROJ) *.dbg ImageLoad_Test

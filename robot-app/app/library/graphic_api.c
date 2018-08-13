@@ -543,3 +543,26 @@ void setFPGAVideoData(U16 *buf) {
     draw_fpga_video_data_full(buf);
     flip();
 }
+
+void drawline(U16 *image, _line_t line, U16 color)
+{
+    U8 x;
+    int y;
+    for (x = 0; x < WIDTH; ++x)
+    {
+        y = line.slope*x + line.intercept;
+        if (0 <= y && y < HEIGHT)
+        {
+            GetPtr(image, (U8)y, x, WIDTH) = color;
+        }
+    }
+}
+
+void drawpoint(U16 *image, _point_t *points, U32 size, U16 color)
+{
+    U32 i;
+    for (i = 0; i < size; ++i)
+    {
+        GetPtr(image, points[i].y, points[i].x, WIDTH) = color;
+    }
+}

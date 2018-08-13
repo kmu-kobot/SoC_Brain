@@ -25,4 +25,8 @@ int open_graphic(void);
 void close_graphic(void);
 
 void setFPGAVideoData(U16 *buf);
+
+void drawline(U16 *image, _line_t line, U16 color);
+void drawpoint(U16 *image, _point_t *points, U32 size, U16 color);
+
 #endif //__AMAZON2_GRAPHIC_API_H__
