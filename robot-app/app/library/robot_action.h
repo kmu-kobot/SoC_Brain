@@ -24,7 +24,7 @@
 #define WALK_END_MOTION(speed, view) (WALK_FAST_END_DOWN + WALK_SPEED_COEF*speed + WALK_VIEW_COEF*view)
 #define WALK_MOTION(step, speed, view) (WALK_FAST_L_DOWN + WALK_SPEED_COEF*speed + WALK_VIEW_COEF*view + step)
 #define TURN_MOTION(dir, len, view) (TURN_LEFT_LONG_DOWN + dir + TURN_LENGTH_COEF*len + TURN_VIEW_COEF*view)
-#define MOVE_MOTION(dir, len, view) (MOVE_LEFT_LONG_DOWN + dir + TURN_LENGTH_COEF*len + TURN_VIEW_COEF*view)
+#define MOVE_MOTION(dir, len, view) (MOVE_LEFT_LONG_DOWN + dir + MOVE_LENGTH_COEF*len + MOVE_VIEW_COEF*view)
 #define BIT_MOTION(dir) (BIT_FRONT + dir)
 
 #define GET_INIT_VIEW(motion) (motion - INIT_DOWN)

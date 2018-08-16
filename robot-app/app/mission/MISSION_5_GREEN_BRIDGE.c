@@ -5,7 +5,7 @@
 #include "MISSION_5_GREEN_BRIDGE.h"
 
 void mission_5_1_watch_below(U16 *image, int repeat) {
-    ACTION_WALK_CHECK(DOWN, image, mission_5_1_check_black_line, 1, image);
+    ACTION_WALK_CHECK(DOWN, image, mission_5_1_check_black_line, 1, repeat);
     RobotSleep(1);
 }
 

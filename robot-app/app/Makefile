@@ -14,13 +14,13 @@ OBJDUMP	= $(CROSS_COMPILE)objdump
 RANLIB	= $(CROSS_COMPILE)ranlib
 ELF2FLT	= $(CROSS_COMPILE)elf2flt
 
-CFLAGS	= -O2 -Wall -Wstrict-prototypes -Dlinux -D__linux__ -Dunix -D__uClinux__ -DEMBED -lpthread
+CFLAGS	= -O2 -Wall -Wstrict-prototypes -Dlinux -D__linux__ -Dunix -D__uClinux__ -DEMBED
 
 COMPILER_PREFIX=/usr/local/ae32000-elf-uclibc-tools
 LDFLAGS = -r -Xlinker -T$(COMPILER_PREFIX)/lib/ae32000-elf2flt.ld
 LDFLAGS_DBG = -Xlinker -T$(COMPILER_PREFIX)/lib/ae32000-elf2flt.ld
 
-LDLIBS	= -lm -lc
+LDLIBS	= -lm -lc -lpthread
 
 
 export AS LD CC CPP AR NM STRIP OBJCOPY OBJDUMP RANLIB CFLAGS

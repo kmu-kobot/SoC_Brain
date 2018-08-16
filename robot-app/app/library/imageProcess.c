@@ -34,7 +34,7 @@ double getColorRatio2(U16 *image, const U16 top, const U16 bot, const U16 left, 
         }
     }
 
-    double ratio = ((double)cnt) / (double)(( MIN(bot, HEIGHT) - MAX(0, top)) * (MIN(right, WIDTH) - MAX(0, left))) * 100.0;
+    double ratio = ((double)cnt) / (double)(( MIN(bot + 1, HEIGHT) - MAX(0, top)) * (MIN(right + 1, WIDTH) - MAX(0, left))) * 100.0;
 
 #ifdef DEBUG
     printf("color1 : %d, color2 : %d, ratio : %f\n", color1, color2, ratio);

@@ -28,20 +28,20 @@ int mission_2_1_attach_red_bridge(U16 *image) {
 }
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image) {
-    U32 col, row, cntRed = 0;
-    for (row = 0; row < HEIGHT; ++row) {
-        for (col = 0; col < WIDTH; ++col) {
-            cntRed += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
-                       GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE) ||
-                       GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), CH2)); // CH2
-        }
-    }
+    // U32 col, row, cntRed = 0;
+    // for (row = 0; row < HEIGHT; ++row) {
+    //     for (col = 0; col < WIDTH; ++col) {
+    //         cntRed += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
+    //                    GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE) ||
+    //                    GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), CH2)); // CH2
+    //     }
+    // }
+    //
+    // printf("cntRed: %d\n", cntRed);
+    // printf("RED / AREA: %f\n\n", (double) cntRed * 100 / (WIDTH * HEIGHT));
+    // printf(((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION) ? "SUCCESS\n" : "FAIL\n");
 
-    printf("cntRed: %d\n", cntRed);
-    printf("RED / AREA: %f\n\n", (double) cntRed * 100 / (WIDTH * HEIGHT));
-    printf(((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION) ? "SUCCESS\n" : "FAIL\n");
-
-    return ((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION);
+    return getColorRatio2(image, 0, HEIGHT, 0, WIDTH, RED, ORANGE) > CASE_2_0_DETECTION;
 }
 
 int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) { // 여러 프레임에 걸쳐서 보정할 필요가 있어보임

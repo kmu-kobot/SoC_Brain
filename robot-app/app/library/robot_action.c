@@ -34,6 +34,7 @@ void *checker(void *args)
 
     while(*data.destroy == 0)
     {
+        setFPGAVideoData(data.p_image);
         *data.p_state = data.check(data.p_image);
     }
 

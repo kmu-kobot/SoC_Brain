@@ -90,7 +90,7 @@ int huro(void) {
                         if (flag == 3) { // 어차피 이 스텝에서 flag 3밖에 안쓰니까 이 if 문 없어도 될거같음
                             setFPGAVideoData(fpga_videodata);
                             mission_2_1_watch_below(fpga_videodata, 30);
-                            ACTION_ATTACH(2);
+                            ACTION_ATTACH(1);
                         }
 
                         setFPGAVideoData(fpga_videodata);
