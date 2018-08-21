@@ -34,7 +34,7 @@ void mission_5_1_watch_below(U16 *image, int repeat);
 
 int mission_5_1_check_black_line(U16 *image);
 
-void mission_5_2_watch_side(void);
+// void mission_5_2_watch_side(void);
 
 void mission_5_3_climb_up_stairs(void);
 

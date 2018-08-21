@@ -6,41 +6,21 @@
 
 void mission_2_1_watch_below(U16 *image, int repeat) { // 이름을 바꾸는게 좋을거같음
     ACTION_WALK_CHECK(DOWN, image, mission_2_1_wait_front_of_red_bridge, 1, repeat);
-    // ACTION_WALK_CHECK(SLOW, DOWN, repeat, mission_2_1_wait_front_of_red_bridge, image, 1);
     RobotSleep(1); // 슬립 빼도 될거같음
 }
 
 int mission_2_1_attach_red_bridge(U16 *image) {
-    U32 row, col, cnt = 0;
-    for (row = 20; row < ROBOT_KNEE; ++row) {
-        for (col = 50; col < WIDTH - 50; ++col) {
-            cnt += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
-                    GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE) ||
-                    GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), CH2)); // CH2는 빼도 되려나..? 확인 한번 해봐야할듯
-        }
-    }
+    double ratio = getColorRatio2(image, 20, ROBOT_KNEE, 50, WIDTH - 50, RED, ORANGE);
 
-    // TODO: 시간 줄일때 없애기
-    if ( (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) < 70) { // * 80 부분 WIDTH - 50 - 50 으로 하면 알아보기 좀 더 좋을거같음
+    if (ratio < 70.0)
+    {
         ACTION_ATTACH(1);
+        return 0;
     }
-    return (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 70;
+    return 1;
 }
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image) {
-    // U32 col, row, cntRed = 0;
-    // for (row = 0; row < HEIGHT; ++row) {
-    //     for (col = 0; col < WIDTH; ++col) {
-    //         cntRed += (GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), RED) ||
-    //                    GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), ORANGE) ||
-    //                    GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), CH2)); // CH2
-    //     }
-    // }
-    //
-    // printf("cntRed: %d\n", cntRed);
-    // printf("RED / AREA: %f\n\n", (double) cntRed * 100 / (WIDTH * HEIGHT));
-    // printf(((cntRed * 100 / (WIDTH * HEIGHT)) > CASE_2_0_DETECTION) ? "SUCCESS\n" : "FAIL\n");
-
     return getColorRatio2(image, 0, HEIGHT, 0, WIDTH, RED, ORANGE) > CASE_2_0_DETECTION;
 }
 
@@ -107,7 +87,6 @@ int mission_2_2_before_bridge_set_center(U16 *image, int mode, int length) { // 
 
 int mission_2_3_escape_red_bridge(void) {
     ACTION_MOTION(MISSION_2_RED_DUMBLING, OBLIQUE);
-    RobotSleep(1); // 슬립이 굳이 필요할까
     return 1;
 }
 

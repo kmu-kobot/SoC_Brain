@@ -6,23 +6,31 @@
 
 void mission_5_1_watch_below(U16 *image, int repeat) {
     ACTION_WALK_CHECK(DOWN, image, mission_5_1_check_black_line, 1, repeat);
-    RobotSleep(1);
 }
 
 int mission_5_11_attach(U16 *image) {
-    U32 row, col, cnt = 0;
-    for (row = 20; row < ROBOT_KNEE; ++row) {
-        for (col = 50; col < WIDTH - 50; ++col) {
-            cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
-        }
-    }
+    // U32 row, col, cnt = 0;
+    // for (row = 20; row < ROBOT_KNEE; ++row) {
+    //     for (col = 50; col < WIDTH - 50; ++col) {
+    //         cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
+    //     }
+    // }
+    //
+    // printf("\n\n xxx %f \n\n", (double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH));
+    //
+    // if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) < 20) {
+    //     ACTION_ATTACH(1);
+    // }
+    // return (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) >= 20;
 
-    printf("\n\n xxx %f \n\n", (double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH));
+    double ratio = getColorRatio1(image, 20, ROBOT_KNEE, 50, WIDTH-50, BLACK);
 
-    if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) < 20) {
+    if (ratio < 20.0)
+    {
         ACTION_ATTACH(1);
+        return 0;
     }
-    return (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) >= 20;
+    return 1;
 }
 
 int mission_5_1_check_black_line(U16 *image) {
@@ -50,13 +58,14 @@ int mission_5_1_check_black_line(U16 *image) {
     return cntBlack > 30;
 }
 
-void mission_5_2_watch_side(void) {
-    CHECK_INIT(LEFT);
-    RobotSleep(5);
-}
+// void mission_5_2_watch_side(void) {
+//     CHECK_INIT(LEFT);
+//     RobotSleep(5);
+// }
 
 void mission_5_3_climb_up_stairs(void) {
-    RobotSleep(1);
+    CHECK_INIT(OBLIQUE);
+    RobotSleep(3);
     ACTION_MOTION(MISSION_5_STAIR_UP, OBLIQUE);
     RobotSleep(1);
     CHECK_INIT(DOWN);

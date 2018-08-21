@@ -9,52 +9,64 @@ void mission_4_1_watch_front(int repeat) {
 }
 
 int mission_4_2_ready_hurdle(U16 *image) { // 굳이? 필요한가
-    U32 col[3] = {90, 70, 110}, row, i, cnt;
-    U16 checkHurdleLine[3] = {0,};
-    int range = 0;
+    // U32 col[3] = {90, 70, 110}, row, i, cnt;
+    // U16 checkHurdleLine[3] = {0,};
+    // int range = 0;
+    //
+    // for (i = 0; i < 3; ++i) {
+    //     for (row = HEIGHT - 1; row > 0; --row) {
+    //         cnt = 0;
+    //         for (range = -3; range < 3; ++range) {
+    //             cnt += (GetValueRGBYOBK(GetPtr(image, row, col[i] + range, WIDTH), BLACK));
+    //         }
+    //
+    //         if (cnt > 3) {
+    //             checkHurdleLine[i] = (U16) row;
+    //             break;
+    //         }
+    //     }
+    // }
+    //
+    // double s = 0;
+    // printf("BLACK LINE\n");
+    // for (i = 0; i < 3; ++i) {
+    //     s = (s > checkHurdleLine[i]) ? s : checkHurdleLine[i];
+    //     printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);
+    // }
+    // printf("\n");
+    //
+    // printf("AVG: %f\n", s);
+    //
+    // printf((CASE_4_0_LENGTH - CASE_4_0_LENGTH_ERROR <= s &&
+    //         s <= CASE_4_0_LENGTH + CASE_4_0_LENGTH_ERROR) ? "SUCCESS\n"
+    //                                                       : "FAIL\n");
+    // return (CASE_4_0_LENGTH - CASE_4_0_LENGTH_ERROR <= s &&
+    //         s <= CASE_4_0_LENGTH + CASE_4_0_LENGTH_ERROR);
 
-    for (i = 0; i < 3; ++i) {
-        for (row = HEIGHT - 1; row > 0; --row) {
-            cnt = 0;
-            for (range = -3; range < 3; ++range) {
-                cnt += (GetValueRGBYOBK(GetPtr(image, row, col[i] + range, WIDTH), BLACK));
-            }
+    static int prev = -1;
+    int dist = getDistance1(image, WIDTH>>1, HEIGHT-1, BLACK);
 
-            if (cnt > 3) {
-                checkHurdleLine[i] = (U16) row;
-                break;
-            }
-        }
+    if (dist == 0)
+    {
+        return 0;
     }
 
-    double s = 0;
-    printf("BLACK LINE\n");
-    for (i = 0; i < 3; ++i) {
-        s = (s > checkHurdleLine[i]) ? s : checkHurdleLine[i];
-        printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);
+    if (abs(dist - prev) < 3)
+    {
+        prev = dist;
+        return 1;
     }
-    printf("\n");
-
-    printf("AVG: %f\n", s);
-
-    printf((CASE_4_0_LENGTH - CASE_4_0_LENGTH_ERROR <= s &&
-            s <= CASE_4_0_LENGTH + CASE_4_0_LENGTH_ERROR) ? "SUCCESS\n"
-                                                          : "FAIL\n");
-    return (CASE_4_0_LENGTH - CASE_4_0_LENGTH_ERROR <= s &&
-            s <= CASE_4_0_LENGTH + CASE_4_0_LENGTH_ERROR);
+    prev = dist;
+    return 0;
 }
 
 int mission_4_4_jump_hurdle(void) {
-    ACTION_INIT(OBLIQUE);
-    ACTION_MOTION(MISSION_4_HURDLING, OBLIQUE);
-    // TODO
-    RobotSleep(1);
-    ACTION_WALK(FAST, DOWN, 9);
-    RobotSleep(2);
-    ACTION_TURN(LONG, DIR_LEFT, DOWN, 3);
-    RobotSleep(1);
     CHECK_INIT(OBLIQUE);
+    RobotSleep(2);
+    ACTION_MOTION(MISSION_4_HURDLING, OBLIQUE);
     RobotSleep(1);
+    ACTION_WALK(FAST, OBLIQUE, 4);
+    RobotSleep(3);
     return 1;
 }
 
@@ -106,7 +118,7 @@ int mission_4_6_set_center(U16 *image, int length) { // 얘도 여러 프레임
     }
 }
 
-void mission_4_6_watch_side(void) {
-    CHECK_INIT(RIGHT);
-    RobotSleep(3);
-}
+// void mission_4_6_watch_side(void) {
+//     CHECK_INIT(RIGHT);
+//     RobotSleep(3);
+// }

@@ -4,10 +4,6 @@ int default_set_straight_and_center1(U16 *image, VIEW view, U16 center, U16 bot,
 {
     _line_t line;
 
-#ifdef DEBUG
-    printf("view : %d, center : %d, bot : %d, color1 : %d\n", view, center, bot, color1);
-#endif
-
     CHECK_INIT(view);
     if (!linear_regression1(image, center, bot, color1, &line))
     {
@@ -21,7 +17,7 @@ int default_set_straight_and_center2(U16 *image, VIEW view, U16 center, U16 bot,
 {
     _line_t line;
 
-    default_watch_side(view);
+    CHECK_INIT(view);
     if (!linear_regression2(image, center, bot, color1, color2, &line))
     {
         return 0;
@@ -30,20 +26,55 @@ int default_set_straight_and_center2(U16 *image, VIEW view, U16 center, U16 bot,
     return set_straight(line, center, view) ? set_center(line, center, view) : 0;
 }
 
+int default_set_straight1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1)
+{
+    _line_t line;
+
+    CHECK_INIT(view);
+    if (!linear_regression1(image, center, bot, color1, &line))
+    {
+        return 0;
+    }
+
+    return set_straight(line, center, view);
+}
+
+int default_set_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1)
+{
+    _line_t line;
+
+    CHECK_INIT(view);
+    if (!linear_regression1(image, center, bot, color1, &line))
+    {
+        return 0;
+    }
+
+    return set_center(line, center, view);
+}
+
 int set_straight(_line_t line, U16 center, VIEW view)
 {
     double angle = atan(line.slope) * 180.0 / M_PI;
     DIRECTION turn_dir = angle > 0;
     angle = abs(angle);
 
-    if (angle > DEFAULT_STRAIGHT_THRES_LONG)
+    if (angle > 20)
     {
-        ACTION_TURN(LONG, turn_dir, view, angle / DEFAULT_STRAIGHT_THRES_LONG);
+        ACTION_TURN(MIDDLE, turn_dir, view, 3);
+    }
+    if (angle > 10)
+    {
+        ACTION_TURN(MIDDLE, turn_dir, view, 2);
         return 0;
     }
-    if (angle > DEFAULT_STRAIGHT_THRES_MIDDLE)
+    if (angle > 5)
     {
-        ACTION_TURN(MIDDLE, turn_dir, view, angle / DEFAULT_STRAIGHT_THRES_MIDDLE);
+        ACTION_TURN(MIDDLE, turn_dir, view, 1);
+        return 0;
+    }
+    if (angle > 2)
+    {
+        ACTION_TURN(SHORT, turn_dir, view, 1);
         return 0;
     }
 
@@ -58,19 +89,22 @@ int set_center(_line_t line, U16 center, VIEW view)
 
     if (dist_err > DEFAULT_CENTER_THRES_LONG)
     {
-        ACTION_MOVE(LONG, move_dir, view, dist_err / DEFAULT_CENTER_THRES_LONG);
-        return 0;
-    }
-    if (dist_err > DEFAULT_CENTER_THRES_MIDDLE)
-    {
-        ACTION_MOVE(MIDDLE, move_dir, view, dist_err / DEFAULT_CENTER_THRES_MIDDLE);
+        ACTION_MOVE(LONG, move_dir, view, MAX(2, dist_err / DEFAULT_CENTER_THRES_LONG));
         return 0;
     }
     if (dist_err > DEFAULT_CENTER_THRES_SHORT)
     {
-        ACTION_MOVE(SHORT, move_dir, view, dist_err / DEFAULT_CENTER_THRES_SHORT);
+        ACTION_MOVE(SHORT, move_dir, view, (int)(1.5 * dist_err) / DEFAULT_CENTER_THRES_SHORT + 1);
         return 0;
     }
 
     return 1;
+}
+
+int default_set_not_black(U16 *image)
+{
+    int dist = getDistance1(image, WIDTH>>1, HEIGHT-1, BLACK);
+
+    ACTION_TURN(LONG, DIR_LEFT, OBLIQUE, 1);
+    return dist < 10;
 }

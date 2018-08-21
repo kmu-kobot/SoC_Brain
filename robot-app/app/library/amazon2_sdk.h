@@ -3,7 +3,7 @@
 
 #define HW_2D_ENGINE
 
-#define DEBUG
+// #define DEBUG
 
 #if defined(BOOL)
 #else
@@ -281,6 +281,7 @@ typedef struct _POINT
     U8 x;
     U8 y;
 } _point_t;
+
 
 typedef struct _LINE
 {

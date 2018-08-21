@@ -9,6 +9,7 @@
 #include "./../library/imageProcess.h"
 #include "DEFAULT.h"
 #include "stdio.h"
+#include <stdlib.h>
 #include "math.h"
 
 #define SOC_APP_MISSION_3_AVOID_BOMB_H
@@ -35,5 +36,11 @@ void mission_3_4_watch_front(void);
 int mission_3_4_getMDir(void);
 
 int mission_3_1_ver2(U16 *image);
+
+int mission_3_set_straight(U16 *image);
+
+int mission_3_set_center(U16 *image);
+
+int mission_3_linear_regression(U16 *image, U16 center, U16 bot, U16 color1, _line_t *line);
 
 #endif //SOC_APP_MISSION_3_AVOID_BOMB_H

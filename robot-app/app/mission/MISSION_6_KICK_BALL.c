@@ -5,42 +5,12 @@
 #include "MISSION_6_KICK_BALL.h"
 #include <stdlib.h>
 #include <math.h>
-#include <limits.h>
 
 
 U32 hole_points[2] = {0,};
 U32 ball_points[2] = {0,};
 U32 hole_top, hole_bottom, hole_left, hole_right;
 U32 ball_top, ball_bottom, ball_left, ball_right;
-
-int average(int *arr, int size) {
-    int sum = 0;
-    int i;
-
-    for (i = 0; i < size; ++i) {
-        sum += arr[i];
-    }
-
-    return sum / size;
-}
-
-int analysis(int *arr, int size) {
-    int min_value = INT_MAX, max_value = INT_MIN;
-    int i;
-    int sum = 0;
-
-    for (i = 0; i < size; ++i) {
-        sum += arr[i];
-        if (arr[i] < min_value) {
-            min_value = arr[i];
-        }
-        if (arr[i] > max_value) {
-            max_value = arr[i];
-        }
-    }
-
-    return (sum - min_value - max_value) / (size - 2);
-}
 
 void mission_6_1_watch_front(void) {
     CHECK_INIT(OBLIQUE);
@@ -638,48 +608,48 @@ int mission_6_5_kick_ball(void) {
     return 1;
 }
 
-void mission_6_6_watch_side(void) {
-    CHECK_INIT(LEFT);
-}
+// void mission_6_6_watch_side(void) {
+//     CHECK_INIT(LEFT);
+// }
 
-int mission_6_9_set_front_of_not_bk(U16 *image) { // 여러프레임, 점 추가
-    U32 col[3] = {85, 95, 90}, row, i;
-    int checkHurdleLine[3] = {0,};
-
-    for (i = 0; i < 3; ++i) {
-        for (row = HEIGHT - 1; row >= 5; --row) {
-            if (GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) &&
-                GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK)) {
-                checkHurdleLine[i] = (HEIGHT - row);
-                break;
-            }
-        }
-        if (row < 5) {
-            checkHurdleLine[i] = HEIGHT - 5;
-        }
-    }
-
-    double s = 0;
-    printf("\nM6-5: BLACK LINE\n");
-    for (i = 0; i < 3; ++i) {
-        s += checkHurdleLine[i];
-        printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);
-    }
-    printf("\n");
-
-    s /= 3;
-    printf("AVG: %f\n\n", s);
-
-    printf((s > CASE_6_9_NON_BLACK_LINE) ? "SUCCESS\n" : "FAIL\n");
-
-    if (s > CASE_6_9_NON_BLACK_LINE) {
-        ACTION_TURN(LONG, DIR_LEFT, OBLIQUE, 1);
-        return 1;
-    } else {
-        ACTION_TURN(LONG, DIR_LEFT, OBLIQUE, 2);
-        return 0;
-    }
-}
+// int mission_6_9_set_front_of_not_bk(U16 *image) { // 여러프레임, 점 추가
+//     U32 col[3] = {85, 95, 90}, row, i;
+//     int checkHurdleLine[3] = {0,};
+//
+//     for (i = 0; i < 3; ++i) {
+//         for (row = HEIGHT - 1; row >= 5; --row) {
+//             if (GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) &&
+//                 GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK)) {
+//                 checkHurdleLine[i] = (HEIGHT - row);
+//                 break;
+//             }
+//         }
+//         if (row < 5) {
+//             checkHurdleLine[i] = HEIGHT - 5;
+//         }
+//     }
+//
+//     double s = 0;
+//     printf("\nM6-5: BLACK LINE\n");
+//     for (i = 0; i < 3; ++i) {
+//         s += checkHurdleLine[i];
+//         printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);
+//     }
+//     printf("\n");
+//
+//     s /= 3;
+//     printf("AVG: %f\n\n", s);
+//
+//     printf((s > CASE_6_9_NON_BLACK_LINE) ? "SUCCESS\n" : "FAIL\n");
+//
+//     if (s > CASE_6_9_NON_BLACK_LINE) {
+//         ACTION_TURN(LONG, DIR_LEFT, OBLIQUE, 1);
+//         return 1;
+//     } else {
+//         ACTION_TURN(LONG, DIR_LEFT, OBLIQUE, 2);
+//         return 0;
+//     }
+// }
 
 int mission_6_9_walk_front(void) {
     ACTION_WALK(FAST, OBLIQUE, 10);

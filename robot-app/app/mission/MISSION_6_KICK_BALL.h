@@ -64,9 +64,9 @@ int mission_6_4_set_front_of_ball(U16 *image);
 
 int mission_6_5_kick_ball(void);
 
-void mission_6_6_watch_side(void);
+// void mission_6_6_watch_side(void);
 
-int mission_6_9_set_front_of_not_bk(U16 *image);
+// int mission_6_9_set_front_of_not_bk(U16 *image);
 
 int mission_6_9_walk_front(void);
 

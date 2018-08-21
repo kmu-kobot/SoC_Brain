@@ -41,6 +41,7 @@ int huro(void) {
         switch (mission) {
             case 0: // MISSION 0: READY PLAY   // 빼도 될거같음
                 // mission += mission_0_1_wait_play(fpga_videodata);
+                // default_set_straight_and_center1(fpga_videodata, LEFT, WIDTH>>1, HEIGHT-1, BLACK);
                 ++mission;
                 break;
             case 1: // MISSION 1: YELLOW BARRICADE
@@ -59,23 +60,23 @@ int huro(void) {
                     case 3:
                         if (flag == 0) {
                             flag++;
-                            default_watch_side(LEFT);
+                            default_watch(LEFT);
                         }
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_2_4_after_bridge_set_straight(fpga_videodata, 0, 0); // 직선 맞추기 // 묶어버려도 될거같음
-
-                        if (step == 4) {
-                            step += mission_2_5_after_bridge_set_center(fpga_videodata);// 길이 맞추기 // 묶어버려도 될거같음
-                        }
-
-                        step = (step == 5) ? 4 : 3;
+                        // step += mission_2_4_after_bridge_set_straight(fpga_videodata, 0, 0); // 직선 맞추기 // 묶어버려도 될거같음
+                        //
+                        // if (step == 4) {
+                        //     step += mission_2_5_after_bridge_set_center(fpga_videodata);// 길이 맞추기 // 묶어버려도 될거같음
+                        // }
+                        //
+                        // step = (step == 5) ? 4 : 3;
+                        step += default_set_straight_and_center1(fpga_videodata, LEFT, 60, HEIGHT-1, BLACK);
                         break;
                     case 4: // 슬립만 합치거나 줄이면 될듯
                         CHECK_INIT(DOWN);
                         RobotSleep(1);
 
 //                        ACTION_WALK(FAST, DOWN, 7);
-                        RobotSleep(1);
+                        // RobotSleep(1);
                         step = 0;
                         mission += 1;
                         flag = 3;
@@ -88,16 +89,14 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         if (flag == 3) { // 어차피 이 스텝에서 flag 3밖에 안쓰니까 이 if 문 없어도 될거같음
-                            setFPGAVideoData(fpga_videodata);
                             mission_2_1_watch_below(fpga_videodata, 30);
                             ACTION_ATTACH(1);
                         }
 
                         setFPGAVideoData(fpga_videodata);
                         step += mission_2_1_wait_front_of_red_bridge(fpga_videodata);
-                        flag = (step == 1) ? 0 : 3; // 어차피 step 0에서는 flag 3만 있고, step 1에서는 0으로 한번 초기화 해주니까 필요 없는듯
                         break;
-                    case 1: // 영상처리 걷기로 붙이면 이 스텝 필요 없을거같음
+                    case 1:
                         flag = 0;
                         setFPGAVideoData(fpga_videodata);
                         step += mission_2_1_attach_red_bridge(fpga_videodata);
@@ -105,34 +104,47 @@ int huro(void) {
                     case 2:
                         // 1. 왼쪽보고 중심 맞추기
                         if (flag == 0) {
-                            mission_5_2_watch_side();
+                            // default_watch(LEFT);
+                            default_watch(LEFT);
                             flag++;
                         }
-                        setFPGAVideoData(fpga_videodata);
 
-                        step += mission_2_2_before_bridge_set_center(fpga_videodata, 5, userStaticValue[0]);
+                        // step += mission_2_2_before_bridge_set_center(fpga_videodata, 5, userStaticValue[0]);
+                        step += default_set_center1(fpga_videodata, LEFT, 60, HEIGHT-1, BLACK);
+
+                        if (step == 2)
+                        {
+                            flag = 2;
+                        }
                         break;
                     case 3:
+                        if (flag == 2)
+                        {
+                            ACTION_ATTACH(1);
+                        }
                         step += mission_2_3_escape_red_bridge();
+                        flag = 0;
                         break;
                     case 4:
                         if (flag == 0) {
                             flag++;
-                            default_watch_side(LEFT);
+                            default_watch(LEFT);
                         }
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_2_4_after_bridge_set_straight(fpga_videodata, 0, 0); // 직선 맞추기
-
-                        if (step == 5) {
-                            step += mission_2_5_after_bridge_set_center(fpga_videodata);// 길이 맞추기
-                        }
-
-                        step = (step == 6) ? 5 : 4;
+                        // setFPGAVideoData(fpga_videodata);
+                        // step += mission_2_4_after_bridge_set_straight(fpga_videodata, 0, 0); // 직선 맞추기
+                        //
+                        // if (step == 5) {
+                        //     step += mission_2_5_after_bridge_set_center(fpga_videodata);// 길이 맞추기
+                        // }
+                        //
+                        // step = (step == 6) ? 5 : 4;
+                        step += default_set_straight_and_center1(fpga_videodata, LEFT, 90, HEIGHT-1, BLACK);
                         break;
                     case 5:
                         flag = 0;
                         mission += 1;
                         step = 0;
+                        default_watch(OBLIQUE);
                         break;
                     default:
                         break;
@@ -141,7 +153,6 @@ int huro(void) {
             case 3: // MISSION 3: AVOID BOMB
                 switch (step) {
                     case 0:
-                        setFPGAVideoData(fpga_videodata);
                         mission_3_default_watch_below(fpga_videodata, 10);
 
                         setFPGAVideoData(fpga_videodata);
@@ -156,7 +167,7 @@ int huro(void) {
                     case 1:
                         if (flag == 0) {
                             flag = 1;
-                            mission_3_4_watch_side();
+                            default_watch(mission_3_4_getMDir());
                             setFPGAVideoData(fpga_videodata);
                             mission_3_measure_line(fpga_videodata);
                             break;
@@ -177,16 +188,18 @@ int huro(void) {
                         break;
                     case 2:
                         if (flag == 0) {
-                            mission_3_4_watch_side();
+                            default_watch(mission_3_4_getMDir());
                         }
 
-                        setFPGAVideoData(fpga_videodata);
-                        step = (mission_2_4_after_bridge_set_straight(fpga_videodata, mission_3_4_getMDir(), 1)) ? 3
-                                                                                                                 : 2;
+                        // setFPGAVideoData(fpga_videodata);
+                        // step = (mission_2_4_after_bridge_set_straight(fpga_videodata, mission_3_4_getMDir(), 1)) ? 3
+                        //                                                                                          : 2;
+                        step += mission_3_set_straight(fpga_videodata);
+
                         flag = (step == 3) ? 0 : 1;
                         break;
                     case 3:
-                        mission_3_4_watch_front();
+                        default_watch(OBLIQUE);
                         setFPGAVideoData(fpga_videodata);
                         step = (mission_3_1_ver2(fpga_videodata) && mission_4_2_ready_hurdle(fpga_videodata)) ? 4 : 0; // ready hurdle 뺴도 될거같음
                         flag = 0;
@@ -198,13 +211,23 @@ int huro(void) {
                         break;
                     case 5:
                         if (flag == 0) {
-                            mission_5_2_watch_side();
+                            default_watch(LEFT);
                             flag++;
                         }
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_2_2_before_bridge_set_center(fpga_videodata, 0, 50);
+                        // setFPGAVideoData(fpga_videodata);
+                        // step += mission_2_2_before_bridge_set_center(fpga_videodata, 0, 50);
+                        step += mission_3_set_center(fpga_videodata);
+                        if (step == 6)
+                        {
+                            flag = 2;
+                        }
                         break;
                     case 6:
+                        if (flag == 2)
+                        {
+                            ACTION_ATTACH(1);
+                        }
+
                         mission += 1;
                         step = 0;
                         flag = 0;
@@ -220,8 +243,8 @@ int huro(void) {
                         step = 5;
                         break;
                     case 5:
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_6_9_set_front_of_not_bk(fpga_videodata); // 얘도 6_9 떼버리고 공용함수로 하는게 나을듯
+                        CHECK_INIT(OBLIQUE);
+                        step += default_set_not_black(fpga_videodata); // 얘도 6_9 떼버리고 공용함수로 하는게 나을듯
                         break;
                     case 6:
                         mission = 10;
@@ -234,7 +257,6 @@ int huro(void) {
 
                         if (step == 2) {
                             CHECK_INIT(OBLIQUE);
-                            // mission_4_1_watch_front(2);
                             step = 3;
                             break;
                         }
@@ -251,9 +273,8 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         if (flag == 0) {
-                            setFPGAVideoData(fpga_videodata);
                             mission_5_1_watch_below(fpga_videodata, 40);
-                            ACTION_ATTACH(2);
+                            ACTION_ATTACH(1);
                         }
 
                         step = 11;
@@ -262,14 +283,16 @@ int huro(void) {
                     case 1:
                         // 맨 처음 다리 중심 맞추기
                         if (flag == 0) {
-                            mission_5_2_watch_side();
+                            default_watch(LEFT);
                             flag++;
                         }
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_2_2_before_bridge_set_center(fpga_videodata, 5, userStaticValue[1]);
+                        // step += mission_2_2_before_bridge_set_center(fpga_videodata, 5, userStaticValue[1]);
+                        step += default_set_straight_and_center1(fpga_videodata, LEFT, 60, HEIGHT-1, BLACK);
                         break;
                     case 2:
                         // 계단 오르기
+                        ACTION_ATTACH(1);
                         mission_5_3_climb_up_stairs();
                         flag = 0;
                         step = 12;
@@ -325,7 +348,7 @@ int huro(void) {
                         break;
                     case 9:
                         if (flag == 0) {
-                            mission_4_6_watch_side();
+                            default_watch(RIGHT);
                             flag++;
                         }
                         setFPGAVideoData(fpga_videodata);
@@ -453,7 +476,7 @@ int huro(void) {
                         break;
                     case 7:
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_6_9_set_front_of_not_bk(fpga_videodata);
+                        step += default_set_not_black(fpga_videodata);
                         break;
                     case 8:
                         mission_6_9_walk_front();
@@ -487,7 +510,7 @@ int huro(void) {
                     case 2:
                         if (flag == 0) {
                             flag++;
-                            default_watch_side(LEFT);
+                            default_watch(LEFT);
                         }
                         setFPGAVideoData(fpga_videodata);
                         step += mission_2_2_before_bridge_set_center(fpga_videodata, 5, userStaticValue[2]);
@@ -502,7 +525,7 @@ int huro(void) {
                     case 7:
                         if (flag == 0) {
                             flag++;
-                            default_watch_side(LEFT);
+                            default_watch(LEFT);
                         }
                         setFPGAVideoData(fpga_videodata);
                         step += mission_2_4_after_bridge_set_straight(fpga_videodata, 0, 0); // 직선 맞추기
@@ -536,7 +559,7 @@ int huro(void) {
                     case 1:
                         if (flag == 0) {
                             flag = 1;
-                            mission_3_4_watch_side();
+                            default_watch(mission_3_4_getMDir());
                             setFPGAVideoData(fpga_videodata);
                             mission_3_measure_line(fpga_videodata);
                             break;
@@ -555,12 +578,13 @@ int huro(void) {
                         break;
                     case 2:
                         if (flag == 0) {
-                            mission_3_4_watch_side();
+                            default_watch(mission_3_4_getMDir());
                         }
 
-                        setFPGAVideoData(fpga_videodata);
-                        step = (mission_2_4_after_bridge_set_straight(fpga_videodata, mission_3_4_getMDir(), 1)) ? 3
-                                                                                                                 : 2;
+                        // setFPGAVideoData(fpga_videodata);
+                        // step = (mission_2_4_after_bridge_set_straight(fpga_videodata, mission_3_4_getMDir(), 1)) ? 3
+                        //                                                                                          : 2;
+                        step += default_set_straight1(fpga_videodata, mission_3_4_getMDir(), WIDTH>>1, HEIGHT-1, BLACK);
 
                         flag = (step == 3) ? 0 : 1;
                         break;
@@ -596,7 +620,7 @@ int huro(void) {
                     case 5:
                         if (flag == 0) {
                             flag++;
-                            default_watch_side(LEFT);
+                            default_watch(LEFT);
                             RobotSleep(1);
                         }
                         setFPGAVideoData(fpga_videodata);
@@ -651,38 +675,14 @@ int huro(void) {
             case 10: // MISSION 10: BLUE GATE
                 switch (step) {
                     case 0:
-                        if (flag++ == 0) {
-                            mission_4_6_watch_side();
-                            flag++;
-                        }
-
-                        setFPGAVideoData(fpga_videodata);
-
-                        if (mission_2_4_after_bridge_set_straight(fpga_videodata, 1, 0) &&
-                            mission_4_6_set_center(fpga_videodata,
-                                                   ((nextMission == 7) ? userStaticValue[3] : userStaticValue[4]))) {
-                            // 앞에꺼는 다음이 옐로우 뒤에는 다음이 초록다리
-
-                            flag = 0;
-                            step += 1;
-
-                            CHECK_INIT(DOWN);
-                            ACTION_WALK(FAST, DOWN, 9);
-                            RobotSleep(1);
-                            break;
-                        }
-                        break;
                     case 1:
                         if (flag++ == 0) {
-                            mission_4_6_watch_side();
+                            default_watch(RIGHT);
                             flag++;
                         }
 
-                        setFPGAVideoData(fpga_videodata);
-
-                        if (mission_2_4_after_bridge_set_straight(fpga_videodata, 1, 0) &&
-                            mission_4_6_set_center(fpga_videodata,
-                                                   ((nextMission == 7) ? userStaticValue[3] : userStaticValue[4]))) {
+                        if (default_set_straight_and_center1(fpga_videodata, RIGHT, 60, HEIGHT-1, BLACK) &&
+                            default_set_straight_and_center1(fpga_videodata, RIGHT, 60, HEIGHT-1, BLACK)) {
                             // 앞에꺼는 다음이 옐로우 뒤에는 다음이 초록다리
 
                             flag = 0;
@@ -695,11 +695,6 @@ int huro(void) {
                         }
                         break;
                     case 2:
-                        CHECK_INIT(DOWN);
-                        ACTION_WALK(FAST, DOWN, 9);
-                        step += 1;
-                        break;
-                    case 3:
                         step = 0;
                         mission = nextMission;
                         nextMission = 0;

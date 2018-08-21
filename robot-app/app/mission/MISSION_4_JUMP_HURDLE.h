@@ -31,6 +31,6 @@ int mission_4_4_jump_hurdle(void);
 
 int mission_4_6_set_center(U16 *image, int length);
 
-void mission_4_6_watch_side(void);
+// void mission_4_6_watch_side(void);
 
 #endif //SOC_APP_MISSION_4_JUMP_HUDDLE_H

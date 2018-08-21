@@ -51,6 +51,7 @@ int ACTION_WALK_CHECK(VIEW view, U16 *image,  int (*check)(U16 *), int finish, i
 
     _args_t args = {image, check, &state, finish, &destroy};
 
+    repeat <<= 1;
     thread_id = pthread_create(&p_thread, NULL, checker, (void *)&args);
 
     if (thread_id < 0)
@@ -61,12 +62,8 @@ int ACTION_WALK_CHECK(VIEW view, U16 *image,  int (*check)(U16 *), int finish, i
 
     action(INIT_MOTION(view), WALK_START_MOTION(SLOW, view));
 
-    for (i = 0; i >> 1 < repeat; ++i) {
-        if (state == finish) {
-            break;
-        } else {
-            RobotAction(WALK_MOTION((i & 1), SLOW, view));
-        }
+    for (i = 0; state != finish && i < repeat; ++i) {
+        RobotAction(WALK_MOTION((i & 1), SLOW, view));
     }
 
     destroy = 1;

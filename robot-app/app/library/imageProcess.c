@@ -1,5 +1,36 @@
 #include "imageProcess.h"
 
+
+int average(int *arr, int size) {
+    int sum = 0;
+    int i;
+
+    for (i = 0; i < size; ++i) {
+        sum += arr[i];
+    }
+
+    return sum / size;
+}
+
+int analysis(int *arr, int size) {
+    int min_value = INT_MAX, max_value = INT_MIN;
+    int i;
+    int sum = 0;
+
+    for (i = 0; i < size; ++i) {
+        sum += arr[i];
+        if (arr[i] < min_value) {
+            min_value = arr[i];
+        }
+        if (arr[i] > max_value) {
+            max_value = arr[i];
+        }
+    }
+
+    return (sum - min_value - max_value) / (size - 2);
+}
+
+
 double getColorRatio1(U16 *image, const U16 top, const U16 bot, const U16 left, const U16 right, const U16 color1)
 {
     U16 i, j;
@@ -66,6 +97,98 @@ double getColorRatio3(U16 *image, const U16 top, const U16 bot, const U16 left, 
     return ratio;
 }
 
+int getDistance1(U16 *image, U16 center, U16 bot, U16 color1)
+{
+    U32 i, j, frame;
+    U8 color_cnt;
+    U32 point_cnt = 0;
+    U16 left, right;
+    int dist[NUM_DIST_FRAME * NUM_DIST_POINT];
+
+    bot = IN_IMG(0, bot, HEIGHT - 1);
+
+    for (frame = 0; frame < NUM_DIST_FRAME; ++frame)
+    {
+        setFPGAVideoData(image);
+        for (j = IN_IMG(0, center - (NUM_DIST_POINT>>1), WIDTH); j < IN_IMG(0, center + (NUM_DIST_POINT>>1), WIDTH); ++j)
+        {
+            left = MAX(j - 1, 0);
+            right = MIN(j + 1, WIDTH - 1);
+
+            for (i = bot; i >= 0; --i)
+            {
+                color_cnt = GetValueRGBYOBK(GetPtr(image, i, left, WIDTH), color1) +
+                            GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), color1) +
+                            GetValueRGBYOBK(GetPtr(image, i, right, WIDTH), color1);
+                if (color_cnt > 1)
+                {
+                    dist[point_cnt++] = i;
+                    break;
+                }
+            }
+        }
+    }
+
+#ifdef DEBUG
+    printf("point_cnt : %d\n", point_cnt);
+#endif
+
+    if (point_cnt == 0)
+    {
+        return 0;
+    }
+
+    return average(dist, NUM_DIST_FRAME * NUM_DIST_POINT);
+}
+
+
+int getDistance2(U16 *image, U16 center, U16 bot, U16 color1, U16 color2)
+{
+    U32 i, j, frame;
+    U8 color_cnt;
+    U32 point_cnt = 0;
+    U16 left, right;
+    int dist[NUM_DIST_FRAME * NUM_DIST_POINT];
+
+    bot = IN_IMG(0, bot, HEIGHT - 1);
+
+    for (frame = 0; frame < NUM_DIST_FRAME; ++frame)
+    {
+        setFPGAVideoData(image);
+        for (j = IN_IMG(0, center - (NUM_DIST_POINT>>1), WIDTH); j < IN_IMG(0, center + (NUM_DIST_POINT>>1), WIDTH); ++j)
+        {
+            left = MAX(j - 1, 0);
+            right = MIN(j + 1, WIDTH - 1);
+
+            for (i = bot; i >= 0; --i)
+            {
+                color_cnt = (GetValueRGBYOBK(GetPtr(image, i, left, WIDTH), color1) |
+                                GetValueRGBYOBK(GetPtr(image, i, left, WIDTH), color2)) +
+                                (GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), color1) |
+                                GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), color2)) +
+                                (GetValueRGBYOBK(GetPtr(image, i, right, WIDTH), color1) |
+                                GetValueRGBYOBK(GetPtr(image, i, right, WIDTH), color2));
+                if (color_cnt > 1)
+                {
+                    dist[point_cnt] = i;
+                    break;
+                }
+            }
+        }
+    }
+
+#ifdef DEBUG
+    printf("point_cnt : %d\n", point_cnt);
+#endif
+
+    if (point_cnt == 0)
+    {
+        return 0;
+    }
+
+    return average(dist, NUM_DIST_FRAME * NUM_DIST_POINT);
+}
+
 int linear_regression1(U16 *image, U16 center, U16 bot, U16 color1, _line_t *line)
 {
     U32 i, j, frame;
@@ -86,7 +209,7 @@ int linear_regression1(U16 *image, U16 center, U16 bot, U16 color1, _line_t *lin
             left = MAX(j - 1, 0);
             right = MIN(j + 1, WIDTH - 1);
 
-            for (i = bot; i > 0; --i)
+            for (i = bot; i >= 0; --i)
             {
                 color_cnt[pos] = GetValueRGBYOBK(GetPtr(image, i, left, WIDTH), color1) +
                                 GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), color1) +
@@ -109,7 +232,7 @@ int linear_regression1(U16 *image, U16 center, U16 bot, U16 color1, _line_t *lin
     printf("point_cnt : %d\n", point_cnt);
 #endif
 
-    if (point_cnt == 0)
+    if (point_cnt * 3 / 4 == 0)
     {
         return 0;
     }
@@ -137,7 +260,7 @@ int linear_regression2(U16 *image, U16 center, U16 bot, U16 color1, U16 color2, 
             left = MAX(j - 1, 0);
             right = MIN(j + 1, WIDTH - 1);
 
-            for (i = bot; i > 0; --i)
+            for (i = bot; i >= 0; --i)
             {
                 color_cnt[pos] = (GetValueRGBYOBK(GetPtr(image, i, left, WIDTH), color1) |
                                 GetValueRGBYOBK(GetPtr(image, i, left, WIDTH), color2)) +
@@ -163,7 +286,7 @@ int linear_regression2(U16 *image, U16 center, U16 bot, U16 color1, U16 color2, 
     printf("point_cnt : %d\n", point_cnt);
 #endif
 
-    if (point_cnt == 0)
+    if (point_cnt * 3 / 4 == 0)
     {
         return 0;
     }
