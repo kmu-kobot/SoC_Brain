@@ -57,35 +57,40 @@ int mission_9_1_go_front_of_yellow_barricade(U16 *image) {
 
 
 int mission_9_1_wait_yellow_barricade(U16 *image) {
-    U32 col, row, cntYellow = 0;
-
-    for (row = 0; row < HEIGHT; ++row) {
-        for (col = 0; col < WIDTH; ++col) {
-            cntYellow += GetValueRGBYOBK(
-                    GetPtr(image, row, col, WIDTH),
-                    YELLOW
-            );
-        }
-    }
-
-    printf("M9-1: WAIT: %f\n", (double) cntYellow * 100 / (WIDTH * HEIGHT));
-    return (double) cntYellow * 100 / (WIDTH * HEIGHT) > MISSION_9_THRESHOLDS;
+    // U32 col, row, cntYellow = 0;
+    //
+    // for (row = 0; row < HEIGHT; ++row) {
+    //     for (col = 0; col < WIDTH; ++col) {
+    //         cntYellow += GetValueRGBYOBK(
+    //                 GetPtr(image, row, col, WIDTH),
+    //                 YELLOW
+    //         );
+    //     }
+    // }
+    //
+    // printf("M9-1: WAIT: %f\n", (double) cntYellow * 100 / (WIDTH * HEIGHT));
+    // return (double) cntYellow * 100 / (WIDTH * HEIGHT) > MISSION_9_THRESHOLDS;
+    double ratio = getColorRatio1(image, 0, HEIGHT, 0, WIDTH, YELLOW);
+    return ratio > MISSION_9_THRESHOLDS;
 }
 
 int mission_9_2_end_yellow_barricade(U16 *image) {
-    U32 col, row, cntYellow = 0;
+    // U32 col, row, cntYellow = 0;
+    //
+    // for (row = 0; row < HEIGHT; ++row) {
+    //     for (col = 0; col < WIDTH; col++) {
+    //         cntYellow += GetValueRGBYOBK(
+    //                 GetPtr(image, row, col, WIDTH),
+    //                 YELLOW
+    //         );
+    //     }
+    // }
+    //
+    // printf("M9-2: END: %f\n", (double) cntYellow * 100 / (WIDTH * HEIGHT));
+    // return (double) cntYellow * 100 / (WIDTH * HEIGHT) < (1); // 1보다 조금 높게 주는게 나을지도? 이거는 대회장 바리게이트 상태에 따라 다르겠다
 
-    for (row = 0; row < HEIGHT; ++row) {
-        for (col = 0; col < WIDTH; col++) {
-            cntYellow += GetValueRGBYOBK(
-                    GetPtr(image, row, col, WIDTH),
-                    YELLOW
-            );
-        }
-    }
-
-    printf("M9-2: END: %f\n", (double) cntYellow * 100 / (WIDTH * HEIGHT));
-    return (double) cntYellow * 100 / (WIDTH * HEIGHT) < (1); // 1보다 조금 높게 주는게 나을지도? 이거는 대회장 바리게이트 상태에 따라 다르겠다
+    double ratio = getColorRatio1(image, 0, HEIGHT, 0, WIDTH, YELLOW);
+    return ratio < 1;
 }
 
 void mission_9_3_escape_yellow_barricade(int repeat) {

@@ -312,18 +312,11 @@ int least_sqaures(U16 *image, U16 center, _point_t* points, U32 size, _line_t *l
         sum_xx += points[i].x * points[i].x;
     }
 
-    #ifdef DEBUG
-    printf("sum_x : %f, sum_y : %f, sum_xy : %f, sum_xx : %f\n", sum_x, sum_y, sum_xy, sum_xx);
-    #endif
-
     double factor = (sum_xx * size) - (sum_x * sum_x);
-
-#ifdef DEBUG
-    printf("factor : %f\n", factor);
-#endif
 
     if (factor == 0)
     {
+        printf("factor is 0\n");
         return 0;
     }
 

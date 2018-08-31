@@ -3,7 +3,7 @@
 
 #define HW_2D_ENGINE
 
-// #define DEBUG
+#define DEBUG
 
 #if defined(BOOL)
 #else

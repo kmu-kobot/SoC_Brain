@@ -9,20 +9,6 @@ void mission_5_1_watch_below(U16 *image, int repeat) {
 }
 
 int mission_5_11_attach(U16 *image) {
-    // U32 row, col, cnt = 0;
-    // for (row = 20; row < ROBOT_KNEE; ++row) {
-    //     for (col = 50; col < WIDTH - 50; ++col) {
-    //         cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
-    //     }
-    // }
-    //
-    // printf("\n\n xxx %f \n\n", (double) cnt * 100 / ((ROBOT_KNEE - 20) * WIDTH));
-    //
-    // if ((double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) < 20) {
-    //     ACTION_ATTACH(1);
-    // }
-    // return (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) >= 20;
-
     double ratio = getColorRatio1(image, 20, ROBOT_KNEE, 50, WIDTH-50, BLACK);
 
     if (ratio < 20.0)
@@ -53,15 +39,12 @@ int mission_5_1_check_black_line(U16 *image) {
         return 0;
     }
 
+#ifdef DEBUG
     printf("%d\n", cntBlack);
+#endif
 
     return cntBlack > 30;
 }
-
-// void mission_5_2_watch_side(void) {
-//     CHECK_INIT(LEFT);
-//     RobotSleep(5);
-// }
 
 void mission_5_3_climb_up_stairs(void) {
     CHECK_INIT(OBLIQUE);
@@ -211,9 +194,7 @@ int mission_5_5_check_green_bridge_center(U16 *image) { // 여러프레임 여�
         flagSign = (dir) ? 1 : -1;
         for (col = 0; col < WIDTH / 2 - 3; ++col) {
             cnt = 0;
-            for (row = 10;
-                 row < 60;
-                 ++row) {
+            for (row = 10; row < 60; ++row) {
                 if (CheckCol(WIDTH / 2 + ROBOT_OFFSET + col * flagSign)) {
                     cnt += GetValueRGBYOBK(GetPtr(image, row, WIDTH / 2 + ROBOT_OFFSET + col * flagSign, WIDTH), GREEN);
                 } else {

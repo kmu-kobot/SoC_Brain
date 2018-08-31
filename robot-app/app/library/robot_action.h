@@ -139,6 +139,8 @@ typedef enum {
 
     MISSION_7_YELLOW_DUMBLING = 125,
 
+    MISSION_8_CREVASSE_DUMBLING = 130,
+
     NIL = 0xff
 } MOTION;
 

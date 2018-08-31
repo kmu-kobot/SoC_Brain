@@ -1,5 +1,18 @@
 #include "DEFAULT.h"
 
+int default_get_straight_and_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1)
+{
+    _line_t line;
+
+    CHECK_INIT(view);
+    if (!linear_regression1(image, center, bot, color1, &line))
+    {
+        return 0;
+    }
+
+    return 1;
+}
+
 int default_set_straight_and_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1)
 {
     _line_t line;
@@ -54,28 +67,23 @@ int default_set_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1)
 
 int set_straight(_line_t line, U16 center, VIEW view)
 {
-    double angle = atan(line.slope) * 180.0 / M_PI;
+    double angle = atan(line.slope) * 180.0 / M_PI + (view == LEFT ? 10 : -10);
     DIRECTION turn_dir = angle > 0;
     angle = abs(angle);
 
-    if (angle > 20)
-    {
-        ACTION_TURN(MIDDLE, turn_dir, view, 3);
-    }
-    if (angle > 10)
-    {
-        ACTION_TURN(MIDDLE, turn_dir, view, 2);
-        return 0;
-    }
-    if (angle > 5)
+    if (angle > 7)
     {
         ACTION_TURN(MIDDLE, turn_dir, view, 1);
         return 0;
     }
     if (angle > 2)
     {
-        ACTION_TURN(SHORT, turn_dir, view, 1);
+        ACTION_TURN(SHORT, turn_dir, view, 2);
         return 0;
+    }
+    if (angle > 1)
+    {
+        ACTION_TURN(SHORT, turn_dir, view, 1);
     }
 
     return 1;
@@ -94,7 +102,7 @@ int set_center(_line_t line, U16 center, VIEW view)
     }
     if (dist_err > DEFAULT_CENTER_THRES_SHORT)
     {
-        ACTION_MOVE(SHORT, move_dir, view, (int)(1.5 * dist_err) / DEFAULT_CENTER_THRES_SHORT + 1);
+        ACTION_MOVE(SHORT, move_dir, view, dist_err / DEFAULT_CENTER_THRES_SHORT + 1 - (view == LEFT && move_dir == DIR_RIGHT));
         return 0;
     }
 

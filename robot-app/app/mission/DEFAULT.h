@@ -8,9 +8,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define DEFAULT_CENTER_DISTANCE 60
+#define DEFAULT_CENTER_DISTANCE 55
 #define DEFAULT_CENTER_THRES_LONG 30
-#define DEFAULT_CENTER_THRES_MIDDLE 15
 #define DEFAULT_CENTER_THRES_SHORT 5
 
 static inline void default_watch(VIEW view)
@@ -18,6 +17,8 @@ static inline void default_watch(VIEW view)
     CHECK_INIT(view);
     RobotSleep(4);
 }
+
+int default_get_straight_and_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1);
 
 int default_set_straight_and_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1);
 int default_set_straight_and_center2(U16 *image, VIEW view, U16 center, U16 bot, U16 color1, U16 color2);
