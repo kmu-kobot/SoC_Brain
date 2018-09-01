@@ -23,11 +23,11 @@ int mission_4_2_ready_hurdle(U16 *image) { // 굳이? 필요한가
 }
 
 int mission_4_4_jump_hurdle(void) {
-    CHECK_INIT(OBLIQUE);
+    CHECK_INIT(UP);
     RobotSleep(2);
-    ACTION_MOTION(MISSION_4_HURDLING, OBLIQUE);
+    ACTION_MOTION(MISSION_4_HURDLING, UP);
     RobotSleep(1);
-    ACTION_WALK(FAST, OBLIQUE, 4);
+    ACTION_WALK(FAST, OBLIQUE, 5);
     RobotSleep(3);
     return 1;
 }

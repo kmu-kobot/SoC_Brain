@@ -55,7 +55,7 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image) {
 int mission_7_6_jump_hole(void) {
     ACTION_ATTACH(1);
     RobotSleep(1);
-    ACTION_MOTION(MISSION_7_YELLOW_DUMBLING, OBLIQUE);
+    ACTION_MOTION(MISSION_7_YELLOW_DUMBLING, UP);
     RobotSleep(1);
     return 1;
 }

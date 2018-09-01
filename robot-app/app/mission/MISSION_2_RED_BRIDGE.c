@@ -25,6 +25,6 @@ int mission_2_1_wait_front_of_red_bridge(U16 *image) {
 }
 
 int mission_2_3_escape_red_bridge(void) {
-    ACTION_MOTION(MISSION_2_RED_DUMBLING, OBLIQUE);
+    ACTION_MOTION(MISSION_2_RED_DUMBLING, UP);
     return 1;
 }

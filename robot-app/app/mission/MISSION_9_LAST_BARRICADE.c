@@ -5,7 +5,7 @@
 #include "MISSION_9_LAST_BARRICADE.h"
 
 int mission_9_1_go_front(U16 *image) {
-    ACTION_WALK_CHECK(OBLIQUE, image, mission_9_1_go_front_of_yellow_barricade, 1, 20);
+    ACTION_WALK_CHECK(UP, image, mission_9_1_go_front_of_yellow_barricade, 1, 20);
     RobotSleep(1);
 }
 

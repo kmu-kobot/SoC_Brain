@@ -14,12 +14,12 @@ void prev_check(MOTION init_motion, PREV_CHECK_MOD mod) {
     } else if (mod == SET) {
     } else if (mod == HEAD) {
         if (init_motion != prev) {
-            if (GET_INIT_VIEW(prev) == DOWN &&
+            if (GET_INIT_VIEW(prev) != UP &&
                 (GET_INIT_VIEW(init_motion) == LEFT || GET_INIT_VIEW(init_motion) == RIGHT)) {
                 RobotAction(HEAD_DOWN_TO_LEFT + GET_INIT_VIEW(init_motion) - LEFT);
-            } else if (GET_INIT_VIEW(init_motion) == DOWN &&
+            } else if (GET_INIT_VIEW(init_motion) != UP &&
                        (GET_INIT_VIEW(prev) == LEFT || GET_INIT_VIEW(prev) == RIGHT)) {
-                RobotAction(HEAD_SIDE_TO_DOWN);
+                RobotAction(HEAD_SIDE_TO_DOWN + GET_INIT_VIEW(init_motion));
             } else {
                 RobotAction(HEAD_DOWN + GET_INIT_VIEW(init_motion));
             }

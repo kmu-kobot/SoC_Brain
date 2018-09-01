@@ -26,8 +26,6 @@
 
 #define MISSION_6_4_CENTER 108
 
-void mission_6_1_watch_front(void);
-
 int mission_6_1_detection_ball(U16 *image);
 
 void mission_6_2_watch_below(void);

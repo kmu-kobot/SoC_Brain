@@ -74,16 +74,20 @@ int set_straight(_line_t line, U16 center, VIEW view)
     if (angle > 7)
     {
         ACTION_TURN(MIDDLE, turn_dir, view, 1);
+        RobotSleep(1);
         return 0;
     }
     if (angle > 2)
     {
         ACTION_TURN(SHORT, turn_dir, view, 2);
+        RobotSleep(1);
         return 0;
     }
     if (angle > 1)
     {
         ACTION_TURN(SHORT, turn_dir, view, 1);
+        RobotSleep(1);
+        return 0;
     }
 
     return 1;
@@ -98,11 +102,13 @@ int set_center(_line_t line, U16 center, VIEW view)
     if (dist_err > DEFAULT_CENTER_THRES_LONG)
     {
         ACTION_MOVE(LONG, move_dir, view, MAX(2, dist_err / DEFAULT_CENTER_THRES_LONG));
+        RobotSleep(1);
         return 0;
     }
     if (dist_err > DEFAULT_CENTER_THRES_SHORT)
     {
         ACTION_MOVE(SHORT, move_dir, view, dist_err / DEFAULT_CENTER_THRES_SHORT + 1 - (view == LEFT && move_dir == DIR_RIGHT));
+        RobotSleep(1);
         return 0;
     }
 
@@ -113,6 +119,9 @@ int default_set_not_black(U16 *image)
 {
     int dist = getDistance1(image, WIDTH>>1, HEIGHT-1, BLACK);
 
-    ACTION_TURN(LONG, DIR_LEFT, OBLIQUE, 1);
+    if (dist < 10)
+    {
+        ACTION_TURN(LONG, DIR_LEFT, UP, 1);
+    }
     return dist < 10;
 }

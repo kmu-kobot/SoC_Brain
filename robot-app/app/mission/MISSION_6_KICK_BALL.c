@@ -12,10 +12,6 @@ U32 ball_points[2] = {0,};
 U32 hole_top, hole_bottom, hole_left, hole_right;
 U32 ball_top, ball_bottom, ball_left, ball_right;
 
-void mission_6_1_watch_front(void) {
-    CHECK_INIT(OBLIQUE);
-}
-
 int mission_6_1_detection_ball(U16 *image) {
 
     int ball_state = mission_6_4_find_ball_interpolation(image, 0, HEIGHT, 0, WIDTH, 0);
@@ -30,9 +26,9 @@ int mission_6_1_detection_ball(U16 *image) {
     DIRECTION move_dir = ball_points[0] > WIDTH / 2;
 
     if (ball_points[0] < 70 || ball_points[0] > 110) {
-        ACTION_MOVE(LONG, move_dir, OBLIQUE, abs(WIDTH / 2 - ball_points[0]) / 15);
+        ACTION_MOVE(LONG, move_dir, UP, abs(WIDTH / 2 - ball_points[0]) / 15);
     } else {
-        ACTION_WALK(FAST, OBLIQUE, (HEIGHT - ball_points[1]) / 10 + 2);
+        ACTION_WALK(FAST, UP, (HEIGHT - ball_points[1]) / 10 + 2);
     }
     return 0;
 }
@@ -54,22 +50,22 @@ int mission_6_3_find_side_hole(U16 *image, U8 step) {
     static MOTION heads[] = {HEAD_HALF_RIGHT, HEAD_RIGHT, HEAD_HALF_LEFT, HEAD_LEFT};
     int state;
 
-    ACTION_MOTION(heads[step], OBLIQUE);
+    ACTION_MOTION(heads[step], UP);
     state = mission_6_3_find_hole_interpolation(image, 0, HEIGHT, 0, WIDTH, 0);
 
     if (state == 1) {
         if (step == 0) {
-            ACTION_MOVE(LONG, DIR_LEFT, OBLIQUE, hole_points[0] / 90 + 1);
-            ACTION_TURN(MIDDLE, DIR_RIGHT, OBLIQUE, hole_points[0] / 20 + 3);
+            ACTION_MOVE(LONG, DIR_LEFT, UP, hole_points[0] / 90 + 1);
+            ACTION_TURN(MIDDLE, DIR_RIGHT, UP, hole_points[0] / 20 + 3);
         } else if (step == 1) {
-            ACTION_MOVE(LONG, DIR_LEFT, OBLIQUE, hole_points[0] / 90 + 2);
-            ACTION_TURN(MIDDLE, DIR_RIGHT, OBLIQUE, hole_points[0] / 20 + 6);
+            ACTION_MOVE(LONG, DIR_LEFT, UP, hole_points[0] / 90 + 2);
+            ACTION_TURN(MIDDLE, DIR_RIGHT, UP, hole_points[0] / 20 + 6);
         } else if (step == 2) {
-            ACTION_MOVE(LONG, DIR_RIGHT, OBLIQUE, hole_points[0] / 50 + 1);
-            ACTION_TURN(MIDDLE, DIR_LEFT, OBLIQUE, hole_points[0] / 20 + 3);
+            ACTION_MOVE(LONG, DIR_RIGHT, UP, hole_points[0] / 50 + 1);
+            ACTION_TURN(MIDDLE, DIR_LEFT, UP, hole_points[0] / 20 + 3);
         } else if (step == 3) {
-            ACTION_MOVE(LONG, DIR_RIGHT, OBLIQUE, (WIDTH - hole_points[0]) / 90 + 2);
-            ACTION_TURN(MIDDLE, DIR_LEFT, OBLIQUE, (WIDTH - hole_points[0]) / 20 + 6);
+            ACTION_MOVE(LONG, DIR_RIGHT, UP, (WIDTH - hole_points[0]) / 90 + 2);
+            ACTION_TURN(MIDDLE, DIR_LEFT, UP, (WIDTH - hole_points[0]) / 20 + 6);
         } else {
             mission_6_4_turn_left();
             return 0;
@@ -92,8 +88,8 @@ int mission_6_3_find_side_hole(U16 *image, U8 step) {
 }
 
 void mission_6_4_turn_left(void) {
-    ACTION_MOVE(LONG, DIR_RIGHT, OBLIQUE, 1);
-    ACTION_TURN(SHORT, DIR_LEFT, OBLIQUE, 5);
+    ACTION_MOVE(LONG, DIR_RIGHT, UP, 1);
+    ACTION_TURN(SHORT, DIR_LEFT, UP, 5);
 }
 
 int mission_6_3_find_hole_interpolation(U16 *image, U32 top, U32 bot, U32 left, U32 right, U8 last) {
@@ -306,7 +302,7 @@ int mission_6_3_set_straight_hole(U16 *image) {
 #endif
 
     if (abs(degree) > 10.0 * M_PI / 180.0) {
-        ACTION_MOVE(LONG, dir, OBLIQUE, (int) (abs(degree) * 180.0 / 10.0 / M_PI));
+        ACTION_MOVE(LONG, dir, UP, (int) (abs(degree) * 180.0 / 10.0 / M_PI));
         return 0;
     }
 
@@ -322,36 +318,36 @@ int mission_6_3_locate_hole_on_center(U16 *image) {
     }
 
     if (hole_points[0] < MISSION_6_3_CENTER - 60) {
-        ACTION_MOVE(SHORT, DIR_RIGHT, OBLIQUE, 2);
-        ACTION_TURN(SHORT, DIR_LEFT, OBLIQUE, 4);
+        ACTION_MOVE(SHORT, DIR_RIGHT, UP, 2);
+        ACTION_TURN(SHORT, DIR_LEFT, UP, 4);
     } else if (hole_points[0] < MISSION_6_3_CENTER - 35) {
-        ACTION_MOVE(SHORT, DIR_RIGHT, OBLIQUE, 2);
-        ACTION_TURN(SHORT, DIR_LEFT, OBLIQUE, 3);
+        ACTION_MOVE(SHORT, DIR_RIGHT, UP, 2);
+        ACTION_TURN(SHORT, DIR_LEFT, UP, 3);
     } else if (hole_points[0] < MISSION_6_3_CENTER - 25) {
-        ACTION_MOVE(SHORT, DIR_RIGHT, OBLIQUE, 1);
-        ACTION_TURN(SHORT, DIR_LEFT, OBLIQUE, 3);
+        ACTION_MOVE(SHORT, DIR_RIGHT, UP, 1);
+        ACTION_TURN(SHORT, DIR_LEFT, UP, 3);
     } else if (hole_points[0] < MISSION_6_3_CENTER - 15) {
-        ACTION_TURN(SHORT, DIR_LEFT, OBLIQUE, 2);
+        ACTION_TURN(SHORT, DIR_LEFT, UP, 2);
     } else if (hole_points[0] < MISSION_6_3_CENTER - 8) {
-        ACTION_TURN(SHORT, DIR_LEFT, OBLIQUE, 1);
+        ACTION_TURN(SHORT, DIR_LEFT, UP, 1);
     } else if (hole_points[0] < MISSION_6_3_CENTER - 3) {
-        ACTION_TURN(SHORT, DIR_LEFT, OBLIQUE, 1);
+        ACTION_TURN(SHORT, DIR_LEFT, UP, 1);
         RobotSleep(3);
     } else if (hole_points[0] > MISSION_6_3_CENTER + 60) {
-        ACTION_MOVE(SHORT, DIR_LEFT, OBLIQUE, 2);
-        ACTION_TURN(SHORT, DIR_RIGHT, OBLIQUE, 4);
+        ACTION_MOVE(SHORT, DIR_LEFT, UP, 2);
+        ACTION_TURN(SHORT, DIR_RIGHT, UP, 4);
     } else if (hole_points[0] > MISSION_6_3_CENTER + 35) {
-        ACTION_MOVE(SHORT, DIR_LEFT, OBLIQUE, 2);
-        ACTION_TURN(SHORT, DIR_RIGHT, OBLIQUE, 3);
+        ACTION_MOVE(SHORT, DIR_LEFT, UP, 2);
+        ACTION_TURN(SHORT, DIR_RIGHT, UP, 3);
     } else if (hole_points[0] > MISSION_6_3_CENTER + 25) {
-        ACTION_MOVE(SHORT, DIR_LEFT, OBLIQUE, 1);
-        ACTION_TURN(SHORT, DIR_RIGHT, OBLIQUE, 3);
+        ACTION_MOVE(SHORT, DIR_LEFT, UP, 1);
+        ACTION_TURN(SHORT, DIR_RIGHT, UP, 3);
     } else if (hole_points[0] > MISSION_6_3_CENTER + 15) {
-        ACTION_TURN(SHORT, DIR_RIGHT, OBLIQUE, 2);
+        ACTION_TURN(SHORT, DIR_RIGHT, UP, 2);
     } else if (hole_points[0] > MISSION_6_3_CENTER + 8) {
-        ACTION_TURN(SHORT, DIR_RIGHT, OBLIQUE, 1);
+        ACTION_TURN(SHORT, DIR_RIGHT, UP, 1);
     } else if (hole_points[0] > MISSION_6_3_CENTER + 3) {
-        ACTION_TURN(SHORT, DIR_RIGHT, OBLIQUE, 1);
+        ACTION_TURN(SHORT, DIR_RIGHT, UP, 1);
         RobotSleep(3);
     } else {
         return 1;
@@ -604,54 +600,11 @@ int mission_6_4_set_front_of_ball(U16 *image) {
 }
 
 int mission_6_5_kick_ball(void) {
-    ACTION_MOTION(MISSION_6_RIGHT_KICK, OBLIQUE);
+    ACTION_MOTION(MISSION_6_RIGHT_KICK, UP);
     return 1;
 }
 
-// void mission_6_6_watch_side(void) {
-//     CHECK_INIT(LEFT);
-// }
-
-// int mission_6_9_set_front_of_not_bk(U16 *image) { // 여러프레임, 점 추가
-//     U32 col[3] = {85, 95, 90}, row, i;
-//     int checkHurdleLine[3] = {0,};
-//
-//     for (i = 0; i < 3; ++i) {
-//         for (row = HEIGHT - 1; row >= 5; --row) {
-//             if (GetValueRGBYOBK(GetPtr(image, row, col[i], WIDTH), BLACK) &&
-//                 GetValueRGBYOBK(GetPtr(image, row, col[i] + 1, WIDTH), BLACK)) {
-//                 checkHurdleLine[i] = (HEIGHT - row);
-//                 break;
-//             }
-//         }
-//         if (row < 5) {
-//             checkHurdleLine[i] = HEIGHT - 5;
-//         }
-//     }
-//
-//     double s = 0;
-//     printf("\nM6-5: BLACK LINE\n");
-//     for (i = 0; i < 3; ++i) {
-//         s += checkHurdleLine[i];
-//         printf("bk_line[%d]: %d,\t", i, checkHurdleLine[i]);
-//     }
-//     printf("\n");
-//
-//     s /= 3;
-//     printf("AVG: %f\n\n", s);
-//
-//     printf((s > CASE_6_9_NON_BLACK_LINE) ? "SUCCESS\n" : "FAIL\n");
-//
-//     if (s > CASE_6_9_NON_BLACK_LINE) {
-//         ACTION_TURN(LONG, DIR_LEFT, OBLIQUE, 1);
-//         return 1;
-//     } else {
-//         ACTION_TURN(LONG, DIR_LEFT, OBLIQUE, 2);
-//         return 0;
-//     }
-// }
-
 int mission_6_9_walk_front(void) {
-    ACTION_WALK(FAST, OBLIQUE, 10);
+    ACTION_WALK(FAST, UP, 10);
     return 1;
 }

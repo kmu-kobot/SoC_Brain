@@ -47,9 +47,9 @@ int mission_5_1_check_black_line(U16 *image) {
 }
 
 void mission_5_3_climb_up_stairs(void) {
-    CHECK_INIT(OBLIQUE);
+    CHECK_INIT(UP);
     RobotSleep(3);
-    ACTION_MOTION(MISSION_5_STAIR_UP, OBLIQUE);
+    ACTION_MOTION(MISSION_5_STAIR_UP, UP);
     RobotSleep(1);
     CHECK_INIT(DOWN);
     RobotSleep(1);
@@ -341,8 +341,8 @@ int mission_5_6_set_straight(U16 *image) { // 여러점 여러프레임
 
 int mission_5_7_climb_down_stairs(void) {
     RobotSleep(1);
-    ACTION_MOTION(MISSION_5_STAIR_DOWN, OBLIQUE);
-    CHECK_INIT(OBLIQUE);
+    ACTION_MOTION(MISSION_5_STAIR_DOWN, UP);
+    CHECK_INIT(UP);
     //TODO
     ACTION_WALK(FAST, DOWN, 9);
     return 1;

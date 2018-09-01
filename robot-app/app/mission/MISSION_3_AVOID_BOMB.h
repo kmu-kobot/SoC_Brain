@@ -13,6 +13,7 @@
 #include "math.h"
 
 #define SOC_APP_MISSION_3_AVOID_BOMB_H
+#define MINE_RANGE_BOT (HEIGHT-40)
 
 int mission_3_isFrontOf_Blue(U16 *image);
 

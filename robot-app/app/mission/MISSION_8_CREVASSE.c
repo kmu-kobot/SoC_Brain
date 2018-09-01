@@ -17,6 +17,6 @@ int mission_8_1_wait_front_of_crevasse(U16 *image)
 
 int mission_8_2_escape_crevasse(void)
 {
-    ACTION_MOTION(MISSION_8_CREVASSE_DUMBLING, OBLIQUE);
+    ACTION_MOTION(MISSION_8_CREVASSE_DUMBLING, UP);
     return 1;
 }

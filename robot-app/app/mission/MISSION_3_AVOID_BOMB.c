@@ -4,21 +4,16 @@
 
 #include "MISSION_3_AVOID_BOMB.h"
 
-void mission_3_4_watch_front(void) {
-    CHECK_INIT(OBLIQUE);
-    RobotSleep(2);
-}
-
 int mdir = 0;
 
 int mission_3_avoid(U16 *image) {
-    double ratio = getColorRatio1(image, 0, ROBOT_KNEE+4, 45, WIDTH-45, BLACK);
+    double ratio = getColorRatio1(image, 20, MINE_RANGE_BOT, 45, WIDTH-45, BLACK);
 
-    if (ratio > 0.5)
+    if (ratio > 1)
     {
-        ACTION_MOVE(LONG, !(mdir & 1), DOWN, 1);
+        ACTION_MOVE(LONG, !(mdir & 1), OBLIQUE, 1);
     }
-    return ratio < 0.5;
+    return ratio < 1;
 }
 
 void mission_3_change_mdir(void)
@@ -28,24 +23,25 @@ void mission_3_change_mdir(void)
 
 int mission_3_measure_line(U16 *image) { // 여기도 col 갯수 늘리고 여러 프레임 돌리느넥 좋을듯
     _line_t line;
-    mission_3_linear_regression(image, WIDTH>>1, HEIGHT-11, BLACK, &line);
+    int i = 0;
+    while(!mission_3_linear_regression(image, WIDTH>>1, HEIGHT-11, BLACK, &line) && i++ < 5);
 
     double dist = line.slope*(WIDTH>>1) + line.intercept;
 
-    mdir += dist > DEFAULT_CENTER_DISTANCE;
+    mdir += (dist > 70.0);
 
     return 1;
 }
 
 int mission_3_isFrontOf_Blue(U16 *image) {
-    double ratio = getColorRatio1(image, 0, ROBOT_KNEE, 0, WIDTH, BLUE);
+    double ratio = getColorRatio1(image, 40, HEIGHT, 0, WIDTH, BLUE);
 
     return ratio > 3;
 }
 
 void mission_3_default_watch_below(U16 *image, int repeat) {
     RobotSleep(3);
-    ACTION_WALK_CHECK(DOWN, image, mission_3_default_avoid_bomb, 1, repeat);
+    ACTION_WALK_CHECK(OBLIQUE, image, mission_3_default_avoid_bomb, 1, repeat);
     RobotSleep(1);
 }
 
@@ -61,16 +57,16 @@ int mission_3_4_getMDir(void) {
 int minecount = 0;
 
 int mission_3_default_avoid_bomb(U16 *image) {
-    double black_ratio = getColorRatio1(image, 0, ROBOT_KNEE, 50, WIDTH-50, BLACK);
+    double black_ratio = getColorRatio1(image, 20, MINE_RANGE_BOT, 50, WIDTH-50, BLACK);
 
-    minecount += black_ratio > 0.5;
-    return black_ratio > 0.5;
+    minecount += black_ratio > 1;
+    return black_ratio > 1;
 }
 
 int k = 0;
 
 int mission_3_1_ver2(U16 *image) {
-    double s = getColorRatio1(image, 0, HEIGHT, 30, WIDTH-30, BLUE);
+    double s = getColorRatio1(image, 40, HEIGHT, 30, WIDTH-30, BLUE);
 
     if (k == 0) {
         if (s > 5) {
@@ -186,5 +182,4 @@ int mission_3_linear_regression(U16 *image, U16 center, U16 bot, U16 color1, _li
     qsort(points, point_cnt, sizeof(_point_t), point_t_cmp_y);
 
     return least_sqaures(image, center, points, point_cnt>>1, line);
-    return 1;
 }
