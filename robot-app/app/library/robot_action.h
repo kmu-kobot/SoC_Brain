@@ -136,6 +136,7 @@ typedef enum {
     MOVE_RIGHT_SHORT_UP,
 
     ATTACH = 109,
+    ATTACH_SHORT,
 
     BIT_FRONT = 111,
     BIT_BACK,
@@ -153,6 +154,45 @@ typedef enum {
     MISSION_7_YELLOW_DUMBLING = 138,
 
     MISSION_8_CREVASSE_DUMBLING = 143,
+
+    STABLE_DOWN = 147,
+    STABLE_OBLIQUE,
+    STABLE_LEFT,
+    STABLE_RIGHT,
+    STABLE_UP,
+
+    BALL_INIT_DOWN = 155,
+    BALL_INIT_OBLIQUE,
+    BALL_INIT_UP,
+
+    BALL_HEAD_DOWN = 159,
+    BALL_HEAD_OBLIQUE,
+    BALL_HEAD_UP,
+    BALL_HEAD_HALF_LEFT,
+    BALL_HEAD_HALF_RIGHT,
+
+    BALL_TURN_LEFT_DOWN = 165,
+    BALL_TURN_RIGHT_DOWN,
+    BALL_TURN_LEFT_OBLIQUE,
+    BALL_TURN_RIGHT_OBLIQUE,
+    BALL_TURN_LEFT_UP,
+    BALL_TURN_RIGHT_UP,
+
+    BALL_MOVE_LEFT_DOWN = 172,
+    BALL_MOVE_RIGHT_DOWN,
+    BALL_MOVE_LEFT_OBLIQUE,
+    BALL_MOVE_RIGHT_OBLIQUE,
+    BALL_MOVE_LEFT_UP,
+    BALL_MOVE_RIGHT_UP,
+
+    BALL_BIT_FRONT = 179,
+    BALL_BIT_BACK,
+
+    KICK = 182,
+
+    BALL_STABLE_DOWN = 185,
+    BALL_STABLE_OBLIQUE,
+    BALL_STABLE_UP,
 
     NIL = 0xff
 } MOTION;
@@ -200,13 +240,18 @@ typedef enum {
 typedef enum {
     CHECK = 0,
     SET,
-    HEAD
+    HEAD,
+    STAY
 } PREV_CHECK_MOD;
 
 void prev_check(MOTION motion, PREV_CHECK_MOD mod);
+void move_check(MOTION motion, VIEW view);
+
+#define IS_MOVE(motion) (MOVE_LEFT_LONG_DOWN <= motion && motion <= MOVE_RIGHT_SHORT_UP)
 
 static inline void action(MOTION init, MOTION motion) {
     prev_check(init, HEAD);
+    move_check(motion, GET_INIT_VIEW(init));
     RobotAction(motion);
 }
 
@@ -289,6 +334,14 @@ static inline void ACTION_ATTACH(int repeat) {
     }
 }
 
+static inline void ACTION_ATTACH_SHORT(int repeat) {
+    action(INIT_MOTION(DOWN), ATTACH_SHORT);
+
+    for (; repeat > 1; --repeat) {
+        RobotAction(ATTACH_SHORT);
+    }
+}
+
 
 //////////////////////////////
 //  MOTION BIT              //
@@ -325,6 +378,55 @@ static inline void ACTION_MOTION_REPEAT(MOTION motion, VIEW view, int repeat) {
 static inline void ACTION_MISSION(MISSION mission, VIEW view) {
     ACTION_MOTION(mission, view);
     prev_check(INIT_MOTION(UP), SET);
+}
+
+//////////////////////////////
+//  MOTION BALL             //
+//////////////////////////////
+
+static inline void BALL_INIT(VIEW view)
+{
+    RobotAction(BALL_INIT_DOWN + view - ((view == UP) << 1));
+}
+
+static inline void BALL_HEAD(VIEW view)
+{
+    RobotAction(BALL_HEAD_DOWN + view - ((view == UP) << 1));
+}
+
+static inline void BALL_TURN(DIRECTION dir, VIEW view, int repeat)
+{
+    while (repeat--)
+    {
+        RobotAction(BALL_TURN_LEFT_DOWN + dir + (view << 1) - ((view == UP) << 2));
+    }
+}
+
+static inline void BALL_MOVE(DIRECTION dir, VIEW view, int repeat)
+{
+    while (repeat--)
+    {
+        RobotAction(BALL_MOVE_LEFT_DOWN + dir + (view << 1) - ((view == UP) << 2));
+    }
+}
+
+static inline void BALL_BIT(DIRECTION dir, int repeat)
+{
+    while (repeat--)
+    {
+        RobotAction(BALL_BIT_FRONT + dir);
+    }
+}
+
+static inline void BALL_KICK(void)
+{
+    RobotAction(KICK);
+    CHECK_INIT(UP);
+}
+
+static inline void BALL_STABLE(VIEW view)
+{
+    RobotAction(BALL_STABLE_DOWN + view - ((view == UP) << 1));
 }
 
 #endif //SOC_APP_ROBOT_ACTION_H

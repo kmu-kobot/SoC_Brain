@@ -28,6 +28,17 @@ void prev_check(MOTION init_motion, PREV_CHECK_MOD mod) {
     prev = init_motion;
 }
 
+void move_check(MOTION motion, VIEW view)
+{
+    static MOTION moved = 0;
+
+    if (moved && !IS_MOVE(motion))
+    {
+        RobotAction(STABLE_DOWN + view);
+    }
+    moved = IS_MOVE(motion);
+}
+
 void *checker(void *args)
 {
     _args_t data = *(_args_t *)args;
@@ -76,5 +87,5 @@ int ACTION_WALK_CHECK(VIEW view, U16 *image,  int (*check)(U16 *), int finish, i
 
     pthread_join(p_thread, (void *)&result);
 
-    return *(int *)result;
+    return finish == *(int *)result;
 }

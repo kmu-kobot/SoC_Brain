@@ -12,8 +12,6 @@
 
 #define SOC_APP_MISSION_4_JUMP_HUDDLE_H
 
-int mission_4_2_ready_hurdle(U16 *image);
-
 int mission_4_4_jump_hurdle(void);
 
 #endif //SOC_APP_MISSION_4_JUMP_HUDDLE_H

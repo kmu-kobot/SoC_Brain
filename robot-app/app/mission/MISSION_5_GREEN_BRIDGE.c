@@ -6,12 +6,17 @@
 
 void mission_5_1_watch_below(U16 *image, int repeat) {
     ACTION_WALK_CHECK(DOWN, image, mission_5_1_check_black_line, 1, repeat);
+    RobotSleep(2);
 }
 
-int mission_5_11_attach(U16 *image) {
-    double ratio = getColorRatio1(image, 20, ROBOT_KNEE, 50, WIDTH-50, BLACK);
+int mission_5_1_attach(U16 *image) {
+    double ratio = getColorRatio1(image, 30, ROBOT_KNEE, 50, WIDTH-50, BLACK);
 
-    if (ratio < 20.0)
+#ifdef DEBUG
+    printf("ratio : %f\n", ratio);
+#endif
+
+    if (ratio < 30.0)
     {
         ACTION_ATTACH(1);
         return 0;
@@ -20,30 +25,24 @@ int mission_5_11_attach(U16 *image) {
 }
 
 int mission_5_1_check_black_line(U16 *image) {
-    U32 col, row, cntBlack = 0;
+    U32 col, row, cntBlack = 0, dist = 0;
 
     for (row = ROBOT_KNEE - 10; row > 0; --row) {
         cntBlack = 0;
-        for (col = 0; col < WIDTH; col++) {
+        for (col = 50; col < WIDTH - 50; col++) {
             cntBlack += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
         }
-        if (cntBlack > 50) {
-            cntBlack = row; // 이거 변수 하나로 2개 역할 하는건가?? 그런거면 변수 하나 더만들어서 나눠주는게 나을거같음 그냥 여기서 row 검사해서 바로 return해도 될듯
+        if (cntBlack > 20) {
+            dist = row;
             break;
-        } else {
-            cntBlack = 0;
         }
-    }
-
-    if (cntBlack < 0) {
-        return 0;
     }
 
 #ifdef DEBUG
-    printf("%d\n", cntBlack);
+    printf("%d\n", dist);
 #endif
 
-    return cntBlack > 30;
+    return dist > 20;
 }
 
 void mission_5_3_climb_up_stairs(void) {
@@ -51,379 +50,696 @@ void mission_5_3_climb_up_stairs(void) {
     RobotSleep(3);
     ACTION_MOTION(MISSION_5_STAIR_UP, UP);
     RobotSleep(1);
-    CHECK_INIT(DOWN);
+    CHECK_INIT(OBLIQUE);
     RobotSleep(1);
-    ACTION_BIT(FRONT, 2);
 }
 
-int mission_5_5_check_finish_black_line(U16 *image) {
-    U32 col, row, cntBlack = 0;
+int mission_5_4_set_straight_and_center(U16 *image)
+{
+    _line_t left_line, right_line;
+    _line_t center_line;
 
-    for (row = 0; row < 60; ++row) {
-        for (col = 0; col < WIDTH; col++) {
-            cntBlack += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
-        }
+    int left_state, right_state;
+    left_state = mission_5_4_get_left_line(image, &left_line);
+    right_state = mission_5_4_get_right_line(image, &right_line);
+
+    if (!(left_state || right_state))
+    {
+        return 0;
     }
-
-    int rResult = (cntBlack * 100 / (60 * WIDTH)) > 15;
-
-    printf("M5-1: BLACK LINE\n");
-    printf("BLACK: %d, BLACK / (WIDTH * HEIGHT) : %f\n",
-           cntBlack, (double) (cntBlack * 100 / (HEIGHT * WIDTH)));
-    printf((rResult) ? "SUCCESS\n" : "FAIL\n");
-
-    return rResult;
-}
-
-int mission_5_5_check_green_bridge_straight(U16 *image) {
-
-    // 한쪽에 쏠려 있을때 처리하는거 개발
-    U32 col, row, cnt;
-
-    // 오른쪽에 많이 붙었을때 왼쪽으로 걷는거 개발
-    cnt = 0;  // 한쪽만 보고 맞추는거보다 양쪽 다 보는게 좋을거같음
-    for (col = 0; col < 30; col++) {
-        for (row = 0; row < HEIGHT; row++) {
-            cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), GREEN);
-        }
+    if (!left_state)
+    {
+        ACTION_TURN(MIDDLE, DIR_LEFT, OBLIQUE, 1);
+        return 0;
     }
-
-    double s = (double) cnt * 100 / (30 * HEIGHT);
-
-    printf("%d %f\n", cnt, s);
-
-    if (s > 13) {
-        printf("GOGO");
-        ACTION_MOVE(SHORT, DIR_LEFT, DOWN, 3);
-        ACTION_TURN(SHORT, DIR_LEFT, DOWN, 4);
+    if (!right_state)
+    {
+        ACTION_TURN(MIDDLE, DIR_RIGHT, OBLIQUE, 1);
         return 0;
     }
 
+    int center_state = mission_5_4_get_center_line(image, left_line, right_line, &center_line);
 
-    // // 왼쪽에 많이 붙었을때 왼쪽으로 걷는거 개발
-    // cnt = 0;
-    // for (col = 150; col < 180; col++) {
-    //     for (row = 0; row < HEIGHT; row++) {
-    //         cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), GREEN);
-    //     }
-    // }
-
-    // s = (double) cnt * 100 / (30 * HEIGHT);
-
-    // printf("%d %f\n", cnt, s);
-
-    // if (s > 13) {
-    //     printf("GOGO");
-    //     ACTION_MOVE(SHORT, DIR_RIGHT, DOWN, 1);
-    //     ACTION_TURN(SHORT, DIR_LEFT, DOWN, 1);
-    //     return 0;
-    // }
-    // //
-
-    // 포인트 더 늘리고 여러 프레임 확인하는게 좋을거같음
-
-    U32 i, range = 0, point[2][2] = {{0, MISSION_5_5_GREEN_BRIDGE_POINT_Y_1},
-                                     {0, MISSION_5_5_GREEN_BRIDGE_POINT_Y_2}};
-    U32 max = MISSION_5_5_GREEN_BRIDGE_SLOPE_RANGE + 1;
-    int pixelQueue[7 + 1] = {0,};
-    int front = 0, rear = 0;
-
-    for (i = 0; i < 2; ++i) {
-        front = 0;
-        rear = 0;
-        for (col = 0; col < WIDTH - 10; ++col) {
-
-            if (front == rear) {
-                for (range = 0; range < MISSION_5_5_GREEN_BRIDGE_SLOPE_RANGE; ++range) {
-                    pixelQueue[rear] = GetValueRGBYOBK(GetPtr(image, point[i][1], col + range, WIDTH), GREEN);
-                    rear++;
-                    rear %= max;
-                }
-            } else {
-                front++;
-                front %= max;
-                pixelQueue[rear] = GetValueRGBYOBK(GetPtr(image, point[i][1], col + range, WIDTH), GREEN);
-                rear++;
-                rear %= max;
-            }
-
-            cnt = 0;
-            for (range = 0; range < MISSION_5_5_GREEN_BRIDGE_SLOPE_RANGE; ++range) {
-                cnt += pixelQueue[range];
-            }
-
-            if (cnt >= 3) {
-                point[i][0] = col;
-                break;
-            }
-
-        }
+    if (center_state == 0)
+    {
+        return 0;
     }
-
-    int r = (point[0][0] - point[1][0]);
-    printf("p0: %d\t p1: %d\t r:%d\t\n", point[0][0], point[1][0], r);
-
-    int rResult = 1;
-    if (((r > 0) ? r : -r) > MISSION_5_5_GREEN_BRIDGE_SLOPE) {
-        rResult = 0;
-        ACTION_TURN(SHORT, ((r > 0) ? DIR_RIGHT : DIR_LEFT),
-                    DOWN, 1);
-        RobotSleep(1);
+    else if (center_state == -1)
+    {
+        return 2;
     }
-
-    return rResult;
+    return mission_5_4_set_straight(center_line) && mission_5_4_set_center(center_line);
 }
 
-int mission_5_3_attach_green(U16 *image) {
-    U32 col, row, cnt = 0;
-    for (col = 0; col < 45; ++col) {
-        for (row = ROBOT_KNEE; row < HEIGHT; ++row) {
-            cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
-        }
-    }
+int mission_5_4_get_left_line(U16 *image, _line_t *left_line)
+{
+    U16 i, j;
+    _point_t points[HEIGHT - 50 - 40];
+    U8 green_cnt[3], pos;
+    U32 point_cnt = 0;
+    U32 out_cnt = 0;
+    U16 up, down;
 
-    ACTION_BIT(FRONT, 5);
-    return (double) cnt * 100 / ((HEIGHT - ROBOT_KNEE) * 30) > 5;
-}
+    for (i = 40; i < HEIGHT - 50; ++i)
+    {
+        pos = 0;
+        memset(green_cnt, 0, 3 * sizeof(U8));
+        up = i - 1;
+        down = i + 1;
+        for (j = 0; j < WIDTH; ++j)
+        {
+            green_cnt[pos] = GetValueRGBYOBK(GetPtr(image, up, j, WIDTH), GREEN) +
+                            GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), GREEN) +
+                            GetValueRGBYOBK(GetPtr(image, down, j, WIDTH), GREEN);
 
-int mission_5_5_check_green_bridge_center(U16 *image) { // 여러프레임 여러점
-    U16 dir, cnt;
-    int col, row, flagSign, green_len[2] = {0,};
+            pos = (pos + 1) % 3;
 
-    for (dir = 0; dir < 2; ++dir) {
-        flagSign = (dir) ? 1 : -1;
-        for (col = 0; col < WIDTH / 2 - 3; ++col) {
-            cnt = 0;
-            for (row = 10; row < 60; ++row) {
-                if (CheckCol(WIDTH / 2 + ROBOT_OFFSET + col * flagSign)) {
-                    cnt += GetValueRGBYOBK(GetPtr(image, row, WIDTH / 2 + ROBOT_OFFSET + col * flagSign, WIDTH), GREEN);
-                } else {
+            if (green_cnt[0] + green_cnt[1] + green_cnt[2] > 2)
+            {
+                if(j < 2)
+                {
+                    ++out_cnt;
                     break;
                 }
-            }
-
-            if (cnt < 3) {
-                green_len[dir] = col;
+                points[point_cnt].x = j;
+                points[point_cnt].y = i;
+                ++point_cnt;
                 break;
             }
         }
     }
 
-    // 0: LEFT, 1: RIGHT
-    int r = green_len[0] - green_len[1];
+#ifdef DEBUG
+    printf("point_cnt : %d\tout_cnt : %d\n", point_cnt, out_cnt);
+#endif
 
-    printf("\nM5-5: SET CENTER\n");
-    printf("LEFT: %d, RIGHT: %d, r: %d\n\n", green_len[0], green_len[1], r);
-
-    if (((r > 0) ? r : (-r)) > MISSION_5_5_GREEN_BRIDGE_THRESHOLDS) {
-        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), DOWN, 1);
-        RobotSleep(1);
+    if (point_cnt < 10)
+    {
+        return 0;
+    }
+    if ((double)out_cnt / (double)point_cnt > 0.7)
+    {
+        return 0;
     }
 
-    return ((r > 0) ? r : (-r)) <= MISSION_5_5_GREEN_BRIDGE_THRESHOLDS;
+    return least_sqauresT(image, HEIGHT>>1, points, point_cnt, left_line);
 }
 
-int mission_5_5_short_walk_on_green_bridge(int repeat) {
-    // TODO
-    ACTION_WALK(FAST, DOWN, 5);
-    RobotSleep(3);
+int mission_5_4_get_right_line(U16 *image, _line_t *right_line)
+{
+    U16 i, j;
+    _point_t points[HEIGHT - 50 - 40];
+    U8 green_cnt[3], pos;
+    U32 point_cnt = 0;
+    U32 out_cnt = 0;
+    U16 up, down;
+
+    for (i = 40; i < HEIGHT - 50; ++i)
+    {
+        pos = 0;
+        memset(green_cnt, 0, 3 * sizeof(U8));
+        up = i - 1;
+        down = i + 1;
+        for (j = WIDTH-1; j < 0xfff0; --j)
+        {
+            green_cnt[pos] = GetValueRGBYOBK(GetPtr(image, up, j, WIDTH), GREEN) +
+                            GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), GREEN) +
+                            GetValueRGBYOBK(GetPtr(image, down, j, WIDTH), GREEN);
+
+            pos = (pos + 1) % 3;
+
+            if (green_cnt[0] + green_cnt[1] + green_cnt[2] > 2)
+            {
+                if(j > 177)
+                {
+                    ++out_cnt;
+                    break;
+                }
+                points[point_cnt].x = j;
+                points[point_cnt].y = i;
+                ++point_cnt;
+                break;
+            }
+        }
+    }
+
+#ifdef DEBUG
+    printf("point_cnt : %d\tout_cnt : %d\n", point_cnt, out_cnt);
+#endif
+
+    if (point_cnt < 10)
+    {
+        return 0;
+    }
+    if ((double)out_cnt / (double)point_cnt > 0.7)
+    {
+        return 0;
+    }
+
+    return least_sqauresT(image, HEIGHT>>1, points, point_cnt, right_line);
+}
+
+int mission_5_4_get_center_line(U16 *image, _line_t left_line, _line_t right_line, _line_t *center_line)
+{
+    double left_degree = atan(left_line.slope);
+    double right_degree = atan(right_line.slope);
+
+    if (MAX(left_degree, right_degree) - MIN(left_degree, right_degree) > 70.0 / 180.0 * M_PI)
+    {
+        return -1;
+    }
+
+    center_line->slope = tan((left_degree + right_degree) / 2.0);
+
+    double y = HEIGHT>>1;
+    double left_dist = left_line.slope*y + left_line.intercept;
+    double right_dist = right_line.slope*y + right_line.intercept;
+
+    center_line->intercept = (left_dist + right_dist) / 2.0 - center_line->slope*y;
+
+#ifdef DEBUG
+    double angle = atan(center_line->slope)*180.0/M_PI;
+    double distance = (center_line->slope)*y + (center_line->intercept);
+
+    printf("slope : %f, angle : %f, intercept : %f, distance : %f\n\n", center_line->slope, angle, center_line->intercept, distance);
+#endif
+
+    drawlineT(image, *center_line, 0xffff);
+    draw_fpga_video_data_full(image);
+    flip();
+
     return 1;
 }
 
-int mission_5_5_get_repeat(U16 *image) {
-    U32 col, row, cnt = 0;
-    for (row = 0; row < HEIGHT; ++row) {
-        for (col = 40; col < 140; ++col) {
-            cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), GREEN);
+int mission_5_4_set_straight(_line_t center_line)
+{
+    double angle = atan(center_line.slope) / M_PI * 180.0;
+    DIRECTION turn_dir = angle < 0;
+    angle = abs(angle);
+
+    if (angle > 3.0)
+    {
+        ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
+    }
+    else
+    {
+        return 1;
+    }
+    RobotSleep(2);
+
+    return 0;
+}
+
+int mission_5_4_set_center(_line_t line)
+{
+    double center = (WIDTH>>1) - line.slope*(HEIGHT>>1) - line.intercept;
+    DIRECTION move_dir = center < 0;
+    center = abs(center);
+
+    if (center > 10.0)
+    {
+        ACTION_MOVE(SHORT, move_dir, OBLIQUE, 2);
+    }
+    else if (center > 3.0)
+    {
+        ACTION_MOVE(SHORT, move_dir, OBLIQUE, 1);
+    }
+    else
+    {
+        return 1;
+    }
+    RobotSleep(2);
+
+    return 0;
+}
+
+void mission_5_5_attach_green(void)
+{
+    ACTION_WALK(FAST, OBLIQUE, 5);
+}
+
+int mission_5_6_set_straight_and_center(U16 *image)
+{
+    _line_t left_line, right_line;
+    _line_t center_line;
+
+    int left_state, right_state;
+    left_state = mission_5_4_get_left_line(image, &left_line);
+    right_state = mission_5_4_get_right_line(image, &right_line);
+
+    if (!(left_state || right_state))
+    {
+        return 0;
+    }
+    if (!left_state)
+    {
+        ACTION_TURN(MIDDLE, DIR_LEFT, OBLIQUE, 1);
+        return 0;
+    }
+    if (!right_state)
+    {
+        ACTION_TURN(MIDDLE, DIR_RIGHT, OBLIQUE, 1);
+        return 0;
+    }
+
+    int center_state = mission_5_4_get_center_line(image, left_line, right_line, &center_line);
+
+    if (center_state == 0)
+    {
+        return 0;
+    }
+    else if (center_state == -1)
+    {
+        return 2;
+    }
+
+    return mission_5_6_set_straight(center_line) && mission_5_4_set_center(center_line);
+}
+
+int mission_5_6_set_straight(_line_t center_line)
+{
+    double angle = atan(center_line.slope) / M_PI * 180.0;
+    DIRECTION turn_dir = angle < 0;
+    angle = abs(angle);
+
+    if (angle > 2.0)
+    {
+        ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
+    }
+    // else if (angle > 1.0)
+    // {
+    //     ACTION_TURN(SHORT, turn_dir, OBLIQUE, 2);
+    // }
+    else
+    {
+        return 1;
+    }
+    RobotSleep(2);
+
+    return 0;
+}
+
+int mission_5_7_watch_below(U16 *image)
+{
+    ACTION_WALK_CHECK(OBLIQUE, image, mission_5_7_walk_check, 1, 15);
+    double ratio = getColorRatio1(image, 50, 70, 50, WIDTH - 50, GREEN);
+
+    if (ratio < 30.0)
+    {
+        return 1;
+    }
+
+    _line_t left_line, right_line;
+    _line_t center_line;
+
+    int left_state, right_state;
+    left_state = mission_5_4_get_left_line(image, &left_line);
+    right_state = mission_5_4_get_right_line(image, &right_line);
+
+    if (!(left_state && right_state))
+    {
+        return -1;
+    }
+
+    int center_state = mission_5_4_get_center_line(image, left_line, right_line, &center_line);
+    if (center_state == 0)
+    {
+        return -1;
+    }
+    else if (center_state == -1)
+    {
+        return 1;
+    }
+
+    double angle = abs(atan(center_line.slope) / M_PI * 180.0);
+
+    if (angle > 5.0)
+    {
+        return -1;
+    }
+
+    double center = abs((WIDTH>>1) - center_line.slope*(HEIGHT>>1) - center_line.intercept);
+
+    if (center > 10.0)
+    {
+        return -1;
+    }
+
+    return 0;
+}
+
+int mission_5_7_walk_check(U16 *image)
+{
+    double ratio = getColorRatio1(image, 50, 70, 50, WIDTH - 50, GREEN);
+
+    if (ratio < 40.0)
+    {
+        return 1;
+    }
+
+    _line_t left_line, right_line;
+    _line_t center_line;
+
+    int left_state, right_state;
+    left_state = mission_5_4_get_left_line(image, &left_line);
+    right_state = mission_5_4_get_right_line(image, &right_line);
+
+    if (!(left_state && right_state))
+    {
+        return 1;
+    }
+
+    if (!mission_5_4_get_center_line(image, left_line, right_line, &center_line))
+    {
+        return 1;
+    }
+
+    double angle = abs(atan(center_line.slope) / M_PI * 180.0);
+
+    if (angle > 5.0)
+    {
+        return 1;
+    }
+
+    double center = abs((WIDTH>>1) - center_line.slope*(HEIGHT>>1) - center_line.intercept);
+
+    if (center > 10.0)
+    {
+        return 1;
+    }
+
+    return 0;
+}
+
+int mission_5_8_attach_black(U16 *image)
+{
+    _line_t front_line;
+
+    if (getColorRatio1(image, 40, 80, 50 , WIDTH - 50, GREEN) > 30.0 && mission_5_8_get_front_line(image, &front_line, GREEN))
+    {
+        _line_t left_line, right_line;
+        _line_t center_line;
+
+        int left_state, right_state;
+        left_state = mission_5_4_get_left_line(image, &left_line);
+        right_state = mission_5_4_get_right_line(image, &right_line);
+
+        if (!(left_state || right_state))
+        {
+            ACTION_ATTACH(1);
+            return 0;
+        }
+
+        if (!mission_5_8_set_straight(front_line))
+        {
+            return 0;
+        }
+
+        int center_state = mission_5_4_get_center_line(image, left_line, right_line, &center_line);
+
+        if (center_state == 0 || center_state == -1)
+        {
+            ACTION_ATTACH(1);
+            return 0;
+        }
+
+        if (mission_5_4_set_center(center_line))
+        {
+            ACTION_ATTACH(1);
+        }
+
+        return 0;
+    }
+
+    if (!mission_5_8_get_front_line(image, &front_line, BLACK) && !mission_5_8_get_front_line(image, &front_line, BLACK))
+    {
+        return 1;
+    }
+
+    if (!mission_5_8_set_straight(front_line))
+    {
+        return 0;
+    }
+
+    if (front_line.slope*(WIDTH>>1) + front_line.intercept < 10.0)
+    {
+        ACTION_ATTACH(1);
+        return 0;
+    }
+
+    return mission_5_8_set_dist(front_line);
+}
+
+int mission_5_8_get_front_line(U16 *image, _line_t *front_line, U16 color)
+{
+    U16 i, j;
+    _point_t points[NUM_LIN_REG_POINT];
+    U8 black_cnt[3], pos;
+    U32 point_cnt = 0;
+    U16 left, right;
+
+    for (j = IN_IMG(0, (WIDTH>>1) - (NUM_LIN_REG_POINT>>1), WIDTH); j < IN_IMG(0, (WIDTH>>1) + (NUM_LIN_REG_POINT>>1), WIDTH); ++j)
+    {
+        pos = 0;
+        memset(black_cnt, 0, 3 * sizeof(U8));
+        left = MAX(j - 1, 0);
+        right = MIN(j + 1, WIDTH - 1);
+
+        for (i = 0; i < HEIGHT - 20; ++i)
+        {
+            black_cnt[pos] = GetValueRGBYOBK(GetPtr(image, i, left, WIDTH), color) +
+                            GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), color) +
+                            GetValueRGBYOBK(GetPtr(image, i, right, WIDTH), color);
+
+            pos = (pos + 1) % 3;
+
+            if (black_cnt[0] + black_cnt[1] + black_cnt[2] > 2)
+            {
+                points[point_cnt].x = j;
+                points[point_cnt].y = i;
+                ++point_cnt;
+                break;
+            }
         }
     }
 
-    return ((double) cnt * 100 / (HEIGHT * 100) >= 5) ? 4 : 3;
-}
+#ifdef DEBUG
+    printf("point_cnt : %d\n", point_cnt);
+#endif
 
+    if (point_cnt < NUM_LIN_REG_POINT>>1)
+    {
+        return 0;
+    }
 
-int mission_5_6_set_only_one_bk_bar(U16 *image) { // 기울어져있을때 똑바로 작동 못함
-    U32 col, row, blackLen = 0;
-    for (row = 0; row < HEIGHT; ++row) {
-        blackLen = 0;
-        for (col = MISSION_5_6_POINT_X_1; // 여기도 딱히 이유 없으면 for문 한줄로
-             col < MISSION_5_6_POINT_X_2;
-             ++col) {
-            blackLen += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK); // cnt 변수 따로 만드는게 나을듯
-        }
+    qsort(points, point_cnt, sizeof(_point_t), point_t_cmp_y);
 
-        if (blackLen >= MISSION_5_6_BLACK_LEN_THRESHOLDS) {
-            blackLen = HEIGHT - row;
+    int sum = 0;
+    for (i = 0; i < point_cnt; ++i)
+    {
+        sum += points[i].y;
+    }
+
+    int aver = sum / point_cnt;
+
+    for (i = 0; i < point_cnt; ++i)
+    {
+        if (points[i].y > aver)
+        {
             break;
         }
-
     }
 
-    printf("\n\t\t- M5-6: SET CENTER\n");
-    printf("\t\t\t+ bk_len length: %d\n", blackLen);
-
-    if (blackLen > MISSION_5_6_BLACK_LEN_LENGTH) { // 멀면 fast로
-        ACTION_BIT(FRONT, 1);
-        RobotSleep(1);
+    if (i <= 1)
+    {
+        return 0;
     }
 
-    return blackLen < MISSION_5_6_BLACK_LEN_LENGTH;
+    return least_sqaures(image, WIDTH>>1, points, i - 1, front_line);
 }
 
-int mission_5_12_set_straight(U16 *image) { // 여러점 여러프레임
-    U32 cnt, row, i;
-    int range, point[2][2] = {{80,  0},
-                              {100, 0}};
+int mission_5_8_set_straight(_line_t line)
+{
+    double angle = atan(line.slope) * 180.0 / M_PI;
+    DIRECTION turn_dir = angle > 0;
+    angle = abs(angle);
 
-    for (i = 0; i < 2; ++i) {
-        for (row = HEIGHT - 1; row > 0; --row) {
-            cnt = 0;
-            for (range = (-MISSION_5_6_BLACK_RANGE); range < MISSION_5_6_BLACK_RANGE; ++range) {
-                cnt += GetValueRGBYOBK(GetPtr(image, row, point[i][0] + range, WIDTH), GREEN);
-            }
+    if (angle > 3.0)
+    {
+        ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
+    }
+    else
+    {
+        return 1;
+    }
 
-            if (cnt > 5) {
-                point[i][1] = HEIGHT - row;
+    RobotSleep(2);
+    return 0;
+}
+
+int mission_5_8_set_dist(_line_t line)
+{
+    double dist = line.slope*(WIDTH>>1) + line.intercept;
+
+    if (dist < 30.0)
+    {
+        ACTION_ATTACH(1);
+        RobotSleep(1);
+        return 0;
+    }
+
+    return 1;
+}
+
+
+int mission_5_9_attach_black(U16 *image)
+{
+    _line_t front_line;
+    if (!mission_5_9_get_front_line(image, &front_line, BLACK))
+    {
+        return 0;
+    }
+
+    return mission_5_9_set_straight(front_line) && mission_5_9_set_dist(front_line);
+}
+
+int mission_5_9_get_front_line(U16 *image, _line_t *front_line, U16 color)
+{
+    U16 i, j;
+    _point_t points[30 * 2];
+    U8 black_cnt[3], pos;
+    U32 point_cnt = 0;
+    U16 left, right;
+
+    for (j = 10; j < 40; ++j)
+    {
+        pos = 0;
+        memset(black_cnt, 0, 3 * sizeof(U8));
+        left = MAX(j - 1, 0);
+        right = MIN(j + 1, WIDTH - 1);
+
+        for (i = 0; i < HEIGHT - 20; ++i)
+        {
+            black_cnt[pos] = GetValueRGBYOBK(GetPtr(image, i, left, WIDTH), color) +
+                            GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), color) +
+                            GetValueRGBYOBK(GetPtr(image, i, right, WIDTH), color);
+
+            pos = (pos + 1) % 3;
+
+            if (black_cnt[0] + black_cnt[1] + black_cnt[2] > 2)
+            {
+                points[point_cnt].x = j;
+                points[point_cnt].y = i;
+                ++point_cnt;
                 break;
             }
-
         }
     }
 
-    printf("\t\t- M5-6: SET STRAIGHT\n");
-    printf("\t\t\t+ %d %d\n\n", point[0][1], point[1][1]);
+    for (j = WIDTH - 10; j > WIDTH - 40; --j)
+    {
+        pos = 0;
+        memset(black_cnt, 0, 3 * sizeof(U8));
+        left = MAX(j - 1, 0);
+        right = MIN(j + 1, WIDTH - 1);
 
-    int r = (point[0][1] - point[1][1]);
+        for (i = 0; i < HEIGHT - 20; ++i)
+        {
+            black_cnt[pos] = GetValueRGBYOBK(GetPtr(image, i, left, WIDTH), color) +
+                            GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), color) +
+                            GetValueRGBYOBK(GetPtr(image, i, right, WIDTH), color);
 
-    int rResult = 1;
-    if (((r > 0) ? r : -r) > MISSION_5_5_GREEN_BRIDGE_SLOPE) {
-        ACTION_TURN((((r > 0) ? r : -r) > 6) ? MIDDLE : SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), DOWN, 1);
-        rResult = 0;
-    }
+            pos = (pos + 1) % 3;
 
-    return rResult;
-}
-
-int mission_5_6_set_straight(U16 *image) { // 여러점 여러프레임
-    U32 cnt, row, i;
-    int range, point[2][2] = {{MISSION_5_6_BLACK_COL_1, 0},
-                              {MISSION_5_6_BLACK_COL_2, 0}};
-
-    for (i = 0; i < 2; ++i) {
-        for (row = 10; row < HEIGHT; ++row) {
-            cnt = 0;
-            for (range = (-MISSION_5_6_BLACK_RANGE); range < MISSION_5_6_BLACK_RANGE; ++range) {
-                cnt += GetValueRGBYOBK(GetPtr(image, row, point[i][0] + range, WIDTH), BLACK);
-            }
-
-            if (cnt > 5) {
-                point[i][1] = HEIGHT - row;
+            if (black_cnt[0] + black_cnt[1] + black_cnt[2] > 2)
+            {
+                points[point_cnt].x = j;
+                points[point_cnt].y = i;
+                ++point_cnt;
                 break;
             }
-
         }
     }
 
-    printf("\t\t- M5-6: SET STRAIGHT\n");
-    printf("\t\t\t+ %d %d\n\n", point[0][1], point[1][1]);
+#ifdef DEBUG
+    printf("point_cnt : %d\n", point_cnt);
+#endif
 
-    int r = (point[0][1] - point[1][1]);
-
-    int rResult = 1;
-    if (((r > 0) ? r : -r) > MISSION_5_6_GREEN_BRIDGE_SLOPE) {
-        ACTION_TURN(SHORT, ((r < 0) ? DIR_LEFT : DIR_RIGHT), DOWN, 1);
-        RobotSleep(1);
-        rResult = 0;
+    if (point_cnt < NUM_LIN_REG_POINT>>1)
+    {
+        return 0;
     }
 
-    return rResult;
+    qsort(points, point_cnt, sizeof(_point_t), point_t_cmp_y);
+
+    int sum = 0;
+    for (i = 0; i < point_cnt; ++i)
+    {
+        sum += points[i].y;
+    }
+
+    int aver = sum / point_cnt;
+
+    for (i = 0; i < point_cnt; ++i)
+    {
+        if (points[i].y > aver)
+        {
+            break;
+        }
+    }
+
+    if (i <= 1)
+    {
+        return 0;
+    }
+
+    return least_sqaures(image, WIDTH>>1, points, i - 1, front_line);
 }
 
-int mission_5_7_climb_down_stairs(void) {
+int mission_5_9_set_straight(_line_t line)
+{
+    double angle = atan(line.slope) * 180.0 / M_PI;
+    DIRECTION turn_dir = angle > 0;
+    angle = abs(angle);
+
+    if (angle > 3.0)
+    {
+        ACTION_TURN(MIDDLE, turn_dir, DOWN, 1);
+    }
+    else
+    {
+        return 1;
+    }
+
+    RobotSleep(2);
+    return 0;
+}
+
+int mission_5_9_set_dist(_line_t line)
+{
+    double dist = line.slope*(WIDTH>>1) + line.intercept;
+
+    if (dist < 50.0)
+    {
+        ACTION_ATTACH(1);
+        RobotSleep(1);
+        return 0;
+    }
+    else if (dist < 60.0)
+    {
+        ACTION_ATTACH_SHORT(1);
+        RobotSleep(1);
+        return 0;
+    }
+
+    return 1;
+}
+
+int mission_5_10_climb_down_stairs(void) {
     RobotSleep(1);
     ACTION_MOTION(MISSION_5_STAIR_DOWN, UP);
     CHECK_INIT(UP);
     //TODO
-    ACTION_WALK(FAST, DOWN, 9);
+    ACTION_WALK(FAST, OBLIQUE, 2);
     return 1;
-}
-
-void mission_5_5_set_center(U16 *image) { // 이거는 중심부터 좌우 초록색 길이 재는건가?? 담에 설명 한번 들어봐야 알듯
-    U16 dir;
-    int col, row, flagSign, green_len[2] = {0,};
-
-    for (dir = 0; dir < 2; ++dir) {
-        flagSign = (dir) ? 1 : -1;
-        for (col = 0; col < WIDTH / 2 - 3; ++col) {
-            for (row = ROBOT_KNEE;
-                 row < HEIGHT;
-                 ++row) { // 여기는 for문 왜 이렇게 써둔거?? 이유 딱히 없으면 그냥 평범하게 쓰는게 알아보기 편할듯
-                green_len[dir] += GetValueRGBYOBK(GetPtr(image, row, WIDTH / 2 + ROBOT_OFFSET + col * flagSign, WIDTH),
-                                                  GREEN);
-            }
-
-        }
-    }
-
-    // 0: LEFT, 1: RIGHT
-    int r = green_len[0] - green_len[1];
-
-    printf("\nM5-5: SET CENTER\n");
-    printf("LEFT: %d, RIGHT: %d, r: %d\n\n", green_len[0], green_len[1], r);
-
-    if (((r > 0) ? r : (-r)) > 20) {
-        ACTION_MOVE(SHORT, ((r > 0) ? DIR_LEFT : DIR_RIGHT), DOWN, 1);
-        RobotSleep(1);
-    }
-
-}
-
-int mission_13_attach_black(U16 *image) { // 여러프레임 돌리고 수치에 따라서 fast로 빨리 가버리는게 필요할듯
-    U32 col, row, cnt = 0;
-
-    for (col = 0; col < WIDTH; ++col) {
-        for (row = 0; row < HEIGHT; ++row) {
-            cnt += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), GREEN);
-        }
-    }
-
-    ACTION_BIT(FRONT, 1);
-
-    return cnt < 100;
-
-}
-
-int mission_14_set_straight(U16 *image) { // 여러프레임 여러점, 수치 가지고 repeat조절
-    U32 cnt, row, i;
-    int range, point[2][2] = {{75,  0},
-                              {105, 0}};
-
-    for (i = 0; i < 2; ++i) {
-        for (row = ROBOT_KNEE; row > 0; --row) {
-            cnt = 0;
-            for (range = (-MISSION_5_6_BLACK_RANGE); range < MISSION_5_6_BLACK_RANGE; ++range) {
-                cnt += GetValueRGBYOBK(GetPtr(image, row, point[i][0] + range, WIDTH), BLACK);
-            }
-
-            if (cnt > 3) {
-                point[i][1] = HEIGHT - row;
-                break;
-            }
-
-        }
-    }
-
-    printf("\t\t- M5-6: SET STRAIGHT\n");
-    printf("\t\t\t+ %d %d\n\n", point[0][1], point[1][1]);
-
-    int r = (point[0][1] - point[1][1]);
-
-    int rResult = 1;
-    if (((r > 0) ? r : -r) > MISSION_5_6_GREEN_BRIDGE_SLOPE) {
-        ACTION_TURN((((r > 0) ? r : -r) > 5) ? MIDDLE : SHORT, ((r > 0) ? DIR_RIGHT : DIR_LEFT), DOWN, 1);
-        RobotSleep(1);
-        rResult = 0;
-    }
-
-    return rResult;
 }

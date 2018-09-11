@@ -13,9 +13,10 @@
 #include "math.h"
 
 #define SOC_APP_MISSION_3_AVOID_BOMB_H
-#define MINE_RANGE_BOT (HEIGHT-40)
+#define MINE_RANGE_BOT (HEIGHT-35)
+#define MINE_RANGE_LEFT 45
 
-int mission_3_isFrontOf_Blue(U16 *image);
+int mission_3_isFrontOf_Blue(U16 *image, U16 bot);
 
 int mission_3_measure_line(U16 *image);
 
@@ -25,7 +26,9 @@ int mission_3_avoid(U16 *image);
 
 void mission_3_change_mdir(void);
 
-void mission_3_default_watch_below(U16 *image, int repeat);
+int mission_3_default_watch_below(U16 *image, int repeat);
+
+int mission_3_walk_avoid_bomb(U16 *image);
 
 int mission_3_default_avoid_bomb(U16 *image);
 

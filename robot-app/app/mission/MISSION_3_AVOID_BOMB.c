@@ -7,13 +7,20 @@
 int mdir = 0;
 
 int mission_3_avoid(U16 *image) {
-    double ratio = getColorRatio1(image, 20, MINE_RANGE_BOT, 45, WIDTH-45, BLACK);
+    double blue_ratio = getColorRatio1(image, 20, ROBOT_KNEE+10, MINE_RANGE_LEFT, WIDTH-MINE_RANGE_LEFT, BLUE);
+    double black_ratio = getColorRatio1(image, 0, ROBOT_KNEE+10, MINE_RANGE_LEFT, WIDTH-MINE_RANGE_LEFT, BLACK);
 
-    if (ratio > 1)
+    if (blue_ratio > 3.0 || black_ratio > 20.0)
     {
-        ACTION_MOVE(LONG, !(mdir & 1), OBLIQUE, 1);
+        return 1;
     }
-    return ratio < 1;
+
+    if (black_ratio > 0.6)
+    {
+        ACTION_MOVE(LONG, (mdir & 1), DOWN, 1);
+        RobotSleep(1);
+    }
+    return black_ratio < 0.6;
 }
 
 void mission_3_change_mdir(void)
@@ -26,6 +33,11 @@ int mission_3_measure_line(U16 *image) { // 여기도 col 갯수 늘리고 여�
     int i = 0;
     while(!mission_3_linear_regression(image, WIDTH>>1, HEIGHT-11, BLACK, &line) && i++ < 5);
 
+    if (i >= 5)
+    {
+        return 0;
+    }
+
     double dist = line.slope*(WIDTH>>1) + line.intercept;
 
     mdir += (dist > 70.0);
@@ -33,16 +45,17 @@ int mission_3_measure_line(U16 *image) { // 여기도 col 갯수 늘리고 여�
     return 1;
 }
 
-int mission_3_isFrontOf_Blue(U16 *image) {
-    double ratio = getColorRatio1(image, 40, HEIGHT, 0, WIDTH, BLUE);
+int mission_3_isFrontOf_Blue(U16 *image, U16 bot) {
+    double ratio = getColorRatio1(image, 30, bot, 0, WIDTH, BLUE);
 
-    return ratio > 3;
+    return ratio > 3.0;
 }
 
-void mission_3_default_watch_below(U16 *image, int repeat) {
+int mission_3_default_watch_below(U16 *image, int repeat) {
     RobotSleep(3);
-    ACTION_WALK_CHECK(OBLIQUE, image, mission_3_default_avoid_bomb, 1, repeat);
+    int result = ACTION_WALK_CHECK(OBLIQUE, image, mission_3_walk_avoid_bomb, 1, repeat);
     RobotSleep(1);
+    return result;
 }
 
 
@@ -51,52 +64,61 @@ void mission_3_init_global(void) {
 }
 
 int mission_3_4_getMDir(void) {
-    return !(mdir & 1) + LEFT;
+    return (mdir & 1) + LEFT;
 }
 
 int minecount = 0;
 
 int mission_3_default_avoid_bomb(U16 *image) {
-    double black_ratio = getColorRatio1(image, 20, MINE_RANGE_BOT, 50, WIDTH-50, BLACK);
+    double black_ratio = getColorRatio1(image, 50, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH-MINE_RANGE_LEFT, BLACK);
 
-    minecount += black_ratio > 1;
-    return black_ratio > 1;
+    minecount += black_ratio > 0.6;
+    return black_ratio > 0.6;
+}
+
+int mission_3_walk_avoid_bomb(U16 *image)
+{
+    double blue_ratio = getColorRatio1(image, 20, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH-MINE_RANGE_LEFT, BLUE);
+    double black_ratio = getColorRatio1(image, 35, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH-MINE_RANGE_LEFT, BLACK);
+
+    if (blue_ratio > 3.0)
+    {
+        return 1;
+    }
+
+
+    minecount += black_ratio > 0.6;
+    return black_ratio > 0.6;
 }
 
 int k = 0;
 
 int mission_3_1_ver2(U16 *image) {
-    double s = getColorRatio1(image, 40, HEIGHT, 30, WIDTH-30, BLUE);
+    double s = getColorRatio1(image, 0, HEIGHT, 30, WIDTH-30, BLUE);
 
-    if (k == 0) {
-        if (s > 5) {
-            k = 1;
-        } else {
-            k = 0;
-        }
-    } else if (k == 1) {
-        if (s < 3) {
-            k = 2;
-        } else {
-            k = 1;
-        }
+    if (!k)
+    {
+        k = (s > 5) ? k + 1 : 0;
+    }
+    else if (minecount < 3)
+    {
+        return 0;
+    }
+    else
+    {
+        k = (s > 5) ? 0 : (s < 3) ? k + 1 : k;
     }
 
-    return k == 2;
-}
-
-int point_t_cmp_y(const void * a, const void * b)
-{
-    return (((_point_t*)a)->y - ((_point_t*)b)->y);
+    return k > 5;
 }
 
 int mission_3_set_straight_and_center1(U16 *image)
 {
     _line_t line;
-    VIEW view = !(mdir & 1) + LEFT;
+    VIEW view = (mdir & 1) + LEFT;
 
     CHECK_INIT(view);
-    if (!mission_3_linear_regression(image, WIDTH>>1, HEIGHT-1, BLACK, &line))
+    if (!mission_3_linear_regression(image, WIDTH>>1, HEIGHT-11, BLACK, &line))
     {
         return 0;
     }
@@ -107,10 +129,10 @@ int mission_3_set_straight_and_center1(U16 *image)
 int mission_3_set_straight(U16 *image)
 {
     _line_t line;
-    VIEW view = !(mdir & 1) + LEFT;
+    VIEW view = (mdir & 1) + LEFT;
 
     CHECK_INIT(view);
-    if (!mission_3_linear_regression(image, WIDTH>>1, HEIGHT-1, BLACK, &line))
+    if (!mission_3_linear_regression(image, WIDTH>>1, HEIGHT-11, BLACK, &line))
     {
         return 0;
     }
@@ -121,10 +143,10 @@ int mission_3_set_straight(U16 *image)
 int mission_3_set_center(U16 *image)
 {
     _line_t line;
-    VIEW view = !(mdir & 1) + LEFT;
+    VIEW view = (mdir & 1) + LEFT;
 
     CHECK_INIT(view);
-    if (!mission_3_linear_regression(image, WIDTH>>1, HEIGHT-1, BLACK, &line))
+    if (!mission_3_linear_regression(image, WIDTH>>1, HEIGHT-11, BLACK, &line))
     {
         return 0;
     }
@@ -139,6 +161,7 @@ int mission_3_linear_regression(U16 *image, U16 center, U16 bot, U16 color1, _li
     U8 color_cnt[3], pos;
     U32 point_cnt = 0;
     U16 left, right;
+    int sum, aver;
 
     bot = IN_IMG(0, bot, HEIGHT - 1);
 
@@ -175,11 +198,33 @@ int mission_3_linear_regression(U16 *image, U16 center, U16 bot, U16 color1, _li
     printf("point_cnt : %d\n", point_cnt);
 #endif
 
-    if (point_cnt >>1 == 0)
+    if (point_cnt <= 0)
     {
         return 0;
     }
+
     qsort(points, point_cnt, sizeof(_point_t), point_t_cmp_y);
 
-    return least_sqaures(image, center, points, point_cnt>>1, line);
+    sum = 0;
+    for (i = 0; i < point_cnt; ++i)
+    {
+        sum += points[i].y;
+    }
+
+    aver = sum / point_cnt;
+
+    for (i = 0; i < point_cnt; ++i)
+    {
+        if (points[i].y > aver)
+        {
+            break;
+        }
+    }
+
+    if (i <= 1)
+    {
+        return 0;
+    }
+
+    return least_sqaures(image, center, points, i-1, line);
 }

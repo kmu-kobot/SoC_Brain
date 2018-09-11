@@ -12,7 +12,7 @@ void mission_8_1_watch_below(U16 *image, int repeat)
 int mission_8_1_wait_front_of_crevasse(U16 *image)
 {
     double ratio = getColorRatio1(image, 0, ROBOT_KNEE, 50, WIDTH - 50, BLACK);
-    return ratio > 5.0;
+    return ratio > 2.0;
 }
 
 int mission_8_2_escape_crevasse(void)

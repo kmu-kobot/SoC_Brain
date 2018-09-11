@@ -8,9 +8,9 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define DEFAULT_CENTER_DISTANCE 55
+#define DEFAULT_CENTER_DISTANCE 59
 #define DEFAULT_CENTER_THRES_LONG 30
-#define DEFAULT_CENTER_THRES_SHORT 5
+#define DEFAULT_CENTER_THRES_SHORT 4
 
 static inline void default_watch(VIEW view)
 {
@@ -30,5 +30,7 @@ int set_straight(_line_t line, U16 center, VIEW view);
 int set_center(_line_t line, U16 center, VIEW view);
 
 int default_set_not_black(U16 *image);
+
+int point_t_cmp_y(const void * a, const void * b);
 
 #endif

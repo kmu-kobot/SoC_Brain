@@ -337,3 +337,47 @@ int least_sqaures(U16 *image, U16 center, _point_t* points, U32 size, _line_t *l
 
     return 1;
 }
+
+
+int least_sqauresT(U16 *image, U16 center, _point_t* points, U32 size, _line_t *line)
+{
+    U32 i;
+
+    double sum_x = 0;
+    double sum_y = 0;
+    double sum_xy = 0;
+    double sum_yy = 0;
+
+    for (i = 0; i < size; ++i)
+    {
+        sum_x += points[i].x;
+        sum_y += points[i].y;
+        sum_xy += points[i].x * points[i].y;
+        sum_yy += points[i].y * points[i].y;
+    }
+
+    double factor = (sum_yy * size) - (sum_y * sum_y);
+
+    if (factor == 0)
+    {
+        printf("factor is 0\n");
+        return 0;
+    }
+
+    line->slope = (size*sum_xy - sum_x*sum_y) / factor;
+    line->intercept = ( - sum_y*sum_xy + sum_yy*sum_x) / factor;
+
+#ifdef DEBUG
+    double angle = atan(line->slope)*180.0/M_PI;
+    double distance = (line->slope) * center + (line->intercept);
+
+    printf("slope : %f, angle : %f, intercept : %f, distance : %f\n\n", line->slope, angle, line->intercept, distance);
+#endif
+
+    drawlineT(image, *line, 0xffff);
+    drawpoint(image, points, size, 0xffff);
+    draw_fpga_video_data_full(image);
+    flip();
+
+    return 1;
+}

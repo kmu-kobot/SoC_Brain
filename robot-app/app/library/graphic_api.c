@@ -558,6 +558,20 @@ void drawline(U16 *image, _line_t line, U16 color)
     }
 }
 
+void drawlineT(U16 *image, _line_t line, U16 color)
+{
+    U8 y;
+    int x;
+    for (y = 0; y < HEIGHT; ++y)
+    {
+        x = line.slope*y + line.intercept;
+        if (0 <= x && x < WIDTH)
+        {
+            GetPtr(image, y, (U8)x, WIDTH) = color;
+        }
+    }
+}
+
 void drawpoint(U16 *image, _point_t *points, U32 size, U16 color)
 {
     U32 i;

@@ -20,19 +20,13 @@
 
 #define MISSION_6_3_THRES 2
 
-#define MISSION_6_3_CENTER 101
+#define MISSION_6_3_CENTER 90
 
 #define MISSION_6_4_THRES 5
 
 #define MISSION_6_4_CENTER 108
 
 int mission_6_1_detection_ball(U16 *image);
-
-void mission_6_2_watch_below(void);
-
-void mission_6_2_watch_right(void);
-
-int mission_6_2_set_center_of_ball(U16 *image);
 
 int mission_6_3_locate_hole_on_center(U16 *image);
 
@@ -58,13 +52,9 @@ int mission_6_4_find_ball_row(U16 *image, U32 top, U32 bot, U32 left, U32 right,
 
 int mission_6_4_find_ball_col(U16 *image, U32 top, U32 bot, U32 left, U32 right, U8 last);
 
-int mission_6_4_set_front_of_ball(U16 *image);
+int mission_6_4_set_center_of_ball(U16 *image);
 
 int mission_6_5_kick_ball(void);
-
-// void mission_6_6_watch_side(void);
-
-// int mission_6_9_set_front_of_not_bk(U16 *image);
 
 int mission_6_9_walk_front(void);
 

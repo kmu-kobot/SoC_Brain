@@ -29,5 +29,6 @@ int linear_regression1(U16 *image, U16 center, U16 bot, U16 color1, _line_t *lin
 int linear_regression2(U16 *image, U16 center, U16 bot, U16 color1, U16 color2, _line_t *line);
 
 int least_sqaures(U16 *image, U16 center, _point_t* points, U32 size, _line_t *line);
+int least_sqauresT(U16 *image, U16 center, _point_t* points, U32 size, _line_t *line);
 
 #endif
