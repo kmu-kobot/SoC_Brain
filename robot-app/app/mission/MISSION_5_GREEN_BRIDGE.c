@@ -54,14 +54,14 @@ void mission_5_3_climb_up_stairs(void) {
     RobotSleep(1);
 }
 
-int mission_5_4_set_straight_and_center(U16 *image)
+int mission_5_4_set_straight_and_center(U16 *image, U16 center)
 {
     _line_t left_line, right_line;
     _line_t center_line;
 
     int left_state, right_state;
-    left_state = mission_5_4_get_left_line(image, &left_line);
-    right_state = mission_5_4_get_right_line(image, &right_line);
+    left_state = mission_5_4_get_left_line(image, center, &left_line);
+    right_state = mission_5_4_get_right_line(image, center, &right_line);
 
     if (!(left_state || right_state))
     {
@@ -91,21 +91,21 @@ int mission_5_4_set_straight_and_center(U16 *image)
     return mission_5_4_set_straight(center_line) && mission_5_4_set_center(center_line);
 }
 
-int mission_5_4_get_left_line(U16 *image, _line_t *left_line)
+int mission_5_4_get_left_line(U16 *image, U16 center, _line_t *left_line)
 {
     U16 i, j;
-    _point_t points[HEIGHT - 50 - 40];
+    _point_t points[NUM_LIN_REG_POINT];
     U8 green_cnt[3], pos;
     U32 point_cnt = 0;
     U32 out_cnt = 0;
     U16 up, down;
 
-    for (i = 40; i < HEIGHT - 50; ++i)
+    for (i = IN_IMG(0, center - (NUM_LIN_REG_POINT>>1), HEIGHT); i < IN_IMG(0, center + (NUM_LIN_REG_POINT>>1), HEIGHT); ++i)
     {
         pos = 0;
         memset(green_cnt, 0, 3 * sizeof(U8));
-        up = i - 1;
-        down = i + 1;
+        up = IN_IMG(0, i - 1, HEIGHT);
+        down = IN_IMG(0, i + 1, HEIGHT);
         for (j = 0; j < WIDTH; ++j)
         {
             green_cnt[pos] = GetValueRGBYOBK(GetPtr(image, up, j, WIDTH), GREEN) +
@@ -145,21 +145,21 @@ int mission_5_4_get_left_line(U16 *image, _line_t *left_line)
     return least_sqauresT(image, HEIGHT>>1, points, point_cnt, left_line);
 }
 
-int mission_5_4_get_right_line(U16 *image, _line_t *right_line)
+int mission_5_4_get_right_line(U16 *image, U16 center, _line_t *right_line)
 {
     U16 i, j;
-    _point_t points[HEIGHT - 50 - 40];
+    _point_t points[NUM_LIN_REG_POINT];
     U8 green_cnt[3], pos;
     U32 point_cnt = 0;
     U32 out_cnt = 0;
     U16 up, down;
 
-    for (i = 40; i < HEIGHT - 50; ++i)
+    for (i = IN_IMG(0, center - (NUM_LIN_REG_POINT>>1), HEIGHT); i < IN_IMG(0, center + (NUM_LIN_REG_POINT>>1), HEIGHT); ++i)
     {
         pos = 0;
         memset(green_cnt, 0, 3 * sizeof(U8));
-        up = i - 1;
-        down = i + 1;
+        up = IN_IMG(0, i - 1, HEIGHT);
+        down = IN_IMG(0, i + 1, HEIGHT);
         for (j = WIDTH-1; j < 0xfff0; --j)
         {
             green_cnt[pos] = GetValueRGBYOBK(GetPtr(image, up, j, WIDTH), GREEN) +
@@ -278,44 +278,6 @@ void mission_5_5_attach_green(void)
     ACTION_WALK(FAST, OBLIQUE, 5);
 }
 
-int mission_5_6_set_straight_and_center(U16 *image)
-{
-    _line_t left_line, right_line;
-    _line_t center_line;
-
-    int left_state, right_state;
-    left_state = mission_5_4_get_left_line(image, &left_line);
-    right_state = mission_5_4_get_right_line(image, &right_line);
-
-    if (!(left_state || right_state))
-    {
-        return 0;
-    }
-    if (!left_state)
-    {
-        ACTION_TURN(MIDDLE, DIR_LEFT, OBLIQUE, 1);
-        return 0;
-    }
-    if (!right_state)
-    {
-        ACTION_TURN(MIDDLE, DIR_RIGHT, OBLIQUE, 1);
-        return 0;
-    }
-
-    int center_state = mission_5_4_get_center_line(image, left_line, right_line, &center_line);
-
-    if (center_state == 0)
-    {
-        return 0;
-    }
-    else if (center_state == -1)
-    {
-        return 2;
-    }
-
-    return mission_5_6_set_straight(center_line) && mission_5_4_set_center(center_line);
-}
-
 int mission_5_6_set_straight(_line_t center_line)
 {
     double angle = atan(center_line.slope) / M_PI * 180.0;
@@ -353,8 +315,8 @@ int mission_5_7_watch_below(U16 *image)
     _line_t center_line;
 
     int left_state, right_state;
-    left_state = mission_5_4_get_left_line(image, &left_line);
-    right_state = mission_5_4_get_right_line(image, &right_line);
+    left_state = mission_5_4_get_left_line(image, 60, &left_line);
+    right_state = mission_5_4_get_right_line(image, 60, &right_line);
 
     if (!(left_state && right_state))
     {
@@ -401,8 +363,8 @@ int mission_5_7_walk_check(U16 *image)
     _line_t center_line;
 
     int left_state, right_state;
-    left_state = mission_5_4_get_left_line(image, &left_line);
-    right_state = mission_5_4_get_right_line(image, &right_line);
+    left_state = mission_5_4_get_left_line(image, 60, &left_line);
+    right_state = mission_5_4_get_right_line(image, 60, &right_line);
 
     if (!(left_state && right_state))
     {
@@ -441,8 +403,8 @@ int mission_5_8_attach_black(U16 *image)
         _line_t center_line;
 
         int left_state, right_state;
-        left_state = mission_5_4_get_left_line(image, &left_line);
-        right_state = mission_5_4_get_right_line(image, &right_line);
+        left_state = mission_5_4_get_left_line(image, 105, &left_line);
+        right_state = mission_5_4_get_right_line(image, 105, &right_line);
 
         if (!(left_state || right_state))
         {
@@ -583,6 +545,7 @@ int mission_5_8_set_dist(_line_t line)
 
     if (dist < 30.0)
     {
+        // ACTION_WALK(SLOW, DOWN, 1);
         ACTION_ATTACH(1);
         RobotSleep(1);
         return 0;
@@ -719,13 +682,19 @@ int mission_5_9_set_dist(_line_t line)
 {
     double dist = line.slope*(WIDTH>>1) + line.intercept;
 
+    // if (dist < 35.0)
+    // {
+    //     ACTION_WALK(SLOW, DOWN, 1);
+    //     return 0;
+    // }
+    // else
     if (dist < 50.0)
     {
         ACTION_ATTACH(1);
         RobotSleep(1);
         return 0;
     }
-    else if (dist < 60.0)
+    else if (dist < 58.0)
     {
         ACTION_ATTACH_SHORT(1);
         RobotSleep(1);

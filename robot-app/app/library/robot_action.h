@@ -386,27 +386,43 @@ static inline void ACTION_MISSION(MISSION mission, VIEW view) {
 
 static inline void BALL_INIT(VIEW view)
 {
-    RobotAction(BALL_INIT_DOWN + view - ((view == UP) << 1));
+    if (view == UP)
+    {
+        view = OBLIQUE + 1;
+    }
+    RobotAction(BALL_INIT_DOWN + view);
 }
 
 static inline void BALL_HEAD(VIEW view)
 {
-    RobotAction(BALL_HEAD_DOWN + view - ((view == UP) << 1));
+    if (view == UP)
+    {
+        view = OBLIQUE + 1;
+    }
+    RobotAction(BALL_HEAD_DOWN + view);
 }
 
 static inline void BALL_TURN(DIRECTION dir, VIEW view, int repeat)
 {
+    if (view == UP)
+    {
+        view = OBLIQUE + 1;
+    }
     while (repeat--)
     {
-        RobotAction(BALL_TURN_LEFT_DOWN + dir + (view << 1) - ((view == UP) << 2));
+        RobotAction(BALL_TURN_LEFT_DOWN + dir + (view << 1));
     }
 }
 
 static inline void BALL_MOVE(DIRECTION dir, VIEW view, int repeat)
 {
+    if (view == UP)
+    {
+        view = OBLIQUE + 1;
+    }
     while (repeat--)
     {
-        RobotAction(BALL_MOVE_LEFT_DOWN + dir + (view << 1) - ((view == UP) << 2));
+        RobotAction(BALL_MOVE_LEFT_DOWN + dir + (view << 1));
     }
 }
 
@@ -426,7 +442,12 @@ static inline void BALL_KICK(void)
 
 static inline void BALL_STABLE(VIEW view)
 {
-    RobotAction(BALL_STABLE_DOWN + view - ((view == UP) << 1));
+    if (view == UP)
+    {
+        view = OBLIQUE + 1;
+    }
+    RobotAction(BALL_STABLE_DOWN + view);
+    RobotSleep(2);
 }
 
 #endif //SOC_APP_ROBOT_ACTION_H

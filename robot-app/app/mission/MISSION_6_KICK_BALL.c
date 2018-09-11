@@ -26,7 +26,7 @@ int mission_6_1_detection_ball(U16 *image) {
     DIRECTION move_dir = ball_points[0] > WIDTH / 2;
 
     if (ball_points[0] < 70 || ball_points[0] > 110) {
-        ACTION_MOVE(LONG, move_dir, UP, MAX(2, abs((WIDTH >> 2) - ball_points[0]) / 30));
+        ACTION_MOVE(LONG, move_dir, UP, MIN(2, abs((WIDTH >> 2) - ball_points[0]) / 30));
     } else {
         ACTION_WALK(FAST, OBLIQUE, (HEIGHT - ball_points[1]) / 15 + 2);
     }
@@ -561,11 +561,11 @@ int mission_6_4_set_center_of_ball(U16 *image) {
         return 0;
     }
 
-    if (ball_points[1] < 30) {
+    if (ball_points[1] < 20) {
         BALL_BIT(FRONT, 2);
-    } else if (ball_points[1] < 35) {
+    } else if (ball_points[1] < 25) {
         BALL_BIT(FRONT, 1);
-    } else if (ball_points[1] > 45) {
+    } else if (ball_points[1] > 35) {
         BALL_BIT(BACK, 1);
     } else if (ball_points[0] < MISSION_6_4_CENTER - 10) {
         BALL_MOVE(DIR_LEFT, DOWN, 2);
@@ -589,7 +589,7 @@ int mission_6_4_set_center_of_ball(U16 *image) {
 int mission_6_5_kick_ball(void) {
     BALL_KICK();
     RobotSleep(1);
-    ACTION_TURN(LONG, DIR_LEFT, UP, 4);
+    ACTION_TURN(LONG, DIR_LEFT, UP, 3);
     RobotSleep(1);
     ACTION_WALK(FAST, OBLIQUE, 2);
     RobotSleep(1);

@@ -95,19 +95,19 @@ int set_straight(_line_t line, U16 center, VIEW view)
 
 int set_center(_line_t line, U16 center, VIEW view)
 {
-    double dist_err = DEFAULT_CENTER_DISTANCE - (line.slope * center + line.intercept);
+    double dist_err = DEFAULT_CENTER_DISTANCE - ((abs((WIDTH>>1) - center) / 15 ) * 2) - (line.slope * center + line.intercept);
     DIRECTION move_dir = (view - LEFT) == (dist_err > 0);
     dist_err = abs(dist_err);
 
     if (dist_err > DEFAULT_CENTER_THRES_LONG)
     {
-        ACTION_MOVE(LONG, move_dir, view, MAX(2, dist_err / DEFAULT_CENTER_THRES_LONG));
+        ACTION_MOVE(LONG, move_dir, view, MIN(2, dist_err / DEFAULT_CENTER_THRES_LONG));
         RobotSleep(4);
         return 0;
     }
     if (dist_err > DEFAULT_CENTER_THRES_SHORT)
     {
-        ACTION_MOVE(SHORT, move_dir, view, MAX(4, dist_err / 7 + 1));
+        ACTION_MOVE(SHORT, move_dir, view, MIN(4, dist_err / 7 + 1));
         RobotSleep(2);
         return 0;
     }

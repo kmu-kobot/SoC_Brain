@@ -38,11 +38,11 @@ int mission_5_1_attach(U16 *image);
 
 void mission_5_3_climb_up_stairs(void);
 
-int mission_5_4_set_straight_and_center(U16 *image);
+int mission_5_4_set_straight_and_center(U16 *image, U16 center);
 
-int mission_5_4_get_left_line(U16 *image, _line_t *left_line);
+int mission_5_4_get_left_line(U16 *image, U16 center, _line_t *left_line);
 
-int mission_5_4_get_right_line(U16 *image, _line_t *right_line);
+int mission_5_4_get_right_line(U16 *image, U16 center, _line_t *right_line);
 
 int mission_5_4_get_center_line(U16 *image, _line_t left_line, _line_t right_line, _line_t *center_line);
 

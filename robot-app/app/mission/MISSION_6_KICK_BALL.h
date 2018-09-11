@@ -20,7 +20,7 @@
 
 #define MISSION_6_3_THRES 2
 
-#define MISSION_6_3_CENTER 90
+#define MISSION_6_3_CENTER 98
 
 #define MISSION_6_4_THRES 5
 
