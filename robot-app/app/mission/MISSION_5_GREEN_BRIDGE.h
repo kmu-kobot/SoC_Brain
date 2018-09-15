@@ -36,6 +36,10 @@ int mission_5_1_check_black_line(U16 *image);
 
 int mission_5_1_attach(U16 *image);
 
+int mission_5_2_set_straight_and_center(U16 *image, U16 center);
+
+int mission_5_2_set_straight(_line_t line);
+
 void mission_5_3_climb_up_stairs(void);
 
 int mission_5_4_set_straight_and_center(U16 *image, U16 center);

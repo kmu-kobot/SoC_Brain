@@ -266,11 +266,15 @@ int huro(void) {
                         if (flag == 0) {
                             // default_watch(LEFT);
                             default_watch(OBLIQUE);
-                            RobotSleep(3);
+                            RobotSleep(1);
                             flag++;
                         }
                         // step += default_set_center1(fpga_videodata, LEFT, 60, HEIGHT-11, BLACK);
-                        step += mission_5_4_set_straight_and_center(fpga_videodata, 15);
+                        step += mission_5_2_set_straight_and_center(fpga_videodata, 15);
+                        if (step == 4)
+                        {
+                            step = 2;
+                        }
                         break;
                     case 3:
                         // 계단 오르기
@@ -498,7 +502,7 @@ int huro(void) {
                             RobotSleep(1);
                             flag++;
                         }
-                        step += default_set_straight_and_center1(fpga_videodata, LEFT, 90, HEIGHT-11, BLACK);
+                        step += default_set_straight_and_center1(fpga_videodata, LEFT, 120, HEIGHT-11, BLACK);
                         break;
                     case 8:
                         mission += 1;
@@ -530,7 +534,7 @@ int huro(void) {
                             RobotSleep(1);
                             ++flag;
                         }
-                        step += default_set_straight_and_center1(fpga_videodata, LEFT, WIDTH>>1, HEIGHT-11, BLACK);
+                        step += default_set_straight_and_center1(fpga_videodata, LEFT, 60, HEIGHT-11, BLACK);
                         break;
                     case 2:
                         step += mission_8_2_escape_crevasse();
@@ -542,11 +546,12 @@ int huro(void) {
                             default_watch(LEFT);
                             RobotSleep(1);
                         }
-                        step += default_set_straight_and_center1(fpga_videodata, LEFT, 60, HEIGHT-11, BLACK);
+                        step += default_set_straight_and_center1(fpga_videodata, LEFT, 120, HEIGHT-11, BLACK);
                         break;
                     default:
                         default_watch(UP);
                         flag = 0;
+                        step = 0;
                         ++mission;
                         break;
                 }
@@ -562,18 +567,43 @@ int huro(void) {
                     case 1:
                         CHECK_INIT(UP);
                         RobotSleep(1);
+                        flag = 0;
                         step += 1;
                         break;
                     case 2:
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_9_1_wait_yellow_barricade(fpga_videodata);
+                        step += mission_1_1_wait_yellow_barricade(fpga_videodata);
                         break;
                     case 3:
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_9_2_end_yellow_barricade(fpga_videodata);
+                        step += mission_1_2_end_yellow_barricade(fpga_videodata);
                         break;
+                    //     if (flag == 0)
+                    //     {
+                    //         RobotSleep(2);
+                    //         ++flag;
+                    //     }
+                    //     setFPGAVideoData(fpga_videodata);
+                    //     if (mission_9_1_wait_yellow_barricade(fpga_videodata))
+                    //     {
+                    //         setFPGAVideoData(fpga_videodata);
+                    //         step += mission_9_1_wait_yellow_barricade(fpga_videodata);
+                    //     }
+                    //     break;
+                    // case 3:
+                    //     if (flag == 1)
+                    //     {
+                    //         RobotSleep(2);
+                    //         ++flag;
+                    //     }
+                    //     setFPGAVideoData(fpga_videodata);
+                    //     if (mission_9_2_end_yellow_barricade(fpga_videodata))
+                    //     {
+                    //         setFPGAVideoData(fpga_videodata);
+                    //         step += mission_9_2_end_yellow_barricade(fpga_videodata);
+                    //     }
+                    //     break;
                     case 4:
                         mission_9_3_escape_yellow_barricade(30);
+                        ++step;
                         break;
                     default:
                         missionFinished = 1;

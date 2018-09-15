@@ -135,6 +135,7 @@ typedef enum {
     MOVE_LEFT_SHORT_UP,
     MOVE_RIGHT_SHORT_UP,
 
+    ATTACH_LIFT = 108,
     ATTACH = 109,
     ATTACH_SHORT,
 
@@ -342,6 +343,13 @@ static inline void ACTION_ATTACH_SHORT(int repeat) {
     }
 }
 
+static inline void ACTION_ATTACH_LIFT(int repeat) {
+    action(INIT_MOTION(DOWN), ATTACH_LIFT);
+
+    for (; repeat > 1; --repeat) {
+        RobotAction(ATTACH_LIFT);
+    }
+}
 
 //////////////////////////////
 //  MOTION BIT              //

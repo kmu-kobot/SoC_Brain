@@ -45,6 +45,75 @@ int mission_5_1_check_black_line(U16 *image) {
     return dist > 20;
 }
 
+int mission_5_2_set_straight_and_center(U16 *image, U16 center)
+{
+    _line_t left_line, right_line;
+    _line_t center_line;
+
+    int left_state, right_state;
+    left_state = mission_5_4_get_left_line(image, center, &left_line);
+    right_state = mission_5_4_get_right_line(image, center, &right_line);
+
+    if (!(left_state || right_state))
+    {
+        return 0;
+    }
+    if (!left_state)
+    {
+        if (right_line.slope / M_PI * 180.0 > 10.0)
+        {
+            ACTION_ATTACH(1);
+        }
+        else
+        {
+            ACTION_MOVE(SHORT, DIR_LEFT, OBLIQUE, 2);
+        }
+        return 0;
+    }
+    if (!right_state)
+    {
+        if (left_line.slope / M_PI * 180.0 < -10.0)
+        {
+            ACTION_ATTACH(1);
+        }
+        else
+        {
+            ACTION_MOVE(SHORT, DIR_RIGHT, OBLIQUE, 2);
+        }
+        return 0;
+    }
+
+    int center_state = mission_5_4_get_center_line(image, left_line, right_line, &center_line);
+
+    if (center_state == 0)
+    {
+        return 0;
+    }
+    else if (center_state == -1)
+    {
+        return 2;
+    }
+    return mission_5_2_set_straight(center_line) && mission_5_4_set_center(center_line);
+}
+
+int mission_5_2_set_straight(_line_t line)
+{
+    double angle = atan(line.slope) / M_PI * 180.0;
+    angle = abs(angle);
+
+    if (angle > 3.0)
+    {
+        ACTION_ATTACH(1);
+    }
+    else
+    {
+        return 1;
+    }
+    RobotSleep(1);
+
+    return 0;
+}
+
 void mission_5_3_climb_up_stairs(void) {
     CHECK_INIT(UP);
     RobotSleep(3);
@@ -69,12 +138,26 @@ int mission_5_4_set_straight_and_center(U16 *image, U16 center)
     }
     if (!left_state)
     {
-        ACTION_TURN(MIDDLE, DIR_LEFT, OBLIQUE, 1);
+        if (right_line.slope / M_PI * 180.0 > 10.0)
+        {
+            ACTION_TURN(MIDDLE, DIR_LEFT, OBLIQUE, 1);
+        }
+        else
+        {
+            ACTION_MOVE(SHORT, DIR_LEFT, OBLIQUE, 2);
+        }
         return 0;
     }
     if (!right_state)
     {
-        ACTION_TURN(MIDDLE, DIR_RIGHT, OBLIQUE, 1);
+        if (left_line.slope / M_PI * 180.0 < -10.0)
+        {
+            ACTION_TURN(MIDDLE, DIR_RIGHT, OBLIQUE, 1);
+        }
+        else
+        {
+            ACTION_MOVE(SHORT, DIR_RIGHT, OBLIQUE, 2);
+        }
         return 0;
     }
 
@@ -237,9 +320,13 @@ int mission_5_4_set_straight(_line_t center_line)
     DIRECTION turn_dir = angle < 0;
     angle = abs(angle);
 
-    if (angle > 3.0)
+    if (angle > 4.0)
     {
-        ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
+        ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 2);
+    }
+    else if (angle > 3.0)
+    {
+        ACTION_TURN(SHORT, turn_dir, OBLIQUE, 2);
     }
     else
     {
@@ -545,8 +632,7 @@ int mission_5_8_set_dist(_line_t line)
 
     if (dist < 30.0)
     {
-        // ACTION_WALK(SLOW, DOWN, 1);
-        ACTION_ATTACH(1);
+        ACTION_ATTACH_LIFT(1);
         RobotSleep(1);
         return 0;
     }
@@ -682,13 +768,13 @@ int mission_5_9_set_dist(_line_t line)
 {
     double dist = line.slope*(WIDTH>>1) + line.intercept;
 
-    // if (dist < 35.0)
-    // {
-    //     ACTION_WALK(SLOW, DOWN, 1);
-    //     return 0;
-    // }
-    // else
-    if (dist < 50.0)
+    if (dist < 40.0)
+    {
+        ACTION_ATTACH_LIFT(1);
+        RobotSleep(1);
+        return 0;
+    }
+    else if (dist < 50.0)
     {
         ACTION_ATTACH(1);
         RobotSleep(1);
