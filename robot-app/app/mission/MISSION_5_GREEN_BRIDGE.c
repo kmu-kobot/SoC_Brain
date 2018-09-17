@@ -421,7 +421,7 @@ int mission_5_6_set_straight(_line_t center_line)
     DIRECTION turn_dir = angle < 0;
     angle = abs(angle);
 
-    if (angle > 4.0)
+    if (angle > 5.0)
     {
         ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
     }
@@ -442,9 +442,11 @@ int mission_5_7_watch_below(U16 *image)
 {
     ACTION_WALK_CHECK(OBLIQUE, image, mission_5_7_walk_check, 1, 15);
     setFPGAVideoData(image);
-    double ratio = getColorRatio1(image, 50, 70, 50, WIDTH - 50, GREEN);
 
-    if (ratio < 30.0)
+    double ratio = getColorRatio1(image, 50, 70, 0, WIDTH, GREEN);
+
+    _line_t front_line;
+    if (mission_5_8_get_front_line(image, &front_line, BLACK) && ratio < 5.0)
     {
         return 1;
     }
@@ -490,9 +492,9 @@ int mission_5_7_watch_below(U16 *image)
 
 int mission_5_7_walk_check(U16 *image)
 {
-    double ratio = getColorRatio1(image, 50, 70, 50, WIDTH - 50, GREEN);
+    double ratio = getColorRatio1(image, 50, 70, 0, WIDTH, GREEN);
 
-    if (ratio < 40.0)
+    if (ratio < 8.0)
     {
         return 1;
     }
@@ -644,7 +646,7 @@ int mission_5_8_get_front_line(U16 *image, _line_t *front_line, U16 color)
 
     for (i = 0; i < point_cnt; ++i)
     {
-        if (points[i].y > aver)
+        if (points[i].y > aver + 5)
         {
             break;
         }
@@ -784,7 +786,7 @@ int mission_5_9_set_straight(_line_t line)
     DIRECTION turn_dir = angle > 0;
     angle = abs(angle);
 
-    if (angle > 5.0)
+    if (angle > 4.0)
     {
         ACTION_TURN(MIDDLE, turn_dir, DOWN, 1);
     }
@@ -813,7 +815,7 @@ int mission_5_9_set_dist(_line_t line)
         RobotSleep(1);
         return 0;
     }
-    else if (dist < 58.0)
+    else if (dist < 61.0)
     {
         ACTION_ATTACH_SHORT(1);
         RobotSleep(1);

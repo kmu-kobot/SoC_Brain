@@ -562,9 +562,9 @@ int mission_6_4_set_center_of_ball(U16 *image) {
 
     if (ball_points[1] < 22) {
         BALL_BIT(FRONT, 2);
-    } else if (ball_points[1] < 27) {
+    } else if (ball_points[1] < 25) {
         BALL_BIT(FRONT, 1);
-    } else if (ball_points[1] > 37) {
+    } else if (ball_points[1] > 35) {
         BALL_BIT(BACK, 1);
     } else if (ball_points[0] < MISSION_6_4_CENTER - 15) {
         BALL_MOVE_LONG(DIR_LEFT, DOWN, 1);
