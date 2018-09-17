@@ -306,10 +306,11 @@ int huro(void) {
                         }
 
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_5_4_set_straight_and_center(fpga_videodata, 60);
+                        step += mission_5_6_set_straight_and_center(fpga_videodata, 60);
                         break;
                     case 7:
                         step += mission_5_7_watch_below(fpga_videodata);
+                        RobotSleep(2);
                         break;
                     case 8:
                         setFPGAVideoData(fpga_videodata);
@@ -407,7 +408,7 @@ int huro(void) {
                         if (!flag) {
                             flag = 1;
                             BALL_HEAD(UP);
-                            RobotSleep(2);
+                            RobotSleep(4);
                         }
 
                         setFPGAVideoData(fpga_videodata);
@@ -416,7 +417,7 @@ int huro(void) {
                         if (step == 6) {
                             flag = 0;
                             BALL_HEAD(DOWN);
-                            RobotSleep(2);
+                            RobotSleep(4);
                             while (TRUE) {
                                 setFPGAVideoData(fpga_videodata);
                                 step += mission_6_4_set_center_of_ball(fpga_videodata);
@@ -428,14 +429,14 @@ int huro(void) {
 
                         if (step == 7) {
                             BALL_HEAD(UP);
-                            RobotSleep(2);
+                            RobotSleep(4);
                             setFPGAVideoData(fpga_videodata);
                             step += mission_6_3_locate_hole_on_center(fpga_videodata);
                         }
 
                         if (step == 8) {
                             BALL_HEAD(DOWN);
-                            RobotSleep(2);
+                            RobotSleep(4);
                             setFPGAVideoData(fpga_videodata);
                             step += mission_6_4_set_center_of_ball(fpga_videodata);
                         }
@@ -488,8 +489,16 @@ int huro(void) {
                         }
 
                         step += default_set_center1(fpga_videodata, LEFT, 60, HEIGHT-11, BLACK);
+                        if (step == 2)
+                        {
+                            flag++;
+                        }
                         break;
                     case 3:
+                        if (flag == 2)
+                        {
+                            ACTION_ATTACH(1);
+                        }
                         step = 6;
                         break;
                     case 6:

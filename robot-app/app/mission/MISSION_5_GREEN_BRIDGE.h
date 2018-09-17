@@ -56,7 +56,7 @@ int mission_5_4_set_center(_line_t center_line);
 
 void mission_5_5_attach_green(void);
 
-int mission_5_6_set_straight_and_center(U16 *image);
+int mission_5_6_set_straight_and_center(U16 *image, U16 center);
 
 int mission_5_6_set_straight(_line_t center_line);
 

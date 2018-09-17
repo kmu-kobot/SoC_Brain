@@ -23,11 +23,15 @@ int mission_7_1_attach_yellow_bridge(U16 *image) { // 무작정 붙이기 쓰는
     // // TODO: 시간 줄일때 없애기
     // ACTION_ATTACH(1);
     // return (double) cnt * 100 / ((ROBOT_KNEE - 20) * 80) > 70; // 80 대신 WIDTH - 50 - 50 이 나을듯
-    ACTION_ATTACH(1);
 
     double ratio = getColorRatio2(image, 20, ROBOT_KNEE, 50, WIDTH-50, YELLOW, CH2);
 
-    return ratio > 70.0;
+    if (ratio < 70.0)
+    {
+        ACTION_ATTACH(1);
+        return 0;
+    }
+    return 1;
 }
 
 int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image) {
@@ -53,8 +57,6 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image) {
 }
 
 int mission_7_6_jump_hole(void) {
-    ACTION_ATTACH(1);
-    RobotSleep(1);
     ACTION_MOTION(MISSION_7_YELLOW_DUMBLING, UP);
     RobotSleep(1);
     return 1;

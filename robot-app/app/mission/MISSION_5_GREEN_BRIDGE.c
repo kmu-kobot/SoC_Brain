@@ -60,9 +60,10 @@ int mission_5_2_set_straight_and_center(U16 *image, U16 center)
     }
     if (!left_state)
     {
-        if (right_line.slope / M_PI * 180.0 > 10.0)
+        if (right_line.slope / M_PI * 180.0 > 15.0)
         {
             ACTION_ATTACH(1);
+            CHECK_INIT(OBLIQUE);
         }
         else
         {
@@ -72,9 +73,10 @@ int mission_5_2_set_straight_and_center(U16 *image, U16 center)
     }
     if (!right_state)
     {
-        if (left_line.slope / M_PI * 180.0 < -10.0)
+        if (left_line.slope / M_PI * 180.0 < -15.0)
         {
             ACTION_ATTACH(1);
+            CHECK_INIT(OBLIQUE);
         }
         else
         {
@@ -101,9 +103,10 @@ int mission_5_2_set_straight(_line_t line)
     double angle = atan(line.slope) / M_PI * 180.0;
     angle = abs(angle);
 
-    if (angle > 3.0)
+    if (angle > 15.0)
     {
         ACTION_ATTACH(1);
+        CHECK_INIT(OBLIQUE);
     }
     else
     {
@@ -320,13 +323,9 @@ int mission_5_4_set_straight(_line_t center_line)
     DIRECTION turn_dir = angle < 0;
     angle = abs(angle);
 
-    if (angle > 4.0)
+    if (angle > 2.0)
     {
-        ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 2);
-    }
-    else if (angle > 3.0)
-    {
-        ACTION_TURN(SHORT, turn_dir, OBLIQUE, 2);
+        ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
     }
     else
     {
@@ -365,20 +364,71 @@ void mission_5_5_attach_green(void)
     ACTION_WALK(FAST, OBLIQUE, 5);
 }
 
+int mission_5_6_set_straight_and_center(U16 *image, U16 center)
+{
+    _line_t left_line, right_line;
+    _line_t center_line;
+
+    int left_state, right_state;
+    left_state = mission_5_4_get_left_line(image, center, &left_line);
+    right_state = mission_5_4_get_right_line(image, center, &right_line);
+
+    if (!(left_state || right_state))
+    {
+        return 0;
+    }
+    if (!left_state)
+    {
+        if (right_line.slope / M_PI * 180.0 > 10.0)
+        {
+            ACTION_TURN(MIDDLE, DIR_LEFT, OBLIQUE, 1);
+        }
+        else
+        {
+            ACTION_MOVE(SHORT, DIR_LEFT, OBLIQUE, 2);
+        }
+        return 0;
+    }
+    if (!right_state)
+    {
+        if (left_line.slope / M_PI * 180.0 < -10.0)
+        {
+            ACTION_TURN(MIDDLE, DIR_RIGHT, OBLIQUE, 1);
+        }
+        else
+        {
+            ACTION_MOVE(SHORT, DIR_RIGHT, OBLIQUE, 2);
+        }
+        return 0;
+    }
+
+    int center_state = mission_5_4_get_center_line(image, left_line, right_line, &center_line);
+
+    if (center_state == 0)
+    {
+        return 0;
+    }
+    else if (center_state == -1)
+    {
+        return 2;
+    }
+    return mission_5_6_set_straight(center_line) && mission_5_4_set_center(center_line);
+}
+
 int mission_5_6_set_straight(_line_t center_line)
 {
     double angle = atan(center_line.slope) / M_PI * 180.0;
     DIRECTION turn_dir = angle < 0;
     angle = abs(angle);
 
-    if (angle > 2.0)
+    if (angle > 4.0)
     {
         ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
     }
-    // else if (angle > 1.0)
-    // {
-    //     ACTION_TURN(SHORT, turn_dir, OBLIQUE, 2);
-    // }
+    else if (angle > 2.0)
+    {
+        ACTION_TURN(SHORT, turn_dir, OBLIQUE, 2);
+    }
     else
     {
         return 1;
@@ -391,6 +441,7 @@ int mission_5_6_set_straight(_line_t center_line)
 int mission_5_7_watch_below(U16 *image)
 {
     ACTION_WALK_CHECK(OBLIQUE, image, mission_5_7_walk_check, 1, 15);
+    setFPGAVideoData(image);
     double ratio = getColorRatio1(image, 50, 70, 50, WIDTH - 50, GREEN);
 
     if (ratio < 30.0)
@@ -429,7 +480,7 @@ int mission_5_7_watch_below(U16 *image)
 
     double center = abs((WIDTH>>1) - center_line.slope*(HEIGHT>>1) - center_line.intercept);
 
-    if (center > 10.0)
+    if (center > 7.0)
     {
         return -1;
     }
@@ -472,7 +523,7 @@ int mission_5_7_walk_check(U16 *image)
 
     double center = abs((WIDTH>>1) - center_line.slope*(HEIGHT>>1) - center_line.intercept);
 
-    if (center > 10.0)
+    if (center > 7.0)
     {
         return 1;
     }
@@ -655,12 +706,12 @@ int mission_5_9_attach_black(U16 *image)
 int mission_5_9_get_front_line(U16 *image, _line_t *front_line, U16 color)
 {
     U16 i, j;
-    _point_t points[30 * 2];
+    _point_t points[20 * 2];
     U8 black_cnt[3], pos;
     U32 point_cnt = 0;
     U16 left, right;
 
-    for (j = 10; j < 40; ++j)
+    for (j = 10; j < 30; ++j)
     {
         pos = 0;
         memset(black_cnt, 0, 3 * sizeof(U8));
@@ -685,7 +736,7 @@ int mission_5_9_get_front_line(U16 *image, _line_t *front_line, U16 color)
         }
     }
 
-    for (j = WIDTH - 10; j > WIDTH - 40; --j)
+    for (j = WIDTH - 10; j > WIDTH - 30; --j)
     {
         pos = 0;
         memset(black_cnt, 0, 3 * sizeof(U8));
@@ -719,30 +770,12 @@ int mission_5_9_get_front_line(U16 *image, _line_t *front_line, U16 color)
         return 0;
     }
 
-    qsort(points, point_cnt, sizeof(_point_t), point_t_cmp_y);
-
-    int sum = 0;
-    for (i = 0; i < point_cnt; ++i)
-    {
-        sum += points[i].y;
-    }
-
-    int aver = sum / point_cnt;
-
-    for (i = 0; i < point_cnt; ++i)
-    {
-        if (points[i].y > aver)
-        {
-            break;
-        }
-    }
-
     if (i <= 1)
     {
         return 0;
     }
 
-    return least_sqaures(image, WIDTH>>1, points, i - 1, front_line);
+    return least_sqaures(image, WIDTH>>1, points, point_cnt, front_line);
 }
 
 int mission_5_9_set_straight(_line_t line)
@@ -751,7 +784,7 @@ int mission_5_9_set_straight(_line_t line)
     DIRECTION turn_dir = angle > 0;
     angle = abs(angle);
 
-    if (angle > 3.0)
+    if (angle > 5.0)
     {
         ACTION_TURN(MIDDLE, turn_dir, DOWN, 1);
     }

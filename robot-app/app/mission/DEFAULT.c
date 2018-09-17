@@ -83,7 +83,7 @@ int set_straight(_line_t line, U16 center, VIEW view)
         RobotSleep(2);
         return 0;
     }
-    if (angle > 1)
+    if (angle > 2)
     {
         ACTION_TURN(SHORT, turn_dir, view, 1);
         RobotSleep(2);

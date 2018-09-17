@@ -14,7 +14,7 @@
 
 #define MISSION_9_UPPER 0
 #define MISSION_9_RANGE 100
-#define MISSION_9_THRESHOLDS 20
+#define MISSION_9_THRESHOLDS 5
 
 int mission_9_1_go_front_of_yellow_barricade(U16 *image);
 

@@ -195,6 +195,13 @@ typedef enum {
     BALL_STABLE_OBLIQUE,
     BALL_STABLE_UP,
 
+    BALL_MOVE_LONG_LEFT_DOWN = 189,
+    BALL_MOVE_LONG_RIGHT_DOWN,
+    BALL_MOVE_LONG_LEFT_OBLIQUE,
+    BALL_MOVE_LONG_RIGHT_OBLIQUE,
+    BALL_MOVE_LONG_LEFT_UP,
+    BALL_MOVE_LONG_RIGHT_UP,
+
     NIL = 0xff
 } MOTION;
 
@@ -431,6 +438,18 @@ static inline void BALL_MOVE(DIRECTION dir, VIEW view, int repeat)
     while (repeat--)
     {
         RobotAction(BALL_MOVE_LEFT_DOWN + dir + (view << 1));
+    }
+}
+
+static inline void BALL_MOVE_LONG(DIRECTION dir, VIEW view, int repeat)
+{
+    if (view == UP)
+    {
+        view = OBLIQUE + 1;
+    }
+    while (repeat--)
+    {
+        RobotAction(BALL_MOVE_LONG_LEFT_DOWN + dir + (view << 1));
     }
 }
 
