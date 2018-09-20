@@ -10,7 +10,7 @@ int mission_3_avoid(U16 *image) {
     double blue_ratio = getColorRatio1(image, 20, ROBOT_KNEE+10, MINE_RANGE_LEFT, WIDTH-MINE_RANGE_LEFT, BLUE);
     double black_ratio = getColorRatio1(image, 0, ROBOT_KNEE+10, MINE_RANGE_LEFT, WIDTH-MINE_RANGE_LEFT, BLACK);
 
-    if (blue_ratio > 3.0 || black_ratio > 20.0)
+    if (blue_ratio > 3.0)
     {
         return 1;
     }

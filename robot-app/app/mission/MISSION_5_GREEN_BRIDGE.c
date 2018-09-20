@@ -323,7 +323,7 @@ int mission_5_4_set_straight(_line_t center_line)
     DIRECTION turn_dir = angle < 0;
     angle = abs(angle);
 
-    if (angle > 2.0)
+    if (angle > 3.0)
     {
         ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
     }
@@ -342,7 +342,11 @@ int mission_5_4_set_center(_line_t line)
     DIRECTION move_dir = center < 0;
     center = abs(center);
 
-    if (center > 10.0)
+    if (center > 8.0)
+    {
+        ACTION_MOVE(SHORT, move_dir, OBLIQUE, 3);
+    }
+    else if (center > 5.0)
     {
         ACTION_MOVE(SHORT, move_dir, OBLIQUE, 2);
     }
@@ -421,13 +425,17 @@ int mission_5_6_set_straight(_line_t center_line)
     DIRECTION turn_dir = angle < 0;
     angle = abs(angle);
 
-    if (angle > 5.0)
+    if (angle > 6.0)
     {
         ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
     }
-    else if (angle > 2.0)
+    else if (angle > 3.0)
     {
         ACTION_TURN(SHORT, turn_dir, OBLIQUE, 2);
+    }
+    else if (angle > 2.5)
+    {
+        ACTION_TURN(SHORT, turn_dir, OBLIQUE, 1);
     }
     else
     {

@@ -9,7 +9,7 @@
 #include <math.h>
 
 #define DEFAULT_CENTER_DISTANCE 55
-#define DEFAULT_CENTER_THRES_LONG 30
+#define DEFAULT_CENTER_THRES_LONG 15
 #define DEFAULT_CENTER_THRES_SHORT 4
 
 static inline void default_watch(VIEW view)

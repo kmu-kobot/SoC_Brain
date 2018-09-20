@@ -107,7 +107,7 @@ int set_center(_line_t line, U16 center, VIEW view)
     }
     if (dist_err > DEFAULT_CENTER_THRES_SHORT)
     {
-        ACTION_MOVE(SHORT, move_dir, view, MIN(4, dist_err / 7 + 1));
+        ACTION_MOVE(SHORT, move_dir, view, MIN(7, dist_err / 3 + 1));
         RobotSleep(2);
         return 0;
     }

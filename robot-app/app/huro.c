@@ -13,7 +13,7 @@ int huro(void) {
 
     int missionFinished = 0;
 
-    int mission = 5;
+    int mission = 0;
     int step = 0;
 
     int nextMission = 0;
@@ -138,11 +138,11 @@ int huro(void) {
                         break;
                     case 1:
                         if (flag == 0) {
-                            flag = 1;
                             default_watch(mission_3_4_getMDir());
                             RobotSleep(2);
                             setFPGAVideoData(fpga_videodata);
                             mission_3_measure_line(fpga_videodata);
+                            ++flag;
                             break;
                         } else if (flag == 1) {
                             flag = 2;
@@ -162,11 +162,21 @@ int huro(void) {
                         }
 
                         if (mission_3_avoid(fpga_videodata)) { // 만약 지뢰를 다 피했으면
+                            RobotSleep(1);
                             mission_3_change_mdir();
                             RobotSleep(1);
+
+                            if (flag == 2)
+                            {
+                                ACTION_ATTACH(1);
+                                RobotSleep(1);
+                            }
                             step = 2;
                             flag = 0;
+                            break;
                         }
+
+                        ++flag;
                         break;
                     case 2:
                         if (flag == 0) {
@@ -543,7 +553,7 @@ int huro(void) {
                             RobotSleep(1);
                             ++flag;
                         }
-                        step += default_set_straight_and_center1(fpga_videodata, LEFT, 60, HEIGHT-11, BLACK);
+                        step += default_set_straight_and_center1(fpga_videodata, LEFT, 40, HEIGHT-11, BLACK);
                         break;
                     case 2:
                         if (flag == 2)
@@ -580,6 +590,7 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         step += 1;
+                        ACTION_WALK(SLOW, UP, 5);
 //                        setFPGAVideoData(fpga_videodata);
 //                        mission_9_1_go_front(fpga_videodata);
 //                        step += 1;
