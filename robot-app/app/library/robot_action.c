@@ -28,31 +28,27 @@ void prev_check(MOTION init_motion, PREV_CHECK_MOD mod) {
     prev = init_motion;
 }
 
-void move_check(MOTION motion, VIEW view)
-{
+void move_check(MOTION motion, VIEW view) {
     static MOTION moved = 0;
 
-    if (moved && !IS_MOVE(motion))
-    {
+    if (moved && !IS_MOVE(motion)) {
         RobotAction(STABLE_DOWN + view);
     }
     moved = IS_MOVE(motion);
 }
 
-void *checker(void *args)
-{
-    _args_t data = *(_args_t *)args;
+void *checker(void *args) {
+    _args_t data = *(_args_t *) args;
 
-    while(*data.destroy == 0)
-    {
+    while (*data.destroy == 0) {
         setFPGAVideoData(data.p_image);
         *data.p_state = data.check(data.p_image);
     }
 
-    return (void *)data.p_state;
+    return (void *) data.p_state;
 }
 
-int ACTION_WALK_CHECK(VIEW view, U16 *image,  int (*check)(U16 *), int finish, int repeat) {
+int ACTION_WALK_CHECK(VIEW view, U16 *image, int (*check)(U16 *), int finish, int repeat) {
     int i = 0;
     int state = 0, destroy = 0;
 
@@ -63,10 +59,9 @@ int ACTION_WALK_CHECK(VIEW view, U16 *image,  int (*check)(U16 *), int finish, i
     _args_t args = {image, check, &state, finish, &destroy};
 
     repeat <<= 1;
-    thread_id = pthread_create(&p_thread, NULL, checker, (void *)&args);
+    thread_id = pthread_create(&p_thread, NULL, checker, (void *) &args);
 
-    if (thread_id < 0)
-    {
+    if (thread_id < 0) {
         printf("thread create error\n");
         return 0;
     }
@@ -81,7 +76,7 @@ int ACTION_WALK_CHECK(VIEW view, U16 *image,  int (*check)(U16 *), int finish, i
 
     RobotAction(WALK_END_MOTION((--i & 1), SLOW, view));
 
-    pthread_join(p_thread, (void *)&result);
+    pthread_join(p_thread, (void *) &result);
 
-    return finish == *(int *)result;
+    return finish == *(int *) result;
 }

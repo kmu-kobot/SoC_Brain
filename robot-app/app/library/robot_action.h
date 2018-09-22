@@ -257,6 +257,7 @@ typedef enum {
 } PREV_CHECK_MOD;
 
 void prev_check(MOTION motion, PREV_CHECK_MOD mod);
+
 void move_check(MOTION motion, VIEW view);
 
 #define IS_MOVE(motion) (MOVE_LEFT_LONG_DOWN <= motion && motion <= MOVE_RIGHT_SHORT_UP)
@@ -295,10 +296,11 @@ static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat) {
     RobotAction(WALK_END_MOTION(DIR_RIGHT, speed, view));
 }
 
-typedef struct CHECKER_ARGS
-{
+typedef struct CHECKER_ARGS {
     U16 *p_image;
+
     int (*check)(U16 *);
+
     int *p_state;
     int finish;
     int *destroy;
@@ -306,7 +308,7 @@ typedef struct CHECKER_ARGS
 
 void *checker(void *data);
 
-int ACTION_WALK_CHECK(VIEW view, U16 *image,  int (*check)(U16 *), int finish, int repeat);
+int ACTION_WALK_CHECK(VIEW view, U16 *image, int (*check)(U16 *), int finish, int repeat);
 
 
 //////////////////////////////
@@ -403,83 +405,64 @@ static inline void ACTION_MISSION(MISSION mission, VIEW view) {
 //  MOTION BALL             //
 //////////////////////////////
 
-static inline void BALL_INIT(VIEW view)
-{
-    if (view == UP)
-    {
+static inline void BALL_INIT(VIEW view) {
+    if (view == UP) {
         view = OBLIQUE + 1;
     }
     RobotAction(BALL_INIT_DOWN + view);
 }
 
-static inline void BALL_HEAD(VIEW view)
-{
-    if (view == UP)
-    {
+static inline void BALL_HEAD(VIEW view) {
+    if (view == UP) {
         view = OBLIQUE + 1;
     }
     RobotAction(BALL_HEAD_DOWN + view);
 }
 
-static inline void BALL_HALF_HEAD(MOTION motion)
-{
+static inline void BALL_HALF_HEAD(MOTION motion) {
     RobotAction(motion);
 }
 
-static inline void BALL_TURN(DIRECTION dir, VIEW view, int repeat)
-{
-    if (view == UP)
-    {
+static inline void BALL_TURN(DIRECTION dir, VIEW view, int repeat) {
+    if (view == UP) {
         view = OBLIQUE + 1;
     }
-    while (repeat--)
-    {
+    while (repeat--) {
         RobotAction(BALL_TURN_LEFT_DOWN + dir + (view << 1));
     }
 }
 
-static inline void BALL_MOVE(DIRECTION dir, VIEW view, int repeat)
-{
-    if (view == UP)
-    {
+static inline void BALL_MOVE(DIRECTION dir, VIEW view, int repeat) {
+    if (view == UP) {
         view = OBLIQUE + 1;
     }
-    while (repeat--)
-    {
+    while (repeat--) {
         RobotAction(BALL_MOVE_LEFT_DOWN + dir + (view << 1));
     }
 }
 
-static inline void BALL_MOVE_LONG(DIRECTION dir, VIEW view, int repeat)
-{
-    if (view == UP)
-    {
+static inline void BALL_MOVE_LONG(DIRECTION dir, VIEW view, int repeat) {
+    if (view == UP) {
         view = OBLIQUE + 1;
     }
-    while (repeat--)
-    {
+    while (repeat--) {
         RobotAction(BALL_MOVE_LONG_LEFT_DOWN + dir + (view << 1));
     }
 }
 
-static inline void BALL_BIT(DIRECTION dir, int repeat)
-{
-    while (repeat--)
-    {
+static inline void BALL_BIT(DIRECTION dir, int repeat) {
+    while (repeat--) {
         RobotAction(BALL_BIT_FRONT + dir);
     }
 }
 
-static inline void BALL_KICK(void)
-{
+static inline void BALL_KICK(void) {
     RobotAction(KICK);
     CHECK_INIT(UP);
 }
 
-static inline void BALL_STABLE(VIEW view)
-{
-    if (view == UP)
-    {
+static inline void BALL_STABLE(VIEW view) {
+    if (view == UP) {
         view = OBLIQUE + 1;
     }
     RobotAction(BALL_STABLE_DOWN + view);

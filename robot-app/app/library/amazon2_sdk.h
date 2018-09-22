@@ -276,15 +276,13 @@ static const U16 COLOR_BITS[] = {0xe000, 0x07a0, 0x001e, 0xcf00, 0xd300, 0x4209,
 
 #define IN_IMG(min, value, max) (MIN(MAX(min, value), max))
 
-typedef struct _POINT
-{
+typedef struct _POINT {
     U8 x;
     U8 y;
 } _point_t;
 
 
-typedef struct _LINE
-{
+typedef struct _LINE {
     double slope;
     double intercept;
 } _line_t;

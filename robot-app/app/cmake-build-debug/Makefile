@@ -48,10 +48,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/dexterastin/SoC_Brain/robot-app/app
+CMAKE_SOURCE_DIR = /Users/dexterastin/SoC_Brain2/robot-app/app
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles /Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles /Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -176,6 +176,33 @@ library/graphic_api.s: library/graphic_api.c.s
 library/graphic_api.c.s:
 	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/library/graphic_api.c.s
 .PHONY : library/graphic_api.c.s
+
+library/imageProcess.o: library/imageProcess.c.o
+
+.PHONY : library/imageProcess.o
+
+# target to build an object file
+library/imageProcess.c.o:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/library/imageProcess.c.o
+.PHONY : library/imageProcess.c.o
+
+library/imageProcess.i: library/imageProcess.c.i
+
+.PHONY : library/imageProcess.i
+
+# target to preprocess a source file
+library/imageProcess.c.i:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/library/imageProcess.c.i
+.PHONY : library/imageProcess.c.i
+
+library/imageProcess.s: library/imageProcess.c.s
+
+.PHONY : library/imageProcess.s
+
+# target to generate assembly for a file
+library/imageProcess.c.s:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/library/imageProcess.c.s
+.PHONY : library/imageProcess.c.s
 
 library/robot_action.o: library/robot_action.c.o
 
@@ -285,6 +312,33 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/main.c.s
 .PHONY : main.c.s
 
+mission/DEFAULT.o: mission/DEFAULT.c.o
+
+.PHONY : mission/DEFAULT.o
+
+# target to build an object file
+mission/DEFAULT.c.o:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o
+.PHONY : mission/DEFAULT.c.o
+
+mission/DEFAULT.i: mission/DEFAULT.c.i
+
+.PHONY : mission/DEFAULT.i
+
+# target to preprocess a source file
+mission/DEFAULT.c.i:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/DEFAULT.c.i
+.PHONY : mission/DEFAULT.c.i
+
+mission/DEFAULT.s: mission/DEFAULT.c.s
+
+.PHONY : mission/DEFAULT.s
+
+# target to generate assembly for a file
+mission/DEFAULT.c.s:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/DEFAULT.c.s
+.PHONY : mission/DEFAULT.c.s
+
 mission/MISSION_0_READY_PLAY.o: mission/MISSION_0_READY_PLAY.c.o
 
 .PHONY : mission/MISSION_0_READY_PLAY.o
@@ -311,6 +365,33 @@ mission/MISSION_0_READY_PLAY.s: mission/MISSION_0_READY_PLAY.c.s
 mission/MISSION_0_READY_PLAY.c.s:
 	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.s
 .PHONY : mission/MISSION_0_READY_PLAY.c.s
+
+mission/MISSION_10_BLUE_GATE.o: mission/MISSION_10_BLUE_GATE.c.o
+
+.PHONY : mission/MISSION_10_BLUE_GATE.o
+
+# target to build an object file
+mission/MISSION_10_BLUE_GATE.c.o:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o
+.PHONY : mission/MISSION_10_BLUE_GATE.c.o
+
+mission/MISSION_10_BLUE_GATE.i: mission/MISSION_10_BLUE_GATE.c.i
+
+.PHONY : mission/MISSION_10_BLUE_GATE.i
+
+# target to preprocess a source file
+mission/MISSION_10_BLUE_GATE.c.i:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.i
+.PHONY : mission/MISSION_10_BLUE_GATE.c.i
+
+mission/MISSION_10_BLUE_GATE.s: mission/MISSION_10_BLUE_GATE.c.s
+
+.PHONY : mission/MISSION_10_BLUE_GATE.s
+
+# target to generate assembly for a file
+mission/MISSION_10_BLUE_GATE.c.s:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.s
+.PHONY : mission/MISSION_10_BLUE_GATE.c.s
 
 mission/MISSION_1_YELLOW_BARRICADE.o: mission/MISSION_1_YELLOW_BARRICADE.c.o
 
@@ -365,6 +446,33 @@ mission/MISSION_2_RED_BRIDGE.s: mission/MISSION_2_RED_BRIDGE.c.s
 mission/MISSION_2_RED_BRIDGE.c.s:
 	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.s
 .PHONY : mission/MISSION_2_RED_BRIDGE.c.s
+
+mission/MISSION_3_AVOID_BOMB.o: mission/MISSION_3_AVOID_BOMB.c.o
+
+.PHONY : mission/MISSION_3_AVOID_BOMB.o
+
+# target to build an object file
+mission/MISSION_3_AVOID_BOMB.c.o:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o
+.PHONY : mission/MISSION_3_AVOID_BOMB.c.o
+
+mission/MISSION_3_AVOID_BOMB.i: mission/MISSION_3_AVOID_BOMB.c.i
+
+.PHONY : mission/MISSION_3_AVOID_BOMB.i
+
+# target to preprocess a source file
+mission/MISSION_3_AVOID_BOMB.c.i:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.i
+.PHONY : mission/MISSION_3_AVOID_BOMB.c.i
+
+mission/MISSION_3_AVOID_BOMB.s: mission/MISSION_3_AVOID_BOMB.c.s
+
+.PHONY : mission/MISSION_3_AVOID_BOMB.s
+
+# target to generate assembly for a file
+mission/MISSION_3_AVOID_BOMB.c.s:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.s
+.PHONY : mission/MISSION_3_AVOID_BOMB.c.s
 
 mission/MISSION_4_JUMP_HURDLE.o: mission/MISSION_4_JUMP_HURDLE.c.o
 
@@ -474,6 +582,33 @@ mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s:
 	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s
 .PHONY : mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s
 
+mission/MISSION_8_CREVASSE.o: mission/MISSION_8_CREVASSE.c.o
+
+.PHONY : mission/MISSION_8_CREVASSE.o
+
+# target to build an object file
+mission/MISSION_8_CREVASSE.c.o:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o
+.PHONY : mission/MISSION_8_CREVASSE.c.o
+
+mission/MISSION_8_CREVASSE.i: mission/MISSION_8_CREVASSE.c.i
+
+.PHONY : mission/MISSION_8_CREVASSE.i
+
+# target to preprocess a source file
+mission/MISSION_8_CREVASSE.c.i:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.i
+.PHONY : mission/MISSION_8_CREVASSE.c.i
+
+mission/MISSION_8_CREVASSE.s: mission/MISSION_8_CREVASSE.c.s
+
+.PHONY : mission/MISSION_8_CREVASSE.s
+
+# target to generate assembly for a file
+mission/MISSION_8_CREVASSE.c.s:
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.s
+.PHONY : mission/MISSION_8_CREVASSE.c.s
+
 mission/MISSION_9_LAST_BARRICADE.o: mission/MISSION_9_LAST_BARRICADE.c.o
 
 .PHONY : mission/MISSION_9_LAST_BARRICADE.o
@@ -516,6 +651,9 @@ help:
 	@echo "... library/graphic_api.o"
 	@echo "... library/graphic_api.i"
 	@echo "... library/graphic_api.s"
+	@echo "... library/imageProcess.o"
+	@echo "... library/imageProcess.i"
+	@echo "... library/imageProcess.s"
 	@echo "... library/robot_action.o"
 	@echo "... library/robot_action.i"
 	@echo "... library/robot_action.s"
@@ -528,15 +666,24 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... mission/DEFAULT.o"
+	@echo "... mission/DEFAULT.i"
+	@echo "... mission/DEFAULT.s"
 	@echo "... mission/MISSION_0_READY_PLAY.o"
 	@echo "... mission/MISSION_0_READY_PLAY.i"
 	@echo "... mission/MISSION_0_READY_PLAY.s"
+	@echo "... mission/MISSION_10_BLUE_GATE.o"
+	@echo "... mission/MISSION_10_BLUE_GATE.i"
+	@echo "... mission/MISSION_10_BLUE_GATE.s"
 	@echo "... mission/MISSION_1_YELLOW_BARRICADE.o"
 	@echo "... mission/MISSION_1_YELLOW_BARRICADE.i"
 	@echo "... mission/MISSION_1_YELLOW_BARRICADE.s"
 	@echo "... mission/MISSION_2_RED_BRIDGE.o"
 	@echo "... mission/MISSION_2_RED_BRIDGE.i"
 	@echo "... mission/MISSION_2_RED_BRIDGE.s"
+	@echo "... mission/MISSION_3_AVOID_BOMB.o"
+	@echo "... mission/MISSION_3_AVOID_BOMB.i"
+	@echo "... mission/MISSION_3_AVOID_BOMB.s"
 	@echo "... mission/MISSION_4_JUMP_HURDLE.o"
 	@echo "... mission/MISSION_4_JUMP_HURDLE.i"
 	@echo "... mission/MISSION_4_JUMP_HURDLE.s"
@@ -549,6 +696,9 @@ help:
 	@echo "... mission/MISSION_7_YELLOW_HOLE_BRIDGE.o"
 	@echo "... mission/MISSION_7_YELLOW_HOLE_BRIDGE.i"
 	@echo "... mission/MISSION_7_YELLOW_HOLE_BRIDGE.s"
+	@echo "... mission/MISSION_8_CREVASSE.o"
+	@echo "... mission/MISSION_8_CREVASSE.i"
+	@echo "... mission/MISSION_8_CREVASSE.s"
 	@echo "... mission/MISSION_9_LAST_BARRICADE.o"
 	@echo "... mission/MISSION_9_LAST_BARRICADE.i"
 	@echo "... mission/MISSION_9_LAST_BARRICADE.s"

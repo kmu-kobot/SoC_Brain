@@ -12,8 +12,7 @@
 #define DEFAULT_CENTER_THRES_LONG 17
 #define DEFAULT_CENTER_THRES_SHORT 4
 
-static inline void default_watch(VIEW view)
-{
+static inline void default_watch(VIEW view) {
     CHECK_INIT(view);
     RobotSleep(4);
 }
@@ -21,16 +20,19 @@ static inline void default_watch(VIEW view)
 int default_get_straight_and_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1);
 
 int default_set_straight_and_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1);
+
 int default_set_straight_and_center2(U16 *image, VIEW view, U16 center, U16 bot, U16 color1, U16 color2);
 
 int default_set_straight1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1);
+
 int default_set_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1);
 
 int set_straight(_line_t line, U16 center, VIEW view);
+
 int set_center(_line_t line, U16 center, VIEW view);
 
 int default_set_not_black(U16 *image);
 
-int point_t_cmp_y(const void * a, const void * b);
+int point_t_cmp_y(const void *a, const void *b);
 
 #endif

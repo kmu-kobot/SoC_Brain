@@ -19,7 +19,7 @@ add_executable(
         library/uart_api.h
         library/robot_action.h
         library/robot_action.c
-        misison/DEFAULT.c
+        mission/DEFAULT.c
         mission/DEFAULT.h
         mission/MISSION_0_READY_PLAY.c
         mission/MISSION_0_READY_PLAY.h

@@ -6,8 +6,7 @@
 
 int mission_9_1_wait_yellow_barricade(U16 *image) {
     U32 i, success = 0;
-    for (i = 0; i < 5 && success < 3; ++i)
-    {
+    for (i = 0; i < 5 && success < 3; ++i) {
         setFPGAVideoData(image);
         success += (getColorRatio1(image, MISSION_9_UPPER, MISSION_9_RANGE, 0, WIDTH, YELLOW) > MISSION_9_THRESHOLDS);
     }
@@ -17,8 +16,7 @@ int mission_9_1_wait_yellow_barricade(U16 *image) {
 
 int mission_9_2_end_yellow_barricade(U16 *image) {
     U32 i, success = 0;
-    for (i = 0; i < 5 && success < 3; ++i)
-    {
+    for (i = 0; i < 5 && success < 3; ++i) {
         setFPGAVideoData(image);
         success += (getColorRatio1(image, MISSION_9_UPPER, MISSION_9_RANGE, 0, WIDTH, YELLOW) < MISSION_9_THRESHOLDS);
     }
