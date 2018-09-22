@@ -13,6 +13,7 @@
 #include <math.h>
 
 #include "./library/graphic_api.h"
+#include "./library/imageProcess.h"
 #include "./library/uart_api.h"
 #include "./library/robot_action.h"
 
@@ -24,7 +25,7 @@
 #include "./mission/MISSION_5_GREEN_BRIDGE.h"
 #include "./mission/MISSION_6_KICK_BALL.h"
 #include "./mission/MISSION_7_YELLOW_HOLE_BRIDGE.h"
-#include "./mission/MISSION_8_AVOID_BOMB.h"
+#include "./mission/MISSION_8_CREVASSE.h"
 #include "./mission/MISSION_9_LAST_BARRICADE.h"
 #include "./mission/MISSION_10_BLUE_GATE.h"
 

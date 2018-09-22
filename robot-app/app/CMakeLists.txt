@@ -11,12 +11,16 @@ add_executable(
         library/amazon2_sdk.h
         library/graphic_api.c
         library/graphic_api.h
+        library/imageProcess.c
+        library/imageProcess.h
         library/robot_protocol.c
         library/robot_protocol.h
         library/uart_api.c
         library/uart_api.h
         library/robot_action.h
         library/robot_action.c
+        mission/DEFAULT.c
+        mission/DEFAULT.h
         mission/MISSION_0_READY_PLAY.c
         mission/MISSION_0_READY_PLAY.h
         mission/MISSION_1_YELLOW_BARRICADE.c
@@ -33,8 +37,8 @@ add_executable(
         mission/MISSION_6_KICK_BALL.h
         mission/MISSION_7_YELLOW_HOLE_BRIDGE.c
         mission/MISSION_7_YELLOW_HOLE_BRIDGE.h
-        mission/MISSION_8_AVOID_BOMB.c
-        mission/MISSION_8_AVOID_BOMB.h
+        mission/MISSION_8_CREVASSE.c
+        mission/MISSION_8_CREVASSE.h
         mission/MISSION_9_LAST_BARRICADE.c
         mission/MISSION_9_LAST_BARRICADE.h
         mission/MISSION_10_BLUE_GATE.c

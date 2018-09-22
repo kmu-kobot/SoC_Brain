@@ -5,6 +5,8 @@
 #ifndef SOC_APP_MISSION_0_READY_PLAY_H
 
 #include "./../library/amazon2_sdk.h"
+#include "./../library/imageProcess.h"
+#include "DEFAULT.h"
 #include "stdio.h"
 
 #define SOC_APP_MISSION_0_READY_PLAY_H

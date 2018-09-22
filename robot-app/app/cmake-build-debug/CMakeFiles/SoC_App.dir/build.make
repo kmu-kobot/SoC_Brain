@@ -43,10 +43,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/dexterastin/SoC_Brain/robot-app/app
+CMAKE_SOURCE_DIR = /Users/dexterastin/SoC_Brain2/robot-app/app
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/SoC_App.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/SoC_App.dir/flags.make
 
 CMakeFiles/SoC_App.dir/main.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/SoC_App.dir/main.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/main.c.o   -c /Users/dexterastin/SoC_Brain/robot-app/app/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/SoC_App.dir/main.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/main.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/main.c
 
 CMakeFiles/SoC_App.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/main.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain/robot-app/app/main.c > CMakeFiles/SoC_App.dir/main.c.i
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/main.c > CMakeFiles/SoC_App.dir/main.c.i
 
 CMakeFiles/SoC_App.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/main.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain/robot-app/app/main.c -o CMakeFiles/SoC_App.dir/main.c.s
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/main.c -o CMakeFiles/SoC_App.dir/main.c.s
 
 CMakeFiles/SoC_App.dir/main.c.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/SoC_App.dir/main.c.o.provides.build: CMakeFiles/SoC_App.dir/main.c.o
 
 CMakeFiles/SoC_App.dir/huro.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/huro.c.o: ../huro.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/SoC_App.dir/huro.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/huro.c.o   -c /Users/dexterastin/SoC_Brain/robot-app/app/huro.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/SoC_App.dir/huro.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/huro.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/huro.c
 
 CMakeFiles/SoC_App.dir/huro.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/huro.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain/robot-app/app/huro.c > CMakeFiles/SoC_App.dir/huro.c.i
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/huro.c > CMakeFiles/SoC_App.dir/huro.c.i
 
 CMakeFiles/SoC_App.dir/huro.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/huro.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain/robot-app/app/huro.c -o CMakeFiles/SoC_App.dir/huro.c.s
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/huro.c -o CMakeFiles/SoC_App.dir/huro.c.s
 
 CMakeFiles/SoC_App.dir/huro.c.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/SoC_App.dir/huro.c.o.provides.build: CMakeFiles/SoC_App.dir/huro.c.o
 
 CMakeFiles/SoC_App.dir/library/graphic_api.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/library/graphic_api.c.o: ../library/graphic_api.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/SoC_App.dir/library/graphic_api.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/graphic_api.c.o   -c /Users/dexterastin/SoC_Brain/robot-app/app/library/graphic_api.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/SoC_App.dir/library/graphic_api.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/graphic_api.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/library/graphic_api.c
 
 CMakeFiles/SoC_App.dir/library/graphic_api.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/library/graphic_api.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain/robot-app/app/library/graphic_api.c > CMakeFiles/SoC_App.dir/library/graphic_api.c.i
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/library/graphic_api.c > CMakeFiles/SoC_App.dir/library/graphic_api.c.i
 
 CMakeFiles/SoC_App.dir/library/graphic_api.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/library/graphic_api.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain/robot-app/app/library/graphic_api.c -o CMakeFiles/SoC_App.dir/library/graphic_api.c.s
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/library/graphic_api.c -o CMakeFiles/SoC_App.dir/library/graphic_api.c.s
 
 CMakeFiles/SoC_App.dir/library/graphic_api.c.o.requires:
 
@@ -129,18 +129,42 @@ CMakeFiles/SoC_App.dir/library/graphic_api.c.o.provides: CMakeFiles/SoC_App.dir/
 CMakeFiles/SoC_App.dir/library/graphic_api.c.o.provides.build: CMakeFiles/SoC_App.dir/library/graphic_api.c.o
 
 
+CMakeFiles/SoC_App.dir/library/imageProcess.c.o: CMakeFiles/SoC_App.dir/flags.make
+CMakeFiles/SoC_App.dir/library/imageProcess.c.o: ../library/imageProcess.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/SoC_App.dir/library/imageProcess.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/imageProcess.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/library/imageProcess.c
+
+CMakeFiles/SoC_App.dir/library/imageProcess.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/library/imageProcess.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/library/imageProcess.c > CMakeFiles/SoC_App.dir/library/imageProcess.c.i
+
+CMakeFiles/SoC_App.dir/library/imageProcess.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/library/imageProcess.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/library/imageProcess.c -o CMakeFiles/SoC_App.dir/library/imageProcess.c.s
+
+CMakeFiles/SoC_App.dir/library/imageProcess.c.o.requires:
+
+.PHONY : CMakeFiles/SoC_App.dir/library/imageProcess.c.o.requires
+
+CMakeFiles/SoC_App.dir/library/imageProcess.c.o.provides: CMakeFiles/SoC_App.dir/library/imageProcess.c.o.requires
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/library/imageProcess.c.o.provides.build
+.PHONY : CMakeFiles/SoC_App.dir/library/imageProcess.c.o.provides
+
+CMakeFiles/SoC_App.dir/library/imageProcess.c.o.provides.build: CMakeFiles/SoC_App.dir/library/imageProcess.c.o
+
+
 CMakeFiles/SoC_App.dir/library/robot_protocol.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/library/robot_protocol.c.o: ../library/robot_protocol.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/SoC_App.dir/library/robot_protocol.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/robot_protocol.c.o   -c /Users/dexterastin/SoC_Brain/robot-app/app/library/robot_protocol.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/SoC_App.dir/library/robot_protocol.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/robot_protocol.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/library/robot_protocol.c
 
 CMakeFiles/SoC_App.dir/library/robot_protocol.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/library/robot_protocol.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain/robot-app/app/library/robot_protocol.c > CMakeFiles/SoC_App.dir/library/robot_protocol.c.i
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/library/robot_protocol.c > CMakeFiles/SoC_App.dir/library/robot_protocol.c.i
 
 CMakeFiles/SoC_App.dir/library/robot_protocol.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/library/robot_protocol.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain/robot-app/app/library/robot_protocol.c -o CMakeFiles/SoC_App.dir/library/robot_protocol.c.s
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/library/robot_protocol.c -o CMakeFiles/SoC_App.dir/library/robot_protocol.c.s
 
 CMakeFiles/SoC_App.dir/library/robot_protocol.c.o.requires:
 
@@ -155,16 +179,16 @@ CMakeFiles/SoC_App.dir/library/robot_protocol.c.o.provides.build: CMakeFiles/SoC
 
 CMakeFiles/SoC_App.dir/library/uart_api.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/library/uart_api.c.o: ../library/uart_api.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/SoC_App.dir/library/uart_api.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/uart_api.c.o   -c /Users/dexterastin/SoC_Brain/robot-app/app/library/uart_api.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/SoC_App.dir/library/uart_api.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/uart_api.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/library/uart_api.c
 
 CMakeFiles/SoC_App.dir/library/uart_api.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/library/uart_api.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain/robot-app/app/library/uart_api.c > CMakeFiles/SoC_App.dir/library/uart_api.c.i
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/library/uart_api.c > CMakeFiles/SoC_App.dir/library/uart_api.c.i
 
 CMakeFiles/SoC_App.dir/library/uart_api.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/library/uart_api.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain/robot-app/app/library/uart_api.c -o CMakeFiles/SoC_App.dir/library/uart_api.c.s
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/library/uart_api.c -o CMakeFiles/SoC_App.dir/library/uart_api.c.s
 
 CMakeFiles/SoC_App.dir/library/uart_api.c.o.requires:
 
@@ -177,18 +201,90 @@ CMakeFiles/SoC_App.dir/library/uart_api.c.o.provides: CMakeFiles/SoC_App.dir/lib
 CMakeFiles/SoC_App.dir/library/uart_api.c.o.provides.build: CMakeFiles/SoC_App.dir/library/uart_api.c.o
 
 
+CMakeFiles/SoC_App.dir/library/robot_action.c.o: CMakeFiles/SoC_App.dir/flags.make
+CMakeFiles/SoC_App.dir/library/robot_action.c.o: ../library/robot_action.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/SoC_App.dir/library/robot_action.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/robot_action.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/library/robot_action.c
+
+CMakeFiles/SoC_App.dir/library/robot_action.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/library/robot_action.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/library/robot_action.c > CMakeFiles/SoC_App.dir/library/robot_action.c.i
+
+CMakeFiles/SoC_App.dir/library/robot_action.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/library/robot_action.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/library/robot_action.c -o CMakeFiles/SoC_App.dir/library/robot_action.c.s
+
+CMakeFiles/SoC_App.dir/library/robot_action.c.o.requires:
+
+.PHONY : CMakeFiles/SoC_App.dir/library/robot_action.c.o.requires
+
+CMakeFiles/SoC_App.dir/library/robot_action.c.o.provides: CMakeFiles/SoC_App.dir/library/robot_action.c.o.requires
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/library/robot_action.c.o.provides.build
+.PHONY : CMakeFiles/SoC_App.dir/library/robot_action.c.o.provides
+
+CMakeFiles/SoC_App.dir/library/robot_action.c.o.provides.build: CMakeFiles/SoC_App.dir/library/robot_action.c.o
+
+
+CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o: CMakeFiles/SoC_App.dir/flags.make
+CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o: ../mission/DEFAULT.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/mission/DEFAULT.c
+
+CMakeFiles/SoC_App.dir/mission/DEFAULT.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/DEFAULT.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/mission/DEFAULT.c > CMakeFiles/SoC_App.dir/mission/DEFAULT.c.i
+
+CMakeFiles/SoC_App.dir/mission/DEFAULT.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/DEFAULT.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/mission/DEFAULT.c -o CMakeFiles/SoC_App.dir/mission/DEFAULT.c.s
+
+CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o.requires:
+
+.PHONY : CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o.requires
+
+CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o.provides: CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o.requires
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o.provides.build
+.PHONY : CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o.provides
+
+CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o.provides.build: CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o
+
+
+CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o: CMakeFiles/SoC_App.dir/flags.make
+CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o: ../mission/MISSION_0_READY_PLAY.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_0_READY_PLAY.c
+
+CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_0_READY_PLAY.c > CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.i
+
+CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_0_READY_PLAY.c -o CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.s
+
+CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.requires:
+
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.requires
+
+CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.provides: CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.requires
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.provides.build
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.provides
+
+CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.provides.build: CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o
+
+
 CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o: ../mission/MISSION_1_YELLOW_BARRICADE.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o   -c /Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.c
 
 CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.c > CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.i
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.c > CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.i
 
 CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.s
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.s
 
 CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o.requires:
 
@@ -203,16 +299,16 @@ CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o.provides.build: CM
 
 CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o: ../mission/MISSION_2_RED_BRIDGE.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o   -c /Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_2_RED_BRIDGE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_2_RED_BRIDGE.c
 
 CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_2_RED_BRIDGE.c > CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.i
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_2_RED_BRIDGE.c > CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.i
 
 CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_2_RED_BRIDGE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.s
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_2_RED_BRIDGE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.s
 
 CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o.requires:
 
@@ -225,52 +321,196 @@ CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o.provides: CMakeFiles/SoC
 CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o.provides.build: CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o
 
 
-CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o: CMakeFiles/SoC_App.dir/flags.make
-CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o: ../mission/MISSION_0_READY_PLAY.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o   -c /Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_0_READY_PLAY.c
+CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o: CMakeFiles/SoC_App.dir/flags.make
+CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o: ../mission/MISSION_3_AVOID_BOMB.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_3_AVOID_BOMB.c
 
-CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_0_READY_PLAY.c > CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.i
+CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_3_AVOID_BOMB.c > CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.i
 
-CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain/robot-app/app/mission/MISSION_0_READY_PLAY.c -o CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.s
+CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_3_AVOID_BOMB.c -o CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.s
 
-CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.requires:
+CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o.requires:
 
-.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.requires
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o.requires
 
-CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.provides: CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.requires
-	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.provides.build
-.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.provides
+CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o.provides: CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o.requires
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o.provides.build
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o.provides
 
-CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.provides.build: CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o
+CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o.provides.build: CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o
 
 
-CMakeFiles/SoC_App.dir/library/robot_action.c.o: CMakeFiles/SoC_App.dir/flags.make
-CMakeFiles/SoC_App.dir/library/robot_action.c.o: ../library/robot_action.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/SoC_App.dir/library/robot_action.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/robot_action.c.o   -c /Users/dexterastin/SoC_Brain/robot-app/app/library/robot_action.c
+CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o: CMakeFiles/SoC_App.dir/flags.make
+CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o: ../mission/MISSION_4_JUMP_HURDLE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_4_JUMP_HURDLE.c
 
-CMakeFiles/SoC_App.dir/library/robot_action.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/library/robot_action.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain/robot-app/app/library/robot_action.c > CMakeFiles/SoC_App.dir/library/robot_action.c.i
+CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_4_JUMP_HURDLE.c > CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.i
 
-CMakeFiles/SoC_App.dir/library/robot_action.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/library/robot_action.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain/robot-app/app/library/robot_action.c -o CMakeFiles/SoC_App.dir/library/robot_action.c.s
+CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_4_JUMP_HURDLE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.s
 
-CMakeFiles/SoC_App.dir/library/robot_action.c.o.requires:
+CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o.requires:
 
-.PHONY : CMakeFiles/SoC_App.dir/library/robot_action.c.o.requires
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o.requires
 
-CMakeFiles/SoC_App.dir/library/robot_action.c.o.provides: CMakeFiles/SoC_App.dir/library/robot_action.c.o.requires
-	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/library/robot_action.c.o.provides.build
-.PHONY : CMakeFiles/SoC_App.dir/library/robot_action.c.o.provides
+CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o.provides: CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o.requires
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o.provides.build
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o.provides
 
-CMakeFiles/SoC_App.dir/library/robot_action.c.o.provides.build: CMakeFiles/SoC_App.dir/library/robot_action.c.o
+CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o.provides.build: CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o
+
+
+CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o: CMakeFiles/SoC_App.dir/flags.make
+CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o: ../mission/MISSION_5_GREEN_BRIDGE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_5_GREEN_BRIDGE.c
+
+CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_5_GREEN_BRIDGE.c > CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.i
+
+CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_5_GREEN_BRIDGE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.s
+
+CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o.requires:
+
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o.requires
+
+CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o.provides: CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o.requires
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o.provides.build
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o.provides
+
+CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o.provides.build: CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o
+
+
+CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o: CMakeFiles/SoC_App.dir/flags.make
+CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o: ../mission/MISSION_6_KICK_BALL.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_6_KICK_BALL.c
+
+CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_6_KICK_BALL.c > CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.i
+
+CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_6_KICK_BALL.c -o CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.s
+
+CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o.requires:
+
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o.requires
+
+CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o.provides: CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o.requires
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o.provides.build
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o.provides
+
+CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o.provides.build: CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o
+
+
+CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o: CMakeFiles/SoC_App.dir/flags.make
+CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o: ../mission/MISSION_7_YELLOW_HOLE_BRIDGE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c
+
+CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c > CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.i
+
+CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s
+
+CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o.requires:
+
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o.requires
+
+CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o.provides: CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o.requires
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o.provides.build
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o.provides
+
+CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o.provides.build: CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o
+
+
+CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o: CMakeFiles/SoC_App.dir/flags.make
+CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o: ../mission/MISSION_8_CREVASSE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_8_CREVASSE.c
+
+CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_8_CREVASSE.c > CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.i
+
+CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_8_CREVASSE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.s
+
+CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o.requires:
+
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o.requires
+
+CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o.provides: CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o.requires
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o.provides.build
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o.provides
+
+CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o.provides.build: CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o
+
+
+CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o: CMakeFiles/SoC_App.dir/flags.make
+CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o: ../mission/MISSION_9_LAST_BARRICADE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_9_LAST_BARRICADE.c
+
+CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_9_LAST_BARRICADE.c > CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.i
+
+CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_9_LAST_BARRICADE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.s
+
+CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o.requires:
+
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o.requires
+
+CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o.provides: CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o.requires
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o.provides.build
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o.provides
+
+CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o.provides.build: CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o
+
+
+CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o: CMakeFiles/SoC_App.dir/flags.make
+CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o: ../mission/MISSION_10_BLUE_GATE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o   -c /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_10_BLUE_GATE.c
+
+CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_10_BLUE_GATE.c > CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.i
+
+CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_10_BLUE_GATE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.s
+
+CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o.requires:
+
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o.requires
+
+CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o.provides: CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o.requires
+	$(MAKE) -f CMakeFiles/SoC_App.dir/build.make CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o.provides.build
+.PHONY : CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o.provides
+
+CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o.provides.build: CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o
 
 
 # Object files for target SoC_App
@@ -278,12 +518,22 @@ SoC_App_OBJECTS = \
 "CMakeFiles/SoC_App.dir/main.c.o" \
 "CMakeFiles/SoC_App.dir/huro.c.o" \
 "CMakeFiles/SoC_App.dir/library/graphic_api.c.o" \
+"CMakeFiles/SoC_App.dir/library/imageProcess.c.o" \
 "CMakeFiles/SoC_App.dir/library/robot_protocol.c.o" \
 "CMakeFiles/SoC_App.dir/library/uart_api.c.o" \
+"CMakeFiles/SoC_App.dir/library/robot_action.c.o" \
+"CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o" \
+"CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o" \
 "CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o" \
 "CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o" \
-"CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o" \
-"CMakeFiles/SoC_App.dir/library/robot_action.c.o"
+"CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o" \
+"CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o" \
+"CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o" \
+"CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o" \
+"CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o" \
+"CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o" \
+"CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o" \
+"CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o"
 
 # External object files for target SoC_App
 SoC_App_EXTERNAL_OBJECTS =
@@ -291,15 +541,25 @@ SoC_App_EXTERNAL_OBJECTS =
 SoC_App: CMakeFiles/SoC_App.dir/main.c.o
 SoC_App: CMakeFiles/SoC_App.dir/huro.c.o
 SoC_App: CMakeFiles/SoC_App.dir/library/graphic_api.c.o
+SoC_App: CMakeFiles/SoC_App.dir/library/imageProcess.c.o
 SoC_App: CMakeFiles/SoC_App.dir/library/robot_protocol.c.o
 SoC_App: CMakeFiles/SoC_App.dir/library/uart_api.c.o
+SoC_App: CMakeFiles/SoC_App.dir/library/robot_action.c.o
+SoC_App: CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o
+SoC_App: CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o
 SoC_App: CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o
 SoC_App: CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o
-SoC_App: CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o
-SoC_App: CMakeFiles/SoC_App.dir/library/robot_action.c.o
+SoC_App: CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o
+SoC_App: CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o
+SoC_App: CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o
+SoC_App: CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o
+SoC_App: CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o
+SoC_App: CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o
+SoC_App: CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o
+SoC_App: CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o
 SoC_App: CMakeFiles/SoC_App.dir/build.make
 SoC_App: CMakeFiles/SoC_App.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking C executable SoC_App"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking C executable SoC_App"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SoC_App.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -310,12 +570,22 @@ CMakeFiles/SoC_App.dir/build: SoC_App
 CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/main.c.o.requires
 CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/huro.c.o.requires
 CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/library/graphic_api.c.o.requires
+CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/library/imageProcess.c.o.requires
 CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/library/robot_protocol.c.o.requires
 CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/library/uart_api.c.o.requires
+CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/library/robot_action.c.o.requires
+CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o.requires
+CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.requires
 CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o.requires
 CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o.requires
-CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/mission/MISSION_0_READY_PLAY.c.o.requires
-CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/library/robot_action.c.o.requires
+CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o.requires
+CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o.requires
+CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o.requires
+CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o.requires
+CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o.requires
+CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o.requires
+CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o.requires
+CMakeFiles/SoC_App.dir/requires: CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o.requires
 
 .PHONY : CMakeFiles/SoC_App.dir/requires
 
@@ -324,6 +594,6 @@ CMakeFiles/SoC_App.dir/clean:
 .PHONY : CMakeFiles/SoC_App.dir/clean
 
 CMakeFiles/SoC_App.dir/depend:
-	cd /Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/dexterastin/SoC_Brain/robot-app/app /Users/dexterastin/SoC_Brain/robot-app/app /Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug /Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug /Users/dexterastin/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles/SoC_App.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/dexterastin/SoC_Brain2/robot-app/app /Users/dexterastin/SoC_Brain2/robot-app/app /Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug /Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug /Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/CMakeFiles/SoC_App.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/SoC_App.dir/depend
 

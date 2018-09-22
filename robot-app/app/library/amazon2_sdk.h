@@ -3,6 +3,8 @@
 
 #define HW_2D_ENGINE
 
+#define DEBUG
+
 #if defined(BOOL)
 #else
 typedef int BOOL;
@@ -268,6 +270,23 @@ static const U16 COLOR_BITS[] = {0xe000, 0x07a0, 0x001e, 0xcf00, 0xd300, 0x4209,
 #define GetValueRGBYOBK(u16, color) ((U16)(u16 >> color) & 0x0001)
 #define GetPtr(arr, row, col, width) (arr[row * width + col])
 #define CheckCol(col)  (!(col < 0 || col >= 180))
+
+#define MIN(a, b) (a > b ? b : a)
+#define MAX(a, b) (a < b ? b : a)
+
+#define IN_IMG(min, value, max) (MIN(MAX(min, value), max))
+
+typedef struct _POINT {
+    U8 x;
+    U8 y;
+} _point_t;
+
+
+typedef struct _LINE {
+    double slope;
+    double intercept;
+} _line_t;
+
 /*#######################################################*/
 typedef enum {
     AMAZON2_IOCTL_CLEAR_SCREEN = 0,
