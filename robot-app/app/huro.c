@@ -497,9 +497,8 @@ int huro(void) {
                         }
                         break;
                     case 3:
-                        if (flag == 2) {
-                            ACTION_ATTACH(1);
-                        }
+                        // 노란색 앞에서 중심 맞추고 붙이기 한번 더 해아함
+                        ACTION_ATTACH(1);
                         step = 6;
                         break;
                     case 6:
