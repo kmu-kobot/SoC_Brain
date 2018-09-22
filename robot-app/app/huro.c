@@ -162,6 +162,7 @@ int huro(void) {
                             if (flag == 2) {
                                 ACTION_ATTACH_SHORT(1);
                                 RobotSleep(1);
+                                flag++;
                                 break;
                             }
                             step = 2;
