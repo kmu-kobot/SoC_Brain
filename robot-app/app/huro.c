@@ -612,8 +612,7 @@ int huro(void) {
                             flag++;
                         }
 
-                        if (default_set_straight_and_center1(fpga_videodata, RIGHT, 60, HEIGHT - 11, BLACK) &&
-                            default_set_straight_and_center1(fpga_videodata, RIGHT, 60, HEIGHT - 11, BLACK)) {
+                        if (default_set_straight_and_center1(fpga_videodata, RIGHT, 60, HEIGHT - 11, BLACK)) {
                             // 앞에꺼는 다음이 옐로우 뒤에는 다음이 초록다리
 
                             flag = 0;
