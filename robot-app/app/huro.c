@@ -625,6 +625,8 @@ int huro(void) {
                         }
                         break;
                     case 2:
+                        // 일반 걸음으로 걸은 후에, 영상처리 걸음 시작할때 안정화를 위해 슬립
+                        RobotSleep(1);
                         step = 0;
                         mission = nextMission;
                         nextMission = 0;
