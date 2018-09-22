@@ -584,6 +584,7 @@ int huro(void) {
                         break;
                     case 1:
                         CHECK_INIT(UP);
+                        ACTION_MOTION(MISSION_9_FACE_FINAL, UP);
                         RobotSleep(1);
                         flag = 0;
                         step += 1;
