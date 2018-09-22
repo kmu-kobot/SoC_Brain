@@ -38,7 +38,7 @@ int mission_6_3_find_side_hole(U16 *image, U8 step) {
     static MOTION heads[] = {BALL_HEAD_HALF_RIGHT, BALL_HEAD_HALF_LEFT};
     int state;
 
-    BALL_HEAD(heads[step]);
+    BALL_HALF_HEAD(heads[step]);
     state = mission_6_3_find_hole_interpolation(image, 0, HEIGHT, 0, WIDTH, 0);
 
     if (state == 1) {
@@ -560,11 +560,11 @@ int mission_6_4_set_center_of_ball(U16 *image) {
         return 0;
     }
 
-    if (ball_points[1] < 22) {
+    if (ball_points[1] < 25) {
         BALL_BIT(FRONT, 2);
-    } else if (ball_points[1] < 25) {
+    } else if (ball_points[1] < 30) {
         BALL_BIT(FRONT, 1);
-    } else if (ball_points[1] > 35) {
+    } else if (ball_points[1] > 40) {
         BALL_BIT(BACK, 1);
     } else if (ball_points[0] < MISSION_6_4_CENTER - 15) {
         BALL_MOVE_LONG(DIR_LEFT, DOWN, 1);

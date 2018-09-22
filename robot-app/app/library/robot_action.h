@@ -21,7 +21,7 @@
 #define INIT_MOTION(view) (INIT_DOWN + view)
 #define HEAD_MOTION(view) (HEAD_DOWN + view)
 #define WALK_START_MOTION(speed, view) (WALK_FAST_START_DOWN + WALK_SPEED_COEF*speed + WALK_VIEW_COEF*view)
-#define WALK_END_MOTION(speed, view) (WALK_FAST_END_DOWN + WALK_SPEED_COEF*speed + WALK_VIEW_COEF*view)
+#define WALK_END_MOTION(dir, speed, view) (WALK_FAST_END_L_DOWN + dir + WALK_SPEED_COEF*speed + WALK_VIEW_COEF*view)
 #define WALK_MOTION(step, speed, view) (WALK_FAST_L_DOWN + WALK_SPEED_COEF*speed + WALK_VIEW_COEF*view + step)
 #define TURN_MOTION(dir, len, view) (TURN_LEFT_LONG_DOWN + dir + TURN_LENGTH_COEF*len + TURN_VIEW_COEF*view)
 #define MOVE_MOTION(dir, len, view) (MOVE_LEFT_LONG_DOWN + dir + MOVE_LENGTH_COEF*len + MOVE_VIEW_COEF*view)
@@ -50,22 +50,26 @@ typedef enum {
     HEAD_HALF_RIGHT,
 
     WALK_FAST_START_DOWN = 20,
-    WALK_FAST_END_DOWN,
+    WALK_FAST_END_L_DOWN,
+    WALK_FAST_END_R_DOWN,
     WALK_FAST_L_DOWN,
     WALK_FAST_R_DOWN,
 
     WALK_FAST_START_OBLIQUE = 25,
-    WALK_FAST_END_OBLIQUE,
+    WALK_FAST_END_L_OBLIQUE,
+    WALK_FAST_END_R_OBLIQUE,
     WALK_FAST_L_OBLIQUE,
     WALK_FAST_R_OBLIQUE,
 
     WALK_SLOW_START_DOWN = 30,
-    WALK_SLOW_END_DOWN,
+    WALK_SLOW_END_L_DOWN,
+    WALK_SLOW_END_R_DOWN,
     WALK_SLOW_L_DOWN,
     WALK_SLOW_R_DOWN,
 
     WALK_SLOW_START_OBLIQUE = 35,
-    WALK_SLOW_END_OBLIQUE,
+    WALK_SLOW_END_L_OBLIQUE,
+    WALK_SLOW_END_R_OBLIQUE,
     WALK_SLOW_L_OBLIQUE,
     WALK_SLOW_R_OBLIQUE,
 
@@ -288,7 +292,7 @@ static inline void ACTION_WALK(SPEED speed, VIEW view, int repeat) {
         RobotAction(WALK_MOTION(STEP_RIGHT, speed, view));
     }
 
-    RobotAction(WALK_END_MOTION(speed, view));
+    RobotAction(WALK_END_MOTION(DIR_RIGHT, speed, view));
 }
 
 typedef struct CHECKER_ARGS
@@ -415,6 +419,11 @@ static inline void BALL_HEAD(VIEW view)
         view = OBLIQUE + 1;
     }
     RobotAction(BALL_HEAD_DOWN + view);
+}
+
+static inline void BALL_HALF_HEAD(MOTION motion)
+{
+    RobotAction(motion);
 }
 
 static inline void BALL_TURN(DIRECTION dir, VIEW view, int repeat)

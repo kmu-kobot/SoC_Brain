@@ -67,7 +67,7 @@ int mission_5_2_set_straight_and_center(U16 *image, U16 center)
         }
         else
         {
-            ACTION_MOVE(SHORT, DIR_LEFT, OBLIQUE, 2);
+            ACTION_MOVE(LONG, DIR_LEFT, OBLIQUE, 1);
         }
         return 0;
     }
@@ -80,7 +80,7 @@ int mission_5_2_set_straight_and_center(U16 *image, U16 center)
         }
         else
         {
-            ACTION_MOVE(SHORT, DIR_RIGHT, OBLIQUE, 2);
+            ACTION_MOVE(LONG, DIR_RIGHT, OBLIQUE, 1);
         }
         return 0;
     }
@@ -350,7 +350,7 @@ int mission_5_4_set_center(_line_t line)
     {
         ACTION_MOVE(SHORT, move_dir, OBLIQUE, 2);
     }
-    else if (center > 3.0)
+    else if (center > 2.0)
     {
         ACTION_MOVE(SHORT, move_dir, OBLIQUE, 1);
     }
@@ -425,11 +425,11 @@ int mission_5_6_set_straight(_line_t center_line)
     DIRECTION turn_dir = angle < 0;
     angle = abs(angle);
 
-    if (angle > 6.0)
+    if (angle > 8.0)
     {
         ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
     }
-    else if (angle > 3.0)
+    else if (angle > 4.0)
     {
         ACTION_TURN(SHORT, turn_dir, OBLIQUE, 2);
     }
@@ -693,7 +693,7 @@ int mission_5_8_set_dist(_line_t line)
 
     if (dist < 30.0)
     {
-        ACTION_ATTACH_LIFT(1);
+        ACTION_ATTACH(1);
         RobotSleep(1);
         return 0;
     }
@@ -811,6 +811,12 @@ int mission_5_9_set_dist(_line_t line)
 {
     double dist = line.slope*(WIDTH>>1) + line.intercept;
 
+    if (dist < 35.0)
+    {
+        ACTION_ATTACH(1);
+        RobotSleep(1);
+        return 0;
+    }
     if (dist < 40.0)
     {
         ACTION_ATTACH_LIFT(1);
@@ -823,7 +829,7 @@ int mission_5_9_set_dist(_line_t line)
         RobotSleep(1);
         return 0;
     }
-    else if (dist < 61.0)
+    else if (dist < 67.0)
     {
         ACTION_ATTACH_SHORT(1);
         RobotSleep(1);
@@ -836,7 +842,7 @@ int mission_5_9_set_dist(_line_t line)
 int mission_5_10_climb_down_stairs(void) {
     RobotSleep(1);
     ACTION_MOTION(MISSION_5_STAIR_DOWN, UP);
-    CHECK_INIT(UP);
+    CHECK_INIT(OBLIQUE);
     //TODO
     ACTION_WALK(FAST, OBLIQUE, 2);
     return 1;

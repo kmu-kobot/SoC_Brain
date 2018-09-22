@@ -24,7 +24,7 @@ void mission_3_init_global(void);
 
 int mission_3_avoid(U16 *image);
 
-void mission_3_change_mdir(void);
+void mission_3_change_mdir(U16 *image);
 
 int mission_3_default_watch_below(U16 *image, int repeat);
 

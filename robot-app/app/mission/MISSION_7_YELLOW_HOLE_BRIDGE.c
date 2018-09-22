@@ -5,7 +5,7 @@
 #include "MISSION_7_YELLOW_HOLE_BRIDGE.h"
 
 void mission_7_1_watch_below(U16 *image, int repeat) { // 합쳐도 될듯
-    ACTION_WALK_CHECK(DOWN, image, mission_7_1_wait_front_of_yellow_hole_bridge, 1, repeat);
+    ACTION_WALK_CHECK(OBLIQUE, image, mission_7_1_wait_front_of_yellow_hole_bridge, 1, repeat);
     RobotSleep(1);
 }
 
@@ -51,7 +51,7 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image) {
     //
     // return rReturn;
 
-    double ratio = getColorRatio2(image, 0, HEIGHT, 0, WIDTH, YELLOW, CH2);
+    double ratio = getColorRatio2(image, 40, HEIGHT, 0, WIDTH, YELLOW, CH2);
 
     return ratio > MISSION_7_1_THRESHOLDS;
 }

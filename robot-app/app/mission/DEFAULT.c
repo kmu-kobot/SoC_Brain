@@ -71,19 +71,19 @@ int set_straight(_line_t line, U16 center, VIEW view)
     DIRECTION turn_dir = angle > 0;
     angle = abs(angle);
 
-    if (angle > 5)
+    if (angle > 5.0)
     {
         ACTION_TURN(MIDDLE, turn_dir, view, 1);
         RobotSleep(2);
         return 0;
     }
-    if (angle > 3)
+    if (angle > 4.0)
     {
         ACTION_TURN(SHORT, turn_dir, view, 2);
         RobotSleep(2);
         return 0;
     }
-    if (angle > 2)
+    if (angle > 2.0)
     {
         ACTION_TURN(SHORT, turn_dir, view, 1);
         RobotSleep(2);
@@ -107,7 +107,7 @@ int set_center(_line_t line, U16 center, VIEW view)
     }
     if (dist_err > DEFAULT_CENTER_THRES_SHORT)
     {
-        ACTION_MOVE(SHORT, move_dir, view, MIN(7, dist_err / 3 + 1));
+        ACTION_MOVE(SHORT, move_dir, view, MIN(5, dist_err / 4 + 1));
         RobotSleep(2);
         return 0;
     }

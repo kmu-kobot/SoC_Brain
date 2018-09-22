@@ -7,8 +7,8 @@
 int mdir = 0;
 
 int mission_3_avoid(U16 *image) {
-    double blue_ratio = getColorRatio1(image, 20, ROBOT_KNEE+10, MINE_RANGE_LEFT, WIDTH-MINE_RANGE_LEFT, BLUE);
-    double black_ratio = getColorRatio1(image, 0, ROBOT_KNEE+10, MINE_RANGE_LEFT, WIDTH-MINE_RANGE_LEFT, BLACK);
+    double blue_ratio = getColorRatio1(image, 20, ROBOT_KNEE+5, MINE_RANGE_LEFT, WIDTH-MINE_RANGE_LEFT, BLUE);
+    double black_ratio = getColorRatio1(image, 0, ROBOT_KNEE+5, MINE_RANGE_LEFT, WIDTH-MINE_RANGE_LEFT, BLACK);
 
     if (blue_ratio > 3.0)
     {
@@ -18,14 +18,23 @@ int mission_3_avoid(U16 *image) {
     if (black_ratio > 0.6)
     {
         ACTION_MOVE(LONG, (mdir & 1), DOWN, 1);
-        RobotSleep(1);
+        RobotSleep(3);
     }
     return black_ratio < 0.6;
 }
 
-void mission_3_change_mdir(void)
+void mission_3_change_mdir(U16 *image)
 {
-    ++mdir;
+    _line_t leftline, rightline;
+    default_watch(LEFT);
+    RobotSleep(1);
+    linear_regression1(image, WIDTH>>1, HEIGHT - 11, BLACK, &leftline);
+
+    default_watch(RIGHT);
+    RobotSleep(1);
+    linear_regression1(image, WIDTH>>1, HEIGHT - 11, BLACK, &rightline);
+
+    mdir = leftline.slope*(WIDTH>>1) + leftline.intercept > rightline.slope*(WIDTH>>1) + rightline.intercept;
 }
 
 int mission_3_measure_line(U16 *image) { // 여기도 col 갯수 늘리고 여러 프레임 돌리느넥 좋을듯

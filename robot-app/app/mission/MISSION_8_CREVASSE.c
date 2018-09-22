@@ -6,12 +6,12 @@
 
 void mission_8_1_watch_below(U16 *image, int repeat)
 {
-    ACTION_WALK_CHECK(DOWN, image, mission_8_1_wait_front_of_crevasse, 1, repeat);
+    ACTION_WALK_CHECK(OBLIQUE, image, mission_8_1_wait_front_of_crevasse, 1, repeat);
 }
 
 int mission_8_1_wait_front_of_crevasse(U16 *image)
 {
-    double ratio = getColorRatio1(image, 0, ROBOT_KNEE, 50, WIDTH - 50, BLACK);
+    double ratio = getColorRatio1(image, 40, 80, 50, WIDTH - 50, BLACK);
     return ratio > 2.0;
 }
 

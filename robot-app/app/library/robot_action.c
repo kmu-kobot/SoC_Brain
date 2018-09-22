@@ -53,7 +53,7 @@ void *checker(void *args)
 }
 
 int ACTION_WALK_CHECK(VIEW view, U16 *image,  int (*check)(U16 *), int finish, int repeat) {
-    int i;
+    int i = 0;
     int state = 0, destroy = 0;
 
     pthread_t p_thread;
@@ -73,17 +73,13 @@ int ACTION_WALK_CHECK(VIEW view, U16 *image,  int (*check)(U16 *), int finish, i
 
     action(INIT_MOTION(view), WALK_START_MOTION(SLOW, view));
 
-    for (i = 0; state != finish && i < repeat; ++i) {
-        RobotAction(WALK_MOTION((i & 1), SLOW, view));
+    while (state != finish && i < repeat) {
+        RobotAction(WALK_MOTION((i++ & 1), SLOW, view));
     }
 
     destroy = 1;
 
-    if (i & 1) {
-        RobotAction(WALK_MOTION(DIR_RIGHT, SLOW, view));
-    }
-
-    RobotAction(WALK_END_MOTION(SLOW, view));
+    RobotAction(WALK_END_MOTION((--i & 1), SLOW, view));
 
     pthread_join(p_thread, (void *)&result);
 
