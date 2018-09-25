@@ -256,7 +256,7 @@ int huro(void) {
 
                         setFPGAVideoData(fpga_videodata);
                         if (!mission_5_1_check_black_line(fpga_videodata)) {
-                            mission_5_1_watch_below(fpga_videodata, 40);
+                            mission_5_1_watch_below(fpga_videodata, 50);
                         }
                         ACTION_ATTACH(1);
 
@@ -467,13 +467,16 @@ int huro(void) {
                         if (flag == 0) {
                             default_watch(OBLIQUE);
                             setFPGAVideoData(fpga_videodata);
-                            mission_7_1_watch_below(fpga_videodata, 20);
+                            mission_7_1_watch_below(fpga_videodata, 30);
                             ACTION_ATTACH(1); // 4개 너무 많음
                         }
 
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_7_1_wait_front_of_yellow_hole_bridge(fpga_videodata);
-                        flag = (step == 1);
+                        ++step;
+                        // 위에서 노란다리를 인식한후에 수행하는 라인이므로, 다시 수행하는 것은 무의미
+
+                        // setFPGAVideoData(fpga_videodata);
+                        // step += mission_7_1_wait_front_of_yellow_hole_bridge(fpga_videodata);
+                        // flag = (step == 1);
                         break;
                     case 1:
                         flag = 0;
