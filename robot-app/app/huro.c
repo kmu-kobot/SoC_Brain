@@ -140,7 +140,6 @@ int huro(void) {
                         if (flag == 1) {
                             flag = 2;
                             default_watch(DOWN);
-                            RobotSleep(1);
                         }
 
                         setFPGAVideoData(fpga_videodata);
