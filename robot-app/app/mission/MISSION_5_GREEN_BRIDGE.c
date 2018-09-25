@@ -41,7 +41,7 @@ int mission_5_1_check_black_line(U16 *image) {
     printf("%d\n", dist);
 #endif
 
-    return dist > 20;
+    return dist > 10;
 }
 
 int mission_5_2_set_straight_and_center(U16 *image, U16 center) {
