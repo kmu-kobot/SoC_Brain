@@ -97,7 +97,7 @@ int huro(void) {
                         break;
                     case 4:
                         if (flag == 0) {
-                            default_watch(mission_3_4_getMDir());
+                            default_watch((VIEW) mission_3_4_getMDir());
                             RobotSleep(1);
                             flag++;
                         }
@@ -178,7 +178,7 @@ int huro(void) {
                             ++flag;
                             break;
                         } else if (flag == 1) {
-                            default_watch(mission_3_4_getMDir());
+                            default_watch((VIEW) mission_3_4_getMDir());
                             RobotSleep(1);
                             ++flag;
                         }
@@ -204,7 +204,7 @@ int huro(void) {
                             ++flag;
                             break;
                         } else if (flag == 1) {
-                            default_watch(mission_3_4_getMDir());
+                            default_watch((VIEW) mission_3_4_getMDir());
                             RobotSleep(1);
                             flag++;
                         }
