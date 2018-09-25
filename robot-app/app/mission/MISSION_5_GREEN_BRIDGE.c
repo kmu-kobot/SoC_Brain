@@ -294,10 +294,8 @@ int mission_5_4_set_center(_line_t line) {
     center = abs(center);
 
     if (center > 8.0) {
-        ACTION_MOVE(SHORT, move_dir, OBLIQUE, 3);
-    } else if (center > 5.0) {
         ACTION_MOVE(SHORT, move_dir, OBLIQUE, 2);
-    } else if (center > 2.0) {
+    } else if (center > 5.0) {
         ACTION_MOVE(SHORT, move_dir, OBLIQUE, 1);
     } else {
         return 1;
