@@ -41,7 +41,7 @@ int mission_5_1_check_black_line(U16 *image) {
     printf("%d\n", dist);
 #endif
 
-    return dist > 10;
+    return dist > 20;
 }
 
 int mission_5_2_set_straight_and_center(U16 *image, U16 center) {
@@ -693,7 +693,7 @@ int mission_5_9_set_dist(_line_t line) {
         ACTION_ATTACH(1);
         RobotSleep(1);
         return 0;
-    } else if (dist < 67.0) {
+    } else if (dist < 65.0) { // 67
         ACTION_ATTACH_SHORT(1);
         RobotSleep(1);
         return 0;
