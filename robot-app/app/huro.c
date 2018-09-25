@@ -112,24 +112,28 @@ int huro(void) {
                 }
                 break;
             case 3: // MISSION 3: AVOID BOMB
+                /*
+                 * 1. 지뢰 있는지 보면서 걷기
+                 * 2. 지뢰 발견하면 옆에보고 어디로 갈지 선택 (이때, 각도가 True 인지도 동시에 검사)
+                 * 3. 지뢰 피하기
+                 * 4. 만약, 2에서 각도가 False라면 각도 맞추기
+                 * */
                 switch (step) {
                     case 0:
+                        // 앞에 있는 지뢰 감지
                         default_watch(OBLIQUE);
                         RobotSleep(1);
                         setFPGAVideoData(fpga_videodata);
                         if (!mission_3_default_avoid_bomb(fpga_videodata)) {
                             step = mission_3_default_watch_below(fpga_videodata, 10) ? 1 : 2;
                             RobotSleep(1);
+                            flag = step == 2 ? 5 : 0;
                         } else {
                             step = 1;
                         }
 
-                        if (mission_3_isFrontOf_Blue(fpga_videodata,
-                                                     HEIGHT)) { // 얘를 윗줄이랑 합쳐서 a ? 4 : b ? 1 : 2 형태로 만드는게 나을듯
-                            step = 4;
-                        }
-
-                        flag = 0;
+                        step = mission_3_isFrontOf_Blue(fpga_videodata, HEIGHT) ? 4 : step;
+                        flag = flag == 5 ? flag : 0;
                         break;
                     case 1:
                         if (flag == 0) {
@@ -137,7 +141,7 @@ int huro(void) {
                             ++flag;
                         }
                         if (flag == 1) {
-                            flag = 2;
+                            ++flag;
                             default_watch(DOWN);
                         }
 
@@ -169,19 +173,35 @@ int huro(void) {
                         ++flag;
                         break;
                     case 2:
-                        if (flag == 0) {
+                        // 방향 설정
+                        if (flag == 5) {
                             mission_3_change_mdir(fpga_videodata);
                             ++flag;
                             break;
-                        } else if (flag == 1) {
+                        } else if (flag == 0) {
+                            // 여기서는 저장된 플래그에 따라 방향을 볼지 말지 결정함
+                            // 만약 각도를 맞춰야한다면 해당하는 방향을 봄
+                            // 아니면 step 증가 시키도 아웃
+
+                            if (!mission_3_check_angle()) {
+                                ++step;
+                                break;
+                            }
+
+                            mission_3_change_mdir_opposite();
+                            flag = 6;
+                        }
+
+                        // 고개 돌리기
+                        if (flag == 6) {
                             default_watch((VIEW) mission_3_4_getMDir());
                             RobotSleep(1);
                             ++flag;
+                            break;
                         }
 
                         step += mission_3_set_straight(fpga_videodata);
-
-                        flag = (step == 3) ? 0 : 2;
+                        flag = (step == 3) ? 0 : 7;
                         break;
                     case 3:
                         default_watch(OBLIQUE);
