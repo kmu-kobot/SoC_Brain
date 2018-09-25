@@ -55,7 +55,7 @@ int mission_3_measure_line(U16 *image) { // 여기도 col 갯수 늘리고 여�
 }
 
 int mission_3_isFrontOf_Blue(U16 *image, U16 bot) {
-    double ratio = getColorRatio1(image, 0, 40, 0, WIDTH, BLUE);
+    double ratio = getColorRatio1(image, 0, 40, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLUE);
 
     return ratio > 3.0;
 }
