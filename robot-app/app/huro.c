@@ -196,6 +196,7 @@ int huro(void) {
                         flag = 0;
                         break;
                     case 5:
+                        // TODO: 좌우 비교하고 긴쪽 보면서 이동하는거보다 거리 계산해서 이동하는게 빠를듯
                         if (flag == 0) {
                             mission_3_change_mdir(fpga_videodata);
                             ++flag;
@@ -590,6 +591,7 @@ int huro(void) {
                         step += 1;
                         break;
                     case 2:
+                        // TODO: 비율 바꿔야함
                         step += mission_1_1_wait_yellow_barricade(fpga_videodata);
                         break;
                     case 3:
