@@ -247,7 +247,7 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         if (flag == 0) {
-                            default_watch(DOWN);
+                            default_watch(OBLIQUE);
                             RobotSleep(2);
                             ++flag;
                         }
@@ -617,16 +617,28 @@ int huro(void) {
                             // 앞에꺼는 다음이 옐로우 뒤에는 다음이 초록다리
 
                             flag = 0;
-                            step += 1;
+                            ++step;
 
                             CHECK_INIT(DOWN);
+                            RobotSleep(2);
                             ACTION_WALK(FAST, DOWN, 5);
                             RobotSleep(1);
                         }
                         break;
                     case 2:
+                        if (flag == 0) {
+                            default_watch(RIGHT);
+                            RobotSleep(1);
+                            flag++;
+                        }
+
+                        step += default_set_straight_and_center1(fpga_videodata, RIGHT, 60, HEIGHT - 11, BLACK);
+                        break;
+                    case 3:
                         // 일반 걸음으로 걸은 후에, 영상처리 걸음 시작할때 안정화를 위해 슬립
-                        RobotSleep(1);
+                        CHECK_INIT(OBLIQUE);
+                        RobotSleep(2);
+
                         step = 0;
                         mission = nextMission;
                         nextMission = 0;
