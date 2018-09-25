@@ -75,8 +75,6 @@ int huro(void) {
                         break;
                     case 2:
                         if (flag == 0) {
-                            ACTION_ATTACH(1);
-                            RobotSleep(1);
                             default_watch(LEFT);
                             RobotSleep(1);
                             flag++;
@@ -466,9 +464,9 @@ int huro(void) {
                             default_watch(OBLIQUE);
                             setFPGAVideoData(fpga_videodata);
                             mission_7_1_watch_below(fpga_videodata, 30);
-                            ACTION_ATTACH(1); // 4개 너무 많음
                         }
 
+                        ACTION_ATTACH(1); // 4개 너무 많음
                         ++step;
                         // 위에서 노란다리를 인식한후에 수행하는 라인이므로, 다시 수행하는 것은 무의미
 
@@ -483,8 +481,6 @@ int huro(void) {
                         break;
                     case 2:
                         if (flag == 0) {
-                            ACTION_ATTACH(1);
-                            RobotSleep(1);
                             default_watch(LEFT);
                             RobotSleep(1);
                             flag++;
