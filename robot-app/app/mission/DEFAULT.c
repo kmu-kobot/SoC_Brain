@@ -57,7 +57,7 @@ int default_set_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1) 
 
 int set_straight(_line_t line, U16 center, VIEW view) {
     double angle = atan(line.slope) * 180.0 / M_PI + (view == LEFT ? 10 : -10);
-    DIRECTION turn_dir = angle > 0;
+    DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = abs(angle);
 
     if (angle > 5.0) {
@@ -81,7 +81,7 @@ int set_straight(_line_t line, U16 center, VIEW view) {
 
 int set_center(_line_t line, U16 center, VIEW view) {
     double dist_err = DEFAULT_CENTER_DISTANCE - (line.slope * (WIDTH >> 1) + line.intercept);
-    DIRECTION move_dir = (view - LEFT) == (dist_err > 0);
+    DIRECTION move_dir = (DIRECTION) ((view - LEFT) == (dist_err > 0));
     dist_err = abs(dist_err);
 
     if (dist_err > DEFAULT_CENTER_THRES_LONG) {

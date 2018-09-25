@@ -95,7 +95,7 @@ int mission_8_2_get_front_line(U16 *image, _line_t *front_line, U16 color) {
 
 int mission_8_2_set_straight(_line_t line) {
     double angle = atan(line.slope) * 180.0 / M_PI;
-    DIRECTION turn_dir = angle > 0;
+    DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = abs(angle);
 
     if (angle > 4.0) {
