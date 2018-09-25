@@ -16,17 +16,14 @@ int mission_5_1_attach(U16 *image) {
     printf("ratio : %f\n", ratio);
 #endif
 
-    if (ratio < 30.0) {
-        ACTION_ATTACH(1);
-        return 0;
-    }
-    return 1;
+    ACTION_ATTACH(1);
+    return ratio > 30.0;
 }
 
 int mission_5_1_check_black_line(U16 *image) {
     U32 col, row, cntBlack = 0, dist = 0;
 
-    for (row = ROBOT_KNEE - 10; row > 0; --row) {
+    for (row = ROBOT_KNEE; row > 0; --row) {
         cntBlack = 0;
         for (col = 50; col < WIDTH - 50; col++) {
             cntBlack += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
