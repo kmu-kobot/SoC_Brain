@@ -325,7 +325,7 @@ int huro(void) {
                             ++flag;
                         }
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_5_9_attach_black(fpga_videodata) && mission_5_9_attach_black(fpga_videodata);
+                        step += mission_5_9_attach_black(fpga_videodata);
                         break;
                     case 10:
                         mission_5_10_climb_down_stairs();
@@ -525,11 +525,11 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         if (flag == 0) {
-                            default_watch(DOWN);
+                            default_watch(OBLIQUE);
                             RobotSleep(1);
                             ++flag;
                         }
-                        mission_8_1_watch_below(fpga_videodata, 10);
+                        mission_8_1_watch_below(fpga_videodata, 20);
 
                         setFPGAVideoData(fpga_videodata);
                         step += mission_8_1_wait_front_of_crevasse(fpga_videodata);
@@ -606,8 +606,11 @@ int huro(void) {
             case 10: // MISSION 10: BLUE GATE
                 switch (step) {
                     case 0:
+                        ++step;
+                        flag = 0;
+                        break;
                     case 1:
-                        if (flag++ == 0) {
+                        if (flag == 0) {
                             default_watch(RIGHT);
                             RobotSleep(1);
                             flag++;
