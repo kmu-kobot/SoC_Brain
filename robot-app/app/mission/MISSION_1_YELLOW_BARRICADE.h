@@ -12,7 +12,7 @@
 
 #define SOC_APP_MISSION_1_YELLOW_BARRICADE_H
 
-#define CASE_1_UPPER 0
+#define CASE_1_UPPER 40
 #define CASE_1_LOWER 110
 #define CASE_1_RATIO 10
 
