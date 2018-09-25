@@ -117,10 +117,11 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         default_watch(OBLIQUE);
+                        RobotSleep(1);
                         setFPGAVideoData(fpga_videodata);
                         if (!mission_3_default_avoid_bomb(fpga_videodata)) {
                             step = mission_3_default_watch_below(fpga_videodata, 10) ? 1 : 2;
-                            RobotSleep(2);
+                            RobotSleep(1);
                         } else {
                             step = 1;
                         }
@@ -621,7 +622,6 @@ int huro(void) {
                             CHECK_INIT(DOWN);
                             ACTION_WALK(FAST, DOWN, 5);
                             RobotSleep(1);
-                            break;
                         }
                         break;
                     case 2:

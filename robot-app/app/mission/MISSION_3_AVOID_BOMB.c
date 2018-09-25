@@ -61,7 +61,7 @@ int mission_3_isFrontOf_Blue(U16 *image, U16 bot) {
 }
 
 int mission_3_default_watch_below(U16 *image, int repeat) {
-    RobotSleep(3);
+    RobotSleep(2);
     int result = ACTION_WALK_CHECK(OBLIQUE, image, mission_3_walk_avoid_bomb, 1, repeat);
     RobotSleep(1);
     return result;
