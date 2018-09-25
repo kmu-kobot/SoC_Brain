@@ -34,6 +34,10 @@ void mission_3_change_mdir(U16 *image) {
     mdir = leftline.slope * (WIDTH >> 1) + leftline.intercept > rightline.slope * (WIDTH >> 1) + rightline.intercept;
 }
 
+void mission_3_change_mdir_opposite(void) {
+    mdir = !mdir;
+}
+
 int mission_3_measure_line(U16 *image) { // 여기도 col 갯수 늘리고 여러 프레임 돌리느넥 좋을듯
     _line_t line;
     int i = 0;

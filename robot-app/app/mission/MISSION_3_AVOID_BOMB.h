@@ -26,6 +26,8 @@ int mission_3_avoid(U16 *image);
 
 void mission_3_change_mdir(U16 *image);
 
+void mission_3_change_mdir_opposite(void);
+
 int mission_3_default_watch_below(U16 *image, int repeat);
 
 int mission_3_walk_avoid_bomb(U16 *image);

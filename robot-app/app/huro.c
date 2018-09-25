@@ -172,7 +172,7 @@ int huro(void) {
                         break;
                     case 2:
                         if (flag == 0) {
-                            mission_3_change_mdir(fpga_videodata);
+                            mission_3_change_mdir_opposite();
                             ++flag;
                             break;
                         } else if (flag == 1) {
