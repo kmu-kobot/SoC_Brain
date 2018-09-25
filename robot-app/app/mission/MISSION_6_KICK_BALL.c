@@ -53,7 +53,8 @@ int mission_6_3_find_side_hole(U16 *image, U8 step) {
             return 0;
         }
 
-        default_watch(DOWN);
+        BALL_HEAD(DOWN);
+        RobotSleep(4);
         mission_6_4_set_center_of_ball(image);
 
         return 1;
