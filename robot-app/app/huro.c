@@ -196,17 +196,13 @@ int huro(void) {
                         flag = 0;
                         break;
                     case 5:
-                        // TODO: 좌우 비교하고 긴쪽 보면서 이동하는거보다 거리 계산해서 이동하는게 빠를듯
                         if (flag == 0) {
-                            mission_3_change_mdir(fpga_videodata);
-                            ++flag;
-                            break;
-                        } else if (flag == 1) {
-                            default_watch((VIEW) mission_3_4_getMDir());
+                            default_watch(LEFT);
                             RobotSleep(1);
-                            flag++;
+                            ++flag;
                         }
-                        step += mission_3_set_center(fpga_videodata);
+
+                        step += default_set_center1(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
                         if (step == 6) {
                             flag = 2;
                         }
