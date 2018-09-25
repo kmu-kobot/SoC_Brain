@@ -79,7 +79,7 @@ int mission_3_4_getMDir(void) {
 int minecount = 0;
 
 int mission_3_default_avoid_bomb(U16 *image) {
-    double black_ratio = getColorRatio1(image, 50, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+    double black_ratio = getColorRatio1(image, 55, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
 
     minecount += black_ratio > 0.6;
     return black_ratio > 0.6;
@@ -87,7 +87,7 @@ int mission_3_default_avoid_bomb(U16 *image) {
 
 int mission_3_walk_avoid_bomb(U16 *image) {
     double blue_ratio = getColorRatio1(image, 20, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLUE);
-    double black_ratio = getColorRatio1(image, 35, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+    double black_ratio = getColorRatio1(image, 30, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
 
     if (blue_ratio > 3.0) {
         return 1;
