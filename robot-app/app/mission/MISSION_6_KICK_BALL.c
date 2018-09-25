@@ -57,6 +57,8 @@ int mission_6_3_find_side_hole(U16 *image, U8 step) {
         RobotSleep(4);
         mission_6_4_set_center_of_ball(image);
 
+        BALL_HEAD(UP);
+        RobotSleep(4);
         return 1;
     } else {
         if (step > 1) {
