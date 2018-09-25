@@ -479,8 +479,7 @@ int mission_5_8_attach_black(U16 *image) {
         return 0;
     }
 
-    if (!mission_5_8_get_front_line(image, &front_line, BLACK) &&
-        !mission_5_8_get_front_line(image, &front_line, BLACK)) {
+    if (!mission_5_8_get_front_line(image, &front_line, BLACK)) {
         return 1;
     }
 
