@@ -345,13 +345,14 @@ int mission_5_6_set_straight_and_center(U16 *image, U16 center) {
 }
 
 int mission_5_6_set_straight(_line_t center_line) {
-    double angle = atan(center_line.slope) / M_PI * 180.0;
+    double angle = atan(center_line.slope) / M_PI * 180.0 - 1.5;
     DIRECTION turn_dir = angle < 0;
     angle = abs(angle);
 
-    if (angle > 8.0) {
-        ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
-    } else if (angle > 4.0) {
+//    if (angle > 8.0) {
+//        ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
+//    } else
+    if (angle > 7.0) {
         ACTION_TURN(SHORT, turn_dir, OBLIQUE, 2);
     } else if (angle > 2.5) {
         ACTION_TURN(SHORT, turn_dir, OBLIQUE, 1);
@@ -660,7 +661,7 @@ int mission_5_9_get_front_line(U16 *image, _line_t *front_line, U16 color) {
 
 int mission_5_9_set_straight(_line_t line) {
     double angle = atan(line.slope) * 180.0 / M_PI;
-    DIRECTION turn_dir = angle > 0;
+    DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = abs(angle);
 
     if (angle > 4.0) {
