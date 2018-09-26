@@ -14,7 +14,7 @@ void mission_3_attach_mine(U16 *image) {
         ACTION_ATTACH_SHORT(1);
         RobotSleep(1);
         setFPGAVideoData(image);
-        ratio = getColorRatio1(image, 50, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+        ratio = getColorRatio1(image, 60, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
     }
 }
 
