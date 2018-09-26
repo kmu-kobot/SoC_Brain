@@ -138,7 +138,7 @@ int default_set_not_black(U16 *image) {
     int dist = getDistance1(image, WIDTH >> 1, HEIGHT - 1, BLACK);
 
     if (dist > 10) {
-        ACTION_TURN(LONG, DIR_LEFT, UP, 1);
+        ACTION_TURN(LONG, DIR_LEFT, UP, 2);
         RobotSleep(1);
     }
     return dist < 10;
