@@ -20,6 +20,8 @@ int mission_3_isFrontOf_Blue(U16 *image, U16 bot);
 
 int mission_3_measure_line(U16 *image);
 
+void mission_3_attach_mine(U16 *image);
+
 int mission_3_check_angle(void);
 
 void mission_3_init_global(void);
