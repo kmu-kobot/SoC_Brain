@@ -137,10 +137,11 @@ int huro(void) {
                         if (flag == 1) {
                             ++flag;
                             default_watch(DOWN);
+                            RobotSleep(2);
+                            setFPGAVideoData(fpga_videodata);
                         }
 
                         setFPGAVideoData(fpga_videodata);
-
                         if (mission_3_isFrontOf_Blue(fpga_videodata, ROBOT_KNEE)) {
                             RobotSleep(1);
                             setFPGAVideoData(fpga_videodata);
