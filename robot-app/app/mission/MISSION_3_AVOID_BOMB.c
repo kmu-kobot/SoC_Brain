@@ -6,7 +6,6 @@
 
 int mdir = 0;
 int mangle = 0;
-_line_t check_lline, check_rline;
 
 int mission_3_avoid(U16 *image) {
     double blue_ratio = getColorRatio1(image, 20, ROBOT_KNEE + 5, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLUE);
@@ -24,16 +23,18 @@ int mission_3_avoid(U16 *image) {
 }
 
 void mission_3_change_mdir(U16 *image) {
+    double thresholdAngle = 8.0;
+
     _line_t leftline, rightline;
     default_watch(LEFT);
     RobotSleep(1);
     linear_regression1(image, WIDTH >> 1, HEIGHT - 11, BLACK, &leftline);
-    mission_3_linear_regression(image, WIDTH >> 1, HEIGHT - 11, BLACK, &check_lline);
+    mangle = abs(atan(leftline.slope) * 180.0 / M_PI + (10)) > thresholdAngle;
 
     default_watch(RIGHT);
     RobotSleep(1);
     linear_regression1(image, WIDTH >> 1, HEIGHT - 11, BLACK, &rightline);
-    mission_3_linear_regression(image, WIDTH >> 1, HEIGHT - 11, BLACK, &check_rline);
+    mangle |= abs(atan(rightline.slope) * 180.0 / M_PI + (-10)) > thresholdAngle;
 
     mdir = leftline.slope * (WIDTH >> 1) + leftline.intercept > rightline.slope * (WIDTH >> 1) + rightline.intercept;
 }
@@ -59,10 +60,6 @@ int mission_3_measure_line(U16 *image) { // 여기도 col 갯수 늘리고 여�
 }
 
 int mission_3_check_angle(void) {
-    double thresholdAngle = 7.0;
-    mangle = abs(atan(check_lline.slope) * 180.0 / M_PI + (10)) > thresholdAngle ||
-             abs(atan(check_rline.slope) * 180.0 / M_PI + (-10)) > thresholdAngle;
-
     return mangle;
 }
 
