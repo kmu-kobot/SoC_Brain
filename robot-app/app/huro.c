@@ -262,8 +262,8 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         if (flag == 0) {
-                            default_watch(OBLIQUE);
-                            RobotSleep(2);
+                            CHECK_INIT(OBLIQUE);
+                            RobotSleep(1);
                             ++flag;
                         }
 
@@ -479,7 +479,8 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         if (flag == 0) {
-                            default_watch(OBLIQUE);
+                            CHECK_INIT(OBLIQUE);
+                            RobotSleep(1);
                             setFPGAVideoData(fpga_videodata);
                             mission_7_1_watch_below(fpga_videodata, 30);
                         }
@@ -628,7 +629,6 @@ int huro(void) {
                     case 1:
                         if (flag == 0) {
                             default_watch(RIGHT);
-                            RobotSleep(1);
                             flag++;
                         }
 
@@ -639,7 +639,6 @@ int huro(void) {
                             ++step;
 
                             CHECK_INIT(DOWN);
-                            RobotSleep(2);
                             ACTION_WALK(FAST, DOWN, 5);
                             RobotSleep(1);
                         }
@@ -647,7 +646,6 @@ int huro(void) {
                     case 2:
                         if (flag == 0) {
                             default_watch(RIGHT);
-                            RobotSleep(1);
                             flag++;
                         }
 
@@ -655,8 +653,7 @@ int huro(void) {
                         break;
                     case 3:
                         // 일반 걸음으로 걸은 후에, 영상처리 걸음 시작할때 안정화를 위해 슬립
-                        CHECK_INIT(OBLIQUE);
-                        RobotSleep(2);
+                        default_watch(OBLIQUE);
 
                         step = 0;
                         mission = nextMission;
