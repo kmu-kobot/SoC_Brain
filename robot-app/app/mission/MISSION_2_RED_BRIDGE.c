@@ -10,10 +10,11 @@ void mission_2_1_watch_below(U16 *image, int repeat) { // 이름을 바꾸는게
 }
 
 int mission_2_1_attach_red_bridge(U16 *image) {
-    double ratio = getColorRatio2(image, 20, ROBOT_KNEE, 50, WIDTH - 50, RED, ORANGE);
+    double ratio = getColorRatio2(image, 20, ROBOT_KNEE - 5, 50, WIDTH - 50, RED, ORANGE);
 
-    ACTION_ATTACH(1);
-    return ratio > 45.0;
+    ACTION_ATTACH(2);
+    return 1;
+    // return ratio > 30.0;
 }
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image) {

@@ -12,8 +12,9 @@ void mission_7_1_watch_below(U16 *image, int repeat) { // 합쳐도 될듯
 int mission_7_1_attach_yellow_bridge(U16 *image) { // 무작정 붙이기 쓰는거보다 기울기 보고 회전 조금 시키는것도 좋을거같음
     double ratio = getColorRatio2(image, 20, ROBOT_KNEE, 50, WIDTH - 50, YELLOW, CH2);
 
-    ACTION_ATTACH(1);
-    return ratio > 70.0;
+    ACTION_ATTACH(2);
+    return 1;
+    // return ratio > 70.0;
 }
 
 int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image) {

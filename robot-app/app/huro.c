@@ -59,14 +59,7 @@ int huro(void) {
             case 2: // MISSION 2: RED BRIDGE
                 switch (step) {
                     case 0:
-                        if (!mission_2_1_wait_front_of_red_bridge(
-                                fpga_videodata)) { // 어차피 이 스텝에서 flag 3밖에 안쓰니까 이 if 문 없어도 될거같음
-                            // mission_2_1_watch_below(fpga_videodata, 20);
-                            ACTION_ATTACH(1);
-                        }
-
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_2_1_wait_front_of_red_bridge(fpga_videodata);
+                        ++step;
                         break;
                     case 1:
                         flag = 0;
@@ -489,7 +482,7 @@ int huro(void) {
                             mission_7_1_watch_below(fpga_videodata, 30);
                         }
 
-                        ACTION_ATTACH(1); // 4개 너무 많음
+                        // ACTION_ATTACH(1); // 4개 너무 많음
                         ++step;
                         // 위에서 노란다리를 인식한후에 수행하는 라인이므로, 다시 수행하는 것은 무의미
 
