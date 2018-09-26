@@ -80,7 +80,7 @@ int huro(void) {
                             flag++;
                         }
 
-                        step += default_set_center1(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
+                        step += default_set_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
 
                         if (step == 2) {
                             flag = 2;
@@ -223,7 +223,7 @@ int huro(void) {
                             ++flag;
                         }
 
-                        step += default_set_center1(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
+                        step += default_set_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
                         if (step == 6) {
                             flag = 2;
                         }
@@ -359,7 +359,7 @@ int huro(void) {
                             RobotSleep(3);
                             ++flag;
                         }
-                        step += default_set_straight_and_center1(fpga_videodata, LEFT, 120, HEIGHT - 11, BLACK);
+                        step += default_set_straight_and_center1_long(fpga_videodata, LEFT, 120, HEIGHT - 11, BLACK);
                         if (step == 12) {
                             default_watch(OBLIQUE);
                         }
@@ -529,7 +529,7 @@ int huro(void) {
                             RobotSleep(1);
                             flag++;
                         }
-                        step += default_set_straight_and_center1(fpga_videodata, LEFT, 120, HEIGHT - 11, BLACK);
+                        step += default_set_straight_and_center1_long(fpga_videodata, LEFT, 120, HEIGHT - 11, BLACK);
                         break;
                     case 8:
                         mission += 1;
@@ -559,7 +559,7 @@ int huro(void) {
                             RobotSleep(1);
                             ++flag;
                         }
-                        step += default_set_straight_and_center1(fpga_videodata, LEFT, 40, HEIGHT - 11, BLACK);
+                        step += default_set_straight_and_center1_long(fpga_videodata, LEFT, 40, HEIGHT - 11, BLACK);
                         break;
                     case 2:
                         if (flag == 2) {
@@ -580,7 +580,7 @@ int huro(void) {
                             RobotSleep(1);
                             ++flag;
                         }
-                        step += default_set_straight_and_center1(fpga_videodata, LEFT, 120, HEIGHT - 11, BLACK);
+                        step += default_set_straight_and_center1_long(fpga_videodata, LEFT, 120, HEIGHT - 11, BLACK);
                         break;
                     default:
                         default_watch(OBLIQUE);
@@ -635,7 +635,7 @@ int huro(void) {
                             flag++;
                         }
 
-                        if (default_set_straight_and_center1(fpga_videodata, RIGHT, 60, HEIGHT - 11, BLACK)) {
+                        if (default_set_straight_and_center1_long(fpga_videodata, RIGHT, 60, HEIGHT - 11, BLACK)) {
                             // 앞에꺼는 다음이 옐로우 뒤에는 다음이 초록다리
 
                             flag = 0;
@@ -654,7 +654,7 @@ int huro(void) {
                             flag++;
                         }
 
-                        step += default_set_straight_and_center1(fpga_videodata, RIGHT, 60, HEIGHT - 11, BLACK);
+                        step += default_set_straight_and_center1_long(fpga_videodata, RIGHT, 60, HEIGHT - 11, BLACK);
                         break;
                     case 3:
                         // 일반 걸음으로 걸은 후에, 영상처리 걸음 시작할때 안정화를 위해 슬립
