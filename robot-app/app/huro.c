@@ -189,7 +189,8 @@ int huro(void) {
                                 break;
                             }
 
-                            mission_3_change_mdir_opposite();
+                            mission_3_change_mdir(fpga_videodata);
+                            // mission_3_change_mdir_opposite();
                             flag = 6;
                         }
 
