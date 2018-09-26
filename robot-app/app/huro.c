@@ -334,6 +334,7 @@ int huro(void) {
                         RobotSleep(2);
                         break;
                     case 8:
+                        CHECK_INIT(OBLIQUE);
                         setFPGAVideoData(fpga_videodata);
                         step += mission_5_8_attach_black(fpga_videodata);
                         flag = 0;
