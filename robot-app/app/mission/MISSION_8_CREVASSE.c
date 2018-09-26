@@ -24,7 +24,7 @@ int mission_8_2_attach_black(U16 *image) {
         return 0;
     }
 
-    return mission_8_2_set_straight(front_line) && mission_8_2_set_dist(front_line);
+    return mission_8_2_set_dist(front_line);
 }
 
 int mission_8_2_get_front_line(U16 *image, _line_t *front_line, U16 color) {
