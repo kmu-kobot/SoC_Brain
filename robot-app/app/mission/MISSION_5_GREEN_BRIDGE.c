@@ -5,7 +5,7 @@
 #include "MISSION_5_GREEN_BRIDGE.h"
 
 void mission_5_1_watch_below(U16 *image, int repeat) {
-    ACTION_WALK_CHECK(DOWN, image, mission_5_1_check_black_line, 1, repeat);
+    ACTION_WALK_CHECK(OBLIQUE, image, mission_5_1_check_black_line, 1, repeat);
     RobotSleep(2);
 }
 
@@ -16,17 +16,14 @@ int mission_5_1_attach(U16 *image) {
     printf("ratio : %f\n", ratio);
 #endif
 
-    if (ratio < 30.0) {
-        ACTION_ATTACH(1);
-        return 0;
-    }
-    return 1;
+    ACTION_ATTACH(1);
+    return ratio > 30.0;
 }
 
 int mission_5_1_check_black_line(U16 *image) {
     U32 col, row, cntBlack = 0, dist = 0;
 
-    for (row = ROBOT_KNEE - 10; row > 0; --row) {
+    for (row = ROBOT_KNEE; row > 0; --row) {
         cntBlack = 0;
         for (col = 50; col < WIDTH - 50; col++) {
             cntBlack += GetValueRGBYOBK(GetPtr(image, row, col, WIDTH), BLACK);
@@ -294,10 +291,8 @@ int mission_5_4_set_center(_line_t line) {
     center = abs(center);
 
     if (center > 8.0) {
-        ACTION_MOVE(SHORT, move_dir, OBLIQUE, 3);
-    } else if (center > 5.0) {
         ACTION_MOVE(SHORT, move_dir, OBLIQUE, 2);
-    } else if (center > 2.0) {
+    } else if (center > 5.0) {
         ACTION_MOVE(SHORT, move_dir, OBLIQUE, 1);
     } else {
         return 1;
@@ -350,13 +345,14 @@ int mission_5_6_set_straight_and_center(U16 *image, U16 center) {
 }
 
 int mission_5_6_set_straight(_line_t center_line) {
-    double angle = atan(center_line.slope) / M_PI * 180.0;
+    double angle = atan(center_line.slope) / M_PI * 180.0 - 1.5;
     DIRECTION turn_dir = angle < 0;
     angle = abs(angle);
 
-    if (angle > 8.0) {
-        ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
-    } else if (angle > 4.0) {
+//    if (angle > 8.0) {
+//        ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
+//    } else
+    if (angle > 7.0) {
         ACTION_TURN(SHORT, turn_dir, OBLIQUE, 2);
     } else if (angle > 2.5) {
         ACTION_TURN(SHORT, turn_dir, OBLIQUE, 1);
@@ -484,8 +480,7 @@ int mission_5_8_attach_black(U16 *image) {
         return 0;
     }
 
-    if (!mission_5_8_get_front_line(image, &front_line, BLACK) &&
-        !mission_5_8_get_front_line(image, &front_line, BLACK)) {
+    if (!mission_5_8_get_front_line(image, &front_line, BLACK)) {
         return 1;
     }
 
@@ -666,7 +661,7 @@ int mission_5_9_get_front_line(U16 *image, _line_t *front_line, U16 color) {
 
 int mission_5_9_set_straight(_line_t line) {
     double angle = atan(line.slope) * 180.0 / M_PI;
-    DIRECTION turn_dir = angle > 0;
+    DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = abs(angle);
 
     if (angle > 4.0) {
@@ -695,7 +690,7 @@ int mission_5_9_set_dist(_line_t line) {
         ACTION_ATTACH(1);
         RobotSleep(1);
         return 0;
-    } else if (dist < 67.0) {
+    } else if (dist < 65.0) { // 67
         ACTION_ATTACH_SHORT(1);
         RobotSleep(1);
         return 0;

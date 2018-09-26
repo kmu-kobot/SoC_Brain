@@ -12,9 +12,9 @@
 
 #define SOC_APP_MISSION_1_YELLOW_BARRICADE_H
 
-#define CASE_1_UPPER 0
+#define CASE_1_UPPER 10
 #define CASE_1_LOWER 110
-#define CASE_1_RATIO 10
+#define CASE_1_RATIO 5
 
 int mission_1_1_wait_yellow_barricade(U16 *image);
 

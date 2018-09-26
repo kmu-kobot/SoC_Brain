@@ -20,11 +20,17 @@ int mission_3_isFrontOf_Blue(U16 *image, U16 bot);
 
 int mission_3_measure_line(U16 *image);
 
+void mission_3_attach_mine(U16 *image);
+
+int mission_3_check_angle(void);
+
 void mission_3_init_global(void);
 
 int mission_3_avoid(U16 *image);
 
 void mission_3_change_mdir(U16 *image);
+
+void mission_3_change_mdir_opposite(void);
 
 int mission_3_default_watch_below(U16 *image, int repeat);
 

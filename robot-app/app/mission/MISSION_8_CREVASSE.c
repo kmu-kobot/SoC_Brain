@@ -24,7 +24,7 @@ int mission_8_2_attach_black(U16 *image) {
         return 0;
     }
 
-    return mission_8_2_set_straight(front_line) && mission_8_2_set_dist(front_line);
+    return mission_8_2_set_dist(front_line);
 }
 
 int mission_8_2_get_front_line(U16 *image, _line_t *front_line, U16 color) {
@@ -95,7 +95,7 @@ int mission_8_2_get_front_line(U16 *image, _line_t *front_line, U16 color) {
 
 int mission_8_2_set_straight(_line_t line) {
     double angle = atan(line.slope) * 180.0 / M_PI;
-    DIRECTION turn_dir = angle > 0;
+    DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = abs(angle);
 
     if (angle > 4.0) {
@@ -115,8 +115,8 @@ int mission_8_2_set_straight(_line_t line) {
 int mission_8_2_set_dist(_line_t line) {
     double dist = line.slope * (WIDTH >> 1) + line.intercept;
 
-    if (dist < 50.0) {
-        ACTION_ATTACH(1);
+    if (dist < 55.0) {
+        ACTION_ATTACH_SHORT(1);
         RobotSleep(1);
         return 0;
     }
