@@ -469,7 +469,6 @@ static inline void BALL_STABLE(VIEW view) {
         view = OBLIQUE + 1;
     }
     RobotAction(BALL_STABLE_DOWN + view);
-    RobotSleep(2);
 }
 
 #endif //SOC_APP_ROBOT_ACTION_H
