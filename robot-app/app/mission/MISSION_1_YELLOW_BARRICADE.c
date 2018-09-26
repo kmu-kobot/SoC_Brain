@@ -18,7 +18,7 @@ int mission_1_2_end_yellow_barricade(U16 *image) {
     U32 i, success = 0;
     for (i = 0; i < 5 && success < 3; ++i) {
         setFPGAVideoData(image);
-        success += (getColorRatio1(image, CASE_1_UPPER, CASE_1_LOWER, 0, WIDTH, YELLOW) < CASE_1_RATIO - 5);
+        success += (getColorRatio1(image, CASE_1_UPPER, CASE_1_LOWER, 0, WIDTH, YELLOW) < CASE_1_RATIO);
     }
 
     return success >= 3;
