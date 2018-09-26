@@ -9,14 +9,34 @@ int mangle = 0;
 
 int mission_3_avoid(U16 *image) {
     double blue_ratio = getColorRatio1(image, 20, ROBOT_KNEE + 5, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLUE);
-    double black_ratio = getColorRatio1(image, 0, ROBOT_KNEE + 5, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+    double black_ratio = getColorRatio1(image, 10, ROBOT_KNEE + 5, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
 
     if (blue_ratio > 3.0) {
         return 1;
     }
 
+    U32 repeat;
+    U16 col, index = 0;
+    double mine_ratio = 0;
+    U32 mines[30] = {0,};
+
+    for (col = MINE_RANGE_LEFT; col < WIDTH - MINE_RANGE_LEFT; col += 5) {
+        mine_ratio = getColorRatio1(image, 10, ROBOT_KNEE + 5, col, col + 5, BLACK);
+
+        if (mine_ratio > 10.0) {
+            mines[index++] = col + 2;
+        }
+
+    }
+
+    // mdir & 1 ? RIGHT : LEFT
+    index = (U16) ((mdir & 1) ? index - 1 : 0);
+    U32 baseline = (mdir & 1) ? MINE_RANGE_LEFT : (WIDTH - MINE_RANGE_LEFT);
+
+    repeat = MIN(3, abs(baseline - mines[index] / 25));
+
     if (black_ratio > 0.6) {
-        ACTION_MOVE(LONG, (mdir & 1), DOWN, 1);
+        ACTION_MOVE(LONG, (DIRECTION) (mdir & 1), DOWN, (int) repeat);
         RobotSleep(3);
     }
     return black_ratio < 0.6;
