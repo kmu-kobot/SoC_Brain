@@ -393,7 +393,7 @@ int mission_5_7_watch_below(U16 *image) {
         return 1;
     }
 
-    double angle = abs(atan(center_line.slope) / M_PI * 180.0);
+    double angle = abs(atan(center_line.slope) / M_PI * 180.0 - 1);
 
     if (angle > 5.0) {
         return -1;
@@ -430,9 +430,9 @@ int mission_5_7_walk_check(U16 *image) {
         return 1;
     }
 
-    double angle = abs(atan(center_line.slope) / M_PI * 180.0);
+    double angle = abs(atan(center_line.slope) / M_PI * 180.0 - 1);
 
-    if (angle > 5.0) {
+    if (angle > 6.0) {
         return 1;
     }
 
