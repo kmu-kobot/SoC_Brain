@@ -219,7 +219,7 @@ int huro(void) {
                         }
 
                         step += default_set_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
-                        if (step == 6) {
+                        if (step == 5) {
                             flag = 2;
                         }
                         break;
@@ -512,7 +512,7 @@ int huro(void) {
                     case 3:
                         // 노란색 앞에서 중심 맞추고 붙이기 한번 더 해아함
                         if (flag == 2) {
-                            ACTION_ATTACH_SHORT(1);
+                            ACTION_ATTACH(1);
                         }
                         step = 6;
                         break;
