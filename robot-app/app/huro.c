@@ -130,6 +130,7 @@ int huro(void) {
                             flag = step == 2 ? 5 : 0;
                         } else {
                             step = 1;
+                            flag = 0;
                         }
 
                         step = mission_3_isFrontOf_Blue(fpga_videodata, HEIGHT) ? 4 : step;
@@ -162,7 +163,7 @@ int huro(void) {
                             if (flag == 2) {
                                 ACTION_ATTACH_SHORT(1);
                                 RobotSleep(1);
-                                flag++;
+                                ++flag;
                                 break;
                             }
                             step = 2;
