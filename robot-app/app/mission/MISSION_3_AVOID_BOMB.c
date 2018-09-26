@@ -84,7 +84,7 @@ int mission_3_check_angle(void) {
 }
 
 int mission_3_isFrontOf_Blue(U16 *image, U16 bot) {
-    double ratio = getColorRatio1(image, 0, 40, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLUE);
+    double ratio = getColorRatio1(image, 10, 40, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLUE);
 
     return ratio > 3.0;
 }
@@ -115,7 +115,7 @@ int mission_3_default_avoid_bomb(U16 *image) {
 }
 
 int mission_3_walk_avoid_bomb(U16 *image) {
-    double blue_ratio = getColorRatio1(image, 0, 40, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLUE);
+    double blue_ratio = getColorRatio1(image, 10, 40, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLUE);
     double black_ratio = getColorRatio1(image, 20, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
 
     if (blue_ratio > 3.0) {
@@ -123,8 +123,8 @@ int mission_3_walk_avoid_bomb(U16 *image) {
     }
 
 
-    minecount += black_ratio > 0.6;
-    return black_ratio > 0.6;
+    minecount += black_ratio > 0.4;
+    return black_ratio > 0.4;
 }
 
 int k = 0;
