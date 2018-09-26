@@ -81,7 +81,7 @@ int huro(void) {
                         break;
                     case 3:
                         if (flag == 2) {
-                            ACTION_ATTACH(1);
+                            ACTION_ATTACH_SHORT(1);
                         }
                         step += mission_2_3_escape_red_bridge();
                         flag = 0;
@@ -296,7 +296,7 @@ int huro(void) {
                         break;
                     case 3:
                         // 계단 오르기
-                        ACTION_ATTACH(1);
+                        ACTION_ATTACH_SHORT(1);
                         mission_5_3_climb_up_stairs();
                         flag = 0;
                         ++step;
@@ -506,12 +506,14 @@ int huro(void) {
 
                         step += default_set_center1(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
                         if (step == 2) {
-                            flag++;
+                            flag = 2;
                         }
                         break;
                     case 3:
                         // 노란색 앞에서 중심 맞추고 붙이기 한번 더 해아함
-                        ACTION_ATTACH(1);
+                        if (flag == 2) {
+                            ACTION_ATTACH_SHORT(1);
+                        }
                         step = 6;
                         break;
                     case 6:
