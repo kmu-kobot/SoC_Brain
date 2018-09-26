@@ -7,15 +7,28 @@
 int mdir = 0;
 int mangle = 0;
 
+void mission_3_attach_mine(U16 *image) {
+    double ratio = getColorRatio1(image, 60, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+    U16 iter = 0;
+    while (ratio < 0.8 && iter++ < 3) {
+        ACTION_ATTACH_SHORT(1);
+        RobotSleep(1);
+        setFPGAVideoData(image);
+        ratio = getColorRatio1(image, 50, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+    }
+}
+
 int mission_3_avoid(U16 *image) {
     double blue_ratio = getColorRatio1(image, 20, ROBOT_KNEE + 5, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLUE);
-    double black_ratio = getColorRatio1(image, 10, ROBOT_KNEE + 5, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+    double black_ratio = getColorRatio1(image, 5, ROBOT_KNEE - 5, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
 
     if (blue_ratio > 3.0) {
         return 1;
     }
 
-    U32 repeat;
+    U32 repeat = 1;
+
+    /*
     U16 col, index = 0;
     double mine_ratio = 0;
     U32 mines[30] = {0,};
@@ -32,14 +45,14 @@ int mission_3_avoid(U16 *image) {
     // mdir & 1 ? RIGHT : LEFT
     index = (U16) ((mdir & 1) ? index - 1 : 0);
     U32 baseline = (mdir & 1) ? MINE_RANGE_LEFT : (WIDTH - MINE_RANGE_LEFT);
+    repeat = MIN(3, abs(baseline - mines[index] / 35));
+     */
 
-    repeat = MIN(3, abs(baseline - mines[index] / 25));
-
-    if (black_ratio > 0.6) {
+    if (black_ratio > 0.4) {
         ACTION_MOVE(LONG, (DIRECTION) (mdir & 1), DOWN, (int) repeat);
-        RobotSleep(3);
+        RobotSleep(2);
     }
-    return black_ratio < 0.6;
+    return black_ratio < 0.4;
 }
 
 void mission_3_change_mdir(U16 *image) {
@@ -108,14 +121,14 @@ int mission_3_4_getMDir(void) {
 int minecount = 0;
 
 int mission_3_default_avoid_bomb(U16 *image) {
-    double black_ratio = getColorRatio1(image, 55, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+    double black_ratio = getColorRatio1(image, 50, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
 
-    minecount += black_ratio > 0.6;
-    return black_ratio > 0.6;
+    minecount += black_ratio > 0.5;
+    return black_ratio > 0.5;
 }
 
 int mission_3_walk_avoid_bomb(U16 *image) {
-    double blue_ratio = getColorRatio1(image, 10, 40, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLUE);
+    double blue_ratio = getColorRatio1(image, 15, 40, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLUE);
     double black_ratio = getColorRatio1(image, 20, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
 
     if (blue_ratio > 3.0) {
@@ -123,8 +136,8 @@ int mission_3_walk_avoid_bomb(U16 *image) {
     }
 
 
-    minecount += black_ratio > 0.4;
-    return black_ratio > 0.4;
+    minecount += black_ratio > 0.45;
+    return black_ratio > 0.45;
 }
 
 int k = 0;

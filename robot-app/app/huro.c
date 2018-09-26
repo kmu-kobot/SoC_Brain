@@ -128,6 +128,10 @@ int huro(void) {
 
                         step = mission_3_isFrontOf_Blue(fpga_videodata, HEIGHT) ? 4 : step;
                         flag = flag == 5 ? flag : 0;
+
+                        if (step == 1) {
+                            mission_3_attach_mine(fpga_videodata);
+                        }
                         break;
                     case 1:
                         if (flag == 0) {
@@ -151,21 +155,12 @@ int huro(void) {
                             }
                         }
 
+                        setFPGAVideoData(fpga_videodata);
                         if (mission_3_avoid(fpga_videodata)) { // 만약 지뢰를 다 피했으면
-                            RobotSleep(1);
-
-                            if (flag == 2) {
-                                ACTION_ATTACH_SHORT(1);
-                                RobotSleep(1);
-                                ++flag;
-                                break;
-                            }
                             step = 2;
                             flag = 0;
-                            break;
                         }
 
-                        ++flag;
                         break;
                     case 2:
                         // 방향 설정
@@ -186,6 +181,12 @@ int huro(void) {
                             mission_3_change_mdir(fpga_videodata);
                             // mission_3_change_mdir_opposite();
                             flag = 6;
+                        }
+
+                        if (!mission_3_check_angle()) {
+                            ++step;
+                            flag = 0;
+                            break;
                         }
 
                         // 고개 돌리기
