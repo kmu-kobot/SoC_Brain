@@ -20,17 +20,17 @@
 
 #define MISSION_6_3_THRES 2
 
-#define MISSION_6_3_CENTER 106
+#define MISSION_6_3_CENTER 102
 
 #define MISSION_6_4_THRES 5
 
-#define MISSION_6_4_CENTER 110
+#define MISSION_6_4_CENTER 105
 
 int mission_6_1_detection_ball(U16 *image);
 
 int mission_6_3_locate_hole_on_center(U16 *image);
 
-void mission_6_4_turn_left(void);
+void mission_6_4_turn_right(void);
 
 int mission_6_3_find_side_hole(U16 *image, U8 step);
 

@@ -703,7 +703,6 @@ int mission_5_10_climb_down_stairs(void) {
     RobotSleep(1);
     ACTION_MOTION(MISSION_5_STAIR_DOWN, UP);
     CHECK_INIT(OBLIQUE);
-    //TODO
     ACTION_WALK(FAST, OBLIQUE, 2);
     return 1;
 }

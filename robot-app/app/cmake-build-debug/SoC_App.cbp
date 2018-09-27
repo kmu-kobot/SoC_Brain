@@ -8,193 +8,181 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug"/>
+				<Option working_dir="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug"/>
+				<Option working_dir="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="SoC_App">
-				<Option output="/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/SoC_App" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug"/>
+				<Option output="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/SoC_App.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include"/>
 					<Add directory="/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/../../../../lib/../include/w32api"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 SoC_App"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 SoC_App"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="SoC_App/fast">
-				<Option output="/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/SoC_App" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug"/>
+				<Option output="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/SoC_App.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include"/>
 					<Add directory="/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/../../../../lib/../include/w32api"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 SoC_App/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/dexterastin/SoC_Brain2/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 SoC_App/fast"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/huro.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/huro.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/huro.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/huro.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/library/amazon2_sdk.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/amazon2_sdk.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/library/graphic_api.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/graphic_api.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/library/graphic_api.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/graphic_api.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/library/imageProcess.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/imageProcess.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/library/imageProcess.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/imageProcess.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/library/robot_action.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/robot_action.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/library/robot_action.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/robot_action.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/library/robot_protocol.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/robot_protocol.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/library/robot_protocol.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/robot_protocol.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/library/uart_api.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/uart_api.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/library/uart_api.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/uart_api.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/main.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/main.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/DEFAULT.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/DEFAULT.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/DEFAULT.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/DEFAULT.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_0_READY_PLAY.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_10_BLUE_GATE.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_0_READY_PLAY.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_10_BLUE_GATE.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_10_BLUE_GATE.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_10_BLUE_GATE.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_2_RED_BRIDGE.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_2_RED_BRIDGE.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_2_RED_BRIDGE.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_3_AVOID_BOMB.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_2_RED_BRIDGE.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_3_AVOID_BOMB.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_3_AVOID_BOMB.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_4_JUMP_HURDLE.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_3_AVOID_BOMB.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_4_JUMP_HURDLE.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_4_JUMP_HURDLE.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_5_GREEN_BRIDGE.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_4_JUMP_HURDLE.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_5_GREEN_BRIDGE.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_5_GREEN_BRIDGE.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_6_KICK_BALL.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_5_GREEN_BRIDGE.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_6_KICK_BALL.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_6_KICK_BALL.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_6_KICK_BALL.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_8_CREVASSE.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_8_CREVASSE.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_8_CREVASSE.c">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_9_LAST_BARRICADE.c">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_8_CREVASSE.h">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_9_LAST_BARRICADE.h">
 			<Option target="SoC_App"/>
 		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_9_LAST_BARRICADE.c">
-			<Option target="SoC_App"/>
-		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/mission/MISSION_9_LAST_BARRICADE.h">
-			<Option target="SoC_App"/>
-		</Unit>
-		<Unit filename="/Users/dexterastin/SoC_Brain2/robot-app/app/CMakeLists.txt">
+		<Unit filename="/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

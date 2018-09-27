@@ -17,7 +17,6 @@
 #include "./library/uart_api.h"
 #include "./library/robot_action.h"
 
-#include "./mission/MISSION_0_READY_PLAY.h"
 #include "./mission/MISSION_1_YELLOW_BARRICADE.h"
 #include "./mission/MISSION_2_RED_BRIDGE.h"
 #include "./mission/MISSION_3_AVOID_BOMB.h"

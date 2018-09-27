@@ -178,12 +178,12 @@ typedef enum {
     BALL_HEAD_HALF_LEFT,
     BALL_HEAD_HALF_RIGHT,
 
-    BALL_TURN_LEFT_DOWN = 165,
-    BALL_TURN_RIGHT_DOWN,
-    BALL_TURN_LEFT_OBLIQUE,
-    BALL_TURN_RIGHT_OBLIQUE,
-    BALL_TURN_LEFT_UP,
-    BALL_TURN_RIGHT_UP,
+    BALL_TURN_LEFT_LONG = 165,
+    BALL_TURN_RIGHT_LONG,
+    BALL_TURN_LEFT_MIDDLE,
+    BALL_TURN_RIGHT_MIDDLE,
+    BALL_TURN_LEFT_SHORT,
+    BALL_TURN_RIGHT_SHORT,
 
     BALL_MOVE_LEFT_DOWN = 172,
     BALL_MOVE_RIGHT_DOWN,
@@ -207,6 +207,9 @@ typedef enum {
     BALL_MOVE_LONG_RIGHT_OBLIQUE,
     BALL_MOVE_LONG_LEFT_UP,
     BALL_MOVE_LONG_RIGHT_UP,
+
+    BALL_BIT_LEFT = 196,
+    BALL_BIT_RIGHT,
 
     NIL = 0xff
 } MOTION;
@@ -256,7 +259,6 @@ typedef enum {
     CHECK = 0,
     SET,
     HEAD,
-    STAY
 } PREV_CHECK_MOD;
 
 void prev_check(MOTION motion, PREV_CHECK_MOD mod);
@@ -426,12 +428,9 @@ static inline void BALL_HALF_HEAD(MOTION motion) {
     RobotAction(motion);
 }
 
-static inline void BALL_TURN(DIRECTION dir, VIEW view, int repeat) {
-    if (view == UP) {
-        view = OBLIQUE + 1;
-    }
+static inline void BALL_TURN(DIRECTION dir, LENGTH len, int repeat) {
     while (repeat--) {
-        RobotAction(BALL_TURN_LEFT_DOWN + dir + (view << 1));
+        RobotAction(BALL_TURN_LEFT_LONG + dir + (len << 1));
     }
 }
 
@@ -456,6 +455,12 @@ static inline void BALL_MOVE_LONG(DIRECTION dir, VIEW view, int repeat) {
 static inline void BALL_BIT(DIRECTION dir, int repeat) {
     while (repeat--) {
         RobotAction(BALL_BIT_FRONT + dir);
+    }
+}
+
+static inline void BALL_BIT_MOVE(DIRECTION dir, int repeat) {
+    while (repeat--) {
+        RobotAction(BALL_BIT_LEFT + dir);
     }
 }
 

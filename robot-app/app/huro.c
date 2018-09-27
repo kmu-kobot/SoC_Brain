@@ -13,7 +13,7 @@ int huro(void) {
 
     int missionFinished = 0;
 
-    int mission = 0;
+    int mission = 6;
     int step = 0;
 
     int nextMission = 0;
@@ -29,9 +29,6 @@ int huro(void) {
 
         switch (mission) {
             case 0: // MISSION 0: READY PLAY   // 빼도 될거같음
-                // mission += mission_0_1_wait_play(fpga_videodata);
-                // default_set_straight_and_center1(fpga_videodata, LEFT, WIDTH>>1, HEIGHT-11, BLACK);
-                // default_get_straight_and_center1(fpga_videodata, RIGHT, WIDTH>>1, HEIGHT-11, BLACK);
                 ++mission;
                 break;
             case 1: // MISSION 1: YELLOW BARRICADE
@@ -274,7 +271,7 @@ int huro(void) {
                         ACTION_ATTACH(1);
 
                         ++step;
-                        flag = 0;
+//                        flag = 0;
                         break;
                     case 1:
                         flag = 0;
@@ -467,6 +464,7 @@ int huro(void) {
                     case 8:
                         mission_6_9_walk_front();
                         ++step;
+                        break;
                     default:
                         mission = 10;
                         step = 0;
@@ -593,9 +591,6 @@ int huro(void) {
                     case 0:
                         step += 1;
                         ACTION_WALK(SLOW, OBLIQUE, 5);
-//                        setFPGAVideoData(fpga_videodata);
-//                        mission_9_1_go_front(fpga_videodata);
-//                        step += 1;
                         break;
                     case 1:
                         CHECK_INIT(UP);

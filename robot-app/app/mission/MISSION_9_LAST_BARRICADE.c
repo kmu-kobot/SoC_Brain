@@ -27,7 +27,6 @@ int mission_9_2_end_yellow_barricade(U16 *image) {
 void mission_9_3_escape_yellow_barricade(int repeat) {
     CHECK_INIT(DOWN);
     RobotSleep(2);
-    // TODO:
     ACTION_WALK(FAST, DOWN, 9);
     ACTION_WALK(FAST, DOWN, 9);
 }
