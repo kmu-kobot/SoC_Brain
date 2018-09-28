@@ -272,7 +272,7 @@ int huro(void) {
                         ACTION_ATTACH(1);
 
                         ++step;
-//                        flag = 0;
+                        //                        flag = 0;
                         break;
                     case 1:
                         flag = 0;
@@ -366,7 +366,7 @@ int huro(void) {
                         flag = 0;
                         step = 0;
                         break;
-                    default :
+                    default:
                         break;
                 }
                 break;
