@@ -110,7 +110,6 @@ int mission_3_default_watch_below(U16 *image, int repeat) {
     return result;
 }
 
-
 void mission_3_init_global(void) {
     mdir = 0;
 }
@@ -135,7 +134,6 @@ int mission_3_walk_avoid_bomb(U16 *image) {
     if (blue_ratio > 3.0) {
         return 1;
     }
-
 
     minecount += black_ratio > 0.45;
     return black_ratio > 0.45;

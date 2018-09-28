@@ -103,26 +103,27 @@ int huro(void) {
                 break;
             case 3: // MISSION 3: AVOID BOMB
                 /*
-                 * 1. 지뢰 있는지 보면서 걷기
-                 * 2. 지뢰 발견하면 옆에보고 어디로 갈지 선택 (이때, 각도가 True 인지도 동시에 검사)
-                 * 3. 지뢰 피하기
-                 * 4. 만약, 2에서 각도가 False라면 각도 맞추기
-                 * */
+                     * 1. 지뢰 있는지 보면서 걷기
+                     * 2. 지뢰 발견하면 옆에보고 어디로 갈지 선택 (이때, 각도가 True 인지도 동시에 검사)
+                     * 3. 지뢰 피하기
+                     * 4. 만약, 2에서 각도가 False라면 각도 맞추기
+                     * */
                 switch (step) {
                     case 0:
                         // 앞에 있는 지뢰 감지
                         default_watch(OBLIQUE);
-                        RobotSleep(1);
+                        // RobotSleep(1);
                         setFPGAVideoData(fpga_videodata);
+
+                        step = 1;
+                        flag = 0;
+
                         if (!mission_3_default_avoid_bomb(fpga_videodata)) {
                             step = mission_3_default_watch_below(fpga_videodata, 10) ? 1 : 2;
-                            RobotSleep(1);
                             flag = step == 2 ? 5 : 0;
-                        } else {
-                            step = 1;
-                            flag = 0;
                         }
 
+                        setFPGAVideoData(fpga_videodata);
                         step = mission_3_isFrontOf_Blue(fpga_videodata, HEIGHT) ? 4 : step;
                         flag = flag == 5 ? flag : 0;
 
@@ -138,7 +139,7 @@ int huro(void) {
                         if (flag == 1) {
                             ++flag;
                             default_watch(DOWN);
-                            RobotSleep(2);
+                            // RobotSleep(2);
                             setFPGAVideoData(fpga_videodata);
                         }
 
@@ -189,7 +190,7 @@ int huro(void) {
                         // 고개 돌리기
                         if (flag == 6) {
                             default_watch((VIEW) mission_3_4_getMDir());
-                            RobotSleep(1);
+                            // RobotSleep(1);
                             ++flag;
                             break;
                         }
@@ -211,7 +212,7 @@ int huro(void) {
                     case 5:
                         if (flag == 0) {
                             default_watch(LEFT);
-                            RobotSleep(1);
+                            // RobotSleep(1);
                             ++flag;
                         }
 
