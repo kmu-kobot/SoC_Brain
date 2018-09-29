@@ -301,30 +301,30 @@ int mission_6_3_locate_hole_on_center(U16 *image) {
         return 0;
     }
 
-    if (hole_points[0] < MISSION_6_3_CENTER - 50) {
+    if (hole_points[0] < MISSION_6_3_CENTER - 40) {
         BALL_MOVE(DIR_RIGHT, UP, 1);
         BALL_STABLE(UP);
         BALL_TURN(DIR_LEFT, MIDDLE, 4);
-    } else if (hole_points[0] < MISSION_6_3_CENTER - 25) {
+    } else if (hole_points[0] < MISSION_6_3_CENTER - 30) {
         BALL_MOVE(DIR_RIGHT, UP, 1);
         BALL_STABLE(UP);
         BALL_TURN(DIR_LEFT, MIDDLE, 3);
-    } else if (hole_points[0] < MISSION_6_3_CENTER - 15) {
+    } else if (hole_points[0] < MISSION_6_3_CENTER - 20) {
         BALL_TURN(DIR_LEFT, MIDDLE, 2);
     } else if (hole_points[0] < MISSION_6_3_CENTER - 10) {
         BALL_TURN(DIR_LEFT, MIDDLE, 1);
     } else if (hole_points[0] < MISSION_6_3_CENTER - 3) {
         BALL_TURN(DIR_LEFT, SHORT, 1);
         RobotSleep(2);
-    } else if (hole_points[0] > MISSION_6_3_CENTER + 50) {
+    } else if (hole_points[0] > MISSION_6_3_CENTER + 40) {
         BALL_MOVE(DIR_LEFT, UP, 1);
         BALL_STABLE(UP);
         BALL_TURN(DIR_RIGHT, MIDDLE, 4);
-    } else if (hole_points[0] > MISSION_6_3_CENTER + 25) {
+    } else if (hole_points[0] > MISSION_6_3_CENTER + 30) {
         BALL_MOVE(DIR_LEFT, UP, 1);
         BALL_STABLE(UP);
         BALL_TURN(DIR_RIGHT, MIDDLE, 3);
-    } else if (hole_points[0] > MISSION_6_3_CENTER + 15) {
+    } else if (hole_points[0] > MISSION_6_3_CENTER + 20) {
         BALL_TURN(DIR_RIGHT, MIDDLE, 2);
     } else if (hole_points[0] > MISSION_6_3_CENTER + 10) {
         BALL_TURN(DIR_RIGHT, MIDDLE, 1);

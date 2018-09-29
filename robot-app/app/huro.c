@@ -220,22 +220,8 @@ int huro(void) {
                         ACTION_ATTACH(3);
                         ++step;
                         flag = 2;
-
-                        /*
-                        if (flag == 0) {
-                            default_watch(LEFT, fpga_videodata);
-                            RobotSleep(1);
-                            ++flag;
-                        }
-
-                        step += default_set_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
-                         */
                         break;
                     case 6:
-                        if (flag == 2) {
-                            ACTION_ATTACH(1);
-                        }
-
                         mission += 1;
                         step = 0;
                         flag = 0;
