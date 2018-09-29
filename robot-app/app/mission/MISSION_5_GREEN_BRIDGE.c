@@ -16,7 +16,7 @@ int mission_5_1_attach(U16 *image) {
     printf("ratio : %f\n", ratio);
 #endif
 
-    ACTION_ATTACH(1);
+    ACTION_ATTACH_SHORT(1);
     return ratio > 30.0;
 }
 
@@ -38,7 +38,7 @@ int mission_5_1_check_black_line(U16 *image) {
     printf("%d\n", dist);
 #endif
 
-    return dist > 20;
+    return dist > 30;
 }
 
 int mission_5_2_set_straight_and_center(U16 *image, U16 center) {

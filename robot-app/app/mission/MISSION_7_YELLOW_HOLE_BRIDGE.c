@@ -13,9 +13,7 @@ int mission_7_1_attach_yellow_bridge(U16 *image) { // 무작정 붙이기 쓰는
     double ratio = getColorRatio2(image, 20, ROBOT_KNEE, 50, WIDTH - 50, YELLOW, CH2);
 
     ACTION_ATTACH(1);
-    ACTION_ATTACH_SHORT(1);
-    return 1;
-    // return ratio > 70.0;
+    return ratio > 70.0;
 }
 
 int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image) {

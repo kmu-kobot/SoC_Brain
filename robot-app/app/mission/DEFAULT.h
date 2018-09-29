@@ -14,6 +14,7 @@
 
 static inline void default_watch(VIEW view, U16 *image) {
     CHECK_INIT(view);
+    RobotSleep(1);
     setFPGAVideoData(image);
     RobotSleep(1);
     setFPGAVideoData(image);

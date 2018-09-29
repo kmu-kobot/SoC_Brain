@@ -112,7 +112,7 @@ int huro(void) {
                     case 0:
                         // 앞에 있는 지뢰 감지
                         default_watch(OBLIQUE, fpga_videodata);
-                        // RobotSleep(1);
+                        RobotSleep(1);
                         setFPGAVideoData(fpga_videodata);
 
                         step = 1;
@@ -129,6 +129,7 @@ int huro(void) {
 
                         if (step == 1) {
                             default_watch(DOWN, fpga_videodata);
+                            RobotSleep(1);
                             setFPGAVideoData(fpga_videodata);
                             mission_3_attach_mine(fpga_videodata);
                         }
@@ -141,7 +142,7 @@ int huro(void) {
                         if (flag == 1) {
                             ++flag;
                             default_watch(DOWN, fpga_videodata);
-                            // RobotSleep(2);
+                            RobotSleep(1);
                             setFPGAVideoData(fpga_videodata);
                         }
 
@@ -151,6 +152,7 @@ int huro(void) {
                             setFPGAVideoData(fpga_videodata);
                             if (mission_3_isFrontOf_Blue(fpga_videodata, ROBOT_KNEE)) {
                                 step = 4;
+                                flag = 0;
                                 break;
                             }
                         }
@@ -192,7 +194,7 @@ int huro(void) {
                         // 고개 돌리기
                         if (flag == 6) {
                             default_watch((VIEW) mission_3_4_getMDir(), fpga_videodata);
-                            // RobotSleep(1);
+                            RobotSleep(1);
                             ++flag;
                             break;
                         }
@@ -207,21 +209,29 @@ int huro(void) {
                         flag = 0;
                         break;
                     case 4:
-                        ACTION_ATTACH(3);
-                        step += 1;
-                        flag = 0;
+                        if (flag == 0) {
+                            mission_3_change_mdir(fpga_videodata);
+                            default_watch((VIEW) mission_3_4_getMDir(), fpga_videodata);
+                            ++flag;
+                        }
+
+                        setFPGAVideoData(fpga_videodata);
+                        step += mission_3_set_straight_and_center1_long(fpga_videodata);
                         break;
                     case 5:
+                        ACTION_ATTACH(3);
+                        ++step;
+                        flag = 2;
+
+                        /*
                         if (flag == 0) {
                             default_watch(LEFT, fpga_videodata);
-                            // RobotSleep(1);
+                            RobotSleep(1);
                             ++flag;
                         }
 
                         step += default_set_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
-                        if (step == 5) {
-                            flag = 2;
-                        }
+                         */
                         break;
                     case 6:
                         if (flag == 2) {
@@ -271,8 +281,7 @@ int huro(void) {
                         if (!mission_5_1_check_black_line(fpga_videodata)) {
                             mission_5_1_watch_below(fpga_videodata, 50);
                         }
-                        ACTION_ATTACH(1);
-
+                        ACTION_ATTACH(2);
                         ++step;
                         //                        flag = 0;
                         break;
@@ -280,6 +289,7 @@ int huro(void) {
                         flag = 0;
                         setFPGAVideoData(fpga_videodata);
                         step += mission_5_1_attach(fpga_videodata);
+                        break;
                     case 2:
                         // 맨 처음 다리 중심 맞추기
                         if (flag == 0) {
@@ -288,15 +298,23 @@ int huro(void) {
                             RobotSleep(1);
                             flag++;
                         }
-                        step += default_set_center1(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
-                        // step += mission_5_2_set_straight_and_center(fpga_videodata, 15);
-                        if (step == 4) {
-                            step = 2;
+
+                        if (default_set_center1(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK)) {
+                            step = 3;
+
+                            if (flag == 2) {
+                                ACTION_ATTACH(1);
+                            } else {
+                                ACTION_ATTACH_SHORT(1);
+                            }
+
+                        } else {
+                            flag = 2;
                         }
+
                         break;
                     case 3:
                         // 계단 오르기
-                        ACTION_ATTACH_SHORT(1);
                         mission_5_3_climb_up_stairs();
                         flag = 0;
                         ++step;
@@ -486,7 +504,7 @@ int huro(void) {
                             mission_7_1_watch_below(fpga_videodata, 30);
                         }
 
-                        // ACTION_ATTACH(1); // 4개 너무 많음
+                        ACTION_ATTACH(2); // 4개 너무 많음
                         ++step;
                         // 위에서 노란다리를 인식한후에 수행하는 라인이므로, 다시 수행하는 것은 무의미
 
@@ -515,6 +533,8 @@ int huro(void) {
                         // 노란색 앞에서 중심 맞추고 붙이기 한번 더 해아함
                         if (flag == 2) {
                             ACTION_ATTACH(1);
+                        } else {
+                            ACTION_ATTACH_SHORT(1);
                         }
                         step = 6;
                         break;

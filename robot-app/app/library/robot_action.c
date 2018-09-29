@@ -78,5 +78,5 @@ int ACTION_WALK_CHECK(VIEW view, U16 *image, int (*check)(U16 *), int finish, in
 
     pthread_join(p_thread, (void *) &result);
 
-    return finish == result;
+    return finish == *(int *) &result;
 }

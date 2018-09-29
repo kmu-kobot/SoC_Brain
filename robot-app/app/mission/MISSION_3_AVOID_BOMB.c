@@ -16,7 +16,7 @@ void mission_3_attach_mine(U16 *image) {
         setFPGAVideoData(image);
         ratio = getColorRatio1(image, 20, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
     }
-//    ACTION_ATTACH_SHORT(1);
+    // ACTION_ATTACH_SHORT(1);
 }
 
 int mission_3_avoid(U16 *image) {
