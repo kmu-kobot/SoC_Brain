@@ -112,8 +112,6 @@ int huro(void) {
                     case 0:
                         // 앞에 있는 지뢰 감지
                         default_watch(OBLIQUE, fpga_videodata);
-                        RobotSleep(1);
-                        setFPGAVideoData(fpga_videodata);
 
                         step = 1;
                         flag = 0;
