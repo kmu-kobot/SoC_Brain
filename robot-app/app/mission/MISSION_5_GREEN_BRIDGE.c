@@ -16,7 +16,7 @@ int mission_5_1_attach(U16 *image) {
     printf("ratio : %f\n", ratio);
 #endif
 
-    ACTION_ATTACH_SHORT(1);
+    ACTION_ATTACH(1);
     return ratio > 30.0;
 }
 

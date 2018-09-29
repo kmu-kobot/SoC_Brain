@@ -116,7 +116,7 @@ int mission_8_2_set_dist(_line_t line) {
     double dist = line.slope * (WIDTH >> 1) + line.intercept;
 
     if (dist < 55.0) {
-        ACTION_ATTACH_SHORT(1);
+        ACTION_ATTACH(1);
         RobotSleep(1);
         return 0;
     }

@@ -10,8 +10,8 @@ int mangle = 0;
 void mission_3_attach_mine(U16 *image) {
     double ratio = getColorRatio1(image, 20, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
     U16 iter = 0;
-    while (ratio < 1.5 && iter++ < 5) {
-        ACTION_ATTACH_SHORT(1);
+    while (ratio < 1.5 && iter++ < 2) {
+        ACTION_ATTACH(1);
         RobotSleep(1);
         setFPGAVideoData(image);
         ratio = getColorRatio1(image, 20, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
