@@ -8,13 +8,17 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define DEFAULT_CENTER_DISTANCE 55
-#define DEFAULT_CENTER_THRES_LONG 17
+#define DEFAULT_CENTER_DISTANCE 52
+#define DEFAULT_CENTER_THRES_LONG 15
 #define DEFAULT_CENTER_THRES_SHORT 4
 
-static inline void default_watch(VIEW view) {
+static inline void default_watch(VIEW view, U16 *image) {
     CHECK_INIT(view);
-    RobotSleep(4);
+    setFPGAVideoData(image);
+    RobotSleep(1);
+    setFPGAVideoData(image);
+    RobotSleep(1);
+    setFPGAVideoData(image);
 }
 
 int default_get_straight_and_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1);

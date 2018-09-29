@@ -497,6 +497,9 @@ void setFPGAVideoData(U16 *buf) {
     read_fpga_video_data(buf);
     draw_fpga_video_data_full(buf);
     flip();
+    read_fpga_video_data(buf);
+    draw_fpga_video_data_full(buf);
+    flip();
 }
 
 void drawline(U16 *image, _line_t line, U16 color) {

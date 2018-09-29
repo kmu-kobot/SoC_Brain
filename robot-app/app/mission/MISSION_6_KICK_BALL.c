@@ -26,7 +26,7 @@ int mission_6_1_detection_ball(U16 *image) {
     DIRECTION move_dir = ball_points[0] > WIDTH / 2;
 
     if (ball_points[0] < 70 || ball_points[0] > 110) {
-        ACTION_MOVE(LONG, move_dir, UP, MIN(2, abs((WIDTH >> 2) - ball_points[0]) / 15));
+        ACTION_MOVE(LONG, move_dir, UP, MIN(2, abs((WIDTH >> 2) - ball_points[0]) / 10));
     } else {
         ACTION_WALK(FAST, OBLIQUE, (HEIGHT - ball_points[1]) / 15 + 1);
     }

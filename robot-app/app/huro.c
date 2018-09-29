@@ -13,7 +13,7 @@ int huro(void) {
 
     int missionFinished = 0;
 
-    int mission = 6;
+    int mission = 0;
     int step = 0;
 
     int nextMission = 0;
@@ -40,7 +40,7 @@ int huro(void) {
                         step += mission_1_2_end_yellow_barricade(fpga_videodata);
                         break;
                     case 2:
-                        mission_1_3_escape_yellow_barricade(10);
+                        mission_1_3_escape_yellow_barricade(8);
                         step += 1;
                         flag = 0;
                         break;
@@ -65,7 +65,7 @@ int huro(void) {
                         break;
                     case 2:
                         if (flag == 0) {
-                            default_watch(LEFT);
+                            default_watch(LEFT, fpga_videodata);
                             RobotSleep(1);
                             flag++;
                         }
@@ -85,12 +85,12 @@ int huro(void) {
                         break;
                     case 4:
                         if (flag == 0) {
-                            default_watch((VIEW) mission_3_4_getMDir());
+                            default_watch((VIEW) mission_3_4_getMDir(), fpga_videodata);
                             RobotSleep(1);
                             flag++;
                         }
 
-                        step += mission_3_set_straight_and_center1(fpga_videodata);
+                        step += mission_3_set_straight_and_center1_long(fpga_videodata);
                         break;
                     case 5:
                         flag = 0;
@@ -111,7 +111,7 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         // 앞에 있는 지뢰 감지
-                        default_watch(OBLIQUE);
+                        default_watch(OBLIQUE, fpga_videodata);
                         // RobotSleep(1);
                         setFPGAVideoData(fpga_videodata);
 
@@ -128,6 +128,8 @@ int huro(void) {
                         flag = flag == 5 ? flag : 0;
 
                         if (step == 1) {
+                            default_watch(DOWN, fpga_videodata);
+                            setFPGAVideoData(fpga_videodata);
                             mission_3_attach_mine(fpga_videodata);
                         }
                         break;
@@ -138,7 +140,7 @@ int huro(void) {
                         }
                         if (flag == 1) {
                             ++flag;
-                            default_watch(DOWN);
+                            default_watch(DOWN, fpga_videodata);
                             // RobotSleep(2);
                             setFPGAVideoData(fpga_videodata);
                         }
@@ -189,7 +191,7 @@ int huro(void) {
 
                         // 고개 돌리기
                         if (flag == 6) {
-                            default_watch((VIEW) mission_3_4_getMDir());
+                            default_watch((VIEW) mission_3_4_getMDir(), fpga_videodata);
                             // RobotSleep(1);
                             ++flag;
                             break;
@@ -199,7 +201,7 @@ int huro(void) {
                         flag = (step == 3) ? 0 : 7;
                         break;
                     case 3:
-                        default_watch(OBLIQUE);
+                        default_watch(OBLIQUE, fpga_videodata);
                         setFPGAVideoData(fpga_videodata);
                         step = (mission_3_1_ver2(fpga_videodata)) ? 4 : 0;
                         flag = 0;
@@ -211,7 +213,7 @@ int huro(void) {
                         break;
                     case 5:
                         if (flag == 0) {
-                            default_watch(LEFT);
+                            default_watch(LEFT, fpga_videodata);
                             // RobotSleep(1);
                             ++flag;
                         }
@@ -281,8 +283,8 @@ int huro(void) {
                     case 2:
                         // 맨 처음 다리 중심 맞추기
                         if (flag == 0) {
-                            default_watch(LEFT);
-                            // default_watch(OBLIQUE);
+                            default_watch(LEFT, fpga_videodata);
+                            // default_watch(OBLIQUE, fpga_videodata);
                             RobotSleep(1);
                             flag++;
                         }
@@ -301,7 +303,7 @@ int huro(void) {
                         break;
                     case 4:
                         if (flag == 0) {
-                            default_watch(OBLIQUE);
+                            default_watch(OBLIQUE, fpga_videodata);
                             RobotSleep(1);
                             ++flag;
                         }
@@ -315,7 +317,7 @@ int huro(void) {
                         break;
                     case 6:
                         if (flag == 0) {
-                            default_watch(OBLIQUE);
+                            default_watch(OBLIQUE, fpga_videodata);
                             ++flag;
                         }
 
@@ -334,7 +336,7 @@ int huro(void) {
                         break;
                     case 9:
                         if (flag == 0) {
-                            default_watch(DOWN);
+                            default_watch(DOWN, fpga_videodata);
                             RobotSleep(1);
                             ++flag;
                         }
@@ -348,13 +350,13 @@ int huro(void) {
                         break;
                     case 11:
                         if (flag == 0) {
-                            default_watch(LEFT);
+                            default_watch(LEFT, fpga_videodata);
                             RobotSleep(3);
                             ++flag;
                         }
                         step += default_set_straight_and_center1_long(fpga_videodata, LEFT, 120, HEIGHT - 11, BLACK);
                         if (step == 12) {
-                            default_watch(OBLIQUE);
+                            default_watch(OBLIQUE, fpga_videodata);
                         }
                         break;
                     case 12:
@@ -374,7 +376,7 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         flag = 0;
-                        default_watch(UP);
+                        default_watch(UP, fpga_videodata);
                         RobotSleep(1);
                         setFPGAVideoData(fpga_videodata);
                         step += mission_6_1_detection_ball(fpga_videodata);
@@ -499,7 +501,7 @@ int huro(void) {
                         break;
                     case 2:
                         if (flag == 0) {
-                            default_watch(LEFT);
+                            default_watch(LEFT, fpga_videodata);
                             RobotSleep(1);
                             flag++;
                         }
@@ -522,7 +524,7 @@ int huro(void) {
                         break;
                     case 7:
                         if (flag == 0) {
-                            default_watch(LEFT);
+                            default_watch(LEFT, fpga_videodata);
                             RobotSleep(1);
                             flag++;
                         }
@@ -541,7 +543,7 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         if (flag == 0) {
-                            default_watch(OBLIQUE);
+                            default_watch(OBLIQUE, fpga_videodata);
                             RobotSleep(1);
                             ++flag;
                         }
@@ -552,7 +554,7 @@ int huro(void) {
                         break;
                     case 1:
                         if (flag == 1) {
-                            default_watch(LEFT);
+                            default_watch(LEFT, fpga_videodata);
                             RobotSleep(1);
                             ++flag;
                         }
@@ -560,7 +562,7 @@ int huro(void) {
                         break;
                     case 2:
                         if (flag == 2) {
-                            default_watch(DOWN);
+                            default_watch(DOWN, fpga_videodata);
                             RobotSleep(2);
                             ++flag;
                         }
@@ -573,14 +575,14 @@ int huro(void) {
                         break;
                     case 4:
                         if (flag == 0) {
-                            default_watch(LEFT);
+                            default_watch(LEFT, fpga_videodata);
                             RobotSleep(1);
                             ++flag;
                         }
                         step += default_set_straight_and_center1_long(fpga_videodata, LEFT, 120, HEIGHT - 11, BLACK);
                         break;
                     default:
-                        default_watch(OBLIQUE);
+                        default_watch(OBLIQUE, fpga_videodata);
                         flag = 0;
                         step = 0;
                         ++mission;
@@ -624,7 +626,7 @@ int huro(void) {
                         break;
                     case 1:
                         if (flag == 0) {
-                            default_watch(RIGHT);
+                            default_watch(RIGHT, fpga_videodata);
                             flag++;
                         }
 
@@ -641,7 +643,7 @@ int huro(void) {
                         break;
                     case 2:
                         if (flag == 0) {
-                            default_watch(RIGHT);
+                            default_watch(RIGHT, fpga_videodata);
                             flag++;
                         }
 
@@ -649,7 +651,7 @@ int huro(void) {
                         break;
                     case 3:
                         // 일반 걸음으로 걸은 후에, 영상처리 걸음 시작할때 안정화를 위해 슬립
-                        default_watch(OBLIQUE);
+                        default_watch(OBLIQUE, fpga_videodata);
 
                         step = 0;
                         mission = nextMission;
