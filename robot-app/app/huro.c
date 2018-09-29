@@ -90,7 +90,7 @@ int huro(void) {
                             flag++;
                         }
 
-                        step += mission_3_set_straight_and_center1_long(fpga_videodata);
+                        step += mission_3_set_straight_and_center1_long(fpga_videodata, (WIDTH>>1) + (mission_3_4_getMDir() == LEFT ? 50 : -50));
                         break;
                     case 5:
                         flag = 0;
@@ -167,6 +167,13 @@ int huro(void) {
                         if (flag == 5) {
                             mission_3_change_mdir(fpga_videodata);
                             ++flag;
+
+                            if (!mission_3_check_angle()) {
+                                step = 3;
+                                flag = 0;
+                                break;
+                            }
+
                             break;
                         } else if (flag == 0) {
                             // 여기서는 저장된 플래그에 따라 방향을 볼지 말지 결정함
@@ -181,12 +188,6 @@ int huro(void) {
                             mission_3_change_mdir(fpga_videodata);
                             // mission_3_change_mdir_opposite();
                             flag = 6;
-                        }
-
-                        if (!mission_3_check_angle()) {
-                            ++step;
-                            flag = 0;
-                            break;
                         }
 
                         // 고개 돌리기
@@ -214,7 +215,7 @@ int huro(void) {
                         }
 
                         setFPGAVideoData(fpga_videodata);
-                        step += mission_3_set_straight_and_center1_long(fpga_videodata);
+                        step += mission_3_set_straight_and_center1_long(fpga_videodata, (WIDTH>>1) - (mission_3_4_getMDir() == LEFT ? 50 : -50));
                         break;
                     case 5:
                         ACTION_ATTACH(3);

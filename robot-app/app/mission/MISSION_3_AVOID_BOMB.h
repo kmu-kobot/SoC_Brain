@@ -42,7 +42,7 @@ int mission_3_4_getMDir(void);
 
 int mission_3_1_ver2(U16 *image);
 
-int mission_3_set_straight_and_center1_long(U16 *image);
+int mission_3_set_straight_and_center1_long(U16 *image, U16 center);
 
 int mission_3_set_straight(U16 *image);
 

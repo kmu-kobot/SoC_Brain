@@ -80,7 +80,7 @@ int default_set_center1_long(U16 *image, VIEW view, U16 center, U16 bot, U16 col
 int set_straight(_line_t line, U16 center, VIEW view) {
     double angle = atan(line.slope) * 180.0 / M_PI + (view == LEFT ? 10 : -10);
     DIRECTION turn_dir = (DIRECTION) (angle > 0);
-    angle = abs(angle);
+    angle = fabs(angle);
 
 //    if (angle > 5.0) {
 //        ACTION_TURN(MIDDLE, turn_dir, view, 1);
@@ -103,11 +103,11 @@ int set_straight(_line_t line, U16 center, VIEW view) {
 
 int set_center_long(_line_t line, U16 center, VIEW view) {
     double dist_err = DEFAULT_CENTER_DISTANCE - (line.slope * (WIDTH >> 1) + line.intercept);
-    DIRECTION move_dir = (DIRECTION) ((view - LEFT) == (dist_err > 0));
-    dist_err = abs(dist_err);
+    DIRECTION move_dir = (DIRECTION) ((view - LEFT) == (dist_err > 0.0));
+    dist_err = fabs(dist_err);
 
-    if (dist_err > DEFAULT_CENTER_THRES_LONG) {
-        ACTION_MOVE(LONG, move_dir, view, MIN(2, dist_err / DEFAULT_CENTER_THRES_LONG));
+    if (dist_err > DEFAULT_CENTER_THRES_LONG - 2) {
+        ACTION_MOVE(LONG, move_dir, view, MIN(2, (int)dist_err / DEFAULT_CENTER_THRES_LONG));
         RobotSleep(4);
         return 0;
     }
@@ -118,15 +118,15 @@ int set_center_long(_line_t line, U16 center, VIEW view) {
 int set_center(_line_t line, U16 center, VIEW view) {
     double dist_err = DEFAULT_CENTER_DISTANCE - (line.slope * (WIDTH >> 1) + line.intercept);
     DIRECTION move_dir = (DIRECTION) ((view - LEFT) == (dist_err > 0));
-    dist_err = abs(dist_err);
+    dist_err = fabs(dist_err);
 
     if (dist_err > DEFAULT_CENTER_THRES_LONG) {
-        ACTION_MOVE(LONG, move_dir, view, MIN(2, dist_err / DEFAULT_CENTER_THRES_LONG));
+        ACTION_MOVE(LONG, move_dir, view, MIN(2, (int)dist_err / DEFAULT_CENTER_THRES_LONG));
         RobotSleep(4);
         return 0;
     }
     if (dist_err > DEFAULT_CENTER_THRES_SHORT) {
-        ACTION_MOVE(SHORT, move_dir, view, MIN(5, dist_err / 4 + 1));
+        ACTION_MOVE(SHORT, move_dir, view, MIN(5, (int)dist_err / 4 + 1));
         RobotSleep(2);
         return 0;
     }
