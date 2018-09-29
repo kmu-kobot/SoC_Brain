@@ -548,8 +548,9 @@ int mission_6_4_find_ball_col(U16 *image, U32 top, U32 bot, U32 left, U32 right,
 }
 
 int mission_6_4_set_center_of_ball(U16 *image) {
-
+    static int need_stable = 0;
     if (mission_6_4_find_ball_interpolation(image, 0, HEIGHT - 15, 0, WIDTH, 0) == 0) {
+        need_stable = 1;
         BALL_BIT(FRONT, 5);
         return 0;
     }
@@ -567,6 +568,8 @@ int mission_6_4_set_center_of_ball(U16 *image) {
     } else if (ball_points[0] < MISSION_6_4_CENTER - 4) {
         BALL_MOVE(DIR_LEFT, DOWN, 1);
         BALL_STABLE(DOWN);
+        need_stable = 0;
+        return 0;
     } else if (ball_points[0] > MISSION_6_4_CENTER + 15) {
         BALL_MOVE_LONG(DIR_RIGHT, DOWN, 1);
     } else if (ball_points[0] > MISSION_6_4_CENTER + 7) {
@@ -574,11 +577,18 @@ int mission_6_4_set_center_of_ball(U16 *image) {
     } else if (ball_points[0] > MISSION_6_4_CENTER + 4) {
         BALL_MOVE(DIR_RIGHT, DOWN, 1);
         BALL_STABLE(DOWN);
+        need_stable = 0;
+        return 0;
     } else {
-        BALL_STABLE(DOWN);
+        if (need_stable)
+        {
+            BALL_STABLE(DOWN);
+        }
+        need_stable = 0;
         return 1;
     }
 
+    need_stable = 1;
     RobotSleep(2);
     return 0;
 }
@@ -587,7 +597,7 @@ int mission_6_5_kick_ball(void) {
     BALL_TURN(DIR_LEFT, MIDDLE, 1);
     BALL_KICK();
     RobotSleep(1);
-    ACTION_TURN(LONG, DIR_LEFT, UP, 3);
+    ACTION_TURN(LONG, DIR_LEFT, UP, 6);
     RobotSleep(1);
     return 1;
 }

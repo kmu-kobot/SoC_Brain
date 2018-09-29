@@ -8,20 +8,28 @@ int mdir = 0;
 int mangle = 0;
 
 void mission_3_attach_mine(U16 *image) {
-    double ratio = getColorRatio1(image, 20, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+    double ratio1 = getColorRatio1(image, 5, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+    double ratio2 = getColorRatio1(image, 20, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
     U16 iter = 0;
-    while (ratio < 1.5 && iter++ < 2) {
-        ACTION_ATTACH(1);
+    while (ratio2 < 1.0 && iter++ < 2) {
+        if (ratio1 < 0.4) {
+            ACTION_ATTACH(1);
+        }
+        else if (ratio2 < 1.0)
+        {
+            ACTION_ATTACH_SHORT(1);
+        }
         RobotSleep(1);
         setFPGAVideoData(image);
-        ratio = getColorRatio1(image, 20, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+        ratio1 = getColorRatio1(image, 5, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+        ratio2 = getColorRatio1(image, 20, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
     }
     // ACTION_ATTACH_SHORT(1);
 }
 
 int mission_3_avoid(U16 *image) {
     double blue_ratio = getColorRatio1(image, 20, ROBOT_KNEE + 5, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLUE);
-    double black_ratio = getColorRatio1(image, 5, ROBOT_KNEE - 5, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+    double black_ratio = getColorRatio1(image, 5, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
 
     if (blue_ratio > 3.0) {
         return 1;

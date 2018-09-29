@@ -12,7 +12,9 @@ void mission_7_1_watch_below(U16 *image, int repeat) {
 int mission_7_1_attach_yellow_bridge(U16 *image) {
     double ratio = getColorRatio2(image, 20, ROBOT_KNEE, 50, WIDTH - 50, YELLOW, CH2);
 
-    ACTION_ATTACH(1);
+    if (ratio < 60.0) {
+        ACTION_ATTACH(1);
+    }
     return ratio > 60.0;
 }
 

@@ -376,7 +376,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="Makefile" value="1" />
-          <entry key="c" value="16" />
+          <entry key="c" value="19" />
           <entry key="h" value="11" />
           <entry key="txt" value="1" />
         </counts>
@@ -384,19 +384,19 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CMakeLists.txt" value="1" />
-          <entry key="ObjectiveC" value="27" />
+          <entry key="ObjectiveC" value="30" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="c" value="639" />
+          <entry key="c" value="947" />
           <entry key="h" value="412" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="ObjectiveC" value="1051" />
+          <entry key="ObjectiveC" value="1359" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -409,7 +409,7 @@
         <entry file="file://$PROJECT_DIR$/library/robot_action.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-900">
-              <caret line="403" column="63" lean-forward="true" selection-start-line="403" selection-start-column="63" selection-end-line="403" selection-end-column="63" />
+              <caret line="403" column="63" selection-start-line="403" selection-start-column="63" selection-end-line="403" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -417,80 +417,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mission/DEFAULT.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="94" column="17" lean-forward="true" selection-start-line="94" selection-start-column="17" selection-end-line="94" selection-end-column="17" />
+            <state relative-caret-position="570">
+              <caret line="142" column="31" selection-start-line="142" selection-start-column="31" selection-end-line="142" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mission/DEFAULT.h">
+        <entry file="file://$PROJECT_DIR$/huro.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+            <state relative-caret-position="322">
+              <caret line="597" column="31" lean-forward="true" selection-start-line="597" selection-start-column="31" selection-end-line="597" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/huro.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="391" column="44" lean-forward="true" selection-start-line="391" selection-start-column="44" selection-end-line="391" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mission/MISSION_5_GREEN_BRIDGE.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mission/MISSION_8_CREVASSE.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="118" column="21" selection-start-line="118" selection-start-column="21" selection-end-line="118" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-9">
-              <caret line="1" column="43" lean-forward="true" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mission/MISSION_7_YELLOW_HOLE_BRIDGE.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mission/MISSION_3_AVOID_BOMB.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="2" lean-forward="true" selection-start-column="2" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mission/MISSION_6_KICK_BALL.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="67">
-              <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+            <state relative-caret-position="347">
+              <caret line="586" column="24" selection-start-line="586" selection-start-column="24" selection-end-line="586" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mission/MISSION_4_JUMP_HURDLE.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -507,6 +462,7 @@
       <find>default_watch\(LET, fpga_videodata\);</find>
       <find>default_watch(RIGHT);</find>
       <find>Sleep</find>
+      <find>TURN(LONG</find>
     </findStrings>
     <replaceStrings>
       <replace>default_watch\(LEFT, fpga_videodata\);</replace>
@@ -539,12 +495,13 @@
         <option value="$PROJECT_DIR$/mission/MISSION_3_AVOID_BOMB.h" />
         <option value="$PROJECT_DIR$/mission/MISSION_7_YELLOW_HOLE_BRIDGE.h" />
         <option value="$PROJECT_DIR$/mission/MISSION_8_CREVASSE.c" />
-        <option value="$PROJECT_DIR$/mission/MISSION_6_KICK_BALL.c" />
-        <option value="$PROJECT_DIR$/mission/DEFAULT.c" />
         <option value="$PROJECT_DIR$/mission/MISSION_5_GREEN_BRIDGE.c" />
+        <option value="$PROJECT_DIR$/huro.c" />
         <option value="$PROJECT_DIR$/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c" />
         <option value="$PROJECT_DIR$/mission/MISSION_3_AVOID_BOMB.c" />
-        <option value="$PROJECT_DIR$/huro.c" />
+        <option value="$PROJECT_DIR$/mission/MISSION_4_JUMP_HURDLE.c" />
+        <option value="$PROJECT_DIR$/mission/DEFAULT.c" />
+        <option value="$PROJECT_DIR$/mission/MISSION_6_KICK_BALL.c" />
       </list>
     </option>
   </component>
@@ -644,12 +601,12 @@
       <workItem from="1538045983237" duration="4767000" />
       <workItem from="1538137929418" duration="57000" />
       <workItem from="1538138677978" duration="3897000" />
-      <workItem from="1538206732869" duration="7014000" />
+      <workItem from="1538206732869" duration="9733000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16754000" />
+    <option name="totallyTimeSpent" value="19473000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -679,14 +636,14 @@
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="CMake" order="10" weight="0.29909706" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Messages" order="12" visible="true" weight="0.3295711" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.3295711" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25753227" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.25681493" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -725,13 +682,6 @@
     <entry file="file://$PROJECT_DIR$/mission/MISSION_2_RED_BRIDGE.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mission/MISSION_4_JUMP_HURDLE.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
           <caret line="19" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
@@ -923,27 +873,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mission/MISSION_7_YELLOW_HOLE_BRIDGE.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mission/MISSION_8_CREVASSE.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="118" column="21" selection-start-line="118" selection-start-column="21" selection-end-line="118" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mission/DEFAULT.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="94" column="17" lean-forward="true" selection-start-line="94" selection-start-column="17" selection-end-line="94" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mission/MISSION_5_GREEN_BRIDGE.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
@@ -951,38 +880,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c">
+    <entry file="file://$PROJECT_DIR$/library/robot_action.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9">
-          <caret line="1" column="43" lean-forward="true" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
+        <state relative-caret-position="-900">
+          <caret line="403" column="63" selection-start-line="403" selection-start-column="63" selection-end-line="403" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mission/MISSION_8_CREVASSE.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mission/MISSION_7_YELLOW_HOLE_BRIDGE.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mission/MISSION_3_AVOID_BOMB.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="2" lean-forward="true" selection-start-column="2" selection-end-column="2" />
+        <state relative-caret-position="285">
+          <caret line="15" column="29" lean-forward="true" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mission/MISSION_6_KICK_BALL.c">
+    <entry file="file://$PROJECT_DIR$/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/robot_action.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-900">
-          <caret line="403" column="63" lean-forward="true" selection-start-line="403" selection-start-column="63" selection-end-line="403" selection-end-column="63" />
+        <state relative-caret-position="86">
+          <caret line="6" column="54" selection-start-line="6" selection-start-column="54" selection-end-line="6" selection-end-column="54" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/huro.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="391" column="44" lean-forward="true" selection-start-line="391" selection-start-column="44" selection-end-line="391" selection-end-column="44" />
+        <state relative-caret-position="322">
+          <caret line="597" column="31" lean-forward="true" selection-start-line="597" selection-start-column="31" selection-end-line="597" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mission/MISSION_4_JUMP_HURDLE.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mission/DEFAULT.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="142" column="31" selection-start-line="142" selection-start-column="31" selection-end-line="142" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mission/MISSION_6_KICK_BALL.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="586" column="24" selection-start-line="586" selection-start-column="24" selection-end-line="586" selection-end-column="24" />
         </state>
       </provider>
     </entry>

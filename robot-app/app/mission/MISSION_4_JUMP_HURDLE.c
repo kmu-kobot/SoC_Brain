@@ -9,11 +9,11 @@ int mission_4_4_jump_hurdle(void) {
     RobotSleep(2);
     ACTION_MOTION(MISSION_4_HURDLING, UP);
     RobotSleep(1);
-    ACTION_TURN(LONG, DIR_LEFT, OBLIQUE, 2);
+    ACTION_TURN(LONG, DIR_LEFT, OBLIQUE, 5);
     RobotSleep(1);
     ACTION_WALK(FAST, OBLIQUE, 6);
     RobotSleep(1);
-    ACTION_TURN(LONG, DIR_LEFT, OBLIQUE, 2);
+    ACTION_TURN(LONG, DIR_LEFT, OBLIQUE, 3);
     RobotSleep(3);
     return 1;
 }

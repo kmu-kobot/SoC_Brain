@@ -598,7 +598,7 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         step += 1;
-                        ACTION_WALK(SLOW, OBLIQUE, 5);
+                        ACTION_WALK(SLOW, OBLIQUE, 4);
                         break;
                     case 1:
 //                        CHECK_INIT(UP);
