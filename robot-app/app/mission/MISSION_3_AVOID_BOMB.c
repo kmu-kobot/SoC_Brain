@@ -24,7 +24,6 @@ void mission_3_attach_mine(U16 *image) {
         ratio1 = getColorRatio1(image, 5, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
         ratio2 = getColorRatio1(image, 20, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
     }
-    // ACTION_ATTACH_SHORT(1);
 }
 
 int mission_3_avoid(U16 *image) {
@@ -36,26 +35,6 @@ int mission_3_avoid(U16 *image) {
     }
 
     U32 repeat = 1;
-
-    /*
-    U16 col, index = 0;
-    double mine_ratio = 0;
-    U32 mines[30] = {0,};
-
-    for (col = MINE_RANGE_LEFT; col < WIDTH - MINE_RANGE_LEFT; col += 5) {
-        mine_ratio = getColorRatio1(image, 10, ROBOT_KNEE + 5, col, col + 5, BLACK);
-
-        if (mine_ratio > 10.0) {
-            mines[index++] = col + 2;
-        }
-
-    }
-
-    // mdir & 1 ? RIGHT : LEFT
-    index = (U16) ((mdir & 1) ? index - 1 : 0);
-    U32 baseline = (mdir & 1) ? MINE_RANGE_LEFT : (WIDTH - MINE_RANGE_LEFT);
-    repeat = MIN(3, abs(baseline - mines[index] / 35));
-     */
 
     if (black_ratio > 0.4) {
         ACTION_MOVE(LONG, (DIRECTION) (mdir & 1), DOWN, (int) repeat);
@@ -112,6 +91,7 @@ int mission_3_isFrontOf_Blue(U16 *image, U16 bot) {
 }
 
 int mission_3_default_watch_below(U16 *image, int repeat) {
+    setFPGAVideoData(image);
     int result = ACTION_WALK_CHECK(OBLIQUE, image, mission_3_walk_avoid_bomb, 1, repeat);
     return result;
 }
@@ -135,14 +115,14 @@ int mission_3_default_avoid_bomb(U16 *image) {
 
 int mission_3_walk_avoid_bomb(U16 *image) {
     double blue_ratio = getColorRatio1(image, 15, 40, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLUE);
-    double black_ratio = getColorRatio1(image, 20, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+    double black_ratio = getColorRatio1(image, 15, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
 
     if (blue_ratio > 3.0) {
         return 1;
     }
 
-    minecount += black_ratio > 0.45;
-    return black_ratio > 0.45;
+    minecount += black_ratio > 0.3;
+    return black_ratio > 0.3;
 }
 
 int k = 0;

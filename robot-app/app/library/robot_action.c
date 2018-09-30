@@ -80,3 +80,36 @@ int ACTION_WALK_CHECK(VIEW view, U16 *image, int (*check)(U16 *), int finish, in
 
     return finish == state;
 }
+
+int GREEN_WALK_CHECK(U16 *image, int (*check)(U16 *), int repeat) {
+    int i = 0;
+    int state = 0, destroy = 0;
+
+    pthread_t p_thread;
+    int thread_id;
+    int result;
+
+    _args_t args = {image, check, &state, 1, &destroy};
+
+    repeat <<= 1;
+    thread_id = pthread_create(&p_thread, NULL, checker, (void *) &args);
+
+    if (thread_id < 0) {
+        printf("thread create error\n");
+        return 0;
+    }
+
+    action(INIT_MOTION(OBLIQUE), GREEN_WALK_START);
+
+    while (state != 1 && i < repeat) {
+        RobotAction(GREEN_WALK_L + (i++ & 1));
+    }
+
+    destroy = 1;
+
+    RobotAction(GREEN_WALK_END_L + (--i & 1));
+
+    pthread_join(p_thread, (void *) &result);
+
+    return 1 == state;
+}

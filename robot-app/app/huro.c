@@ -344,8 +344,7 @@ int huro(void) {
 //                            RobotSleep(1);
                             ++flag;
                         }
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_5_9_attach_black(fpga_videodata);
+                        step += mission_5_9_attach_black(fpga_videodata) && mission_5_9_attach_black(fpga_videodata);
                         break;
                     case 10:
                         mission_5_10_climb_down_stairs();
@@ -571,8 +570,7 @@ int huro(void) {
 //                            RobotSleep(2);
                             ++flag;
                         }
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_8_2_attach_black(fpga_videodata);
+                        step += mission_8_2_attach_black(fpga_videodata) && mission_8_2_attach_black(fpga_videodata);
                         break;
                     case 3:
                         step += mission_8_3_escape_crevasse();

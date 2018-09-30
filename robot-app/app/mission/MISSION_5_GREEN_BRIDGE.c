@@ -17,7 +17,7 @@ int mission_5_1_attach(U16 *image) {
 #endif
 
     ACTION_ATTACH(1);
-    return ratio > 30.0;
+    return ratio > 35.0;
 }
 
 int mission_5_1_check_black_line(U16 *image) {
@@ -303,7 +303,7 @@ int mission_5_4_set_center(_line_t line) {
 }
 
 void mission_5_5_attach_green(void) {
-    ACTION_WALK(FAST, OBLIQUE, 5);
+    ACTION_MOTION(GREEN_WALK, OBLIQUE);
 }
 
 int mission_5_6_set_straight_and_center(U16 *image, U16 center) {
@@ -345,7 +345,7 @@ int mission_5_6_set_straight_and_center(U16 *image, U16 center) {
 }
 
 int mission_5_6_set_straight(_line_t center_line) {
-    double angle = atan(center_line.slope) / M_PI * 180.0 - 1.5;
+    double angle = atan(center_line.slope) / M_PI * 180.0 + 1.5;
     DIRECTION turn_dir = angle < 0;
     angle = abs(angle);
 
@@ -354,7 +354,7 @@ int mission_5_6_set_straight(_line_t center_line) {
 //    } else
     if (angle > 7.0) {
         ACTION_TURN(SHORT, turn_dir, OBLIQUE, 2);
-    } else if (angle > 2.5) {
+    } else if (angle > 3.5) {
         ACTION_TURN(SHORT, turn_dir, OBLIQUE, 1);
     } else {
         return 1;
@@ -365,7 +365,7 @@ int mission_5_6_set_straight(_line_t center_line) {
 }
 
 int mission_5_7_watch_below(U16 *image) {
-    ACTION_WALK_CHECK(OBLIQUE, image, mission_5_7_walk_check, 1, 15);
+    GREEN_WALK_CHECK(image, mission_5_7_walk_check, 15);
     setFPGAVideoData(image);
 
     double ratio = getColorRatio1(image, 50, 70, 0, WIDTH, GREEN);
@@ -430,7 +430,7 @@ int mission_5_7_walk_check(U16 *image) {
         return 1;
     }
 
-    double angle = abs(atan(center_line.slope) / M_PI * 180.0 - 1);
+    double angle = abs(atan(center_line.slope) / M_PI * 180.0 + 1);
 
     if (angle > 6.0) {
         return 1;
@@ -449,7 +449,7 @@ int mission_5_8_attach_black(U16 *image) {
     _line_t front_line;
 
     if (getColorRatio1(image, 40, 80, 50, WIDTH - 50, GREEN) > 30.0 &&
-        mission_5_8_get_front_line(image, &front_line, GREEN)) {
+        linear_regression1(image, (WIDTH>>1), 80,BLACK, &front_line)) {
         _line_t left_line, right_line;
         _line_t center_line;
 
@@ -585,6 +585,7 @@ int mission_5_8_set_dist(_line_t line) {
 
 
 int mission_5_9_attach_black(U16 *image) {
+    setFPGAVideoData(image);
     _line_t front_line;
     if (!mission_5_9_get_front_line(image, &front_line, BLACK)) {
         return 0;
@@ -664,8 +665,10 @@ int mission_5_9_set_straight(_line_t line) {
     DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = abs(angle);
 
-    if (angle > 4.0) {
+    if (angle > 5.0) {
         ACTION_TURN(MIDDLE, turn_dir, DOWN, 1);
+    } else if (angle > 3.0) {
+        ACTION_TURN(SHORT, turn_dir, DOWN, 1);
     } else {
         return 1;
     }

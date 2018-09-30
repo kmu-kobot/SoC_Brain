@@ -561,20 +561,20 @@ int mission_6_4_set_center_of_ball(U16 *image) {
         BALL_BIT(FRONT, 1);
     } else if (ball_points[1] > 35) {
         BALL_BIT(BACK, 1);
-    } else if (ball_points[0] < MISSION_6_4_CENTER - 15) {
+    } else if (ball_points[0] < MISSION_6_4_CENTER - 18) {
         BALL_MOVE_LONG(DIR_LEFT, DOWN, 1);
-    } else if (ball_points[0] < MISSION_6_4_CENTER - 7) {
+    } else if (ball_points[0] < MISSION_6_4_CENTER - 8) {
         BALL_MOVE(DIR_LEFT, DOWN, 2);
-    } else if (ball_points[0] < MISSION_6_4_CENTER - 4) {
+    } else if (ball_points[0] < MISSION_6_4_CENTER - 3) {
         BALL_MOVE(DIR_LEFT, DOWN, 1);
         BALL_STABLE(DOWN);
         need_stable = 0;
         return 0;
-    } else if (ball_points[0] > MISSION_6_4_CENTER + 15) {
+    } else if (ball_points[0] > MISSION_6_4_CENTER + 18) {
         BALL_MOVE_LONG(DIR_RIGHT, DOWN, 1);
-    } else if (ball_points[0] > MISSION_6_4_CENTER + 7) {
+    } else if (ball_points[0] > MISSION_6_4_CENTER + 8) {
         BALL_MOVE(DIR_RIGHT, DOWN, 2);
-    } else if (ball_points[0] > MISSION_6_4_CENTER + 4) {
+    } else if (ball_points[0] > MISSION_6_4_CENTER + 3) {
         BALL_MOVE(DIR_RIGHT, DOWN, 1);
         BALL_STABLE(DOWN);
         need_stable = 0;

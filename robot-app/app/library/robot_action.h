@@ -211,6 +211,14 @@ typedef enum {
     BALL_BIT_LEFT = 196,
     BALL_BIT_RIGHT,
 
+    GREEN_WALK_START = 201,
+    GREEN_WALK_END_L,
+    GREEN_WALK_END_R,
+    GREEN_WALK_L,
+    GREEN_WALK_R,
+
+    GREEN_WALK = 207,
+
     NIL = 0xff
 } MOTION;
 
@@ -314,6 +322,8 @@ typedef struct CHECKER_ARGS {
 void *checker(void *data);
 
 int ACTION_WALK_CHECK(VIEW view, U16 *image, int (*check)(U16 *), int finish, int repeat);
+
+int GREEN_WALK_CHECK(U16 *image, int (*check)(U16 *), int repeat);
 
 
 //////////////////////////////
