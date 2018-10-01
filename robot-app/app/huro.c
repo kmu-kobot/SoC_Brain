@@ -13,7 +13,7 @@ int huro(void) {
 
     int missionFinished = 0;
 
-    int mission = 0;
+    int mission = 3;
     int step = 0;
 
     int nextMission = 0;
@@ -59,27 +59,29 @@ int huro(void) {
                         ++step;
                         break;
                     case 1:
-                        flag = 0;
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_2_1_attach_red_bridge(fpga_videodata);
+                        ++step;
+//                        flag = 0;
+//                        setFPGAVideoData(fpga_videodata);
+//                        step += mission_2_1_attach_red_bridge(fpga_videodata);
                         break;
                     case 2:
-                        if (flag == 0) {
-                            default_watch(LEFT, fpga_videodata);
-//                            RobotSleep(1);
-                            flag++;
-                        }
-
-                        step += default_set_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
-
-                        if (step == 2) {
-                            flag = 2;
-                        }
+                        ++step;
+//                        if (flag == 0) {
+//                            default_watch(LEFT, fpga_videodata);
+////                            RobotSleep(1);
+//                            flag++;
+//                        }
+//
+//                        step += default_set_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
+//
+//                        if (step == 2) {
+//                            flag = 2;
+//                        }
                         break;
                     case 3:
-                        if (flag == 2) {
-                            ACTION_ATTACH_SHORT(1);
-                        }
+//                        if (flag == 2) {
+//                            ACTION_ATTACH_SHORT(1);
+//                        }
                         step += mission_2_3_escape_red_bridge();
                         flag = 0;
                         break;
@@ -208,17 +210,18 @@ int huro(void) {
                         flag = 0;
                         break;
                     case 4:
-                        if (flag == 0) {
-                            mission_3_change_mdir(fpga_videodata);
-                            default_watch((VIEW) mission_3_4_getMDir(), fpga_videodata);
-                            ++flag;
-                        }
-
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_3_set_straight_and_center1_long(fpga_videodata, (WIDTH>>1) - (mission_3_4_getMDir() == LEFT ? 50 : -50));
+//                        if (flag == 0) {
+//                            mission_3_change_mdir(fpga_videodata);
+//                            default_watch((VIEW) mission_3_4_getMDir(), fpga_videodata);
+//                            ++flag;
+//                        }
+//
+//                        setFPGAVideoData(fpga_videodata);
+//                        step += mission_3_set_straight_and_center1_long(fpga_videodata, (WIDTH>>1) - (mission_3_4_getMDir() == LEFT ? 50 : -50));
+                        ++step;
                         break;
                     case 5:
-                        ACTION_ATTACH(3);
+//                        ACTION_ATTACH(3);
                         ++step;
                         flag = 2;
                         break;
@@ -499,9 +502,10 @@ int huro(void) {
                         // flag = (step == 1);
                         break;
                     case 1:
-                        flag = 0;
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_7_1_attach_yellow_bridge(fpga_videodata);
+                        ++step;
+//                        flag = 0;
+//                        setFPGAVideoData(fpga_videodata);
+//                        step += mission_7_1_attach_yellow_bridge(fpga_videodata);
                         break;
                     case 2:
                         if (flag == 0) {
@@ -515,11 +519,11 @@ int huro(void) {
                         break;
                     case 3:
                         // 노란색 앞에서 중심 맞추고 붙이기 한번 더 해아함
-                        if (flag > 2) {
-                            ACTION_ATTACH(1);
-                        } else {
-                            ACTION_ATTACH_SHORT(1);
-                        }
+//                        if (flag > 2) {
+//                            ACTION_ATTACH(1);
+//                        } else {
+//                            ACTION_ATTACH_SHORT(1);
+//                        }
                         step = 6;
                         break;
                     case 6:
@@ -557,19 +561,20 @@ int huro(void) {
                         step += mission_8_1_wait_front_of_crevasse(fpga_videodata);
                         break;
                     case 1:
-                        if (flag == 1) {
-                            default_watch(LEFT, fpga_videodata);
-//                            RobotSleep(1);
-                            ++flag;
-                        }
-                        step += default_set_straight_and_center1_long(fpga_videodata, LEFT, 40, HEIGHT - 11, BLACK);
+                        ++step;
+//                        if (flag == 1) {
+//                            default_watch(LEFT, fpga_videodata);
+////                            RobotSleep(1);
+//                            ++flag;
+//                        }
+//                        step += default_set_straight_and_center1_long(fpga_videodata, LEFT, 40, HEIGHT - 11, BLACK);
                         break;
                     case 2:
-                        if (flag == 2) {
-                            default_watch(DOWN, fpga_videodata);
-//                            RobotSleep(2);
-                            ++flag;
-                        }
+//                        if (flag == 2) {
+//                            default_watch(DOWN, fpga_videodata);
+////                            RobotSleep(2);
+//                            ++flag;
+//                        }
                         step += mission_8_2_attach_black(fpga_videodata) && mission_8_2_attach_black(fpga_videodata);
                         break;
                     case 3:
@@ -639,22 +644,24 @@ int huro(void) {
                             flag = 0;
                             ++step;
 
-                            CHECK_INIT(DOWN);
-                            ACTION_WALK(FAST, DOWN, 5);
-//                            RobotSleep(1);
+                            CHECK_INIT(OBLIQUE);
+                            ACTION_WALK(FAST, OBLIQUE, 5);
+                            RobotSleep(1);
                         }
                         break;
                     case 2:
-                        if (flag == 0) {
-                            default_watch(RIGHT, fpga_videodata);
-                            flag++;
-                        }
-
-                        step += default_set_straight_and_center1_long(fpga_videodata, RIGHT, 60, HEIGHT - 11, BLACK);
+//                        if (flag == 0) {
+//                            default_watch(RIGHT, fpga_videodata);
+//                            flag++;
+//                        }
+//
+//                        step += default_set_straight_and_center1_long(fpga_videodata, RIGHT, 60, HEIGHT - 11, BLACK);
+                        ++step;
                         break;
                     case 3:
                         // 일반 걸음으로 걸은 후에, 영상처리 걸음 시작할때 안정화를 위해 슬립
-                        default_watch(OBLIQUE, fpga_videodata);
+//                        default_watch(OBLIQUE, fpga_videodata);
+//                        CHECK_INIT(OBLIQUE);
 
                         step = 0;
                         mission = nextMission;

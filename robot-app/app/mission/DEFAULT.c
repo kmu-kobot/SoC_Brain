@@ -78,18 +78,23 @@ int default_set_center1_long(U16 *image, VIEW view, U16 center, U16 bot, U16 col
 }
 
 int set_straight(_line_t line, U16 center, VIEW view) {
-    double angle = atan(line.slope) * 180.0 / M_PI + (view == LEFT ? 10.5 : -10.5);
+    double angle = atan(line.slope) * 180.0 / M_PI + (view == LEFT ? 9.0 : -9.0);
     DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = fabs(angle);
 
-//    if (angle > 5.0) {
-//        ACTION_TURN(MIDDLE, turn_dir, view, 1);
-//        RobotSleep(2);
-//        return 0;
-//    }
-    if (angle > 9.0) {
-        ACTION_TURN(SHORT, turn_dir, view, 2);
-        RobotSleep(3);
+    if (angle > 25,0) {
+        ACTION_TURN(MIDDLE, turn_dir, view, 3);
+        RobotSleep(2);
+        return 0;
+    }
+    if (angle > 15.0) {
+        ACTION_TURN(MIDDLE, turn_dir, view, 2);
+        RobotSleep(2);
+        return 0;
+    }
+    if (angle > 8.0) {
+        ACTION_TURN(MIDDLE, turn_dir, view, 1);
+        RobotSleep(2);
         return 0;
     }
     if (angle > 3.0) {

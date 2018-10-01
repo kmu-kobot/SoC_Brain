@@ -18,8 +18,12 @@ static inline void default_watch(VIEW view, U16 *image) {
     setFPGAVideoData(image);
     RobotSleep(1);
     setFPGAVideoData(image);
-    RobotSleep(1);
-    setFPGAVideoData(image);
+    if (view == LEFT || view == RIGHT) {
+        RobotSleep(1);
+        setFPGAVideoData(image);
+        setFPGAVideoData(image);
+        setFPGAVideoData(image);
+    }
 }
 
 int default_get_straight_and_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1);
