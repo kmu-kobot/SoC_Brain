@@ -5,7 +5,7 @@
 #include "MISSION_7_YELLOW_HOLE_BRIDGE.h"
 
 void mission_7_1_watch_below(U16 *image, int repeat) {
-    ACTION_WALK_CHECK(OBLIQUE, image, mission_7_1_wait_front_of_yellow_hole_bridge, 1, repeat);
+    YELLOW_WALK_CHECK(image, mission_7_1_wait_front_of_yellow_hole_bridge, repeat);
     RobotSleep(1);
 }
 

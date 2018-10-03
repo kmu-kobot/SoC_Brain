@@ -219,6 +219,24 @@ typedef enum {
 
     GREEN_WALK = 207,
 
+    MINE_WALK_START = 213,
+    MINE_WALK_END_L,
+    MINE_WALK_END_R,
+    MINE_WALK_L,
+    MINE_WALK_R,
+
+    STAIR_WALK_START = 219,
+    STAIR_WALK_END_L,
+    STAIR_WALK_END_R,
+    STAIR_WALK_L,
+    STAIR_WALK_R,
+
+    YELLOW_WALK_START = 225,
+    YELLOW_WALK_END_L,
+    YELLOW_WALK_END_R,
+    YELLOW_WALK_L,
+    YELLOW_WALK_R,
+
     NIL = 0xff
 } MOTION;
 
@@ -324,6 +342,12 @@ void *checker(void *data);
 int ACTION_WALK_CHECK(VIEW view, U16 *image, int (*check)(U16 *), int finish, int repeat);
 
 int GREEN_WALK_CHECK(U16 *image, int (*check)(U16 *), int repeat);
+
+int MINE_WALK_CHECK(U16 *image, int (*check)(U16 *), int repeat);
+
+int STAIR_WALK_CHECK(U16 *image, int (*check)(U16 *), int repeat);
+
+int YELLOW_WALK_CHECK(U16 *image, int (*check)(U16 *), int repeat);
 
 
 //////////////////////////////

@@ -63,6 +63,7 @@ int huro(void) {
                         ++step;
                         break;
                     case 2:
+#if MODE == 3
                         if (flag == 0) {
                             default_watch(LEFT, fpga_videodata);
                             RobotSleep(1);
@@ -72,13 +73,11 @@ int huro(void) {
                         setFPGAVideoData(fpga_videodata);
                         step += default_set_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
                         // flag = step == 2 ? 2 : flag;
+#else
+                        ++step;
+#endif
                         break;
                     case 3:
-                        /*
-                        if (flag == 2) {
-                            ACTION_ATTACH_SHORT(1);
-                        }
-                         */
                         step += mission_2_3_escape_red_bridge();
                         flag = 0;
                         break;
@@ -89,9 +88,13 @@ int huro(void) {
                             flag++;
                         }
 
+#ifndef MINE
                         step += mission_3_set_straight_and_center1_long(fpga_videodata, (WIDTH >> 1) +
                                                                                         (mission_3_4_getMDir() == LEFT
                                                                                          ? 50 : -50));
+#else
+                        step += mission_3_set_straight(fpga_videodata);
+#endif
                         break;
                     case 5:
                         flag = 0;
@@ -109,6 +112,7 @@ int huro(void) {
                      * 3. 지뢰 피하기
                      * 4. 만약, 2에서 각도가 False라면 각도 맞추기
                      * */
+#ifdef MINE
                 switch (step) {
                     case 0:
                         // 앞에 있는 지뢰 감지
@@ -232,6 +236,40 @@ int huro(void) {
                     default:
                         break;
                 }
+#else
+                switch(step) {
+                    case 0:
+                        flag == 1;
+                    case 1:
+                        if (flag == 1) {
+                            default_watch(OBLIQUE, fpga_videodata);
+                            flag = 0;
+                        }
+
+                        step = mission_3_default_watch_below(fpga_videodata, 10) && mission_3_isFrontOf_Blue(fpga_videodata, HEIGHT) ? 3 : 2;
+
+                        break;
+                    case 2:
+                        if (flag == 0) {
+                            default_watch(LEFT, fpga_videodata);
+                            ++flag;
+                        }
+                        step -= mission_3_set_straight(fpga_videodata);
+                        break;
+                    case 3:
+                        if (flag == 0) {
+                            default_watch(LEFT, fpga_videodata);
+                            ++flag;
+                        }
+                        step += mission_3_set_straight_and_center1_long(fpga_videodata, WIDTH>>1);
+                        break;
+                    case 4:
+                        step = 0;
+                        flag = 0;
+                        ++mission;
+                        break;
+                }
+#endif
                 break;
             case 4: // MISSION 4: JUMP HURDLE
                 switch (step) {
@@ -647,25 +685,28 @@ int huro(void) {
                             flag = 0;
                             ++step;
 
-                            default_watch(OBLIQUE, fpga_videodata);
-//                            CHECK_INIT(OBLIQUE);
-//                            ACTION_WALK(FAST, OBLIQUE, 5);
-//                            RobotSleep(2);
+                            CHECK_INIT(OBLIQUE);
+                            ACTION_WALK(FAST, OBLIQUE, 5);
+                            RobotSleep(2);
                         }
                         break;
                     case 2:
-//                        if (flag == 0) {
-//                            default_watch(RIGHT, fpga_videodata);
-//                            flag++;
-//                        }
-//
-//                        step += default_set_straight_and_center1_long(fpga_videodata, RIGHT, 60, HEIGHT - 11, BLACK);
+#if MODE == 3
+                        if (flag == 0) {
+                            default_watch(RIGHT, fpga_videodata);
+                            flag++;
+                        }
+
+                        step += default_set_straight_and_center1_long(fpga_videodata, RIGHT, 60, HEIGHT - 11, BLACK);
+#else
                         ++step;
+#endif
                         break;
                     case 3:
                         // 일반 걸음으로 걸은 후에, 영상처리 걸음 시작할때 안정화를 위해 슬립
-//                        default_watch(OBLIQUE, fpga_videodata);
-//                        CHECK_INIT(OBLIQUE);
+#if MODE == 3
+                        default_watch(OBLIQUE, fpga_videodata);
+#endif
 
                         step = 0;
                         mission = nextMission;

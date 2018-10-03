@@ -92,7 +92,7 @@ int mission_3_isFrontOf_Blue(U16 *image, U16 bot) {
 
 int mission_3_default_watch_below(U16 *image, int repeat) {
     setFPGAVideoData(image);
-    int result = ACTION_WALK_CHECK(OBLIQUE, image, mission_3_walk_avoid_bomb, 1, repeat);
+    int result = MINE_WALK_CHECK(image, mission_3_walk_avoid_bomb, repeat);
     return result;
 }
 
@@ -115,14 +115,19 @@ int mission_3_default_avoid_bomb(U16 *image) {
 
 int mission_3_walk_avoid_bomb(U16 *image) {
     double blue_ratio = getColorRatio1(image, 15, 40, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLUE);
-    double black_ratio = getColorRatio1(image, 15, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
 
     if (blue_ratio > 3.0) {
         return 1;
     }
 
+#if MINE
+    double black_ratio = getColorRatio1(image, 15, MINE_RANGE_BOT, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+
     minecount += black_ratio > 0.3;
     return black_ratio > 0.3;
+#else
+    return 0;
+#endif
 }
 
 int k = 0;
