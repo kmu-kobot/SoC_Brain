@@ -57,42 +57,41 @@ int huro(void) {
                 switch (step) {
                     case 0:
                         ++step;
+                        flag = 0;
                         break;
                     case 1:
                         ++step;
-//                        flag = 0;
-//                        setFPGAVideoData(fpga_videodata);
-//                        step += mission_2_1_attach_red_bridge(fpga_videodata);
                         break;
                     case 2:
-                        ++step;
-//                        if (flag == 0) {
-//                            default_watch(LEFT, fpga_videodata);
-////                            RobotSleep(1);
-//                            flag++;
-//                        }
-//
-//                        step += default_set_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
-//
-//                        if (step == 2) {
-//                            flag = 2;
-//                        }
+                        if (flag == 0) {
+                            default_watch(LEFT, fpga_videodata);
+                            RobotSleep(1);
+                            flag++;
+                        }
+
+                        setFPGAVideoData(fpga_videodata);
+                        step += default_set_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
+                        // flag = step == 2 ? 2 : flag;
                         break;
                     case 3:
-//                        if (flag == 2) {
-//                            ACTION_ATTACH_SHORT(1);
-//                        }
+                        /*
+                        if (flag == 2) {
+                            ACTION_ATTACH_SHORT(1);
+                        }
+                         */
                         step += mission_2_3_escape_red_bridge();
                         flag = 0;
                         break;
                     case 4:
                         if (flag == 0) {
                             default_watch((VIEW) mission_3_4_getMDir(), fpga_videodata);
-//                            RobotSleep(1);
+                            // RobotSleep(1);
                             flag++;
                         }
 
-                        step += mission_3_set_straight_and_center1_long(fpga_videodata, (WIDTH>>1) + (mission_3_4_getMDir() == LEFT ? 50 : -50));
+                        step += mission_3_set_straight_and_center1_long(fpga_videodata, (WIDTH >> 1) +
+                                                                                        (mission_3_4_getMDir() == LEFT
+                                                                                         ? 50 : -50));
                         break;
                     case 5:
                         flag = 0;
@@ -129,7 +128,7 @@ int huro(void) {
 
                         if (step == 1) {
                             default_watch(DOWN, fpga_videodata);
-//                            RobotSleep(1);
+                            // RobotSleep(1);
                             setFPGAVideoData(fpga_videodata);
                             mission_3_attach_mine(fpga_videodata);
                         }
@@ -142,13 +141,13 @@ int huro(void) {
                         if (flag == 1) {
                             ++flag;
                             default_watch(DOWN, fpga_videodata);
-//                            RobotSleep(1);
+                            // RobotSleep(1);
                             setFPGAVideoData(fpga_videodata);
                         }
 
                         setFPGAVideoData(fpga_videodata);
                         if (mission_3_isFrontOf_Blue(fpga_videodata, ROBOT_KNEE)) {
-//                            RobotSleep(1);
+                            // RobotSleep(1);
                             setFPGAVideoData(fpga_videodata);
                             if (mission_3_isFrontOf_Blue(fpga_videodata, ROBOT_KNEE)) {
                                 step = 4;

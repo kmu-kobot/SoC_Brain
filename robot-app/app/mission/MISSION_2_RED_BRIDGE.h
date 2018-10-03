@@ -18,6 +18,10 @@ void mission_2_1_watch_below(U16 *image, int repeat);
 
 int mission_2_1_wait_front_of_red_bridge(U16 *image);
 
+int mission_2_1_check_center(U16 *image);
+
+int mission_2_1_get_mdir(void);
+
 int mission_2_3_escape_red_bridge(void);
 
 int mission_2_1_attach_red_bridge(U16 *image);
