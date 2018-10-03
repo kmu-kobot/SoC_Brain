@@ -44,10 +44,10 @@ int mission_6_3_find_side_hole(U16 *image, U8 step) {
     if (state == 1) {
         if (step == 0) {
             BALL_MOVE_LONG(DIR_LEFT, UP, 1);
-            BALL_TURN(DIR_RIGHT, MIDDLE, hole_points[0] / 30 + 6);
+            BALL_TURN(DIR_RIGHT, LONG, 3);
         } else if (step == 1) {
             BALL_MOVE_LONG(DIR_RIGHT, UP, 1);
-            BALL_TURN(DIR_LEFT, MIDDLE, (WIDTH - hole_points[0]) / 30 + 6);
+            BALL_TURN(DIR_LEFT, LONG, 3);
         } else {
             mission_6_4_turn_right();
             return mission_6_3_find_side_hole(image, 0);
@@ -301,36 +301,30 @@ int mission_6_3_locate_hole_on_center(U16 *image) {
         return 0;
     }
 
-    if (hole_points[0] < MISSION_6_3_CENTER - 40) {
-        BALL_MOVE(DIR_RIGHT, UP, 1);
+    if (hole_points[0] < MISSION_6_3_CENTER - 35) {
+        BALL_MOVE_LONG(DIR_RIGHT, UP, 1);
         BALL_STABLE(UP);
-        BALL_TURN(DIR_LEFT, MIDDLE, 4);
-    } else if (hole_points[0] < MISSION_6_3_CENTER - 30) {
-        BALL_MOVE(DIR_RIGHT, UP, 1);
-        BALL_STABLE(UP);
+        BALL_TURN(DIR_LEFT, LONG, 1);
+    } else if (hole_points[0] < MISSION_6_3_CENTER - 25) {
         BALL_TURN(DIR_LEFT, MIDDLE, 3);
-    } else if (hole_points[0] < MISSION_6_3_CENTER - 20) {
+    } else if (hole_points[0] < MISSION_6_3_CENTER - 15) {
         BALL_TURN(DIR_LEFT, MIDDLE, 2);
-    } else if (hole_points[0] < MISSION_6_3_CENTER - 10) {
+    } else if (hole_points[0] < MISSION_6_3_CENTER - 7) {
         BALL_TURN(DIR_LEFT, MIDDLE, 1);
     } else if (hole_points[0] < MISSION_6_3_CENTER - 3) {
         BALL_TURN(DIR_LEFT, SHORT, 1);
-        RobotSleep(2);
-    } else if (hole_points[0] > MISSION_6_3_CENTER + 40) {
-        BALL_MOVE(DIR_LEFT, UP, 1);
+    } else if (hole_points[0] > MISSION_6_3_CENTER + 35) {
+        BALL_MOVE_LONG(DIR_LEFT, UP, 1);
         BALL_STABLE(UP);
-        BALL_TURN(DIR_RIGHT, MIDDLE, 4);
-    } else if (hole_points[0] > MISSION_6_3_CENTER + 30) {
-        BALL_MOVE(DIR_LEFT, UP, 1);
-        BALL_STABLE(UP);
+        BALL_TURN(DIR_RIGHT, LONG, 1);
+    } else if (hole_points[0] > MISSION_6_3_CENTER + 25) {
         BALL_TURN(DIR_RIGHT, MIDDLE, 3);
-    } else if (hole_points[0] > MISSION_6_3_CENTER + 20) {
+    } else if (hole_points[0] > MISSION_6_3_CENTER + 15) {
         BALL_TURN(DIR_RIGHT, MIDDLE, 2);
-    } else if (hole_points[0] > MISSION_6_3_CENTER + 10) {
+    } else if (hole_points[0] > MISSION_6_3_CENTER + 7) {
         BALL_TURN(DIR_RIGHT, MIDDLE, 1);
     } else if (hole_points[0] > MISSION_6_3_CENTER + 3) {
         BALL_TURN(DIR_RIGHT, SHORT, 1);
-        RobotSleep(2);
     } else {
         return 1;
     }
@@ -563,7 +557,7 @@ int mission_6_4_set_center_of_ball(U16 *image) {
         BALL_BIT(BACK, 1);
     } else if (ball_points[0] < MISSION_6_4_CENTER - 18) {
         BALL_MOVE_LONG(DIR_LEFT, DOWN, 1);
-    } else if (ball_points[0] < MISSION_6_4_CENTER - 6) {
+    } else if (ball_points[0] < MISSION_6_4_CENTER - 5) {
         BALL_MOVE(DIR_LEFT, DOWN, 2);
     } else if (ball_points[0] < MISSION_6_4_CENTER - 3) {
         BALL_MOVE(DIR_LEFT, DOWN, 1);
@@ -572,7 +566,7 @@ int mission_6_4_set_center_of_ball(U16 *image) {
         return 0;
     } else if (ball_points[0] > MISSION_6_4_CENTER + 18) {
         BALL_MOVE_LONG(DIR_RIGHT, DOWN, 1);
-    } else if (ball_points[0] > MISSION_6_4_CENTER + 6) {
+    } else if (ball_points[0] > MISSION_6_4_CENTER + 5) {
         BALL_MOVE(DIR_RIGHT, DOWN, 2);
     } else if (ball_points[0] > MISSION_6_4_CENTER + 3) {
         BALL_MOVE(DIR_RIGHT, DOWN, 1);
@@ -597,7 +591,7 @@ int mission_6_5_kick_ball(void) {
     BALL_TURN(DIR_LEFT, MIDDLE, 1);
     BALL_KICK();
     RobotSleep(1);
-    ACTION_TURN(LONG, DIR_LEFT, UP, 6);
+    ACTION_TURN(LONG, DIR_LEFT, UP, 4);
     RobotSleep(1);
     return 1;
 }

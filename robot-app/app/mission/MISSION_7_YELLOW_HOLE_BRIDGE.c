@@ -17,13 +17,13 @@ int mission_7_1_attach_yellow_bridge(U16 *image) {
 }
 
 int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image) {
-    double ratio = getColorRatio2(image, 25, HEIGHT, 0, WIDTH, YELLOW, CH2);
+    double ratio = getColorRatio2(image, 30, HEIGHT, 0, WIDTH, YELLOW, CH2);
 
     return ratio > MISSION_7_1_THRESHOLDS;
 }
 
 int mission_7_6_jump_hole(void) {
-    ACTION_MOTION(MISSION_7_YELLOW_DUMBLING, UP);
+    ACTION_MOTION(MISSION_7_YELLOW_DUMBLING, DOWN);
     RobotSleep(1);
     return 1;
 }

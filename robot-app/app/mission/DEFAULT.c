@@ -22,6 +22,17 @@ int default_set_straight_and_center1_long(U16 *image, VIEW view, U16 center, U16
     return set_straight(line, center, view) ? set_center_long(line, center, view) : 0;
 }
 
+int default_set_straight_long_and_center1_long(U16 *image, VIEW view, U16 center, U16 bot, U16 color1) {
+    _line_t line;
+
+    CHECK_INIT(view);
+    if (!linear_regression1(image, center, bot, color1, &line)) {
+        return 0;
+    }
+
+    return set_straight_long(line, center, view) ? set_center_long(line, center, view) : 0;
+}
+
 int default_set_straight_and_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1) {
     _line_t line;
 
@@ -78,12 +89,12 @@ int default_set_center1_long(U16 *image, VIEW view, U16 center, U16 bot, U16 col
 }
 
 int set_straight(_line_t line, U16 center, VIEW view) {
-    double angle = atan(line.slope) * 180.0 / M_PI + (view == LEFT ? 9.0 : -9.0);
+    double angle = atan(line.slope) * 180.0 / M_PI + (view == LEFT ? 9.0 : -11.0);
     DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = fabs(angle);
 
     if (angle > 25,0) {
-        ACTION_TURN(MIDDLE, turn_dir, view, 3);
+        ACTION_TURN(LONG, turn_dir, view, 1);
         RobotSleep(2);
         return 0;
     }
@@ -100,6 +111,30 @@ int set_straight(_line_t line, U16 center, VIEW view) {
     if (angle > 3.0) {
         ACTION_TURN(SHORT, turn_dir, view, 1);
         RobotSleep(3);
+        return 0;
+    }
+
+    return 1;
+}
+
+int set_straight_long(_line_t line, U16 center, VIEW view) {
+    double angle = atan(line.slope) * 180.0 / M_PI + (view == LEFT ? 9.0 : -11.0);
+    DIRECTION turn_dir = (DIRECTION) (angle > 0);
+    angle = fabs(angle);
+
+    if (angle > 25,0) {
+        ACTION_TURN(LONG, turn_dir, view, 1);
+        RobotSleep(2);
+        return 0;
+    }
+    if (angle > 15.0) {
+        ACTION_TURN(MIDDLE, turn_dir, view, 2);
+        RobotSleep(2);
+        return 0;
+    }
+    if (angle > 8.0) {
+        ACTION_TURN(MIDDLE, turn_dir, view, 1);
+        RobotSleep(2);
         return 0;
     }
 
@@ -143,7 +178,7 @@ int default_set_not_black(U16 *image) {
     int dist = getDistance1(image, WIDTH >> 1, HEIGHT - 1, BLACK);
 
     if (dist > 10) {
-        ACTION_TURN(LONG, DIR_LEFT, UP, 4);
+        ACTION_TURN(LONG, DIR_LEFT, UP, 1);
         RobotSleep(1);
         setFPGAVideoData(image);
     }

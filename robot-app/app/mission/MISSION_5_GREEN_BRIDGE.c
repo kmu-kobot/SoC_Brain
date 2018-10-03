@@ -97,9 +97,7 @@ int mission_5_2_set_straight(_line_t line) {
 }
 
 void mission_5_3_climb_up_stairs(void) {
-    CHECK_INIT(UP);
-    RobotSleep(3);
-    ACTION_MOTION(MISSION_5_STAIR_UP, UP);
+    ACTION_MOTION(MISSION_5_STAIR_UP, OBLIQUE);
     RobotSleep(1);
     CHECK_INIT(OBLIQUE);
     RobotSleep(1);
@@ -561,7 +559,7 @@ int mission_5_8_set_straight(_line_t line) {
     DIRECTION turn_dir = angle > 0;
     angle = abs(angle);
 
-    if (angle > 3.0) {
+    if (angle > 5.0) {
         ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
     } else {
         return 1;
@@ -665,7 +663,7 @@ int mission_5_9_set_straight(_line_t line) {
     DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = abs(angle);
 
-    if (angle > 5.0) {
+    if (angle > 4.0) {
         ACTION_TURN(MIDDLE, turn_dir, DOWN, 1);
     } else if (angle > 3.0) {
         ACTION_TURN(SHORT, turn_dir, DOWN, 1);
@@ -685,15 +683,15 @@ int mission_5_9_set_dist(_line_t line) {
         RobotSleep(1);
         return 0;
     }
-    if (dist < 40.0) {
+    if (dist < 45.0) {
         ACTION_ATTACH_LIFT(1);
         RobotSleep(1);
         return 0;
-    } else if (dist < 50.0) {
+    } else if (dist < 53.0) {
         ACTION_ATTACH(1);
         RobotSleep(1);
         return 0;
-    } else if (dist < 65.0) { // 67
+    } else if (dist < 62.0) { // 67
         ACTION_ATTACH_SHORT(1);
         RobotSleep(1);
         return 0;
@@ -704,8 +702,9 @@ int mission_5_9_set_dist(_line_t line) {
 
 int mission_5_10_climb_down_stairs(void) {
     RobotSleep(1);
-    ACTION_MOTION(MISSION_5_STAIR_DOWN, UP);
+    ACTION_MOTION(MISSION_5_STAIR_DOWN, DOWN);
     CHECK_INIT(OBLIQUE);
-    ACTION_WALK(FAST, OBLIQUE, 2);
+    RobotSleep(1);
+    ACTION_WALK(FAST, OBLIQUE, 5);
     return 1;
 }

@@ -13,7 +13,7 @@ int huro(void) {
 
     int missionFinished = 0;
 
-    int mission = 3;
+    int mission = 0;
     int step = 0;
 
     int nextMission = 0;
@@ -289,7 +289,7 @@ int huro(void) {
                             flag++;
                         }
 
-                        if (default_set_center1(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK)) {
+                        if (default_set_straight_long_and_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK)) {
                             step = 3;
 
                             if (flag == 2) {
@@ -355,18 +355,19 @@ int huro(void) {
                         flag = 0;
                         break;
                     case 11:
-                        if (flag == 0) {
-                            default_watch(LEFT, fpga_videodata);
-//                            RobotSleep(3);
-                            ++flag;
-                        }
-                        step += default_set_straight_and_center1_long(fpga_videodata, LEFT, 120, HEIGHT - 11, BLACK);
-                        if (step == 12) {
-                            default_watch(OBLIQUE, fpga_videodata);
-                        }
+//                        if (flag == 0) {
+//                            default_watch(LEFT, fpga_videodata);
+////                            RobotSleep(3);
+//                            ++flag;
+//                        }
+//                        step += default_set_straight_and_center1_long(fpga_videodata, LEFT, 120, HEIGHT - 11, BLACK);
+//                        if (step == 12) {
+//                            default_watch(OBLIQUE, fpga_videodata);
+//                        }
+                        ++step;
                         break;
                     case 12:
-                        ACTION_WALK(FAST, OBLIQUE, 5);
+//                        ACTION_WALK(FAST, OBLIQUE, 5);
                         ++step;
                         break;
                     case 13:
@@ -514,7 +515,7 @@ int huro(void) {
                             flag++;
                         }
 
-                        step += default_set_center1(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
+                        step += default_set_straight_long_and_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
                         ++flag;
                         break;
                     case 3:
@@ -644,9 +645,10 @@ int huro(void) {
                             flag = 0;
                             ++step;
 
-                            CHECK_INIT(OBLIQUE);
-                            ACTION_WALK(FAST, OBLIQUE, 5);
-                            RobotSleep(1);
+                            default_watch(OBLIQUE, fpga_videodata);
+//                            CHECK_INIT(OBLIQUE);
+//                            ACTION_WALK(FAST, OBLIQUE, 5);
+//                            RobotSleep(2);
                         }
                         break;
                     case 2:
