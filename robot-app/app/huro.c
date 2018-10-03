@@ -288,7 +288,7 @@ int huro(void) {
                             flag++;
                         }
 
-                        if (default_set_straight_long_and_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK)) {
+                        if (default_set_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK)) {
                             step = 3;
 
                             if (flag == 2) {
@@ -493,7 +493,7 @@ int huro(void) {
                             mission_7_1_watch_below(fpga_videodata, 30);
                         }
 
-//                        ACTION_ATTACH(1); // 4개 너무 많음
+                        ACTION_ATTACH(1); // 4개 너무 많음
                         ++step;
                         // 위에서 노란다리를 인식한후에 수행하는 라인이므로, 다시 수행하는 것은 무의미
 
@@ -514,16 +514,19 @@ int huro(void) {
                             flag++;
                         }
 
-                        step += default_set_straight_long_and_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
+                        step += default_set_center1_long(fpga_videodata, LEFT, 60, HEIGHT - 11, BLACK);
+
+//                        step += default_set_straight_long_and_center1_long(fpga_videodata, LEFT,
+//                                                                           60, HEIGHT - 11, BLACK);
                         ++flag;
                         break;
                     case 3:
                         // 노란색 앞에서 중심 맞추고 붙이기 한번 더 해아함
-//                        if (flag > 2) {
-//                            ACTION_ATTACH(1);
-//                        } else {
-//                            ACTION_ATTACH_SHORT(1);
-//                        }
+                        if (flag > 2) {
+                            ACTION_ATTACH(1);
+                        } else {
+                            ACTION_ATTACH_SHORT(1);
+                        }
                         step = 6;
                         break;
                     case 6:
