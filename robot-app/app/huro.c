@@ -78,7 +78,7 @@ int huro(void) {
                         }
 
                         setFPGAVideoData(fpga_videodata);
-                        state = ithub_center1_long(fpga_videodata, dir, 60, HEIGHT - 11, BLACK);
+                        state = default_set_center1_long(fpga_videodata, dir, 60, HEIGHT - 11, BLACK);
                         if (state == 1) {
                             ++step;
                         }
