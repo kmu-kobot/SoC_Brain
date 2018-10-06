@@ -2,21 +2,20 @@
 
 int default_get_straight_and_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1) {
     _line_t line;
+    int state;
 
     CHECK_INIT(view);
-    if (!linear_regression1(image, center, bot, color1, &line)) {
-        return 0;
-    }
-
-    return 1;
+    return state = linear_regression1(image, center, bot, color1, &line);
 }
 
 int default_set_straight_and_center1_long(U16 *image, VIEW view, U16 center, U16 bot, U16 color1) {
     _line_t line;
+    int state;
 
     CHECK_INIT(view);
-    if (!linear_regression1(image, center, bot, color1, &line)) {
-        return 0;
+    state = linear_regression1(image, center, bot, color1, &line);
+    if (state != 1) {
+        return state;
     }
 
     return set_straight(line, center, view) ? set_center_long(line, center, view) : 0;
@@ -24,10 +23,12 @@ int default_set_straight_and_center1_long(U16 *image, VIEW view, U16 center, U16
 
 int default_set_straight_long_and_center1_long(U16 *image, VIEW view, U16 center, U16 bot, U16 color1) {
     _line_t line;
+    int state;
 
     CHECK_INIT(view);
-    if (!linear_regression1(image, center, bot, color1, &line)) {
-        return 0;
+    state = linear_regression1(image, center, bot, color1, &line);
+    if (state != 1) {
+        return state;
     }
 
     return set_straight_long(line, center, view) ? set_center_long(line, center, view) : 0;
@@ -35,10 +36,12 @@ int default_set_straight_long_and_center1_long(U16 *image, VIEW view, U16 center
 
 int default_set_straight_and_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1) {
     _line_t line;
+    int state;
 
     CHECK_INIT(view);
-    if (!linear_regression1(image, center, bot, color1, &line)) {
-        return 0;
+    state = linear_regression1(image, center, bot, color1, &line);
+    if (state != 1) {
+        return state;
     }
 
     return set_straight(line, center, view) ? set_center(line, center, view) : 0;
@@ -46,10 +49,12 @@ int default_set_straight_and_center1(U16 *image, VIEW view, U16 center, U16 bot,
 
 int default_set_straight_and_center2(U16 *image, VIEW view, U16 center, U16 bot, U16 color1, U16 color2) {
     _line_t line;
+    int state;
 
     CHECK_INIT(view);
-    if (!linear_regression2(image, center, bot, color1, color2, &line)) {
-        return 0;
+    state = linear_regression2(image, center, bot, color1, color2, &line);
+    if (state != 1) {
+        return state;
     }
 
     return set_straight(line, center, view) ? set_center(line, center, view) : 0;
@@ -57,10 +62,12 @@ int default_set_straight_and_center2(U16 *image, VIEW view, U16 center, U16 bot,
 
 int default_set_straight1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1) {
     _line_t line;
+    int state;
 
     CHECK_INIT(view);
-    if (!linear_regression1(image, center, bot, color1, &line)) {
-        return 0;
+    state = linear_regression1(image, center, bot, color1, &line);
+    if (state != 1) {
+        return state;
     }
 
     return set_straight(line, center, view);
@@ -68,10 +75,12 @@ int default_set_straight1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1
 
 int default_set_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1) {
     _line_t line;
+    int state;
 
     CHECK_INIT(view);
-    if (!linear_regression1(image, center, bot, color1, &line)) {
-        return 0;
+    state = linear_regression1(image, center, bot, color1, &line);
+    if (state != 1) {
+        return state;
     }
 
     return set_center(line, center, view);
@@ -79,10 +88,12 @@ int default_set_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1) 
 
 int default_set_center1_long(U16 *image, VIEW view, U16 center, U16 bot, U16 color1) {
     _line_t line;
+    int state;
 
     CHECK_INIT(view);
-    if (!linear_regression1(image, center, bot, color1, &line)) {
-        return 0;
+    state = linear_regression1(image, center, bot, color1, &line);
+    if (state != 1) {
+        return state;
     }
 
     return set_center_long(line, center, view);

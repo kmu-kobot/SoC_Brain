@@ -65,26 +65,6 @@ void mission_3_change_mdir(U16 *image) {
     mdir = leftline.slope * (WIDTH >> 1) + leftline.intercept > rightline.slope * (WIDTH >> 1) + rightline.intercept;
 }
 
-void mission_3_change_mdir_opposite(void) {
-    mdir = !mdir;
-}
-
-int mission_3_measure_line(U16 *image) { // 여기도 col 갯수 늘리고 여러 프레임 돌리느넥 좋을듯
-    _line_t line;
-    int i = 0;
-    while (!mission_3_linear_regression(image, WIDTH >> 1, HEIGHT - 11, BLACK, &line) && i++ < 5);
-
-    if (i >= 5) {
-        return 0;
-    }
-
-    double dist = line.slope * (WIDTH >> 1) + line.intercept;
-
-    mdir += (dist > 70.0);
-
-    return 1;
-}
-
 int mission_3_check_angle(void) {
     return mangle;
 }
@@ -156,7 +136,7 @@ int mission_3_set_straight_and_center1_long(U16 *image, U16 center) {
     VIEW view = (mdir & 1) + LEFT;
 
     CHECK_INIT(view);
-    if (!mission_3_linear_regression(image, center, HEIGHT - 11, BLACK, &line)) {
+    if (mission_3_linear_regression(image, center, HEIGHT - 11, BLACK, &line) != 1) {
         return 0;
     }
 
@@ -168,7 +148,7 @@ int mission_3_set_straight(U16 *image) {
     VIEW view = (mdir & 1) + LEFT;
 
     CHECK_INIT(view);
-    if (!mission_3_linear_regression(image, WIDTH >> 1, HEIGHT - 11, BLACK, &line)) {
+    if (mission_3_linear_regression(image, WIDTH >> 1, HEIGHT - 11, BLACK, &line) != 1) {
         return 0;
     }
 
@@ -180,7 +160,7 @@ int mission_3_set_center(U16 *image) {
     VIEW view = (mdir & 1) + LEFT;
 
     CHECK_INIT(view);
-    if (!mission_3_linear_regression(image, WIDTH >> 1, HEIGHT - 11, BLACK, &line)) {
+    if (mission_3_linear_regression(image, WIDTH >> 1, HEIGHT - 11, BLACK, &line) != 1) {
         return 0;
     }
 

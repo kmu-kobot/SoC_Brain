@@ -215,7 +215,7 @@ int linear_regression1(U16 *image, U16 center, U16 bot, U16 color1, _line_t *lin
     printf("point_cnt : %d\n", point_cnt);
 #endif
 
-    if (point_cnt * 3 / 4 == 0) {
+    if (point_cnt < (NUM_LIN_REG_POINT * NUM_LIN_REG_FRAME) >> 2) {
         return 0;
     }
 
@@ -264,7 +264,7 @@ int linear_regression2(U16 *image, U16 center, U16 bot, U16 color1, U16 color2, 
     printf("point_cnt : %d\n", point_cnt);
 #endif
 
-    if (point_cnt * 3 / 4 == 0) {
+    if (point_cnt < (NUM_LIN_REG_POINT * NUM_LIN_REG_FRAME) >> 2) {
         return 0;
     }
 
@@ -279,6 +279,7 @@ int least_sqaures(U16 *image, U16 center, _point_t *points, U32 size, _line_t *l
     double sum_y = 0;
     double sum_xy = 0;
     double sum_xx = 0;
+    double error = 0.0;
 
     for (i = 0; i < size; ++i) {
         sum_x += points[i].x;
@@ -304,6 +305,21 @@ int least_sqaures(U16 *image, U16 center, _point_t *points, U32 size, _line_t *l
     printf("slope : %f, angle : %f, intercept : %f, distance : %f\n\n", line->slope, angle, line->intercept, distance);
 #endif
 
+    for (i = 0; i < size; ++i) {
+        double e = points[i].y - line->slope*points[i].x - line->intercept;
+        error += e*e;
+    }
+
+    error /= size;
+
+    if (error > 10.0) {
+        drawline(image, *line, 0x00ff);
+        drawpoint(image, points, size, 0x00ff);
+        draw_fpga_video_data_full(image);
+        flip();
+        return -1;
+    }
+
     drawline(image, *line, 0xffff);
     drawpoint(image, points, size, 0xffff);
     draw_fpga_video_data_full(image);
@@ -316,10 +332,11 @@ int least_sqaures(U16 *image, U16 center, _point_t *points, U32 size, _line_t *l
 int least_sqauresT(U16 *image, U16 center, _point_t *points, U32 size, _line_t *line) {
     U32 i;
 
-    double sum_x = 0;
-    double sum_y = 0;
-    double sum_xy = 0;
-    double sum_yy = 0;
+    double sum_x = 0.0;
+    double sum_y = 0.0;
+    double sum_xy = 0.0;
+    double sum_yy = 0.0;
+    double error = 0.0;
 
     for (i = 0; i < size; ++i) {
         sum_x += points[i].x;
@@ -344,6 +361,21 @@ int least_sqauresT(U16 *image, U16 center, _point_t *points, U32 size, _line_t *
 
     printf("slope : %f, angle : %f, intercept : %f, distance : %f\n\n", line->slope, angle, line->intercept, distance);
 #endif
+
+    for (i = 0; i < size; ++i) {
+        double e = points[i].x - line->slope*points[i].y - line->intercept;
+        error += e*e;
+    }
+
+    error /= size;
+
+    if (error > 10.0) {
+        drawlineT(image, *line, 0x00ff);
+        drawpoint(image, points, size, 0x00ff);
+        draw_fpga_video_data_full(image);
+        flip();
+        return -1;
+    }
 
     drawlineT(image, *line, 0xffff);
     drawpoint(image, points, size, 0xffff);
