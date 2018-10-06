@@ -447,7 +447,7 @@ int mission_5_8_attach_black(U16 *image) {
     _line_t front_line;
 
     if (getColorRatio1(image, 40, 80, 50, WIDTH - 50, GREEN) > 30.0 &&
-        linear_regression1(image, (WIDTH>>1), 80,BLACK, &front_line)) {
+        linear_regression1(image, (WIDTH >> 1), 80, BLACK, &front_line)) {
         _line_t left_line, right_line;
         _line_t center_line;
 
@@ -658,16 +658,26 @@ int mission_5_9_get_front_line(U16 *image, _line_t *front_line, U16 color) {
     return least_sqaures(image, WIDTH >> 1, points, point_cnt, front_line);
 }
 
+int cntSetStraightOnBlock = 0;
+
 int mission_5_9_set_straight(_line_t line) {
     double angle = atan(line.slope) * 180.0 / M_PI;
     DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = abs(angle);
+
+    if (cntSetStraightOnBlock++ > 10) {
+        ACTION_ATTACH_LIFT(1);
+        RobotSleep(1);
+        cntSetStraightOnBlock = 0;
+        return 0;
+    }
 
     if (angle > 4.0) {
         ACTION_TURN(MIDDLE, turn_dir, DOWN, 1);
     } else if (angle > 3.0) {
         ACTION_TURN(SHORT, turn_dir, DOWN, 1);
     } else {
+        cntSetStraightOnBlock = 0;
         return 1;
     }
 
@@ -675,23 +685,27 @@ int mission_5_9_set_straight(_line_t line) {
     return 0;
 }
 
+int cntAttachDist = 0;
+
 int mission_5_9_set_dist(_line_t line) {
     double dist = line.slope * (WIDTH >> 1) + line.intercept;
 
-    if (dist < 35.0) {
-        ACTION_ATTACH(1);
+    if (0 <= dist && dist < 35.0) {
+        if (cntAttachDist++ < 5) {
+            ACTION_ATTACH(1);
+        } else {
+            ACTION_ATTACH_LIFT(1);
+        }
+
         RobotSleep(1);
         return 0;
     }
-    if (dist < 45.0) {
+
+    if (dist < 57.0) {
         ACTION_ATTACH_LIFT(1);
         RobotSleep(1);
         return 0;
-    } else if (dist < 53.0) {
-        ACTION_ATTACH(1);
-        RobotSleep(1);
-        return 0;
-    } else if (dist < 62.0) { // 67
+    } else if (dist < 67.0) { // 67
         ACTION_ATTACH_SHORT(1);
         RobotSleep(1);
         return 0;

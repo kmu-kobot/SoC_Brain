@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define DEFAULT_CENTER_DISTANCE 52
+#define DEFAULT_CENTER_DISTANCE 50
 #define DEFAULT_CENTER_THRES_LONG 12
 #define DEFAULT_CENTER_THRES_SHORT 4
 
@@ -25,6 +25,7 @@ static inline void default_watch(VIEW view, U16 *image) {
         setFPGAVideoData(image);
         setFPGAVideoData(image);
         setFPGAVideoData(image);
+        // ㅋㅋ 무엇?
     }
 }
 
