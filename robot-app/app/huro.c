@@ -65,7 +65,7 @@ int huro(void) {
                         ++step;
                         break;
                     case 2:
-#if MODE == 3 || MODE == 2
+#if MODE == 3
                         if (flag == 0) {
                             dir = LEFT;
                             default_watch(LEFT, fpga_videodata);
