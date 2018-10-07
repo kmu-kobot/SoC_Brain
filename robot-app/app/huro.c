@@ -110,6 +110,7 @@ int huro(void) {
 #endif
                         break;
                     case 5:
+                        RobotSleep(1);
                         flag = 0;
                         mission += 1;
                         step = 0;
@@ -754,11 +755,8 @@ int huro(void) {
                         }
 
                         setFPGAVideoData(fpga_videodata);
-#if MODE == 3
                         state = default_set_straight_and_center1(fpga_videodata, dir, 60, HEIGHT - 11, BLACK);
-#else
-                        state = default_set_straight_and_center1_long(fpga_videodata, dir, 60, HEIGHT - 11, BLACK);
-#endif
+
                         if (state == 1) {
                             flag = 0;
                             ++step;
@@ -807,6 +805,7 @@ int huro(void) {
                     case 3:
                         // 일반 걸음으로 걸은 후에, 영상처리 걸음 시작할때 안정화를 위해 슬립
                         step = 0;
+                        RobotSleep(1);
                         mission = nextMission;
                         nextMission = 0;
                         flag = 0;
