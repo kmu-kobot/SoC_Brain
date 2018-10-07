@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define DEFAULT_CENTER_DISTANCE 55
+#define DEFAULT_CENTER_DISTANCE 57
 #define DEFAULT_CENTER_THRES_LONG 12
 #define DEFAULT_CENTER_THRES_SHORT 4
 
