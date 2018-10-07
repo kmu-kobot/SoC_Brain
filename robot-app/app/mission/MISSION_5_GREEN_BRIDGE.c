@@ -446,39 +446,40 @@ int mission_5_7_walk_check(U16 *image) {
 int mission_5_8_attach_black(U16 *image) {
     _line_t front_line;
 
-    if (getColorRatio1(image, 40, 80, 50, WIDTH - 50, GREEN) > 30.0 &&
-        linear_regression1(image, WIDTH_CENTER, 80, BLACK, &front_line)) {
-        _line_t left_line, right_line;
-        _line_t center_line;
-
-        int left_state, right_state;
-        left_state = mission_5_4_get_left_line(image, 105, &left_line);
-        right_state = mission_5_4_get_right_line(image, 105, &right_line);
-
-        if (!(left_state || right_state)) {
-            ACTION_ATTACH(1);
-            return 0;
-        }
-
-        if (!mission_5_8_set_straight(front_line)) {
-            return 0;
-        }
-
-        int center_state = mission_5_4_get_center_line(image, left_line, right_line, &center_line);
-
-        if (center_state == 0 || center_state == -1) {
-            ACTION_ATTACH(1);
-            return 0;
-        }
-
-        if (mission_5_4_set_center(center_line)) {
-            ACTION_ATTACH(1);
-        }
-
-        return 0;
-    }
+//    if (getColorRatio1(image, 40, 80, 50, WIDTH - 50, GREEN) > 30.0 &&
+//        linear_regression1(image, WIDTH_CENTER, 80, BLACK, &front_line)) {
+//        _line_t left_line, right_line;
+//        _line_t center_line;
+//
+//        int left_state, right_state;
+//        left_state = mission_5_4_get_left_line(image, 105, &left_line);
+//        right_state = mission_5_4_get_right_line(image, 105, &right_line);
+//
+//        if (!(left_state || right_state)) {
+//            ACTION_ATTACH(1);
+//            return 0;
+//        }
+//
+//        if (!mission_5_8_set_straight(front_line)) {
+//            return 0;
+//        }
+//
+//        int center_state = mission_5_4_get_center_line(image, left_line, right_line, &center_line);
+//
+//        if (center_state == 0 || center_state == -1) {
+//            ACTION_ATTACH(1);
+//            return 0;
+//        }
+//
+//        if (mission_5_4_set_center(center_line)) {
+//            ACTION_ATTACH(1);
+//        }
+//
+//        return 0;
+//    }
 
     if (!mission_5_8_get_front_line(image, &front_line, BLACK)) {
+        ACTION_ATTACH(1);
         return 1;
     }
 
@@ -586,6 +587,7 @@ int mission_5_9_attach_black(U16 *image) {
     setFPGAVideoData(image);
     _line_t front_line;
     if (!mission_5_9_get_front_line(image, &front_line, BLACK)) {
+        ACTION_ATTACH(1);
         return 0;
     }
 

@@ -52,14 +52,25 @@ void mission_3_change_mdir(U16 *image) {
     double thresholdAngle = 13.0;
 
     _line_t leftline, rightline;
+    int leftstate, rightstate;
     default_watch(LEFT, image);
     RobotSleep(1);
-    linear_regression1(image, WIDTH_CENTER, HEIGHT - 11, BLACK, &leftline);
+    leftstate = linear_regression1(image, WIDTH_CENTER, HEIGHT - 11, BLACK, &leftline);
+    if (leftstate != 1)
+    {
+        mdir = DIR_RIGHT;
+        return;
+    }
     mangle = fabs(atan(leftline.slope) * 180.0 / M_PI + (9.0)) > thresholdAngle;
 
     default_watch(RIGHT, image);
     RobotSleep(1);
-    linear_regression1(image, WIDTH_CENTER, HEIGHT - 11, BLACK, &rightline);
+    rightstate = linear_regression1(image, WIDTH_CENTER, HEIGHT - 11, BLACK, &rightline);
+    if (rightstate != 1)
+    {
+        mdir = DIR_LEFT;
+        return;
+    }
     mangle |= fabs(atan(rightline.slope) * 180.0 / M_PI + (-11.0)) > thresholdAngle;
 
     mdir = leftline.slope * WIDTH_CENTER + leftline.intercept > rightline.slope * WIDTH_CENTER + rightline.intercept;
@@ -134,21 +145,27 @@ int mission_3_1_ver2(U16 *image) {
 int mission_3_set_straight_and_center1_long(U16 *image, U16 center) {
     _line_t line;
     VIEW view = (mdir & 1) + LEFT;
+    int state;
 
     CHECK_INIT(view);
-    if (mission_3_linear_regression(image, center, HEIGHT - 11, BLACK, &line) != 1) {
+    state = mission_3_linear_regression(image, center, HEIGHT - 11, BLACK, &line);
+    if (state != 1) {
+        mission_3_change_mdir(image);
         return 0;
     }
 
-    return set_straight(line, center, view) && set_center_long(line, center, view);
+    return set_straight(line, center, view) && set_center_long(line, DEFAULT_CENTER_DISTANCE, view);
 }
 
 int mission_3_set_straight(U16 *image) {
     _line_t line;
     VIEW view = (mdir & 1) + LEFT;
+    int state;
 
     CHECK_INIT(view);
-    if (mission_3_linear_regression(image, WIDTH_CENTER, HEIGHT - 11, BLACK, &line) != 1) {
+    state = mission_3_linear_regression(image, WIDTH_CENTER, HEIGHT - 11, BLACK, &line);
+    if (state != 1) {
+        mission_3_change_mdir(image);
         return 0;
     }
 
@@ -158,13 +175,16 @@ int mission_3_set_straight(U16 *image) {
 int mission_3_set_center(U16 *image) {
     _line_t line;
     VIEW view = (mdir & 1) + LEFT;
+    int state;
 
     CHECK_INIT(view);
-    if (mission_3_linear_regression(image, WIDTH_CENTER, HEIGHT - 11, BLACK, &line) != 1) {
+    state = mission_3_linear_regression(image, WIDTH_CENTER, HEIGHT - 11, BLACK, &line);
+    if (state != 1) {
+        mission_3_change_mdir(image);
         return 0;
     }
 
-    return set_center(line, WIDTH_CENTER, view);
+    return set_center(line, DEFAULT_CENTER_DISTANCE, view);
 }
 
 int mission_3_linear_regression(U16 *image, U16 center, U16 bot, U16 color1, _line_t *line) {
