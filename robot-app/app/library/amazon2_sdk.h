@@ -268,6 +268,8 @@ static const U16 COLOR_BITS[] = {0xe000, 0x07a0, 0x001e, 0xcf00, 0xd300, 0x4209,
 
 #define HEIGHT 120
 #define WIDTH 180
+#define HEIGHT_CENTER (HEIGHT>>1)
+#define WIDTH_CENTER (WIDTH>>1)
 
 #define GetValueRGBYOBK(u16, color) ((U16)(u16 >> color) & 0x0001)
 #define GetPtr(arr, row, col, width) (arr[row * width + col])
