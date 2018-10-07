@@ -24,7 +24,7 @@
 
 #define MISSION_6_4_THRES 5
 
-#define MISSION_6_4_CENTER 105
+#define MISSION_6_4_CENTER 103
 
 int mission_6_1_detection_ball(U16 *image);
 

@@ -367,18 +367,18 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="6" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.12" value="3" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="Makefile" value="1" />
-          <entry key="c" value="34" />
+          <entry key="c" value="35" />
           <entry key="h" value="19" />
           <entry key="txt" value="1" />
         </counts>
@@ -386,19 +386,19 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CMakeLists.txt" value="1" />
-          <entry key="ObjectiveC" value="53" />
+          <entry key="ObjectiveC" value="54" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="c" value="3384" />
-          <entry key="h" value="685" />
+          <entry key="c" value="3526" />
+          <entry key="h" value="758" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="ObjectiveC" value="4069" />
+          <entry key="ObjectiveC" value="4284" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -407,18 +407,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/huro.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="80" column="43" selection-start-line="80" selection-start-column="32" selection-end-line="80" selection-end-column="43" />
+            <state relative-caret-position="366">
+              <caret line="565" column="27" lean-forward="true" selection-start-line="565" selection-start-column="27" selection-end-line="565" selection-end-column="27" />
               <folding>
-                <element signature="e#424#485#0" expanded="true" />
-                <element signature="e#8756#9928#0" expanded="true" />
-                <element signature="e#10102#10122#0" expanded="true" />
-                <element signature="e#28707#28800#0" expanded="true" />
-                <element signature="e#29924#30017#0" expanded="true" />
-                <element signature="e#27565#27572#0" expanded="true" />
+                <element signature="e#1840#2721#0" expanded="true" />
+                <element signature="e#3591#3638#0" expanded="true" />
+                <element signature="e#4262#9287#0" expanded="true" />
+                <element signature="e#23714#23882#0" expanded="true" />
+                <element signature="e#26004#26096#0" expanded="true" />
+                <element signature="e#26753#26845#0" expanded="true" />
+                <element signature="e#29634#29720#0" expanded="true" />
+                <element signature="e#30453#31519#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -427,8 +429,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/library/amazon2_sdk.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+            <state relative-caret-position="77">
+              <caret line="259" column="17" lean-forward="true" selection-start-line="259" selection-start-column="17" selection-end-line="259" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -446,7 +448,7 @@
         <entry file="file://$PROJECT_DIR$/mission/MISSION_3_AVOID_BOMB.c">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="3078">
-              <caret line="162" column="86" selection-start-line="162" selection-start-column="86" selection-end-line="162" selection-end-column="86" />
+              <caret line="162" column="88" selection-start-line="162" selection-start-column="88" selection-end-line="162" selection-end-column="88" />
               <folding>
                 <element signature="e#3889#3898#0" expanded="true" />
               </folding>
@@ -454,10 +456,19 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mission/MISSION_5_GREEN_BRIDGE.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="278">
+              <caret line="438" column="19" selection-start-line="438" selection-start-column="19" selection-end-line="438" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/library/imageProcess.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2116">
+            <state relative-caret-position="3382">
               <caret line="178" column="4" selection-start-line="178" selection-start-column="4" selection-end-line="178" selection-end-column="4" />
             </state>
           </provider>
@@ -466,7 +477,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/library/imageProcess.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
+            <state relative-caret-position="228">
               <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
             </state>
           </provider>
@@ -475,7 +486,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/library/robot_action.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-798">
+            <state relative-caret-position="171">
               <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
             </state>
           </provider>
@@ -525,6 +536,12 @@
       <find>!linear_regression1(image, center, bot, color1, &amp;line)</find>
       <find>state</find>
       <find>default_set</find>
+      <find>WIDTH&gt;&gt;1</find>
+      <find>WIDTH</find>
+      <find>60</find>
+      <find>(WIDTH &gt;&gt; 1)</find>
+      <find>WIDTH &gt;&gt; 1</find>
+      <find>dir</find>
     </findStrings>
     <replaceStrings>
       <replace>default_watch\(LEFT, fpga_videodata\);</replace>
@@ -535,6 +552,7 @@
       <replace>9.5</replace>
       <replace>YELLOW</replace>
       <replace>MINE</replace>
+      <replace>WIDTH_CENTER</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -561,13 +579,13 @@
         <option value="$PROJECT_DIR$/library/robot_action.h" />
         <option value="$PROJECT_DIR$/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c" />
         <option value="$PROJECT_DIR$/library/robot_action.c" />
-        <option value="$PROJECT_DIR$/mission/MISSION_5_GREEN_BRIDGE.c" />
-        <option value="$PROJECT_DIR$/library/amazon2_sdk.h" />
         <option value="$PROJECT_DIR$/mission/DEFAULT.h" />
         <option value="$PROJECT_DIR$/library/imageProcess.c" />
         <option value="$PROJECT_DIR$/mission/MISSION_3_AVOID_BOMB.c" />
         <option value="$PROJECT_DIR$/mission/DEFAULT.c" />
+        <option value="$PROJECT_DIR$/library/amazon2_sdk.h" />
         <option value="$PROJECT_DIR$/huro.c" />
+        <option value="$PROJECT_DIR$/mission/MISSION_5_GREEN_BRIDGE.c" />
       </list>
     </option>
   </component>
@@ -578,8 +596,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
-    <option name="x" value="9" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="37" />
+    <option name="y" value="217" />
     <option name="width" value="2160" />
     <option name="height" value="1440" />
   </component>
@@ -588,39 +607,12 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="SoC_App" type="b2602c69:ProjectViewProjectNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SoC_App" type="b2602c69:ProjectViewProjectNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SoC_App" type="b2602c69:ProjectViewProjectNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="library" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SoC_App" type="b2602c69:ProjectViewProjectNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="mission" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="default&#9;FILE&#9;file://C:/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/DEFAULT.h&#10;robot&#9;FILE&#9;file://C:/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/robot_action.h&#10;huro&#9;FILE&#9;file://C:/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/huro.c&#10;mission_6&#9;FILE&#9;file://C:/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_6_KICK_BALL.c&#10;mission7&#9;FILE&#9;file://C:/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c" />
+    <property name="SearchEverywhereHistoryKey" value="mission_6&#9;FILE&#9;file://C:/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_6_KICK_BALL.h&#10;mission&#9;FILE&#9;file://C:/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_6_KICK_BALL.c&#10;default&#9;FILE&#9;file://C:/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/DEFAULT.h&#10;robot&#9;FILE&#9;file://C:/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/robot_action.h&#10;huro&#9;FILE&#9;file://C:/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/huro.c&#10;mission7&#9;FILE&#9;file://C:/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="CPPToolchains" />
   </component>
   <component name="RunDashboard">
@@ -671,11 +663,12 @@
       <workItem from="1538296547943" duration="4622000" />
       <workItem from="1538397108365" duration="5840000" />
       <workItem from="1538823447527" duration="4724000" />
+      <workItem from="1538896052237" duration="1617000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43222000" />
+    <option name="totallyTimeSpent" value="44839000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -687,7 +680,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="960" extended-state="6" />
+    <frame x="0" y="0" width="1440" height="960" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.26040173" />
@@ -942,62 +935,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/library/amazon2_sdk.h">
+    <entry file="file://$PROJECT_DIR$/mission/MISSION_3_AVOID_BOMB.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mission/MISSION_5_GREEN_BRIDGE.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5415">
-          <caret line="285" column="42" selection-start-line="285" selection-start-column="42" selection-end-line="285" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/robot_action.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5814">
-          <caret line="306" column="10" selection-start-line="306" selection-start-column="10" selection-end-line="306" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/robot_action.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-798">
-          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/imageProcess.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+        <state relative-caret-position="3078">
+          <caret line="162" column="88" selection-start-line="162" selection-start-column="88" selection-end-line="162" selection-end-column="88" />
+          <folding>
+            <element signature="e#3889#3898#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/library/imageProcess.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2116">
+        <state relative-caret-position="3382">
           <caret line="178" column="4" selection-start-line="178" selection-start-column="4" selection-end-line="178" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mission/DEFAULT.h">
+    <entry file="file://$PROJECT_DIR$/library/imageProcess.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+        <state relative-caret-position="228">
+          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mission/MISSION_3_AVOID_BOMB.c">
+    <entry file="file://$PROJECT_DIR$/library/robot_action.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3078">
-          <caret line="162" column="86" selection-start-line="162" selection-start-column="86" selection-end-line="162" selection-end-column="86" />
-          <folding>
-            <element signature="e#3889#3898#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="171">
+          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -1008,18 +973,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/library/robot_action.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5814">
+          <caret line="306" column="10" selection-start-line="306" selection-start-column="10" selection-end-line="306" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/amazon2_sdk.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="77">
+          <caret line="259" column="17" lean-forward="true" selection-start-line="259" selection-start-column="17" selection-end-line="259" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mission/DEFAULT.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/huro.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="80" column="43" selection-start-line="80" selection-start-column="32" selection-end-line="80" selection-end-column="43" />
+        <state relative-caret-position="366">
+          <caret line="565" column="27" lean-forward="true" selection-start-line="565" selection-start-column="27" selection-end-line="565" selection-end-column="27" />
           <folding>
-            <element signature="e#424#485#0" expanded="true" />
-            <element signature="e#8756#9928#0" expanded="true" />
-            <element signature="e#10102#10122#0" expanded="true" />
-            <element signature="e#28707#28800#0" expanded="true" />
-            <element signature="e#29924#30017#0" expanded="true" />
-            <element signature="e#27565#27572#0" expanded="true" />
+            <element signature="e#1840#2721#0" expanded="true" />
+            <element signature="e#3591#3638#0" expanded="true" />
+            <element signature="e#4262#9287#0" expanded="true" />
+            <element signature="e#23714#23882#0" expanded="true" />
+            <element signature="e#26004#26096#0" expanded="true" />
+            <element signature="e#26753#26845#0" expanded="true" />
+            <element signature="e#29634#29720#0" expanded="true" />
+            <element signature="e#30453#31519#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mission/MISSION_5_GREEN_BRIDGE.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="438" column="19" selection-start-line="438" selection-start-column="19" selection-end-line="438" selection-end-column="19" />
         </state>
       </provider>
     </entry>

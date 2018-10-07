@@ -605,23 +605,23 @@ int huro(void) {
                         break;
                     case 7:
                         if (flag == 0) {
-                            dir = LEFT;
-                            default_watch(LEFT, fpga_videodata);
-                            flag++;
-                        } else if (flag == 3) {
                             dir = RIGHT;
                             default_watch(RIGHT, fpga_videodata);
+                            flag++;
+                        } else if (flag == 3) {
+                            dir = LEFT;
+                            default_watch(LEFT, fpga_videodata);
                             flag++;
                         }
 
                         setFPGAVideoData(fpga_videodata);
 
 #if MODE == 3
-                    state = default_set_straight_long_and_center1_long(fpga_videodata, dir, WIDTH_CENTER + (dir == LEFT ? 30 : -30), HEIGHT - 11,
+                    state = default_set_straight_long_and_center1_long(fpga_videodata, dir, WIDTH_CENTER, HEIGHT - 11,
                                                                        BLACK);
 #else
-                        // state = default_set_center1_long(fpga_videodata, dir, WIDTH_CENTER + (dir == LEFT ? 30 : -30), HEIGHT - 11, BLACK);
-                        state = default_set_straight1(fpga_videodata, dir, WIDTH_CENTER + (dir == LEFT ? 30 : -30),
+                        // state = default_set_center1_long(fpga_videodata, dir, WIDTH_CENTER, HEIGHT - 11, BLACK);
+                        state = default_set_straight1(fpga_videodata, dir, WIDTH_CENTER,
                                                       HEIGHT - 11, BLACK);
 #endif
                         if (state == 1) {
