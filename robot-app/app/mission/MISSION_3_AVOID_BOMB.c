@@ -54,15 +54,15 @@ void mission_3_change_mdir(U16 *image) {
     _line_t leftline, rightline;
     default_watch(LEFT, image);
     RobotSleep(1);
-    linear_regression1(image, WIDTH >> 1, HEIGHT - 11, BLACK, &leftline);
+    linear_regression1(image, WIDTH_CENTER, HEIGHT - 11, BLACK, &leftline);
     mangle = fabs(atan(leftline.slope) * 180.0 / M_PI + (9.0)) > thresholdAngle;
 
     default_watch(RIGHT, image);
     RobotSleep(1);
-    linear_regression1(image, WIDTH >> 1, HEIGHT - 11, BLACK, &rightline);
+    linear_regression1(image, WIDTH_CENTER, HEIGHT - 11, BLACK, &rightline);
     mangle |= fabs(atan(rightline.slope) * 180.0 / M_PI + (-11.0)) > thresholdAngle;
 
-    mdir = leftline.slope * (WIDTH >> 1) + leftline.intercept > rightline.slope * (WIDTH >> 1) + rightline.intercept;
+    mdir = leftline.slope * WIDTH_CENTER + leftline.intercept > rightline.slope * WIDTH_CENTER + rightline.intercept;
 }
 
 int mission_3_check_angle(void) {
@@ -148,11 +148,11 @@ int mission_3_set_straight(U16 *image) {
     VIEW view = (mdir & 1) + LEFT;
 
     CHECK_INIT(view);
-    if (mission_3_linear_regression(image, WIDTH >> 1, HEIGHT - 11, BLACK, &line) != 1) {
+    if (mission_3_linear_regression(image, WIDTH_CENTER, HEIGHT - 11, BLACK, &line) != 1) {
         return 0;
     }
 
-    return set_straight(line, WIDTH >> 1, view);
+    return set_straight(line, WIDTH_CENTER, view);
 }
 
 int mission_3_set_center(U16 *image) {
@@ -160,11 +160,11 @@ int mission_3_set_center(U16 *image) {
     VIEW view = (mdir & 1) + LEFT;
 
     CHECK_INIT(view);
-    if (mission_3_linear_regression(image, WIDTH >> 1, HEIGHT - 11, BLACK, &line) != 1) {
+    if (mission_3_linear_regression(image, WIDTH_CENTER, HEIGHT - 11, BLACK, &line) != 1) {
         return 0;
     }
 
-    return set_center(line, WIDTH >> 1, view);
+    return set_center(line, WIDTH_CENTER, view);
 }
 
 int mission_3_linear_regression(U16 *image, U16 center, U16 bot, U16 color1, _line_t *line) {

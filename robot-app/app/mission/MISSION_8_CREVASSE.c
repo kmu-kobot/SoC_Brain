@@ -91,7 +91,7 @@ int mission_8_2_get_front_line(U16 *image, _line_t *front_line, U16 color) {
         return 0;
     }
 
-    return least_sqaures(image, WIDTH >> 1, points, point_cnt, front_line);
+    return least_sqaures(image, WIDTH_CENTER, points, point_cnt, front_line);
 }
 
 int mission_8_2_set_straight(_line_t line) {
@@ -114,7 +114,7 @@ int mission_8_2_set_straight(_line_t line) {
 }
 
 int mission_8_2_set_dist(_line_t line) {
-    double dist = line.slope * (WIDTH >> 1) + line.intercept;
+    double dist = line.slope * WIDTH_CENTER + line.intercept;
 
     if (dist < 50.0) {
         ACTION_ATTACH(1);

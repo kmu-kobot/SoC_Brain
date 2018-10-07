@@ -153,7 +153,7 @@ int set_straight_long(_line_t line, U16 center, VIEW view) {
 }
 
 int set_center_long(_line_t line, U16 center, VIEW view) {
-    double dist_err = DEFAULT_CENTER_DISTANCE - (line.slope * (WIDTH >> 1) + line.intercept);
+    double dist_err = DEFAULT_CENTER_DISTANCE - (line.slope * WIDTH_CENTER + line.intercept);
     DIRECTION move_dir = (DIRECTION) ((view - LEFT) == (dist_err > 0.0));
     dist_err = fabs(dist_err);
 
@@ -167,7 +167,7 @@ int set_center_long(_line_t line, U16 center, VIEW view) {
 }
 
 int set_center(_line_t line, U16 center, VIEW view) {
-    double dist_err = DEFAULT_CENTER_DISTANCE - (line.slope * (WIDTH >> 1) + line.intercept);
+    double dist_err = DEFAULT_CENTER_DISTANCE - (line.slope * WIDTH_CENTER + line.intercept);
     DIRECTION move_dir = (DIRECTION) ((view - LEFT) == (dist_err > 0));
     dist_err = fabs(dist_err);
 
@@ -186,7 +186,7 @@ int set_center(_line_t line, U16 center, VIEW view) {
 }
 
 int default_set_not_black(U16 *image) {
-    int dist = getDistance1(image, WIDTH >> 1, HEIGHT - 1, BLACK);
+    int dist = getDistance1(image, WIDTH_CENTER, HEIGHT - 1, BLACK);
 
     if (dist > 10) {
         ACTION_TURN(LONG, DIR_LEFT, UP, 1);

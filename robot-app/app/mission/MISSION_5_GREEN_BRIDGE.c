@@ -284,7 +284,7 @@ int mission_5_4_set_straight(_line_t center_line) {
 }
 
 int mission_5_4_set_center(_line_t line) {
-    double center = (WIDTH >> 1) - line.slope * (HEIGHT >> 1) - line.intercept;
+    double center = WIDTH_CENTER - line.slope * (HEIGHT >> 1) - line.intercept;
     DIRECTION move_dir = center < 0;
     center = abs(center);
 
@@ -397,7 +397,7 @@ int mission_5_7_watch_below(U16 *image) {
         return -1;
     }
 
-    double center = abs((WIDTH >> 1) - center_line.slope * (HEIGHT >> 1) - center_line.intercept);
+    double center = abs(WIDTH_CENTER - center_line.slope * (HEIGHT >> 1) - center_line.intercept);
 
     if (center > 7.0) {
         return -1;
@@ -430,13 +430,13 @@ int mission_5_7_walk_check(U16 *image) {
 
     double angle = abs(atan(center_line.slope) / M_PI * 180.0 + 1);
 
-    if (angle > 6.0) {
+    if (angle > 10.0) {
         return 1;
     }
 
-    double center = abs((WIDTH >> 1) - center_line.slope * (HEIGHT >> 1) - center_line.intercept);
+    double center = abs(WIDTH_CENTER - center_line.slope * (HEIGHT >> 1) - center_line.intercept);
 
-    if (center > 7.0) {
+    if (center > 10.0) {
         return 1;
     }
 
@@ -447,7 +447,7 @@ int mission_5_8_attach_black(U16 *image) {
     _line_t front_line;
 
     if (getColorRatio1(image, 40, 80, 50, WIDTH - 50, GREEN) > 30.0 &&
-        linear_regression1(image, (WIDTH >> 1), 80, BLACK, &front_line)) {
+        linear_regression1(image, WIDTH_CENTER, 80, BLACK, &front_line)) {
         _line_t left_line, right_line;
         _line_t center_line;
 
@@ -486,7 +486,7 @@ int mission_5_8_attach_black(U16 *image) {
         return 0;
     }
 
-    if (front_line.slope * (WIDTH >> 1) + front_line.intercept < 10.0) {
+    if (front_line.slope * WIDTH_CENTER + front_line.intercept < 10.0) {
         ACTION_ATTACH(1);
         return 0;
     }
@@ -501,8 +501,8 @@ int mission_5_8_get_front_line(U16 *image, _line_t *front_line, U16 color) {
     U32 point_cnt = 0;
     U16 left, right;
 
-    for (j = IN_IMG(0, (WIDTH >> 1) - (NUM_LIN_REG_POINT >> 1), WIDTH);
-         j < IN_IMG(0, (WIDTH >> 1) + (NUM_LIN_REG_POINT >> 1), WIDTH); ++j) {
+    for (j = IN_IMG(0, WIDTH_CENTER - (NUM_LIN_REG_POINT >> 1), WIDTH);
+         j < IN_IMG(0, WIDTH_CENTER + (NUM_LIN_REG_POINT >> 1), WIDTH); ++j) {
         pos = 0;
         memset(black_cnt, 0, 3 * sizeof(U8));
         left = MAX(j - 1, 0);
@@ -551,7 +551,7 @@ int mission_5_8_get_front_line(U16 *image, _line_t *front_line, U16 color) {
         return 0;
     }
 
-    return least_sqaures(image, WIDTH >> 1, points, i - 1, front_line);
+    return least_sqaures(image, WIDTH_CENTER, points, i - 1, front_line);
 }
 
 int mission_5_8_set_straight(_line_t line) {
@@ -570,7 +570,7 @@ int mission_5_8_set_straight(_line_t line) {
 }
 
 int mission_5_8_set_dist(_line_t line) {
-    double dist = line.slope * (WIDTH >> 1) + line.intercept;
+    double dist = line.slope * WIDTH_CENTER + line.intercept;
 
     if (dist < 30.0) {
         ACTION_ATTACH(1);
@@ -655,7 +655,7 @@ int mission_5_9_get_front_line(U16 *image, _line_t *front_line, U16 color) {
         return 0;
     }
 
-    return least_sqaures(image, WIDTH >> 1, points, point_cnt, front_line);
+    return least_sqaures(image, WIDTH_CENTER, points, point_cnt, front_line);
 }
 
 int cntSetStraightOnBlock = 0;
@@ -688,7 +688,7 @@ int mission_5_9_set_straight(_line_t line) {
 int cntAttachDist = 0;
 
 int mission_5_9_set_dist(_line_t line) {
-    double dist = line.slope * (WIDTH >> 1) + line.intercept;
+    double dist = line.slope * WIDTH_CENTER + line.intercept;
 
     if (0 <= dist && dist < 35.0) {
         if (cntAttachDist++ < 5) {
