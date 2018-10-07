@@ -202,6 +202,9 @@ int linear_regression1(U16 *image, U16 center, U16 bot, U16 color1, _line_t *lin
                 pos = (pos + 1) % 3;
 
                 if (color_cnt[0] + color_cnt[1] + color_cnt[2] > 2) {
+                    if (i > bot - 5) {
+                        break;
+                    }
                     points[point_cnt].x = j;
                     points[point_cnt].y = i;
                     ++point_cnt;
@@ -251,6 +254,9 @@ int linear_regression2(U16 *image, U16 center, U16 bot, U16 color1, U16 color2, 
                 pos = (pos + 1) % 3;
 
                 if (color_cnt[0] + color_cnt[1] + color_cnt[2] > 2) {
+                    if (i > bot - 5) {
+                        break;
+                    }
                     points[point_cnt].x = j;
                     points[point_cnt].y = i;
                     ++point_cnt;

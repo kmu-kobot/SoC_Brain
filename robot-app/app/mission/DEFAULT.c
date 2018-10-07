@@ -160,6 +160,8 @@ int set_center_long(_line_t line, U16 base, VIEW view) {
     if (dist_err > DEFAULT_CENTER_THRES_LONG - 2) {
         ACTION_MOVE(LONG, move_dir, view, MIN(2, (int)dist_err / DEFAULT_CENTER_THRES_LONG));
         RobotSleep(4);
+        U16 t[WIDTH*HEIGHT];
+        setFPGAVideoData(t);
         return 0;
     }
 
@@ -173,7 +175,9 @@ int set_center(_line_t line, U16 base, VIEW view) {
 
     if (dist_err > DEFAULT_CENTER_THRES_LONG) {
         ACTION_MOVE(LONG, move_dir, view, MIN(2, (int)dist_err / DEFAULT_CENTER_THRES_LONG));
-        RobotSleep(6);
+        RobotSleep(4);
+        U16 t[WIDTH*HEIGHT];
+        setFPGAVideoData(t);
         return 0;
     }
     if (dist_err > DEFAULT_CENTER_THRES_SHORT) {

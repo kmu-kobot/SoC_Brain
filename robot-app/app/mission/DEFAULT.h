@@ -20,6 +20,7 @@ static inline void default_watch(VIEW view, U16 *image) {
     setFPGAVideoData(image);
     RobotSleep(1);
     setFPGAVideoData(image);
+    RobotSleep(1);
     setFPGAVideoData(image);
     setFPGAVideoData(image);
     if (view == LEFT || view == RIGHT) {
