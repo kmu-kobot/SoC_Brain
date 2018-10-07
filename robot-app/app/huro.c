@@ -296,16 +296,41 @@ int huro(void) {
                         ++step;
                         break;
                     case 1:
-                        // CHECK_INIT(UP);
-                        // setFPGAVideoData(fpga_videodata);
-                        // step += default_set_not_black(fpga_videodata); // 얘도 6_9 떼버리고 공용함수로 하는게 나을듯
-                        ++step;
+                        if (flag == 0) {
+                            dir = RIGHT;
+                            default_watch(RIGHT, fpga_videodata);
+                            flag++;
+                        } else if (flag == 3) {
+                            dir = LEFT;
+                            default_watch(LEFT, fpga_videodata);
+                            flag++;
+                        }
+
+                        setFPGAVideoData(fpga_videodata);
+#if MODE == 3
+                        state = default_set_straight_and_center1(fpga_videodata, dir, WIDTH_CENTER + (dir == LEFT ? 30 : -30), HEIGHT - 11, BLACK, DEFAULT_CENTER_DISTANCE);
+#else
+                        state = default_set_straight_and_center1_long(fpga_videodata, dir,
+                                                                      WIDTH_CENTER + (dir == LEFT ? 40 : -40),
+                                                                      HEIGHT - 11, BLACK, DEFAULT_CENTER_DISTANCE);
+#endif
+
+                        if (state == 1) {
+                            flag = 0;
+                            ++step;
+
+                            default_watch(OBLIQUE, fpga_videodata);
+                            RobotSleep(2);
+                        } else if (state == -1) {
+                            if (++flag == 5) {
+                                flag = 0;
+                            }
+                        }
                         break;
                     case 2:
-                        mission = 10;
+                        mission = 5;
                         step = 0;
                         flag = 0;
-                        nextMission = 5;
                         break;
                     default:
                         break;
@@ -771,7 +796,7 @@ int huro(void) {
             case 10: // MISSION 10: BLUE GATE
                 switch (step) {
                     case 0:
-                        RobotSleep(2);
+//                        RobotSleep(2);
                         ++step;
                         flag = 0;
                         break;
