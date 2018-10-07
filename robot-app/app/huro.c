@@ -70,8 +70,7 @@ int huro(void) {
                             dir = LEFT;
                             default_watch(LEFT, fpga_videodata);
                             flag++;
-                        }
-                        else if (flag == 3) {
+                        } else if (flag == 3) {
                             dir = RIGHT;
                             default_watch(RIGHT, fpga_videodata);
                             flag++;
@@ -81,8 +80,7 @@ int huro(void) {
                         state = default_set_center1_long(fpga_videodata, dir, 60, HEIGHT - 11, BLACK);
                         if (state == 1) {
                             ++step;
-                        }
-                        else if (state == -1) {
+                        } else if (state == -1) {
                             if (++flag == 5) {
                                 flag = 0;
                             }
@@ -104,9 +102,9 @@ int huro(void) {
                         }
 
 #ifndef MINE
-                    step += mission_3_set_straight_and_center1_long(fpga_videodata, (WIDTH >> 1) +
-                                                                                    (mission_3_4_getMDir() == LEFT
-                                                                                     ? 50 : -50));
+                        step += mission_3_set_straight_and_center1_long(fpga_videodata, (WIDTH >> 1) +
+                                                                                        (mission_3_4_getMDir() == LEFT
+                                                                                         ? 50 : -50));
 #else
                         step += mission_3_set_straight(fpga_videodata);
 #endif
@@ -251,39 +249,39 @@ int huro(void) {
                         break;
                 }
 #else
-            switch (step) {
-                case 0:
-                    flag == 1;
-                case 1:
-                    if (flag == 1) {
-                        default_watch(OBLIQUE, fpga_videodata);
+                switch (step) {
+                    case 0:
+                        flag == 1;
+                    case 1:
+                        if (flag == 1) {
+                            default_watch(OBLIQUE, fpga_videodata);
+                            flag = 0;
+                        }
+
+                        step = mission_3_default_watch_below(fpga_videodata, 10) &&
+                               mission_3_isFrontOf_Blue(fpga_videodata, HEIGHT) ? 3 : 2;
+
+                        break;
+                    case 2:
+                        if (flag == 0) {
+                            default_watch(LEFT, fpga_videodata);
+                            ++flag;
+                        }
+                        step -= mission_3_set_straight(fpga_videodata);
+                        break;
+                    case 3:
+                        if (flag == 0) {
+                            default_watch(LEFT, fpga_videodata);
+                            ++flag;
+                        }
+                        step += mission_3_set_straight_and_center1_long(fpga_videodata, WIDTH >> 1);
+                        break;
+                    case 4:
+                        step = 0;
                         flag = 0;
-                    }
-
-                    step = mission_3_default_watch_below(fpga_videodata, 10) &&
-                           mission_3_isFrontOf_Blue(fpga_videodata, HEIGHT) ? 3 : 2;
-
-                    break;
-                case 2:
-                    if (flag == 0) {
-                        default_watch(LEFT, fpga_videodata);
-                        ++flag;
-                    }
-                    step -= mission_3_set_straight(fpga_videodata);
-                    break;
-                case 3:
-                    if (flag == 0) {
-                        default_watch(LEFT, fpga_videodata);
-                        ++flag;
-                    }
-                    step += mission_3_set_straight_and_center1_long(fpga_videodata, WIDTH >> 1);
-                    break;
-                case 4:
-                    step = 0;
-                    flag = 0;
-                    ++mission;
-                    break;
-            }
+                        ++mission;
+                        break;
+                }
 #endif
                 break;
             case 4: // MISSION 4: JUMP HURDLE
@@ -343,8 +341,7 @@ int huro(void) {
                             dir = LEFT;
                             default_watch(LEFT, fpga_videodata);
                             flag++;
-                        }
-                        else if (flag == 3) {
+                        } else if (flag == 3) {
                             dir = RIGHT;
                             default_watch(RIGHT, fpga_videodata);
                             flag++;
@@ -356,8 +353,7 @@ int huro(void) {
                             if (++flag == 5) {
                                 flag = 0;
                             }
-                        }
-                        else if (state == 1) {
+                        } else if (state == 1) {
                             step = 3;
 
                             if (flag == 99) {
@@ -532,7 +528,7 @@ int huro(void) {
                         step += default_set_not_black(fpga_videodata);
                         break;
                     case 8:
-                        mission_6_9_walk_front();
+                        // mission_6_9_walk_front();
                         ++step;
                         break;
                     default:
@@ -572,24 +568,22 @@ int huro(void) {
                             dir = LEFT;
                             default_watch(LEFT, fpga_videodata);
                             flag++;
-                        }
-                        else if (flag == 3) {
+                        } else if (flag == 3) {
                             dir = RIGHT;
                             default_watch(RIGHT, fpga_videodata);
                             flag++;
                         }
 
                         setFPGAVideoData(fpga_videodata);
-                        state = default_set_center1_long(fpga_videodata, dir, 60, HEIGHT - 11, BLACK);
+                        state = default_set_center1(fpga_videodata, dir, 60, HEIGHT - 11, BLACK);
+                        // state = default_set_center1_long(fpga_videodata, dir, 60, HEIGHT - 11, BLACK);
                         if (state == 1) {
                             ++step;
-                        }
-                        else if (state == -1) {
+                        } else if (state == -1) {
                             if (++flag == 5) {
                                 flag = 0;
                             }
-                        }
-                        else {
+                        } else {
                             flag = 99;
                         }
                         break;
@@ -611,19 +605,24 @@ int huro(void) {
                             dir = LEFT;
                             default_watch(LEFT, fpga_videodata);
                             flag++;
-                        }
-                        else if (flag == 3) {
+                        } else if (flag == 3) {
                             dir = RIGHT;
                             default_watch(RIGHT, fpga_videodata);
                             flag++;
                         }
 
                         setFPGAVideoData(fpga_videodata);
-                        state = default_set_center1_long(fpga_videodata, dir, 120, HEIGHT - 11, BLACK);
+
+#if MODE == 3
+                    state = default_set_straight_long_and_center1_long(fpga_videodata, dir, 120, HEIGHT - 11,
+                                                                       BLACK);
+#else
+                        // state = default_set_center1_long(fpga_videodata, dir, 120, HEIGHT - 11, BLACK);
+                        state = default_set_straight1(fpga_videodata, dir, 120, HEIGHT - 11, BLACK);
+#endif
                         if (state == 1) {
                             ++step;
-                        }
-                        else if (state == -1) {
+                        } else if (state == -1) {
                             if (++flag == 5) {
                                 flag = 0;
                             }
@@ -647,19 +646,17 @@ int huro(void) {
                             ++flag;
                         }
                         mission_8_1_watch_below(fpga_videodata, 20);
-
-                        setFPGAVideoData(fpga_videodata);
-                        step += mission_8_1_wait_front_of_crevasse(fpga_videodata);
+                        ++step;
+                        // setFPGAVideoData(fpga_videodata);
+                        // step += mission_8_1_wait_front_of_crevasse(fpga_videodata);
                         break;
                     case 1:
-                        ++step;
-                        flag = 0;
-//                        if (flag == 1) {
-//                            default_watch(LEFT, fpga_videodata);
-////                            RobotSleep(1);
-//                            ++flag;
-//                        }
-//                        step += default_set_straight_and_center1_long(fpga_videodata, LEFT, 40, HEIGHT - 11, BLACK);
+                        if (flag == 1) {
+                            default_watch(LEFT, fpga_videodata);
+                            ++flag;
+                        }
+                        step += default_set_straight_and_center1_long(fpga_videodata, LEFT, 40, HEIGHT - 11, BLACK);
+                        flag = step == 2 ? 0 : flag;
                         break;
                     case 2:
                         if (flag == 0) {
@@ -678,19 +675,24 @@ int huro(void) {
                             dir = LEFT;
                             default_watch(LEFT, fpga_videodata);
                             flag++;
-                        }
-                        else if (flag == 3) {
+                        } else if (flag == 3) {
                             dir = RIGHT;
                             default_watch(RIGHT, fpga_videodata);
                             flag++;
                         }
 
                         setFPGAVideoData(fpga_videodata);
-                        state = default_set_center1_long(fpga_videodata, dir, 120, HEIGHT - 11, BLACK);
+#if MODE == 3
+                        state = default_set_straight_and_center1_long(fpga_videodata, dir, 120, HEIGHT - 11, BLACK);
+#else
+                        state = default_set_straight_long_and_center1_long(fpga_videodata, dir, 120, HEIGHT - 11,
+                                                                           BLACK);
+#endif
+                        // state = default_set_center1_long(fpga_videodata, dir, 120, HEIGHT - 11, BLACK);
+
                         if (state == 1) {
                             ++step;
-                        }
-                        else if (state == -1) {
+                        } else if (state == -1) {
                             if (++flag == 5) {
                                 flag = 0;
                             }
@@ -736,6 +738,7 @@ int huro(void) {
             case 10: // MISSION 10: BLUE GATE
                 switch (step) {
                     case 0:
+                        RobotSleep(2);
                         ++step;
                         flag = 0;
                         break;
@@ -744,8 +747,7 @@ int huro(void) {
                             dir = RIGHT;
                             default_watch(RIGHT, fpga_videodata);
                             flag++;
-                        }
-                        else if (flag == 3) {
+                        } else if (flag == 3) {
                             dir = LEFT;
                             default_watch(LEFT, fpga_videodata);
                             flag++;
@@ -762,10 +764,10 @@ int huro(void) {
                             ++step;
 
                             CHECK_INIT(OBLIQUE);
+                            RobotSleep(2);
                             ACTION_WALK(FAST, OBLIQUE, 6);
                             RobotSleep(2);
-                        }
-                        else if (state == -1) {
+                        } else if (state == -1) {
                             if (++flag == 5) {
                                 flag = 0;
                             }
@@ -777,8 +779,7 @@ int huro(void) {
                             dir = RIGHT;
                             default_watch(RIGHT, fpga_videodata);
                             flag++;
-                        }
-                        else if (flag == 3) {
+                        } else if (flag == 3) {
                             dir = LEFT;
                             default_watch(LEFT, fpga_videodata);
                             flag++;
@@ -794,8 +795,7 @@ int huro(void) {
                             flag = 0;
                             ++step;
                             default_watch(OBLIQUE, fpga_videodata);
-                        }
-                        else if (state == -1) {
+                        } else if (state == -1) {
                             if (++flag == 5) {
                                 flag = 0;
                             }

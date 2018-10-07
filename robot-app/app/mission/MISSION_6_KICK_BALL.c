@@ -574,8 +574,7 @@ int mission_6_4_set_center_of_ball(U16 *image) {
         need_stable = 0;
         return 0;
     } else {
-        if (need_stable)
-        {
+        if (need_stable) {
             BALL_STABLE(DOWN);
         }
         need_stable = 0;
@@ -591,7 +590,9 @@ int mission_6_5_kick_ball(void) {
     BALL_TURN(DIR_LEFT, MIDDLE, 1);
     BALL_KICK();
     RobotSleep(1);
-    ACTION_TURN(LONG, DIR_LEFT, UP, 4);
+    ACTION_TURN(LONG, DIR_LEFT, UP, 3);
+    RobotSleep(1);
+    ACTION_WALK(FAST, OBLIQUE, 4);
     RobotSleep(1);
     return 1;
 }
