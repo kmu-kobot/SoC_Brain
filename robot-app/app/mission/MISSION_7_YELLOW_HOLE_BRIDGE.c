@@ -26,7 +26,7 @@ int mission_7_6_jump_hole(void) {
 #if MODE == 3
     ACTION_MOTION(MISSION_7_YELLOW_DUMBLING, DOWN);
 #else
-    ACTION_MOTION(MISSION_7_YELLOW_DUMBLING, DOWN);
+    ACTION_MOTION(MISSION_7_YELLOW_DUMBLING_FAST, DOWN);
 #endif
     RobotSleep(1);
     return 1;
