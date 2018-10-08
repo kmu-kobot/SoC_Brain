@@ -22,6 +22,8 @@ int mission_8_2_attach_black(U16 *image) {
     setFPGAVideoData(image);
     _line_t front_line;
     if (!mission_8_2_get_front_line(image, &front_line, BLACK)) {
+        ACTION_ATTACH(1);
+        RobotSleep(2);
         return 0;
     }
 
@@ -116,14 +118,14 @@ int mission_8_2_set_straight(_line_t line) {
 int mission_8_2_set_dist(_line_t line) {
     double dist = line.slope * WIDTH_CENTER + line.intercept;
 
-    if (dist < 53.0) {
+    if (dist < 48.0) {
         ACTION_ATTACH(1);
-        RobotSleep(1);
+        RobotSleep(2);
         return 0;
     }
-    else if (dist < 65.0) {
+    else if (dist < 60.0) {
         ACTION_ATTACH_SHORT(1);
-        RobotSleep(1);
+        RobotSleep(2);
         return 0;
     }
 
