@@ -237,6 +237,8 @@ typedef enum {
     YELLOW_WALK_L,
     YELLOW_WALK_R,
 
+    MISSION_7_YELLOW_DUMBLING_FAST = 232,
+
     NIL = 0xff
 } MOTION;
 

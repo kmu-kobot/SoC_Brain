@@ -13,7 +13,7 @@ int huro(void) {
 
     int missionFinished = 0;
 
-    int mission = 0;
+    int mission = 7;
     int step = 0;
     int state;
     int dir;
@@ -643,6 +643,7 @@ int huro(void) {
                         flag = 0;
                         break;
                     case 7:
+#if MODE == 3
                         if (flag == 0) {
                             dir = RIGHT;
                             default_watch(RIGHT, fpga_videodata);
@@ -655,14 +656,11 @@ int huro(void) {
 
                         setFPGAVideoData(fpga_videodata);
 
-#if MODE == 3
                     state = default_set_straight_long_and_center1_long(fpga_videodata, dir, WIDTH_CENTER, HEIGHT - 4,
                                                                        BLACK, DEFAULT_CENTER_DISTANCE);
-#else
                         // state = default_set_center1_long(fpga_videodata, dir, WIDTH_CENTER, HEIGHT - 4, BLACK, DEFAULT_CENTER_DISTANCE);
                         state = default_set_straight1(fpga_videodata, dir, WIDTH_CENTER,
                                                       HEIGHT - 4, BLACK, DEFAULT_CENTER_DISTANCE);
-#endif
                         if (state == 1) {
                             ++step;
                         } else if (state == -1) {
@@ -670,6 +668,9 @@ int huro(void) {
                                 flag = 0;
                             }
                         }
+#else
+                        ++step;
+#endif
                         break;
                     case 8:
                         mission += 1;
@@ -682,6 +683,7 @@ int huro(void) {
                 break;
             case 8: // MISSION 8: CREVASSE
                 switch (step) {
+#if MODE == 3
                     case 0:
                         if (flag == 0) {
                             default_watch(OBLIQUE, fpga_videodata);
@@ -724,6 +726,11 @@ int huro(void) {
                         }
                         flag = step == 2 ? 0 : flag;
                         break;
+#else
+                    case 0: case 1:
+                        ++step;
+                        break;
+#endif
                     case 2:
                         if (flag == 0) {
                             default_watch(DOWN, fpga_videodata);

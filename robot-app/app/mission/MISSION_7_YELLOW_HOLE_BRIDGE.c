@@ -23,7 +23,11 @@ int mission_7_1_wait_front_of_yellow_hole_bridge(U16 *image) {
 }
 
 int mission_7_6_jump_hole(void) {
+#if MODE == 3
     ACTION_MOTION(MISSION_7_YELLOW_DUMBLING, DOWN);
+#else
+    ACTION_MOTION(MISSION_7_YELLOW_DUMBLING, DOWN);
+#endif
     RobotSleep(1);
     return 1;
 }
