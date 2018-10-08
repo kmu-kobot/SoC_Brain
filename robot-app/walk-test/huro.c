@@ -12,7 +12,8 @@ int huro(void) {
     U16 *fpga_videodata = (U16 *) malloc(WIDTH * HEIGHT * 2);
 
     while (1) {
-        
+        RobotSleep(10);
+        ACTION_WALK(SLOW, DOWN, 20);
     }
 
     destroy_huro(fpga_videodata);
