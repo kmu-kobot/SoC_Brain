@@ -65,8 +65,7 @@ int mission_3_change_mdir(U16 *image) {
     mangle |= fabs(atan(line2.slope) * 180.0 / M_PI + straight[mdir & 1]) > thresholdAngle;
 
     if (state1 == 1 && state2 == 1) {
-        mdir = line1.slope * WIDTH_CENTER + line1.intercept >
-               line2.slope * WIDTH_CENTER + line2.intercept;
+        mdir = ((line1.slope * WIDTH_CENTER + line1.intercept < line2.slope * WIDTH_CENTER + line2.intercept) ? mdir : !mdir);
     } else if (state1 != 1 && state2 != 1) {
         return mission_3_change_mdir(image);
     } else if (state1 != 1) {
