@@ -40,6 +40,8 @@ int mission_3_default_avoid_bomb(U16 *image);
 
 int mission_3_4_getMDir(void);
 
+void mission_3_inverse_mdir(void);
+
 int mission_3_1_ver2(U16 *image);
 
 int mission_3_set_straight_and_center1_long(U16 *image, U16 center);

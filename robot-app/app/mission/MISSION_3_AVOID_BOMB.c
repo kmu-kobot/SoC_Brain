@@ -72,7 +72,7 @@ int mission_3_change_mdir(U16 *image) {
     } else if (state1 != 1) {
         mdir = mdir;
     } else if (state2 != 1) {
-        mdir = (mdir ^ 1) & 1;
+        mdir = !mdir;
     }
 
     return prev_mdir == mdir;
@@ -100,6 +100,10 @@ void mission_3_init_global(void) {
 
 int mission_3_4_getMDir(void) {
     return (mdir & 1) + LEFT;
+}
+
+void mission_3_inverse_mdir(void) {
+    mdir = !mdir;
 }
 
 int minecount = 0;

@@ -175,6 +175,7 @@ int huro(void) {
 
                         setFPGAVideoData(fpga_videodata);
                         if (mission_3_avoid(fpga_videodata)) { // 만약 지뢰를 다 피했으면
+                            mission_3_inverse_mdir();
                             step = 2;
                             flag = 0;
                         }
