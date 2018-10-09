@@ -13,7 +13,7 @@ int huro(void) {
 
     int missionFinished = 0;
 
-    int mission = 7;
+    int mission = 0;
     int step = 0;
     int state;
     int dir;
@@ -203,9 +203,9 @@ int huro(void) {
                                 break;
                             }
 
-                            mission_3_change_mdir(fpga_videodata);
-                            // mission_3_change_mdir_opposite();
                             flag = 6;
+                            flag += mission_3_change_mdir(fpga_videodata);
+                            // mission_3_change_mdir_opposite();
                         }
 
                         // 고개 돌리기
@@ -228,9 +228,13 @@ int huro(void) {
                     case 4:
 //                        if (flag == 0) {
 //                            mission_3_change_mdir(fpga_videodata);
+//                            ++flag;
+//                        }
+//                        if (flag == 1) {
 //                            default_watch((VIEW) mission_3_4_getMDir(), fpga_videodata);
 //                            ++flag;
 //                        }
+//
 //
 //                        setFPGAVideoData(fpga_videodata);
 //                        step += mission_3_set_straight_and_center1_long(fpga_videodata, (WIDTH_CENTER) - (mission_3_4_getMDir() == LEFT ? 50 : -50));
@@ -265,24 +269,24 @@ int huro(void) {
                         break;
                     case 2:
                         if (flag == 0) {
-                            mission_3_change_mdir(fpga_videodata);
+                            flag += mission_3_change_mdir(fpga_videodata);
                             ++flag;
                         }
                         if (flag == 1) {
                             ++flag;
-                            default_watch((VIEW) mission_3_4_getMDir(), fpga_videodata);
-                            setFPGAVideoData(fpga_videodata);
+                            default_watch((VIEW)mission_3_4_getMDir(), fpga_videodata);
                         }
+                        setFPGAVideoData(fpga_videodata);
                         step -= mission_3_set_straight(fpga_videodata);
                         break;
                     case 3:
                         if (flag == 0) {
-                            mission_3_change_mdir(fpga_videodata);
+                            flag += mission_3_change_mdir(fpga_videodata);
                             ++flag;
                         }
                         if (flag == 1) {
                             ++flag;
-                            default_watch((VIEW) mission_3_4_getMDir(), fpga_videodata);
+                            default_watch((VIEW)mission_3_4_getMDir(), fpga_videodata);
                             setFPGAVideoData(fpga_videodata);
                         }
                         step += mission_3_set_straight_and_center1_long(fpga_videodata, WIDTH_CENTER);
@@ -766,6 +770,8 @@ int huro(void) {
                         // state = default_set_center1_long(fpga_videodata, dir, WIDTH_CENTER + (dir == LEFT ? 30 : -30), HEIGHT - 4, BLACK, DEFAULT_CENTER_DISTANCE);
 
                         if (state == 1) {
+                            CHECK_INIT(OBLIQUE);
+                            RobotSleep(1);
                             ++step;
                         } else if (state == -1) {
                             if (++flag == 5) {
@@ -774,7 +780,6 @@ int huro(void) {
                         }
                         break;
                     default:
-                        default_watch(OBLIQUE, fpga_videodata);
                         flag = 0;
                         step = 0;
                         ++mission;

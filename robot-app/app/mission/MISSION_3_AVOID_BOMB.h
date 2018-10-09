@@ -28,7 +28,7 @@ void mission_3_init_global(void);
 
 int mission_3_avoid(U16 *image);
 
-void mission_3_change_mdir(U16 *image);
+int mission_3_change_mdir(U16 *image);
 
 void mission_3_change_mdir_opposite(void);
 

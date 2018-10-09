@@ -100,7 +100,7 @@ int default_set_center1_long(U16 *image, VIEW view, U16 center, U16 bot, U16 col
 }
 
 int set_straight(_line_t line, U16 center, VIEW view) {
-    double angle = atan(line.slope) * 180.0 / M_PI + (view == LEFT ? 9.0 : -11.0);
+    double angle = atan(line.slope) * 180.0 / M_PI + straight[view - LEFT];
     DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = fabs(angle);
 
@@ -129,7 +129,7 @@ int set_straight(_line_t line, U16 center, VIEW view) {
 }
 
 int set_straight_long(_line_t line, U16 center, VIEW view) {
-    double angle = atan(line.slope) * 180.0 / M_PI + (view == LEFT ? 9.0 : -11.0);
+    double angle = atan(line.slope) * 180.0 / M_PI + straight[view - LEFT];
     DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = fabs(angle);
 

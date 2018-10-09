@@ -48,33 +48,34 @@ int mission_3_avoid(U16 *image) {
     return black_ratio < 0.4;
 }
 
-void mission_3_change_mdir(U16 *image) {
+int mission_3_change_mdir(U16 *image) {
     double thresholdAngle = 13.0;
 
-    _line_t leftline, rightline;
-    int leftstate, rightstate;
-    default_watch(LEFT, image);
+    int prev_mdir = mdir;
+    _line_t line1, line2;
+    int state1, state2;
+    default_watch(!(mdir & 1) + LEFT, image);
     RobotSleep(1);
-    leftstate = linear_regression1(image, WIDTH_CENTER, HEIGHT - 4, BLACK, &leftline);
-    mangle = fabs(atan(leftline.slope) * 180.0 / M_PI + (9.0)) > thresholdAngle;
+    state1 = mission_3_linear_regression(image, WIDTH_CENTER, HEIGHT - 4, BLACK, &line1);
+    mangle = fabs(atan(line1.slope) * 180.0 / M_PI + straight[!(mdir & 1)]) > thresholdAngle;
 
-    default_watch(RIGHT, image);
+    default_watch((mdir & 1) + LEFT, image);
     RobotSleep(1);
-    rightstate = linear_regression1(image, WIDTH_CENTER, HEIGHT - 4, BLACK, &rightline);
-    mangle |= fabs(atan(rightline.slope) * 180.0 / M_PI + (-11.0)) > thresholdAngle;
+    state2 = mission_3_linear_regression(image, WIDTH_CENTER, HEIGHT - 4, BLACK, &line2);
+    mangle |= fabs(atan(line2.slope) * 180.0 / M_PI + straight[mdir & 1]) > thresholdAngle;
 
-    mdir = leftline.slope * WIDTH_CENTER + leftline.intercept > rightline.slope * WIDTH_CENTER + rightline.intercept;
+    if (state1 == 1 && state2 == 1) {
+        mdir = line1.slope * WIDTH_CENTER + line1.intercept >
+               line2.slope * WIDTH_CENTER + line2.intercept;
+    } else if (state1 != 1 && state2 != 1) {
+        return mission_3_change_mdir(image);
+    } else if (state1 != 1) {
+        mdir = mdir;
+    } else if (state2 != 1) {
+        mdir = (mdir ^ 1) & 1;
+    }
 
-    if (leftstate != 1)
-    {
-        mdir = DIR_RIGHT;
-        return;
-    }
-    if (rightstate != 1)
-    {
-        mdir = DIR_LEFT;
-        return;
-    }
+    return prev_mdir == mdir;
 }
 
 int mission_3_check_angle(void) {
@@ -212,6 +213,9 @@ int mission_3_linear_regression(U16 *image, U16 center, U16 bot, U16 color1, _li
                 pos = (pos + 1) % 3;
 
                 if (color_cnt[0] + color_cnt[1] + color_cnt[2] > 2) {
+                    if (i > bot - 5) {
+                        break;
+                    }
                     points[point_cnt].x = j;
                     points[point_cnt].y = i;
                     ++point_cnt;
@@ -225,8 +229,12 @@ int mission_3_linear_regression(U16 *image, U16 center, U16 bot, U16 color1, _li
     printf("point_cnt : %d\n", point_cnt);
 #endif
 
-    if (point_cnt <= 0) {
-        return 0;
+    if (point_cnt < (NUM_LIN_REG_POINT * NUM_LIN_REG_FRAME) >> 2) {
+        return -1;
+    }
+
+    if (least_sqaures(image, center, points, point_cnt, line) == 1) {
+        return 1;
     }
 
     qsort(points, point_cnt, sizeof(_point_t), point_t_cmp_y);
@@ -245,7 +253,7 @@ int mission_3_linear_regression(U16 *image, U16 center, U16 bot, U16 color1, _li
     }
 
     if (i <= 1) {
-        return 0;
+        return -1;
     }
 
     return least_sqaures(image, center, points, i - 1, line);

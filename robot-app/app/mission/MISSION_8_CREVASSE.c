@@ -27,7 +27,11 @@ int mission_8_2_attach_black(U16 *image) {
         return 0;
     }
 
+#if MODE == 2
+    return mission_8_2_set_straight(front_line) && mission_8_2_set_dist(front_line);
+#else
     return mission_8_2_set_dist(front_line);
+#endif
 }
 
 int mission_8_2_get_front_line(U16 *image, _line_t *front_line, U16 color) {
@@ -101,11 +105,9 @@ int mission_8_2_set_straight(_line_t line) {
     DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = abs(angle);
 
-    if (angle > 4.0) {
+    if (angle > 5.0) {
         ACTION_TURN(MIDDLE, turn_dir, DOWN, 1);
     } else if (angle > 3.0) {
-        ACTION_TURN(SHORT, turn_dir, DOWN, 2);
-    } else if (angle > 2.0) {
         ACTION_TURN(SHORT, turn_dir, DOWN, 1);
     } else {
         return 1;
@@ -118,7 +120,7 @@ int mission_8_2_set_straight(_line_t line) {
 int mission_8_2_set_dist(_line_t line) {
     double dist = line.slope * WIDTH_CENTER + line.intercept;
 
-    if (dist < 48.0) {
+    if (dist < 43.0) {
         ACTION_ATTACH(1);
         RobotSleep(2);
         return 0;

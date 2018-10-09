@@ -12,6 +12,8 @@
 #define DEFAULT_CENTER_THRES_LONG 12
 #define DEFAULT_CENTER_THRES_SHORT 4
 
+const static double straight[2] = {9, -10.5};
+
 static inline void default_watch(VIEW view, U16 *image) {
     CHECK_INIT(view);
     RobotSleep(1);
