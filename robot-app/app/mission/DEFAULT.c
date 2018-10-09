@@ -104,7 +104,7 @@ int set_straight(_line_t line, U16 center, VIEW view) {
     DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = fabs(angle);
 
-    if (angle > 25,0) {
+    if (angle > 25.0) {
         ACTION_TURN(LONG, turn_dir, view, 1);
         RobotSleep(2);
         return 0;

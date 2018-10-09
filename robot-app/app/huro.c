@@ -110,7 +110,6 @@ int huro(void) {
 #endif
                         break;
                     case 5:
-                        RobotSleep(1);
                         flag = 0;
                         mission += 1;
                         step = 0;
@@ -227,22 +226,19 @@ int huro(void) {
                         flag = 0;
                         break;
                     case 4:
-//                        if (flag == 0) {
-//                            mission_3_change_mdir(fpga_videodata);
-//                            ++flag;
-//                        }
-//                        if (flag == 1) {
-//                            default_watch((VIEW) mission_3_4_getMDir(), fpga_videodata);
-//                            ++flag;
-//                        }
-//
-//
-//                        setFPGAVideoData(fpga_videodata);
-//                        step += mission_3_set_straight_and_center1_long(fpga_videodata, (WIDTH_CENTER) - (mission_3_4_getMDir() == LEFT ? 50 : -50));
-                        ++step;
+                        if (flag == 0) {
+                            flag += mission_3_change_mdir(fpga_videodata);
+                            ++flag;
+                        }
+                        if (flag == 1) {
+                            ++flag;
+                            default_watch((VIEW)mission_3_4_getMDir(), fpga_videodata);
+                            setFPGAVideoData(fpga_videodata);
+                        }
+                        step += mission_3_set_straight_and_center1_long(fpga_videodata, (WIDTH_CENTER) - (mission_3_4_getMDir() == LEFT ? 40 : -40));
                         break;
                     case 5:
-//                        ACTION_ATTACH(3);
+                        ACTION_ATTACH(1);
                         ++step;
                         flag = 2;
                         break;
@@ -712,15 +708,8 @@ int huro(void) {
                         }
 
                         setFPGAVideoData(fpga_videodata);
-#if MODE == 3
-                        state = default_set_straight_and_center1_long(fpga_videodata, dir, 120, HEIGHT - 4, BLACK, DEFAULT_CENTER_DISTANCE);
-#else
-                        state = default_set_straight_long_and_center1_long(fpga_videodata, dir,
-                                                                           WIDTH_CENTER + (dir == LEFT ? -30 : 30),
-                                                                           HEIGHT - 4,
-                                                                           BLACK, DEFAULT_CENTER_DISTANCE);
-#endif
-                        // state = default_set_center1_long(fpga_videodata, dir, WIDTH_CENTER + (dir == LEFT ? 30 : -30), HEIGHT - 4, BLACK, DEFAULT_CENTER_DISTANCE);
+//                        state = default_set_straight_and_center1_long(fpga_videodata, dir, 120, HEIGHT - 4, BLACK, DEFAULT_CENTER_DISTANCE);
+                        state = default_set_center1_long(fpga_videodata, dir, WIDTH_CENTER + (dir == LEFT ? 30 : -30), HEIGHT - 4, BLACK, DEFAULT_CENTER_DISTANCE);
 
                         if (state == 1) {
                             ++step;

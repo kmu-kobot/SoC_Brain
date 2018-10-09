@@ -9,7 +9,7 @@ int mangle = 0;
 
 void mission_3_attach_mine(U16 *image) {
     double upper_ratio = getColorRatio1(image, 5, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
-    double lower_ratio = getColorRatio1(image, 20, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
+    double lower_ratio = getColorRatio1(image, 15, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
     U16 iter = 0;
     while (lower_ratio < 1.0 && iter++ < 2) {
         if (upper_ratio < 0.4) {
@@ -17,7 +17,8 @@ void mission_3_attach_mine(U16 *image) {
         } else if (lower_ratio < 1.0) {
             ACTION_ATTACH_SHORT(1);
         }
-        RobotSleep(1);
+        setFPGAVideoData(image);
+        RobotSleep(2);
         setFPGAVideoData(image);
         upper_ratio = getColorRatio1(image, 5, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
         lower_ratio = getColorRatio1(image, 20, ROBOT_KNEE, MINE_RANGE_LEFT, WIDTH - MINE_RANGE_LEFT, BLACK);
@@ -43,7 +44,11 @@ int mission_3_avoid(U16 *image) {
 
     if (black_ratio > 0.4) {
         ACTION_MOVE(LONG, (DIRECTION) (mdir & 1), DOWN, (int) repeat);
+        setFPGAVideoData(image);
         RobotSleep(2);
+        setFPGAVideoData(image);
+        RobotSleep(2);
+        setFPGAVideoData(image);
     }
     return black_ratio < 0.4;
 }
