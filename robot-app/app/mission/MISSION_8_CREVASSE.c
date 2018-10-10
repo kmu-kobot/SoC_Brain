@@ -4,8 +4,8 @@
 
 #include "MISSION_8_CREVASSE.h"
 
-void mission_8_1_watch_below(U16 *image, int repeat) {
-    ACTION_WALK_CHECK(OBLIQUE, image, mission_8_1_wait_front_of_crevasse, 1, repeat);
+int mission_8_1_watch_below(U16 *image, int repeat) {
+    return ACTION_WALK_CHECK(OBLIQUE, image, mission_8_1_wait_front_of_crevasse, 1, repeat);
 }
 
 int mission_8_1_wait_front_of_crevasse(U16 *image) {

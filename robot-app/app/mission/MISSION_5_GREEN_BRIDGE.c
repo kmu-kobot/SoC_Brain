@@ -707,7 +707,7 @@ int mission_5_9_set_dist(_line_t line) {
         ACTION_ATTACH_LIFT(1);
         RobotSleep(1);
         return 0;
-    } else if (dist < 67.0) { // 67
+    } else if (dist < 69.0) { // 67
         ACTION_ATTACH_SHORT(1);
         RobotSleep(1);
         return 0;

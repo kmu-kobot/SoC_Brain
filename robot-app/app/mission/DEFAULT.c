@@ -157,7 +157,7 @@ int set_center_long(_line_t line, U16 base, VIEW view) {
     DIRECTION move_dir = (DIRECTION) ((view - LEFT) == (dist_err > 0.0));
     dist_err = fabs(dist_err);
 
-    if (dist_err > DEFAULT_CENTER_THRES_LONG - 2) {
+    if (dist_err > DEFAULT_CENTER_THRES_LONG - 3) {
         ACTION_MOVE(LONG, move_dir, view, MIN(2, (int)dist_err / DEFAULT_CENTER_THRES_LONG));
         RobotSleep(4);
         U16 t[WIDTH*HEIGHT];
@@ -192,7 +192,7 @@ int set_center(_line_t line, U16 base, VIEW view) {
 int default_set_not_black(U16 *image) {
     int dist = getDistance1(image, WIDTH_CENTER, HEIGHT - 1, BLACK);
 
-    if (dist > 10) {
+    if (dist > 5) {
         ACTION_TURN(LONG, DIR_LEFT, UP, 1);
         RobotSleep(1);
         setFPGAVideoData(image);

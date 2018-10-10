@@ -8,8 +8,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define DEFAULT_CENTER_DISTANCE 57
-#define DEFAULT_CENTER_THRES_LONG 12
+#define DEFAULT_CENTER_DISTANCE 58
+#define DEFAULT_CENTER_THRES_LONG 13
 #define DEFAULT_CENTER_THRES_SHORT 4
 
 const static double straight[2] = {9, -10.5};
