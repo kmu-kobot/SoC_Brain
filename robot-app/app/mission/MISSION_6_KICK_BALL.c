@@ -39,7 +39,7 @@ int mission_6_3_find_side_hole(U16 *image, U8 step) {
     int state;
 
     BALL_HALF_HEAD(heads[step]);
-    state = mission_6_3_find_hole_interpolation(image, 0, HEIGHT, 0, WIDTH, 0);
+    state = mission_6_3_find_hole_interpolation(image, 0, HEIGHT, 5, WIDTH - 5, 0);
 
     if (state == 1) {
         if (step == 0) {

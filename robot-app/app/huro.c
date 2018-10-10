@@ -525,7 +525,7 @@ int huro(void) {
                         }
 
                         setFPGAVideoData(fpga_videodata);
-                        if (mission_6_3_find_hole_interpolation(fpga_videodata, 0, HEIGHT, 0, WIDTH, 0) == 0) {
+                        if (mission_6_3_find_hole_interpolation(fpga_videodata, 0, HEIGHT, 5, WIDTH - 5, 0) == 0) {
                             mission_6_3_find_side_hole(fpga_videodata, 0);
                         } else {
                             ++step;
