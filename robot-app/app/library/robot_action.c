@@ -99,7 +99,7 @@ int GREEN_WALK_CHECK(U16 *image, int (*check)(U16 *), int repeat) {
         return 0;
     }
 
-    action(INIT_MOTION(OBLIQUE), GREEN_WALK_START);
+    action(INIT_MOTION(UP), GREEN_WALK_START);
 
     while (state != 1 && i < repeat) {
         RobotAction(GREEN_WALK_L + (i++ & 1));

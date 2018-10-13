@@ -56,9 +56,19 @@ int mission_5_4_set_center(_line_t center_line);
 
 void mission_5_5_attach_green(void);
 
+int mission_5_6_get_left_line_green(U16 *image, U16 center, _line_t *left_line);
+
+int mission_5_6_get_right_line_green(U16 *image, U16 center, _line_t *right_line);
+
+int mission_5_6_get_left_line_black(U16 *image, U16 center, _line_t *left_line);
+
+int mission_5_6_get_right_line_black(U16 *image, U16 center, _line_t *right_line);
+
 int mission_5_6_set_straight_and_center(U16 *image, U16 center);
 
 int mission_5_6_set_straight(_line_t center_line);
+
+int mission_5_6_set_center(_line_t line);
 
 int mission_5_7_watch_below(U16 *image);
 
@@ -67,6 +77,8 @@ int mission_5_7_walk_check(U16 *image);
 int mission_5_8_attach_black(U16 *image);
 
 int mission_5_8_set_straight(_line_t line);
+
+int mission_5_8_set_center(U16 *image);
 
 int mission_5_8_set_dist(_line_t line);
 

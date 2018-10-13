@@ -34,6 +34,20 @@ static inline void default_watch(VIEW view, U16 *image) {
     }
 }
 
+static inline void default_watch_green(U16 *image) {
+    CHECK_INIT(UP);
+    RobotAction(250);
+    RobotSleep(1);
+    setFPGAVideoData(image);
+    RobotSleep(1);
+    setFPGAVideoData(image);
+    RobotSleep(1);
+    setFPGAVideoData(image);
+    RobotSleep(1);
+    setFPGAVideoData(image);
+    setFPGAVideoData(image);
+}
+
 int default_get_straight_and_center1(U16 *image, VIEW view, U16 center, U16 bot, U16 color1, U16 base);
 
 int default_set_straight_and_center1_long(U16 *image, VIEW view, U16 center, U16 bot, U16 color1, U16 base);

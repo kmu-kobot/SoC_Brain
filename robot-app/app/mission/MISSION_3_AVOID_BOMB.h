@@ -48,6 +48,8 @@ int mission_3_set_straight_and_center1_long(U16 *image, U16 center);
 
 int mission_3_set_straight(U16 *image);
 
+int mission_3_set_straight_and_center(U16 *image, U16 center);
+
 int mission_3_set_center(U16 *image);
 
 int mission_3_linear_regression(U16 *image, U16 center, U16 bot, U16 color1, _line_t *line);

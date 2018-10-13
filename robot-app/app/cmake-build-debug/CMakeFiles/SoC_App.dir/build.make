@@ -43,10 +43,10 @@ RM = /cygdrive/c/Users/thdtj/.CLion2018.2/system/cygwin_cmake/bin/cmake.exe -E r
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app
+CMAKE_SOURCE_DIR = /cygdrive/e/app
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug
+CMAKE_BINARY_DIR = /cygdrive/e/app/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/SoC_App.dir/depend.make
@@ -59,237 +59,237 @@ include CMakeFiles/SoC_App.dir/flags.make
 
 CMakeFiles/SoC_App.dir/main.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/SoC_App.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/main.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/SoC_App.dir/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/main.c.o   -c /cygdrive/e/app/main.c
 
 CMakeFiles/SoC_App.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/main.c > CMakeFiles/SoC_App.dir/main.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/main.c > CMakeFiles/SoC_App.dir/main.c.i
 
 CMakeFiles/SoC_App.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/main.c -o CMakeFiles/SoC_App.dir/main.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/main.c -o CMakeFiles/SoC_App.dir/main.c.s
 
 CMakeFiles/SoC_App.dir/huro.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/huro.c.o: ../huro.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/SoC_App.dir/huro.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/huro.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/huro.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/SoC_App.dir/huro.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/huro.c.o   -c /cygdrive/e/app/huro.c
 
 CMakeFiles/SoC_App.dir/huro.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/huro.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/huro.c > CMakeFiles/SoC_App.dir/huro.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/huro.c > CMakeFiles/SoC_App.dir/huro.c.i
 
 CMakeFiles/SoC_App.dir/huro.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/huro.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/huro.c -o CMakeFiles/SoC_App.dir/huro.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/huro.c -o CMakeFiles/SoC_App.dir/huro.c.s
 
 CMakeFiles/SoC_App.dir/library/graphic_api.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/library/graphic_api.c.o: ../library/graphic_api.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/SoC_App.dir/library/graphic_api.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/graphic_api.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/graphic_api.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/SoC_App.dir/library/graphic_api.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/graphic_api.c.o   -c /cygdrive/e/app/library/graphic_api.c
 
 CMakeFiles/SoC_App.dir/library/graphic_api.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/library/graphic_api.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/graphic_api.c > CMakeFiles/SoC_App.dir/library/graphic_api.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/library/graphic_api.c > CMakeFiles/SoC_App.dir/library/graphic_api.c.i
 
 CMakeFiles/SoC_App.dir/library/graphic_api.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/library/graphic_api.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/graphic_api.c -o CMakeFiles/SoC_App.dir/library/graphic_api.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/library/graphic_api.c -o CMakeFiles/SoC_App.dir/library/graphic_api.c.s
 
 CMakeFiles/SoC_App.dir/library/imageProcess.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/library/imageProcess.c.o: ../library/imageProcess.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/SoC_App.dir/library/imageProcess.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/imageProcess.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/imageProcess.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/SoC_App.dir/library/imageProcess.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/imageProcess.c.o   -c /cygdrive/e/app/library/imageProcess.c
 
 CMakeFiles/SoC_App.dir/library/imageProcess.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/library/imageProcess.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/imageProcess.c > CMakeFiles/SoC_App.dir/library/imageProcess.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/library/imageProcess.c > CMakeFiles/SoC_App.dir/library/imageProcess.c.i
 
 CMakeFiles/SoC_App.dir/library/imageProcess.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/library/imageProcess.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/imageProcess.c -o CMakeFiles/SoC_App.dir/library/imageProcess.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/library/imageProcess.c -o CMakeFiles/SoC_App.dir/library/imageProcess.c.s
 
 CMakeFiles/SoC_App.dir/library/robot_protocol.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/library/robot_protocol.c.o: ../library/robot_protocol.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/SoC_App.dir/library/robot_protocol.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/robot_protocol.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/robot_protocol.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/SoC_App.dir/library/robot_protocol.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/robot_protocol.c.o   -c /cygdrive/e/app/library/robot_protocol.c
 
 CMakeFiles/SoC_App.dir/library/robot_protocol.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/library/robot_protocol.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/robot_protocol.c > CMakeFiles/SoC_App.dir/library/robot_protocol.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/library/robot_protocol.c > CMakeFiles/SoC_App.dir/library/robot_protocol.c.i
 
 CMakeFiles/SoC_App.dir/library/robot_protocol.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/library/robot_protocol.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/robot_protocol.c -o CMakeFiles/SoC_App.dir/library/robot_protocol.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/library/robot_protocol.c -o CMakeFiles/SoC_App.dir/library/robot_protocol.c.s
 
 CMakeFiles/SoC_App.dir/library/uart_api.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/library/uart_api.c.o: ../library/uart_api.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/SoC_App.dir/library/uart_api.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/uart_api.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/uart_api.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/SoC_App.dir/library/uart_api.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/uart_api.c.o   -c /cygdrive/e/app/library/uart_api.c
 
 CMakeFiles/SoC_App.dir/library/uart_api.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/library/uart_api.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/uart_api.c > CMakeFiles/SoC_App.dir/library/uart_api.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/library/uart_api.c > CMakeFiles/SoC_App.dir/library/uart_api.c.i
 
 CMakeFiles/SoC_App.dir/library/uart_api.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/library/uart_api.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/uart_api.c -o CMakeFiles/SoC_App.dir/library/uart_api.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/library/uart_api.c -o CMakeFiles/SoC_App.dir/library/uart_api.c.s
 
 CMakeFiles/SoC_App.dir/library/robot_action.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/library/robot_action.c.o: ../library/robot_action.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/SoC_App.dir/library/robot_action.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/robot_action.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/robot_action.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/SoC_App.dir/library/robot_action.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/library/robot_action.c.o   -c /cygdrive/e/app/library/robot_action.c
 
 CMakeFiles/SoC_App.dir/library/robot_action.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/library/robot_action.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/robot_action.c > CMakeFiles/SoC_App.dir/library/robot_action.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/library/robot_action.c > CMakeFiles/SoC_App.dir/library/robot_action.c.i
 
 CMakeFiles/SoC_App.dir/library/robot_action.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/library/robot_action.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/library/robot_action.c -o CMakeFiles/SoC_App.dir/library/robot_action.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/library/robot_action.c -o CMakeFiles/SoC_App.dir/library/robot_action.c.s
 
 CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o: ../mission/DEFAULT.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/DEFAULT.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/DEFAULT.c.o   -c /cygdrive/e/app/mission/DEFAULT.c
 
 CMakeFiles/SoC_App.dir/mission/DEFAULT.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/DEFAULT.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/DEFAULT.c > CMakeFiles/SoC_App.dir/mission/DEFAULT.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/mission/DEFAULT.c > CMakeFiles/SoC_App.dir/mission/DEFAULT.c.i
 
 CMakeFiles/SoC_App.dir/mission/DEFAULT.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/DEFAULT.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/DEFAULT.c -o CMakeFiles/SoC_App.dir/mission/DEFAULT.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/mission/DEFAULT.c -o CMakeFiles/SoC_App.dir/mission/DEFAULT.c.s
 
 CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o: ../mission/MISSION_1_YELLOW_BARRICADE.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.o   -c /cygdrive/e/app/mission/MISSION_1_YELLOW_BARRICADE.c
 
 CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.c > CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/mission/MISSION_1_YELLOW_BARRICADE.c > CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.i
 
 CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_1_YELLOW_BARRICADE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/mission/MISSION_1_YELLOW_BARRICADE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_1_YELLOW_BARRICADE.c.s
 
 CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o: ../mission/MISSION_2_RED_BRIDGE.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_2_RED_BRIDGE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.o   -c /cygdrive/e/app/mission/MISSION_2_RED_BRIDGE.c
 
 CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_2_RED_BRIDGE.c > CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/mission/MISSION_2_RED_BRIDGE.c > CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.i
 
 CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_2_RED_BRIDGE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/mission/MISSION_2_RED_BRIDGE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_2_RED_BRIDGE.c.s
 
 CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o: ../mission/MISSION_3_AVOID_BOMB.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_3_AVOID_BOMB.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.o   -c /cygdrive/e/app/mission/MISSION_3_AVOID_BOMB.c
 
 CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_3_AVOID_BOMB.c > CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/mission/MISSION_3_AVOID_BOMB.c > CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.i
 
 CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_3_AVOID_BOMB.c -o CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/mission/MISSION_3_AVOID_BOMB.c -o CMakeFiles/SoC_App.dir/mission/MISSION_3_AVOID_BOMB.c.s
 
 CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o: ../mission/MISSION_4_JUMP_HURDLE.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_4_JUMP_HURDLE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.o   -c /cygdrive/e/app/mission/MISSION_4_JUMP_HURDLE.c
 
 CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_4_JUMP_HURDLE.c > CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/mission/MISSION_4_JUMP_HURDLE.c > CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.i
 
 CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_4_JUMP_HURDLE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/mission/MISSION_4_JUMP_HURDLE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_4_JUMP_HURDLE.c.s
 
 CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o: ../mission/MISSION_5_GREEN_BRIDGE.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_5_GREEN_BRIDGE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.o   -c /cygdrive/e/app/mission/MISSION_5_GREEN_BRIDGE.c
 
 CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_5_GREEN_BRIDGE.c > CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/mission/MISSION_5_GREEN_BRIDGE.c > CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.i
 
 CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_5_GREEN_BRIDGE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/mission/MISSION_5_GREEN_BRIDGE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_5_GREEN_BRIDGE.c.s
 
 CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o: ../mission/MISSION_6_KICK_BALL.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_6_KICK_BALL.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.o   -c /cygdrive/e/app/mission/MISSION_6_KICK_BALL.c
 
 CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_6_KICK_BALL.c > CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/mission/MISSION_6_KICK_BALL.c > CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.i
 
 CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_6_KICK_BALL.c -o CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/mission/MISSION_6_KICK_BALL.c -o CMakeFiles/SoC_App.dir/mission/MISSION_6_KICK_BALL.c.s
 
 CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o: ../mission/MISSION_7_YELLOW_HOLE_BRIDGE.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.o   -c /cygdrive/e/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c
 
 CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c > CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c > CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.i
 
 CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_7_YELLOW_HOLE_BRIDGE.c.s
 
 CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o: ../mission/MISSION_8_CREVASSE.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_8_CREVASSE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.o   -c /cygdrive/e/app/mission/MISSION_8_CREVASSE.c
 
 CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_8_CREVASSE.c > CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/mission/MISSION_8_CREVASSE.c > CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.i
 
 CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_8_CREVASSE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/mission/MISSION_8_CREVASSE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_8_CREVASSE.c.s
 
 CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o: ../mission/MISSION_9_LAST_BARRICADE.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_9_LAST_BARRICADE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o   -c /cygdrive/e/app/mission/MISSION_9_LAST_BARRICADE.c
 
 CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_9_LAST_BARRICADE.c > CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/mission/MISSION_9_LAST_BARRICADE.c > CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.i
 
 CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_9_LAST_BARRICADE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/mission/MISSION_9_LAST_BARRICADE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.s
 
 CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o: CMakeFiles/SoC_App.dir/flags.make
 CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o: ../mission/MISSION_10_BLUE_GATE.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o   -c /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_10_BLUE_GATE.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o   -c /cygdrive/e/app/mission/MISSION_10_BLUE_GATE.c
 
 CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_10_BLUE_GATE.c > CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/e/app/mission/MISSION_10_BLUE_GATE.c > CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.i
 
 CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/mission/MISSION_10_BLUE_GATE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/e/app/mission/MISSION_10_BLUE_GATE.c -o CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.s
 
 # Object files for target SoC_App
 SoC_App_OBJECTS = \
@@ -335,7 +335,7 @@ SoC_App.exe: CMakeFiles/SoC_App.dir/mission/MISSION_9_LAST_BARRICADE.c.o
 SoC_App.exe: CMakeFiles/SoC_App.dir/mission/MISSION_10_BLUE_GATE.c.o
 SoC_App.exe: CMakeFiles/SoC_App.dir/build.make
 SoC_App.exe: CMakeFiles/SoC_App.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking C executable SoC_App.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cygdrive/e/app/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking C executable SoC_App.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SoC_App.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -348,6 +348,6 @@ CMakeFiles/SoC_App.dir/clean:
 .PHONY : CMakeFiles/SoC_App.dir/clean
 
 CMakeFiles/SoC_App.dir/depend:
-	cd /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug /cygdrive/c/Users/thdtj/OneDrive/SoC/SoC_Brain/robot-app/app/cmake-build-debug/CMakeFiles/SoC_App.dir/DependInfo.cmake --color=$(COLOR)
+	cd /cygdrive/e/app/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /cygdrive/e/app /cygdrive/e/app /cygdrive/e/app/cmake-build-debug /cygdrive/e/app/cmake-build-debug /cygdrive/e/app/cmake-build-debug/CMakeFiles/SoC_App.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/SoC_App.dir/depend
 

@@ -194,7 +194,7 @@ int default_set_not_black(U16 *image) {
 
     if (dist > 5) {
         ACTION_TURN(LONG, DIR_LEFT, UP, 1);
-        RobotSleep(1);
+        RobotSleep(2);
         setFPGAVideoData(image);
     }
     return dist < 10;

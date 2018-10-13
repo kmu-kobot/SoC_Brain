@@ -166,6 +166,20 @@ int mission_3_set_straight_and_center1_long(U16 *image, U16 center) {
     return set_straight(line, center, view) && set_center_long(line, DEFAULT_CENTER_DISTANCE, view);
 }
 
+int mission_3_set_straight_and_center(U16 *image, U16 center) {
+    _line_t line;
+    VIEW view = (mdir & 1) + LEFT;
+    int state;
+
+    CHECK_INIT(view);
+    state = mission_3_linear_regression(image, center, HEIGHT - 4, BLACK, &line);
+    if (state != 1) {
+        return 0;
+    }
+
+    return set_straight(line, WIDTH_CENTER, view) && set_center_long(line, center, view);
+}
+
 int mission_3_set_straight(U16 *image) {
     _line_t line;
     VIEW view = (mdir & 1) + LEFT;
