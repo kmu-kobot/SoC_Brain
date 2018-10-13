@@ -5,7 +5,7 @@
 #include "MISSION_5_GREEN_BRIDGE.h"
 
 void mission_5_1_watch_below(U16 *image, int repeat) {
-    ACTION_WALK_CHECK(OBLIQUE, image, mission_5_1_check_black_line, 1, repeat);
+    STAIR_WALK_CHECK(image, mission_5_1_check_black_line, repeat);
     RobotSleep(2);
 }
 
@@ -17,7 +17,7 @@ int mission_5_1_attach(U16 *image) {
 #endif
 
     ACTION_ATTACH(1);
-    return ratio > 30.0;
+    return ratio > 35.0;
 }
 
 int mission_5_1_check_black_line(U16 *image) {
@@ -38,7 +38,7 @@ int mission_5_1_check_black_line(U16 *image) {
     printf("%d\n", dist);
 #endif
 
-    return dist > 20;
+    return dist > 30;
 }
 
 int mission_5_2_set_straight_and_center(U16 *image, U16 center) {
@@ -97,9 +97,7 @@ int mission_5_2_set_straight(_line_t line) {
 }
 
 void mission_5_3_climb_up_stairs(void) {
-    CHECK_INIT(UP);
-    RobotSleep(3);
-    ACTION_MOTION(MISSION_5_STAIR_UP, UP);
+    ACTION_MOTION(MISSION_5_STAIR_UP, OBLIQUE);
     RobotSleep(1);
     CHECK_INIT(OBLIQUE);
     RobotSleep(1);
@@ -286,7 +284,7 @@ int mission_5_4_set_straight(_line_t center_line) {
 }
 
 int mission_5_4_set_center(_line_t line) {
-    double center = (WIDTH >> 1) - line.slope * (HEIGHT >> 1) - line.intercept;
+    double center = WIDTH_CENTER - line.slope * (HEIGHT >> 1) - line.intercept;
     DIRECTION move_dir = center < 0;
     center = abs(center);
 
@@ -303,8 +301,202 @@ int mission_5_4_set_center(_line_t line) {
 }
 
 void mission_5_5_attach_green(void) {
-    ACTION_WALK(FAST, OBLIQUE, 5);
+    ACTION_MOTION(GREEN_WALK, OBLIQUE);
 }
+
+int mission_5_6_get_left_line_green(U16 *image, U16 center, _line_t *left_line) {
+    U16 i, j;
+    _point_t points[NUM_LIN_REG_POINT];
+    U8 green_cnt[3], pos;
+    U32 point_cnt = 0;
+    U32 out_cnt = 0;
+    U16 up, down;
+
+    for (i = IN_IMG(0, center - (NUM_LIN_REG_POINT >> 1), HEIGHT);
+         i < IN_IMG(0, center + (NUM_LIN_REG_POINT >> 1), HEIGHT); ++i) {
+        pos = 0;
+        memset(green_cnt, 0, 3 * sizeof(U8));
+        up = IN_IMG(0, i - 1, HEIGHT);
+        down = IN_IMG(0, i + 1, HEIGHT);
+        for (j = 0; j < WIDTH; ++j) {
+            green_cnt[pos] = (GetValueRGBYOBK(GetPtr(image, up, j, WIDTH), GREEN) | GetValueRGBYOBK(GetPtr(image, up, j, WIDTH), CH2)) +
+                                     (GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), GREEN) | GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), CH2)) +
+                    (GetValueRGBYOBK(GetPtr(image, down, j, WIDTH), GREEN) | GetValueRGBYOBK(GetPtr(image, down, j, WIDTH), CH2));
+
+            pos = (pos + 1) % 3;
+
+            if (green_cnt[0] + green_cnt[1] + green_cnt[2] > 2) {
+                if (j < 2) {
+                    ++out_cnt;
+                    break;
+                }
+                points[point_cnt].x = j;
+                points[point_cnt].y = i;
+                ++point_cnt;
+                break;
+            }
+        }
+    }
+
+#ifdef DEBUG
+    printf("point_cnt : %d\tout_cnt : %d\n", point_cnt, out_cnt);
+#endif
+
+    if (point_cnt < 10) {
+        return 0;
+    }
+    if ((double) out_cnt / (double) point_cnt > 0.7) {
+        return 0;
+    }
+
+    return least_sqauresT(image, HEIGHT >> 1, points, point_cnt, left_line);
+}
+
+int mission_5_6_get_right_line_green(U16 *image, U16 center, _line_t *right_line) {
+    U16 i, j;
+    _point_t points[NUM_LIN_REG_POINT];
+    U8 green_cnt[3], pos;
+    U32 point_cnt = 0;
+    U32 out_cnt = 0;
+    U16 up, down;
+
+    for (i = IN_IMG(0, center - (NUM_LIN_REG_POINT >> 1), HEIGHT);
+         i < IN_IMG(0, center + (NUM_LIN_REG_POINT >> 1), HEIGHT); ++i) {
+        pos = 0;
+        memset(green_cnt, 0, 3 * sizeof(U8));
+        up = IN_IMG(0, i - 1, HEIGHT);
+        down = IN_IMG(0, i + 1, HEIGHT);
+        for (j = WIDTH - 1; j < 0xfff0; --j) {
+            green_cnt[pos] = (GetValueRGBYOBK(GetPtr(image, up, j, WIDTH), GREEN) || GetValueRGBYOBK(GetPtr(image, up, j, WIDTH), CH2)) +
+                    (GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), GREEN) || GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), CH2)) +
+                                                                                   (GetValueRGBYOBK(GetPtr(image, down, j, WIDTH), GREEN) || GetValueRGBYOBK(GetPtr(image, down, j, WIDTH), CH2));
+
+            pos = (pos + 1) % 3;
+
+            if (green_cnt[0] + green_cnt[1] + green_cnt[2] > 2) {
+                if (j > 177) {
+                    ++out_cnt;
+                    break;
+                }
+                points[point_cnt].x = j;
+                points[point_cnt].y = i;
+                ++point_cnt;
+                break;
+            }
+        }
+    }
+
+#ifdef DEBUG
+    printf("point_cnt : %d\tout_cnt : %d\n", point_cnt, out_cnt);
+#endif
+
+    if (point_cnt < 10) {
+        return 0;
+    }
+    if ((double) out_cnt / (double) point_cnt > 0.7) {
+        return 0;
+    }
+
+    return least_sqauresT(image, HEIGHT >> 1, points, point_cnt, right_line);
+}
+
+
+int mission_5_6_get_left_line_black(U16 *image, U16 center, _line_t *left_line) {
+    U16 i, j;
+    _point_t points[NUM_LIN_REG_POINT];
+    U8 green_cnt[3], pos;
+    U32 point_cnt = 0;
+    U32 out_cnt = 0;
+    U16 up, down;
+
+    for (i = IN_IMG(0, center - (NUM_LIN_REG_POINT >> 1), HEIGHT);
+         i < IN_IMG(0, center + (NUM_LIN_REG_POINT >> 1), HEIGHT); ++i) {
+        pos = 0;
+        memset(green_cnt, 0, 3 * sizeof(U8));
+        up = IN_IMG(0, i - 1, HEIGHT);
+        down = IN_IMG(0, i + 1, HEIGHT);
+        for (j = WIDTH_CENTER; j >= 0; --j) {
+            green_cnt[pos] = GetValueRGBYOBK(GetPtr(image, up, j, WIDTH), BLACK) +
+                             GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), BLACK) +
+                             GetValueRGBYOBK(GetPtr(image, down, j, WIDTH), BLACK);
+
+            pos = (pos + 1) % 3;
+
+            if (green_cnt[0] + green_cnt[1] + green_cnt[2] > 2) {
+                if (j < 2) {
+                    ++out_cnt;
+                    break;
+                }
+                points[point_cnt].x = j;
+                points[point_cnt].y = i;
+                ++point_cnt;
+                break;
+            }
+        }
+    }
+
+#ifdef DEBUG
+    printf("point_cnt : %d\tout_cnt : %d\n", point_cnt, out_cnt);
+#endif
+
+    if (point_cnt < 10) {
+        return 0;
+    }
+    if ((double) out_cnt / (double) point_cnt > 0.7) {
+        return 0;
+    }
+
+    return least_sqauresT(image, HEIGHT >> 1, points, point_cnt, left_line);
+}
+
+int mission_5_6_get_right_line_black(U16 *image, U16 center, _line_t *right_line) {
+    U16 i, j;
+    _point_t points[NUM_LIN_REG_POINT];
+    U8 green_cnt[3], pos;
+    U32 point_cnt = 0;
+    U32 out_cnt = 0;
+    U16 up, down;
+
+    for (i = IN_IMG(0, center - (NUM_LIN_REG_POINT >> 1), HEIGHT);
+         i < IN_IMG(0, center + (NUM_LIN_REG_POINT >> 1), HEIGHT); ++i) {
+        pos = 0;
+        memset(green_cnt, 0, 3 * sizeof(U8));
+        up = IN_IMG(0, i - 1, HEIGHT);
+        down = IN_IMG(0, i + 1, HEIGHT);
+        for (j = WIDTH_CENTER; j < WIDTH; ++j) {
+            green_cnt[pos] = GetValueRGBYOBK(GetPtr(image, up, j, WIDTH), BLACK) +
+                             GetValueRGBYOBK(GetPtr(image, i, j, WIDTH), BLACK) +
+                             GetValueRGBYOBK(GetPtr(image, down, j, WIDTH), BLACK);
+
+            pos = (pos + 1) % 3;
+
+            if (green_cnt[0] + green_cnt[1] + green_cnt[2] > 2) {
+                if (j > 177) {
+                    ++out_cnt;
+                    break;
+                }
+                points[point_cnt].x = j;
+                points[point_cnt].y = i;
+                ++point_cnt;
+                break;
+            }
+        }
+    }
+
+#ifdef DEBUG
+    printf("point_cnt : %d\tout_cnt : %d\n", point_cnt, out_cnt);
+#endif
+
+    if (point_cnt < 10) {
+        return 0;
+    }
+    if ((double) out_cnt / (double) point_cnt > 0.7) {
+        return 0;
+    }
+
+    return least_sqauresT(image, HEIGHT >> 1, points, point_cnt, right_line);
+}
+
 
 int mission_5_6_set_straight_and_center(U16 *image, U16 center) {
     _line_t left_line, right_line;
@@ -319,17 +511,17 @@ int mission_5_6_set_straight_and_center(U16 *image, U16 center) {
     }
     if (!left_state) {
         if (right_line.slope / M_PI * 180.0 > 10.0) {
-            ACTION_TURN(MIDDLE, DIR_LEFT, OBLIQUE, 1);
+            ACTION_TURN(MIDDLE, DIR_LEFT, UP, 1);
         } else {
-            ACTION_MOVE(SHORT, DIR_LEFT, OBLIQUE, 2);
+            ACTION_MOVE(SHORT, DIR_LEFT, UP, 2);
         }
         return 0;
     }
     if (!right_state) {
         if (left_line.slope / M_PI * 180.0 < -10.0) {
-            ACTION_TURN(MIDDLE, DIR_RIGHT, OBLIQUE, 1);
+            ACTION_TURN(MIDDLE, DIR_RIGHT, UP, 1);
         } else {
-            ACTION_MOVE(SHORT, DIR_RIGHT, OBLIQUE, 2);
+            ACTION_MOVE(SHORT, DIR_RIGHT, UP, 2);
         }
         return 0;
     }
@@ -341,11 +533,11 @@ int mission_5_6_set_straight_and_center(U16 *image, U16 center) {
     } else if (center_state == -1) {
         return 2;
     }
-    return mission_5_6_set_straight(center_line) && mission_5_4_set_center(center_line);
+    return mission_5_6_set_straight(center_line) && mission_5_6_set_center(center_line);
 }
 
 int mission_5_6_set_straight(_line_t center_line) {
-    double angle = atan(center_line.slope) / M_PI * 180.0 - 1.5;
+    double angle = atan(center_line.slope) / M_PI * 180.0 + 1.5;
     DIRECTION turn_dir = angle < 0;
     angle = abs(angle);
 
@@ -353,9 +545,26 @@ int mission_5_6_set_straight(_line_t center_line) {
 //        ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
 //    } else
     if (angle > 7.0) {
-        ACTION_TURN(SHORT, turn_dir, OBLIQUE, 2);
-    } else if (angle > 2.5) {
-        ACTION_TURN(SHORT, turn_dir, OBLIQUE, 1);
+        ACTION_TURN(SHORT, turn_dir, UP, 2);
+    } else if (angle > 3.5) {
+        ACTION_TURN(SHORT, turn_dir, UP, 1);
+    } else {
+        return 1;
+    }
+    RobotSleep(2);
+
+    return 0;
+}
+
+int mission_5_6_set_center(_line_t line) {
+    double center = WIDTH_CENTER - line.slope * (HEIGHT >> 1) - line.intercept;
+    DIRECTION move_dir = center < 0;
+    center = abs(center);
+
+    if (center > 8.0) {
+        ACTION_MOVE(SHORT, move_dir, UP, 2);
+    } else if (center > 5.0) {
+        ACTION_MOVE(SHORT, move_dir, UP, 1);
     } else {
         return 1;
     }
@@ -365,7 +574,7 @@ int mission_5_6_set_straight(_line_t center_line) {
 }
 
 int mission_5_7_watch_below(U16 *image) {
-    ACTION_WALK_CHECK(OBLIQUE, image, mission_5_7_walk_check, 1, 15);
+    GREEN_WALK_CHECK(image, mission_5_7_walk_check, 15);
     setFPGAVideoData(image);
 
     double ratio = getColorRatio1(image, 50, 70, 0, WIDTH, GREEN);
@@ -383,6 +592,9 @@ int mission_5_7_watch_below(U16 *image) {
     right_state = mission_5_4_get_right_line(image, 60, &right_line);
 
     if (!(left_state && right_state)) {
+        if (ratio < 5.0) {
+            return 0;
+        }
         return -1;
     }
 
@@ -399,7 +611,7 @@ int mission_5_7_watch_below(U16 *image) {
         return -1;
     }
 
-    double center = abs((WIDTH >> 1) - center_line.slope * (HEIGHT >> 1) - center_line.intercept);
+    double center = abs(WIDTH_CENTER - center_line.slope * (HEIGHT >> 1) - center_line.intercept);
 
     if (center > 7.0) {
         return -1;
@@ -430,15 +642,15 @@ int mission_5_7_walk_check(U16 *image) {
         return 1;
     }
 
-    double angle = abs(atan(center_line.slope) / M_PI * 180.0 - 1);
+    double angle = abs(atan(center_line.slope) / M_PI * 180.0 + 1);
 
-    if (angle > 6.0) {
+    if (angle > 10.0) {
         return 1;
     }
 
-    double center = abs((WIDTH >> 1) - center_line.slope * (HEIGHT >> 1) - center_line.intercept);
+    double center = abs(WIDTH_CENTER - center_line.slope * (HEIGHT >> 1) - center_line.intercept);
 
-    if (center > 7.0) {
+    if (center > 10.0) {
         return 1;
     }
 
@@ -448,39 +660,45 @@ int mission_5_7_walk_check(U16 *image) {
 int mission_5_8_attach_black(U16 *image) {
     _line_t front_line;
 
-    if (getColorRatio1(image, 40, 80, 50, WIDTH - 50, GREEN) > 30.0 &&
-        mission_5_8_get_front_line(image, &front_line, GREEN)) {
-        _line_t left_line, right_line;
-        _line_t center_line;
+//    if (getColorRatio1(image, 40, 80, 50, WIDTH - 50, GREEN) > 30.0 &&
+//        linear_regression1(image, WIDTH_CENTER, 80, BLACK, &front_line)) {
+//        _line_t left_line, right_line;
+//        _line_t center_line;
+//
+//        int left_state, right_state;
+//        left_state = mission_5_4_get_left_line(image, 105, &left_line);
+//        right_state = mission_5_4_get_right_line(image, 105, &right_line);
+//
+//        if (!(left_state || right_state)) {
+//            ACTION_ATTACH(1);
+//            return 0;
+//        }
+//
+//        if (!mission_5_8_set_straight(front_line)) {
+//            return 0;
+//        }
+//
+//        int center_state = mission_5_4_get_center_line(image, left_line, right_line, &center_line);
+//
+//        if (center_state == 0 || center_state == -1) {
+//            ACTION_ATTACH(1);
+//            return 0;
+//        }
+//
+//        if (mission_5_4_set_center(center_line)) {
+//            ACTION_ATTACH(1);
+//        }
+//
+//        return 0;
+//    }
 
-        int left_state, right_state;
-        left_state = mission_5_4_get_left_line(image, 105, &left_line);
-        right_state = mission_5_4_get_right_line(image, 105, &right_line);
-
-        if (!(left_state || right_state)) {
-            ACTION_ATTACH(1);
-            return 0;
-        }
-
-        if (!mission_5_8_set_straight(front_line)) {
-            return 0;
-        }
-
-        int center_state = mission_5_4_get_center_line(image, left_line, right_line, &center_line);
-
-        if (center_state == 0 || center_state == -1) {
-            ACTION_ATTACH(1);
-            return 0;
-        }
-
-        if (mission_5_4_set_center(center_line)) {
-            ACTION_ATTACH(1);
-        }
-
+    if(!mission_5_8_set_center(image)) {
         return 0;
     }
 
     if (!mission_5_8_get_front_line(image, &front_line, BLACK)) {
+        ACTION_ATTACH(1);
+        RobotSleep(2);
         return 1;
     }
 
@@ -488,8 +706,9 @@ int mission_5_8_attach_black(U16 *image) {
         return 0;
     }
 
-    if (front_line.slope * (WIDTH >> 1) + front_line.intercept < 10.0) {
+    if (front_line.slope * WIDTH_CENTER + front_line.intercept < 10.0) {
         ACTION_ATTACH(1);
+        RobotSleep(2);
         return 0;
     }
 
@@ -503,8 +722,8 @@ int mission_5_8_get_front_line(U16 *image, _line_t *front_line, U16 color) {
     U32 point_cnt = 0;
     U16 left, right;
 
-    for (j = IN_IMG(0, (WIDTH >> 1) - (NUM_LIN_REG_POINT >> 1), WIDTH);
-         j < IN_IMG(0, (WIDTH >> 1) + (NUM_LIN_REG_POINT >> 1), WIDTH); ++j) {
+    for (j = IN_IMG(0, WIDTH_CENTER - (NUM_LIN_REG_POINT >> 1), WIDTH);
+         j < IN_IMG(0, WIDTH_CENTER + (NUM_LIN_REG_POINT >> 1), WIDTH); ++j) {
         pos = 0;
         memset(black_cnt, 0, 3 * sizeof(U8));
         left = MAX(j - 1, 0);
@@ -553,7 +772,22 @@ int mission_5_8_get_front_line(U16 *image, _line_t *front_line, U16 color) {
         return 0;
     }
 
-    return least_sqaures(image, WIDTH >> 1, points, i - 1, front_line);
+    return least_sqaures(image, WIDTH_CENTER, points, i - 1, front_line);
+}
+
+int mission_5_8_set_center(U16 *image) {
+    double left = getColorRatio1(image, 0, HEIGHT, 10, WIDTH_CENTER, GREEN);
+    double right = getColorRatio1(image, 0, HEIGHT, WIDTH_CENTER, WIDTH - 10, GREEN);
+    int dir = left < right;
+
+    if (fabs(left - right) > 10) {
+        ACTION_MOVE(SHORT, dir, OBLIQUE, 2);
+        RobotSleep(2);
+        return 0;
+    }
+
+    return 1;
+
 }
 
 int mission_5_8_set_straight(_line_t line) {
@@ -561,7 +795,7 @@ int mission_5_8_set_straight(_line_t line) {
     DIRECTION turn_dir = angle > 0;
     angle = abs(angle);
 
-    if (angle > 3.0) {
+    if (angle > 7.0) {
         ACTION_TURN(MIDDLE, turn_dir, OBLIQUE, 1);
     } else {
         return 1;
@@ -572,11 +806,11 @@ int mission_5_8_set_straight(_line_t line) {
 }
 
 int mission_5_8_set_dist(_line_t line) {
-    double dist = line.slope * (WIDTH >> 1) + line.intercept;
+    double dist = line.slope * WIDTH_CENTER + line.intercept;
 
     if (dist < 30.0) {
         ACTION_ATTACH(1);
-        RobotSleep(1);
+        RobotSleep(2);
         return 0;
     }
 
@@ -585,8 +819,23 @@ int mission_5_8_set_dist(_line_t line) {
 
 
 int mission_5_9_attach_black(U16 *image) {
+    setFPGAVideoData(image);
     _line_t front_line;
-    if (!mission_5_9_get_front_line(image, &front_line, BLACK)) {
+    int state;
+    state = mission_5_9_get_front_line(image, &front_line, BLACK);
+    if (state == 0) {
+        ACTION_ATTACH(1);
+        RobotSleep(2);
+        return 0;
+    }
+    else if (state == -1) {
+        if (front_line.slope * WIDTH_CENTER + front_line.intercept < 60) {
+            ACTION_ATTACH(1);
+        }
+        else {
+            ACTION_ATTACH_SHORT(1);
+        }
+        RobotSleep(1);
         return 0;
     }
 
@@ -649,24 +898,36 @@ int mission_5_9_get_front_line(U16 *image, _line_t *front_line, U16 color) {
 #endif
 
     if (point_cnt < NUM_LIN_REG_POINT >> 1) {
-        return 0;
+        return -1;
     }
 
     if (i <= 1) {
-        return 0;
+        return -1;
     }
 
-    return least_sqaures(image, WIDTH >> 1, points, point_cnt, front_line);
+    return least_sqaures(image, WIDTH_CENTER, points, point_cnt, front_line);
 }
+
+int cntSetStraightOnBlock = 0;
 
 int mission_5_9_set_straight(_line_t line) {
     double angle = atan(line.slope) * 180.0 / M_PI;
     DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = abs(angle);
 
-    if (angle > 4.0) {
+    if (cntSetStraightOnBlock++ > 10) {
+        ACTION_ATTACH_LIFT(1);
+        RobotSleep(1);
+        cntSetStraightOnBlock = 0;
+        return 0;
+    }
+
+    if (angle > 8.0) {
         ACTION_TURN(MIDDLE, turn_dir, DOWN, 1);
+    } else if (angle > 2.0) {
+        ACTION_TURN(SHORT, turn_dir, DOWN, 1);
     } else {
+        cntSetStraightOnBlock = 0;
         return 1;
     }
 
@@ -674,23 +935,27 @@ int mission_5_9_set_straight(_line_t line) {
     return 0;
 }
 
-int mission_5_9_set_dist(_line_t line) {
-    double dist = line.slope * (WIDTH >> 1) + line.intercept;
+int cntAttachDist = 0;
 
-    if (dist < 35.0) {
-        ACTION_ATTACH(1);
+int mission_5_9_set_dist(_line_t line) {
+    double dist = line.slope * WIDTH_CENTER + line.intercept;
+
+    if (0 <= dist && dist < 35.0) {
+        if (cntAttachDist++ < 5) {
+            ACTION_ATTACH(1);
+        } else {
+            ACTION_ATTACH_LIFT(1);
+        }
+
         RobotSleep(1);
         return 0;
     }
-    if (dist < 40.0) {
+
+    if (dist < 57.0) {
         ACTION_ATTACH_LIFT(1);
         RobotSleep(1);
         return 0;
-    } else if (dist < 50.0) {
-        ACTION_ATTACH(1);
-        RobotSleep(1);
-        return 0;
-    } else if (dist < 65.0) { // 67
+    } else if (dist < 69) { // 67
         ACTION_ATTACH_SHORT(1);
         RobotSleep(1);
         return 0;
@@ -701,9 +966,9 @@ int mission_5_9_set_dist(_line_t line) {
 
 int mission_5_10_climb_down_stairs(void) {
     RobotSleep(1);
-    ACTION_MOTION(MISSION_5_STAIR_DOWN, UP);
+    ACTION_MOTION(MISSION_5_STAIR_DOWN, DOWN);
     CHECK_INIT(OBLIQUE);
-    //TODO
-    ACTION_WALK(FAST, OBLIQUE, 2);
+    RobotSleep(1);
+    ACTION_WALK(FAST, OBLIQUE, 6);
     return 1;
 }

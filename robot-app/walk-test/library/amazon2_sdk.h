@@ -4,8 +4,8 @@
 #define HW_2D_ENGINE
 
 //#define DEBUG
-#define MODE 3
-// #define MINE
+#define MODE 2
+//#define MINE
 
 #if defined(BOOL)
 #else

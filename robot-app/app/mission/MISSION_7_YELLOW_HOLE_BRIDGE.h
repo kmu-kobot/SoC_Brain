@@ -12,7 +12,7 @@
 
 #define SOC_APP_MISSION_7_YELLOW_HOLE_BRIDGE_H
 
-#define MISSION_7_1_THRESHOLDS 20
+#define MISSION_7_1_THRESHOLDS 15
 
 void mission_7_1_watch_below(U16 *image, int repeat);
 

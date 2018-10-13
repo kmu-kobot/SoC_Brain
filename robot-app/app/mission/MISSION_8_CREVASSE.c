@@ -4,8 +4,8 @@
 
 #include "MISSION_8_CREVASSE.h"
 
-void mission_8_1_watch_below(U16 *image, int repeat) {
-    ACTION_WALK_CHECK(OBLIQUE, image, mission_8_1_wait_front_of_crevasse, 1, repeat);
+int mission_8_1_watch_below(U16 *image, int repeat) {
+    return ACTION_WALK_CHECK(OBLIQUE, image, mission_8_1_wait_front_of_crevasse, 1, repeat);
 }
 
 int mission_8_1_wait_front_of_crevasse(U16 *image) {
@@ -19,11 +19,15 @@ int mission_8_3_escape_crevasse(void) {
 }
 
 int mission_8_2_attach_black(U16 *image) {
+    setFPGAVideoData(image);
     _line_t front_line;
     if (!mission_8_2_get_front_line(image, &front_line, BLACK)) {
+        ACTION_ATTACH(1);
+        RobotSleep(2);
         return 0;
     }
 
+//    return mission_8_2_set_straight(front_line) && mission_8_2_set_dist(front_line);
     return mission_8_2_set_dist(front_line);
 }
 
@@ -90,7 +94,7 @@ int mission_8_2_get_front_line(U16 *image, _line_t *front_line, U16 color) {
         return 0;
     }
 
-    return least_sqaures(image, WIDTH >> 1, points, point_cnt, front_line);
+    return least_sqaures(image, WIDTH_CENTER, points, point_cnt, front_line);
 }
 
 int mission_8_2_set_straight(_line_t line) {
@@ -98,11 +102,9 @@ int mission_8_2_set_straight(_line_t line) {
     DIRECTION turn_dir = (DIRECTION) (angle > 0);
     angle = abs(angle);
 
-    if (angle > 4.0) {
+    if (angle > 5.0) {
         ACTION_TURN(MIDDLE, turn_dir, DOWN, 1);
     } else if (angle > 3.0) {
-        ACTION_TURN(SHORT, turn_dir, DOWN, 2);
-    } else if (angle > 2.0) {
         ACTION_TURN(SHORT, turn_dir, DOWN, 1);
     } else {
         return 1;
@@ -113,11 +115,16 @@ int mission_8_2_set_straight(_line_t line) {
 }
 
 int mission_8_2_set_dist(_line_t line) {
-    double dist = line.slope * (WIDTH >> 1) + line.intercept;
+    double dist = line.slope * WIDTH_CENTER + line.intercept;
 
-    if (dist < 55.0) {
+    if (dist < 43.0) {
+        ACTION_ATTACH(1);
+        RobotSleep(2);
+        return 0;
+    }
+    else if (dist < 60.0) {
         ACTION_ATTACH_SHORT(1);
-        RobotSleep(1);
+        RobotSleep(2);
         return 0;
     }
 

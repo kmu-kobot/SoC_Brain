@@ -21,8 +21,6 @@ add_executable(
         library/robot_action.c
         mission/DEFAULT.c
         mission/DEFAULT.h
-        mission/MISSION_0_READY_PLAY.c
-        mission/MISSION_0_READY_PLAY.h
         mission/MISSION_1_YELLOW_BARRICADE.c
         mission/MISSION_1_YELLOW_BARRICADE.h
         mission/MISSION_2_RED_BRIDGE.c

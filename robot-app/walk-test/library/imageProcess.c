@@ -127,7 +127,7 @@ int getDistance1(U16 *image, U16 center, U16 bot, U16 color1) {
 #endif
 
     if (point_cnt == 0) {
-        return -1;
+        return 0;
     }
 
     return average(dist, NUM_DIST_FRAME * NUM_DIST_POINT);
@@ -170,7 +170,7 @@ int getDistance2(U16 *image, U16 center, U16 bot, U16 color1, U16 color2) {
 #endif
 
     if (point_cnt == 0) {
-        return -1;
+        return 0;
     }
 
     return average(dist, NUM_DIST_FRAME * NUM_DIST_POINT);
@@ -219,7 +219,7 @@ int linear_regression1(U16 *image, U16 center, U16 bot, U16 color1, _line_t *lin
 #endif
 
     if (point_cnt < (NUM_LIN_REG_POINT * NUM_LIN_REG_FRAME) >> 2) {
-        return -1;
+        return 0;
     }
 
     return least_sqaures(image, center, points, point_cnt, line);
@@ -271,7 +271,7 @@ int linear_regression2(U16 *image, U16 center, U16 bot, U16 color1, U16 color2, 
 #endif
 
     if (point_cnt < (NUM_LIN_REG_POINT * NUM_LIN_REG_FRAME) >> 2) {
-        return -1;
+        return 0;
     }
 
     return least_sqaures(image, center, points, point_cnt, line);

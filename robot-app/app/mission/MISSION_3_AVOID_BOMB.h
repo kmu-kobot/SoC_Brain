@@ -28,7 +28,7 @@ void mission_3_init_global(void);
 
 int mission_3_avoid(U16 *image);
 
-void mission_3_change_mdir(U16 *image);
+int mission_3_change_mdir(U16 *image);
 
 void mission_3_change_mdir_opposite(void);
 
@@ -40,11 +40,15 @@ int mission_3_default_avoid_bomb(U16 *image);
 
 int mission_3_4_getMDir(void);
 
+void mission_3_inverse_mdir(void);
+
 int mission_3_1_ver2(U16 *image);
 
-int mission_3_set_straight_and_center1(U16 *image);
+int mission_3_set_straight_and_center1_long(U16 *image, U16 center);
 
 int mission_3_set_straight(U16 *image);
+
+int mission_3_set_straight_and_center(U16 *image, U16 center);
 
 int mission_3_set_center(U16 *image);
 

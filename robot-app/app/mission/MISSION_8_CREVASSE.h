@@ -12,7 +12,7 @@
 
 #define SOC_APP_MISSION_8_CREVASSE_H
 
-void mission_8_1_watch_below(U16 *image, int repeat);
+int mission_8_1_watch_below(U16 *image, int repeat);
 
 int mission_8_1_wait_front_of_crevasse(U16 *image);
 

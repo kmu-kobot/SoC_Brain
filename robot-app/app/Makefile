@@ -34,7 +34,6 @@ OBJS = main.o huro.o \
     ./library/uart_api.o \
     ./library/robot_action.o \
 	./mission/DEFAULT.o \
-    ./mission/MISSION_0_READY_PLAY.o \
     ./mission/MISSION_1_YELLOW_BARRICADE.o \
     ./mission/MISSION_2_RED_BRIDGE.o \
     ./mission/MISSION_3_AVOID_BOMB.o \

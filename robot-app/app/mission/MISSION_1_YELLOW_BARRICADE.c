@@ -8,7 +8,7 @@ int mission_1_1_wait_yellow_barricade(U16 *image) {
     U32 i, success = 0;
     for (i = 0; i < 5 && success < 3; ++i) {
         setFPGAVideoData(image);
-        success += (getColorRatio1(image, CASE_1_UPPER, CASE_1_LOWER, 0, WIDTH, YELLOW) > CASE_1_RATIO);
+        success += (getColorRatio1(image, CASE_1_UPPER, CASE_1_LOWER, 20, WIDTH - 20, YELLOW) > CASE_1_RATIO);
     }
 
     return success >= 3;
@@ -18,7 +18,7 @@ int mission_1_2_end_yellow_barricade(U16 *image) {
     U32 i, success = 0;
     for (i = 0; i < 5 && success < 3; ++i) {
         setFPGAVideoData(image);
-        success += (getColorRatio1(image, CASE_1_UPPER, CASE_1_LOWER, 0, WIDTH, YELLOW) < CASE_1_RATIO - 2);
+        success += (getColorRatio1(image, CASE_1_UPPER, CASE_1_LOWER, 20, WIDTH - 20, YELLOW) < CASE_1_RATIO - 2);
     }
 
     return success >= 3;
@@ -26,6 +26,6 @@ int mission_1_2_end_yellow_barricade(U16 *image) {
 
 void mission_1_3_escape_yellow_barricade(int repeat) {
     RobotSleep(2);
-    ACTION_WALK(FAST, OBLIQUE, 9);
+    ACTION_WALK(FAST, OBLIQUE, repeat);
     RobotSleep(1);
 }
